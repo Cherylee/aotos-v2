@@ -52,6 +52,12 @@
 }
 
 @media screen and (min-width: 769px) {
+  .aotos-footer__menu:not([open])::details-content,
+  .aotos-footer__menu[open]::details-content {
+    display: block;
+    content-visibility: visible;
+  }
+
   .aotos-footer__menu:not([open]) > .aotos-footer__links {
     display: flex;
   }
