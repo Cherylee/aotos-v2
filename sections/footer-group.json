@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "t:sections.footer.name",
   "type": "footer",
@@ -9,28 +18,28 @@
           "type": "link_list",
           "settings": {
             "heading": "Product",
-            "menu": ""
+            "menu": "product"
           }
         },
         "menu-support": {
           "type": "link_list",
           "settings": {
             "heading": "Support",
-            "menu": ""
+            "menu": "legal"
           }
         },
         "menu-about": {
           "type": "link_list",
           "settings": {
             "heading": "About",
-            "menu": ""
+            "menu": "about"
           }
         },
         "menu-policy": {
           "type": "link_list",
           "settings": {
             "heading": "Policy",
-            "menu": ""
+            "menu": "help"
           }
         }
       },
@@ -44,17 +53,21 @@
         "show_social": true,
         "newsletter_enable": true,
         "newsletter_button": "Subscribe",
-        "consent_before": "I agree to AOTOS's ",
+        "consent_before": "I agree to AOTOS's",
         "privacy_label": "Privacy Policy",
-        "privacy_link": "/policies/privacy-policy",
-        "consent_middle": " and ",
+        "privacy_link": "shopify://pages/privacy-policy",
+        "consent_middle": "and",
         "terms_label": "Terms of Service",
-        "terms_link": "/policies/terms-of-service",
+        "terms_link": "shopify://pages/terms-of-service",
         "consent_after": ".",
         "hours": "Mon–Fri, 9:00 AM–6:00 PM ET",
         "email": "support@aotos.com",
         "payment_enable": true,
         "app_heading": "GET APP",
+        "app_store_image": "shopify://shop_images/png-clipart-app-store-apple-google-play-iphone-mid-autumn-lantern-text-logo_1_535d3bfe-44e8-4449-a353-9716168c9d5a.webp",
+        "app_store_link": "https://apps.apple.com/us/app/aotos/id6743829984",
+        "google_play_image": "shopify://shop_images/en_badge_web_generic_1_e12176cc-492d-4f35-84e9-c4929b9eb547.webp",
+        "google_play_link": "https://play.google.com/store/apps/details?id=com.dt.smart.aotos&hl=en",
         "copyright": "© 2026, AOTOS. Ride Further. Ride Smarter."
       }
     }
