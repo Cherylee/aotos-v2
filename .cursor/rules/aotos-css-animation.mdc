@@ -1,0 +1,29 @@
+---
+description: 简单动画用 CSS（transition / @keyframes / IntersectionObserver），不要为此加载 GSAP
+globs: sections/**/*.liquid, snippets/**/*.liquid, assets/**/*.css, assets/**/*.js
+alwaysApply: true
+---
+
+# 动画：CSS 优先，少用 GSAP
+
+简单动效用 CSS，不要引入或依赖 GSAP。GSAP 体积大，拖 INP / LCP。
+
+## 用 CSS 的（默认）
+
+- hover / 按下：颜色、位移、缩放、下划线 — `@media (hover: hover)` + `transition`
+- 入场：淡入、上滑、下划线展开 — `@keyframes` + `.is-inview`，需要时用 `IntersectionObserver`
+- 标题揭示：首页 Banner 用 `.aotos-css-reveal`（纯 CSS）；其它页可复用 `snippets/gsap-title-reveal.liquid`（也是 CSS，**不加载 GSAP**）
+- 首页（`template.name == 'index'`）不加载 GSAP
+- `prefers-reduced-motion: reduce` 时关掉动画
+
+## 才用 GSAP 的
+
+路径绘制、复杂时间轴、ScrollTrigger 钉住、字符拆分、Logo morph、Boost Mode 等现有复杂模块。
+
+必须走 `snippets/aotos-gsap-loader.liquid` 按需加载。不要在新模块里直接 `<script src="gsap">`。不要给元素加 `.ga-*` 只为「有个淡入」——那会让整页拉 GSAP。
+
+## 禁止
+
+- 为 fade / slide-up / hover 缩放去写 `gsap.to` / `gsap.from`
+- 给 LCP 图 `opacity: 0` 再 GSAP fade in
+- 把 `.gsap-title-reveal` 算进 GSAP 加载条件

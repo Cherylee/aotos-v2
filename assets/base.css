@@ -1,4 +1,10 @@
 :root {
+  --aotos-design-width-pc: 1440;
+  --aotos-design-width-mob: 750;
+  --rem: calc(100vw / var(--aotos-design-width-pc));
+  --aotos-section-title: 32;
+  --aotos-section-title-mob: 38;
+  --aotos-section-title-size: calc(var(--aotos-section-title) * var(--rem));
   --alpha-button-background: 1;
   --alpha-button-border: 1;
   --alpha-link: 0.85;
@@ -6,6 +12,17 @@
   --focused-base-outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
   --focused-base-outline-offset: 0.3rem;
   --focused-base-box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
+}
+
+@media screen and (max-width: 768px) {
+  :root {
+    --rem: calc(100vw / var(--aotos-design-width-mob));
+    --aotos-section-title-size: calc(var(--aotos-section-title-mob) * var(--rem));
+  }
+}
+
+.aotos-section-title {
+  font-size: var(--aotos-section-title-size);
 }
 
 .product-card-wrapper .card,

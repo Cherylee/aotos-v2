@@ -1,0 +1,141 @@
+---
+description: aotos 模块用全局 --rem（PC 1440 / 移动 750）；只两套尺寸——PC 不写断点，手机 max-width 768 单独一套
+globs: sections/**/*.liquid, assets/**/*.css, snippets/**/*.liquid
+alwaysApply: false
+---
+
+# aotos 响应式开发规范（Shopify 跨境独立站）
+## 全局基准
+
+定义在 `assets/base.css`（**改稿宽只改这两个参数**）：
+
+```css
+:root {
+  --aotos-design-width-pc: 1440;
+  --aotos-design-width-mob: 750; /* 若移动稿是 375，改成 375 */
+
+  --rem: calc(100vw / var(--aotos-design-width-pc));
+}
+
+/* 与模块手机断点一致：≤768 切移动稿宽 */
+@media screen and (max-width: 768px) {
+  :root {
+    --rem: calc(100vw / var(--aotos-design-width-mob));
+  }
+}
+```
+
+`≤768px` 时 `--rem` **已全局自动切换**到移动稿宽。新模块只写两套尺寸，不用再手写重置，也不要再拆 749 / 750–768。
+
+## 只两套尺寸
+
+| 范围 | 怎么写 | `--rem` | 尺寸 |
+|------|--------|---------|------|
+| PC（默认） | **不写断点** | 1440 | PC 这一套 |
+| 手机 `max-width: 768px` | 只写这一个 media | 750 | **768 自己的一套**，不要抄 PC 的 N |
+
+
+## 区块标题（全局，必须统一）
+
+定义在 `assets/base.css` 的 `:root`，**和首页区块标题一致**。改字号只改这两个 token，不要在单个 section 里写死 32 / 36 / 40。
+
+```css
+:root {
+  --aotos-section-title: 32;      /* PC @1440，与首页 heading 32 一致 */
+  --aotos-section-title-mob: 38;  /* 手机 @750，768 断点用这一套 */
+  --aotos-section-title-size: calc(var(--aotos-section-title) * var(--rem));
+}
+
+@media screen and (max-width: 768px) {
+  :root {
+    --aotos-section-title-size: calc(var(--aotos-section-title-mob) * var(--rem));
+  }
+}
+
+.aotos-section-title {
+  font-size: var(--aotos-section-title-size);
+}
+```
+
+区块主标题用法见下方「模块字体与间距」。全屏视频、App 评价插件等没有区块标题的模块不用套。
+
+## 模块字体与间距（新建必须统一）
+
+新模块按下面两套写，**不要另起数字**。设计稿明确不同再改。所有 `N` 都用 `calc(N * var(--rem))`。卡片标题、正文、按钮不算区块标题。不要再用 `#333` / `#666` / `#b3b3b3`。强调色（品牌橙等）不受限。
+
+### PC（不写断点）
+
+- 内容宽 **1100**
+- 模块上下 padding **80**
+- 标题：字号走 `var(--aotos-section-title-size)`（token **32**），字重 **700**，颜色 `#000000`，下边距 **48**。`h2` 加 class `aotos-section-title`
+- 正文默认 **14 / 行高 18**，需要更大时用 **18 / 22**，颜色 `#000000`
+- 灰色辅助字 `#999999`
+- 不要写死 `32px` / `40px` 当标题字号
+
+### 手机（`max-width: 768px`）
+
+- 内容宽 100%，左右 padding **40**
+- 模块上下 padding **88**
+- 标题：token **38**，字重 **700**，`#000000`，下边距 **48**
+- 正文默认 **20 / 行高 32**，加大用 **22 / 32**，`#000000`
+
+### Schema 默认
+
+| 字段 | 默认 |
+|------|------|
+| `padding_top` / `padding_bottom` | 80 |
+| `padding_top_mobile` / `padding_bottom_mobile` | 88 |
+
+```css
+/* PC：不写断点 */
+.example-section {
+  padding-top: calc({{ section.settings.padding_top | default: 80 }} * var(--rem));
+  padding-bottom: calc({{ section.settings.padding_bottom | default: 80 }} * var(--rem));
+}
+
+.example-shell {
+  width: calc(1100 * var(--rem));
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* 手机 ≤768 */
+@media screen and (max-width: 768px) {
+  .example-section {
+    padding-top: calc({{ section.settings.padding_top_mobile | default: 88 }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88 }} * var(--rem));
+  }
+
+  .example-shell {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0 calc(40 * var(--rem));
+    box-sizing: border-box;
+  }
+}
+```
+
+- 不要在模块里再写一遍 `:root { --rem: ... }`，用全局即可。
+- `≤768` 整段走手机这一套，不要再拆 749 / 750–768，也不要在这个宽度变回 PC 多列。
+- 内容容器用 `padding` 留左右边距，`box-sizing: border-box`。不要 `width: 100%` 再加左右 `margin`，会撑出横向滚动。
+- 手机 N 用 **88 / 40 / 20 / 22**，不要抄 PC 的 **80 / 14 / 18**。
+
+## 关于竖屏 `orientation: portrait`
+
+**新模块不要单独用 `orientation: portrait` 当主断点**。手机竖屏宽度通常 &lt; 768，`max-width: 768px` 已经会套上移动端。`orientation: portrait` 只看高&gt;宽：大平板竖屏也会进，却不该当手机；手机横屏宽度常 &gt;768，只写 portrait 也管不到。
+
+默认仍以 **`max-width: 768px` 为唯一手机断点**。只有用户明确要求平板竖屏也强制手机布局时，再用「宽度或竖屏」组合，规则与 `≤768` 完全相同：
+
+```css
+@media screen and (max-width: 768px),
+  screen and (orientation: portrait) and (max-width: 1024px) {
+  /* 与 ≤768 完全相同的移动端规则 */
+}
+```
+
+旧模块里的 `orientation: portrait` 可保留，不必主动改。
+
+## 注意
+
+- Hover 动效包在 `@media (hover: hover)` 里，避免触控误触。

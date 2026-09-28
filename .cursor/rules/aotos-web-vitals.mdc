@@ -1,0 +1,61 @@
+---
+description: 以后新写代码必须过 Google PageSpeed 五项：FCP、SI、LCP、TBT、CLS。图片按展示尺寸出图。
+globs: sections/**/*.liquid, snippets/**/*.liquid, layout/**/*.liquid, assets/**/*.{js,css}
+alwaysApply: true
+---
+
+# 新代码必须过 Google PageSpeed
+
+以后新写或大改的 section / snippet / JS / CSS，动笔前过下面五项，不要为功能牺牲 Speed 分数。
+
+| 项 | 看什么 |
+|----|--------|
+| **FCP** | 第一次画出内容要快 |
+| **SI** | 首屏内容要尽快铺满，不要一块块慢慢出来 |
+| **LCP** | 首屏最大的图 / 文字要早出来 |
+| **TBT** | 主线程别被长任务堵住（线上对应 INP） |
+| **CLS** | 加载后布局不要跳动 |
+
+## 图片（必做）
+
+- 禁止 `image_url` 不带 `width`。禁止把 CDN 原图（900 / 1600 / 2200）塞进卡片、封面、poster。
+- `<img>` 必须有匹配 **CSS 实际展示宽** 的 `srcset` + `sizes`。`width`/`height` 用请求宽度，不要用 `image.width` 原图像素。
+- `sizes` 按真实布局写：全宽才 `100vw`；两列约 `47vw`；四列约 `360px`；小卡片写死展示 px（如 `280px`）。不要用偏小的 `420px` 导致 2x 去拉 840w。
+- `<video poster>` 同样要带宽度；横屏展示、竖图封面时用 `width` + `height` + `crop: 'center'`。
+- JS 换图时同步改 `srcset`/`sizes`，或先 `removeAttribute('srcset')`。
+- LCP 图（首屏 Banner）：`loading="eager"` + `fetchpriority="high"`。其余 `loading="lazy"`。
+- 文章封面压缩不够是后台重传，主题改不了原文件体积。
+
+```liquid
+{{ image | image_url: width: 580 }}
+srcset="... 400w, ... 580w, ... 800w"
+sizes="(max-width: 749px) 92vw, 568px"
+width="580"
+height="{{ 580 | divided_by: image.aspect_ratio | round }}"
+```
+
+## FCP
+
+- 首屏内容写在 HTML 里，不要等 JS 跑完再插进去。
+- 新模块不要加阻塞渲染的大 CSS / JS，也不要把 `body` 藏到字体或脚本就绪后再显示。
+
+## SI
+
+- 首屏只放当前视口里看得到的内容；视口外的图 `loading="lazy"`，脚本延后。
+- 不要等整页图片、轮播、第三方脚本都好了才让首屏铺开。
+
+## LCP
+
+- 首屏只保留真正可见的那张图/视频 poster，尺寸贴近展示（桌面约 1600–1920，不要原图 4K）。
+- 不要给 LCP 图加 `opacity: 0` / GSAP 再 fade in。简单动画用 CSS，见 `.cursor/rules/aotos-css-animation.mdc`。
+
+## TBT
+
+- GSAP 只通过 `snippets/aotos-gsap-loader.liquid` 按需加载（页上有 `.ga-*` / `.boost-mode-section` 等才加载）。首页、产品页若只用标题动画，不要拉 GSAP。
+- 禁止给每个卡片绑重监听；`MutationObserver` / Swiper / 自定义元素尽量少、尽晚。页面加载时不要跑长循环或大计算。
+- **不要延迟 GTM / GA / Clarity**（广告数据）。Klaviyo 保持原加载时机。
+
+## CLS
+
+- 图片和视频容器必须有宽高或 `aspect-ratio`，避免加载后撑开。
+- 后插入的横幅、弹层、字体替换不能把已有内容顶下去。先留好位置。
