@@ -1216,65 +1216,77 @@
     ]
   },
   {
-    "name": "t:settings_schema.social-media.name",
+    "name": "社交媒体",
     "settings": [
       {
-        "type": "header",
-        "content": "t:settings_schema.social-media.settings.header.content"
+        "type": "paragraph",
+        "content": "填写主页链接后，页脚会显示对应图标。留空则不显示。"
       },
       {
         "type": "text",
         "id": "social_facebook_link",
-        "label": "t:settings_schema.social-media.settings.social_facebook_link.label",
-        "placeholder": "t:settings_schema.social-media.settings.social_facebook_link.info"
+        "label": "Facebook",
+        "placeholder": "https://facebook.com/shopify"
       },
       {
         "type": "text",
         "id": "social_instagram_link",
-        "label": "t:settings_schema.social-media.settings.social_instagram_link.label",
-        "placeholder": "t:settings_schema.social-media.settings.social_instagram_link.info"
+        "label": "Instagram",
+        "placeholder": "https://instagram.com/shopify"
       },
       {
         "type": "text",
         "id": "social_youtube_link",
-        "label": "t:settings_schema.social-media.settings.social_youtube_link.label",
-        "placeholder": "t:settings_schema.social-media.settings.social_youtube_link.info"
+        "label": "YouTube",
+        "placeholder": "https://www.youtube.com/shopify"
       },
       {
         "type": "text",
         "id": "social_tiktok_link",
-        "label": "t:settings_schema.social-media.settings.social_tiktok_link.label",
-        "placeholder": "t:settings_schema.social-media.settings.social_tiktok_link.info"
+        "label": "TikTok",
+        "placeholder": "https://tiktok.com/@shopify"
       },
       {
         "type": "text",
         "id": "social_twitter_link",
-        "label": "t:settings_schema.social-media.settings.social_twitter_link.label",
-        "placeholder": "t:settings_schema.social-media.settings.social_twitter_link.info"
+        "label": "X / Twitter",
+        "placeholder": "https://x.com/shopify"
       },
       {
         "type": "text",
         "id": "social_snapchat_link",
-        "label": "t:settings_schema.social-media.settings.social_snapchat_link.label",
-        "placeholder": "t:settings_schema.social-media.settings.social_snapchat_link.info"
+        "label": "Snapchat",
+        "placeholder": "https://www.snapchat.com/add/shopify"
       },
       {
         "type": "text",
         "id": "social_pinterest_link",
-        "label": "t:settings_schema.social-media.settings.social_pinterest_link.label",
-        "placeholder": "t:settings_schema.social-media.settings.social_pinterest_link.info"
+        "label": "Pinterest",
+        "placeholder": "https://pinterest.com/shopify"
       },
       {
         "type": "text",
         "id": "social_tumblr_link",
-        "label": "t:settings_schema.social-media.settings.social_tumblr_link.label",
-        "placeholder": "t:settings_schema.social-media.settings.social_tumblr_link.info"
+        "label": "Tumblr",
+        "placeholder": "https://shopify.tumblr.com"
       },
       {
         "type": "text",
         "id": "social_vimeo_link",
-        "label": "t:settings_schema.social-media.settings.social_vimeo_link.label",
-        "placeholder": "t:settings_schema.social-media.settings.social_vimeo_link.info"
+        "label": "Vimeo",
+        "placeholder": "https://vimeo.com/shopify"
+      }
+    ]
+  },
+  {
+    "name": "支付图标",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "payment_icons",
+        "label": "支付方式",
+        "info": "用英文逗号分隔，按顺序显示。可用：visa, master, american_express, paypal, maestro, klarna, venmo, afterpay, discover, diners_club, jcb, unionpay, elo, apple_pay, google_pay, shopify_pay",
+        "default": "visa,master,klarna,paypal,maestro,venmo,afterpay"
       }
     ]
   },

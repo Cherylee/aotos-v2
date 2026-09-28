@@ -69,6 +69,38 @@
                 </a>
               </li>
             {%- endif -%}
+            {%- if settings.social_pinterest_link != blank -%}
+              <li>
+                <a href="{{ settings.social_pinterest_link }}" data-social="pinterest" target="_blank" rel="noopener">
+                  {{- 'icon-pinterest.svg' | inline_asset_content -}}
+                  <span class="visually-hidden">Pinterest</span>
+                </a>
+              </li>
+            {%- endif -%}
+            {%- if settings.social_snapchat_link != blank -%}
+              <li>
+                <a href="{{ settings.social_snapchat_link }}" data-social="snapchat" target="_blank" rel="noopener">
+                  {{- 'icon-snapchat.svg' | inline_asset_content -}}
+                  <span class="visually-hidden">Snapchat</span>
+                </a>
+              </li>
+            {%- endif -%}
+            {%- if settings.social_tumblr_link != blank -%}
+              <li>
+                <a href="{{ settings.social_tumblr_link }}" data-social="tumblr" target="_blank" rel="noopener">
+                  {{- 'icon-tumblr.svg' | inline_asset_content -}}
+                  <span class="visually-hidden">Tumblr</span>
+                </a>
+              </li>
+            {%- endif -%}
+            {%- if settings.social_vimeo_link != blank -%}
+              <li>
+                <a href="{{ settings.social_vimeo_link }}" data-social="vimeo" target="_blank" rel="noopener">
+                  {{- 'icon-vimeo.svg' | inline_asset_content -}}
+                  <span class="visually-hidden">Vimeo</span>
+                </a>
+              </li>
+            {%- endif -%}
           </ul>
         {%- endif -%}
 
@@ -123,7 +155,7 @@
           {%- endform -%}
         {%- endif -%}
 
-        {%- if section.settings.hours != blank or section.settings.email != blank or section.settings.payment_enable and shop.enabled_payment_types.size > 0 -%}
+        {%- if section.settings.hours != blank or section.settings.email != blank or settings.payment_icons != blank -%}
           <div class="aotos-footer__meta">
             {%- if section.settings.hours != blank -%}
               <p class="aotos-footer__note">
@@ -145,10 +177,30 @@
               </p>
             {%- endif -%}
 
-            {%- if section.settings.payment_enable and shop.enabled_payment_types.size > 0 -%}
+            {%- if settings.payment_icons != blank -%}
               <ul class="aotos-footer__pay" role="list">
-                {%- for type in shop.enabled_payment_types -%}
-                  <li>{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>
+                {%- assign payment_list = settings.payment_icons | replace: '，', ',' | split: ',' -%}
+                {%- for raw_name in payment_list -%}
+                  {%- assign pay_name = raw_name | strip | downcase -%}
+                  {%- case pay_name -%}
+                    {%- when 'mastercard', 'master-card', 'master_card' -%}
+                      {%- assign pay_name = 'master' -%}
+                    {%- when 'amex', 'americanexpress', 'american-express', 'american express' -%}
+                      {%- assign pay_name = 'american_express' -%}
+                    {%- when 'diners', 'dinersclub', 'diners-club' -%}
+                      {%- assign pay_name = 'diners_club' -%}
+                    {%- when 'applepay', 'apple-pay', 'apple pay' -%}
+                      {%- assign pay_name = 'apple_pay' -%}
+                    {%- when 'googlepay', 'google-pay', 'google pay', 'gpay' -%}
+                      {%- assign pay_name = 'google_pay' -%}
+                    {%- when 'shoppay', 'shop-pay', 'shop pay', 'shop_pay' -%}
+                      {%- assign pay_name = 'shopify_pay' -%}
+                    {%- when 'union pay', 'union-pay', 'union_pay' -%}
+                      {%- assign pay_name = 'unionpay' -%}
+                  {%- endcase -%}
+                  {%- if pay_name != blank -%}
+                    <li>{{ pay_name | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>
+                  {%- endif -%}
                 {%- endfor -%}
               </ul>
             {%- endif -%}
@@ -160,34 +212,33 @@
             <p class="aotos-footer__apps-label">{{ section.settings.app_heading | escape }}</p>
           {%- endif -%}
           <div class="aotos-footer__apps">
+            {%- assign app_badge_sizes = '(max-width: 768px) 29vw, 10vw' -%}
             {%- if section.settings.app_store_image != blank -%}
+              {%- assign app_store_height = 480 | divided_by: section.settings.app_store_image.aspect_ratio | round -%}
               <a class="aotos-footer__app" href="{{ section.settings.app_store_link | default: '#' }}">
-                {{
-                  section.settings.app_store_image
-                  | image_url: width: 280
-                  | image_tag:
-                    widths: '140, 210, 280',
-                    sizes: '140px',
-                    width: 140,
-                    height: 42,
-                    loading: 'lazy',
-                    alt: 'Download on the App Store'
-                }}
+                <img
+                  src="{{ section.settings.app_store_image | image_url: width: 480 }}"
+                  srcset="{{ section.settings.app_store_image | image_url: width: 240 }} 240w, {{ section.settings.app_store_image | image_url: width: 360 }} 360w, {{ section.settings.app_store_image | image_url: width: 480 }} 480w, {{ section.settings.app_store_image | image_url: width: 640 }} 640w"
+                  sizes="{{ app_badge_sizes }}"
+                  width="480"
+                  height="{{ app_store_height }}"
+                  loading="lazy"
+                  alt="Download on the App Store"
+                >
               </a>
             {%- endif -%}
             {%- if section.settings.google_play_image != blank -%}
+              {%- assign google_play_height = 480 | divided_by: section.settings.google_play_image.aspect_ratio | round -%}
               <a class="aotos-footer__app" href="{{ section.settings.google_play_link | default: '#' }}">
-                {{
-                  section.settings.google_play_image
-                  | image_url: width: 280
-                  | image_tag:
-                    widths: '140, 210, 280',
-                    sizes: '140px',
-                    width: 140,
-                    height: 42,
-                    loading: 'lazy',
-                    alt: 'Get it on Google Play'
-                }}
+                <img
+                  src="{{ section.settings.google_play_image | image_url: width: 480 }}"
+                  srcset="{{ section.settings.google_play_image | image_url: width: 240 }} 240w, {{ section.settings.google_play_image | image_url: width: 360 }} 360w, {{ section.settings.google_play_image | image_url: width: 480 }} 480w, {{ section.settings.google_play_image | image_url: width: 640 }} 640w"
+                  sizes="{{ app_badge_sizes }}"
+                  width="480"
+                  height="{{ google_play_height }}"
+                  loading="lazy"
+                  alt="Get it on Google Play"
+                >
               </a>
             {%- endif -%}
           </div>
@@ -229,7 +280,7 @@
       "type": "checkbox",
       "id": "show_social",
       "label": "显示社交图标",
-      "info": "链接在主题设置的社交媒体里填写",
+      "info": "在主题设置 → 社交媒体里填写链接",
       "default": true
     },
     {
@@ -295,12 +346,6 @@
       "id": "email",
       "label": "邮箱",
       "default": "support@aotos.com"
-    },
-    {
-      "type": "checkbox",
-      "id": "payment_enable",
-      "label": "显示付款图标",
-      "default": true
     },
     {
       "type": "text",
