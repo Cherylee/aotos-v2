@@ -280,8 +280,6 @@
       "type": "main-page",
       "disabled": true,
       "settings": {
-        "color_scheme": "",
-        "heading_size": "h1",
         "padding_top": 28,
         "padding_bottom": 28
       }
