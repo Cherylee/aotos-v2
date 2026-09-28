@@ -1,10 +1,13 @@
 ---
 description: aotos 模块用全局 --rem（PC 1440 / 移动 750）；只两套尺寸——PC 不写断点，手机 max-width 768 单独一套
 globs: sections/**/*.liquid, assets/**/*.css, snippets/**/*.liquid
-alwaysApply: false
+alwaysApply: true
 ---
 
 # aotos 响应式开发规范（Shopify 跨境独立站）
+
+以后新写的 section、snippet、导航、弹层都走这套，不要写死 `px`。已有旧代码先不动，除非明确要求迁移。
+
 ## 全局基准
 
 定义在 `assets/base.css`（**改稿宽只改这两个参数**）：
