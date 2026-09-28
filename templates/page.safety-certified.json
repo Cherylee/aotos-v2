@@ -1,0 +1,98 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "safety_certified_hero": {
+      "type": "safety-certified-hero",
+      "settings": {
+        "image": "shopify://shop_images/UL.jpg",
+        "image_mobile": "shopify://shop_images/1500X960_f7d916f5-ee3c-453d-92e1-e1f5a74fb3c1.jpg",
+        "image_alt": "",
+        "image_position": "center center",
+        "overlay_opacity": 45,
+        "eyebrow": "YOUR SAFETY IS OUR PRIORITY",
+        "heading": "Safety Certified",
+        "subtitle": "UL and TUV Safety Certified - UL 2849 / UL 2271"
+      }
+    },
+    "safety_certified_grid": {
+      "type": "safety-certified-grid",
+      "blocks": {
+        "card_flux_pro": {
+          "type": "product_card",
+          "settings": {
+            "image": "shopify://shop_images/EB03_0919_2.webp",
+            "title": "FLUX X26 Pro",
+            "shop_label": "Shop",
+            "shop_link": "shopify://products/flux-x26-pro",
+            "cert_label": "Bike Cert. Details",
+            "cert_link": "https://cdn.shopify.com/s/files/1/0719/2736/5851/files/CU_72606403_0002_signed_license_extsigned.pdf?v=1789114542"
+          }
+        },
+        "card_flux_x26": {
+          "type": "product_card",
+          "settings": {
+            "image": "shopify://shop_images/eb03020-cropped.webp",
+            "title": "FLUX X26",
+            "shop_label": "Shop",
+            "shop_link": "shopify://products/flux-x26-pro",
+            "cert_label": "Bike Cert. Details",
+            "cert_link": "https://cdn.shopify.com/s/files/1/0719/2736/5851/files/CU_72606403_0002_signed_license_extsigned.pdf?v=1789114542"
+          }
+        },
+        "card_mc01": {
+          "type": "product_card",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/eb02-bike-main.webp",
+            "title": "MC01",
+            "shop_label": "Shop",
+            "shop_link": "",
+            "cert_label": "Bike Cert. Details",
+            "cert_link": ""
+          }
+        },
+        "card_m1": {
+          "type": "product_card",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/aotos-flux-x26-series-ebike-9780156.jpg",
+            "title": "M1",
+            "shop_label": "Shop",
+            "shop_link": "",
+            "cert_label": "Bike Cert. Details",
+            "cert_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_flux_pro",
+        "card_flux_x26",
+        "card_mc01",
+        "card_m1"
+      ],
+      "settings": {
+        "section_bg_color": "#ffffff",
+        "link_color": "#256d13",
+        "cert_icon": "shopify://shop_images/lR3PKH6cyikcXnPMocyNsJ6iDVyBb6leCnWNqmNdgwA.png",
+        "heading": "Safety Certification Details",
+        "text": "<p>Meeting the UL and/or TUV standards for Ebikes and batteries assures consumers that AOTOS electric bikes have been certified to meet critical electrical and fire safety standards. For more information on certifications, please visit the UL website or TUV website.</p>",
+        "padding_top": 40,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
+    }
+  },
+  "order": [
+    "safety_certified_hero",
+    "safety_certified_grid"
+  ]
+}

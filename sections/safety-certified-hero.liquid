@@ -1,0 +1,290 @@
+{%- liquid
+  assign sc_hero_img = section.settings.image
+  assign sc_hero_img_mob = section.settings.image_mobile | default: sc_hero_img
+  assign sc_hero_eyebrow = section.settings.eyebrow | default: 'YOUR SAFETY IS OUR PRIORITY'
+  assign sc_hero_title = section.settings.heading | default: 'Safety Certified'
+  assign sc_hero_subtitle = section.settings.subtitle
+  assign sc_overlay = section.settings.overlay_opacity | default: 45
+-%}
+
+{% style %}
+  body:has(.sc-hero) #MainContent {
+    background-color: #ffffff;
+  }
+
+  body:has(.sc-hero) #MainContent > .shopify-section.section + .shopify-section.section {
+    margin-top: 0;
+  }
+
+  #sc-hero-{{ section.id }} {
+    position: relative;
+    width: 100%;
+    min-height: calc(400 * var(--rem));
+    overflow: hidden;
+    color: #ffffff;
+    font-family: var(--font-body-family);
+  }
+
+  #sc-hero-{{ section.id }} * {
+    box-sizing: border-box;
+  }
+
+  #sc-hero-{{ section.id }} .sc-hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  #sc-hero-{{ section.id }} .sc-hero__bg picture,
+  #sc-hero-{{ section.id }} .sc-hero__bg img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: {{ section.settings.image_position | default: 'center center' }};
+  }
+
+  #sc-hero-{{ section.id }} .sc-hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgb(0 0 0 / calc(var(--sc-hero-overlay, 45) * 1%));
+    pointer-events: none;
+  }
+
+  #sc-hero-{{ section.id }} .sc-hero__inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    min-height: calc(400 * var(--rem));
+    margin: 0 auto;
+    padding: calc(80 * var(--rem)) calc(30 * var(--rem));
+  }
+
+  #sc-hero-{{ section.id }} .sc-hero__accent {
+    display: block;
+    width: calc(40 * var(--rem));
+    height: calc(4 * var(--rem));
+    margin-bottom: calc(20 * var(--rem));
+    border-radius: calc(2 * var(--rem));
+    background: var(--aotos-theme-accent, #ff6501);
+  }
+
+  #sc-hero-{{ section.id }} .sc-hero__eyebrow {
+    margin: 0 0 calc(16 * var(--rem));
+    color: #ffffff;
+    font-size: calc(12 * var(--rem));
+    letter-spacing: 0.14em;
+    line-height: calc(18 * var(--rem));
+    text-transform: uppercase;
+  }
+
+  #sc-hero-{{ section.id }} .sc-hero__title {
+    margin: 0 0 calc(16 * var(--rem));
+    color: #ffffff;
+    font-size: calc(32 * var(--rem));
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  #sc-hero-{{ section.id }} .sc-hero__subtitle {
+    margin: 0;
+    max-width: calc(560 * var(--rem));
+    color: #ffffff;
+    font-size: calc(12 * var(--rem));
+    line-height: calc(24 * var(--rem));
+  }
+
+  @media screen and (max-width: 749px) {
+    #sc-hero-{{ section.id }} {
+      min-height: calc(480 * var(--rem));
+    }
+
+    #sc-hero-{{ section.id }} .sc-hero__inner {
+      width: 100%;
+      min-height: calc(480 * var(--rem));
+      padding: calc(88 * var(--rem)) calc(40 * var(--rem));
+    }
+
+    #sc-hero-{{ section.id }} .sc-hero__accent {
+      width: calc(56 * var(--rem));
+      height: calc(6 * var(--rem));
+      margin-bottom: calc(24 * var(--rem));
+    }
+
+    #sc-hero-{{ section.id }} .sc-hero__eyebrow {
+      margin-bottom: calc(20 * var(--rem));
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #sc-hero-{{ section.id }} .sc-hero__title {
+      margin-bottom: calc(20 * var(--rem));
+      font-size: calc(48 * var(--rem));
+      line-height: 1.15;
+    }
+
+    #sc-hero-{{ section.id }} .sc-hero__subtitle {
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+  }
+
+  @media screen and (min-width: 750px) and (max-width: 768px) {
+    #sc-hero-{{ section.id }} .sc-hero__inner {
+      width: 100%;
+      padding: calc(168 * var(--rem)) calc(34 * var(--rem));
+    }
+
+    #sc-hero-{{ section.id }} .sc-hero__eyebrow {
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #sc-hero-{{ section.id }} .sc-hero__title {
+      font-size: calc(48 * var(--rem));
+    }
+
+    #sc-hero-{{ section.id }} .sc-hero__subtitle {
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+  }
+{% endstyle %}
+
+<section
+  class="sc-hero"
+  id="sc-hero-{{ section.id }}"
+  style="--sc-hero-overlay: {{ sc_overlay }};"
+>
+  <div class="sc-hero__bg" aria-hidden="true">
+    {%- if sc_hero_img != blank or sc_hero_img_mob != blank -%}
+      <picture>
+        {%- if sc_hero_img_mob != blank -%}
+          <source
+            media="(max-width: 749px)"
+            srcset="{{ sc_hero_img_mob | image_url: width: 750 }} 750w, {{ sc_hero_img_mob | image_url: width: 1500 }} 1500w"
+            sizes="100vw"
+          >
+        {%- endif -%}
+        {%- if sc_hero_img != blank -%}
+          <img
+            src="{{ sc_hero_img | image_url: width: 1600 }}"
+            srcset="{{ sc_hero_img | image_url: width: 1100 }} 1100w, {{ sc_hero_img | image_url: width: 1600 }} 1600w, {{ sc_hero_img | image_url: width: 1920 }} 1920w"
+            sizes="100vw"
+            width="1600"
+            height="{{ 1600 | divided_by: sc_hero_img.aspect_ratio | round }}"
+            alt="{{ section.settings.image_alt | default: sc_hero_title | escape }}"
+            loading="eager"
+            fetchpriority="high"
+          >
+        {%- elsif sc_hero_img_mob != blank -%}
+          <img
+            src="{{ sc_hero_img_mob | image_url: width: 1500 }}"
+            srcset="{{ sc_hero_img_mob | image_url: width: 750 }} 750w, {{ sc_hero_img_mob | image_url: width: 1500 }} 1500w"
+            sizes="100vw"
+            width="1500"
+            height="{{ 1500 | divided_by: sc_hero_img_mob.aspect_ratio | round }}"
+            alt="{{ section.settings.image_alt | default: sc_hero_title | escape }}"
+            loading="eager"
+            fetchpriority="high"
+          >
+        {%- endif -%}
+      </picture>
+    {%- else -%}
+      <div style="width:100%;height:100%;background:#1a1a1a;"></div>
+    {%- endif -%}
+  </div>
+
+  <div class="sc-hero__overlay" aria-hidden="true"></div>
+
+  <div class="sc-hero__inner">
+    <span class="sc-hero__accent" aria-hidden="true"></span>
+    {%- if sc_hero_eyebrow != blank -%}
+      <p class="sc-hero__eyebrow">{{ sc_hero_eyebrow | escape }}</p>
+    {%- endif -%}
+    {%- if sc_hero_title != blank -%}
+      <h1 class="sc-hero__title">{{ sc_hero_title | escape }}</h1>
+    {%- endif -%}
+    {%- if sc_hero_subtitle != blank -%}
+      <p class="sc-hero__subtitle">{{ sc_hero_subtitle | escape }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Safety Certified Hero",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "背景图（PC）",
+      "info": "建议上传：1920 × 800 px（宽 × 高）。展示：全宽，高度约 400px。"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "背景图（手机）",
+      "info": "建议上传：1500 × 960 px（宽 × 高）。展示：全宽，高度约 480px。未上传时使用 PC 图。"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "背景图 Alt"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "背景图位置",
+      "options": [
+        { "value": "center center", "label": "居中" },
+        { "value": "left center", "label": "偏左" },
+        { "value": "right center", "label": "偏右" }
+      ],
+      "default": "center center"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "label": "遮罩透明度",
+      "default": 45
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "副标题",
+      "default": "YOUR SAFETY IS OUR PRIORITY"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "主标题",
+      "default": "Safety Certified"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "说明文字",
+      "default": "UL and TUV Safety Certified - UL 2849 / UL 2271"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Safety Certified Hero"
+    }
+  ]
+}
+{% endschema %}

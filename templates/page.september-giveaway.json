@@ -1,0 +1,202 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_banner_Knt8rx": {
+      "type": "image-banner",
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/2880X680_c18da4c4-fd5d-4990-9d4b-4fbfb7d23e4c.jpg",
+        "image_mobile": "shopify://shop_images/21c96ddb-8669-4121-9763-2e9769786f4d.png",
+        "image_overlay_opacity": 0,
+        "image_height": "adapt",
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": true
+      }
+    },
+    "giveaway_prizes": {
+      "type": "giveaway-prize-row",
+      "blocks": {
+        "prize_1": {
+          "type": "prize",
+          "settings": {
+            "image": "shopify://shop_images/840X360a.jpg",
+            "image_link": "",
+            "image_alt": "AOTOS gift cards",
+            "image_2_link": "",
+            "image_2_alt": "",
+            "caption": "3 × $100 AOTOS Gift Cards",
+            "note": ""
+          }
+        },
+        "prize_2": {
+          "type": "prize",
+          "settings": {
+            "image": "shopify://shop_images/840X360b.webp",
+            "image_link": "",
+            "image_alt": "AOTOS helmets",
+            "image_2_link": "",
+            "image_2_alt": "",
+            "caption": "5 × AOTOS Helmets ($79 Each)",
+            "note": ""
+          }
+        },
+        "prize_3": {
+          "type": "prize",
+          "settings": {
+            "image": "shopify://shop_images/840X360c.jpg",
+            "image_link": "",
+            "image_alt": "Total prize value",
+            "image_2_link": "",
+            "image_2_alt": "",
+            "caption": "Total Prize Value: $695",
+            "note": ""
+          }
+        }
+      },
+      "block_order": [
+        "prize_1",
+        "prize_2",
+        "prize_3"
+      ],
+      "settings": {
+        "section_heading": "",
+        "footnote": "*Valid only on aotos.com. Not applicable on other AOTOS platforms.",
+        "image_size": "large",
+        "show_numbers": false,
+        "bg_color": "#ffffff",
+        "heading_color": "#000000",
+        "accent_color": "#8bc34a",
+        "text_color": "#000000",
+        "divider_color": "#e6e6e6",
+        "number_bg": "#111111",
+        "number_color": "#ffffff",
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 32
+      }
+    },
+    "giveaway_prize_row_NTD6Jf": {
+      "type": "giveaway-prize-row",
+      "blocks": {
+        "prize_79xrEK": {
+          "type": "prize",
+          "settings": {
+            "image": "shopify://shop_images/5446933.webp",
+            "image_link": "",
+            "image_alt": "",
+            "image_2_link": "",
+            "image_2_alt": "",
+            "caption": "Choose Your Ride",
+            "note": "Select the AOTOS e-bike you're most interested in above."
+          }
+        },
+        "prize_Rq3AXw": {
+          "type": "prize",
+          "settings": {
+            "image": "shopify://shop_images/432452.webp",
+            "image_link": "https://www.instagram.com/aotos_global/",
+            "image_alt": "",
+            "image_2": "shopify://shop_images/272121.webp",
+            "image_2_link": "https://www.facebook.com/Aotosglobal",
+            "image_2_alt": "",
+            "caption": "Follow AOTOS",
+            "note": "Follow @aotos on Instagram for the latest updates."
+          }
+        },
+        "prize_KmqAcM": {
+          "type": "prize",
+          "settings": {
+            "image": "shopify://shop_images/7843162.webp",
+            "image_link": "https://www.facebook.com/Aotosglobal/posts/pfbid0QZWXmzNE58kFjcX3BiuxSThveHgZ282ywuaM1e7EGwuWKK3RCeGVd4AHHKP5jZkTl",
+            "image_alt": "",
+            "image_2_link": "",
+            "image_2_alt": "",
+            "caption": "Comment the Post and Tag a Friend",
+            "note": "Comment on the giveaway post and tag a friend who loves riding!"
+          }
+        }
+      },
+      "block_order": [
+        "prize_79xrEK",
+        "prize_Rq3AXw",
+        "prize_KmqAcM"
+      ],
+      "name": "Giveaway prize row",
+      "settings": {
+        "section_heading": "HOW TO ENTER",
+        "footnote": "",
+        "image_size": "icon",
+        "show_numbers": true,
+        "bg_color": "#ffffff",
+        "heading_color": "#111111",
+        "accent_color": "#ff6501",
+        "text_color": "#000000",
+        "divider_color": "#d8d4ce",
+        "number_bg": "#111111",
+        "number_color": "#ffffff",
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 32
+      }
+    },
+    "service_repair_book_UxBGzA": {
+      "type": "service-repair-book",
+      "name": "Service Repair Book",
+      "settings": {
+        "globo_form_id": "MTYzODM4",
+        "form_liquid": "<div class=\"globo-formbuilder\" data-id=\"MTYzODM4\"></div>",
+        "show_form_note": true,
+        "form_note": "Tips<br>Giveaway Details: No purchase necessary. One entry per person. Giveaway ends September 30, 2026 at 11:59 PM ET. Winners will be announced October 1, 2026. Open to legal residents of the United States, age 18 or older. AOTOS employees and their immediate family members are not eligible.",
+        "form_note_align": "left",
+        "form_note_color": "#666666",
+        "background_color": "#f5f5f5",
+        "padding_top": 12,
+        "padding_bottom": 12,
+        "padding_top_mobile": 12,
+        "padding_bottom_mobile": 12
+      }
+    },
+    "image_banner_XVkKw8": {
+      "type": "image-banner",
+      "disabled": true,
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/2880X360.jpg",
+        "image_mobile": "shopify://shop_images/111112.png",
+        "image_overlay_opacity": 0,
+        "image_height": "adapt",
+        "desktop_content_position": "middle-center",
+        "show_text_box": true,
+        "desktop_content_alignment": "center",
+        "color_scheme": "",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": true
+      }
+    }
+  },
+  "order": [
+    "image_banner_Knt8rx",
+    "giveaway_prizes",
+    "giveaway_prize_row_NTD6Jf",
+    "service_repair_book_UxBGzA",
+    "image_banner_XVkKw8"
+  ]
+}

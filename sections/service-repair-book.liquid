@@ -1,0 +1,349 @@
+{%- liquid
+  assign sr_book_bg = section.settings.background_color | default: '#f5f5f5'
+  assign globo_form_id = section.settings.globo_form_id | strip
+  assign has_embed = false
+  if section.settings.form_liquid != blank
+    assign has_embed = true
+  endif
+  for block in section.blocks
+    assign has_embed = true
+  endfor
+-%}
+
+{% style %}
+  body:has(.sr-book) #MainContent > .shopify-section.section + .shopify-section.section {
+    margin-top: 0;
+  }
+
+  #shopify-section-{{ section.id }} {
+    background-color: {{ sr_book_bg }};
+    display: flow-root;
+  }
+
+  #sr-book-{{ section.id }} {
+    background: {{ sr_book_bg }};
+    color: #000000;
+    font-family: var(--font-body-family);
+    display: flow-root;
+    padding-top: calc({{ section.settings.padding_top | default: 40 }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 40 }} * var(--rem));
+  }
+
+  #sr-book-{{ section.id }} .sr-book__shell {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  #sr-book-{{ section.id }} .sr-book__form {
+    width: 100%;
+  }
+
+  #sr-book-{{ section.id }} .sr-book__form-slot {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #sr-book-{{ section.id }} .sr-book__form-slot .globo-formbuilder,
+  #sr-book-{{ section.id }} .sr-book__form-slot .globo-form-app,
+  #sr-book-{{ section.id }} .sr-book__form-slot form.g-container {
+    width: 100%;
+    margin-bottom: 0 !important;
+  }
+
+  #sr-book-{{ section.id }} .sr-book__form-slot .gfb__footer,
+  #sr-book-{{ section.id }} .sr-book__form-slot .wizard__footer {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  #sr-book-{{ section.id }} .sr-book__form-note {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    margin: calc(16 * var(--rem)) 0 0;
+    padding: 0;
+    color: {{ section.settings.form_note_color | default: '#666666' }};
+    font-size: calc(10 * var(--rem));
+    line-height: 1.5;
+    text-align: {{ section.settings.form_note_align | default: 'left' }};
+  }
+
+  #sr-book-{{ section.id }} .sr-book__form-note a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  #sr-book-{{ section.id }} .globo-description h4 strong {
+    color: #ff6501 !important;
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    #sr-book-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 0 }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 0 }} * var(--rem));
+    }
+
+    #sr-book-{{ section.id }} .sr-book__shell {
+      width: 100%;
+      padding: calc(40 * var(--rem)) calc(40 * var(--rem));
+    }
+
+    #sr-book-{{ section.id }} .globo-formbuilder,
+    #sr-book-{{ section.id }} .globo-form-app,
+    #sr-book-{{ section.id }} .globo-form-app.default-layout,
+    #sr-book-{{ section.id }} .globo-form-app.gfb-style-material_filled,
+    #sr-book-{{ section.id }} form.g-container,
+    #sr-book-{{ section.id }} .globo-formbuilder-wizard,
+    #sr-book-{{ section.id }} .wizard__content,
+    #sr-book-{{ section.id }} .wizard_content,
+    #sr-book-{{ section.id }} .panels,
+    #sr-book-{{ section.id }} .panel,
+    #sr-book-{{ section.id }} .description.globo-description {
+      background-color: {{ sr_book_bg }} !important;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+    }
+
+    #sr-book-{{ section.id }} .globo-form-app .header,
+    #sr-book-{{ section.id }} .wizard__header,
+    #sr-book-{{ section.id }} .wizard_header {
+      display: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      min-height: 0 !important;
+      height: 0 !important;
+      overflow: hidden !important;
+    }
+
+    #sr-book-{{ section.id }} .gfb__footer,
+    #sr-book-{{ section.id }} .wizard__footer {
+      margin-bottom: 0 !important;
+      padding-bottom: 0 !important;
+    }
+    #sr-book-{{ section.id }} .sr-book__form-note {
+      font-size: calc(18 * var(--rem));
+    }
+  }
+
+  @media screen and (min-width: 750px) and (max-width: 768px) {
+    #sr-book-{{ section.id }} {
+      padding-top: calc(28 * var(--rem));
+      padding-bottom: calc(28 * var(--rem));
+    }
+
+    #sr-book-{{ section.id }} .sr-book__shell {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 0 calc(34 * var(--rem));
+    }
+    #sr-book-{{ section.id }} .sr-book__form-note {
+      font-size: calc(18 * var(--rem));
+    }
+  }
+{% endstyle %}
+
+<section class="sr-book" id="sr-book-{{ section.id }}">
+  <div class="sr-book__shell">
+    <div class="sr-book__form" id="service-repair-form">
+      <div class="sr-book__form-slot">
+        {%- if section.settings.form_liquid != blank -%}
+          {{ section.settings.form_liquid }}
+        {%- elsif has_embed -%}
+          {%- for block in section.blocks -%}
+            {% render block %}
+          {%- endfor -%}
+        {%- elsif globo_form_id != blank -%}
+          <div class="globo-formbuilder" data-id="{{ globo_form_id | escape }}"></div>
+        {%- endif -%}
+
+        {%- if section.settings.show_form_note and section.settings.form_note != blank -%}
+          <p class="sr-book__form-note">{{ section.settings.form_note }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- if section.settings.show_form_note and section.settings.form_note != blank -%}
+  <script>
+    (function () {
+      var root = document.getElementById('sr-book-{{ section.id }}');
+      if (!root) return;
+      var note = root.querySelector('.sr-book__form-note');
+      var slot = root.querySelector('.sr-book__form-slot');
+      if (!note || !slot) return;
+
+      function pickForm() {
+        return (
+          root.querySelector('.globo-form-app') ||
+          root.querySelector('form.g-container') ||
+          root.querySelector('.globo-formbuilder-wizard') ||
+          root.querySelector('.globo-formbuilder')
+        );
+      }
+
+      function syncNote() {
+        var formEl = pickForm();
+        if (!formEl) return;
+        var formRect = formEl.getBoundingClientRect();
+        var slotRect = slot.getBoundingClientRect();
+        if (!formRect.width) return;
+        note.style.boxSizing = 'border-box';
+        note.style.width = formRect.width + 'px';
+        note.style.maxWidth = formRect.width + 'px';
+        note.style.marginLeft = Math.max(0, formRect.left - slotRect.left) + 'px';
+        note.style.marginRight = 'auto';
+        note.style.marginTop = '16px';
+      }
+
+      syncNote();
+      window.addEventListener('resize', syncNote);
+      if (window.ResizeObserver) {
+        var ro = new ResizeObserver(syncNote);
+        ro.observe(slot);
+        var formEl = pickForm();
+        if (formEl) ro.observe(formEl);
+      }
+      var mo = new MutationObserver(function () {
+        requestAnimationFrame(syncNote);
+      });
+      mo.observe(slot, { childList: true, subtree: true, attributes: true });
+      setTimeout(syncNote, 300);
+      setTimeout(syncNote, 1200);
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Service Repair Book",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Form plugin"
+    },
+    {
+      "type": "paragraph",
+      "content": "每个页面填自己的 Globo form data-id。也可改用下方 embed 或 App block（后两者优先）。"
+    },
+    {
+      "type": "text",
+      "id": "globo_form_id",
+      "label": "Globo form data-id",
+      "info": "Globo 后台表单 ID，例如 MTYzNDk3。留空则不输出表单。"
+    },
+    {
+      "type": "liquid",
+      "id": "form_liquid",
+      "label": "Form embed code"
+    },
+    {
+      "type": "header",
+      "content": "Form footnote"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_form_note",
+      "label": "Show footnote below form",
+      "default": false
+    },
+    {
+      "type": "textarea",
+      "id": "form_note",
+      "label": "Footnote text",
+      "default": "By submitting this form, you agree to be contacted regarding your repair request.",
+      "info": "显示在表单下方的一行小字。"
+    },
+    {
+      "type": "select",
+      "id": "form_note_align",
+      "label": "Footnote alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "color",
+      "id": "form_note_color",
+      "label": "Footnote color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top (PC)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom (PC)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top (mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom (mobile)",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Service Repair Book"
+    }
+  ]
+}
+{% endschema %}

@@ -149,6 +149,8 @@
 
         --aotos-theme-color: {{ settings.theme_color }};
         --aotos-theme-color-rgb: {{ settings.theme_color.red }},{{ settings.theme_color.green }},{{ settings.theme_color.blue }};
+        /* migrated from Aotos-New: accent var used by safety-certified / service-repair sections */
+        --aotos-theme-accent: var(--aotos-theme-color, #ff6501);
         --aotos-button-height: {{ settings.button_height }};
         --aotos-button-height-mobile: {{ settings.button_height_mobile }};
         --aotos-button-radius: {{ settings.button_radius }};

@@ -1,0 +1,518 @@
+{%- liquid
+  assign sc_link_color = section.settings.link_color | default: '#16a115'
+  assign sc_cert_icon = section.settings.cert_icon
+-%}
+
+{% style %}
+  #sc-grid-{{ section.id }} {
+    background-color: {{ section.settings.section_bg_color | default: '#ffffff' }};
+    padding-top: calc({{ section.settings.padding_top | default: 40 }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80 }} * var(--rem));
+    color: #000000;
+    font-family: var(--font-body-family);
+  }
+
+  #sc-grid-{{ section.id }} * {
+    box-sizing: border-box;
+  }
+
+  #sc-grid-{{ section.id }} .sc-grid__shell {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 calc(30 * var(--rem));
+  }
+
+  #sc-grid-{{ section.id }} .sc-grid__intro {
+    margin-bottom: calc(28 * var(--rem));
+    max-width: calc(900 * var(--rem));
+  }
+
+  #sc-grid-{{ section.id }} .sc-grid__title {
+    margin: 0 0 calc(20 * var(--rem));
+    font-size: var(--aotos-section-title-size);
+    font-weight: 700;
+    line-height: 1.2;
+    color: #000000;
+  }
+
+  #sc-grid-{{ section.id }} .sc-grid__text {
+    margin: 0;
+    font-size: calc(12 * var(--rem));
+    line-height: calc(22 * var(--rem));
+    color: #999999;
+  }
+
+  #sc-grid-{{ section.id }} .sc-grid__text p {
+    margin: 0;
+  }
+
+  #sc-grid-{{ section.id }} .sc-grid__cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: calc(24 * var(--rem));
+  }
+
+  #sc-grid-{{ section.id }} .sc-grid__card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  #sc-grid-{{ section.id }} .sc-grid__media {
+    aspect-ratio: 1 / 1;
+    margin-bottom: calc(16 * var(--rem));
+    overflow: hidden;
+    background: #f5f5f5;
+  }
+
+  #sc-grid-{{ section.id }} .sc-grid__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  #sc-grid-{{ section.id }} .sc-grid__card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: calc(12 * var(--rem));
+    margin-bottom: calc(16 * var(--rem));
+    
+  }
+
+  #sc-grid-{{ section.id }} .sc-grid__card-title {
+    margin: 0;
+    font-size: calc(12 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    font-weight: 600!important;
+    color: #000000;
+  }
+
+  #sc-grid-{{ section.id }} .sc-grid__shop-link {
+    flex-shrink: 0;
+    color: var(--aotos-theme-accent, #ff6501);
+    font-size: calc(14 * var(--rem));
+    font-weight: 600;
+    line-height: calc(18 * var(--rem));
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  @media (hover: hover) {
+    #sc-grid-{{ section.id }} .sc-grid__shop-link:hover {
+      opacity: 0.8;
+    }
+
+    #sc-grid-{{ section.id }} .sc-grid__cert-btn:hover {
+      border-color: {{ sc_link_color }};
+    }
+  }
+
+  #sc-grid-{{ section.id }} .sc-grid__cert-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(10 * var(--rem));
+    width: 100%;
+    min-height: calc(40 * var(--rem));
+    padding: calc(6 * var(--rem)) calc(16 * var(--rem));
+    border: 1px solid #b2b2b2;
+    border-radius: calc(8 * var(--rem));
+    background: #ffffff;
+    color: {{ sc_link_color }};
+    font-size: calc(12 * var(--rem));
+    /* font-weight: 500; */
+    line-height: 1;
+    text-decoration: none;
+    transition: border-color 0.25s ease;
+  }
+
+  #sc-grid-{{ section.id }} .sc-grid__cert-btn > span {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+  }
+
+  #sc-grid-{{ section.id }} .sc-grid__cert-btn--disabled {
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  #sc-grid-{{ section.id }} .sc-grid__cert-icon {
+    display: block;
+    width: calc(24 * var(--rem));
+    height: calc(24 * var(--rem));
+    flex-shrink: 0;
+    object-fit: contain;
+    align-self: center;
+  }
+
+  #sc-grid-{{ section.id }} .sc-grid__cert-icon-svg {
+    display: block;
+    width: calc(24 * var(--rem));
+    height: calc(24 * var(--rem));
+    flex-shrink: 0;
+    align-self: center;
+  }
+
+  @media screen and (max-width: 749px) {
+    #sc-grid-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 88 }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88 }} * var(--rem));
+    }
+
+    #sc-grid-{{ section.id }} .sc-grid__shell {
+      width: 100%;
+      padding: 0 calc(24 * var(--rem));
+    }
+
+    #sc-grid-{{ section.id }} .sc-grid__intro {
+      margin-bottom: calc(48 * var(--rem));
+    }
+
+    #sc-grid-{{ section.id }} .sc-grid__title {
+      margin-bottom: calc(24 * var(--rem));
+    }
+
+    #sc-grid-{{ section.id }} .sc-grid__text {
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #sc-grid-{{ section.id }} .sc-grid__cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: calc(24 * var(--rem)) calc(16 * var(--rem));
+    }
+
+    #sc-grid-{{ section.id }} .sc-grid__media {
+      margin-bottom: calc(12 * var(--rem));
+    }
+
+    #sc-grid-{{ section.id }} .sc-grid__card-head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: calc(4 * var(--rem));
+      margin-bottom: calc(12 * var(--rem));
+    }
+
+    #sc-grid-{{ section.id }} .sc-grid__card-title,
+    #sc-grid-{{ section.id }} .sc-grid__shop-link {
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+      white-space: normal;
+    }
+
+    #sc-grid-{{ section.id }} .sc-grid__cert-btn {
+      gap: calc(12 * var(--rem));
+      min-height: calc(64 * var(--rem));
+      padding: calc(12 * var(--rem)) calc(16 * var(--rem));
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+      border-radius: calc(12 * var(--rem));
+    }
+
+    #sc-grid-{{ section.id }} .sc-grid__cert-btn > span {
+      line-height: calc(32 * var(--rem));
+      text-align: center;
+    }
+
+    #sc-grid-{{ section.id }} .sc-grid__cert-icon,
+    #sc-grid-{{ section.id }} .sc-grid__cert-icon-svg {
+      width: calc(40 * var(--rem));
+      height: calc(40 * var(--rem));
+    }
+  }
+
+  @media screen and (min-width: 750px) and (max-width: 768px) {
+    #sc-grid-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 88 | times: 1.9 | round }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88 | times: 1.9 | round }} * var(--rem));
+    }
+
+    #sc-grid-{{ section.id }} .sc-grid__shell {
+      width: 100%;
+      padding: 0 calc(34 * var(--rem));
+    }
+
+    #sc-grid-{{ section.id }} .sc-grid__cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: calc(40 * var(--rem));
+    }
+
+    #sc-grid-{{ section.id }} .sc-grid__text {
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #sc-grid-{{ section.id }} .sc-grid__card-head {
+      align-items: center;
+    }
+
+    #sc-grid-{{ section.id }} .sc-grid__card-title,
+    #sc-grid-{{ section.id }} .sc-grid__shop-link {
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #sc-grid-{{ section.id }} .sc-grid__cert-btn {
+      gap: calc(12 * var(--rem));
+      min-height: calc(64 * var(--rem));
+      padding: calc(12 * var(--rem)) calc(20 * var(--rem));
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+      border-radius: calc(12 * var(--rem));
+    }
+
+    #sc-grid-{{ section.id }} .sc-grid__cert-btn > span {
+      line-height: calc(32 * var(--rem));
+    }
+
+    #sc-grid-{{ section.id }} .sc-grid__cert-icon,
+    #sc-grid-{{ section.id }} .sc-grid__cert-icon-svg {
+      width: calc(40 * var(--rem));
+      height: calc(40 * var(--rem));
+    }
+  }
+{% endstyle %}
+
+<section class="sc-grid" id="sc-grid-{{ section.id }}">
+  <div class="sc-grid__shell">
+    {%- if section.settings.heading != blank or section.settings.text != blank -%}
+      <div class="sc-grid__intro">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="sc-grid__title">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="sc-grid__text rte">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="sc-grid__cards">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign card_title = block.settings.title
+            assign card_shop_link = block.settings.shop_link
+            assign card_shop_label = block.settings.shop_label | default: 'Shop'
+            assign card_cert_link = block.settings.cert_link
+            assign card_cert_label = block.settings.cert_label | default: 'Bike Cert. Details'
+            assign card_image = block.settings.image
+          -%}
+          <article class="sc-grid__card" {{ block.shopify_attributes }}>
+            <div class="sc-grid__media">
+              {%- if card_image != blank -%}
+                <img
+                  src="{{ card_image | image_url: width: 560 }}"
+                  srcset="{{ card_image | image_url: width: 280 }} 280w, {{ card_image | image_url: width: 400 }} 400w, {{ card_image | image_url: width: 560 }} 560w, {{ card_image | image_url: width: 720 }} 720w, {{ card_image | image_url: width: 960 }} 960w"
+                  sizes="(max-width: 768px) 47vw, 250px"
+                  width="560"
+                  height="{{ 560 | divided_by: card_image.aspect_ratio | round }}"
+                  alt="{{ card_title | escape }}"
+                  loading="lazy"
+                >
+              {%- endif -%}
+            </div>
+
+            <div class="sc-grid__card-head">
+              {%- if card_title != blank -%}
+                <h3 class="sc-grid__card-title">{{ card_title | escape }}</h3>
+              {%- endif -%}
+              {%- if card_shop_label != blank and card_shop_link != blank -%}
+                <a class="sc-grid__shop-link" href="{{ card_shop_link }}">{{ card_shop_label | escape }}</a>
+              {%- endif -%}
+            </div>
+
+            {%- if card_cert_label != blank -%}
+              {%- if card_cert_link != blank -%}
+                <a class="sc-grid__cert-btn" href="{{ card_cert_link }}">
+                  {%- if sc_cert_icon != blank -%}
+                    <img
+                      class="sc-grid__cert-icon"
+                      src="{{ sc_cert_icon | image_url: width: 48 }}"
+                      width="24"
+                      height="{{ 24 | divided_by: sc_cert_icon.aspect_ratio | round }}"
+                      alt=""
+                      loading="lazy"
+                    >
+                  {%- else -%}
+                    <svg class="sc-grid__cert-icon-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                      <circle cx="12" cy="12" r="11" fill="#000000"/>
+                      <text x="12" y="16" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="8" font-weight="700">UL</text>
+                    </svg>
+                  {%- endif -%}
+                  <span>{{ card_cert_label | escape }}</span>
+                </a>
+              {%- else -%}
+                <span class="sc-grid__cert-btn sc-grid__cert-btn--disabled">
+                  {%- if sc_cert_icon != blank -%}
+                    <img
+                      class="sc-grid__cert-icon"
+                      src="{{ sc_cert_icon | image_url: width: 48 }}"
+                      width="24"
+                      height="{{ 24 | divided_by: sc_cert_icon.aspect_ratio | round }}"
+                      alt=""
+                      loading="lazy"
+                    >
+                  {%- else -%}
+                    <svg class="sc-grid__cert-icon-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                      <circle cx="12" cy="12" r="11" fill="#000000"/>
+                      <text x="12" y="16" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="8" font-weight="700">UL</text>
+                    </svg>
+                  {%- endif -%}
+                  <span>{{ card_cert_label | escape }}</span>
+                </span>
+              {%- endif -%}
+            {%- endif -%}
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Safety Certified Grid",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "背景色",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "链接 / 按钮文字色",
+      "default": "#16a115"
+    },
+    {
+      "type": "image_picker",
+      "id": "cert_icon",
+      "label": "认证按钮图标",
+      "info": "建议上传：48 × 60 px，PNG 透明底。未上传时使用 UL SVG 占位。"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "区块标题",
+      "default": "Safety Certification Details"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "说明文字",
+      "default": "<p>Meeting the UL and/or TUV standards for Ebikes and batteries assures consumers that AOTOS electric bikes have been certified to meet critical electrical and fire safety standards. For more information on certifications, please visit the UL website or TUV website.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Desktop padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Mobile padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 88
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_card",
+      "name": "Product card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "产品图",
+          "info": "建议上传：960 × 960 px（1:1），PNG/JPG 透明或白底。展示约 250px（PC 四列）/ 47vw（手机双列）。"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "产品名称",
+          "default": "FLUX X26 Pro"
+        },
+        {
+          "type": "text",
+          "id": "shop_label",
+          "label": "购买链接文案",
+          "default": "Shop"
+        },
+        {
+          "type": "url",
+          "id": "shop_link",
+          "label": "购买链接"
+        },
+        {
+          "type": "text",
+          "id": "cert_label",
+          "label": "认证按钮文案",
+          "default": "Bike Cert. Details"
+        },
+        {
+          "type": "url",
+          "id": "cert_link",
+          "label": "认证详情链接",
+          "info": "PDF 或站内页面"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Safety Certified Grid",
+      "blocks": [
+        { "type": "product_card" },
+        { "type": "product_card" },
+        { "type": "product_card" },
+        { "type": "product_card" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,480 @@
+{%- liquid
+  assign sr_heading = section.settings.heading | default: 'SERVICE & REPAIR'
+  assign sr_text = section.settings.text
+  assign sr_img = section.settings.image
+  assign sr_img_mob = section.settings.image_mobile | default: sr_img
+  assign sr_alt = section.settings.image_alt | default: sr_heading
+  assign sr_fallback = section.settings.fallback_asset | strip | default: 'service-repair-banner.png'
+  assign sr_ratio = section.settings.image_ratio | default: '5/2'
+  assign sr_ratio_w = sr_ratio | split: '/' | first | plus: 0
+  assign sr_ratio_h = sr_ratio | split: '/' | last | plus: 0
+  if sr_ratio_w < 1 or sr_ratio_h < 1
+    assign sr_ratio_w = 5
+    assign sr_ratio_h = 2
+  endif
+  assign sr_banner_h = 320
+  assign sr_media_w = sr_banner_h | times: sr_ratio_w | divided_by: sr_ratio_h
+  assign sr_img_w = sr_media_w
+  assign sr_img_h = sr_banner_h
+  assign sr_img_w2 = sr_img_w | times: 2
+  assign sr_img_h2 = sr_img_h | times: 2
+  assign sr_mob_h_750 = 750 | times: sr_ratio_h | divided_by: sr_ratio_w | round
+  assign sr_mob_h_1100 = 1100 | times: sr_ratio_h | divided_by: sr_ratio_w | round
+-%}
+
+{% render 'gsap-title-reveal' %}
+
+{% style %}
+  body:has(.sr-banner) #MainContent > .shopify-section.section + .shopify-section.section {
+    margin-top: 0;
+  }
+
+  #shopify-section-{{ section.id }} {
+    background-color: {{ section.settings.background_color | default: '#f5f5f5' }};
+  }
+
+  #sr-banner-{{ section.id }} {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: {{ section.settings.background_color | default: '#f5f5f5' }};
+    color: #000000;
+    font-family: var(--font-body-family);
+  }
+
+  #sr-banner-{{ section.id }} * {
+    box-sizing: border-box;
+  }
+
+  #sr-banner-{{ section.id }} .sr-banner__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) calc({{ sr_media_w }} * var(--rem));
+    align-items: stretch;
+    width: 100%;
+    height: calc({{ sr_banner_h }} * var(--rem));
+  }
+
+  #sr-banner-{{ section.id }} .sr-banner__copy {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 calc(48 * var(--rem)) 0 calc(80 * var(--rem));
+  }
+
+  #sr-banner-{{ section.id }} .sr-banner__title {
+    margin: 0 0 calc(20 * var(--rem));
+    color: {{ section.settings.heading_color | default: '#000000' }};
+    font-size: calc(40 * var(--rem));
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+  }
+
+  #sr-banner-{{ section.id }} .sr-banner__text {
+    margin: 0 0 calc(32 * var(--rem));
+    max-width: calc(420 * var(--rem));
+    color: {{ section.settings.text_color | default: '#999999' }};
+    font-size: calc(14 * var(--rem));
+    line-height: calc(22 * var(--rem));
+  }
+
+  #sr-banner-{{ section.id }} .sr-banner__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(12 * var(--rem));
+  }
+
+  #sr-banner-{{ section.id }} .sr-banner__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(40 * var(--rem));
+    padding: 0 calc(20 * var(--rem));
+    border-radius: calc(4 * var(--rem));
+    font-size: calc(12 * var(--rem));
+    letter-spacing: 0.04em;
+    line-height: 1;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.25s ease, background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  }
+
+  #sr-banner-{{ section.id }} .sr-banner__btn--primary {
+    background: {{ section.settings.accent_color | default: '#ff6501' }};
+    border: 1px solid {{ section.settings.accent_color | default: '#ff6501' }};
+    color: #ffffff;
+  }
+
+  #sr-banner-{{ section.id }} .sr-banner__btn--secondary {
+    background: #ffffff;
+    border: 1px solid #000000;
+    color: #000000;
+  }
+
+  #sr-banner-{{ section.id }} .sr-banner__media {
+    position: relative;
+    width: calc({{ sr_media_w }} * var(--rem));
+    height: calc({{ sr_banner_h }} * var(--rem));
+    aspect-ratio: {{ sr_ratio_w }} / {{ sr_ratio_h }};
+    overflow: hidden;
+    background-color: {{ section.settings.background_color | default: '#f5f5f5' }};
+  }
+
+  #sr-banner-{{ section.id }} .sr-banner__media picture,
+  #sr-banner-{{ section.id }} .sr-banner__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: {{ section.settings.image_position | default: 'right center' }};
+  }
+
+  @media (hover: hover) {
+    #sr-banner-{{ section.id }} .sr-banner__btn--primary:hover {
+      opacity: 0.88;
+    }
+
+    #sr-banner-{{ section.id }} .sr-banner__btn--secondary:hover {
+      background: #000000;
+      color: #ffffff;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #sr-banner-{{ section.id }} .sr-banner__inner {
+      display: flex;
+      flex-direction: column;
+      height: auto;
+    }
+
+    #sr-banner-{{ section.id }} .sr-banner__copy {
+      order: 1;
+      padding:
+        calc(40 * var(--rem))
+        calc(40 * var(--rem))
+        calc(40 * var(--rem));
+    }
+
+    #sr-banner-{{ section.id }} .sr-banner__title {
+      margin-bottom: calc(24 * var(--rem));
+      font-size: calc(48 * var(--rem));
+    }
+
+    #sr-banner-{{ section.id }} .sr-banner__text {
+      max-width: none;
+      margin-bottom: calc(40 * var(--rem));
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #sr-banner-{{ section.id }} .sr-banner__actions {
+      gap: calc(16 * var(--rem));
+    }
+
+    #sr-banner-{{ section.id }} .sr-banner__btn {
+      flex: 1 1 calc(50% - 16 * var(--rem));
+      min-height: calc(72 * var(--rem));
+      padding: 0 calc(16 * var(--rem));
+      font-size: calc(22 * var(--rem));
+      border-radius: calc(6 * var(--rem));
+    }
+
+    #sr-banner-{{ section.id }} .sr-banner__media {
+      order: 2;
+      width: 100%;
+      height: auto;
+      aspect-ratio: {{ sr_ratio_w }} / {{ sr_ratio_h }};
+    }
+  }
+
+  @media screen and (min-width: 750px) and (max-width: 768px) {
+    #sr-banner-{{ section.id }} .sr-banner__inner {
+      display: flex;
+      flex-direction: column;
+      height: auto;
+    }
+
+    #sr-banner-{{ section.id }} .sr-banner__copy {
+      order: 1;
+      padding:
+        calc(var(--header-height, 0px) + 168 * var(--rem))
+        calc(34 * var(--rem))
+        calc(76 * var(--rem));
+    }
+
+    #sr-banner-{{ section.id }} .sr-banner__title {
+      margin-bottom: calc(38 * var(--rem));
+      font-size: calc(40 * var(--rem));
+    }
+
+    #sr-banner-{{ section.id }} .sr-banner__text {
+      max-width: none;
+      margin-bottom: calc(48 * var(--rem));
+      font-size: calc(22 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #sr-banner-{{ section.id }} .sr-banner__actions {
+      gap: calc(16 * var(--rem));
+    }
+
+    #sr-banner-{{ section.id }} .sr-banner__btn {
+      flex: 1 1 calc(50% - 16 * var(--rem));
+      min-height: calc(52 * var(--rem));
+      font-size: calc(14 * var(--rem));
+    }
+
+    #sr-banner-{{ section.id }} .sr-banner__media {
+      order: 2;
+      width: 100%;
+      height: auto;
+      aspect-ratio: {{ sr_ratio_w }} / {{ sr_ratio_h }};
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #sr-banner-{{ section.id }} .sr-banner__btn {
+      transition: none;
+    }
+  }
+{% endstyle %}
+
+<section class="sr-banner" id="sr-banner-{{ section.id }}" aria-label="{{ sr_heading | escape }}">
+  <div class="sr-banner__inner">
+    <div class="sr-banner__copy">
+      {%- if sr_heading != blank -%}
+        <h1 class="sr-banner__title gsap-title-reveal">{{ sr_heading }}</h1>
+      {%- endif -%}
+      {%- if sr_text != blank -%}
+        <p class="sr-banner__text">{{ sr_text }}</p>
+      {%- endif -%}
+      {%- if section.settings.primary_label != blank or section.settings.secondary_label != blank -%}
+        <div class="sr-banner__actions">
+          {%- if section.settings.primary_label != blank -%}
+            <a
+              class="sr-banner__btn sr-banner__btn--primary"
+              href="{{ section.settings.primary_link | default: '#' }}"
+            >
+              {{- section.settings.primary_label -}}
+            </a>
+          {%- endif -%}
+          {%- if section.settings.secondary_label != blank -%}
+            <a
+              class="sr-banner__btn sr-banner__btn--secondary"
+              href="{{ section.settings.secondary_link | default: '#' }}"
+            >
+              {{- section.settings.secondary_label -}}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="sr-banner__media">
+      {%- if sr_img != blank -%}
+        <picture>
+          {%- if sr_img_mob != blank and sr_img_mob != sr_img -%}
+            <source
+              media="(max-width: 749px)"
+              srcset="
+                {{ sr_img_mob | image_url: width: 750, height: sr_mob_h_750, crop: 'center' }} 750w,
+                {{ sr_img_mob | image_url: width: 1100, height: sr_mob_h_1100, crop: 'center' }} 1100w
+              "
+              sizes="100vw"
+            >
+          {%- endif -%}
+          <img
+            class="sr-banner__img"
+            src="{{ sr_img | image_url: width: sr_img_w, height: sr_img_h, crop: 'center' }}"
+            srcset="
+              {{ sr_img | image_url: width: sr_img_w, height: sr_img_h, crop: 'center' }} {{ sr_img_w }}w,
+              {{ sr_img | image_url: width: sr_img_w2, height: sr_img_h2, crop: 'center' }} {{ sr_img_w2 }}w
+            "
+            sizes="(max-width: 768px) 100vw, calc({{ sr_media_w }} * 100vw / 1440)"
+            width="{{ sr_img_w }}"
+            height="{{ sr_img_h }}"
+            alt="{{ sr_alt | escape }}"
+            loading="eager"
+            fetchpriority="high"
+          >
+        </picture>
+      {%- elsif sr_fallback != blank -%}
+        <img
+          class="sr-banner__img"
+          src="{{ sr_fallback | asset_url }}"
+          alt="{{ sr_alt | escape }}"
+          width="{{ sr_img_w }}"
+          height="{{ sr_img_h }}"
+          loading="eager"
+          fetchpriority="high"
+        >
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Service Repair Banner",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "SERVICE & REPAIR"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Get online help, book a repair, or find an AOTOS service location near you."
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#999999"
+    },
+    {
+      "type": "text",
+      "id": "primary_label",
+      "label": "Primary button label",
+      "default": "GET ONLINE HELP"
+    },
+    {
+      "type": "url",
+      "id": "primary_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Secondary button label",
+      "default": "BOOK A REPAIR"
+    },
+    {
+      "type": "url",
+      "id": "secondary_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "paragraph",
+      "content": "PC banner height is 320. Default image ratio is 5:2 — upload 1600×640 (or 800×320). Extra area is cropped from the focus point."
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "info": "5:2 = 800×320 @1440",
+      "default": "5/2",
+      "options": [
+        { "value": "5/2", "label": "5:2 (800×320)" },
+        { "value": "2/1", "label": "2:1 (640×320)" },
+        { "value": "16/9", "label": "16:9" },
+        { "value": "3/1", "label": "3:1 (960×320)" }
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image (desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image (mobile)"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image focus",
+      "default": "right center",
+      "options": [
+        { "value": "left center", "label": "Left" },
+        { "value": "center center", "label": "Center" },
+        { "value": "right center", "label": "Right" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "fallback_asset",
+      "label": "Fallback asset filename",
+      "default": "service-repair-banner.png"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Primary button color",
+      "default": "#ff6501"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top (PC)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom (PC)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom (mobile)",
+      "default": 88
+    }
+  ],
+  "presets": [
+    {
+      "name": "Service Repair Banner"
+    }
+  ]
+}
+{% endschema %}

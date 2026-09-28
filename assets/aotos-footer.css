@@ -8,7 +8,7 @@
 .aotos-footer__shell {
   width: 100%;
   margin: 0 auto;
-  padding: 0 calc(80 * var(--rem));
+  padding: 0 calc(170 * var(--rem));
   box-sizing: border-box;
 }
 
@@ -31,6 +31,34 @@
   font-size: calc(14 * var(--rem));
   font-weight: 600;
   line-height: 1.3;
+  list-style: none;
+}
+
+.aotos-footer__heading::-webkit-details-marker {
+  display: none;
+}
+
+.aotos-footer__heading::marker {
+  content: '';
+}
+
+.aotos-footer__heading h2 {
+  margin: 0;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  flex: 1 1 auto;
+}
+
+@media screen and (min-width: 769px) {
+  .aotos-footer__menu:not([open]) > .aotos-footer__links {
+    display: flex;
+  }
+
+  .aotos-footer__heading {
+    pointer-events: none;
+  }
 }
 
 .aotos-footer__links {
@@ -71,33 +99,13 @@
   width: calc(28 * var(--rem));
   height: calc(28 * var(--rem));
   border-radius: 50%;
-  color: #fff;
-  background: #333;
+  color: #000;
+  background: #fff;
 }
 
 .aotos-footer__social .icon {
   width: calc(14 * var(--rem));
   height: calc(14 * var(--rem));
-}
-
-.aotos-footer__social a[data-social='facebook'] {
-  background: #1877f2;
-}
-
-.aotos-footer__social a[data-social='instagram'] {
-  background: #e1306c;
-}
-
-.aotos-footer__social a[data-social='youtube'] {
-  background: #ff0000;
-}
-
-.aotos-footer__social a[data-social='tiktok'] {
-  background: #111;
-}
-
-.aotos-footer__social a[data-social='twitter'] {
-  background: #111;
 }
 
 .aotos-footer__form {
@@ -127,7 +135,7 @@
   background: #fff;
   color: #000;
   -webkit-text-fill-color: #000;
-  font-size: calc(14 * var(--rem));
+  font-size: calc(12 * var(--rem));
   outline: none;
   box-shadow: none;
 }
@@ -162,8 +170,8 @@
   border-radius: 999px;
   background: var(--aotos-theme-color, #ff6501);
   color: #fff;
-  font-size: calc(14 * var(--rem));
-  font-weight: 600;
+  font-size: calc(12 * var(--rem));
+  font-weight: 500;
   line-height: 1;
   cursor: pointer;
 }
@@ -264,11 +272,13 @@
 }
 
 .aotos-footer__copy {
-  margin: calc(48 * var(--rem)) 0 0;
+  margin: calc(32 * var(--rem)) 0 0;
+  padding-top: calc(20 * var(--rem));
+  border-top: 1px solid #4f4f4f;
   color: #b2b2b2;
   font-size: calc(12 * var(--rem));
   line-height: 1.4;
-  text-align: center;
+  text-align: left;
 }
 
 @media (hover: hover) {
@@ -301,19 +311,46 @@
   }
 
   .aotos-footer__menus {
-    grid-template-columns: 1fr 1fr;
-    gap: calc(40 * var(--rem)) calc(24 * var(--rem));
+    grid-template-columns: 1fr;
+    gap: 0;
   }
 
   .aotos-footer__heading {
-    margin-bottom: calc(28 * var(--rem));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    padding: calc(28 * var(--rem)) 0;
     font-size: calc(28 * var(--rem));
+    cursor: pointer;
   }
 
-  .aotos-footer__links {
-    gap: calc(18 * var(--rem));
+  .aotos-footer__heading::after {
+    content: '';
+    flex: 0 0 auto;
+    width: calc(14 * var(--rem));
+    height: calc(14 * var(--rem));
+    margin-left: calc(16 * var(--rem));
+    border-right: calc(3 * var(--rem)) solid #fff;
+    border-bottom: calc(3 * var(--rem)) solid #fff;
+    transform: rotate(-45deg);
   }
 
+  .aotos-footer__menu[open] > .aotos-footer__heading::after {
+    transform: rotate(45deg);
+  }
+
+  .aotos-footer__menu:not([open]) > .aotos-footer__links {
+    display: none;
+  }
+
+  .aotos-footer__menu[open] > .aotos-footer__links {
+    padding-bottom: calc(28 * var(--rem));
+  }
+  .aotos-footer__note svg, .aotos-footer__message svg{
+    width: calc(38 * var(--rem));
+    height: calc(38 * var(--rem));
+  }
   .aotos-footer__links a,
   .aotos-footer__field input,
   .aotos-footer__field button,
@@ -351,20 +388,29 @@
     width: calc(20 * var(--rem));
     height: calc(20 * var(--rem));
   }
-
+  .aotos-footer__pay {
+    gap: calc(10 * var(--rem));
+  }
+  .aotos-footer__pay svg {
+    width: calc(80 * var(--rem));
+  }
   .aotos-footer__app {
-    height: calc(64 * var(--rem));
+    height: calc(84 * var(--rem));
   }
 
   .aotos-footer__copy {
-    margin-top: calc(64 * var(--rem));
+    margin-top: calc(84 * var(--rem));
+  }
+  .aotos-footer__apps-label {
+    font-size: calc(28 * var(--rem));
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .aotos-footer__links a,
   .aotos-footer__note a,
-  .aotos-footer__consent a {
+  .aotos-footer__consent a,
+  .aotos-footer__heading::after {
     transition: none;
   }
 }

@@ -1,0 +1,377 @@
+{%- liquid
+  assign fd_use_rem = false
+  if section.settings.spacing_mode == 'rem'
+    assign fd_use_rem = true
+  endif
+-%}
+
+{% style %}
+  .fd-search-{{ section.id }} {
+    --fd-orange: {{ section.settings.accent_color | default: '#ff6501' }};
+    --eyebrow-font-size-pc: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'eyebrow_font_size_pc', fallback: 12 %};
+    --eyebrow-font-size-mob: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'eyebrow_font_size_mob', fallback: 22 %};
+    --title-font-size-pc: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'title_font_size_pc', fallback: 34 %};
+    --title-font-size-mob: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'title_font_size_mob', fallback: 48 %};
+    --title-line-height: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'title_line_height', fallback: '1.1' %};
+    --title-color: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'title_color', fallback: '#111111' %};
+    --subtitle-font-size-pc: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'subtitle_font_size_pc', fallback: 16 %};
+    --subtitle-font-size-mob: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'subtitle_font_size_mob', fallback: 26 %};
+    --subtitle-line-height: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'subtitle_line_height', fallback: '1.5' %};
+    --subtitle-color: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'subtitle_color', fallback: '#666666' %};
+    --loading-font-size-pc: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'loading_font_size_pc', fallback: 15 %};
+    --loading-font-size-mob: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'loading_font_size_mob', fallback: 26 %};
+    --loading-color: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'loading_color', fallback: '#999999' %};
+    --notice-font-size-pc: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'notice_font_size_pc', fallback: 15 %};
+    --notice-font-size-mob: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'notice_font_size_mob', fallback: 26 %};
+    --notice-color: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'notice_color', fallback: '#888888' %};
+    background: {{ section.settings.background | default: '#ffffff' }};
+    width: 100%;
+  }
+
+  .fd-search-{{ section.id }} .fd-search__inner {
+    {%- if fd_use_rem -%}
+      width: calc(1100 * var(--rem));
+      max-width: 100%;
+      margin: 0 auto;
+      padding-top: calc({{ section.settings.padding_top | default: 80 }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom | default: 80 }} * var(--rem));
+    {%- else -%}
+      max-width: calc(1600 * 100vw / 1920);
+      margin: 0 auto;
+    {%- endif -%}
+  }
+
+  {%- unless fd_use_rem -%}
+    {% render 'aotos-section-padding-css', settings: section.settings, selector: '.fd-search-{{ section.id }} .fd-search__inner', mode: 'vw' %}
+  {%- endunless -%}
+
+  .fd-search-{{ section.id }} .fd-search__head {
+    {%- if fd_use_rem -%}
+      margin-bottom: calc(48 * var(--rem));
+    {%- else -%}
+      margin-bottom: calc(28 * 100vw / 1920);
+    {%- endif -%}
+  }
+  .fd-search-{{ section.id }} .fd-search__head--center {
+    text-align: center;
+  }
+  .fd-search-{{ section.id }} .fd-search__eyebrow {
+    font-size: calc(var(--eyebrow-font-size-pc) * 100vw / 1920);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fd-orange);
+    margin: 0 0 calc(12 * 100vw / 1920);
+  }
+  .fd-search-{{ section.id }} .fd-search__title {
+    margin: 0 0 calc(10 * 100vw / 1920);
+    font-size: calc(var(--title-font-size-pc) * 100vw / 1920);
+    font-weight: 700;
+    line-height: var(--title-line-height);
+    color: var(--title-color);
+    text-transform: uppercase;
+  }
+  {%- if fd_use_rem -%}
+    .fd-search-{{ section.id }} .fd-search__title {
+      margin: 0;
+      font-size: var(--aotos-section-title-size);
+      line-height: 1.2;
+      color: #000000;
+    }
+  {%- endif -%}
+  .fd-search-{{ section.id }} .fd-search__head--center .fd-search__title {
+    width: 100%;
+    text-align: center;
+  }
+  .fd-search-{{ section.id }} .fd-search__subtitle {
+    margin: 0;
+    font-size: calc(var(--subtitle-font-size-pc) * 100vw / 1920);
+    line-height: var(--subtitle-line-height);
+    color: var(--subtitle-color);
+    max-width: calc(620 * 100vw / 1920);
+  }
+  .fd-search-{{ section.id }} .fd-search__head--center .fd-search__subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Stockist widget host. Colors, pins, filters, layout and AUTOMATIC
+     GEOLOCATION are all configured in the Stockist dashboard
+     (Settings > Appearance / Search filters / Geolocation). */
+  .fd-search-{{ section.id }} .fd-search__widget {
+    position: relative;
+  }
+  .fd-search-{{ section.id }} stockist-store-locator {
+    display: block;
+    min-height: {{ section.settings.min_height | default: 500 }}px;
+  }
+
+  .fd-search-{{ section.id }} .fd-search__loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: {{ section.settings.min_height | default: 500 }}px;
+    padding: calc(20 * 100vw / 1920);
+    font-size: calc(var(--loading-font-size-pc) * 100vw / 1920);
+    color: var(--loading-color);
+  }
+  .fd-search-{{ section.id }} .fd-search__loading a { color: var(--fd-orange); }
+
+  .fd-search-{{ section.id }} .fd-search__notice {
+    display: flex;
+    flex-direction: column;
+    gap: calc(8 * 100vw / 1920);
+    align-items: center;
+    justify-content: center;
+    min-height: {{ section.settings.min_height | default: 500 }}px;
+    padding: calc(40 * 100vw / 1920);
+    text-align: center;
+    color: var(--notice-color);
+    font-size: calc(var(--notice-font-size-pc) * 100vw / 1920);
+    background: #f6f6f6;
+    border: 1px dashed #ccc;
+    border-radius: calc(10 * 100vw / 1920);
+  }
+  .fd-search-{{ section.id }} .fd-search__notice strong { color: #333; }
+
+  @media screen and (max-width: 749px) {
+    .fd-search-{{ section.id }} .fd-search__inner {
+      max-width: 100%;
+      {%- if fd_use_rem -%}
+        width: 100%;
+        padding: calc({{ section.settings.padding_top_mobile | default: 88 }} * var(--rem)) calc(40 * var(--rem)) calc({{ section.settings.padding_bottom_mobile | default: 88 }} * var(--rem));
+      {%- endif -%}
+    }
+    .fd-search-{{ section.id }} .fd-search__head { margin-bottom: {% if fd_use_rem %}calc(48 * var(--rem)){% else %}calc(32 * 100vw / 750){% endif %}; }
+    .fd-search-{{ section.id }} .fd-search__eyebrow {
+      font-size: calc(var(--eyebrow-font-size-mob) * 100vw / 750);
+      margin-bottom: calc(16 * 100vw / 750);
+    }
+    {%- unless fd_use_rem -%}
+      .fd-search-{{ section.id }} .fd-search__title { font-size: calc(var(--title-font-size-mob) * 100vw / 750); }
+    {%- endunless -%}
+    .fd-search-{{ section.id }} .fd-search__subtitle {
+      font-size: calc(var(--subtitle-font-size-mob) * 100vw / 750);
+      max-width: 100%;
+    }
+    .fd-search-{{ section.id }} stockist-store-locator,
+    .fd-search-{{ section.id }} .fd-search__loading,
+    .fd-search-{{ section.id }} .fd-search__notice {
+      min-height: {{ section.settings.min_height_mobile | default: 760 }}px;
+    }
+    .fd-search-{{ section.id }} .fd-search__notice { border-radius: calc(16 * 100vw / 750); }
+    .fd-search-{{ section.id }} .fd-search__loading { font-size: calc(var(--loading-font-size-mob) * 100vw / 750); }
+    .fd-search-{{ section.id }} .fd-search__notice { font-size: calc(var(--notice-font-size-mob) * 100vw / 750); }
+  }
+
+  {%- if fd_use_rem -%}
+    @media screen and (min-width: 750px) and (max-width: 768px) {
+      .fd-search-{{ section.id }} .fd-search__inner {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: calc(168 * var(--rem)) calc(34 * var(--rem));
+      }
+      .fd-search-{{ section.id }} .fd-search__head {
+        margin-bottom: calc(90 * var(--rem));
+      }
+    }
+  {%- endif -%}
+{% endstyle %}
+
+<section id="dealer-search" class="fd-search-{{ section.id }}">
+  <div class="fd-search__inner">
+    {%- if section.settings.eyebrow != blank or section.settings.title != blank or section.settings.subtitle != blank -%}
+      <div class="fd-search__head{% if section.settings.heading_align == 'center' %} fd-search__head--center{% endif %}">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="fd-search__eyebrow ga-fade-up">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h2 class="fd-search__title{% if fd_use_rem %} aotos-section-title{% endif %} ga-line-reveal-text">{{ section.settings.title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subtitle != blank -%}
+          <p class="fd-search__subtitle ga-fade-up">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.widget_tag != blank -%}
+      <div class="fd-search__widget ga-fade-up">
+        <!-- Start Stockist.co widget -->
+        <stockist-store-locator data-stockist-widget-tag="{{ section.settings.widget_tag | escape }}">
+          <span class="fd-search__loading">
+            {{ section.settings.loading_text }}
+          </span>
+        </stockist-store-locator>
+        {% # theme-check-disable RemoteAsset %}
+        <script async src="https://stockist.co/embed/v1/widget.min.js"></script>
+        {% # theme-check-enable RemoteAsset %}
+        <!-- End Stockist.co widget -->
+      </div>
+    {%- else -%}
+      <div class="fd-search__notice">
+        <strong>Stockist store locator not configured</strong>
+        <span>
+          Add your widget tag (e.g. <em>map_xxxxxxxx</em>) in this section's settings.
+          Find it in your Stockist dashboard under Installation &rsaquo; Embed code.
+        </span>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Find a Dealer Search",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Stockist store locator"
+    },
+    {
+      "type": "paragraph",
+      "content": "Automatic geolocation, map colors, pins and search filters are configured in your Stockist dashboard (Settings > Appearance / Search filters). Turn on 'detect visitor location' there to locate the customer on load."
+    },
+    {
+      "type": "text",
+      "id": "widget_tag",
+      "label": "Stockist widget tag",
+      "default": "map_93eyv2v3",
+      "info": "From your Stockist dashboard > Installation > Embed code. Looks like map_xxxxxxxx (the data-stockist-widget-tag value)."
+    },
+    {
+      "type": "range",
+      "id": "min_height",
+      "label": "Loading min height (desktop)",
+      "min": 360,
+      "max": 1000,
+      "step": 20,
+      "unit": "px",
+      "default": 500,
+      "info": "Reserves space while the locator loads. Match your Stockist 'map height' setting."
+    },
+    {
+      "type": "range",
+      "id": "min_height_mobile",
+      "label": "Loading min height (mobile)",
+      "min": 360,
+      "max": 1400,
+      "step": 20,
+      "unit": "px",
+      "default": 760
+    },
+    {
+      "type": "text",
+      "id": "loading_text",
+      "label": "Loading text",
+      "default": "Loading store locator…"
+    },
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Find a Dealer Near You" },
+    { "type": "text", "id": "title", "label": "Title", "default": "FIND A SERVICE LOCATION" },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "Title alignment",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Search by city or ZIP code to find authorized AOTOS dealers, test rides, and service near you."
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "paragraph",
+      "content": "The Stockist map/feature color cannot be changed from the theme (it lives in a closed shadow DOM). Set it in Stockist dashboard > Settings > Appearance > Feature color. The accent color below only styles this section's heading."
+    },
+    { "type": "color", "id": "accent_color", "label": "Heading accent color", "default": "#ff6501" },
+    { "type": "color", "id": "background", "label": "Section background", "default": "#ffffff" },
+    { "type": "header", "content": "Typography" },
+    { "type": "number", "id": "eyebrow_font_size_pc", "label": "Eyebrow font size PC (px)", "default": 12 },
+    { "type": "number", "id": "eyebrow_font_size_mob", "label": "Eyebrow font size mobile (px)", "default": 22 },
+    { "type": "number", "id": "title_font_size_pc", "label": "Title font size PC (px)", "default": 34 },
+    { "type": "number", "id": "title_font_size_mob", "label": "Title font size mobile (px)", "default": 48 },
+    { "type": "text", "id": "title_line_height", "label": "Title line height", "default": "1.1" },
+    { "type": "color", "id": "title_color", "label": "Title color", "default": "#111111" },
+    { "type": "number", "id": "subtitle_font_size_pc", "label": "Subtitle font size PC (px)", "default": 16 },
+    { "type": "number", "id": "subtitle_font_size_mob", "label": "Subtitle font size mobile (px)", "default": 26 },
+    { "type": "text", "id": "subtitle_line_height", "label": "Subtitle line height", "default": "1.5" },
+    { "type": "color", "id": "subtitle_color", "label": "Subtitle color", "default": "#666666" },
+    { "type": "number", "id": "loading_font_size_pc", "label": "Loading font size PC (px)", "default": 15 },
+    { "type": "number", "id": "loading_font_size_mob", "label": "Loading font size mobile (px)", "default": 26 },
+    { "type": "color", "id": "loading_color", "label": "Loading text color", "default": "#999999" },
+    { "type": "number", "id": "notice_font_size_pc", "label": "Notice font size PC (px)", "default": 15 },
+    { "type": "number", "id": "notice_font_size_mob", "label": "Notice font size mobile (px)", "default": 26 },
+    { "type": "color", "id": "notice_color", "label": "Notice text color", "default": "#888888" },
+    { "type": "header", "content": "Section spacing" },
+    {
+      "type": "select",
+      "id": "spacing_mode",
+      "label": "Spacing system",
+      "default": "vw",
+      "options": [
+        { "value": "vw", "label": "1920 vw (Find a Dealer)" },
+        { "value": "rem", "label": "AOTOS rem @1440" }
+      ]
+    },
+    { "type": "number", "id": "pc_padding_top", "label": "PC padding top (px @1920)", "default": 48 },
+    { "type": "number", "id": "pc_padding_bottom", "label": "PC padding bottom (px @1920)", "default": 48 },
+    { "type": "number", "id": "mob_padding_top", "label": "Mobile padding top (px @750)", "default": 48 },
+    { "type": "number", "id": "mob_padding_bottom", "label": "Mobile padding bottom (px @750)", "default": 48 },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top rem (PC)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom rem (PC)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top rem (mobile)",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom rem (mobile)",
+      "default": 88
+    }
+  ],
+  "presets": [{ "name": "Find a Dealer Search" }]
+}
+{% endschema %}

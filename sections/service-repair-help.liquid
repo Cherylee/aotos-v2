@@ -1,0 +1,881 @@
+{%- liquid
+  assign accent = section.settings.accent_color | default: '#ff6501'
+  assign cta_icon_color = section.settings.cta_icon_color | default: '#ff6501'
+-%}
+
+{% style %}
+  body:has(.sr-help) #MainContent > .shopify-section.section + .shopify-section.section {
+    margin-top: 0;
+  }
+
+  #sr-help-{{ section.id }} {
+    background: {{ section.settings.background_color | default: '#ffffff' }};
+    color: #000000;
+    font-family: var(--font-body-family);
+    padding-top: calc(0 * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80 }} * var(--rem));
+  }
+
+  #sr-help-{{ section.id }} * {
+    box-sizing: border-box;
+  }
+
+  #sr-help-{{ section.id }} .sr-help__shell {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  #sr-help-{{ section.id }} .sr-help__highlights {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin: 0 0 calc(80 * var(--rem));
+    border: 1px solid #e8e8e8;
+    border-radius: calc(8 * var(--rem));
+    background: #ffffff;
+  }
+
+  #sr-help-{{ section.id }} .sr-help__hi {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(10 * var(--rem));
+    min-height: calc(72 * var(--rem));
+    padding: calc(16 * var(--rem)) calc(12 * var(--rem));
+    text-align: left;
+    text-decoration: none;
+    color: #000000;
+  }
+
+  #sr-help-{{ section.id }} .sr-help__hi:not(:last-child) {
+    border-right: 1px solid #e8e8e8;
+  }
+
+  #sr-help-{{ section.id }} .sr-help__hi-icon,
+  #sr-help-{{ section.id }} .sr-help__hi-icon svg,
+  #sr-help-{{ section.id }} .sr-help__hi-icon img {
+    display: block;
+    width: calc(20 * var(--rem));
+    height: calc(20 * var(--rem));
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+
+  #sr-help-{{ section.id }} .sr-help__hi-title {
+    margin: 0;
+    font-size: calc(12 * var(--rem));
+    font-weight: 500;
+    line-height: calc(18 * var(--rem));
+  }
+
+  #sr-help-{{ section.id }} .sr-help__heading {
+    margin: 0 0 calc(48 * var(--rem));
+    color: #000000;
+    font-size: var(--aotos-section-title-size);
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  #sr-help-{{ section.id }} .sr-help__policies {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: calc(16 * var(--rem));
+    margin: 0 0 calc(80 * var(--rem));
+  }
+
+  #sr-help-{{ section.id }} .sr-help__card {
+    display: flex;
+    align-items: flex-start;
+    gap: calc(16 * var(--rem));
+    padding: calc(24 * var(--rem));
+    border: 1px solid #e8e8e8;
+    border-radius: calc(8 * var(--rem));
+    background: #ffffff;
+  }
+
+  #sr-help-{{ section.id }} .sr-help__card-icon,
+  #sr-help-{{ section.id }} .sr-help__card-icon svg,
+  #sr-help-{{ section.id }} .sr-help__card-icon img {
+    display: block;
+    width: calc(30 * var(--rem));
+    height: calc(30 * var(--rem));
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+
+  #sr-help-{{ section.id }} .sr-help__card-title {
+    margin: 0 0 calc(6 * var(--rem));
+    color: #000000;
+    font-size: calc(14 * var(--rem));
+    font-weight: 500;
+    line-height: calc(22 * var(--rem));
+  }
+
+  #sr-help-{{ section.id }} .sr-help__card-text {
+    margin: 0 0 calc(12 * var(--rem));
+    color: #999999;
+    font-size: calc(12 * var(--rem));
+    line-height: calc(18 * var(--rem));
+  }
+
+  #sr-help-{{ section.id }} .sr-help__card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(4 * var(--rem));
+    color: {{ accent }};
+    font-size: calc(10 * var(--rem));
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  #sr-help-{{ section.id }} .sr-help__card-link-text,
+  #sr-help-{{ section.id }} .sr-help__card-link-arrow {
+    display: inline-block;
+    transition: transform 0.25s ease;
+  }
+
+  #sr-help-{{ section.id }} .sr-help__cta {
+    display: flex;
+    align-items: center;
+    gap: calc(24 * var(--rem));
+    padding: calc(24 * var(--rem)) calc(32 * var(--rem));
+    border-radius: calc(8 * var(--rem));
+    background: {{ section.settings.cta_background | default: '#f5f5f5' }};
+  }
+
+  #sr-help-{{ section.id }} .sr-help__cta-media {
+    position: relative;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(120 * var(--rem));
+    height: calc(120 * var(--rem));
+    overflow: hidden;
+    border-radius: calc(8 * var(--rem));
+    background: #ffffff;
+    color: #ff6501;
+  }
+
+  #sr-help-{{ section.id }} .sr-help__cta-media img,
+  #sr-help-{{ section.id }} .sr-help__cta-media svg {
+    display: block;
+    width: calc(56 * var(--rem));
+    height: calc(56 * var(--rem));
+    object-fit: contain;
+    color: inherit;
+  }
+
+  #sr-help-{{ section.id }} .sr-help__cta-media--custom::after {
+    content: '';
+    display: block;
+    width: calc(56 * var(--rem));
+    height: calc(56 * var(--rem));
+    background-color: currentColor;
+    -webkit-mask-image: var(--sr-help-cta-mask);
+    mask-image: var(--sr-help-cta-mask);
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+  }
+
+  #sr-help-{{ section.id }} .sr-help__cta-media--custom img {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    overflow: hidden;
+  }
+
+  #sr-help-{{ section.id }} .sr-help__cta-copy {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  #sr-help-{{ section.id }} .sr-help__cta-title {
+    margin: 0 0 calc(8 * var(--rem));
+    color: #000000;
+    font-size: calc(20 * var(--rem));
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: left;
+  }
+
+  #sr-help-{{ section.id }} .sr-help__cta-text {
+    margin: 0;
+    color: #000000;
+    font-size: calc(12 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    text-align: left;
+  }
+
+  #sr-help-{{ section.id }} .sr-help__contacts {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(16 * var(--rem)) calc(24 * var(--rem));
+    margin-top: calc(12 * var(--rem));
+  }
+
+  #sr-help-{{ section.id }} .sr-help__contact {
+    display: flex;
+    align-items: center;
+    gap: calc(8 * var(--rem));
+    text-decoration: none;
+    color: inherit;
+  }
+
+  #sr-help-{{ section.id }} .sr-help__contact svg {
+    width: calc(16 * var(--rem));
+    height: calc(16 * var(--rem));
+    flex-shrink: 0;
+  }
+
+  #sr-help-{{ section.id }} .sr-help__phone {
+    color: {{ accent }};
+    font-size: calc(12 * var(--rem));
+    line-height: calc(18 * var(--rem));
+  }
+
+  #sr-help-{{ section.id }} .sr-help__hours {
+    display: block;
+    margin-top: calc(2 * var(--rem));
+    color: #000000;
+    font-size: calc(12 * var(--rem));
+    line-height: calc(18 * var(--rem));
+  }
+
+  #sr-help-{{ section.id }} .sr-help__email {
+    color: #000000;
+    font-size: calc(12 * var(--rem));
+    line-height: calc(18 * var(--rem));
+  }
+
+  #sr-help-{{ section.id }} .sr-help__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-left: auto;
+    min-height: calc(40 * var(--rem));
+    padding: 0 calc(24 * var(--rem));
+    border-radius: calc(4 * var(--rem));
+    background: {{ accent }};
+    color: #ffffff;
+    font-size: calc(12 * var(--rem));
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: opacity 0.25s ease;
+  }
+
+  @media (hover: hover) {
+    #sr-help-{{ section.id }} .sr-help__card-link:hover .sr-help__card-link-text {
+      transform: translateX(calc(-4 * var(--rem)));
+    }
+
+    #sr-help-{{ section.id }} .sr-help__card-link:hover .sr-help__card-link-arrow {
+      transform: translateX(calc(6 * var(--rem)));
+    }
+
+    #sr-help-{{ section.id }} .sr-help__btn:hover {
+      opacity: 0.88;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #sr-help-{{ section.id }} .sr-help__card-link-text,
+    #sr-help-{{ section.id }} .sr-help__card-link-arrow {
+      transition: none;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #sr-help-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 88 }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88 }} * var(--rem));
+    }
+
+    #sr-help-{{ section.id }} .sr-help__shell {
+      width: 100%;
+      padding: 0 calc(40 * var(--rem));
+    }
+
+    #sr-help-{{ section.id }} .sr-help__highlights {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-bottom: calc(88 * var(--rem));
+    }
+
+    #sr-help-{{ section.id }} .sr-help__hi {
+      justify-content: flex-start;
+      min-height: calc(88 * var(--rem));
+      padding: calc(24 * var(--rem));
+      gap: calc(24 * var(--rem));
+    }
+
+    #sr-help-{{ section.id }} .sr-help__hi:not(:last-child) {
+      border-right: 0;
+      border-bottom: 0;
+    }
+
+    #sr-help-{{ section.id }} .sr-help__hi:nth-child(odd) {
+      border-right: 1px solid #e8e8e8;
+    }
+
+    #sr-help-{{ section.id }} .sr-help__hi:nth-child(-n + 2) {
+      border-bottom: 1px solid #e8e8e8;
+    }
+
+    #sr-help-{{ section.id }} .sr-help__hi-icon,
+    #sr-help-{{ section.id }} .sr-help__hi-icon svg,
+    #sr-help-{{ section.id }} .sr-help__hi-icon img {
+      width: calc(40 * var(--rem));
+      height: calc(40 * var(--rem));
+    }
+
+    #sr-help-{{ section.id }} .sr-help__hi-title {
+      font-size: calc(22 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #sr-help-{{ section.id }} .sr-help__heading {
+      margin-bottom: calc(48 * var(--rem));
+    }
+
+    #sr-help-{{ section.id }} .sr-help__policies {
+      grid-template-columns: 1fr;
+      gap: calc(24 * var(--rem));
+      margin-bottom: calc(88 * var(--rem));
+    }
+
+    #sr-help-{{ section.id }} .sr-help__card-title {
+      font-size: calc(28 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #sr-help-{{ section.id }} .sr-help__card-text {
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #sr-help-{{ section.id }} .sr-help__card-link {
+      font-size: calc(20 * var(--rem));
+    }
+
+    #sr-help-{{ section.id }} .sr-help__cta {
+      flex-direction: column;
+      align-items: stretch;
+      padding: calc(32 * var(--rem));
+      gap: calc(24 * var(--rem));
+    }
+
+    #sr-help-{{ section.id }} .sr-help__cta-media {
+      width: calc(160 * var(--rem));
+      height: calc(160 * var(--rem));
+      aspect-ratio: auto;
+      margin: 0 auto;
+    }
+
+    #sr-help-{{ section.id }} .sr-help__cta-media img,
+    #sr-help-{{ section.id }} .sr-help__cta-media svg,
+    #sr-help-{{ section.id }} .sr-help__cta-media--custom::after {
+      width: calc(72 * var(--rem));
+      height: calc(72 * var(--rem));
+    }
+
+    #sr-help-{{ section.id }} .sr-help__cta-title {
+      font-size: calc(38 * var(--rem));
+      text-align: center;
+    }
+
+    #sr-help-{{ section.id }} .sr-help__cta-text {
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+      text-align: center;
+    }
+
+    #sr-help-{{ section.id }} .sr-help__contacts {
+      flex-direction: column;
+      align-items: center;
+      gap: calc(16 * var(--rem));
+    }
+
+    #sr-help-{{ section.id }} .sr-help__contact {
+      justify-content: center;
+    }
+
+    #sr-help-{{ section.id }} .sr-help__phone,
+    #sr-help-{{ section.id }} .sr-help__email {
+      font-size: calc(24 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #sr-help-{{ section.id }} .sr-help__hours {
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #sr-help-{{ section.id }} .sr-help__btn {
+      width: 100%;
+      margin-left: 0;
+      min-height: calc(72 * var(--rem));
+      font-size: calc(22 * var(--rem));
+    }
+    #sr-help-{{ section.id }} .sr-help__card-icon,
+    #sr-help-{{ section.id }} .sr-help__card-icon svg,
+    #sr-help-{{ section.id }} .sr-help__card-icon img {
+      display: block;
+      width: calc(60 * var(--rem));
+      height: calc(60 * var(--rem));
+    }
+  }
+
+  @media screen and (min-width: 750px) and (max-width: 768px) {
+    #sr-help-{{ section.id }} {
+      padding-top: calc(168 * var(--rem));
+      padding-bottom: calc(168 * var(--rem));
+    }
+
+    #sr-help-{{ section.id }} .sr-help__shell {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 0 calc(34 * var(--rem));
+    }
+
+    #sr-help-{{ section.id }} .sr-help__highlights {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #sr-help-{{ section.id }} .sr-help__policies {
+      grid-template-columns: 1fr;
+    }
+
+    #sr-help-{{ section.id }} .sr-help__hi:not(:last-child) {
+      border-right: 0;
+      border-bottom: 0;
+    }
+
+    #sr-help-{{ section.id }} .sr-help__hi:nth-child(odd) {
+      border-right: 1px solid #e8e8e8;
+    }
+
+    #sr-help-{{ section.id }} .sr-help__hi:nth-child(-n + 2) {
+      border-bottom: 1px solid #e8e8e8;
+    }
+
+    #sr-help-{{ section.id }} .sr-help__heading {
+      margin-bottom: calc(90 * var(--rem));
+    }
+
+    #sr-help-{{ section.id }} .sr-help__cta {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    #sr-help-{{ section.id }} .sr-help__btn {
+      width: 100%;
+      margin-left: 0;
+      min-height: calc(52 * var(--rem));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #sr-help-{{ section.id }} .sr-help__btn {
+      transition: none;
+    }
+  }
+{% endstyle %}
+
+{%- capture sr_ico_shield -%}
+  <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 4 6 8v8c0 7 4.4 11.2 10 13 5.6-1.8 10-6 10-13V8L16 4Z" stroke="#111" stroke-width="1.6" stroke-linejoin="round"/><path d="m11.5 16 3 3 6-6.5" stroke="#111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+{%- endcapture -%}
+{%- capture sr_ico_gear -%}
+  <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="4" stroke="#111" stroke-width="1.6"/><path d="M16 6v2.5M16 23.5V26M6 16h2.5M23.5 16H26M8.9 8.9l1.8 1.8M21.3 21.3l1.8 1.8M8.9 23.1l1.8-1.8M21.3 10.7l1.8-1.8" stroke="#111" stroke-width="1.6" stroke-linecap="round"/></svg>
+{%- endcapture -%}
+{%- capture sr_ico_headset -%}
+  <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M8 16a8 8 0 1 1 16 0" stroke="#111" stroke-width="1.6" stroke-linecap="round"/><rect x="5.5" y="14.5" width="5" height="8" rx="2" stroke="#111" stroke-width="1.6"/><rect x="21.5" y="14.5" width="5" height="8" rx="2" stroke="#111" stroke-width="1.6"/><path d="M24 22.5V24a3.5 3.5 0 0 1-3.5 3.5H16" stroke="#111" stroke-width="1.6" stroke-linecap="round"/></svg>
+{%- endcapture -%}
+{%- capture sr_ico_headset_orange -%}
+  <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M8 16a8 8 0 1 1 16 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><rect x="5.5" y="14.5" width="5" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="21.5" y="14.5" width="5" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M24 22.5V24a3.5 3.5 0 0 1-3.5 3.5H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+{%- endcapture -%}
+{%- capture sr_ico_people -%}
+  <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="11" r="3.2" stroke="#111" stroke-width="1.6"/><path d="M10 24c.6-3.4 3-5.2 6-5.2s5.4 1.8 6 5.2" stroke="#111" stroke-width="1.6" stroke-linecap="round"/><circle cx="8.5" cy="12.5" r="2.4" stroke="#111" stroke-width="1.6"/><path d="M4.5 23c.5-2.4 2.2-3.7 4.2-3.7" stroke="#111" stroke-width="1.6" stroke-linecap="round"/><circle cx="23.5" cy="12.5" r="2.4" stroke="#111" stroke-width="1.6"/><path d="M27.5 23c-.5-2.4-2.2-3.7-4.2-3.7" stroke="#111" stroke-width="1.6" stroke-linecap="round"/></svg>
+{%- endcapture -%}
+{%- capture sr_ico_refresh -%}
+  <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M7 16a9 9 0 0 1 15.4-6.3L25 12" stroke="#111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M25 7v5h-5M25 16a9 9 0 0 1-15.4 6.3L7 20" stroke="#111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 25v-5h5" stroke="#111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+{%- endcapture -%}
+{%- capture sr_ico_book -%}
+  <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 8c-2.4-1.8-6-2.4-10-1.2v16.5c4.2-1.2 7.8-.4 10 1.4 2.2-1.8 5.8-2.6 10-1.4V6.8C22 5.6 18.4 6.2 16 8Z" stroke="#111" stroke-width="1.6" stroke-linejoin="round"/><path d="M16 8v16.7" stroke="#111" stroke-width="1.6"/></svg>
+{%- endcapture -%}
+
+<section class="sr-help" id="sr-help-{{ section.id }}">
+  <div class="sr-help__shell">
+    {%- assign hi_count = 0 -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'highlight' -%}
+        {%- assign hi_count = hi_count | plus: 1 -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if hi_count > 0 -%}
+      <div class="sr-help__highlights">
+        {%- for block in section.blocks -%}
+          {%- if block.type != 'highlight' -%}{%- continue -%}{%- endif -%}
+          {%- assign tag = 'div' -%}
+          {%- if block.settings.link != blank -%}{%- assign tag = 'a' -%}{%- endif -%}
+          <{{ tag }}
+            class="sr-help__hi"
+            {% if tag == 'a' %}href="{{ block.settings.link }}"{% endif %}
+            {{ block.shopify_attributes }}
+          >
+            <span class="sr-help__hi-icon">
+              {%- if block.settings.icon != blank -%}
+                <img src="{{ block.settings.icon | image_url: width: 80 }}" width="80" height="80" alt="" loading="lazy">
+              {%- else -%}
+                {%- case block.settings.icon_key -%}
+                  {%- when 'gear' -%}{{ sr_ico_gear }}
+                  {%- when 'headset' -%}{{ sr_ico_headset }}
+                  {%- when 'people' -%}{{ sr_ico_people }}
+                  {%- else -%}{{ sr_ico_shield }}
+                {%- endcase -%}
+              {%- endif -%}
+            </span>
+            {%- if block.settings.title != blank -%}
+              <p class="sr-help__hi-title">{{ block.settings.title }}</p>
+            {%- endif -%}
+          </{{ tag }}>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.policies_heading != blank -%}
+      <h2 class="sr-help__heading aotos-section-title">{{ section.settings.policies_heading }}</h2>
+    {%- endif -%}
+
+    <div class="sr-help__policies">
+      {%- for block in section.blocks -%}
+        {%- if block.type != 'policy' -%}{%- continue -%}{%- endif -%}
+        <article class="sr-help__card" {{ block.shopify_attributes }}>
+          <div class="sr-help__card-icon">
+            {%- if block.settings.icon != blank -%}
+              <img src="{{ block.settings.icon | image_url: width: 80 }}" width="80" height="80" alt="" loading="lazy">
+            {%- else -%}
+              {%- case block.settings.icon_key -%}
+                {%- when 'refresh' -%}{{ sr_ico_refresh }}
+                {%- when 'book' -%}{{ sr_ico_book }}
+                {%- else -%}{{ sr_ico_shield }}
+              {%- endcase -%}
+            {%- endif -%}
+          </div>
+          <div>
+            {%- if block.settings.title != blank -%}
+              <h3 class="sr-help__card-title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <p class="sr-help__card-text">{{ block.settings.text }}</p>
+            {%- endif -%}
+            {%- if block.settings.link_label != blank -%}
+              {%- liquid
+                assign card_link_label = block.settings.link_label | strip
+                assign card_link_arrow = '→'
+                if card_link_label contains '→'
+                  assign card_link_text = card_link_label | split: '→' | first | strip
+                else
+                  assign card_link_text = card_link_label
+                endif
+              -%}
+              <a class="sr-help__card-link" href="{{ block.settings.link | default: '#' }}">
+                <span class="sr-help__card-link-text">{{ card_link_text }}</span>
+                <span class="sr-help__card-link-arrow" aria-hidden="true">{{ card_link_arrow }}</span>
+              </a>
+            {%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+
+    <div class="sr-help__cta">
+      <div
+        class="sr-help__cta-media{% if section.settings.cta_image != blank %} sr-help__cta-media--custom{% endif %}"
+        style="color: {{ cta_icon_color }};{% if section.settings.cta_image != blank %} --sr-help-cta-mask: url({{ section.settings.cta_image | image_url: width: 160 }});{% endif %}"
+      >
+        {%- if section.settings.cta_image != blank -%}
+          <img
+            src="{{ section.settings.cta_image | image_url: width: 280 }}"
+            srcset="{{ section.settings.cta_image | image_url: width: 240 }} 240w, {{ section.settings.cta_image | image_url: width: 280 }} 280w, {{ section.settings.cta_image | image_url: width: 400 }} 400w"
+            sizes="(max-width: 749px) 92vw, 120px"
+            width="280"
+            height="{{ 280 | divided_by: section.settings.cta_image.aspect_ratio | round }}"
+            alt="{{ section.settings.cta_title | escape }}"
+            loading="lazy"
+          >
+        {%- else -%}
+          {{ sr_ico_headset_orange }}
+        {%- endif -%}
+      </div>
+      <div class="sr-help__cta-copy">
+        {%- if section.settings.cta_title != blank -%}
+          <h2 class="sr-help__cta-title">{{ section.settings.cta_title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.cta_text != blank -%}
+          <p class="sr-help__cta-text">{{ section.settings.cta_text }}</p>
+        {%- endif -%}
+        {%- if section.settings.phone != blank or section.settings.email != blank -%}
+          <div class="sr-help__contacts">
+            {%- if section.settings.phone != blank -%}
+              <a class="sr-help__contact" href="tel:{{ section.settings.phone | replace: ' ', '' | replace: '(', '' | replace: ')', '' | replace: '-', '' }}">
+                <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.2 2.8h2.2l.9 2.3-1.2 1.2a9 9 0 0 0 4.6 4.6l1.2-1.2 2.3.9v2.2c0 .6-.5 1.1-1.1 1.1C6.6 14 2 9.4 2 3.9c0-.6.5-1.1 1.2-1.1Z" stroke="{{ accent }}" stroke-width="1.3" stroke-linejoin="round"/></svg>
+                <span>
+                  <span class="sr-help__phone">{{ section.settings.phone }}</span>
+                  {%- if section.settings.hours != blank -%}
+                    <span class="sr-help__hours">{{ section.settings.hours }}</span>
+                  {%- endif -%}
+                </span>
+              </a>
+            {%- endif -%}
+            {%- if section.settings.email != blank -%}
+              <a class="sr-help__contact" href="mailto:{{ section.settings.email }}">
+                <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="3.5" width="12" height="9" rx="1.2" stroke="{{ accent }}" stroke-width="1.3"/><path d="m2.5 4.5 5.5 4 5.5-4" stroke="{{ accent }}" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="sr-help__email">{{ section.settings.email }}</span>
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.button_label != blank -%}
+        <a class="sr-help__btn" href="{{ section.settings.button_link | default: '/pages/contact' }}">{{ section.settings.button_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Service Repair Help",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "policies_heading",
+      "label": "Policies heading",
+      "default": "POLICIES & HELPFUL LINKS"
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "Help title",
+      "default": "Still Need Help?"
+    },
+    {
+      "type": "textarea",
+      "id": "cta_text",
+      "label": "Help text",
+      "default": "Contact AOTOS Support and we'll guide you to the right solution."
+    },
+    {
+      "type": "image_picker",
+      "id": "cta_image",
+      "label": "Help image (left)"
+    },
+    {
+      "type": "color",
+      "id": "cta_icon_color",
+      "label": "Help icon color",
+      "default": "#ff6501"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone"
+    },
+    {
+      "type": "text",
+      "id": "hours",
+      "label": "Hours",
+      "default": "Mon–Fri, 9:00 AM–6:00 PM ET"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email",
+      "default": "support@aotos.com"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "CONTACT US"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent",
+      "default": "#ff6501"
+    },
+    {
+      "type": "color",
+      "id": "cta_background",
+      "label": "Help bar background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top (PC)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom (PC)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top (mobile)",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom (mobile)",
+      "default": 88
+    }
+  ],
+  "blocks": [
+    {
+      "type": "highlight",
+      "name": "Highlight",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_key",
+          "label": "Icon",
+          "default": "shield",
+          "options": [
+            { "value": "shield", "label": "Shield" },
+            { "value": "gear", "label": "Gear" },
+            { "value": "headset", "label": "Headset" },
+            { "value": "people", "label": "People" }
+          ]
+        },
+        { "type": "image_picker", "id": "icon", "label": "Custom icon" },
+        { "type": "text", "id": "title", "label": "Title", "default": "1-Year Warranty" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    },
+    {
+      "type": "policy",
+      "name": "Policy card",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_key",
+          "label": "Icon",
+          "default": "shield",
+          "options": [
+            { "value": "shield", "label": "Shield" },
+            { "value": "refresh", "label": "Refresh" },
+            { "value": "book", "label": "Book" }
+          ]
+        },
+        { "type": "image_picker", "id": "icon", "label": "Custom icon" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Warranty" },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "View coverage and claim requirements."
+        },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "LEARN MORE →" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Service Repair Help",
+      "blocks": [
+        { "type": "highlight", "settings": { "icon_key": "shield", "title": "1-Year Warranty" } },
+        { "type": "highlight", "settings": { "icon_key": "gear", "title": "Genuine AOTOS Parts" } },
+        { "type": "highlight", "settings": { "icon_key": "headset", "title": "Remote Diagnosis" } },
+        { "type": "highlight", "settings": { "icon_key": "people", "title": "Trusted Service Partners" } },
+        {
+          "type": "policy",
+          "settings": {
+            "icon_key": "shield",
+            "title": "Warranty",
+            "text": "View coverage and claim requirements.",
+            "link_label": "LEARN MORE →"
+          }
+        },
+        {
+          "type": "policy",
+          "settings": {
+            "icon_key": "refresh",
+            "title": "Returns & Refunds",
+            "text": "Check eligibility and start a return.",
+            "link_label": "LEARN MORE →"
+          }
+        },
+        {
+          "type": "policy",
+          "settings": {
+            "icon_key": "book",
+            "title": "Installation Guides",
+            "text": "Follow official setup and user manuals.",
+            "link_label": "LEARN MORE →"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

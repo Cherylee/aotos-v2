@@ -8,6 +8,8 @@
     data-aotos-nav-toggle
     aria-expanded="false"
     aria-controls="AotosNavList-{{ section.id }}"
+    data-label-menu="{{ 'sections.header.menu' | t }}"
+    data-label-close="Close"
   >
     <span class="visually-hidden">{{ 'sections.header.menu' | t }}</span>
     <span class="aotos-nav__toggle-bar"></span>
@@ -15,7 +17,15 @@
     <span class="aotos-nav__toggle-bar"></span>
   </button>
 
+  <button type="button" class="aotos-nav__backdrop" data-aotos-nav-close tabindex="-1" aria-hidden="true"></button>
+
   <ul class="aotos-nav__list" id="AotosNavList-{{ section.id }}" role="list">
+    <li class="aotos-nav__back">
+      <button type="button" data-aotos-nav-back>
+        <span class="aotos-nav__back-icon" aria-hidden="true"></span>
+        Back
+      </button>
+    </li>
     {%- for block in section.blocks -%}
       {%- if block.type == 'nav_link' -%}
         <li class="aotos-nav__item" {{ block.shopify_attributes }}>
@@ -152,76 +162,48 @@
                         <a class="aotos-nav__mega-link" href="{{ item_url | default: product_1.url | default: '#' }}">
                           {{ item_title | default: product_1.title | escape }}
                         </a>
+                        <div class="aotos-nav__mega-products">
+                          {%- for n in (1..4) -%}
+                            {%- liquid
+                              case n
+                                when 1
+                                  assign nav_product = product_1
+                                when 2
+                                  assign nav_product = product_2
+                                when 3
+                                  assign nav_product = product_3
+                                when 4
+                                  assign nav_product = product_4
+                              endcase
+                            -%}
+                            {%- if nav_product != blank -%}
+                              <a class="aotos-nav__card{% if request.path == nav_product.url %} is-current{% endif %}" href="{{ nav_product.url }}">
+                                <span class="aotos-nav__card-media">
+                                  {%- if nav_product.featured_image != blank -%}
+                                    {%- assign card_width = 320 -%}
+                                    {%- assign card_height = card_width | divided_by: nav_product.featured_image.aspect_ratio | round -%}
+                                    {{
+                                      nav_product.featured_image
+                                      | image_url: width: card_width
+                                      | image_tag:
+                                        widths: '160, 240, 320',
+                                        sizes: '(max-width: 768px) 28vw, 11vw',
+                                        width: card_width,
+                                        height: card_height,
+                                        loading: 'lazy',
+                                        alt: nav_product.title
+                                    }}
+                                  {%- endif -%}
+                                </span>
+                                <span class="aotos-nav__card-title">{{ nav_product.title | escape }}</span>
+                              </a>
+                            {%- endif -%}
+                          {%- endfor -%}
+                        </div>
                       </li>
                     {%- endif -%}
                   {%- endfor -%}
                 </ul>
-                <div class="aotos-nav__mega-stage">
-                  {%- for i in (1..4) -%}
-                    {%- liquid
-                      case i
-                        when 1
-                          assign product_1 = block.settings.item_1_product_1
-                          assign product_2 = block.settings.item_1_product_2
-                          assign product_3 = block.settings.item_1_product_3
-                          assign product_4 = block.settings.item_1_product_4
-                        when 2
-                          assign product_1 = block.settings.item_2_product_1
-                          assign product_2 = block.settings.item_2_product_2
-                          assign product_3 = block.settings.item_2_product_3
-                          assign product_4 = block.settings.item_2_product_4
-                        when 3
-                          assign product_1 = block.settings.item_3_product_1
-                          assign product_2 = block.settings.item_3_product_2
-                          assign product_3 = block.settings.item_3_product_3
-                          assign product_4 = block.settings.item_3_product_4
-                        when 4
-                          assign product_1 = block.settings.item_4_product_1
-                          assign product_2 = block.settings.item_4_product_2
-                          assign product_3 = block.settings.item_4_product_3
-                          assign product_4 = block.settings.item_4_product_4
-                      endcase
-                    -%}
-                    <div class="aotos-nav__mega-products{% if forloop.first %} is-active{% endif %}">
-                      {%- for n in (1..4) -%}
-                        {%- liquid
-                          case n
-                            when 1
-                              assign nav_product = product_1
-                            when 2
-                              assign nav_product = product_2
-                            when 3
-                              assign nav_product = product_3
-                            when 4
-                              assign nav_product = product_4
-                          endcase
-                        -%}
-                        {%- if nav_product != blank -%}
-                          <a class="aotos-nav__card{% if request.path == nav_product.url %} is-current{% endif %}" href="{{ nav_product.url }}">
-                            <span class="aotos-nav__card-media">
-                              {%- if nav_product.featured_image != blank -%}
-                                {%- assign card_width = 320 -%}
-                                {%- assign card_height = card_width | divided_by: nav_product.featured_image.aspect_ratio | round -%}
-                                {{
-                                  nav_product.featured_image
-                                  | image_url: width: card_width
-                                  | image_tag:
-                                    widths: '160, 240, 320',
-                                    sizes: '(max-width: 768px) 28vw, 11vw',
-                                    width: card_width,
-                                    height: card_height,
-                                    loading: 'lazy',
-                                    alt: nav_product.title
-                                }}
-                              {%- endif -%}
-                            </span>
-                            <span class="aotos-nav__card-title">{{ nav_product.title | escape }}</span>
-                          </a>
-                        {%- endif -%}
-                      {%- endfor -%}
-                    </div>
-                  {%- endfor -%}
-                </div>
               </div>
             </div>
           {%- endif -%}

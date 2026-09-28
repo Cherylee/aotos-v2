@@ -1,0 +1,18 @@
+{%- comment -%}
+  Output a single CSS custom property from section settings.
+  Usage: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'title_font_size', fallback: 11, unit: 'px' %}
+  Usage: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'title_line_height', fallback: '1.3' %}
+  Usage: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'title_color', fallback: '#111111' %}
+{%- endcomment -%}
+{%- liquid
+  assign setting_key = id
+  assign setting_value = settings[setting_key]
+  if setting_value == blank
+    echo fallback
+  else
+    echo setting_value
+  endif
+  if unit != blank
+    echo unit
+  endif
+-%}

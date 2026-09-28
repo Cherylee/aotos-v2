@@ -1,0 +1,36 @@
+{%- comment -%}
+  Configurable section vertical padding.
+  @param settings {object} section.settings
+  @param selector {string} CSS selector
+  @param mode {string} 'px' or 'vw' (default: px)
+  @param horizontal_pc {number} horizontal padding design px @1920 (vw mode)
+  @param horizontal_mob {number} horizontal padding design px @750 (vw mode)
+  @param mobile_selector {string} optional mobile selector override
+{%- endcomment -%}
+{%- liquid
+  assign mob_sel = mobile_selector | default: selector
+  assign h_pc = horizontal_pc | default: 60
+  assign h_mob = horizontal_mob | default: 40
+  assign pad_mode = mode | default: 'px'
+-%}
+{%- if pad_mode == 'vw' -%}
+  {{ selector }} {
+    padding: calc({{ settings.pc_padding_top }} / 1920 * 100vw) calc({{ h_pc }} / 1920 * 100vw) calc({{ settings.pc_padding_bottom }} / 1920 * 100vw);
+  }
+  @media screen and (max-width: 749px) {
+    {{ mob_sel }} {
+      padding: calc({{ settings.mob_padding_top }} / 750 * 100vw) calc({{ h_mob }} / 750 * 100vw) calc({{ settings.mob_padding_bottom }} / 750 * 100vw);
+    }
+  }
+{%- else -%}
+  {{ selector }} {
+    padding-top: {{ settings.pc_padding_top }}px;
+    padding-bottom: {{ settings.pc_padding_bottom }}px;
+  }
+  @media screen and (max-width: 749px) {
+    {{ mob_sel }} {
+      padding-top: {{ settings.mob_padding_top }}px;
+      padding-bottom: {{ settings.mob_padding_bottom }}px;
+    }
+  }
+{%- endif -%}

@@ -1,0 +1,298 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "service_repair_banner": {
+      "type": "service-repair-banner",
+      "name": "Service Repair Banner",
+      "settings": {
+        "heading": "SERVICE & REPAIR",
+        "heading_color": "#000000",
+        "text": "Get online help, book a repair, or find an AOTOS service location near you.",
+        "text_color": "#999999",
+        "primary_label": "GET ONLINE HELP",
+        "primary_link": "",
+        "secondary_label": "BOOK A REPAIR",
+        "secondary_link": "#service-repair-form",
+        "image_ratio": "5/2",
+        "image": "shopify://shop_images/eb02-bike-alt.webp",
+        "image_alt": "AOTOS e-bike in a service workshop",
+        "image_position": "right center",
+        "fallback_asset": "service-repair-banner.png",
+        "accent_color": "#ff6501",
+        "background_color": "#f5f5f5",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_bottom_mobile": 88
+      }
+    },
+    "service_repair_support": {
+      "type": "service-repair-support",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "icon_key": "document",
+            "icon": "shopify://shop_images/284f259c9af40d8c36bec40a3c480de4.svg",
+            "title": "1. Submit Your Request",
+            "text": "Tell us about your issue and upload any details."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "icon_key": "monitor",
+            "icon": "shopify://shop_images/e0f1fc26fd083728e01a6deddb4adad7.svg",
+            "title": "2. Remote Diagnosis",
+            "text": "Our experts review your case and provide initial guidance."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "icon_key": "branch",
+            "icon": "shopify://shop_images/124c169f4be26c11f4c523cd1ff9c86b.svg",
+            "title": "3. Choose a Solution",
+            "text": "We recommend the best option for your specific case."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "icon_key": "tools",
+            "icon": "shopify://shop_images/40a27c6c5c83d032b3e2373b4393dc19.svg",
+            "title": "4. Repair or Resolution",
+            "text": "Get your bike fixed or your issue resolved quickly."
+          }
+        },
+        "offer_1": {
+          "type": "offer",
+          "settings": {
+            "icon_key": "headset",
+            "icon": "shopify://shop_images/d55a7625f2e496727215f10a7f138aeb.svg",
+            "icon_color": "#ff6501",
+            "title": "Online Support",
+            "text": "For product questions, troubleshooting, parts and warranty claims.",
+            "button_label": "CONTACT SUPPORT",
+            "button_link": "",
+            "button_style": "accent"
+          }
+        },
+        "offer_2": {
+          "type": "offer",
+          "settings": {
+            "icon_key": "store",
+            "icon": "shopify://shop_images/1b662c9f72f8f77f7f3e7eb3624161da.svg",
+            "icon_color": "#ff6501",
+            "title": "In-Store Service",
+            "text": "Book an inspection or repair at a participating service location.",
+            "button_label": "BOOK AN APPOINTMENT",
+            "button_link": "",
+            "button_style": "dark"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "offer_1",
+        "offer_2"
+      ],
+      "name": "Service Repair Support",
+      "settings": {
+        "steps_heading": "HOW AOTOS SUPPORT WORKS",
+        "offers_heading": "CHOOSE THE SUPPORT YOU NEED",
+        "note": "Appointment required. Service availability varies by location.",
+        "accent_color": "#ff6501",
+        "icon_wash": "#fff1e8",
+        "background_color": "#ffffff",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
+    },
+    "service_repair_book": {
+      "type": "service-repair-book",
+      "name": "Service Repair Book",
+      "settings": {
+        "globo_form_id": "MTYzNDk3",
+        "form_liquid": "",
+        "background_color": "#f5f5f5",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0
+      }
+    },
+    "service_repair_search": {
+      "type": "find-dealer-search",
+      "name": "Find a Service Location",
+      "settings": {
+        "widget_tag": "map_93eyv2v3",
+        "min_height": 500,
+        "min_height_mobile": 760,
+        "loading_text": "Loading store locator...",
+        "eyebrow": "",
+        "title": "FIND A SERVICE LOCATION",
+        "heading_align": "center",
+        "subtitle": "",
+        "accent_color": "#ff6501",
+        "background": "#ffffff",
+        "eyebrow_font_size_pc": 12,
+        "eyebrow_font_size_mob": 22,
+        "title_font_size_pc": 32,
+        "title_font_size_mob": 38,
+        "title_line_height": "1.2",
+        "title_color": "#000000",
+        "subtitle_font_size_pc": 16,
+        "subtitle_font_size_mob": 26,
+        "subtitle_line_height": "1.5",
+        "subtitle_color": "#666666",
+        "loading_font_size_pc": 15,
+        "loading_font_size_mob": 26,
+        "loading_color": "#999999",
+        "notice_font_size_pc": 15,
+        "notice_font_size_mob": 26,
+        "notice_color": "#888888",
+        "spacing_mode": "rem",
+        "pc_padding_top": 80,
+        "pc_padding_bottom": 80,
+        "mob_padding_top": 88,
+        "mob_padding_bottom": 88,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
+    },
+    "service_repair_help": {
+      "type": "service-repair-help",
+      "blocks": {
+        "hi_1": {
+          "type": "highlight",
+          "settings": {
+            "icon_key": "shield",
+            "icon": "shopify://shop_images/3.svg",
+            "title": "1-Year Warranty",
+            "link": ""
+          }
+        },
+        "hi_2": {
+          "type": "highlight",
+          "settings": {
+            "icon_key": "gear",
+            "icon": "shopify://shop_images/2.svg",
+            "title": "Genuine AOTOS Parts",
+            "link": ""
+          }
+        },
+        "hi_3": {
+          "type": "highlight",
+          "settings": {
+            "icon_key": "headset",
+            "icon": "shopify://shop_images/e0f1fc26fd083728e01a6deddb4adad7.svg",
+            "title": "Remote Diagnosis",
+            "link": ""
+          }
+        },
+        "hi_4": {
+          "type": "highlight",
+          "settings": {
+            "icon_key": "people",
+            "icon": "shopify://shop_images/e111f6b684a3199ade88ce16fc7ad28d.svg",
+            "title": "Trusted Service Partners",
+            "link": ""
+          }
+        },
+        "pol_1": {
+          "type": "policy",
+          "settings": {
+            "icon_key": "shield",
+            "title": "Warranty",
+            "text": "View coverage and claim requirements.",
+            "link_label": "LEARN MORE →",
+            "link": "shopify://pages/warranty-policy"
+          }
+        },
+        "pol_2": {
+          "type": "policy",
+          "settings": {
+            "icon_key": "refresh",
+            "icon": "shopify://shop_images/04540b1fdba5890e06a3d297e60f438d.svg",
+            "title": "Returns & Refunds",
+            "text": "Check eligibility and start a return.",
+            "link_label": "LEARN MORE →",
+            "link": "shopify://pages/return-refund-policy"
+          }
+        },
+        "pol_3": {
+          "type": "policy",
+          "settings": {
+            "icon_key": "book",
+            "title": "Installation Guides",
+            "text": "Follow official setup and user manuals.",
+            "link_label": "LEARN MORE →",
+            "link": "shopify://pages/user-manuals"
+          }
+        }
+      },
+      "block_order": [
+        "hi_1",
+        "hi_2",
+        "hi_3",
+        "hi_4",
+        "pol_1",
+        "pol_2",
+        "pol_3"
+      ],
+      "name": "Service Repair Help",
+      "settings": {
+        "policies_heading": "POLICIES & HELPFUL LINKS",
+        "cta_title": "Still Need Help?",
+        "cta_text": "Contact AOTOS Support and we'll guide you to the right solution.",
+        "cta_image": "shopify://shop_images/d55a7625f2e496727215f10a7f138aeb.svg",
+        "cta_icon_color": "#ff6501",
+        "phone": "",
+        "hours": "Mon–Fri, 9:00 AM–6:00 PM ET",
+        "email": "support@aotos.com",
+        "button_label": "CONTACT US",
+        "button_link": "shopify://pages/contact",
+        "accent_color": "#ff6501",
+        "cta_background": "#f5f5f5",
+        "background_color": "#ffffff",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "heading_size": "h1",
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": [
+    "service_repair_banner",
+    "service_repair_support",
+    "service_repair_book",
+    "service_repair_search",
+    "service_repair_help",
+    "main"
+  ]
+}
