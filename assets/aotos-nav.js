@@ -53,5 +53,31 @@
     if (event.key === 'Escape') closeNav();
   });
 
+  function activateMega(item) {
+    var mega = item.closest('.aotos-nav__mega');
+    if (!mega) return;
+    var items = mega.querySelectorAll('.aotos-nav__mega-item');
+    var index = Array.prototype.indexOf.call(items, item);
+    if (index < 0) return;
+    items.forEach(function (el, i) {
+      el.classList.toggle('is-active', i === index);
+    });
+    mega.querySelectorAll('.aotos-nav__mega-products').forEach(function (panel, i) {
+      panel.classList.toggle('is-active', i === index);
+    });
+  }
+
+  nav.addEventListener('pointerover', function (event) {
+    if (mq.matches) return;
+    var item = event.target.closest('.aotos-nav__mega-item');
+    if (item) activateMega(item);
+  });
+
+  nav.addEventListener('focusin', function (event) {
+    if (mq.matches) return;
+    var item = event.target.closest('.aotos-nav__mega-item');
+    if (item) activateMega(item);
+  });
+
   document.addEventListener('aotos-nav:close', closeNav);
 })();

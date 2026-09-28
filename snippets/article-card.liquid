@@ -60,7 +60,7 @@
                   {{ article.image.src | image_url }} {{ article.image.src.width }}w
                 "
                 src="{{ article.image.src | image_url: width: 533 }}"
-                sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                sizes="(min-width: {{ 1200 }}px) {{ 1200 | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
                 alt="{{ article.image.src.alt | escape }}"
                 class="motion-reduce"
                 {% unless lazy_load == false %}
@@ -107,7 +107,7 @@
           </div>
           {%- if show_badge -%}
             <div class="card__badge {{ settings.badge_position }}">
-              <span class="badge color-{{ settings.color_schemes | first }}">{{ 'blogs.article.blog' | t }}</span>
+              <span class="badge color-scheme-1">{{ 'blogs.article.blog' | t }}</span>
             </div>
           {%- endif -%}
         </div>
@@ -146,7 +146,7 @@
         </div>
         {%- if show_badge -%}
           <div class="card__badge {{ settings.badge_position }}">
-            <span class="badge color-{{ settings.color_schemes | first }}">{{ 'blogs.article.blog' | t }}</span>
+            <span class="badge color-scheme-1">{{ 'blogs.article.blog' | t }}</span>
           </div>
         {%- endif -%}
       </div>

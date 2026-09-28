@@ -49,7 +49,7 @@
           {{ block.shopify_attributes }}
         >
           <div class="aotos-nav__row">
-            {%- if block.settings.link != blank -%}
+            {%- if block.type != 'nav_mega' and block.settings.link != blank -%}
               <a
                 class="aotos-nav__link"
                 href="{{ block.settings.link }}"
@@ -114,69 +114,114 @@
             <div class="aotos-nav__panel aotos-nav__panel--mega" id="{{ panel_id }}">
               <div class="aotos-nav__mega">
                 <ul class="aotos-nav__mega-list" role="list">
-                  {%- if block.settings.menu != blank -%}
-                    {%- for child in block.settings.menu.links -%}
-                      <li>
-                        <a
-                          class="aotos-nav__mega-link"
-                          href="{{ child.url }}"
-                          {% if child.current %}
-                            aria-current="page"
-                          {% endif %}
-                        >
-                          {{ child.title | escape }}
+                  {%- for i in (1..4) -%}
+                    {%- liquid
+                      case i
+                        when 1
+                          assign item_title = block.settings.item_1_title
+                          assign item_url = block.settings.item_1_url
+                          assign product_1 = block.settings.item_1_product_1
+                          assign product_2 = block.settings.item_1_product_2
+                          assign product_3 = block.settings.item_1_product_3
+                          assign product_4 = block.settings.item_1_product_4
+                        when 2
+                          assign item_title = block.settings.item_2_title
+                          assign item_url = block.settings.item_2_url
+                          assign product_1 = block.settings.item_2_product_1
+                          assign product_2 = block.settings.item_2_product_2
+                          assign product_3 = block.settings.item_2_product_3
+                          assign product_4 = block.settings.item_2_product_4
+                        when 3
+                          assign item_title = block.settings.item_3_title
+                          assign item_url = block.settings.item_3_url
+                          assign product_1 = block.settings.item_3_product_1
+                          assign product_2 = block.settings.item_3_product_2
+                          assign product_3 = block.settings.item_3_product_3
+                          assign product_4 = block.settings.item_3_product_4
+                        when 4
+                          assign item_title = block.settings.item_4_title
+                          assign item_url = block.settings.item_4_url
+                          assign product_1 = block.settings.item_4_product_1
+                          assign product_2 = block.settings.item_4_product_2
+                          assign product_3 = block.settings.item_4_product_3
+                          assign product_4 = block.settings.item_4_product_4
+                      endcase
+                    -%}
+                    {%- if item_title != blank or product_1 != blank or product_2 != blank or product_3 != blank or product_4 != blank -%}
+                      <li class="aotos-nav__mega-item{% if forloop.first %} is-active{% endif %}">
+                        <a class="aotos-nav__mega-link" href="{{ item_url | default: product_1.url | default: '#' }}">
+                          {{ item_title | default: product_1.title | escape }}
                         </a>
                       </li>
-                    {%- endfor -%}
-                  {%- else -%}
-                    {%- for i in (1..4) -%}
-                      {%- liquid
-                        assign title_key = 'item_' | append: i | append: '_title'
-                        assign url_key = 'item_' | append: i | append: '_url'
-                        assign item_title = block.settings[title_key]
-                        assign item_url = block.settings[url_key]
-                      -%}
-                      {%- if item_title != blank -%}
-                        <li>
-                          <a class="aotos-nav__mega-link" href="{{ item_url | default: '#' }}">{{ item_title | escape }}</a>
-                        </li>
-                      {%- endif -%}
-                    {%- endfor -%}
-                  {%- endif -%}
-                </ul>
-
-                {%- if block.settings.card_title != blank or block.settings.card_image != blank -%}
-                  {%- if block.settings.card_link != blank -%}
-                    <a class="aotos-nav__card" href="{{ block.settings.card_link }}">
-                  {%- else -%}
-                    <div class="aotos-nav__card">
-                  {%- endif -%}
-                    <span class="aotos-nav__card-media">
-                      {%- if block.settings.card_image != blank -%}
-                        {%- assign card_width = 560 -%}
-                        {%- assign card_height = card_width | divided_by: block.settings.card_image.aspect_ratio | round -%}
-                        {{
-                          block.settings.card_image
-                          | image_url: width: card_width
-                          | image_tag:
-                            widths: '280, 420, 560',
-                            sizes: '280px',
-                            width: card_width,
-                            height: card_height,
-                            loading: 'lazy',
-                            alt: block.settings.card_title
-                        }}
-                      {%- endif -%}
-                    </span>
-                    {%- if block.settings.card_title != blank -%}
-                      <span class="aotos-nav__card-title">{{ block.settings.card_title | escape }}</span>
                     {%- endif -%}
-                  {%- if block.settings.card_link != blank -%}
-                    </a>
-                  {%- else -%}
+                  {%- endfor -%}
+                </ul>
+                <div class="aotos-nav__mega-stage">
+                  {%- for i in (1..4) -%}
+                    {%- liquid
+                      case i
+                        when 1
+                          assign product_1 = block.settings.item_1_product_1
+                          assign product_2 = block.settings.item_1_product_2
+                          assign product_3 = block.settings.item_1_product_3
+                          assign product_4 = block.settings.item_1_product_4
+                        when 2
+                          assign product_1 = block.settings.item_2_product_1
+                          assign product_2 = block.settings.item_2_product_2
+                          assign product_3 = block.settings.item_2_product_3
+                          assign product_4 = block.settings.item_2_product_4
+                        when 3
+                          assign product_1 = block.settings.item_3_product_1
+                          assign product_2 = block.settings.item_3_product_2
+                          assign product_3 = block.settings.item_3_product_3
+                          assign product_4 = block.settings.item_3_product_4
+                        when 4
+                          assign product_1 = block.settings.item_4_product_1
+                          assign product_2 = block.settings.item_4_product_2
+                          assign product_3 = block.settings.item_4_product_3
+                          assign product_4 = block.settings.item_4_product_4
+                      endcase
+                    -%}
+                    <div class="aotos-nav__mega-products{% if forloop.first %} is-active{% endif %}">
+                      {%- for n in (1..4) -%}
+                        {%- liquid
+                          case n
+                            when 1
+                              assign nav_product = product_1
+                            when 2
+                              assign nav_product = product_2
+                            when 3
+                              assign nav_product = product_3
+                            when 4
+                              assign nav_product = product_4
+                          endcase
+                        -%}
+                        {%- if nav_product != blank -%}
+                          <a class="aotos-nav__card{% if request.path == nav_product.url %} is-current{% endif %}" href="{{ nav_product.url }}">
+                            <span class="aotos-nav__card-media">
+                              {%- if nav_product.featured_image != blank -%}
+                                {%- assign card_width = 320 -%}
+                                {%- assign card_height = card_width | divided_by: nav_product.featured_image.aspect_ratio | round -%}
+                                {{
+                                  nav_product.featured_image
+                                  | image_url: width: card_width
+                                  | image_tag:
+                                    widths: '160, 240, 320',
+                                    sizes: '(max-width: 768px) 28vw, 11vw',
+                                    width: card_width,
+                                    height: card_height,
+                                    loading: 'lazy',
+                                    alt: nav_product.title
+                                }}
+                              {%- endif -%}
+                            </span>
+                            <span class="aotos-nav__card-title">{{ nav_product.title | escape }}</span>
+                          </a>
+                        {%- endif -%}
+                      {%- endfor -%}
                     </div>
-                  {%- endif -%}
-                {%- endif -%}
+                  {%- endfor -%}
+                </div>
               </div>
             </div>
           {%- endif -%}

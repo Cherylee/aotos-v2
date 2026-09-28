@@ -82,14 +82,14 @@
             {%- if settings.logo != blank -%}
               <div class="header__heading-logo-wrapper">
                 {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
-                {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
-                {% capture sizes %}(max-width: {{ settings.logo_width | times: 2 }}px) 50vw, {{ settings.logo_width }}px{% endcapture %}
-                {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
+                {%- assign logo_aspect = settings.logo.aspect_ratio -%}
+                {%- assign logo_display_width = 36 | times: logo_aspect | round -%}
+                {% capture sizes %}(max-width: 768px) calc(6.4vw * {{ logo_aspect }}), calc(2.5vw * {{ logo_aspect }}){% endcapture %}
                 {{ settings.logo | image_url: width: 600 | image_tag:
                   class: 'header__heading-logo motion-reduce',
-                  widths: widths,
-                  height: logo_height,
-                  width: settings.logo_width,
+                  widths: '180, 270, 360, 480, 600',
+                  height: 36,
+                  width: logo_display_width,
                   alt: logo_alt,
                   sizes: sizes,
                   preload: true
@@ -113,14 +113,14 @@
             {%- if settings.logo != blank -%}
               <div class="header__heading-logo-wrapper">
                 {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
-                {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
-                {% capture sizes %}(min-width: 750px) {{ settings.logo_width }}px, 50vw{% endcapture %}
-                {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
+                {%- assign logo_aspect = settings.logo.aspect_ratio -%}
+                {%- assign logo_display_width = 36 | times: logo_aspect | round -%}
+                {% capture sizes %}(max-width: 768px) calc(6.4vw * {{ logo_aspect }}), calc(2.5vw * {{ logo_aspect }}){% endcapture %}
                 {{ settings.logo | image_url: width: 600 | image_tag:
                   class: 'header__heading-logo',
-                  widths: widths,
-                  height: logo_height,
-                  width: settings.logo_width,
+                  widths: '180, 270, 360, 480, 600',
+                  height: 36,
+                  width: logo_display_width,
                   alt: logo_alt,
                   sizes: sizes,
                   preload: true
@@ -644,7 +644,7 @@
       "settings": [
         {
           "type": "paragraph",
-          "content": "左侧是菜单，右侧是一张内容卡片。适合 Products。"
+          "content": "左侧每一项可以对应多个产品。电脑端悬停左侧菜单，右侧切换成这一组产品。"
         },
         {
           "type": "text",
@@ -653,71 +653,140 @@
           "default": "Products"
         },
         {
-          "type": "url",
-          "id": "link",
-          "label": "标题链接"
-        },
-        {
-          "type": "link_list",
-          "id": "menu",
-          "label": "左侧菜单",
-          "info": "选了导航就用导航。留空则用下面的手动链接。"
+          "type": "header",
+          "content": "左侧 1"
         },
         {
           "type": "text",
           "id": "item_1_title",
-          "label": "左侧链接 1 标题"
+          "label": "标题"
         },
         {
           "type": "url",
           "id": "item_1_url",
-          "label": "左侧链接 1"
+          "label": "链接"
+        },
+        {
+          "type": "product",
+          "id": "item_1_product_1",
+          "label": "产品 1"
+        },
+        {
+          "type": "product",
+          "id": "item_1_product_2",
+          "label": "产品 2"
+        },
+        {
+          "type": "product",
+          "id": "item_1_product_3",
+          "label": "产品 3"
+        },
+        {
+          "type": "product",
+          "id": "item_1_product_4",
+          "label": "产品 4"
+        },
+        {
+          "type": "header",
+          "content": "左侧 2"
         },
         {
           "type": "text",
           "id": "item_2_title",
-          "label": "左侧链接 2 标题"
+          "label": "标题"
         },
         {
           "type": "url",
           "id": "item_2_url",
-          "label": "左侧链接 2"
+          "label": "链接"
+        },
+        {
+          "type": "product",
+          "id": "item_2_product_1",
+          "label": "产品 1"
+        },
+        {
+          "type": "product",
+          "id": "item_2_product_2",
+          "label": "产品 2"
+        },
+        {
+          "type": "product",
+          "id": "item_2_product_3",
+          "label": "产品 3"
+        },
+        {
+          "type": "product",
+          "id": "item_2_product_4",
+          "label": "产品 4"
+        },
+        {
+          "type": "header",
+          "content": "左侧 3"
         },
         {
           "type": "text",
           "id": "item_3_title",
-          "label": "左侧链接 3 标题"
+          "label": "标题"
         },
         {
           "type": "url",
           "id": "item_3_url",
-          "label": "左侧链接 3"
+          "label": "链接"
+        },
+        {
+          "type": "product",
+          "id": "item_3_product_1",
+          "label": "产品 1"
+        },
+        {
+          "type": "product",
+          "id": "item_3_product_2",
+          "label": "产品 2"
+        },
+        {
+          "type": "product",
+          "id": "item_3_product_3",
+          "label": "产品 3"
+        },
+        {
+          "type": "product",
+          "id": "item_3_product_4",
+          "label": "产品 4"
+        },
+        {
+          "type": "header",
+          "content": "左侧 4"
         },
         {
           "type": "text",
           "id": "item_4_title",
-          "label": "左侧链接 4 标题"
+          "label": "标题"
         },
         {
           "type": "url",
           "id": "item_4_url",
-          "label": "左侧链接 4"
+          "label": "链接"
         },
         {
-          "type": "image_picker",
-          "id": "card_image",
-          "label": "右侧图片"
+          "type": "product",
+          "id": "item_4_product_1",
+          "label": "产品 1"
         },
         {
-          "type": "text",
-          "id": "card_title",
-          "label": "右侧标题",
-          "default": "AOTOS FLUX X26 Series eBike"
+          "type": "product",
+          "id": "item_4_product_2",
+          "label": "产品 2"
         },
         {
-          "type": "url",
-          "id": "card_link",
-          "label": "右侧链接"
+          "type": "product",
+          "id": "item_4_product_3",
+          "label": "产品 3"
+        },
+        {
+          "type": "product",
+          "id": "item_4_product_4",
+          "label": "产品 4"
         }
       ]
     }

@@ -25,6 +25,102 @@
   font-size: var(--aotos-section-title-size);
 }
 
+:root,
+.color-scheme-1 {
+  --color-background: 255, 255, 255;
+  --gradient-background: #ffffff;
+  --color-foreground: 18, 18, 18;
+  --color-background-contrast: 191, 191, 191;
+  --color-shadow: 18, 18, 18;
+  --color-button: 18, 18, 18;
+  --color-button-text: 255, 255, 255;
+  --color-secondary-button: 255, 255, 255;
+  --color-secondary-button-text: 18, 18, 18;
+  --color-link: 18, 18, 18;
+  --color-badge-foreground: 18, 18, 18;
+  --color-badge-background: 255, 255, 255;
+  --color-badge-border: 18, 18, 18;
+  --payment-terms-background-color: rgb(255, 255, 255);
+}
+
+.color-scheme-2 {
+  --color-background: 243, 243, 243;
+  --gradient-background: #f3f3f3;
+  --color-foreground: 18, 18, 18;
+  --color-background-contrast: 182, 182, 182;
+  --color-shadow: 18, 18, 18;
+  --color-button: 18, 18, 18;
+  --color-button-text: 243, 243, 243;
+  --color-secondary-button: 243, 243, 243;
+  --color-secondary-button-text: 18, 18, 18;
+  --color-link: 18, 18, 18;
+  --color-badge-foreground: 18, 18, 18;
+  --color-badge-background: 243, 243, 243;
+  --color-badge-border: 18, 18, 18;
+  --payment-terms-background-color: rgb(243, 243, 243);
+}
+
+.color-scheme-3 {
+  --color-background: 36, 40, 51;
+  --gradient-background: #242833;
+  --color-foreground: 255, 255, 255;
+  --color-background-contrast: 49, 54, 66;
+  --color-shadow: 18, 18, 18;
+  --color-button: 255, 255, 255;
+  --color-button-text: 0, 0, 0;
+  --color-secondary-button: 36, 40, 51;
+  --color-secondary-button-text: 255, 255, 255;
+  --color-link: 255, 255, 255;
+  --color-badge-foreground: 255, 255, 255;
+  --color-badge-background: 36, 40, 51;
+  --color-badge-border: 255, 255, 255;
+  --payment-terms-background-color: rgb(36, 40, 51);
+}
+
+.color-scheme-4 {
+  --color-background: 18, 18, 18;
+  --gradient-background: #121212;
+  --color-foreground: 255, 255, 255;
+  --color-background-contrast: 137, 137, 137;
+  --color-shadow: 18, 18, 18;
+  --color-button: 255, 255, 255;
+  --color-button-text: 18, 18, 18;
+  --color-secondary-button: 18, 18, 18;
+  --color-secondary-button-text: 255, 255, 255;
+  --color-link: 255, 255, 255;
+  --color-badge-foreground: 255, 255, 255;
+  --color-badge-background: 18, 18, 18;
+  --color-badge-border: 255, 255, 255;
+  --payment-terms-background-color: rgb(18, 18, 18);
+}
+
+.color-scheme-5 {
+  --color-background: 51, 79, 180;
+  --gradient-background: #334fb4;
+  --color-foreground: 255, 255, 255;
+  --color-background-contrast: 38, 59, 135;
+  --color-shadow: 18, 18, 18;
+  --color-button: 255, 255, 255;
+  --color-button-text: 51, 79, 180;
+  --color-secondary-button: 51, 79, 180;
+  --color-secondary-button-text: 255, 255, 255;
+  --color-link: 255, 255, 255;
+  --color-badge-foreground: 255, 255, 255;
+  --color-badge-background: 51, 79, 180;
+  --color-badge-border: 255, 255, 255;
+  --payment-terms-background-color: rgb(51, 79, 180);
+}
+
+body,
+.color-scheme-1,
+.color-scheme-2,
+.color-scheme-3,
+.color-scheme-4,
+.color-scheme-5 {
+  color: rgba(var(--color-foreground), 0.75);
+  background-color: rgb(var(--color-background));
+}
+
 .product-card-wrapper .card,
 .contains-card--product {
   --border-radius: var(--product-card-corner-radius);
@@ -1225,7 +1321,24 @@ button.shopify-payment-button__button--unbranded,
 .customer button,
 button.shopify-payment-button__button--unbranded {
   min-width: calc(12rem + var(--buttons-border-width) * 2);
-  min-height: calc(4.5rem + var(--buttons-border-width) * 2);
+  min-height: calc(var(--aotos-button-height, 40) * var(--rem));
+}
+
+.button:not(.button--secondary):not(.button--tertiary),
+.shopify-challenge__button,
+.customer button,
+button.shopify-payment-button__button--unbranded {
+  --color-button: var(--aotos-theme-color-rgb, 255, 101, 1);
+  --color-button-text: 255, 255, 255;
+}
+
+@media screen and (max-width: 768px) {
+  .button,
+  .shopify-challenge__button,
+  .customer button,
+  button.shopify-payment-button__button--unbranded {
+    min-height: calc(var(--aotos-button-height-mobile, 60) * var(--rem));
+  }
 }
 
 .shopify-payment-button__button--branded {

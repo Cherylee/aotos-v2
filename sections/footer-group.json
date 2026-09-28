@@ -1,1 +1,65 @@
-{"name":"t:sections.footer.name","type":"footer","sections":{"footer":{"type":"footer","settings":{"color_scheme":"scheme-1","newsletter_enable":true,"newsletter_heading":"Subscribe to our emails","enable_follow_on_shop":true,"show_social":true,"enable_country_selector":true,"enable_language_selector":true,"payment_enable":true,"show_policy":true,"margin_top":0,"padding_top":36,"padding_bottom":36}}},"order":["footer"]}
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "menu-product": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Product",
+            "menu": ""
+          }
+        },
+        "menu-support": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Support",
+            "menu": ""
+          }
+        },
+        "menu-about": {
+          "type": "link_list",
+          "settings": {
+            "heading": "About",
+            "menu": ""
+          }
+        },
+        "menu-policy": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Policy",
+            "menu": ""
+          }
+        }
+      },
+      "block_order": [
+        "menu-product",
+        "menu-support",
+        "menu-about",
+        "menu-policy"
+      ],
+      "settings": {
+        "show_social": true,
+        "newsletter_enable": true,
+        "newsletter_button": "Subscribe",
+        "consent_before": "I agree to AOTOS's ",
+        "privacy_label": "Privacy Policy",
+        "privacy_link": "/policies/privacy-policy",
+        "consent_middle": " and ",
+        "terms_label": "Terms of Service",
+        "terms_link": "/policies/terms-of-service",
+        "consent_after": ".",
+        "hours": "Mon–Fri, 9:00 AM–6:00 PM ET",
+        "email": "support@aotos.com",
+        "payment_enable": true,
+        "app_heading": "GET APP",
+        "copyright": "© 2026, AOTOS. Ride Further. Ride Smarter."
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}
