@@ -1,0 +1,187 @@
+{{ 'aotos-nav.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'aotos-nav.js' | asset_url }}" defer="defer"></script>
+
+<nav class="aotos-nav" data-aotos-nav aria-label="{{ 'sections.header.menu' | t }}">
+  <button
+    type="button"
+    class="aotos-nav__toggle"
+    data-aotos-nav-toggle
+    aria-expanded="false"
+    aria-controls="AotosNavList-{{ section.id }}"
+  >
+    <span class="visually-hidden">{{ 'sections.header.menu' | t }}</span>
+    <span class="aotos-nav__toggle-bar"></span>
+    <span class="aotos-nav__toggle-bar"></span>
+    <span class="aotos-nav__toggle-bar"></span>
+  </button>
+
+  <ul class="aotos-nav__list" id="AotosNavList-{{ section.id }}" role="list">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'nav_link' -%}
+        <li class="aotos-nav__item" {{ block.shopify_attributes }}>
+          <a
+            class="aotos-nav__link"
+            href="{{ block.settings.link | default: '#' }}"
+            {% if block.settings.link != blank and request.path == block.settings.link %}
+              aria-current="page"
+            {% endif %}
+          >
+            {{ block.settings.title | escape }}
+          </a>
+        </li>
+      {%- elsif block.type == 'nav_dropdown' or block.type == 'nav_mega' -%}
+        {%- liquid
+          assign panel_id = 'AotosNavPanel-' | append: block.id
+          assign item_current = false
+          if block.settings.link != blank and request.path == block.settings.link
+            assign item_current = true
+          endif
+          if block.settings.menu != blank
+            if block.settings.menu.links.size > 0
+              if request.path == block.settings.link
+                assign item_current = true
+              endif
+            endif
+          endif
+        -%}
+        <li
+          class="aotos-nav__item{% if block.type == 'nav_mega' %} aotos-nav__item--mega{% else %} aotos-nav__item--drop{% endif %}"
+          {{ block.shopify_attributes }}
+        >
+          <div class="aotos-nav__row">
+            {%- if block.settings.link != blank -%}
+              <a
+                class="aotos-nav__link"
+                href="{{ block.settings.link }}"
+                {% if item_current %}
+                  aria-current="page"
+                {% endif %}
+                aria-controls="{{ panel_id }}"
+              >
+                {{ block.settings.title | escape }}
+              </a>
+            {%- else -%}
+              <button type="button" class="aotos-nav__link" data-aotos-sub-toggle aria-expanded="false" aria-controls="{{ panel_id }}">
+                {{ block.settings.title | escape }}
+              </button>
+            {%- endif -%}
+            <button
+              type="button"
+              class="aotos-nav__subtoggle"
+              data-aotos-sub-toggle
+              aria-expanded="false"
+              aria-controls="{{ panel_id }}"
+            >
+              <span class="visually-hidden">{{ block.settings.title | escape }}</span>
+            </button>
+          </div>
+
+          {%- if block.type == 'nav_dropdown' -%}
+            <div class="aotos-nav__panel aotos-nav__panel--drop" id="{{ panel_id }}">
+              <ul class="aotos-nav__drop" role="list">
+                {%- if block.settings.menu != blank -%}
+                  {%- for child in block.settings.menu.links -%}
+                    <li>
+                      <a
+                        class="aotos-nav__drop-link"
+                        href="{{ child.url }}"
+                        {% if child.current %}
+                          aria-current="page"
+                        {% endif %}
+                      >
+                        {{ child.title | escape }}
+                      </a>
+                    </li>
+                  {%- endfor -%}
+                {%- else -%}
+                  {%- for i in (1..6) -%}
+                    {%- liquid
+                      assign title_key = 'item_' | append: i | append: '_title'
+                      assign url_key = 'item_' | append: i | append: '_url'
+                      assign item_title = block.settings[title_key]
+                      assign item_url = block.settings[url_key]
+                    -%}
+                    {%- if item_title != blank -%}
+                      <li>
+                        <a class="aotos-nav__drop-link" href="{{ item_url | default: '#' }}">{{ item_title | escape }}</a>
+                      </li>
+                    {%- endif -%}
+                  {%- endfor -%}
+                {%- endif -%}
+              </ul>
+            </div>
+          {%- else -%}
+            <div class="aotos-nav__panel aotos-nav__panel--mega" id="{{ panel_id }}">
+              <div class="aotos-nav__mega">
+                <ul class="aotos-nav__mega-list" role="list">
+                  {%- if block.settings.menu != blank -%}
+                    {%- for child in block.settings.menu.links -%}
+                      <li>
+                        <a
+                          class="aotos-nav__mega-link"
+                          href="{{ child.url }}"
+                          {% if child.current %}
+                            aria-current="page"
+                          {% endif %}
+                        >
+                          {{ child.title | escape }}
+                        </a>
+                      </li>
+                    {%- endfor -%}
+                  {%- else -%}
+                    {%- for i in (1..4) -%}
+                      {%- liquid
+                        assign title_key = 'item_' | append: i | append: '_title'
+                        assign url_key = 'item_' | append: i | append: '_url'
+                        assign item_title = block.settings[title_key]
+                        assign item_url = block.settings[url_key]
+                      -%}
+                      {%- if item_title != blank -%}
+                        <li>
+                          <a class="aotos-nav__mega-link" href="{{ item_url | default: '#' }}">{{ item_title | escape }}</a>
+                        </li>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  {%- endif -%}
+                </ul>
+
+                {%- if block.settings.card_title != blank or block.settings.card_image != blank -%}
+                  {%- if block.settings.card_link != blank -%}
+                    <a class="aotos-nav__card" href="{{ block.settings.card_link }}">
+                  {%- else -%}
+                    <div class="aotos-nav__card">
+                  {%- endif -%}
+                    <span class="aotos-nav__card-media">
+                      {%- if block.settings.card_image != blank -%}
+                        {%- assign card_width = 560 -%}
+                        {%- assign card_height = card_width | divided_by: block.settings.card_image.aspect_ratio | round -%}
+                        {{
+                          block.settings.card_image
+                          | image_url: width: card_width
+                          | image_tag:
+                            widths: '280, 420, 560',
+                            sizes: '280px',
+                            width: card_width,
+                            height: card_height,
+                            loading: 'lazy',
+                            alt: block.settings.card_title
+                        }}
+                      {%- endif -%}
+                    </span>
+                    {%- if block.settings.card_title != blank -%}
+                      <span class="aotos-nav__card-title">{{ block.settings.card_title | escape }}</span>
+                    {%- endif -%}
+                  {%- if block.settings.card_link != blank -%}
+                    </a>
+                  {%- else -%}
+                    </div>
+                  {%- endif -%}
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        </li>
+      {%- endif -%}
+    {%- endfor -%}
+  </ul>
+</nav>
