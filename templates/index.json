@@ -226,34 +226,6 @@
         "padding_bottom_mobile": 88
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "color_scheme": "scheme-1",
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 44,
-        "padding_bottom": 36
-      }
-    },
     "safety_certified_hero_4AnbLr": {
       "type": "safety-certified-hero",
       "blocks": {
@@ -337,7 +309,15 @@
             "title": "Accessories",
             "text": "Suitable for FLUX X26 Series",
             "button_label": "Shop Accessories",
-            "button_link": "shopify://collections/accessories"
+            "button_link": "shopify://collections/accessories",
+            "feature_1_title": "",
+            "feature_1_text": "",
+            "feature_2_title": "",
+            "feature_2_text": "",
+            "feature_3_title": "",
+            "feature_3_text": "",
+            "feature_4_title": "",
+            "feature_4_text": ""
           }
         },
         "card_app": {
@@ -369,7 +349,7 @@
         "card_app"
       ],
       "settings": {
-        "padding_top": 10,
+        "padding_top": 20,
         "padding_bottom": 80,
         "padding_top_mobile": 88,
         "padding_bottom_mobile": 88
@@ -564,7 +544,12 @@
       ],
       "settings": {
         "title": "From the Rider’s Perspective",
-        "padding_top": 80,
+        "layout": "stories",
+        "blog": "",
+        "post_limit": 8,
+        "show_date": true,
+        "date_format": "%B %d, %Y",
+        "padding_top": 0,
         "padding_bottom": 80,
         "padding_top_mobile": 88,
         "padding_bottom_mobile": 88
@@ -627,8 +612,8 @@
     "home_spotlight": {
       "type": "home-rider-stories",
       "settings": {
-        "layout": "articles",
         "title": "On the Road. In the Spotlight.",
+        "layout": "articles",
         "blog": "knowledge",
         "post_limit": 8,
         "show_date": true,
@@ -644,11 +629,10 @@
     "safety_certified_hero_QW8qWE",
     "home_trust_bar",
     "home_product_views",
+    "safety_certified_hero_4AnbLr",
     "home_split_cards",
     "home_rider_stories",
     "home_explore_cards",
-    "home_spotlight",
-    "featured_collection",
-    "safety_certified_hero_4AnbLr"
+    "home_spotlight"
   ]
 }
