@@ -1,0 +1,374 @@
+{%- style -%}
+  #HomeExplore-{{ section.id }} {
+    padding-top: calc({{ section.settings.padding_top | default: 80 }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80 }} * var(--rem));
+    background: #ffffff;
+  }
+
+  #HomeExplore-{{ section.id }} .home-explore__shell {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  #HomeExplore-{{ section.id }} .home-explore__title {
+    margin: 0 0 calc(12 * var(--rem));
+    color: #000000;
+    font-weight: 700;
+  }
+
+  #HomeExplore-{{ section.id }} .home-explore__subtitle {
+    margin: 0 0 calc(48 * var(--rem));
+    color: #999999;
+    font-size: calc(14 * var(--rem));
+    font-weight: 400;
+    line-height: calc(18 * var(--rem));
+  }
+
+  #HomeExplore-{{ section.id }} .home-explore__track {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: calc(20 * var(--rem));
+  }
+
+  #HomeExplore-{{ section.id }} .home-explore__card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: visible;
+    background: #ffffff;
+    border-radius: calc(16 * var(--rem));
+    box-shadow: 0 calc(6 * var(--rem)) calc(20 * var(--rem)) rgb(0 0 0 / 8%);
+  }
+
+  #HomeExplore-{{ section.id }} .home-explore__media {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: #f2f2f2;
+    border-radius: calc(16 * var(--rem)) calc(16 * var(--rem)) 0 0;
+  }
+
+  #HomeExplore-{{ section.id }} .home-explore__media img,
+  #HomeExplore-{{ section.id }} .home-explore__ph {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #HomeExplore-{{ section.id }} .home-explore__ph {
+    background: #d9d9d9;
+  }
+
+  #HomeExplore-{{ section.id }} .home-explore__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: calc(20 * var(--rem));
+    border-radius: 0 0 calc(16 * var(--rem)) calc(16 * var(--rem));
+  }
+
+  #HomeExplore-{{ section.id }} .home-explore__name {
+    display: flex;
+    align-items: center;
+    gap: calc(8 * var(--rem));
+    margin: 0;
+    color: #000000;
+    font-size: calc(14 * var(--rem));
+    font-weight: 600;
+    line-height: calc(18 * var(--rem));
+  }
+
+  #HomeExplore-{{ section.id }} .home-explore__icon {
+    flex: 0 0 auto;
+    width: calc(18 * var(--rem));
+    height: calc(18 * var(--rem));
+  }
+
+  #HomeExplore-{{ section.id }} .home-explore__icon img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  #HomeExplore-{{ section.id }} .home-explore__text {
+    margin: calc(8 * var(--rem)) 0 calc(16 * var(--rem));
+    color: #999999;
+    font-size: calc(12 * var(--rem));
+    font-weight: 400;
+    line-height: calc(18 * var(--rem));
+  }
+
+  #HomeExplore-{{ section.id }} .home-explore__btn {
+    gap: calc(8 * var(--rem));
+    width: max-content;
+    margin-top: auto;
+    margin-left: auto;
+  }
+
+  #HomeExplore-{{ section.id }} .home-explore__btn svg {
+    width: calc(14 * var(--rem));
+    height: calc(14 * var(--rem));
+  }
+
+  @media (hover: hover) {
+    #HomeExplore-{{ section.id }} .home-explore__card:hover .home-explore__name {
+      color: var(--aotos-theme-color, #ff6501);
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #HomeExplore-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 88 }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88 }} * var(--rem));
+    }
+    #HomeExplore-{{ section.id }} .home-explore__btn svg {
+      width: calc(24 * var(--rem));
+      height: calc(24 * var(--rem));
+    }
+
+    #HomeExplore-{{ section.id }} .home-explore__shell {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 0 calc(40 * var(--rem));
+      box-sizing: border-box;
+    }
+
+    #HomeExplore-{{ section.id }} .home-explore__subtitle {
+      margin-bottom: calc(32 * var(--rem));
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #HomeExplore-{{ section.id }} .home-explore__track {
+      display: flex;
+      gap: calc(24 * var(--rem));
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: calc(16 * var(--rem));
+      scrollbar-width: none;
+      padding: calc(20 * var(--rem)) calc(16 * var(--rem)) calc(28 * var(--rem));
+      margin: calc(-20 * var(--rem)) calc(-16 * var(--rem)) calc(-28 * var(--rem));
+    }
+
+    #HomeExplore-{{ section.id }} .home-explore__track::-webkit-scrollbar {
+      display: none;
+    }
+
+    #HomeExplore-{{ section.id }} .home-explore__card {
+      flex: 0 0 86%;
+      scroll-snap-align: start;
+    }
+
+    #HomeExplore-{{ section.id }} .home-explore__body {
+      padding: calc(28 * var(--rem));
+    }
+
+    #HomeExplore-{{ section.id }} .home-explore__name {
+      gap: calc(12 * var(--rem));
+      font-size: calc(22 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #HomeExplore-{{ section.id }} .home-explore__icon {
+      width: calc(36 * var(--rem));
+      height: calc(36 * var(--rem));
+    }
+
+    #HomeExplore-{{ section.id }} .home-explore__text {
+      margin-top: calc(12 * var(--rem));
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #HomeExplore-{{ section.id }} .home-explore__name {
+      transition: none;
+    }
+  }
+{%- endstyle -%}
+
+<div id="HomeExplore-{{ section.id }}" class="home-explore">
+  <div class="home-explore__shell">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="home-explore__title aotos-section-title">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subtitle != blank -%}
+      <p class="home-explore__subtitle">{{ section.settings.subtitle | escape }}</p>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="home-explore__track">
+        {%- for block in section.blocks -%}
+          <article class="home-explore__card" {{ block.shopify_attributes }}>
+            <div class="home-explore__media">
+              {%- if block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 540 }}"
+                  srcset="{{ block.settings.image | image_url: width: 400 }} 400w, {{ block.settings.image | image_url: width: 540 }} 540w, {{ block.settings.image | image_url: width: 720 }} 720w"
+                  sizes="(max-width: 768px) 78vw, 340px"
+                  alt="{{ block.settings.image_alt | escape }}"
+                  width="540"
+                  height="338"
+                  loading="lazy"
+                >
+              {%- else -%}
+                <span class="home-explore__ph"></span>
+              {%- endif -%}
+            </div>
+            <div class="home-explore__body">
+              {%- if block.settings.title != blank -%}
+                <h3 class="home-explore__name">
+                  {%- if block.settings.icon != blank -%}
+                    <span class="home-explore__icon">
+                      <img
+                        src="{{ block.settings.icon | image_url: width: 72 }}"
+                        alt=""
+                        width="36"
+                        height="36"
+                        loading="lazy"
+                      >
+                    </span>
+                  {%- endif -%}
+                  {{ block.settings.title | escape }}
+                </h3>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <p class="home-explore__text">{{ block.settings.text | escape }}</p>
+              {%- endif -%}
+              {%- if block.settings.button_label != blank -%}
+                {%- if block.settings.button_link != blank -%}
+                  <a class="button home-explore__btn" href="{{ block.settings.button_link }}">
+                    {{ block.settings.button_label | escape }}
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                      <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                  </a>
+                {%- else -%}
+                  <span class="button home-explore__btn">{{ block.settings.button_label | escape }}</span>
+                {%- endif -%}
+              {%- endif -%}
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "探索更多",
+  "tag": "section",
+  "class": "section-home-explore-cards",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "标题",
+      "default": "Explore More"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "副标题",
+      "default": "Discover how AOTOS is shaping the future of electric riding."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "电脑端上边距",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "电脑端下边距",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "手机端上边距",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "手机端下边距",
+      "default": 88
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "卡片",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "图片"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "图片替代文字"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "图标"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "标题",
+          "default": "Featured in the Media"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "说明",
+          "default": "Press highlights & Expert Reviews on AOTOS"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "按钮文字",
+          "default": "Learn More"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "按钮链接"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "探索更多"
+    }
+  ]
+}
+{% endschema %}

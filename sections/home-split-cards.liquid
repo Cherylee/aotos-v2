@@ -1,0 +1,543 @@
+{%- style -%}
+  #HomeSplit-{{ section.id }} {
+    padding-top: calc({{ section.settings.padding_top | default: 10 }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80 }} * var(--rem));
+    background: #ffffff;
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__shell {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__row {
+    display: grid;
+    grid-template-columns: repeat({{ section.blocks.size | at_least: 1 | at_most: 2 }}, minmax(0, 1fr));
+    gap: calc(16 * var(--rem));
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__card {
+    position: relative;
+    display: block;
+    min-width: 0;
+    padding: calc(32 * var(--rem)) calc(20 * var(--rem)) calc(28 * var(--rem)) calc(28 * var(--rem));
+    background: #f5f5f5;
+    border-radius: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__copy {
+    align-self: start;
+    padding-right: calc(392 * var(--rem));
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__title {
+    margin: 0;
+    color: #000000;
+    font-size: calc(28 * var(--rem));
+    font-weight: 700;
+    line-height: calc(34 * var(--rem));
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__text {
+    margin: calc(8 * var(--rem)) 0 0;
+    color: #999999;
+    font-size: calc(14 * var(--rem));
+    font-weight: 400;
+    line-height: calc(18 * var(--rem));
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__features {
+    display: flex;
+    flex-direction: column;
+    gap: calc(14 * var(--rem));
+    margin: calc(22 * var(--rem)) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__feature {
+    display: flex;
+    align-items: flex-start;
+    gap: calc(10 * var(--rem));
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__icon {
+    flex: 0 0 auto;
+    width: calc(20 * var(--rem));
+    height: calc(20 * var(--rem));
+    margin-top: calc(1 * var(--rem));
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__icon .home-split__ph,
+  #HomeSplit-{{ section.id }} .home-split__media .home-split__ph {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #d9d9d9;
+    border-radius: calc(4 * var(--rem));
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__icon:has(img) .home-split__ph,
+  #HomeSplit-{{ section.id }} .home-split__media:has(img) .home-split__ph {
+    display: none;
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__icon img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__feature-title {
+    margin: 0;
+    color: #000000;
+    font-size: calc(14 * var(--rem));
+    font-weight: 600;
+    line-height: calc(18 * var(--rem));
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__feature-text {
+    margin: calc(2 * var(--rem)) 0 0;
+    color: #999999;
+    font-size: calc(12 * var(--rem));
+    font-weight: 400;
+    line-height: calc(16 * var(--rem));
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__actions {
+    margin-top: calc(22 * var(--rem));
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__media {
+    position: absolute;
+    top: 50%;
+    right: calc(36 * var(--rem));
+    width: calc(380 * var(--rem));
+    transform: translateY(-50%);
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__card:nth-child(2) {
+    padding-bottom: 0;
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__card:nth-child(2) .home-split__copy {
+    padding-right: calc(252 * var(--rem));
+    padding-bottom: calc(28 * var(--rem));
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__card:nth-child(2) .home-split__media {
+    top: auto;
+    bottom: 0;
+    right: calc(36 * var(--rem));
+    width: calc(240 * var(--rem));
+    transform: none;
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__media .home-split__ph {
+    aspect-ratio: 1;
+    border-radius: calc(8 * var(--rem));
+  }
+
+  @media screen and (max-width: 768px) {
+    #HomeSplit-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 88 }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88 }} * var(--rem));
+    }
+
+    #HomeSplit-{{ section.id }} .home-split__shell {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 0 calc(40 * var(--rem));
+      box-sizing: border-box;
+    }
+
+    #HomeSplit-{{ section.id }} .home-split__row {
+      grid-template-columns: 1fr;
+      gap: calc(24 * var(--rem));
+    }
+
+    #HomeSplit-{{ section.id }} .home-split__card {
+      position: relative;
+      display: block;
+      padding: calc(40 * var(--rem)) calc(28 * var(--rem));
+      border-radius: calc(20 * var(--rem));
+      overflow: hidden;
+    }
+
+    #HomeSplit-{{ section.id }} .home-split__copy {
+      padding-right: calc(0 * var(--rem));
+      padding-bottom: 0;
+    }
+
+    #HomeSplit-{{ section.id }} .home-split__media {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: calc(280 * var(--rem));
+      transform: translateY(-50%);
+    }
+
+    #HomeSplit-{{ section.id }} .home-split__card:nth-child(2) {
+      padding-bottom: 0;
+    }
+
+    #HomeSplit-{{ section.id }} .home-split__card:nth-child(2) .home-split__copy {
+      padding-right: calc(0 * var(--rem));
+      padding-bottom: calc(40 * var(--rem));
+    }
+
+    #HomeSplit-{{ section.id }} .home-split__card:nth-child(2) .home-split__media {
+      top: auto;
+      bottom: 0;
+      width: calc(280 * var(--rem));
+      transform: none;
+    }
+
+    #HomeSplit-{{ section.id }} .home-split__media .home-split__ph {
+      aspect-ratio: 1;
+    }
+
+    #HomeSplit-{{ section.id }} .home-split__title {
+      font-size: calc(36 * var(--rem));
+      line-height: calc(44 * var(--rem));
+    }
+
+    #HomeSplit-{{ section.id }} .home-split__text {
+      margin-top: calc(10 * var(--rem));
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #HomeSplit-{{ section.id }} .home-split__features {
+      gap: calc(22 * var(--rem));
+      margin-top: calc(28 * var(--rem));
+    }
+
+    #HomeSplit-{{ section.id }} .home-split__feature {
+      gap: calc(16 * var(--rem));
+    }
+
+    #HomeSplit-{{ section.id }} .home-split__icon {
+      width: calc(36 * var(--rem));
+      height: calc(36 * var(--rem));
+    }
+
+    #HomeSplit-{{ section.id }} .home-split__feature-title {
+      font-size: calc(22 * var(--rem));
+      line-height: calc(28 * var(--rem));
+    }
+
+    #HomeSplit-{{ section.id }} .home-split__feature-text {
+      margin-top: calc(4 * var(--rem));
+      font-size: calc(20 * var(--rem));
+      line-height: calc(28 * var(--rem));
+    }
+
+    #HomeSplit-{{ section.id }} .home-split__actions {
+      margin-top: calc(32 * var(--rem));
+    }
+  }
+{%- endstyle -%}
+
+<div id="HomeSplit-{{ section.id }}" class="home-split">
+  <div class="home-split__shell">
+    <div class="home-split__row">
+      {%- for block in section.blocks -%}
+        <article class="home-split__card" {{ block.shopify_attributes }}>
+          <div class="home-split__copy">
+            {%- if block.settings.title != blank -%}
+              <h2 class="home-split__title">{{ block.settings.title | escape }}</h2>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <p class="home-split__text">{{ block.settings.text | escape }}</p>
+            {%- endif -%}
+
+            {%- assign feature_nums = '1,2,3,4' | split: ',' -%}
+            {%- capture feature_items -%}
+              {%- for num in feature_nums -%}
+                {%- liquid
+                  assign icon_key = 'feature_' | append: num | append: '_icon'
+                  assign title_key = 'feature_' | append: num | append: '_title'
+                  assign text_key = 'feature_' | append: num | append: '_text'
+                  assign feature_icon = block.settings[icon_key]
+                  assign feature_title = block.settings[title_key]
+                  assign feature_text = block.settings[text_key]
+                -%}
+                {%- if feature_icon != blank or feature_title != blank or feature_text != blank -%}
+                  <li class="home-split__feature">
+                    <div class="home-split__icon">
+                      <span class="home-split__ph" aria-hidden="true"></span>
+                      {%- if feature_icon != blank -%}
+                        <img
+                          src="{{ feature_icon | image_url: width: 72 }}"
+                          srcset="{{ feature_icon | image_url: width: 48 }} 48w, {{ feature_icon | image_url: width: 72 }} 72w, {{ feature_icon | image_url: width: 96 }} 96w"
+                          sizes="(max-width: 768px) 36px, 24px"
+                          width="72"
+                          height="72"
+                          alt=""
+                          loading="lazy"
+                        >
+                      {%- endif -%}
+                    </div>
+                    <div>
+                      {%- if feature_title != blank -%}
+                        <p class="home-split__feature-title">{{ feature_title | escape }}</p>
+                      {%- endif -%}
+                      {%- if feature_text != blank -%}
+                        <p class="home-split__feature-text">{{ feature_text | escape }}</p>
+                      {%- endif -%}
+                    </div>
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endcapture -%}
+            {%- assign feature_items = feature_items | strip -%}
+            {%- if feature_items != blank -%}
+              <ul class="home-split__features">{{ feature_items }}</ul>
+            {%- endif -%}
+
+            {%- if block.settings.button_label != blank -%}
+              <div class="home-split__actions">
+                {%- if block.settings.button_link != blank -%}
+                  <a class="button" href="{{ block.settings.button_link }}">{{ block.settings.button_label | escape }}</a>
+                {%- else -%}
+                  <span class="button">{{ block.settings.button_label | escape }}</span>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          </div>
+
+          <div class="home-split__media">
+            {%- if block.settings.image != blank -%}
+              {%- assign card_alt = block.settings.image_alt | default: block.settings.title -%}
+              <img
+                src="{{ block.settings.image | image_url: width: 700 }}"
+                srcset="{{ block.settings.image | image_url: width: 400 }} 400w, {{ block.settings.image | image_url: width: 700 }} 700w, {{ block.settings.image | image_url: width: 1000 }} 1000w"
+                sizes="(max-width: 768px) 84vw, 360px"
+                width="700"
+                height="{{ 700 | divided_by: block.settings.image.aspect_ratio | round }}"
+                alt="{{ card_alt | escape }}"
+                loading="lazy"
+              >
+            {%- else -%}
+              <span class="home-split__ph" aria-hidden="true"></span>
+            {%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "双栏卡片",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 2,
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "label": "上边距（PC）",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "下边距（PC）",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "上边距（手机）",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "下边距（手机）",
+      "default": 88
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "卡片",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "图片"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "图片描述"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "标题",
+          "default": "标题"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "说明"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "按钮文案",
+          "default": "Learn More"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "按钮链接"
+        },
+        {
+          "type": "header",
+          "content": "卖点 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "feature_1_icon",
+          "label": "图标"
+        },
+        {
+          "type": "text",
+          "id": "feature_1_title",
+          "label": "标题"
+        },
+        {
+          "type": "text",
+          "id": "feature_1_text",
+          "label": "说明"
+        },
+        {
+          "type": "header",
+          "content": "卖点 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "feature_2_icon",
+          "label": "图标"
+        },
+        {
+          "type": "text",
+          "id": "feature_2_title",
+          "label": "标题"
+        },
+        {
+          "type": "text",
+          "id": "feature_2_text",
+          "label": "说明"
+        },
+        {
+          "type": "header",
+          "content": "卖点 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "feature_3_icon",
+          "label": "图标"
+        },
+        {
+          "type": "text",
+          "id": "feature_3_title",
+          "label": "标题"
+        },
+        {
+          "type": "text",
+          "id": "feature_3_text",
+          "label": "说明"
+        },
+        {
+          "type": "header",
+          "content": "卖点 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "feature_4_icon",
+          "label": "图标"
+        },
+        {
+          "type": "text",
+          "id": "feature_4_title",
+          "label": "标题"
+        },
+        {
+          "type": "text",
+          "id": "feature_4_text",
+          "label": "说明"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "双栏卡片",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "title": "Accessories",
+            "text": "Suitable for FLUX X26 Series",
+            "button_label": "Shop Accessories"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "AOTOS Mobility App",
+            "text": "Control Every Ride from One App",
+            "button_label": "Learn More",
+            "feature_1_title": "Ride Stats",
+            "feature_1_text": "Track your performance",
+            "feature_2_title": "Smart Security",
+            "feature_2_text": "Lock, alert, and protect",
+            "feature_3_title": "Navigation",
+            "feature_3_text": "Plan and go with ease",
+            "feature_4_title": "OTA Updates",
+            "feature_4_text": "Keep improving, wirelessly"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -325,12 +325,329 @@
         "image_position": "center center",
         "image_alt": ""
       }
+    },
+    "home_split_cards": {
+      "type": "home-split-cards",
+      "blocks": {
+        "card_accessories": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/2_1.webp",
+            "image_alt": "AOTOS accessories",
+            "title": "Accessories",
+            "text": "Suitable for FLUX X26 Series",
+            "button_label": "Shop Accessories",
+            "button_link": "shopify://collections/accessories"
+          }
+        },
+        "card_app": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/1_1.webp",
+            "image_alt": "AOTOS Mobility App",
+            "title": "AOTOS Mobility App",
+            "text": "Control Every Ride from One App",
+            "button_label": "Learn More",
+            "button_link": "shopify://pages/download-center",
+            "feature_1_icon": "shopify://shop_images/Activity.webp",
+            "feature_1_title": "Ride Stats",
+            "feature_1_text": "Track your performance",
+            "feature_2_icon": "shopify://shop_images/Lock.webp",
+            "feature_2_title": "Smart Security",
+            "feature_2_text": "Lock, alert, and protect",
+            "feature_3_icon": "shopify://shop_images/Map_pin.webp",
+            "feature_3_title": "Navigation",
+            "feature_3_text": "Plan and go with ease",
+            "feature_4_icon": "shopify://shop_images/Settings.webp",
+            "feature_4_title": "OTA Updates",
+            "feature_4_text": "Keep improving, wirelessly"
+          }
+        }
+      },
+      "block_order": [
+        "card_accessories",
+        "card_app"
+      ],
+      "settings": {
+        "padding_top": 10,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
+    },
+    "home_rider_stories": {
+      "type": "home-rider-stories",
+      "blocks": {
+        "testimonial_kKgPNX": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/channels4_profile_1_eecb6fae-4b75-431e-8c19-20f3a75a1aec.jpg",
+            "quote": "\"400+ Miles Later: Let’s Talk About the AOTOS Flux X26 Pro\"",
+            "author": "Hangin' with Nardo",
+            "video_source": "youtube",
+            "video_url": "https://www.youtube.com/watch?v=uQiikbQcuns&t=616s",
+            "poster_alt": "AOTOS rider story",
+            "play_label": "Play video"
+          }
+        },
+        "testimonial_LBhNEK": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/channels4_profile_296eaa15-cc94-414c-8c70-e4dddb390ef0.jpg",
+            "quote": "\"This E-Bike Is INSANE! Aotos Flux X26 Review\"",
+            "author": "EASYHEIMER",
+            "video_source": "youtube",
+            "video_url": "https://www.youtube.com/watch?v=Cf0BztTmPVU&t=624s",
+            "poster_alt": "AOTOS rider story",
+            "play_label": "Play video"
+          }
+        },
+        "testimonial_VfPCiY": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/Youtuber-Android_Tech.jpg",
+            "quote": "\"Aotos Flux X26 Review – The Best Futuristic E-Bike of 2026?\"",
+            "author": "Android Tech",
+            "video_source": "youtube",
+            "video_url": "https://www.youtube.com/watch?v=HFi_j91FbRo",
+            "poster": "shopify://shop_images/hqdefault.jpg",
+            "poster_alt": "AOTOS rider story",
+            "play_label": "Play video"
+          }
+        },
+        "testimonial_DzAtQD": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/Youtuber-Electric_Vehicles_Space.jpg",
+            "quote": "\"Segway Xyber Killer The Best Moped Style Electric Bike at CES 2026 That Looks 🔥- Aotos Flux X26!\"",
+            "author": "Electric Vehicles Space",
+            "video_source": "youtube",
+            "video_url": "https://www.youtube.com/watch?v=NaVPnR1pmXo",
+            "poster": "shopify://shop_images/hqdefault_1_45904592-9916-485c-b0db-fa45794b9fc5.webp",
+            "poster_alt": "AOTOS rider story",
+            "play_label": "Play video"
+          }
+        },
+        "testimonial_tk79FK": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/channels4_profile_2.jpg",
+            "quote": "\"This Cyberpunk E-Bike has one Crazy Feature...\"",
+            "author": "Maximum Charge",
+            "video_source": "youtube",
+            "video_url": "https://www.youtube.com/watch?v=XQK4yd61n88",
+            "poster": "shopify://shop_images/hqdefault_5_4d0756dd-e4ad-42b1-ab37-17e9800e6db5.webp",
+            "poster_alt": "AOTOS rider story",
+            "play_label": "Play video"
+          }
+        },
+        "testimonial_NwYAgW": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/unnamed_982640b1-06a3-46ef-9ca7-06a3f2b5092f.jpg",
+            "quote": "\"ADID TESLA MAKE THIS CRAZY E-BIKE? AOTOS FLUX X26.\"",
+            "author": "MC Cycles.",
+            "video_source": "youtube",
+            "video_url": "https://www.youtube.com/watch?v=PpUFEYmUUkw",
+            "video": "shopify://files/videos/0623.mp4",
+            "poster": "shopify://shop_images/hqdefault_7_2a0558a9-b320-42ba-8937-9b0d9df493f7.webp",
+            "poster_alt": "AOTOS rider story",
+            "play_label": "Play video"
+          }
+        },
+        "testimonial_KGdjz3": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/Youtuber-TailHappyTV.jpg",
+            "quote": "\"AOTOS Flux X26 Pro is NOT a \"Normal\" Ebike\"",
+            "author": "TailHappyTV",
+            "video_source": "youtube",
+            "video_url": "https://www.youtube.com/watch?v=JuEXj_BQlEo",
+            "poster": "shopify://shop_images/hqdefault_6_6ef44d24-8a57-460d-872d-ec891be255b5.webp",
+            "poster_alt": "AOTOS rider story",
+            "play_label": "Play video"
+          }
+        },
+        "testimonial_LT8fLR": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/channels4_profile_3.jpg",
+            "quote": "\"Great E-Moto Style Bike for Young Adults...\"",
+            "author": "E-MTB.",
+            "video_source": "youtube",
+            "video_url": "https://www.youtube.com/watch?v=uT5Qcq5fkTs",
+            "poster": "shopify://shop_images/hqdefault_9_1.webp",
+            "poster_alt": "AOTOS rider story",
+            "play_label": "Play video"
+          }
+        },
+        "testimonial_dnpdCV": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/channels4_profile.jpg",
+            "quote": "\"This e-bike has a 50mi range... | Exploring on the AOTOS Flux X26.\"",
+            "author": "Fooligan",
+            "video_source": "youtube",
+            "video_url": "https://www.youtube.com/watch?v=2nj7mjSkE9E",
+            "poster": "shopify://shop_images/hqdefault_2_d7009dc5-6217-44b5-a346-49b67a05ad43.webp",
+            "poster_alt": "AOTOS rider story",
+            "play_label": "Play video"
+          }
+        },
+        "testimonial_Fzjwxq": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/channels4_profile_1.jpg",
+            "quote": "“AOTOS FLUX X26 Bike Review - Is This the Next Big Thing?”",
+            "author": "EBPMAN Tech Reviews",
+            "video_source": "youtube",
+            "video_url": "https://www.youtube.com/watch?v=RD3-S1v4Jnc",
+            "poster": "shopify://shop_images/hqdefault_3_f66d02bc-691f-4042-b590-fff2ece9c5ab.webp",
+            "poster_alt": "AOTOS rider story",
+            "play_label": "Play video"
+          }
+        },
+        "testimonial_qTdLw8": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/Youtuber-Raspy_Rides.jpg",
+            "quote": "\"The Most Futuristic Ebike of 2026!? | Aotos Flux X26 Pro\"",
+            "author": "Raspy Rides",
+            "video_source": "youtube",
+            "video_url": "https://www.youtube.com/watch?v=g1qNIk6Y-TQ",
+            "poster": "shopify://shop_images/hqdefault_8_75891f35-feb3-4659-baab-bd745f92d648.webp",
+            "poster_alt": "AOTOS rider story",
+            "play_label": "Play video"
+          }
+        },
+        "testimonial_LUmwUQ": {
+          "type": "testimonial",
+          "disabled": true,
+          "settings": {
+            "avatar": "shopify://shop_images/Youtuber-Rozzy.jpg",
+            "quote": "\"The Future of E-Bikes Are Here // AUTOS FLUX\"",
+            "author": "Rozzy",
+            "video_source": "youtube",
+            "video_url": "https://www.youtube.com/watch?v=TmDkwgWdvnE",
+            "poster_alt": "AOTOS rider story",
+            "play_label": "Play video"
+          }
+        },
+        "testimonial_CmxVPF": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/Youtuber-The_Bike_Cave.jpg",
+            "quote": "\"Can't Believe the LOW Price of This New E-bike!\"",
+            "author": "The Bike Cave",
+            "video_source": "youtube",
+            "video_url": "https://www.youtube.com/watch?v=yxVyipDVEAo",
+            "poster": "shopify://shop_images/hqdefault_4_2f6cf183-9df8-4393-9a4a-2f8c606d2aca.webp",
+            "poster_alt": "AOTOS rider story",
+            "play_label": "Play video"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_kKgPNX",
+        "testimonial_LBhNEK",
+        "testimonial_VfPCiY",
+        "testimonial_DzAtQD",
+        "testimonial_tk79FK",
+        "testimonial_NwYAgW",
+        "testimonial_KGdjz3",
+        "testimonial_LT8fLR",
+        "testimonial_dnpdCV",
+        "testimonial_Fzjwxq",
+        "testimonial_qTdLw8",
+        "testimonial_LUmwUQ",
+        "testimonial_CmxVPF"
+      ],
+      "settings": {
+        "title": "From the Rider’s Perspective",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
+    },
+    "home_explore_cards": {
+      "type": "home-explore-cards",
+      "blocks": {
+        "explore_media": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1_compressed_266be994-afd9-45fa-8973-4f475144f5a8_1.webp",
+            "image_alt": "AOTOS featured media",
+            "icon": "shopify://shop_images/Video_2.webp",
+            "title": "Featured in the Media",
+            "text": "Press highlights & Expert Reviews on AOTOS",
+            "button_label": "Learn More",
+            "button_link": "shopify://pages/what-the-press-is-saying-about-flux-x26-pro"
+          }
+        },
+        "explore_collaborate": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/8_61ffdd95-83f2-458b-b632-842b23a3f347_1.webp",
+            "image_alt": "Collaborate with AOTOS",
+            "icon": "shopify://shop_images/User.webp",
+            "title": "Collaborate with AOTOS",
+            "text": "Join our affiliate network and be part of the future of electric riding",
+            "button_label": "Learn More",
+            "button_link": "shopify://pages/partner-with-aotos"
+          }
+        },
+        "explore_support": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/4_ea368923-2032-418e-b1b3-14e642eecd3c.webp",
+            "image_alt": "AOTOS service and support",
+            "icon": "shopify://shop_images/Headphones_1.webp",
+            "title": "Service and Support",
+            "text": "Get help for all your AOTOS products",
+            "button_label": "Learn More",
+            "button_link": "shopify://pages/support-center"
+          }
+        }
+      },
+      "block_order": [
+        "explore_media",
+        "explore_collaborate",
+        "explore_support"
+      ],
+      "settings": {
+        "heading": "Explore More",
+        "subtitle": "Discover how AOTOS is shaping the future of electric riding.",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
+    },
+    "home_spotlight": {
+      "type": "home-rider-stories",
+      "settings": {
+        "layout": "articles",
+        "title": "On the Road. In the Spotlight.",
+        "blog": "knowledge",
+        "post_limit": 8,
+        "show_date": true,
+        "date_format": "%B %d, %Y",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
     }
   },
   "order": [
     "safety_certified_hero_QW8qWE",
     "home_trust_bar",
     "home_product_views",
+    "home_split_cards",
+    "home_rider_stories",
+    "home_explore_cards",
+    "home_spotlight",
     "featured_collection",
     "safety_certified_hero_4AnbLr"
   ]

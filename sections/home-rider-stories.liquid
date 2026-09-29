@@ -1,0 +1,850 @@
+{%- style -%}
+  #HomeRiders-{{ section.id }} {
+    padding-top: calc({{ section.settings.padding_top | default: 80 }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80 }} * var(--rem));
+    background: #ffffff;
+  }
+
+  #HomeRiders-{{ section.id }} .home-riders__shell {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  #HomeRiders-{{ section.id }} .home-riders__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(16 * var(--rem));
+    margin-bottom: calc(48 * var(--rem));
+  }
+
+  #HomeRiders-{{ section.id }} .home-riders__title {
+    margin: 0;
+    color: #000000;
+    font-weight: 700;
+  }
+
+  #HomeRiders-{{ section.id }} .home-riders__nav {
+    display: flex;
+    flex: 0 0 auto;
+    gap: calc(10 * var(--rem));
+  }
+
+  #HomeRiders-{{ section.id }} .home-riders__arrow {
+    display: grid;
+    width: calc(44 * var(--rem));
+    height: calc(44 * var(--rem));
+    padding: 0;
+    place-items: center;
+    color: #000000;
+    background: #ffffff;
+    border: 1px solid #dedede;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  #HomeRiders-{{ section.id }} .home-riders__arrow svg {
+    width: calc(18 * var(--rem));
+    height: calc(18 * var(--rem));
+  }
+
+  #HomeRiders-{{ section.id }} .home-riders__arrow:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+
+  #HomeRiders-{{ section.id }} .home-riders__viewport {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+  }
+
+  #HomeRiders-{{ section.id }} .home-riders__viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  #HomeRiders-{{ section.id }} .home-riders__track {
+    display: flex;
+    align-items: stretch;
+    gap: calc(16 * var(--rem));
+  }
+
+  #HomeRiders-{{ section.id }} .home-riders__card {
+    position: relative;
+    flex: 0 0 calc((100% - calc(16 * var(--rem)) * 2) / 3.15);
+    aspect-ratio: 760 / 424;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #dedede;
+    border-radius: calc(16 * var(--rem));
+    scroll-snap-align: start;
+    box-sizing: border-box;
+  }
+
+  #HomeRiders-{{ section.id }} .home-riders__poster {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+  }
+
+  #HomeRiders-{{ section.id }} .home-riders__face {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: calc(48 * var(--rem)) minmax(0, 1fr);
+    gap: calc(14 * var(--rem));
+    align-content: center;
+    height: 100%;
+    padding: calc(20 * var(--rem));
+    background: #ffffff;
+    box-sizing: border-box;
+  }
+
+  #HomeRiders-{{ section.id }} .home-riders__avatar {
+    width: calc(48 * var(--rem));
+    height: calc(48 * var(--rem));
+    border-radius: 50%;
+    object-fit: cover;
+    background: #f2f2f2;
+  }
+
+  #HomeRiders-{{ section.id }} .home-riders__avatar--ph {
+    display: grid;
+    place-items: center;
+    color: #000000;
+    font-size: calc(18 * var(--rem));
+    font-weight: 700;
+  }
+
+  #HomeRiders-{{ section.id }} .home-riders__quote {
+    margin: 0;
+    color: #000000;
+    font-size: calc(14 * var(--rem));
+    font-weight: 600;
+    line-height: calc(18 * var(--rem));
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  #HomeRiders-{{ section.id }} .home-riders__author {
+    display: block;
+    margin-top: calc(8 * var(--rem));
+    color: #999999;
+    font-size: calc(12 * var(--rem));
+    font-weight: 400;
+    line-height: calc(16 * var(--rem));
+  }
+
+  #HomeRiders-{{ section.id }} .home-riders__play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    display: grid;
+    width: calc(56 * var(--rem));
+    height: calc(56 * var(--rem));
+    padding: 0;
+    place-items: center;
+    color: #000000;
+    background: #ffffff;
+    border: 0;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    pointer-events: none;
+    cursor: pointer;
+  }
+
+  #HomeRiders-{{ section.id }} .home-riders__play svg {
+    width: calc(18 * var(--rem));
+    height: calc(18 * var(--rem));
+    margin-left: calc(2 * var(--rem));
+  }
+
+  #HomeRiders-{{ section.id }} .home-riders__player {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: none;
+    background: #111111;
+  }
+
+  #HomeRiders-{{ section.id }} .home-riders__player iframe,
+  #HomeRiders-{{ section.id }} .home-riders__player video {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  #HomeRiders-{{ section.id }} .home-riders__card.is-playing .home-riders__player {
+    display: block;
+  }
+
+  #HomeRiders-{{ section.id }} .home-riders__card.is-playing .home-riders__face,
+  #HomeRiders-{{ section.id }} .home-riders__card.is-playing .home-riders__play,
+  #HomeRiders-{{ section.id }} .home-riders__card.is-playing .home-riders__poster {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #HomeRiders-{{ section.id }} .home-riders__dots {
+    display: flex;
+    justify-content: center;
+    gap: calc(10 * var(--rem));
+    margin-top: calc(24 * var(--rem));
+  }
+
+  #HomeRiders-{{ section.id }} .home-riders__dot {
+    width: calc(12 * var(--rem));
+    height: calc(12 * var(--rem));
+    padding: 0;
+    background: #dddddd;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  #HomeRiders-{{ section.id }} .home-riders__dot.is-active {
+    background: var(--aotos-theme-color, #ff6501);
+  }
+
+  @media (hover: hover) {
+    #HomeRiders-{{ section.id }} .home-riders__card--video:hover .home-riders__poster {
+      opacity: 1;
+    }
+
+    #HomeRiders-{{ section.id }} .home-riders__card--video:hover .home-riders__face {
+      opacity: 0;
+    }
+
+    #HomeRiders-{{ section.id }} .home-riders__card--video:hover .home-riders__play {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  #HomeRiders-{{ section.id }}.home-riders--articles .home-riders__viewport {
+    padding: calc(16 * var(--rem)) calc(8 * var(--rem)) calc(28 * var(--rem));
+    margin: calc(-16 * var(--rem)) calc(-8 * var(--rem)) calc(-28 * var(--rem));
+    scroll-padding-inline: calc(8 * var(--rem));
+  }
+
+  #HomeRiders-{{ section.id }}.home-riders--articles .home-riders__card {
+    display: flex;
+    flex-direction: column;
+    aspect-ratio: auto;
+    flex-basis: calc((100% - calc(16 * var(--rem)) * 3) / 4);
+    overflow: visible;
+    background: #ffffff;
+    border: 0;
+    border-radius: calc(16 * var(--rem));
+    box-shadow: 0 calc(6 * var(--rem)) calc(20 * var(--rem)) rgb(0 0 0 / 8%);
+    color: inherit;
+    text-decoration: none;
+  }
+
+  #HomeRiders-{{ section.id }}.home-riders--articles .home-riders__photo {
+    aspect-ratio: 4 / 2;
+    overflow: hidden;
+    border-radius: calc(16 * var(--rem)) calc(16 * var(--rem)) 0 0;
+    background: #f2f2f2;
+  }
+
+  #HomeRiders-{{ section.id }}.home-riders--articles .home-riders__photo img,
+  #HomeRiders-{{ section.id }}.home-riders--articles .home-riders__photo-ph {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #HomeRiders-{{ section.id }}.home-riders--articles .home-riders__photo-ph {
+    background: #d9d9d9;
+  }
+
+  #HomeRiders-{{ section.id }}.home-riders--articles .home-riders__meta {
+    padding: calc(16 * var(--rem));
+    border-radius: 0 0 calc(16 * var(--rem)) calc(16 * var(--rem));
+    background: #ffffff;
+  }
+
+  #HomeRiders-{{ section.id }}.home-riders--articles .home-riders__headline {
+    margin: 0;
+    color: #000000;
+    font-size: calc(14 * var(--rem));
+    font-weight: 600;
+    line-height: calc(18 * var(--rem));
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  #HomeRiders-{{ section.id }}.home-riders--articles .home-riders__date {
+    display: block;
+    margin-top: calc(8 * var(--rem));
+    color: #999999;
+    font-size: calc(12 * var(--rem));
+    font-weight: 400;
+    line-height: calc(16 * var(--rem));
+  }
+
+  @media screen and (max-width: 768px) {
+    #HomeRiders-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 88 }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88 }} * var(--rem));
+    }
+
+    #HomeRiders-{{ section.id }} .home-riders__shell {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 0 calc(40 * var(--rem));
+      box-sizing: border-box;
+    }
+
+    #HomeRiders-{{ section.id }} .home-riders__nav {
+      display: none;
+    }
+
+    #HomeRiders-{{ section.id }} .home-riders__card {
+      flex-basis: 100%;
+    }
+
+    #HomeRiders-{{ section.id }} .home-riders__face {
+      grid-template-columns: calc(80 * var(--rem)) minmax(0, 1fr);
+      gap: calc(16 * var(--rem));
+      padding: calc(28 * var(--rem));
+    }
+
+    #HomeRiders-{{ section.id }} .home-riders__avatar {
+      width: calc(80 * var(--rem));
+      height: calc(80 * var(--rem));
+    }
+
+    #HomeRiders-{{ section.id }} .home-riders__quote {
+      font-size: calc(22 * var(--rem));
+      line-height: calc(32 * var(--rem));
+      -webkit-line-clamp: 5;
+    }
+
+    #HomeRiders-{{ section.id }} .home-riders__author {
+      margin-top: calc(12 * var(--rem));
+      font-size: calc(20 * var(--rem));
+      line-height: calc(28 * var(--rem));
+    }
+
+    #HomeRiders-{{ section.id }} .home-riders__card--video .home-riders__play {
+      top: auto;
+      right: calc(16 * var(--rem));
+      bottom: calc(16 * var(--rem));
+      left: auto;
+      width: calc(48 * var(--rem));
+      height: calc(48 * var(--rem));
+      color: #ffffff;
+      background: rgb(0 0 0 / 40%);
+      transform: none;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #HomeRiders-{{ section.id }} .home-riders__player iframe,
+    #HomeRiders-{{ section.id }} .home-riders__player video {
+      pointer-events: none;
+    }
+
+    #HomeRiders-{{ section.id }}.home-riders--articles .home-riders__viewport {
+      padding: calc(24 * var(--rem)) calc(24 * var(--rem)) calc(48 * var(--rem));
+      margin: calc(-24 * var(--rem)) calc(-24 * var(--rem)) calc(-48 * var(--rem));
+      scroll-padding-inline: calc(24 * var(--rem));
+    }
+
+    #HomeRiders-{{ section.id }}.home-riders--articles .home-riders__card {
+      flex-basis: 84%;
+    }
+
+    #HomeRiders-{{ section.id }}.home-riders--articles .home-riders__headline {
+      font-size: calc(22 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #HomeRiders-{{ section.id }}.home-riders--articles .home-riders__date {
+      margin-top: calc(12 * var(--rem));
+      font-size: calc(20 * var(--rem));
+      line-height: calc(28 * var(--rem));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #HomeRiders-{{ section.id }} .home-riders__viewport {
+      scroll-behavior: auto;
+    }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign riders_layout = section.settings.layout | default: 'stories'
+  assign news_blog = section.settings.blog
+  assign post_limit = section.settings.post_limit | default: 8
+  assign riders_count = section.blocks.size
+  if riders_layout == 'articles'
+    assign riders_count = 0
+    if news_blog != blank
+      assign riders_count = news_blog.articles_count
+      if riders_count > post_limit
+        assign riders_count = post_limit
+      endif
+    endif
+  endif
+-%}
+<div id="HomeRiders-{{ section.id }}" class="home-riders{% if riders_layout == 'articles' %} home-riders--articles{% endif %}">
+  <div class="home-riders__shell">
+    <div class="home-riders__head">
+      {%- if section.settings.title != blank -%}
+        <h2 class="home-riders__title aotos-section-title">{{ section.settings.title | escape }}</h2>
+      {%- endif -%}
+      {%- if riders_count > 1 -%}
+        <div class="home-riders__nav">
+          <button type="button" class="home-riders__arrow" data-riders-prev aria-label="Previous">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M14.5 5.5 8 12l6.5 6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+          <button type="button" class="home-riders__arrow" data-riders-next aria-label="Next">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M9.5 5.5 16 12l-6.5 6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if riders_layout == 'articles' -%}
+      {%- if news_blog != blank -%}
+        {%- if riders_count > 0 -%}
+        <div class="home-riders__viewport" data-riders-viewport>
+          <div class="home-riders__track">
+            {%- for article in news_blog.articles limit: post_limit -%}
+              <a class="home-riders__card home-riders__card--article" href="{{ article.url }}">
+                <div class="home-riders__photo">
+                  {%- if article.image != blank -%}
+                    <img
+                      src="{{ article.image | image_url: width: 560 }}"
+                      srcset="{{ article.image | image_url: width: 360 }} 360w, {{ article.image | image_url: width: 560 }} 560w, {{ article.image | image_url: width: 800 }} 800w"
+                      sizes="(max-width: 768px) 84vw, 260px"
+                      alt="{{ article.image.alt | default: article.title | escape }}"
+                      width="560"
+                      height="280"
+                      loading="lazy"
+                    >
+                  {%- else -%}
+                    <span class="home-riders__photo-ph"></span>
+                  {%- endif -%}
+                </div>
+                <div class="home-riders__meta">
+                  <h3 class="home-riders__headline">{{ article.title | escape }}</h3>
+                  {%- if section.settings.show_date -%}
+                    <time class="home-riders__date" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: section.settings.date_format }}</time>
+                  {%- endif -%}
+                </div>
+              </a>
+            {%- endfor -%}
+          </div>
+        </div>
+        {%- if riders_count > 1 -%}
+          <div class="home-riders__dots" data-riders-dots></div>
+        {%- endif -%}
+        {%- endif -%}
+      {%- endif -%}
+    {%- elsif section.blocks.size > 0 -%}
+      <div class="home-riders__viewport" data-riders-viewport>
+        <div class="home-riders__track">
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign video_source = block.settings.video_source | default: 'youtube'
+              assign video_id = block.settings.video_url.id
+              assign has_youtube = false
+              if video_source == 'youtube'
+                if video_id != blank
+                  assign has_youtube = true
+                endif
+              endif
+              assign has_file = false
+              if video_source == 'shopify'
+                if block.settings.video != blank
+                  assign has_file = true
+                endif
+              endif
+              assign has_video = false
+              if has_youtube
+                assign has_video = true
+              endif
+              if has_file
+                assign has_video = true
+              endif
+              assign poster = block.settings.poster
+            -%}
+            <article class="home-riders__card{% if has_video %} home-riders__card--video{% endif %}" {{ block.shopify_attributes }}>
+              {%- if poster != blank -%}
+                <img
+                  class="home-riders__poster"
+                  src="{{ poster | image_url: width: 540 }}"
+                  srcset="{{ poster | image_url: width: 360 }} 360w, {{ poster | image_url: width: 540 }} 540w, {{ poster | image_url: width: 720 }} 720w"
+                  sizes="(max-width: 768px) 86vw, 360px"
+                  alt="{{ block.settings.poster_alt | escape }}"
+                  width="540"
+                  height="{{ 540 | divided_by: poster.aspect_ratio | round }}"
+                  loading="lazy"
+                >
+              {%- elsif has_youtube -%}
+                <img
+                  class="home-riders__poster"
+                  src="https://i.ytimg.com/vi/{{ video_id }}/hqdefault.jpg"
+                  alt="{{ block.settings.poster_alt | escape }}"
+                  width="480"
+                  height="360"
+                  loading="lazy"
+                >
+              {%- endif -%}
+
+              <div class="home-riders__face">
+                {%- if block.settings.avatar != blank -%}
+                  <img
+                    class="home-riders__avatar"
+                    src="{{ block.settings.avatar | image_url: width: 160 }}"
+                    alt="{{ block.settings.author | escape }}"
+                    width="80"
+                    height="80"
+                    loading="lazy"
+                  >
+                {%- else -%}
+                  <span class="home-riders__avatar home-riders__avatar--ph">{{ block.settings.author | slice: 0, 1 | upcase }}</span>
+                {%- endif -%}
+                <div>
+                  {%- if block.settings.quote != blank -%}
+                    <p class="home-riders__quote">{{ block.settings.quote | escape }}</p>
+                  {%- endif -%}
+                  {%- if block.settings.author != blank -%}
+                    <span class="home-riders__author">{{ block.settings.author | escape }}</span>
+                  {%- endif -%}
+                </div>
+              </div>
+
+              {%- if has_video -%}
+                <button type="button" class="home-riders__play" data-riders-play aria-label="{{ block.settings.play_label | default: 'Play video' | escape }}">
+                  {{- 'icon-play.svg' | inline_asset_content -}}
+                </button>
+                <div
+                  class="home-riders__player"
+                  data-riders-player
+                  data-video-type="{% if has_youtube %}youtube{% else %}shopify{% endif %}"
+                  {% if has_youtube %}
+                    data-video-id="{{ video_id | escape }}"
+                  {% endif %}
+                >
+                  {%- if has_file -%}
+                    {{ block.settings.video | video_tag: controls: true, playsinline: true, preload: 'none' }}
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            </article>
+          {%- endfor -%}
+        </div>
+      </div>
+      {%- if section.blocks.size > 1 -%}
+        <div class="home-riders__dots" data-riders-dots></div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById('HomeRiders-{{ section.id }}');
+    if (!root || root.dataset.bound === 'true') return;
+    root.dataset.bound = 'true';
+
+    var viewport = root.querySelector('[data-riders-viewport]');
+    var prev = root.querySelector('[data-riders-prev]');
+    var next = root.querySelector('[data-riders-next]');
+    var dots = root.querySelector('[data-riders-dots]');
+    if (!viewport) return;
+
+    var cards = viewport.querySelectorAll('.home-riders__card');
+
+    function step() {
+      var card = cards[0];
+      if (!card) return viewport.clientWidth;
+      var styles = window.getComputedStyle(viewport.querySelector('.home-riders__track'));
+      var gap = parseFloat(styles.columnGap || styles.gap) || 0;
+      return card.getBoundingClientRect().width + gap;
+    }
+
+    function nearestIndex() {
+      var amount = step();
+      if (!amount) return 0;
+      return Math.round(viewport.scrollLeft / amount);
+    }
+
+    function go(index) {
+      var max = Math.max(cards.length - 1, 0);
+      var nextIndex = Math.min(Math.max(index, 0), max);
+      var left = step() * nextIndex;
+      stopAll(null);
+      requestAnimationFrame(function () {
+        viewport.scrollTo({ left: left, behavior: 'smooth' });
+      });
+    }
+
+    function paint() {
+      var index = nearestIndex();
+      var max = viewport.scrollWidth - viewport.clientWidth - 2;
+      if (prev) prev.disabled = viewport.scrollLeft <= 2;
+      if (next) next.disabled = viewport.scrollLeft >= max;
+      if (!dots) return;
+      dots.querySelectorAll('.home-riders__dot').forEach(function (dot, i) {
+        dot.classList.toggle('is-active', i === index);
+      });
+    }
+
+    if (dots) {
+      cards.forEach(function (_, i) {
+        var dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'home-riders__dot';
+        dot.setAttribute('aria-label', 'Show story ' + (i + 1));
+        dot.addEventListener('click', function () { go(i); });
+        dots.appendChild(dot);
+      });
+    }
+
+    if (prev) prev.addEventListener('click', function () { go(nearestIndex() - 1); });
+    if (next) next.addEventListener('click', function () { go(nearestIndex() + 1); });
+    var settleTimer = 0;
+    viewport.addEventListener('scroll', function () {
+      paint();
+      window.clearTimeout(settleTimer);
+      settleTimer = window.setTimeout(function () {
+        var playing = root.querySelector('.home-riders__card.is-playing');
+        if (!playing) return;
+        if (cards[nearestIndex()] === playing) return;
+        var left = viewport.scrollLeft;
+        stopAll(null);
+        if (viewport.scrollLeft !== left) viewport.scrollLeft = left;
+      }, 140);
+    }, { passive: true });
+
+    function stopItem(card) {
+      if (!card) return;
+      card.classList.remove('is-playing');
+      var player = card.querySelector('[data-riders-player]');
+      if (!player) return;
+      if (player.dataset.videoType === 'youtube') {
+        player.querySelectorAll('iframe').forEach(function (frame) { frame.remove(); });
+      } else {
+        var video = player.querySelector('video');
+        if (video) {
+          video.pause();
+        }
+      }
+    }
+
+    function stopAll(except) {
+      root.querySelectorAll('.home-riders__card.is-playing').forEach(function (card) {
+        if (card !== except) stopItem(card);
+      });
+    }
+
+    root.addEventListener('click', function (event) {
+      var button = event.target.closest('[data-riders-play]');
+      if (!button || !root.contains(button)) return;
+      var card = button.closest('.home-riders__card');
+      var player = card && card.querySelector('[data-riders-player]');
+      if (!card || !player || card.classList.contains('is-playing')) return;
+      stopAll(card);
+      if (player.dataset.videoType === 'youtube' && player.dataset.videoId) {
+        var frame = document.createElement('iframe');
+        frame.src = 'https://www.youtube.com/embed/' + player.dataset.videoId + '?autoplay=1&rel=0';
+        frame.allow = 'autoplay; encrypted-media; fullscreen';
+        frame.allowFullscreen = true;
+        frame.title = button.getAttribute('aria-label') || 'Video';
+        player.appendChild(frame);
+      } else {
+        var video = player.querySelector('video');
+        if (video) video.play();
+      }
+      card.classList.add('is-playing');
+    });
+
+    paint();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "骑手视角",
+  "tag": "section",
+  "class": "section-home-rider-stories",
+  "max_blocks": 16,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "标题",
+      "default": "From the Rider’s Perspective"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "布局",
+      "options": [
+        { "value": "stories", "label": "骑手评价" },
+        { "value": "articles", "label": "文章列表" }
+      ],
+      "default": "stories"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "博客"
+    },
+    {
+      "type": "range",
+      "id": "post_limit",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "label": "文章数量",
+      "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "显示日期",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "date_format",
+      "label": "日期格式",
+      "default": "%B %d, %Y"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "电脑端上边距",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "电脑端下边距",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "手机端上边距",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "手机端下边距",
+      "default": 88
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "评价",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "头像"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "评价",
+          "default": "\"AOTOS changed my daily commute.\""
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "作者",
+          "default": "Alex T."
+        },
+        {
+          "type": "select",
+          "id": "video_source",
+          "label": "视频来源",
+          "options": [
+            { "value": "youtube", "label": "YouTube" },
+            { "value": "shopify", "label": "上传视频" }
+          ],
+          "default": "youtube"
+        },
+        {
+          "type": "video_url",
+          "id": "video_url",
+          "label": "YouTube 链接",
+          "accept": ["youtube"],
+          "info": "视频来源选 YouTube 时使用"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "上传视频"
+        },
+        {
+          "type": "image_picker",
+          "id": "poster",
+          "label": "封面"
+        },
+        {
+          "type": "text",
+          "id": "poster_alt",
+          "label": "封面替代文字",
+          "default": "AOTOS rider story"
+        },
+        {
+          "type": "text",
+          "id": "play_label",
+          "label": "播放按钮文字",
+          "default": "Play video"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "骑手视角"
+    }
+  ]
+}
+{% endschema %}
