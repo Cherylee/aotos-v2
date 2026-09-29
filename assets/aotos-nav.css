@@ -283,6 +283,29 @@
   transform-origin: center;
 }
 
+.section-header .aotos-nav__tools .header__icon--cart {
+  position: relative;
+  margin-right: 0;
+}
+
+.section-header .aotos-nav__tools .cart-count-bubble {
+  top: calc(-4 * var(--rem));
+  right: auto;
+  bottom: auto;
+  left: calc(9 * var(--rem));
+  width: calc(12 * var(--rem));
+  height: calc(12 * var(--rem));
+  font-size: calc(8 * var(--rem));
+  line-height: 1;
+}
+
+.section-header .aotos-nav__tools .cart-count-bubble span {
+  width: auto;
+  height: auto;
+  flex: none;
+  transform: none;
+}
+
 @media screen and (min-width: 769px) {
   .section-header .header {
     grid-template-areas: 'heading navigation icons';
@@ -364,7 +387,7 @@
     grid-template-areas: 'navigation heading icons';
     grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: center;
-    height: calc(60 * var(--rem));
+    height: calc(102 * var(--rem));
     min-height: 0;
     padding: 0 calc(40 * var(--rem));
   }
@@ -376,7 +399,7 @@
   }
 
   .section-header .header__heading-logo {
-    height: calc(48 * var(--rem));
+    height: calc(66 * var(--rem));
   }
 
   .aotos-nav {
@@ -399,9 +422,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: calc(5 * var(--rem));
-    width: calc(28 * var(--rem));
-    height: calc(28 * var(--rem));
+    gap: calc(8 * var(--rem));
+    width: calc(48 * var(--rem));
+    height: calc(48 * var(--rem));
     padding: 0;
     border: 0;
     background: transparent;
@@ -410,8 +433,8 @@
 
   .aotos-nav__toggle-bar {
     display: block;
-    width: calc(28 * var(--rem));
-    height: calc(3 * var(--rem));
+    width: calc(30 * var(--rem));
+    height: calc(4 * var(--rem));
     background: #fff;
     transition: transform 0.2s ease, opacity 0.2s ease;
   }
@@ -664,7 +687,7 @@
   }
 
   .section-header .aotos-nav__tools {
-    height: calc(40 * var(--rem));
+    height: calc(60 * var(--rem));
     gap: calc(18 * var(--rem));
     padding: 0 calc(12 * var(--rem));
     overflow: visible;
@@ -699,6 +722,20 @@
     height: calc(28 * var(--rem));
     transform: scale(2.1);
     transform-origin: center;
+  }
+
+  .section-header .aotos-nav__tools .cart-count-bubble {
+    top: calc(-4 * var(--rem));
+    left: calc(18 * var(--rem));
+    width: calc(22 * var(--rem));
+    height: calc(22 * var(--rem));
+    font-size: calc(14 * var(--rem));
+    color: #fff;
+    background-color: var(--aotos-theme-color, #ff6501);
+  }
+
+  .section-header .aotos-nav__tools .header__icon--cart .cart-count-bubble span {
+    color: #fff;
   }
 }
 

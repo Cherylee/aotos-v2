@@ -1,8 +1,3 @@
-.cart {
-  position: relative;
-  display: block;
-}
-
 .cart__empty-text,
 .is-empty .cart__contents,
 cart-items.is-empty .title-wrapper-with-link,
@@ -155,14 +150,6 @@ cart-items {
   width: 100%;
 }
 
-.cart__ctas > * + * {
-  margin-top: 1rem;
-}
-
-.cart__update-button {
-  margin-bottom: 1rem;
-}
-
 .cart__dynamic-checkout-buttons {
   max-width: 36rem;
   margin: 0 auto;
@@ -180,12 +167,6 @@ cart-items {
   margin-top: 1rem;
 }
 
-.cart-note__label {
-  display: inline-block;
-  margin-bottom: 1rem;
-  line-height: calc(1 + 1 / var(--font-body-scale));
-}
-
 .tax-note {
   margin: 2.2rem 0 1.6rem auto;
   text-align: center;
@@ -200,16 +181,51 @@ cart-items {
   text-align: center;
 }
 
+#main-cart-footer .cart__ctas {
+  --aotos-cta-height: clamp(25px, calc(var(--aotos-button-height, 40) * var(--rem)), 55px);
+  --aotos-cta-radius: var(--buttons-radius, calc(8 * var(--rem)));
+}
+
+#main-cart-footer .cart__checkout-button {
+  height: var(--aotos-cta-height);
+  min-height: var(--aotos-cta-height);
+  padding-top: 0;
+  padding-bottom: 0;
+  border-radius: var(--aotos-cta-radius);
+}
+
+#main-cart-footer .cart__dynamic-checkout-buttons,
+#main-cart-footer .cart__dynamic-checkout-buttons .dynamic-checkout__content,
+#main-cart-footer .cart__dynamic-checkout-buttons shopify-accelerated-checkout-cart,
+#main-cart-footer .cart__dynamic-checkout-buttons shopify-paypal-button {
+  display: block;
+  height: var(--aotos-cta-height);
+  --shopify-accelerated-checkout-button-block-size: var(--aotos-cta-height);
+  --shopify-accelerated-checkout-button-border-radius: var(--aotos-cta-radius);
+}
+
+@media screen and (max-width: 768px) {
+  #main-cart-footer .cart__ctas,
+  #main-cart-footer .cart__dynamic-checkout-buttons {
+    width: calc(520 * var(--rem));
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #main-cart-footer .cart__ctas {
+    --aotos-cta-height: clamp(25px, calc(var(--aotos-button-height-mobile, 80) * var(--rem)), 55px);
+  }
+
+  #main-cart-footer .cart__checkout-button {
+    width: 100%;
+    max-width: none;
+    font-size: calc(var(--aotos-button-font-size-mobile, 22) * var(--rem));
+    font-weight: var(--aotos-button-font-weight, 600);
+  }
+}
+
 @media screen and (min-width: 750px) {
-  .cart-note {
-    max-width: 35rem;
-  }
-
-  .cart__update-button {
-    margin-bottom: 0;
-    margin-right: 0.8rem;
-  }
-
   .tax-note {
     margin-bottom: 2.2rem;
     text-align: right;
@@ -217,10 +233,5 @@ cart-items {
 
   [data-shopify-buttoncontainer] {
     justify-content: flex-end;
-  }
-
-  .cart__ctas {
-    display: flex;
-    gap: 1rem;
   }
 }

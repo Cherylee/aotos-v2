@@ -87,7 +87,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: calc(18 * var(--rem));
+  gap: calc(12 * var(--rem));
 }
 
 .aotos-footer__social {
@@ -176,8 +176,8 @@
   border-radius: 999px;
   background: var(--aotos-theme-color, #ff6501);
   color: #fff;
-  font-size: calc(12 * var(--rem));
-  font-weight: 500;
+  font-size: calc(var(--aotos-button-font-size, 14) * var(--rem));
+  font-weight: var(--aotos-button-font-weight, 600);
   line-height: 1;
   cursor: pointer;
 }
@@ -330,6 +330,9 @@
     font-size: calc(28 * var(--rem));
     cursor: pointer;
   }
+  .aotos-footer__aside {
+    gap: calc(40 * var(--rem));
+  }
 
   .aotos-footer__heading::after {
     content: '';
@@ -357,9 +360,14 @@
     width: calc(38 * var(--rem));
     height: calc(38 * var(--rem));
   }
+  .aotos-footer__field button {
+    height: calc(var(--aotos-button-height-mobile, 80) * var(--rem));
+    font-size: calc(var(--aotos-button-font-size-mobile, 22) * var(--rem));
+    padding: 0 calc(60 * var(--rem));
+  }
+
   .aotos-footer__links a,
   .aotos-footer__field input,
-  .aotos-footer__field button,
   .aotos-footer__consent,
   .aotos-footer__note,
   .aotos-footer__message,
@@ -379,7 +387,7 @@
 
   .aotos-footer__field input,
   .aotos-footer__field button {
-    height: calc(var(--aotos-button-height-mobile, 60) * var(--rem));
+    height: calc(var(--aotos-button-height-mobile, 80) * var(--rem));
   }
 
   .aotos-footer__consent {

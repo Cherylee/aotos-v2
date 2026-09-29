@@ -75,6 +75,38 @@ alwaysApply: true
 - 灰色辅助字 `#999999`
 - 不要写死 `32px` / `40px` 当标题字号
 
+## 按钮（全局，必须统一）
+
+后台「主题」里已有一套，**新按钮不要再写死高度、圆角、字号、字重**。用 class `button`，或直接用下面的 token。
+
+| 项 | Token | 默认 |
+|----|--------|------|
+| 高度 PC | `--aotos-button-height` | 40 |
+| 高度手机 | `--aotos-button-height-mobile` | 80 |
+| 圆角 | `--buttons-radius`（数值 `--aotos-button-radius`） | 8 |
+| 字号 PC | `--aotos-button-font-size` | 14 |
+| 字号手机 | `--aotos-button-font-size-mobile` | 22 |
+| 字重 | `--aotos-button-font-weight` | 600 |
+| 颜色 | `--aotos-theme-color` | #ff6501 |
+
+```css
+.example-button {
+  min-height: calc(var(--aotos-button-height, 40) * var(--rem));
+  border-radius: var(--buttons-radius, calc(8 * var(--rem)));
+  font-size: calc(var(--aotos-button-font-size, 14) * var(--rem));
+  font-weight: var(--aotos-button-font-weight, 600);
+  background: var(--aotos-theme-color, #ff6501);
+  color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .example-button {
+    min-height: calc(var(--aotos-button-height-mobile, 80) * var(--rem));
+    font-size: calc(var(--aotos-button-font-size-mobile, 22) * var(--rem));
+  }
+}
+```
+
 ### 手机（`max-width: 768px`）
 
 - 内容宽 100%，左右 padding **40**

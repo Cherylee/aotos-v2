@@ -154,6 +154,9 @@
         --aotos-button-height: {{ settings.button_height }};
         --aotos-button-height-mobile: {{ settings.button_height_mobile }};
         --aotos-button-radius: {{ settings.button_radius }};
+        --aotos-button-font-size: {{ settings.button_font_size }};
+        --aotos-button-font-size-mobile: {{ settings.button_font_size_mobile }};
+        --aotos-button-font-weight: {{ settings.button_font_weight }};
         --buttons-radius: calc({{ settings.button_radius }} * var(--rem));
         --buttons-radius-outset: {% if settings.button_radius > 0 %}calc({{ settings.button_radius }} * var(--rem) + var(--buttons-border-width)){% else %}0px{% endif %};
         --buttons-border-width: {% if settings.buttons_border_opacity > 0 %}{{ settings.buttons_border_thickness }}{% else %}0{% endif %}px;

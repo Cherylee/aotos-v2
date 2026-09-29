@@ -1,27 +1,45 @@
 {{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
 
 {%- if section.settings.image_height == 'adapt' and section.settings.image != blank or section.settings.image_height == 'adapt' and section.settings.image_mobile != blank -%}
-  {%- liquid
-    assign adapt_img_pc = section.settings.image | default: section.settings.image_mobile
-    assign adapt_img_mob = section.settings.image_mobile | default: adapt_img_pc
-  -%}
   {%- style -%}
-    @media screen and (max-width: 749px) {
-      #Banner-{{ section.id }}::before,
-      #Banner-{{ section.id }} .banner__media::before,
-      #Banner-{{ section.id }}:not(.banner--mobile-bottom) .banner__content::before {
-        padding-bottom: {{ 1 | divided_by: adapt_img_mob.aspect_ratio | times: 100 }}%;
-        content: '';
-        display: block;
-      }
+    #Banner-{{ section.id }}.banner--adapt {
+      display: block;
+      height: auto;
     }
 
-    @media screen and (min-width: 750px) {
-      #Banner-{{ section.id }}::before,
-      #Banner-{{ section.id }} .banner__media::before {
-        padding-bottom: {{ 1 | divided_by: adapt_img_pc.aspect_ratio | times: 100 }}%;
-        content: '';
-        display: block;
+    #Banner-{{ section.id }}.banner--adapt .banner__media {
+      position: relative;
+      width: 100%;
+      height: auto;
+    }
+
+    #Banner-{{ section.id }}.banner--adapt .banner__media.media > picture,
+    #Banner-{{ section.id }}.banner--adapt .banner__media.media > img {
+      position: static;
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: none;
+    }
+
+    #Banner-{{ section.id }}.banner--adapt .banner__media.media > picture img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: unset;
+    }
+
+    #Banner-{{ section.id }}.banner--adapt .banner__content {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+    }
+
+    @media screen and (max-width: 749px) {
+      #Banner-{{ section.id }}.banner--adapt.banner--mobile-bottom .banner__content {
+        position: relative;
+        inset: auto;
+        height: auto;
       }
     }
   {%- endstyle -%}

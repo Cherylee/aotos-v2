@@ -62,7 +62,7 @@
         "unit": "px",
         "label": "按钮高度（手机）",
         "info": "750 设计稿数值，768 以下使用",
-        "default": 60
+        "default": 80
       },
       {
         "type": "range",
@@ -74,6 +74,41 @@
         "label": "按钮圆角",
         "info": "按页面宽度等比，所有按钮圆角弧度一致，不随按钮本身变宽而变圆",
         "default": 8
+      },
+      {
+        "type": "range",
+        "id": "button_font_size",
+        "min": 10,
+        "max": 32,
+        "step": 1,
+        "unit": "px",
+        "label": "按钮字号（电脑）",
+        "info": "1440 设计稿数值，所有按钮共用",
+        "default": 14
+      },
+      {
+        "type": "range",
+        "id": "button_font_size_mobile",
+        "min": 12,
+        "max": 48,
+        "step": 1,
+        "unit": "px",
+        "label": "按钮字号（手机）",
+        "info": "750 设计稿数值，768 以下使用",
+        "default": 22
+      },
+      {
+        "type": "select",
+        "id": "button_font_weight",
+        "label": "按钮字重",
+        "info": "电脑和手机共用",
+        "options": [
+          { "value": "400", "label": "400" },
+          { "value": "500", "label": "500" },
+          { "value": "600", "label": "600" },
+          { "value": "700", "label": "700" }
+        ],
+        "default": "600"
       }
     ]
   },

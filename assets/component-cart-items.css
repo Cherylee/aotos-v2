@@ -216,12 +216,6 @@ cart-remove-button .icon-remove {
 }
 
 @media screen and (max-width: 749px) {
-  .cart-items,
-  .cart-items thead,
-  .cart-items tbody {
-    display: block;
-    width: 100%;
-  }
 
   .cart-items thead tr {
     display: flex;
@@ -347,5 +341,27 @@ cart-remove-button .icon-remove {
 @media screen and (max-width: 989px) {
   .cart-items .quantity-popover__info-button {
     padding-left: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  cart-items .quantity {
+    width: calc(180 * var(--rem));
+    min-height: calc(56 * var(--rem));
+    height: calc(56 * var(--rem));
+  }
+
+  cart-items .quantity__button {
+    width: calc(52 * var(--rem));
+  }
+
+  cart-items .quantity__button .svg-wrapper {
+    width: calc(16 * var(--rem));
+    height: calc(16 * var(--rem));
+  }
+
+  cart-items .quantity__input {
+    font-size: calc(22 * var(--rem));
+    padding: 0;
   }
 }

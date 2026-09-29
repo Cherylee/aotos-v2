@@ -7,6 +7,7 @@
 
 {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'aotos-cart-drawer.css' | asset_url | stylesheet_tag }}
 
 <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
@@ -62,7 +63,9 @@
         </div>
       {%- endif -%}
       <div class="drawer__header">
-        <h2 class="drawer__heading">{{ 'sections.cart.title' | t }}</h2>
+        <h2 class="drawer__heading">
+          <a href="{{ routes.cart_url }}">My Cart</a>
+        </h2>
         <button
           class="drawer__close"
           type="button"
@@ -170,15 +173,10 @@
                           -%}
                             <dl>
                               {%- if item.product.has_only_default_variant == false -%}
-                                {%- for option in item.options_with_values -%}
-                                  <div class="product-option">
-                                    <dt>{{ option.name }}:</dt>
-                                    <dd>
-                                      {{ option.value -}}
-                                      {%- unless forloop.last %}, {% endunless %}
-                                    </dd>
-                                  </div>
-                                {%- endfor -%}
+                                <div class="product-option cart-item__model">
+                                  <dt>Model:</dt>
+                                  <dd>{{ item.variant.title | escape }}</dd>
+                                </div>
                               {%- endif -%}
 
                               {%- for property in item.properties -%}
@@ -494,7 +492,7 @@
           </div>
 
           <div class="totals" role="status">
-            <h2 class="totals__total">{{ 'sections.cart.estimated_total' | t }}</h2>
+            <h2 class="totals__total">Total</h2>
             <p class="totals__total-value">{{ cart.total_price | money_with_currency }}</p>
           </div>
 
@@ -541,6 +539,55 @@
 
         <!-- CTAs -->
 
+        <ul class="cart-drawer__trust" role="list">
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/></svg>
+            Free Shipping
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10l2 3v7H4z"/><path d="M8 7V5h6v2M7 14h4"/></svg>
+            30-Day Free Returns
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v6c0 4.2-2.8 7.2-7 8-4.2-.8-7-3.8-7-8V6z"/></svg>
+            1-Year Warranty
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0"/><path d="M4 13v4h3v-4zM17 13v4h3v-4zM9 19h6"/></svg>
+            Customer Support
+          </li>
+        </ul>
+
+        {%- if settings.payment_icons != blank -%}
+          <ul class="cart-drawer__pay" role="list">
+            {%- assign payment_list = settings.payment_icons | replace: '，', ',' | split: ',' -%}
+            {%- for raw_name in payment_list -%}
+              {%- assign pay_name = raw_name | strip | downcase -%}
+              {%- case pay_name -%}
+                {%- when 'mastercard', 'master-card', 'master_card' -%}
+                  {%- assign pay_name = 'master' -%}
+                {%- when 'amex', 'americanexpress', 'american-express', 'american express' -%}
+                  {%- assign pay_name = 'american_express' -%}
+                {%- when 'diners', 'dinersclub', 'diners-club' -%}
+                  {%- assign pay_name = 'diners_club' -%}
+                {%- when 'applepay', 'apple-pay', 'apple pay' -%}
+                  {%- assign pay_name = 'apple_pay' -%}
+                {%- when 'googlepay', 'google-pay', 'google pay', 'gpay' -%}
+                  {%- assign pay_name = 'google_pay' -%}
+                {%- when 'shoppay', 'shop-pay', 'shop pay', 'shop_pay' -%}
+                  {%- assign pay_name = 'shopify_pay' -%}
+                {%- when 'union pay', 'union-pay', 'union_pay' -%}
+                  {%- assign pay_name = 'unionpay' -%}
+              {%- endcase -%}
+              {%- if pay_name != blank -%}
+                <li>{{ pay_name | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        <p class="cart-drawer__lock">Klarna &amp; Afterpay available at checkout</p>
+
         <div class="cart__ctas" {{ block.shopify_attributes }}>
           <button
             type="submit"
@@ -552,8 +599,14 @@
               disabled
             {% endif %}
           >
-            {{ 'sections.cart.checkout' | t }}
+            Check Out
           </button>
+          {%- if additional_checkout_buttons -%}
+            <div class="cart-drawer__dynamic">
+              {{ content_for_additional_checkout_buttons }}
+            </div>
+            <p class="cart-drawer__paypal-note">Enjoy fast, secure checkout with PayPal</p>
+          {%- endif -%}
         </div>
       </div>
     </div>
