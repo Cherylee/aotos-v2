@@ -1,0 +1,288 @@
+{%- style -%}
+  #HomeTrust-{{ section.id }} {
+    padding-top: calc({{ section.settings.padding_top | default: 24 }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 24 }} * var(--rem));
+  }
+
+  #HomeTrust-{{ section.id }} .home-trust__shell {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  #HomeTrust-{{ section.id }} .home-trust__card {
+    display: grid;
+    grid-template-columns: repeat({{ section.blocks.size | at_least: 1 }}, minmax(0, 1fr));
+    align-items: center;
+    background: #ffffff;
+    border-radius: calc(10 * var(--rem));
+    box-shadow: 0 calc(8 * var(--rem)) calc(28 * var(--rem)) rgb(0 0 0 / 8%);
+    border: 1px solid #e6e6e6;
+  }
+
+  #HomeTrust-{{ section.id }} .home-trust__item {
+    display: flex;
+    align-items: center;
+    gap: calc(14 * var(--rem));
+    min-width: 0;
+    padding: calc(22 * var(--rem)) calc(24 * var(--rem));
+    position: relative;
+  }
+
+  #HomeTrust-{{ section.id }} .home-trust__item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 1px;
+    height: calc(36 * var(--rem));
+    background: #e6e6e6;
+    transform: translateY(-50%);
+  }
+
+  #HomeTrust-{{ section.id }} .home-trust__icon {
+    flex: 0 0 auto;
+    width: calc(40 * var(--rem));
+    height: calc(40 * var(--rem));
+    border-radius: calc(8 * var(--rem));
+    background: #d9d9d9;
+    overflow: hidden;
+  }
+
+  #HomeTrust-{{ section.id }} .home-trust__icon img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  #HomeTrust-{{ section.id }} .home-trust__copy {
+    min-width: 0;
+  }
+
+  #HomeTrust-{{ section.id }} .home-trust__title {
+    margin: 0;
+    color: #000000;
+    font-size: calc(14 * var(--rem));
+    font-weight: 700;
+    line-height: calc(18 * var(--rem));
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  #HomeTrust-{{ section.id }} .home-trust__text {
+    margin: calc(4 * var(--rem)) 0 0;
+    color: #999999;
+    font-size: calc(12 * var(--rem));
+    font-weight: 400;
+    line-height: calc(16 * var(--rem));
+  }
+
+  @media screen and (max-width: 768px) {
+    #HomeTrust-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 40 }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 40 }} * var(--rem));
+    }
+
+    #HomeTrust-{{ section.id }} .home-trust__shell {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 0 calc(40 * var(--rem));
+      box-sizing: border-box;
+    }
+
+    #HomeTrust-{{ section.id }} .home-trust__card {
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+      border-radius: calc(20 * var(--rem));
+    }
+
+    #HomeTrust-{{ section.id }} .home-trust__item {
+      align-items: center;
+      gap: calc(14 * var(--rem));
+      padding: calc(22 * var(--rem)) calc(16 * var(--rem));
+    }
+
+    #HomeTrust-{{ section.id }} .home-trust__item::after {
+      display: none;
+    }
+
+    #HomeTrust-{{ section.id }} .home-trust__item:nth-child(odd) {
+      box-shadow: inset -1px 0 0 #e6e6e6;
+    }
+
+    #HomeTrust-{{ section.id }} .home-trust__item:nth-child(n + 3) {
+      box-shadow: inset 0 1px 0 #e6e6e6;
+    }
+
+    #HomeTrust-{{ section.id }} .home-trust__item:nth-child(odd):nth-child(n + 3) {
+      box-shadow: inset -1px 0 0 #e6e6e6, inset 0 1px 0 #e6e6e6;
+    }
+
+    #HomeTrust-{{ section.id }} .home-trust__icon {
+      width: calc(64 * var(--rem));
+      height: calc(64 * var(--rem));
+      border-radius: calc(12 * var(--rem));
+    }
+
+    #HomeTrust-{{ section.id }} .home-trust__title {
+      font-size: calc(20 * var(--rem));
+      line-height: calc(28 * var(--rem));
+    }
+
+    #HomeTrust-{{ section.id }} .home-trust__text {
+      margin-top: calc(2 * var(--rem));
+      font-size: calc(18 * var(--rem));
+      line-height: calc(20 * var(--rem));
+    }
+  }
+{%- endstyle -%}
+
+<div id="HomeTrust-{{ section.id }}" class="home-trust">
+  <div class="home-trust__shell">
+    <div class="home-trust__card">
+      {%- for block in section.blocks -%}
+        <div class="home-trust__item" {{ block.shopify_attributes }}>
+          <div class="home-trust__icon">
+            <span class="home-trust__ph" aria-hidden="true"></span>
+            {%- if block.settings.icon != blank -%}
+              <img
+                src="{{ block.settings.icon | image_url: width: 128 }}"
+                srcset="{{ block.settings.icon | image_url: width: 80 }} 80w, {{ block.settings.icon | image_url: width: 128 }} 128w, {{ block.settings.icon | image_url: width: 160 }} 160w"
+                sizes="(max-width: 768px) 64px, 48px"
+                width="128"
+                height="128"
+                alt=""
+                loading="lazy"
+              >
+            {%- endif -%}
+          </div>
+          <div class="home-trust__copy">
+            {%- if block.settings.title != blank -%}
+              <p class="home-trust__title">{{ block.settings.title | escape }}</p>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <p class="home-trust__text">{{ block.settings.text | escape }}</p>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "信任条",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "上边距（PC）",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "下边距（PC）",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "上边距（手机）",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "下边距（手机）",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "条目",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "图标",
+          "info": "不上传时显示灰色占位。"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "标题",
+          "default": "标题"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "说明",
+          "default": "说明文案"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "信任条",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "title": "1-Year Warranty",
+            "text": "With reliable local repair support."
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "title": "Lifetime Support",
+            "text": "Expert help for as long as you ride"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "title": "Local Shipping",
+            "text": "Delivered in 5 Days"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "title": "30-Day Returns",
+            "text": "Easy Returns Guaranteed"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,372 @@
+{%- liquid
+  assign view_count = section.blocks.size
+  if view_count > 3
+    assign view_count = 3
+  endif
+  assign title_font = settings.type_body_font | font_modify: 'weight', '900' | font_modify: 'style', 'italic'
+  if title_font == blank
+    assign title_font = settings.type_body_font | font_modify: 'weight', 'bold' | font_modify: 'style', 'italic'
+  endif
+-%}
+
+{%- style -%}
+  {{ title_font | font_face: font_display: 'swap' }}
+  #HomeViews-{{ section.id }} {
+    padding-top: calc({{ section.settings.padding_top | default: 80 }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80 }} * var(--rem));
+    background: #ffffff;
+  }
+
+  #HomeViews-{{ section.id }} .home-views__shell {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  #HomeViews-{{ section.id }} .home-views__title {
+    margin: 0 0 calc(36 * var(--rem));
+    color: var(--aotos-theme-color, #ff6501);
+    font-family: {{ title_font.family }}, {{ title_font.fallback_families }};
+    font-size: calc(90 * var(--rem));
+    font-style: {{ title_font.style }};
+    font-weight: {{ title_font.weight }};
+    font-synthesis: none;
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  #HomeViews-{{ section.id }} .home-views__stage {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat({{ view_count | at_least: 1 }}, minmax(0, 1fr));
+    align-items: end;
+    gap: calc(16 * var(--rem));
+  }
+
+  #HomeViews-{{ section.id }}.home-views--n3 .home-views__stage {
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.56fr) minmax(0, 0.72fr);
+  }
+
+  #HomeViews-{{ section.id }} .home-views__slide img,
+  #HomeViews-{{ section.id }} .home-views__ph {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  #HomeViews-{{ section.id }} .home-views__ph {
+    aspect-ratio: 1;
+    background: #e6e6e6;
+    border-radius: calc(8 * var(--rem));
+  }
+
+  #HomeViews-{{ section.id }} .home-views__slide.is-center .home-views__ph {
+    aspect-ratio: 16 / 10;
+  }
+
+  #HomeViews-{{ section.id }} .home-views__actions {
+    display: flex;
+    justify-content: center;
+    margin-top: calc(40 * var(--rem));
+  }
+
+  #HomeViews-{{ section.id }} .home-views__arrow {
+    display: none;
+  }
+
+  @media screen and (max-width: 768px) {
+    #HomeViews-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 88 }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88 }} * var(--rem));
+    }
+
+    #HomeViews-{{ section.id }} .home-views__shell {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 0 calc(40 * var(--rem));
+      box-sizing: border-box;
+    }
+
+    #HomeViews-{{ section.id }} .home-views__title {
+      margin-bottom: calc(28 * var(--rem));
+      font-size: calc(74 * var(--rem));
+    }
+
+    #HomeViews-{{ section.id }} .home-views__stage,
+    #HomeViews-{{ section.id }}.home-views--n3 .home-views__stage {
+      display: block;
+    }
+
+    #HomeViews-{{ section.id }} .home-views__slide {
+      display: none;
+      padding: 0 calc(72 * var(--rem));
+      box-sizing: border-box;
+    }
+
+    #HomeViews-{{ section.id }} .home-views__slide.is-active {
+      display: block;
+    }
+
+    #HomeViews-{{ section.id }} .home-views__ph {
+      aspect-ratio: 16 / 10;
+    }
+
+    #HomeViews-{{ section.id }} .home-views__arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 50%;
+      z-index: 1;
+      width: calc(72 * var(--rem));
+      height: calc(72 * var(--rem));
+      margin: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: #f2f2f2;
+      color: #000000;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+
+    #HomeViews-{{ section.id }} .home-views__arrow--prev {
+      left: 0;
+    }
+
+    #HomeViews-{{ section.id }} .home-views__arrow--next {
+      right: 0;
+    }
+
+    #HomeViews-{{ section.id }} .home-views__arrow svg {
+      display: block;
+      width: calc(22 * var(--rem));
+      height: calc(22 * var(--rem));
+    }
+
+    #HomeViews-{{ section.id }} .home-views__actions {
+      margin-top: calc(48 * var(--rem));
+    }
+  }
+
+  @media (hover: hover) {
+    #HomeViews-{{ section.id }} .home-views__arrow:hover {
+      background: #e8e8e8;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #HomeViews-{{ section.id }} .home-views__arrow {
+      transition: none;
+    }
+  }
+{%- endstyle -%}
+
+<div
+  id="HomeViews-{{ section.id }}"
+  class="home-views{% if view_count == 3 %} home-views--n3{% endif %}"
+  data-home-views
+>
+  <div class="home-views__shell">
+    {%- if section.settings.title != blank -%}
+      <h2 class="home-views__title">{{ section.settings.title | escape }}</h2>
+    {%- endif -%}
+
+    {%- if view_count > 0 -%}
+      <div class="home-views__stage">
+        {%- if view_count > 1 -%}
+          <button type="button" class="home-views__arrow home-views__arrow--prev" data-view-prev aria-label="Previous">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M14.5 5.5 8 12l6.5 6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+        {%- endif -%}
+
+        {%- for block in section.blocks limit: 3 -%}
+          {%- liquid
+            assign view_image = block.settings.image
+            assign view_alt = block.settings.image_alt | default: section.settings.title
+            assign is_center = false
+            if view_count == 3 and forloop.index == 2
+              assign is_center = true
+            endif
+            if is_center
+              assign view_w = 1100
+              assign view_sizes = '(max-width: 768px) 70vw, 560px'
+            else
+              assign view_w = 700
+              assign view_sizes = '(max-width: 768px) 70vw, 280px'
+            endif
+          -%}
+          <div
+            class="home-views__slide{% if forloop.first %} is-active{% endif %}{% if is_center %} is-center{% endif %}"
+            data-view-slide
+            {{ block.shopify_attributes }}
+          >
+            {%- if view_image != blank -%}
+              <img
+                src="{{ view_image | image_url: width: view_w }}"
+                srcset="{{ view_image | image_url: width: 400 }} 400w, {{ view_image | image_url: width: 700 }} 700w, {{ view_image | image_url: width: 1000 }} 1000w{% if is_center %}, {{ view_image | image_url: width: 1400 }} 1400w{% endif %}"
+                sizes="{{ view_sizes }}"
+                width="{{ view_w }}"
+                height="{{ view_w | divided_by: view_image.aspect_ratio | round }}"
+                alt="{{ view_alt | escape }}"
+                {% if section.index == 1 and forloop.first %}
+                  loading="eager"
+                  fetchpriority="high"
+                {% else %}
+                  loading="lazy"
+                {% endif %}
+              >
+            {%- else -%}
+              <div class="home-views__ph" aria-hidden="true"><span></span></div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+
+        {%- if view_count > 1 -%}
+          <button type="button" class="home-views__arrow home-views__arrow--next" data-view-next aria-label="Next">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M9.5 5.5 16 12l-6.5 6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.button_label != blank -%}
+      <div class="home-views__actions">
+        {%- if section.settings.button_link != blank -%}
+          <a class="button" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>
+        {%- else -%}
+          <span class="button">{{ section.settings.button_label | escape }}</span>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{%- if view_count > 1 -%}
+  <script>
+    (function () {
+      var root = document.getElementById('HomeViews-{{ section.id }}');
+      if (!root || root.dataset.bound === 'true') return;
+      root.dataset.bound = 'true';
+      var slides = root.querySelectorAll('[data-view-slide]');
+      var index = 0;
+      function show(next) {
+        if (!slides.length) return;
+        index = (next + slides.length) % slides.length;
+        slides.forEach(function (slide, i) {
+          slide.classList.toggle('is-active', i === index);
+        });
+      }
+      var prev = root.querySelector('[data-view-prev]');
+      var next = root.querySelector('[data-view-next]');
+      if (prev) prev.addEventListener('click', function () { show(index - 1); });
+      if (next) next.addEventListener('click', function () { show(index + 1); });
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "产品三视图",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "标题",
+      "default": "FLUX X26 PRO"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "按钮文案",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "按钮链接"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "上边距（PC）",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "下边距（PC）",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "上边距（手机）",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "下边距（手机）",
+      "default": 88
+    }
+  ],
+  "blocks": [
+    {
+      "type": "view",
+      "name": "图片",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "图片"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "图片描述"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "产品三视图",
+      "blocks": [
+        { "type": "view" },
+        { "type": "view" },
+        { "type": "view" }
+      ]
+    }
+  ]
+}
+{% endschema %}

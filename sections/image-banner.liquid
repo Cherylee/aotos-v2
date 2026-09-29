@@ -1,6 +1,28 @@
 {{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
 
-{%- if section.settings.image_height == 'adapt' and section.settings.image != blank or section.settings.image_height == 'adapt' and section.settings.image_mobile != blank -%}
+{%- liquid
+  assign banner_img_pc = section.settings.image | default: section.settings.image_mobile
+  assign banner_img_mob = section.settings.image_mobile | default: section.settings.image
+  assign banner_video = section.settings.video
+  assign banner_video_mob = section.settings.video_mobile
+  assign fetch_priority = 'auto'
+  if section.index == 1
+    assign fetch_priority = 'high'
+  endif
+  assign poster_pc = banner_img_pc
+  if poster_pc == blank and banner_video != blank
+    assign poster_pc = banner_video.preview_image
+  endif
+  assign poster_mob = banner_img_mob
+  if poster_mob == blank and banner_video_mob != blank
+    assign poster_mob = banner_video_mob.preview_image
+  endif
+  if poster_mob == blank
+    assign poster_mob = poster_pc
+  endif
+-%}
+
+{%- if section.settings.image_height == 'adapt' and poster_pc != blank -%}
   {%- style -%}
     #Banner-{{ section.id }}.banner--adapt {
       display: block;
@@ -14,208 +36,189 @@
     }
 
     #Banner-{{ section.id }}.banner--adapt .banner__media.media > picture,
-    #Banner-{{ section.id }}.banner--adapt .banner__media.media > img {
+    #Banner-{{ section.id }}.banner--adapt .banner__media.media > img,
+    #Banner-{{ section.id }}.banner--adapt .banner__media.media > .banner__poster {
       position: static;
       display: block;
       width: 100%;
       height: auto;
       max-width: none;
+      object-fit: contain;
     }
 
     #Banner-{{ section.id }}.banner--adapt .banner__media.media > picture img {
       display: block;
       width: 100%;
       height: auto;
-      object-fit: unset;
+      object-fit: contain;
     }
 
-    #Banner-{{ section.id }}.banner--adapt .banner__content {
+    #Banner-{{ section.id }}.banner--adapt .banner__media video {
       position: absolute;
       inset: 0;
+      width: 100%;
       height: 100%;
+      object-fit: contain;
     }
 
-    @media screen and (max-width: 749px) {
-      #Banner-{{ section.id }}.banner--adapt.banner--mobile-bottom .banner__content {
-        position: relative;
-        inset: auto;
-        height: auto;
-      }
+    #Banner-{{ section.id }}.banner--adapt .banner__media:not(:has(img)) video {
+      position: relative;
+      inset: auto;
+      height: auto;
     }
   {%- endstyle -%}
 {%- endif -%}
 
 {%- style -%}
-  #Banner-{{ section.id }}::after {
-    opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
+  #Banner-{{ section.id }} .banner__media video {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #Banner-{{ section.id }}:not(.banner--adapt) .banner__media picture,
+  #Banner-{{ section.id }}:not(.banner--adapt) .banner__media picture img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #Banner-{{ section.id }} .banner__video--mobile {
+    display: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    #Banner-{{ section.id }} .banner__video--pc {
+      display: none;
+    }
+
+    #Banner-{{ section.id }} .banner__video--mobile {
+      display: block;
+    }
   }
 {%- endstyle -%}
 
-{%- liquid
-  assign full_width = '100vw'
-  assign widths = '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
-
-  if section.settings.image_behavior == 'ambient'
-    assign half_width = '60vw'
-    assign full_width = '120vw'
-    assign stacked_sizes = '(min-width: 750px) 60vw, 120vw'
-    assign widths = '450, 660, 900, 1320, 1800, 2136, 2400, 3600, 7680'
-  elsif section.settings.image_behavior == 'fixed' or section.settings.image_behavior == 'zoom-in'
-    assign half_width = '100vw'
-    assign stacked_sizes = '100vw'
-  else
-    assign half_width = '50vw'
-    assign stacked_sizes = '(min-width: 750px) 50vw, 100vw'
-  endif
-  assign fetch_priority = 'auto'
-  if section.index == 1
-    assign fetch_priority = 'high'
-  endif
-  assign banner_img_pc = section.settings.image | default: section.settings.image_mobile
-  assign banner_img_mob = section.settings.image_mobile | default: section.settings.image
--%}
-
 <div
   id="Banner-{{ section.id }}"
-  class="banner banner--content-align-{{ section.settings.desktop_content_alignment }} banner--content-align-mobile-{{ section.settings.mobile_content_alignment }} banner--{{ section.settings.image_height }}{% if section.settings.stack_images_on_mobile and banner_img_pc != blank and section.settings.image_2 != blank %} banner--stacked{% endif %}{% if section.settings.image_height == 'adapt' and banner_img_pc != blank %} banner--adapt{% endif %}{% if section.settings.show_text_below %} banner--mobile-bottom{%- endif -%}{% if section.settings.show_text_box == false %} banner--desktop-transparent{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+  class="banner banner--{{ section.settings.image_height }}{% if section.settings.image_height == 'adapt' and poster_pc != blank %} banner--adapt{% endif %}"
 >
-  {%- if banner_img_pc != blank -%}
-    <div class="banner__media media{% if banner_img_pc == blank and section.settings.image_2 == blank %} placeholder{% endif %}{% if section.settings.image_2 != blank %} banner__media-half{% endif %}{% if section.settings.image_behavior != 'none' %} animate--{{ section.settings.image_behavior }}{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-      {%- liquid
-        assign image_height = banner_img_pc.width | divided_by: banner_img_pc.aspect_ratio
-        if section.settings.image_2 != blank
-          assign image_class = 'banner__media-image-half'
-        endif
-        if section.settings.image_2 != blank and section.settings.stack_images_on_mobile
-          assign sizes = stacked_sizes
-        elsif section.settings.image_2 != blank
-          assign sizes = half_width
-        else
-          assign sizes = full_width
-        endif
-        assign pc_tag_h = 1920 | divided_by: banner_img_pc.aspect_ratio | round
-      -%}
+  <div class="banner__media media{% if poster_pc == blank and banner_video == blank and banner_video_mob == blank %} placeholder{% endif %}">
+    {%- if banner_video != blank or banner_video_mob != blank -%}
+      {%- if poster_pc != blank -%}
+        <img
+          class="banner__poster{% if poster_mob != blank and poster_mob != poster_pc %} banner__poster--pc{% endif %}"
+          src="{{ poster_pc | image_url: width: 1600 }}"
+          srcset="{{ poster_pc | image_url: width: 1100 }} 1100w, {{ poster_pc | image_url: width: 1600 }} 1600w, {{ poster_pc | image_url: width: 1920 }} 1920w"
+          sizes="100vw"
+          width="1600"
+          height="{{ 1600 | divided_by: poster_pc.aspect_ratio | round }}"
+          alt=""
+          {% if fetch_priority == 'high' %}
+            loading="eager"
+            fetchpriority="high"
+          {% else %}
+            loading="lazy"
+          {% endif %}
+        >
+      {%- endif -%}
+      {%- if poster_mob != blank and poster_mob != poster_pc -%}
+        <img
+          class="banner__poster banner__poster--mobile"
+          src="{{ poster_mob | image_url: width: 1100 }}"
+          srcset="{{ poster_mob | image_url: width: 750 }} 750w, {{ poster_mob | image_url: width: 1100 }} 1100w, {{ poster_mob | image_url: width: 1500 }} 1500w"
+          sizes="100vw"
+          width="1100"
+          height="{{ 1100 | divided_by: poster_mob.aspect_ratio | round }}"
+          alt=""
+          {% if fetch_priority == 'high' %}
+            loading="eager"
+            fetchpriority="high"
+          {% else %}
+            loading="lazy"
+          {% endif %}
+        >
+      {%- endif -%}
+      {%- if banner_video != blank -%}
+        {%- capture banner_video_class -%}banner__video{% if banner_video_mob != blank %} banner__video--pc{% endif %}{%- endcapture -%}
+        {{ banner_video | video_tag: class: banner_video_class, autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata' }}
+      {%- endif -%}
+      {%- if banner_video_mob != blank -%}
+        {{ banner_video_mob | video_tag: class: 'banner__video banner__video--mobile', autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata' }}
+      {%- endif -%}
+    {%- elsif banner_img_pc != blank -%}
+      {%- assign pc_tag_h = 1600 | divided_by: banner_img_pc.aspect_ratio | round -%}
       {%- if section.settings.image_mobile != blank -%}
         <picture>
           <source
             media="(max-width: 749px)"
-            srcset="
-              {{ banner_img_mob | image_url: width: 375 }} 375w,
-              {{ banner_img_mob | image_url: width: 750 }} 750w,
-              {{ banner_img_mob | image_url: width: 1100 }} 1100w,
-              {{ banner_img_mob | image_url: width: 1500 }} 1500w
-            "
-            sizes="{{ sizes }}"
+            srcset="{{ banner_img_mob | image_url: width: 750 }} 750w, {{ banner_img_mob | image_url: width: 1100 }} 1100w, {{ banner_img_mob | image_url: width: 1500 }} 1500w"
+            sizes="100vw"
           >
-          {{
-            banner_img_pc
-            | image_url: width: 3840
-            | image_tag:
-              width: 1920,
-              height: pc_tag_h,
-              class: image_class,
-              sizes: sizes,
-              widths: widths,
-              fetchpriority: fetch_priority
-          }}
+          <img
+            src="{{ banner_img_pc | image_url: width: 1600 }}"
+            srcset="{{ banner_img_pc | image_url: width: 1100 }} 1100w, {{ banner_img_pc | image_url: width: 1600 }} 1600w, {{ banner_img_pc | image_url: width: 1920 }} 1920w"
+            sizes="100vw"
+            width="1600"
+            height="{{ pc_tag_h }}"
+            alt=""
+            {% if fetch_priority == 'high' %}
+              loading="eager"
+              fetchpriority="high"
+            {% else %}
+              loading="lazy"
+            {% endif %}
+          >
         </picture>
       {%- else -%}
-        {{
-          banner_img_pc
-          | image_url: width: 3840
-          | image_tag:
-            width: banner_img_pc.width,
-            height: image_height,
-            class: image_class,
-            sizes: sizes,
-            widths: widths,
-            fetchpriority: fetch_priority
-        }}
+        <img
+          src="{{ banner_img_pc | image_url: width: 1600 }}"
+          srcset="{{ banner_img_pc | image_url: width: 1100 }} 1100w, {{ banner_img_pc | image_url: width: 1600 }} 1600w, {{ banner_img_pc | image_url: width: 1920 }} 1920w"
+          sizes="100vw"
+          width="1600"
+          height="{{ pc_tag_h }}"
+          alt=""
+          {% if fetch_priority == 'high' %}
+            loading="eager"
+            fetchpriority="high"
+          {% else %}
+            loading="lazy"
+          {% endif %}
+        >
       {%- endif -%}
-    </div>
-  {%- elsif section.settings.image_2 == blank -%}
-    <div class="banner__media media{% if section.settings.image == blank and section.settings.image_2 == blank %} placeholder{% endif %}{% if section.settings.image_2 != blank %} banner__media-half{% endif %}{% if section.settings.image_behavior != 'none' %} animate--{{ section.settings.image_behavior }}{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+    {%- else -%}
       {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
-    </div>
-  {%- endif -%}
-  {%- if section.settings.image_2 != blank -%}
-    <div class="banner__media media{% if banner_img_pc != blank %} banner__media-half{% endif %}{% if section.settings.image_behavior != 'none' %} animate--{{ section.settings.image_behavior }}{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-      {%- liquid
-        assign image_height_2 = section.settings.image_2.width | divided_by: section.settings.image_2.aspect_ratio
-        if banner_img_pc != blank
-          assign image_class_2 = 'banner__media-image-half'
-        endif
-        if banner_img_pc != blank and section.settings.stack_images_on_mobile
-          assign sizes = stacked_sizes
-        elsif section.settings.image_2 != blank
-          assign sizes = half_width
-        else
-          assign sizes = full_width
-        endif
-      -%}
-      {{
-        section.settings.image_2
-        | image_url: width: 3840
-        | image_tag:
-          width: section.settings.image_2.width,
-          height: image_height_2,
-          class: image_class_2,
-          sizes: sizes,
-          widths: widths,
-          fetchpriority: fetch_priority
-      }}
-    </div>
-  {%- endif -%}
-  <div class="banner__content banner__content--{{ section.settings.desktop_content_position }} page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-    <div class="banner__box content-container content-container--full-width-mobile color-{{ section.settings.color_scheme }} gradient">
-      {%- for block in section.blocks -%}
-        {%- case block.type -%}
-          {%- when 'heading' -%}
-            <h2
-              class="banner__heading inline-richtext {{ block.settings.heading_size }}"
-              {{ block.shopify_attributes }}
-            >
-              {{ block.settings.heading }}
-            </h2>
-          {%- when 'text' -%}
-            <div class="banner__text rte {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
-              <p>{{ block.settings.text }}</p>
-            </div>
-          {%- when 'buttons' -%}
-            <div
-              class="banner__buttons{% if block.settings.button_label_1 != blank and block.settings.button_label_2 != blank %} banner__buttons--multiple{% endif %}"
-              {{ block.shopify_attributes }}
-            >
-              {%- if block.settings.button_label_1 != blank -%}
-                <a
-                  {% if block.settings.button_link_1 == blank %}
-                    role="link" aria-disabled="true"
-                  {% else %}
-                    href="{{ block.settings.button_link_1 }}"
-                  {% endif %}
-                  class="button{% if block.settings.button_style_secondary_1 %} button--secondary{% else %} button--primary{% endif %}"
-                >
-                  {{- block.settings.button_label_1 | escape -}}
-                </a>
-              {%- endif -%}
-              {%- if block.settings.button_label_2 != blank -%}
-                <a
-                  {% if block.settings.button_link_2 == blank %}
-                    role="link" aria-disabled="true"
-                  {% else %}
-                    href="{{ block.settings.button_link_2 }}"
-                  {% endif %}
-                  class="button{% if block.settings.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %}"
-                >
-                  {{- block.settings.button_label_2 | escape -}}
-                </a>
-              {%- endif -%}
-            </div>
-        {%- endcase -%}
-      {%- endfor -%}
-    </div>
+    {%- endif -%}
   </div>
 </div>
+
+{%- if banner_video != blank or banner_video_mob != blank -%}
+  {%- style -%}
+    @media screen and (max-width: 749px) {
+      #Banner-{{ section.id }} .banner__poster--pc {
+        display: none;
+      }
+    }
+
+    @media screen and (min-width: 750px) {
+      #Banner-{{ section.id }} .banner__poster--mobile {
+        display: none;
+      }
+    }
+  {%- endstyle -%}
+{%- endif -%}
 
 {% schema %}
 {
@@ -227,30 +230,35 @@
   },
   "settings": [
     {
+      "type": "header",
+      "content": "PC"
+    },
+    {
       "type": "image_picker",
       "id": "image",
-      "label": "t:sections.image-banner.settings.image.label"
+      "label": "图片（PC）",
+      "info": "有视频时作为封面。"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "视频（PC）"
+    },
+    {
+      "type": "header",
+      "content": "手机"
     },
     {
       "type": "image_picker",
       "id": "image_mobile",
-      "label": "手机端图片",
-      "info": "建议 750 × 1000 px（竖图按构图）。不上传则手机端使用 PC 图片。"
+      "label": "图片（手机）",
+      "info": "建议 750 × 1000。不上传则使用 PC 图片。"
     },
     {
-      "type": "image_picker",
-      "id": "image_2",
-      "label": "t:sections.image-banner.settings.image_2.label"
-    },
-    {
-      "type": "range",
-      "id": "image_overlay_opacity",
-      "min": 0,
-      "max": 100,
-      "step": 10,
-      "unit": "%",
-      "label": "t:sections.image-banner.settings.image_overlay_opacity.label",
-      "default": 0
+      "type": "video",
+      "id": "video_mobile",
+      "label": "视频（手机）",
+      "info": "不上传则使用 PC 视频。"
     },
     {
       "type": "select",
@@ -274,283 +282,12 @@
         }
       ],
       "default": "medium",
-      "label": "t:sections.image-banner.settings.image_height.label",
-      "info": "t:sections.image-banner.settings.image_height.info"
-    },
-    {
-      "type": "select",
-      "id": "desktop_content_position",
-      "options": [
-        {
-          "value": "top-left",
-          "label": "t:sections.image-banner.settings.desktop_content_position.options__1.label"
-        },
-        {
-          "value": "top-center",
-          "label": "t:sections.image-banner.settings.desktop_content_position.options__2.label"
-        },
-        {
-          "value": "top-right",
-          "label": "t:sections.image-banner.settings.desktop_content_position.options__3.label"
-        },
-        {
-          "value": "middle-left",
-          "label": "t:sections.image-banner.settings.desktop_content_position.options__4.label"
-        },
-        {
-          "value": "middle-center",
-          "label": "t:sections.image-banner.settings.desktop_content_position.options__5.label"
-        },
-        {
-          "value": "middle-right",
-          "label": "t:sections.image-banner.settings.desktop_content_position.options__6.label"
-        },
-        {
-          "value": "bottom-left",
-          "label": "t:sections.image-banner.settings.desktop_content_position.options__7.label"
-        },
-        {
-          "value": "bottom-center",
-          "label": "t:sections.image-banner.settings.desktop_content_position.options__8.label"
-        },
-        {
-          "value": "bottom-right",
-          "label": "t:sections.image-banner.settings.desktop_content_position.options__9.label"
-        }
-      ],
-      "default": "middle-center",
-      "label": "t:sections.image-banner.settings.desktop_content_position.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_text_box",
-      "default": true,
-      "label": "t:sections.image-banner.settings.show_text_box.label"
-    },
-    {
-      "type": "select",
-      "id": "desktop_content_alignment",
-      "options": [
-        {
-          "value": "left",
-          "label": "t:sections.image-banner.settings.desktop_content_alignment.options__1.label"
-        },
-        {
-          "value": "center",
-          "label": "t:sections.image-banner.settings.desktop_content_alignment.options__2.label"
-        },
-        {
-          "value": "right",
-          "label": "t:sections.image-banner.settings.desktop_content_alignment.options__3.label"
-        }
-      ],
-      "default": "center",
-      "label": "t:sections.image-banner.settings.desktop_content_alignment.label"
-    },
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:sections.all.colors.label",
-      "default": "scheme-1"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.all.animation.content"
-    },
-    {
-      "type": "select",
-      "id": "image_behavior",
-      "options": [
-        {
-          "value": "none",
-          "label": "t:sections.all.animation.image_behavior.options__1.label"
-        },
-        {
-          "value": "ambient",
-          "label": "t:sections.all.animation.image_behavior.options__2.label"
-        },
-        {
-          "value": "fixed",
-          "label": "t:sections.all.animation.image_behavior.options__3.label"
-        },
-        {
-          "value": "zoom-in",
-          "label": "t:sections.all.animation.image_behavior.options__4.label"
-        }
-      ],
-      "default": "none",
-      "label": "t:sections.all.animation.image_behavior.label"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.image-banner.settings.mobile.content"
-    },
-    {
-      "type": "select",
-      "id": "mobile_content_alignment",
-      "options": [
-        {
-          "value": "left",
-          "label": "t:sections.image-banner.settings.mobile_content_alignment.options__1.label"
-        },
-        {
-          "value": "center",
-          "label": "t:sections.image-banner.settings.mobile_content_alignment.options__2.label"
-        },
-        {
-          "value": "right",
-          "label": "t:sections.image-banner.settings.mobile_content_alignment.options__3.label"
-        }
-      ],
-      "default": "center",
-      "label": "t:sections.image-banner.settings.mobile_content_alignment.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "stack_images_on_mobile",
-      "default": true,
-      "label": "t:sections.image-banner.settings.stack_images_on_mobile.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_text_below",
-      "default": true,
-      "label": "t:sections.image-banner.settings.show_text_below.label"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "heading",
-      "name": "t:sections.image-banner.blocks.heading.name",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "inline_richtext",
-          "id": "heading",
-          "default": "t:sections.image-banner.blocks.heading.settings.heading.default",
-          "label": "t:sections.image-banner.blocks.heading.settings.heading.label"
-        },
-        {
-          "type": "select",
-          "id": "heading_size",
-          "options": [
-            {
-              "value": "h2",
-              "label": "t:sections.all.heading_size.options__1.label"
-            },
-            {
-              "value": "h1",
-              "label": "t:sections.all.heading_size.options__2.label"
-            },
-            {
-              "value": "h0",
-              "label": "t:sections.all.heading_size.options__3.label"
-            },
-            {
-              "value": "hxl",
-              "label": "t:sections.all.heading_size.options__4.label"
-            },
-            {
-              "value": "hxxl",
-              "label": "t:sections.all.heading_size.options__5.label"
-            }
-          ],
-          "default": "h1",
-          "label": "t:sections.all.heading_size.label"
-        }
-      ]
-    },
-    {
-      "type": "text",
-      "name": "t:sections.image-banner.blocks.text.name",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "inline_richtext",
-          "id": "text",
-          "default": "t:sections.image-banner.blocks.text.settings.text.default",
-          "label": "t:sections.image-banner.blocks.text.settings.text.label"
-        },
-        {
-          "type": "select",
-          "id": "text_style",
-          "options": [
-            {
-              "value": "body",
-              "label": "t:sections.image-banner.blocks.text.settings.text_style.options__1.label"
-            },
-            {
-              "value": "subtitle",
-              "label": "t:sections.image-banner.blocks.text.settings.text_style.options__2.label"
-            },
-            {
-              "value": "caption-with-letter-spacing",
-              "label": "t:sections.image-banner.blocks.text.settings.text_style.options__3.label"
-            }
-          ],
-          "default": "body",
-          "label": "t:sections.image-banner.blocks.text.settings.text_style.label"
-        }
-      ]
-    },
-    {
-      "type": "buttons",
-      "name": "t:sections.image-banner.blocks.buttons.name",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "text",
-          "id": "button_label_1",
-          "default": "t:sections.image-banner.blocks.buttons.settings.button_label_1.default",
-          "label": "t:sections.image-banner.blocks.buttons.settings.button_label_1.label",
-          "info": "t:sections.image-banner.blocks.buttons.settings.button_label_1.info"
-        },
-        {
-          "type": "url",
-          "id": "button_link_1",
-          "label": "t:sections.image-banner.blocks.buttons.settings.button_link_1.label"
-        },
-        {
-          "type": "checkbox",
-          "id": "button_style_secondary_1",
-          "default": false,
-          "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_1.label"
-        },
-        {
-          "type": "text",
-          "id": "button_label_2",
-          "default": "t:sections.image-banner.blocks.buttons.settings.button_label_2.default",
-          "label": "t:sections.image-banner.blocks.buttons.settings.button_label_2.label",
-          "info": "t:sections.image-banner.blocks.buttons.settings.button_label_2.info"
-        },
-        {
-          "type": "url",
-          "id": "button_link_2",
-          "label": "t:sections.image-banner.blocks.buttons.settings.button_link_2.label"
-        },
-        {
-          "type": "checkbox",
-          "id": "button_style_secondary_2",
-          "default": false,
-          "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_2.label"
-        }
-      ]
+      "label": "t:sections.image-banner.settings.image_height.label"
     }
   ],
   "presets": [
     {
-      "name": "t:sections.image-banner.presets.name",
-      "blocks": [
-        {
-          "type": "heading"
-        },
-        {
-          "type": "text"
-        },
-        {
-          "type": "buttons"
-        }
-      ]
+      "name": "t:sections.image-banner.presets.name"
     }
   ]
 }
