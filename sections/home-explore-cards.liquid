@@ -1,7 +1,7 @@
 {%- style -%}
   #HomeExplore-{{ section.id }} {
-    padding-top: calc({{ section.settings.padding_top | default: 80 }} * var(--rem));
-    padding-bottom: calc({{ section.settings.padding_bottom | default: 80 }} * var(--rem));
+    padding-top: calc({{ section.settings.padding_top | default: 80, allow_false: true }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80, allow_false: true }} * var(--rem));
     background: #ffffff;
   }
 
@@ -120,8 +120,8 @@
 
   @media screen and (max-width: 768px) {
     #HomeExplore-{{ section.id }} {
-      padding-top: calc({{ section.settings.padding_top_mobile | default: 88 }} * var(--rem));
-      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88 }} * var(--rem));
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }} * var(--rem));
     }
     #HomeExplore-{{ section.id }} .home-explore__btn svg {
       width: calc(24 * var(--rem));

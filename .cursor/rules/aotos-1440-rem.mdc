@@ -116,16 +116,18 @@ alwaysApply: true
 
 ### Schema 默认
 
-| 字段 | 默认 |
-|------|------|
-| `padding_top` / `padding_bottom` | 80 |
-| `padding_top_mobile` / `padding_bottom_mobile` | 88 |
+| 字段 | 默认 | 最小值 |
+|------|------|--------|
+| `padding_top` / `padding_bottom` | 80 | **0** |
+| `padding_top_mobile` / `padding_bottom_mobile` | 88 | **0** |
+
+上下边距必须能在后台调成 **0**。`range` 的 `min` 写 `0`。输出时带 `allow_false: true`：Liquid 的 `default` 会把 `0` 当成空值，不写这个参数时，设成 0 仍会退回 80 / 88。
 
 ```css
 /* PC：不写断点 */
 .example-section {
-  padding-top: calc({{ section.settings.padding_top | default: 80 }} * var(--rem));
-  padding-bottom: calc({{ section.settings.padding_bottom | default: 80 }} * var(--rem));
+  padding-top: calc({{ section.settings.padding_top | default: 80, allow_false: true }} * var(--rem));
+  padding-bottom: calc({{ section.settings.padding_bottom | default: 80, allow_false: true }} * var(--rem));
 }
 
 .example-shell {
@@ -137,8 +139,8 @@ alwaysApply: true
 /* 手机 ≤768 */
 @media screen and (max-width: 768px) {
   .example-section {
-    padding-top: calc({{ section.settings.padding_top_mobile | default: 88 }} * var(--rem));
-    padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88 }} * var(--rem));
+    padding-top: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }} * var(--rem));
   }
 
   .example-shell {

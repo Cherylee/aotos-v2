@@ -101,7 +101,7 @@
       min-height: calc({{ sc_height }} * var(--rem));
     {%- endunless -%}
     margin: 0 auto;
-    padding: calc(80 * var(--rem)) calc(0 * var(--rem));
+    padding: calc({{ section.settings.padding_top | default: 80, allow_false: true }} * var(--rem)) 0 calc({{ section.settings.padding_bottom | default: 80, allow_false: true }} * var(--rem));
     pointer-events: none;
     opacity: 0;
     transform: translateY(calc(-20 * var(--rem)));
@@ -382,7 +382,7 @@
 
     #sc-hero-{{ section.id }} .sc-hero__inner {
       width: 100%;
-      padding: calc(88 * var(--rem)) calc(40 * var(--rem));
+      padding: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem)) calc(40 * var(--rem)) calc({{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }} * var(--rem));
     }
 
     #sc-hero-{{ section.id }} .sc-hero__video--pc,
@@ -1009,6 +1009,50 @@
       "type": "text",
       "id": "image_alt",
       "label": "背景图 Alt"
+    },
+    {
+      "type": "header",
+      "content": "上下边距"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "上边距（PC）",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "下边距（PC）",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "上边距（手机）",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "下边距（手机）",
+      "default": 88
     }
   ],
   "blocks": [

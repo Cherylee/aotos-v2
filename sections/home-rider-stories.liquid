@@ -1,7 +1,7 @@
 {%- style -%}
   #HomeRiders-{{ section.id }} {
-    padding-top: calc({{ section.settings.padding_top | default: 80 }} * var(--rem));
-    padding-bottom: calc({{ section.settings.padding_bottom | default: 80 }} * var(--rem));
+    padding-top: calc({{ section.settings.padding_top | default: 80, allow_false: true }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80, allow_false: true }} * var(--rem));
     background: #ffffff;
   }
 
@@ -298,8 +298,8 @@
 
   @media screen and (max-width: 768px) {
     #HomeRiders-{{ section.id }} {
-      padding-top: calc({{ section.settings.padding_top_mobile | default: 88 }} * var(--rem));
-      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88 }} * var(--rem));
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }} * var(--rem));
     }
 
     #HomeRiders-{{ section.id }} .home-riders__shell {
