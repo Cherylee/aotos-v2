@@ -268,7 +268,7 @@ cart-drawer.is-empty .drawer__close {
   flex-direction: column;
   gap: calc(10 * var(--rem));
   --aotos-cta-height: clamp(25px, calc(var(--aotos-button-height, 40) * var(--rem)), 55px);
-  --aotos-cta-radius: var(--buttons-radius, calc(8 * var(--rem)));
+  --aotos-cta-radius: var(--buttons-radius, calc(40 * var(--rem)));
 }
 
 .cart-drawer .cart__checkout-button {

@@ -126,13 +126,26 @@
     height: calc(4 * var(--rem));
     margin-bottom: calc(20 * var(--rem));
     border-radius: calc(2 * var(--rem));
-    background: var(--aotos-theme-accent, #ff6501);
+    background: var(--aotos-theme-color, #ff6501);
+  }
+
+  #sc-hero-{{ section.id }} .sc-hero__accent.is-color-black {
+    background: #000000;
+  }
+
+  #sc-hero-{{ section.id }} .sc-hero__accent.is-color-gray {
+    background: #999999;
+  }
+
+  #sc-hero-{{ section.id }} .sc-hero__accent.is-color-white {
+    background: #ffffff;
   }
 
   #sc-hero-{{ section.id }} .sc-hero__eyebrow {
     margin: 0 0 calc(var(--sc-eyebrow-gap, 16) * var(--rem));
     color: #ffffff;
     font-size: calc(var(--sc-eyebrow-size, 12) * var(--rem));
+    font-weight: var(--sc-weight, 400);
     letter-spacing: 0.14em;
     line-height: 1.4;
     text-transform: uppercase;
@@ -142,7 +155,7 @@
     margin: 0 0 calc(var(--sc-title-gap, 16) * var(--rem));
     color: #ffffff;
     font-size: calc(var(--sc-title-size, 32) * var(--rem));
-    font-weight: 600;
+    font-weight: var(--sc-weight, 600);
     line-height: 1.1;
     letter-spacing: -0.02em;
   }
@@ -152,7 +165,32 @@
     max-width: calc(560 * var(--rem));
     color: #ffffff;
     font-size: calc(var(--sc-subtitle-size, 12) * var(--rem));
+    font-weight: var(--sc-weight, 400);
     line-height: 1.5;
+  }
+
+  #sc-hero-{{ section.id }} .sc-hero__eyebrow.is-color-theme,
+  #sc-hero-{{ section.id }} .sc-hero__title.is-color-theme,
+  #sc-hero-{{ section.id }} .sc-hero__subtitle.is-color-theme {
+    color: var(--aotos-theme-color, #ff6501);
+  }
+
+  #sc-hero-{{ section.id }} .sc-hero__eyebrow.is-color-black,
+  #sc-hero-{{ section.id }} .sc-hero__title.is-color-black,
+  #sc-hero-{{ section.id }} .sc-hero__subtitle.is-color-black {
+    color: #000000;
+  }
+
+  #sc-hero-{{ section.id }} .sc-hero__eyebrow.is-color-gray,
+  #sc-hero-{{ section.id }} .sc-hero__title.is-color-gray,
+  #sc-hero-{{ section.id }} .sc-hero__subtitle.is-color-gray {
+    color: #999999;
+  }
+
+  #sc-hero-{{ section.id }} .sc-hero__eyebrow.is-color-white,
+  #sc-hero-{{ section.id }} .sc-hero__title.is-color-white,
+  #sc-hero-{{ section.id }} .sc-hero__subtitle.is-color-white {
+    color: #ffffff;
   }
 
   #sc-hero-{{ section.id }} .sc-hero__stats {
@@ -438,20 +476,20 @@
           style="--sc-eyebrow-size: {{ block.settings.eyebrow_size | default: 12 }}; --sc-eyebrow-gap: {{ block.settings.eyebrow_gap | default: 16 }}; --sc-title-size: {{ block.settings.title_size | default: 32 }}; --sc-title-gap: {{ block.settings.title_gap | default: 16 }}; --sc-subtitle-size: {{ block.settings.subtitle_size | default: 12 }}; --sc-subtitle-gap: {{ block.settings.subtitle_gap | default: 0 }}; --sc-eyebrow-size-mob: {{ block.settings.eyebrow_size_mobile | default: 20 }}; --sc-eyebrow-gap-mob: {{ block.settings.eyebrow_gap_mobile | default: 20 }}; --sc-title-size-mob: {{ block.settings.title_size_mobile | default: 48 }}; --sc-title-gap-mob: {{ block.settings.title_gap_mobile | default: 20 }}; --sc-subtitle-size-mob: {{ block.settings.subtitle_size_mobile | default: 20 }}; --sc-subtitle-gap-mob: {{ block.settings.subtitle_gap_mobile | default: 0 }};"
         >
           {%- if block.settings.show_accent != false -%}
-            <span class="sc-hero__accent" aria-hidden="true"></span>
+            <span class="sc-hero__accent is-color-{{ block.settings.accent_color | default: 'theme' }}" aria-hidden="true"></span>
           {%- endif -%}
           {%- if block.settings.eyebrow != blank -%}
-            <p class="sc-hero__eyebrow">{{ block.settings.eyebrow | escape }}</p>
+            <p class="sc-hero__eyebrow is-color-{{ block.settings.eyebrow_color | default: 'white' }}" style="--sc-weight: {{ block.settings.eyebrow_weight | default: 400 }};">{{ block.settings.eyebrow | escape }}</p>
           {%- endif -%}
           {%- if block.settings.heading != blank -%}
             {%- if forloop.first -%}
-              <h1 class="sc-hero__title">{{ block.settings.heading | escape }}</h1>
+              <h1 class="sc-hero__title is-color-{{ block.settings.title_color | default: 'white' }}" style="--sc-weight: {{ block.settings.title_weight | default: 600 }};">{{ block.settings.heading | escape }}</h1>
             {%- else -%}
-              <h2 class="sc-hero__title">{{ block.settings.heading | escape }}</h2>
+              <h2 class="sc-hero__title is-color-{{ block.settings.title_color | default: 'white' }}" style="--sc-weight: {{ block.settings.title_weight | default: 600 }};">{{ block.settings.heading | escape }}</h2>
             {%- endif -%}
           {%- endif -%}
           {%- if block.settings.subtitle != blank -%}
-            <p class="sc-hero__subtitle">{{ block.settings.subtitle | escape }}</p>
+            <p class="sc-hero__subtitle is-color-{{ block.settings.subtitle_color | default: 'white' }}" style="--sc-weight: {{ block.settings.subtitle_weight | default: 400 }};">{{ block.settings.subtitle | escape }}</p>
           {%- endif -%}
           {%- liquid
             assign slide_show_stats = false
@@ -875,10 +913,46 @@
           "default": true
         },
         {
+          "type": "select",
+          "id": "accent_color",
+          "label": "装饰条颜色",
+          "options": [
+            { "value": "theme", "label": "主题色" },
+            { "value": "black", "label": "纯黑" },
+            { "value": "gray", "label": "#999999" },
+            { "value": "white", "label": "纯白" }
+          ],
+          "default": "theme"
+        },
+        {
           "type": "text",
           "id": "eyebrow",
           "label": "副标题",
           "default": "YOUR SAFETY IS OUR PRIORITY"
+        },
+        {
+          "type": "select",
+          "id": "eyebrow_weight",
+          "label": "副标题字重",
+          "options": [
+            { "value": "400", "label": "400" },
+            { "value": "500", "label": "500" },
+            { "value": "600", "label": "600" },
+            { "value": "700", "label": "700" }
+          ],
+          "default": "400"
+        },
+        {
+          "type": "select",
+          "id": "eyebrow_color",
+          "label": "副标题颜色",
+          "options": [
+            { "value": "theme", "label": "主题色" },
+            { "value": "black", "label": "纯黑" },
+            { "value": "gray", "label": "#999999" },
+            { "value": "white", "label": "纯白" }
+          ],
+          "default": "white"
         },
         {
           "type": "text",
@@ -887,10 +961,58 @@
           "default": "Safety Certified"
         },
         {
+          "type": "select",
+          "id": "title_weight",
+          "label": "主标题字重",
+          "options": [
+            { "value": "400", "label": "400" },
+            { "value": "500", "label": "500" },
+            { "value": "600", "label": "600" },
+            { "value": "700", "label": "700" }
+          ],
+          "default": "600"
+        },
+        {
+          "type": "select",
+          "id": "title_color",
+          "label": "主标题颜色",
+          "options": [
+            { "value": "theme", "label": "主题色" },
+            { "value": "black", "label": "纯黑" },
+            { "value": "gray", "label": "#999999" },
+            { "value": "white", "label": "纯白" }
+          ],
+          "default": "white"
+        },
+        {
           "type": "text",
           "id": "subtitle",
           "label": "说明文字",
           "default": "UL and TUV Safety Certified - UL 2849 / UL 2271"
+        },
+        {
+          "type": "select",
+          "id": "subtitle_weight",
+          "label": "说明字重",
+          "options": [
+            { "value": "400", "label": "400" },
+            { "value": "500", "label": "500" },
+            { "value": "600", "label": "600" },
+            { "value": "700", "label": "700" }
+          ],
+          "default": "400"
+        },
+        {
+          "type": "select",
+          "id": "subtitle_color",
+          "label": "说明颜色",
+          "options": [
+            { "value": "theme", "label": "主题色" },
+            { "value": "black", "label": "纯黑" },
+            { "value": "gray", "label": "#999999" },
+            { "value": "white", "label": "纯白" }
+          ],
+          "default": "white"
         },
         {
           "type": "header",

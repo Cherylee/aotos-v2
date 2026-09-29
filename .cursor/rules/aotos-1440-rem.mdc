@@ -83,7 +83,7 @@ alwaysApply: true
 |----|--------|------|
 | 高度 PC | `--aotos-button-height` | 40 |
 | 高度手机 | `--aotos-button-height-mobile` | 80 |
-| 圆角 | `--buttons-radius`（数值 `--aotos-button-radius`） | 8 |
+| 圆角 | `--buttons-radius`（数值 `--aotos-button-radius`） | 40 |
 | 字号 PC | `--aotos-button-font-size` | 14 |
 | 字号手机 | `--aotos-button-font-size-mobile` | 22 |
 | 字重 | `--aotos-button-font-weight` | 600 |
@@ -92,7 +92,7 @@ alwaysApply: true
 ```css
 .example-button {
   min-height: calc(var(--aotos-button-height, 40) * var(--rem));
-  border-radius: var(--buttons-radius, calc(8 * var(--rem)));
+  border-radius: var(--buttons-radius, calc(40 * var(--rem)));
   font-size: calc(var(--aotos-button-font-size, 14) * var(--rem));
   font-weight: var(--aotos-button-font-weight, 600);
   background: var(--aotos-theme-color, #ff6501);

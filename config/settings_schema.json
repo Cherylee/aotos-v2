@@ -73,7 +73,7 @@
         "unit": "px",
         "label": "按钮圆角",
         "info": "按页面宽度等比，所有按钮圆角弧度一致，不随按钮本身变宽而变圆",
-        "default": 8
+        "default": 40
       },
       {
         "type": "range",
