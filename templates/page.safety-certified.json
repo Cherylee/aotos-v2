@@ -11,15 +11,26 @@
   "sections": {
     "safety_certified_hero": {
       "type": "safety-certified-hero",
+      "blocks": {
+        "slide_safety": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/UL.jpg",
+            "image_mobile": "shopify://shop_images/1500X960_f7d916f5-ee3c-453d-92e1-e1f5a74fb3c1.jpg",
+            "image_alt": "",
+            "show_accent": true,
+            "eyebrow": "YOUR SAFETY IS OUR PRIORITY",
+            "heading": "Safety Certified",
+            "subtitle": "UL and TUV Safety Certified - UL 2849 / UL 2271"
+          }
+        }
+      },
+      "block_order": [
+        "slide_safety"
+      ],
       "settings": {
-        "image": "shopify://shop_images/UL.jpg",
-        "image_mobile": "shopify://shop_images/1500X960_f7d916f5-ee3c-453d-92e1-e1f5a74fb3c1.jpg",
-        "image_alt": "",
         "image_position": "center center",
-        "overlay_opacity": 45,
-        "eyebrow": "YOUR SAFETY IS OUR PRIORITY",
-        "heading": "Safety Certified",
-        "subtitle": "UL and TUV Safety Certified - UL 2849 / UL 2271"
+        "overlay_opacity": 45
       }
     },
     "safety_certified_grid": {

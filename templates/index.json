@@ -17,7 +17,11 @@
           "settings": {
             "video": "shopify://files/videos/0409.mp4",
             "video_mobile": "shopify://files/videos/006.mp4",
-            "image_alt": ""
+            "image_alt": "",
+            "show_accent": false,
+            "eyebrow": "YOUR SAFETY IS OUR PRIORITY",
+            "heading": "Safety Certified",
+            "subtitle": "UL and TUV Safety Certified - UL 2849 / UL 2271"
           }
         },
         "slide_TmTGkn": {
@@ -25,7 +29,11 @@
           "settings": {
             "image": "shopify://shop_images/3840_x_1600.webp",
             "image_mobile": "shopify://shop_images/aotos_giveaway.webp",
-            "image_alt": ""
+            "image_alt": "",
+            "show_accent": false,
+            "eyebrow": "YOUR SAFETY IS OUR PRIORITY",
+            "heading": "Safety Certified",
+            "subtitle": "UL and TUV Safety Certified - UL 2849 / UL 2271"
           }
         }
       },
@@ -37,22 +45,6 @@
       "settings": {
         "height": "700",
         "height_mobile": "1000",
-        "show_accent": false,
-        "eyebrow": "YOUR SAFETY IS OUR PRIORITY",
-        "heading": "Safety Certified",
-        "subtitle": "UL and TUV Safety Certified - UL 2849 / UL 2271",
-        "eyebrow_size": 12,
-        "eyebrow_gap": 16,
-        "title_size": 32,
-        "title_gap": 16,
-        "subtitle_size": 12,
-        "subtitle_gap": 0,
-        "eyebrow_size_mobile": 20,
-        "eyebrow_gap_mobile": 20,
-        "title_size_mobile": 48,
-        "title_gap_mobile": 20,
-        "subtitle_size_mobile": 20,
-        "subtitle_gap_mobile": 0,
         "overlay_opacity": 45,
         "image_position": "center center",
         "image_alt": ""
