@@ -30,10 +30,10 @@
             "subtitle_weight": "500",
             "subtitle_color": "black",
             "eyebrow_size": 24,
-            "eyebrow_gap": 2,
-            "title_size": 20,
-            "title_gap": 10,
-            "subtitle_size": 14,
+            "eyebrow_gap": 4,
+            "title_size": 14,
+            "title_gap": 14,
+            "subtitle_size": 15,
             "subtitle_gap": 0,
             "eyebrow_size_mobile": 20,
             "eyebrow_gap_mobile": 20,
@@ -86,7 +86,7 @@
             "subtitle_color": "white",
             "eyebrow_size": 24,
             "eyebrow_gap": 10,
-            "title_size": 20,
+            "title_size": 16,
             "title_gap": 16,
             "subtitle_size": 16,
             "subtitle_gap": 0,
@@ -163,10 +163,81 @@
         "padding_top": 44,
         "padding_bottom": 36
       }
+    },
+    "safety_certified_hero_4AnbLr": {
+      "type": "safety-certified-hero",
+      "blocks": {
+        "slide_DPeF8m": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/002.webp",
+            "image_alt": "",
+            "show_accent": true,
+            "accent_color": "theme",
+            "eyebrow": "YOUR SAFETY IS OUR PRIORITY",
+            "eyebrow_weight": "400",
+            "eyebrow_color": "white",
+            "heading": "Safety Certified",
+            "title_weight": "600",
+            "title_color": "white",
+            "subtitle": "UL and TUV Safety Certified - UL 2849 / UL 2271",
+            "subtitle_weight": "400",
+            "subtitle_color": "white",
+            "eyebrow_size": 12,
+            "eyebrow_gap": 16,
+            "title_size": 32,
+            "title_gap": 16,
+            "subtitle_size": 12,
+            "subtitle_gap": 0,
+            "eyebrow_size_mobile": 20,
+            "eyebrow_gap_mobile": 20,
+            "title_size_mobile": 48,
+            "title_gap_mobile": 20,
+            "subtitle_size_mobile": 20,
+            "subtitle_gap_mobile": 0,
+            "stat_1_value": "",
+            "stat_1_label": "",
+            "stat_2_value": "",
+            "stat_2_label": "",
+            "stat_3_value": "",
+            "stat_3_label": "",
+            "stat_size": 28,
+            "stat_label_size": 14,
+            "stat_gap": 56,
+            "stat_margin": 28,
+            "stat_size_mobile": 36,
+            "stat_label_size_mobile": 20,
+            "stat_gap_mobile": 40,
+            "stat_margin_mobile": 32,
+            "show_button_1": false,
+            "button_1_label": "",
+            "button_1_link": "",
+            "button_1_margin": 24,
+            "button_1_margin_mobile": 32,
+            "show_button_2": false,
+            "button_2_label": "",
+            "button_2_link": "",
+            "button_2_margin": 24,
+            "button_2_margin_mobile": 32
+          }
+        }
+      },
+      "block_order": [
+        "slide_DPeF8m"
+      ],
+      "name": "Safety Certified Hero",
+      "settings": {
+        "height": "700",
+        "height_mobile": "1000",
+        "overlay_opacity": 45,
+        "image_position": "center center",
+        "image_alt": ""
+      }
     }
   },
   "order": [
     "safety_certified_hero_QW8qWE",
-    "featured_collection"
+    "featured_collection",
+    "safety_certified_hero_4AnbLr"
   ]
 }
