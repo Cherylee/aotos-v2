@@ -137,6 +137,95 @@
         "image_alt": ""
       }
     },
+    "home_trust_bar": {
+      "type": "home-trust-bar",
+      "blocks": {
+        "trust_warranty": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/2_4x_da1da376-c593-45b0-8c5b-a51309ab5d05.webp",
+            "title": "1-Year Warranty",
+            "text": "With reliable local repair support."
+          }
+        },
+        "trust_support": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/2_2_4x_61636923-ffc8-4973-b77a-3c7c1fbed214.webp",
+            "title": "Lifetime Support",
+            "text": "Expert help for as long as you ride"
+          }
+        },
+        "trust_shipping": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/2_1_4x_d9977a37-d262-4100-a22b-f7aad9985348.webp",
+            "title": "Local Shipping",
+            "text": "Delivered in 5 Days"
+          }
+        },
+        "trust_returns": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/2_3_4x_1f8d2568-5da8-4895-80a5-0f4d01b52fb6.webp",
+            "title": "30-Day Returns",
+            "text": "Easy Returns Guaranteed"
+          }
+        }
+      },
+      "block_order": [
+        "trust_warranty",
+        "trust_support",
+        "trust_shipping",
+        "trust_returns"
+      ],
+      "settings": {
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "home_product_views": {
+      "type": "home-product-views",
+      "blocks": {
+        "view_front": {
+          "type": "view",
+          "settings": {
+            "image": "shopify://shop_images/4_fffc70c0-048e-416c-bb50-2391be7bacd6.webp",
+            "image_alt": "FLUX X26 Pro front"
+          }
+        },
+        "view_side": {
+          "type": "view",
+          "settings": {
+            "image": "shopify://shop_images/EB03_0919_3.webp",
+            "image_alt": "FLUX X26 Pro side"
+          }
+        },
+        "view_rear": {
+          "type": "view",
+          "settings": {
+            "image": "shopify://shop_images/3_84181337-25e1-47bc-81b8-d339aa45e320.webp",
+            "image_alt": "FLUX X26 Pro rear"
+          }
+        }
+      },
+      "block_order": [
+        "view_front",
+        "view_side",
+        "view_rear"
+      ],
+      "settings": {
+        "title": "FLUX X26 PRO",
+        "button_label": "Learn More",
+        "button_link": "",
+        "padding_top": 60,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
+    },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
@@ -235,88 +324,6 @@
         "overlay_opacity": 45,
         "image_position": "center center",
         "image_alt": ""
-      }
-    },
-    "home_trust_bar": {
-      "type": "home-trust-bar",
-      "blocks": {
-        "trust_warranty": {
-          "type": "item",
-          "settings": {
-            "title": "1-Year Warranty",
-            "text": "With reliable local repair support."
-          }
-        },
-        "trust_support": {
-          "type": "item",
-          "settings": {
-            "title": "Lifetime Support",
-            "text": "Expert help for as long as you ride"
-          }
-        },
-        "trust_shipping": {
-          "type": "item",
-          "settings": {
-            "title": "Local Shipping",
-            "text": "Delivered in 5 Days"
-          }
-        },
-        "trust_returns": {
-          "type": "item",
-          "settings": {
-            "title": "30-Day Returns",
-            "text": "Easy Returns Guaranteed"
-          }
-        }
-      },
-      "block_order": [
-        "trust_warranty",
-        "trust_support",
-        "trust_shipping",
-        "trust_returns"
-      ],
-      "settings": {
-        "padding_top": 24,
-        "padding_bottom": 24,
-        "padding_top_mobile": 40,
-        "padding_bottom_mobile": 40
-      }
-    },
-    "home_product_views": {
-      "type": "home-product-views",
-      "blocks": {
-        "view_front": {
-          "type": "view",
-          "settings": {
-            "image_alt": "FLUX X26 Pro front"
-          }
-        },
-        "view_side": {
-          "type": "view",
-          "settings": {
-            "image_alt": "FLUX X26 Pro side"
-          }
-        },
-        "view_rear": {
-          "type": "view",
-          "settings": {
-            "image_alt": "FLUX X26 Pro rear"
-          }
-        }
-      },
-      "block_order": [
-        "view_front",
-        "view_side",
-        "view_rear"
-      ],
-      "settings": {
-        "title": "FLUX X26 PRO",
-        "button_label": "Learn More",
-        "button_link": "",
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "padding_top_mobile": 88,
-        "padding_bottom_mobile": 88
       }
     }
   },
