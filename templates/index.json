@@ -1,1 +1,94 @@
-{"sections":{"image_banner":{"type":"image-banner","blocks":{"heading":{"type":"heading","settings":{"heading":"Browse our latest products","heading_size":"h0"}},"button":{"type":"buttons","settings":{"button_label_1":"Shop all","button_link_1":"shopify:\/\/collections\/all","button_style_secondary_1":true,"button_label_2":"","button_link_2":"","button_style_secondary_2":false}}},"block_order":["heading","button"],"settings":{"image_overlay_opacity":40,"image_height":"large","desktop_content_position":"bottom-center","show_text_box":false,"desktop_content_alignment":"center","color_scheme":"scheme-3","image_behavior":"none","mobile_content_alignment":"center","stack_images_on_mobile":false,"show_text_below":false}},"featured_collection":{"type":"featured-collection","settings":{"title":"Featured products","heading_size":"h2","description":"","show_description":false,"description_style":"body","collection":"all","products_to_show":8,"columns_desktop":4,"full_width":false,"show_view_all":true,"view_all_style":"solid","enable_desktop_slider":false,"color_scheme":"scheme-1","image_ratio":"adapt","image_shape":"default","show_secondary_image":true,"show_vendor":false,"show_rating":false,"quick_add":"none","columns_mobile":"2","swipe_on_mobile":false,"padding_top":44,"padding_bottom":36}}},"order":["image_banner","featured_collection"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "safety_certified_hero_QW8qWE": {
+      "type": "safety-certified-hero",
+      "blocks": {
+        "slide_8qyhAe": {
+          "type": "slide",
+          "settings": {
+            "video": "shopify://files/videos/0409.mp4",
+            "video_mobile": "shopify://files/videos/006.mp4",
+            "image_alt": ""
+          }
+        },
+        "slide_TmTGkn": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/3840_x_1600.webp",
+            "image_mobile": "shopify://shop_images/aotos_giveaway.webp",
+            "image_alt": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_8qyhAe",
+        "slide_TmTGkn"
+      ],
+      "name": "Safety Certified Hero",
+      "settings": {
+        "height": "700",
+        "height_mobile": "1000",
+        "show_accent": false,
+        "eyebrow": "YOUR SAFETY IS OUR PRIORITY",
+        "heading": "Safety Certified",
+        "subtitle": "UL and TUV Safety Certified - UL 2849 / UL 2271",
+        "eyebrow_size": 12,
+        "eyebrow_gap": 16,
+        "title_size": 32,
+        "title_gap": 16,
+        "subtitle_size": 12,
+        "subtitle_gap": 0,
+        "eyebrow_size_mobile": 20,
+        "eyebrow_gap_mobile": 20,
+        "title_size_mobile": 48,
+        "title_gap_mobile": 20,
+        "subtitle_size_mobile": 20,
+        "subtitle_gap_mobile": 0,
+        "overlay_opacity": 45,
+        "image_position": "center center",
+        "image_alt": ""
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Featured products",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "all",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 44,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "safety_certified_hero_QW8qWE",
+    "featured_collection"
+  ]
+}
