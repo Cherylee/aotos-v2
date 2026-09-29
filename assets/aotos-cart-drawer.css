@@ -44,6 +44,17 @@
   height: calc(20 * var(--rem));
 }
 
+cart-drawer.is-empty .drawer__inner {
+  position: relative;
+}
+
+cart-drawer.is-empty .drawer__close {
+  position: absolute;
+  top: calc(16 * var(--rem));
+  right: calc(16 * var(--rem));
+  z-index: 2;
+}
+
 .cart-drawer .drawer__close .svg-wrapper {
   width: calc(16 * var(--rem));
   height: calc(16 * var(--rem));
@@ -128,17 +139,28 @@
   gap: calc(10 * var(--rem));
 }
 
+.cart-drawer .cart-item cart-remove-button {
+  display: flex;
+  width: auto;
+  height: auto;
+  margin: 0;
+}
+
 .cart-drawer cart-remove-button .button {
   min-width: 0;
   min-height: 0;
   width: calc(20 * var(--rem));
   height: calc(20 * var(--rem));
+  margin: 0;
+  padding: 0;
   color: #111;
 }
 
-.cart-drawer cart-remove-button .svg-wrapper {
-  width: calc(16 * var(--rem));
-  height: calc(16 * var(--rem));
+.cart-drawer cart-remove-button .svg-wrapper,
+.cart-drawer cart-remove-button .icon-remove {
+  display: block;
+  width: calc(14 * var(--rem));
+  height: calc(14 * var(--rem));
 }
 
 .cart-drawer .quantity {
@@ -213,15 +235,11 @@
   color: #333;
 }
 
-.cart-drawer__trust svg {
+.cart-drawer__trust img {
   flex: 0 0 auto;
   width: calc(18 * var(--rem));
   height: calc(18 * var(--rem));
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.6;
-  stroke-linejoin: round;
-  stroke-linecap: round;
+  object-fit: contain;
 }
 
 .cart-drawer__pay {
@@ -298,7 +316,7 @@
   .cart-drawer .drawer__inner {
     width: 100%;
     max-width: none;
-    padding: 0 calc(32 * var(--rem)) calc(24 * var(--rem));
+    padding: 0 calc(32 * var(--rem)) calc(10 * var(--rem)) calc(24 * var(--rem));
   }
 
   .cart-drawer .drawer__heading {
@@ -327,8 +345,11 @@
   .cart-drawer__paypal-note {
     font-size: calc(22 * var(--rem));
   }
+  .cart-drawer__trust,.cart-drawer .tax-note,.cart-drawer__pay {
+    margin: 0 0 calc(20 * var(--rem));
+  }
 
-  .cart-drawer__trust svg {
+  .cart-drawer__trust img {
     width: calc(40 * var(--rem));
     height: calc(40 * var(--rem));
   }
@@ -355,11 +376,36 @@
     font-size: calc(var(--aotos-button-font-size-mobile, 22) * var(--rem));
   }
 
+  .cart-drawer cart-remove-button .button {
+    width: calc(56 * var(--rem));
+    height: calc(56 * var(--rem));
+  }
+
+  .cart-drawer cart-remove-button .svg-wrapper,
+  .cart-drawer cart-remove-button .icon-remove {
+    width: calc(30 * var(--rem));
+    height: calc(30 * var(--rem));
+  }
+
   .cart-drawer .quantity {
     width: calc(150 * var(--rem));
     min-height: calc(56 * var(--rem));
     height: calc(56 * var(--rem));
   }
+
+  .cart-drawer .drawer__close {
+    min-width: calc(40 * var(--rem));
+    min-height: calc(40 * var(--rem));
+    width: calc(40 * var(--rem));
+    height: calc(40 * var(--rem));
+  }
+  
+  .cart-drawer .drawer__close .svg-wrapper {
+    width: calc(24 * var(--rem));
+    height: calc(24 * var(--rem));
+  }
+
+
 
   .cart-drawer .quantity__button {
     width: calc(46 * var(--rem));
@@ -372,6 +418,12 @@
 
   .cart-drawer .quantity__input {
     font-size: calc(24 * var(--rem));
+  }
+}
+
+@media screen and (width: 768px) {
+  .cart-drawer .cart__ctas {
+    gap: calc(16 * var(--rem));
   }
 }
 

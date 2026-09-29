@@ -57,10 +57,6 @@ cart-items .title-wrapper-with-link {
   max-width: 30rem;
 }
 
-.cart-item__details > * + * {
-  margin-top: 0.6rem;
-}
-
 .cart-item__media {
   position: relative;
 }
@@ -150,9 +146,9 @@ cart-remove-button .button:not([disabled]):hover {
   }
 }
 
-cart-remove-button .icon-remove {
-  height: 1.5rem;
-  width: 1.5rem;
+cart-items cart-remove-button .icon-remove {
+  height: 1.8rem;
+  width: 1.8rem;
 }
 
 .cart-item .loading__spinner {
