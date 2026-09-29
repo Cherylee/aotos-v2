@@ -1,0 +1,820 @@
+/* Klaviyo POPUP WeHz4K — align with popup-promotions visuals.
+   Desktop DOM: form > image-col + content-col
+   Mobile DOM:  form > one wrapper > form-rows (image is .klaviyo-form-image)
+   Do not force display:!important (breaks Klaviyo show/hide). */
+
+/* ---------- Overlay / shell ---------- */
+[role="dialog"][aria-label="POPUP Form"] {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+[role="dialog"][aria-label="POPUP Form"] [data-testid="modal-form-container"] {
+  border-radius: calc(16 * var(--rem)) !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
+
+/* 收起态 Teaser：右下角，避开视口底边 */
+.kl-teaser-WeHz4K {
+  left: auto !important;
+  right: 0 !important;
+  bottom: calc(76 * var(--rem)) !important;
+}
+
+@media screen and (max-width: 768px) {
+  .kl-teaser-WeHz4K {
+    bottom: calc(140 * var(--rem)) !important;
+  }
+}
+
+.kl-teaser-WeHz4K [role="button"]:not(.klaviyo-close-form) {
+  border-radius: 10px !important;
+}
+
+/* ---------- Close ---------- */
+[role="dialog"][aria-label="POPUP Form"] .klaviyo-close-form {
+  top: calc(16 * var(--rem)) !important;
+  right: calc(16 * var(--rem)) !important;
+  margin: 0 !important;
+  z-index: 20 !important;
+  height: calc(24 * var(--rem)) !important;
+  width: calc(24 * var(--rem)) !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+[role="dialog"][aria-label="POPUP Form"] .klaviyo-close-form svg {
+  width: calc(24 * var(--rem)) !important;
+  height: calc(24 * var(--rem)) !important;
+}
+
+[role="dialog"][aria-label="POPUP Form"] .klaviyo-close-form circle {
+  fill: transparent !important;
+  stroke: transparent !important;
+}
+
+[role="dialog"][aria-label="POPUP Form"] .klaviyo-close-form path {
+  stroke: #000 !important;
+}
+
+[role="dialog"][aria-label="POPUP Form"] a[aria-label*="Created with Klaviyo"],
+[role="dialog"][aria-label="POPUP Form"] a[href*="klaviyo.com/features/forms"] {
+  display: none !important;
+}
+
+/* ---------- Desktop form (two direct column divs) ---------- */
+@media screen and (min-width: 769px) {
+  form[data-testid="klaviyo-form-WeHz4K"] {
+    width: calc(720 * var(--rem)) !important;
+    min-width: 0 !important;
+    max-width: min(calc(720 * var(--rem)), calc(100vw - 32px)) !important;
+    height: calc(416 * var(--rem)) !important;
+    min-height: calc(416 * var(--rem)) !important;
+    max-height: calc(416 * var(--rem)) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: calc(16 * var(--rem)) !important;
+    background-color: #f8f5f0 !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    flex-direction: row !important;
+    align-items: stretch !important;
+    gap: 0 !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] > div:first-of-type {
+    width: 48% !important;
+    min-width: 0 !important;
+    max-width: 48% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    overflow: hidden !important;
+    flex: 0 0 48% !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] > div:first-of-type img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] > div:last-of-type {
+    width: 52% !important;
+    min-width: 0 !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: calc(64 * var(--rem)) calc(24 * var(--rem)) calc(30 * var(--rem)) !important;
+    box-sizing: border-box !important;
+    background: #f8f5f0 !important;
+    flex: 1 1 52% !important;
+    justify-content: flex-start !important;
+    align-items: stretch !important;
+    gap: 0 !important;
+    overflow: hidden !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] [data-testid="form-row"] {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+    gap: 0 !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] [data-testid="form-row"]:empty {
+    display: none !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] [data-testid="form-component"],
+  form[data-testid="klaviyo-form-WeHz4K"] [data-testid="form-component"] > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-emailinput {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: normal !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext h1,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext h2,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext h3,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext h4,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext h1 span,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext h2 span,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext h3 span,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext h4 span {
+    margin: 0 0 calc(14 * var(--rem)) !important;
+    font-weight: 700 !important;
+    font-size: calc(23 * var(--rem)) !important;
+    line-height: calc(34 * var(--rem)) !important;
+    letter-spacing: 0 !important;
+    color: #000 !important;
+    text-align: center !important;
+    font-family: inherit !important;
+    background: transparent !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext p,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext p span {
+    margin: 0 !important;
+    color: #000 !important;
+    font-size: calc(13 * var(--rem)) !important;
+    line-height: calc(20 * var(--rem)) !important;
+    font-weight: 500 !important;
+    text-align: center !important;
+    letter-spacing: normal !important;
+    font-family: inherit !important;
+    background: transparent !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext:has(p):not(:has(a)) {
+    margin: 0 auto calc(24 * var(--rem)) !important;
+    width: 90% !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext a,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext a span {
+    color: #ff6501 !important;
+    text-decoration: underline !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext:has(a) {
+    margin-top: calc(16 * var(--rem)) !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext:has(a) p,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext:has(a) p span {
+    font-size: calc(11 * var(--rem)) !important;
+    line-height: calc(16 * var(--rem)) !important;
+    font-weight: 400 !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] input[type="email"] {
+    width: 100% !important;
+    height: calc(48 * var(--rem)) !important;
+    margin: 0 0 calc(24 * var(--rem)) !important;
+    padding: 0 calc(16 * var(--rem)) !important;
+    font-size: calc(16 * var(--rem)) !important;
+    line-height: calc(48 * var(--rem)) !important;
+    font-family: inherit !important;
+    color: #000 !important;
+    text-align: left !important;
+    background: #f8f5f0 !important;
+    background-clip: padding-box !important;
+    box-sizing: border-box !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: 0 0 0 1px #333 !important;
+    outline: none !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] input[type="email"]::placeholder {
+    font-size: calc(16 * var(--rem)) !important;
+    color: rgba(0, 0, 0, 0.55) !important;
+    opacity: 1 !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-button,
+  form[data-testid="klaviyo-form-WeHz4K"] button[type="button"]:not(.klaviyo-close-form):not([aria-label="Copy coupon code"]) {
+    width: 100% !important;
+    height: calc(48 * var(--rem)) !important;
+    margin: 0 !important;
+    padding: 0 calc(16 * var(--rem)) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #000 !important;
+    color: #ff6501 !important;
+    font-size: calc(16 * var(--rem)) !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    border: none !important;
+    border-radius: 100px !important;
+    outline: none !important;
+    cursor: pointer !important;
+    box-shadow: none !important;
+  }
+}
+
+@media (hover: hover) and (min-width: 769px) {
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-button:hover,
+  form[data-testid="klaviyo-form-WeHz4K"] button[type="button"]:not(.klaviyo-close-form):not([aria-label="Copy coupon code"]):hover {
+    background: #ff6501 !important;
+    color: #fff !important;
+  }
+}
+
+/* ---------- Mobile (single-column DOM with .klaviyo-form-image row) ---------- */
+@media screen and (max-width: 768px) {
+  [role="dialog"][aria-label="POPUP Form"] [data-testid="modal-form-container"] {
+    width: min(calc(672 * var(--rem)), calc(100vw - 20px)) !important;
+    max-width: min(calc(672 * var(--rem)), calc(100vw - 20px)) !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] {
+    width: min(calc(672 * var(--rem)), calc(100vw - 20px)) !important;
+    max-width: min(calc(672 * var(--rem)), calc(100vw - 20px)) !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: calc(16 * var(--rem)) !important;
+    background: #f9f8f6 !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: stretch !important;
+    gap: 0 !important;
+    background: #f9f8f6 !important;
+    flex: none !important;
+    overflow: visible !important;
+  }
+
+  /* Close sits in white content area (below image), like 自研 */
+  [role="dialog"][aria-label="POPUP Form"] .klaviyo-close-form {
+    top: calc(min(672 * var(--rem), 100vw - 20px) * 390 / 624 + 12 * var(--rem)) !important;
+    right: calc(12 * var(--rem)) !important;
+    margin: 0 !important;
+    height: calc(32 * var(--rem)) !important;
+    width: calc(32 * var(--rem)) !important;
+  }
+
+  [role="dialog"][aria-label="POPUP Form"] .klaviyo-close-form svg {
+    width: calc(32 * var(--rem)) !important;
+    height: calc(32 * var(--rem)) !important;
+  }
+
+  [role="dialog"][aria-label="POPUP Form"] .klaviyo-close-form path {
+    stroke-width: 1.5 !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] [data-testid="form-row"] {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+    gap: 0 !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] [data-testid="form-row"]:empty {
+    display: none !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] [data-testid="form-component"],
+  form[data-testid="klaviyo-form-WeHz4K"] [data-testid="form-component"] > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-emailinput,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-image {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: normal !important;
+  }
+
+  /* Image row full-bleed */
+  form[data-testid="klaviyo-form-WeHz4K"] [data-testid="form-row"]:has(.klaviyo-form-image) {
+    padding: 0 !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-image {
+    aspect-ratio: 624 / 390 !important;
+    overflow: hidden !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+
+  /* Content rows padding = 自研 mobile */
+  form[data-testid="klaviyo-form-WeHz4K"] [data-testid="form-row"]:not(:has(.klaviyo-form-image)) {
+    padding-left: calc(40 * var(--rem)) !important;
+    padding-right: calc(40 * var(--rem)) !important;
+    box-sizing: border-box !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] [data-testid="form-row"]:has(.klaviyo-form-image) + [data-testid="form-row"] {
+    padding-top: calc(38 * var(--rem)) !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] > div > [data-testid="form-row"]:last-child {
+    padding-bottom: calc(67 * var(--rem)) !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext h1,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext h2,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext h3,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext h4,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext h1 span,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext h2 span,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext h3 span,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext h4 span {
+    margin: 0 0 calc(12 * var(--rem)) !important;
+    font-weight: 700 !important;
+    font-size: calc(36 * var(--rem)) !important;
+    line-height: calc(42 * var(--rem)) !important;
+    color: #000 !important;
+    text-align: center !important;
+    font-family: inherit !important;
+    background: transparent !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext p,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext p span {
+    margin: 0 !important;
+    color: #000 !important;
+    font-size: calc(24 * var(--rem)) !important;
+    line-height: calc(32 * var(--rem)) !important;
+    font-weight: 500 !important;
+    text-align: center !important;
+    font-family: inherit !important;
+    background: transparent !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext:has(p):not(:has(a)) {
+    margin: 0 auto calc(47 * var(--rem)) !important;
+    width: 82% !important;
+    max-width: 82% !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext a,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext a span {
+    color: #ff6501 !important;
+    text-decoration: underline !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext:has(a) {
+    margin-top: calc(30 * var(--rem)) !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext:has(a) p,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext:has(a) p span {
+    font-size: calc(24 * var(--rem)) !important;
+    line-height: calc(32 * var(--rem)) !important;
+    font-weight: 400 !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] input[type="email"] {
+    width: 100% !important;
+    height: calc(88 * var(--rem)) !important;
+    margin: 0 0 calc(30 * var(--rem)) !important;
+    padding: 0 calc(30 * var(--rem)) !important;
+    font-size: max(16px, calc(24 * var(--rem))) !important;
+    line-height: calc(88 * var(--rem)) !important;
+    font-family: inherit !important;
+    color: #000 !important;
+    text-align: left !important;
+    background: #f8f5f0 !important;
+    background-clip: padding-box !important;
+    box-sizing: border-box !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: 0 0 0 1px #333 !important;
+    outline: none !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] input[type="email"]::placeholder {
+    font-size: max(16px, calc(24 * var(--rem))) !important;
+    color: rgba(0, 0, 0, 0.55) !important;
+    opacity: 1 !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-button,
+  form[data-testid="klaviyo-form-WeHz4K"] button[type="button"]:not(.klaviyo-close-form):not([aria-label="Copy coupon code"]) {
+    width: 100% !important;
+    height: calc(88 * var(--rem)) !important;
+    margin: 0 !important;
+    padding: 0 calc(16 * var(--rem)) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #000 !important;
+    color: #ff6501 !important;
+    font-size: calc(30 * var(--rem)) !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    border: none !important;
+    border-radius: 100px !important;
+    outline: none !important;
+    cursor: pointer !important;
+    box-shadow: none !important;
+  }
+}
+
+/* ---------- iPad mini / 540–768：手机稿 rem 接近 1 时会过大 ---------- */
+@media screen and (min-width: 540px) and (max-width: 768px) {
+  [role="dialog"][aria-label="POPUP Form"] [data-testid="modal-form-container"],
+  form[data-testid="klaviyo-form-WeHz4K"] {
+    width: min(420px, calc(100vw - 48px)) !important;
+    max-width: min(420px, calc(100vw - 48px)) !important;
+  }
+
+  [role="dialog"][aria-label="POPUP Form"] .klaviyo-close-form {
+    top: calc(min(420px, 100vw - 48px) * 390 / 624 + 10px) !important;
+    right: 12px !important;
+    height: 24px !important;
+    width: 24px !important;
+  }
+
+  [role="dialog"][aria-label="POPUP Form"] .klaviyo-close-form svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] [data-testid="form-row"]:not(:has(.klaviyo-form-image)) {
+    padding-left: 28px !important;
+    padding-right: 28px !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] [data-testid="form-row"]:has(.klaviyo-form-image) + [data-testid="form-row"] {
+    padding-top: 28px !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] > div > [data-testid="form-row"]:last-child {
+    padding-bottom: 32px !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext h1,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext h2,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext h3,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext h4,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext h1 span,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext h2 span,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext h3 span,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext h4 span {
+    font-size: 22px !important;
+    line-height: 28px !important;
+    margin-bottom: 10px !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext p,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext p span {
+    font-size: 13px !important;
+    line-height: 18px !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext:has(p):not(:has(a)) {
+    margin-bottom: 20px !important;
+    width: 88% !important;
+    max-width: 88% !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext:has(a) {
+    margin-top: 14px !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext:has(a) p,
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-richtext:has(a) p span {
+    font-size: 11px !important;
+    line-height: 16px !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] input[type="email"] {
+    height: 44px !important;
+    font-size: 16px !important;
+    line-height: 44px !important;
+    margin-bottom: 16px !important;
+    padding: 0 14px !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] input[type="email"]::placeholder {
+    font-size: 16px !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] .klaviyo-form-button,
+  form[data-testid="klaviyo-form-WeHz4K"] button[type="button"]:not(.klaviyo-close-form):not([aria-label="Copy coupon code"]) {
+    height: 44px !important;
+    font-size: 15px !important;
+  }
+}
+
+/* ---------- Success step: coupon left + copy right ---------- */
+form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 0 calc(10 * var(--rem)) !important;
+}
+
+form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h1,
+form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h2,
+form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h3,
+form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h4 {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: calc(10 * var(--rem)) !important;
+  margin: 0 0 calc(12 * var(--rem)) !important;
+  font-size: calc(22 * var(--rem)) !important;
+  line-height: 1.2 !important;
+  font-weight: 700 !important;
+  color: #1e1b1b !important;
+  text-align: left !important;
+}
+
+form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h1::before,
+form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h2::before,
+form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h3::before,
+form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h4::before {
+  content: '' !important;
+  flex-shrink: 0 !important;
+  width: calc(22 * var(--rem)) !important;
+  height: calc(22 * var(--rem)) !important;
+  border-radius: 50% !important;
+  background-color: #22c55e !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' d='M3.5 8.3 6.4 11.2 12.5 4.8'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: calc(12 * var(--rem)) !important;
+}
+
+form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h1 span,
+form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h2 span,
+form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h3 span,
+form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h4 span {
+  font-size: inherit !important;
+  line-height: inherit !important;
+  font-weight: inherit !important;
+  text-align: left !important;
+}
+
+form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext p,
+form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext p span {
+  color: #6b6560 !important;
+  font-size: calc(13 * var(--rem)) !important;
+  line-height: calc(20 * var(--rem)) !important;
+  font-weight: 400 !important;
+  text-align: left !important;
+}
+
+form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext:has(p):not(:has(a)) {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 0 calc(8 * var(--rem)) !important;
+}
+
+form[data-testid="klaviyo-form-WeHz4K"] [data-testid="form-row"]:has(button[aria-label="Copy coupon code"]) {
+  margin-top: calc(22 * var(--rem)) !important;
+}
+
+form[data-testid="klaviyo-form-WeHz4K"] button[aria-label="Copy coupon code"] {
+  width: 100% !important;
+  height: calc(44 * var(--rem)) !important;
+  min-height: calc(44 * var(--rem)) !important;
+  max-height: calc(44 * var(--rem)) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  gap: 0 !important;
+  background: #fdf6e9 !important;
+  color: #3d2e1f !important;
+  border: 1px solid #e6d7c0 !important;
+  border-radius: calc(8 * var(--rem)) !important;
+  box-shadow: none !important;
+  outline: none !important;
+  cursor: pointer !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+form[data-testid="klaviyo-form-WeHz4K"] button[aria-label="Copy coupon code"] > *:not(.klaviyo-coupon-copy) {
+  order: 1 !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 calc(14 * var(--rem)) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #fdf6e9 !important;
+  color: #3d2e1f !important;
+  font-family: ui-monospace, 'Courier New', Courier, monospace !important;
+  font-size: calc(13 * var(--rem)) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  line-height: 1 !important;
+}
+
+form[data-testid="klaviyo-form-WeHz4K"] button[aria-label="Copy coupon code"] svg,
+form[data-testid="klaviyo-form-WeHz4K"] button[aria-label="Copy coupon code"] img,
+form[data-testid="klaviyo-form-WeHz4K"] button[aria-label="Copy coupon code"] > *:has(svg),
+form[data-testid="klaviyo-form-WeHz4K"] button[aria-label="Copy coupon code"] > *:has(img) {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+form[data-testid="klaviyo-form-WeHz4K"] button[aria-label="Copy coupon code"] .klaviyo-coupon-copy {
+  order: 2 !important;
+  flex: 0 0 30% !important;
+  width: 30% !important;
+  min-width: calc(72 * var(--rem)) !important;
+  max-width: 40% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  max-height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #111111 !important;
+  color: #ffffff !important;
+  font-family: inherit !important;
+  font-size: calc(13 * var(--rem)) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  line-height: 1 !important;
+  border: 0 !important;
+  border-radius: 0 calc(7 * var(--rem)) calc(7 * var(--rem)) 0 !important;
+}
+
+@media screen and (max-width: 768px) {
+  form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h1,
+  form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h2,
+  form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h3,
+  form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h4 {
+    font-size: calc(32 * var(--rem)) !important;
+    gap: calc(12 * var(--rem)) !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h1::before,
+  form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h2::before,
+  form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h3::before,
+  form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h4::before {
+    width: calc(32 * var(--rem)) !important;
+    height: calc(32 * var(--rem)) !important;
+    background-size: calc(18 * var(--rem)) !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext p,
+  form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext p span {
+    font-size: calc(22 * var(--rem)) !important;
+    line-height: calc(30 * var(--rem)) !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] [data-testid="form-row"]:has(button[aria-label="Copy coupon code"]) {
+    margin-top: calc(28 * var(--rem)) !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] button[aria-label="Copy coupon code"] {
+    height: calc(72 * var(--rem)) !important;
+    min-height: calc(72 * var(--rem)) !important;
+    max-height: calc(72 * var(--rem)) !important;
+    border-radius: calc(12 * var(--rem)) !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] button[aria-label="Copy coupon code"] > *:not(.klaviyo-coupon-copy) {
+    font-size: calc(22 * var(--rem)) !important;
+    padding: 0 calc(16 * var(--rem)) !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] button[aria-label="Copy coupon code"] .klaviyo-coupon-copy {
+    min-width: calc(120 * var(--rem)) !important;
+    font-size: calc(22 * var(--rem)) !important;
+    border-radius: 0 calc(11 * var(--rem)) calc(11 * var(--rem)) 0 !important;
+  }
+}
+
+@media screen and (min-width: 540px) and (max-width: 768px) {
+  form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h1,
+  form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h2,
+  form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h3,
+  form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h4 {
+    font-size: 22px !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h1::before,
+  form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h2::before,
+  form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h3::before,
+  form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext h4::before {
+    width: 22px !important;
+    height: 22px !important;
+    background-size: 12px !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext p,
+  form[data-testid="klaviyo-form-WeHz4K"]:has(button[aria-label="Copy coupon code"]) .klaviyo-form-richtext p span {
+    font-size: 13px !important;
+    line-height: 20px !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] button[aria-label="Copy coupon code"] {
+    height: 44px !important;
+    min-height: 44px !important;
+    max-height: 44px !important;
+    border-radius: 8px !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] button[aria-label="Copy coupon code"] > *:not(.klaviyo-coupon-copy) {
+    font-size: 13px !important;
+  }
+
+  form[data-testid="klaviyo-form-WeHz4K"] button[aria-label="Copy coupon code"] .klaviyo-coupon-copy {
+    min-width: 72px !important;
+    font-size: 13px !important;
+    border-radius: 0 7px 7px 0 !important;
+  }
+}

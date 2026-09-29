@@ -40,6 +40,74 @@
     {%- endif -%}
 
     {{ content_for_header }}
+    {%- comment -%} Klaviyo 弹窗覆盖：隐藏原样式，避免弹窗先闪 {%- endcomment -%}
+    <style>
+      [role="dialog"][aria-label="POPUP Form"] {
+        opacity: 0 !important;
+        visibility: hidden !important;
+      }
+    </style>
+    {%- comment -%} Klaviyo 弹窗样式非首屏，异步加载 {%- endcomment -%}
+    <link rel="stylesheet" href="{{ 'klaviyo-popup.css' | asset_url }}" media="print" onload="this.media='all'">
+    <style>
+      @media screen and (max-width: 768px) {
+        form[data-testid='klaviyo-form-WeHz4K'] input[type='email'],
+        form[data-testid='klaviyo-form-WeHz4K'] input[type='email']::placeholder {
+          font-size: 16px !important;
+        }
+      }
+    </style>
+
+    {%- comment -%} Klaviyo 弹窗复制按钮 patch：defer 到 DOM 解析后 {%- endcomment -%}
+    <script defer>
+      (function () {
+        const COPY_BTN = 'button[aria-label="Copy coupon code"]';
+
+        const enhance = (btn) => {
+          if (!btn || !btn.matches || !btn.matches(COPY_BTN)) return;
+
+          btn.querySelectorAll('svg, img').forEach((icon) => {
+            icon.style.setProperty('display', 'none', 'important');
+            icon.style.setProperty('width', '0', 'important');
+            icon.style.setProperty('height', '0', 'important');
+            icon.setAttribute('aria-hidden', 'true');
+          });
+
+          if (!btn.querySelector('.klaviyo-coupon-copy')) {
+            const copy = document.createElement('span');
+            copy.className = 'klaviyo-coupon-copy';
+            copy.textContent = 'Copy';
+            copy.setAttribute('aria-hidden', 'true');
+            btn.appendChild(copy);
+          }
+        };
+
+        const patch = (root) => {
+          const scope = root && root.querySelectorAll ? root : document;
+          if (scope.matches && scope.matches(COPY_BTN)) enhance(scope);
+          scope.querySelectorAll?.(COPY_BTN).forEach(enhance);
+        };
+
+        const observer = new MutationObserver((mutations) => {
+          mutations.forEach((mutation) => {
+            mutation.addedNodes.forEach((node) => {
+              if (node.nodeType === 1) patch(node);
+            });
+          });
+        });
+
+        const start = () => {
+          patch(document);
+          observer.observe(document.documentElement, { childList: true, subtree: true });
+        };
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', start);
+        } else {
+          start();
+        }
+      })();
+    </script>
 
     {%- liquid
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'

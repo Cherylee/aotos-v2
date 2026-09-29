@@ -1,10 +1,26 @@
 {%- liquid
-  assign sc_hero_img = section.settings.image
-  assign sc_hero_img_mob = section.settings.image_mobile | default: sc_hero_img
   assign sc_hero_eyebrow = section.settings.eyebrow | default: 'YOUR SAFETY IS OUR PRIORITY'
   assign sc_hero_title = section.settings.heading | default: 'Safety Certified'
   assign sc_hero_subtitle = section.settings.subtitle
   assign sc_overlay = section.settings.overlay_opacity | default: 45
+  assign sc_height = section.settings.height | default: '400'
+  assign sc_height_mob = section.settings.height_mobile | default: '480'
+  assign sc_eyebrow_size = section.settings.eyebrow_size | default: 12
+  assign sc_eyebrow_gap = section.settings.eyebrow_gap | default: 16
+  assign sc_title_size = section.settings.title_size | default: 32
+  assign sc_title_gap = section.settings.title_gap | default: 16
+  assign sc_subtitle_size = section.settings.subtitle_size | default: 12
+  assign sc_subtitle_gap = section.settings.subtitle_gap | default: 0
+  assign sc_eyebrow_size_mob = section.settings.eyebrow_size_mobile | default: 20
+  assign sc_eyebrow_gap_mob = section.settings.eyebrow_gap_mobile | default: 20
+  assign sc_title_size_mob = section.settings.title_size_mobile | default: 48
+  assign sc_title_gap_mob = section.settings.title_gap_mobile | default: 20
+  assign sc_subtitle_size_mob = section.settings.subtitle_size_mobile | default: 20
+  assign sc_subtitle_gap_mob = section.settings.subtitle_gap_mobile | default: 0
+  assign sc_slide_count = section.blocks.size
+  if sc_slide_count == 0
+    assign sc_slide_count = 1
+  endif
 -%}
 
 {% style %}
@@ -19,7 +35,7 @@
   #sc-hero-{{ section.id }} {
     position: relative;
     width: 100%;
-    min-height: calc(400 * var(--rem));
+    min-height: calc({{ sc_height }} * var(--rem));
     overflow: hidden;
     color: #ffffff;
     font-family: var(--font-body-family);
@@ -29,14 +45,24 @@
     box-sizing: border-box;
   }
 
-  #sc-hero-{{ section.id }} .sc-hero__bg {
+  #sc-hero-{{ section.id }} .sc-hero__slide {
     position: absolute;
     inset: 0;
     z-index: 0;
+    opacity: 0;
+    pointer-events: none;
   }
 
-  #sc-hero-{{ section.id }} .sc-hero__bg picture,
-  #sc-hero-{{ section.id }} .sc-hero__bg img {
+  #sc-hero-{{ section.id }} .sc-hero__slide.is-active {
+    opacity: 1;
+    z-index: 1;
+    pointer-events: auto;
+  }
+
+  #sc-hero-{{ section.id }} .sc-hero__media,
+  #sc-hero-{{ section.id }} .sc-hero__media picture,
+  #sc-hero-{{ section.id }} .sc-hero__media img,
+  #sc-hero-{{ section.id }} .sc-hero__media video {
     display: block;
     width: 100%;
     height: 100%;
@@ -44,26 +70,37 @@
     object-position: {{ section.settings.image_position | default: 'center center' }};
   }
 
+  #sc-hero-{{ section.id }} .sc-hero__media {
+    position: absolute;
+    inset: 0;
+  }
+
+  #sc-hero-{{ section.id }} .sc-hero__video--mobile,
+  #sc-hero-{{ section.id }} .sc-hero__poster--mobile {
+    display: none;
+  }
+
   #sc-hero-{{ section.id }} .sc-hero__overlay {
     position: absolute;
     inset: 0;
-    z-index: 1;
+    z-index: 2;
     background: rgb(0 0 0 / calc(var(--sc-hero-overlay, 45) * 1%));
     pointer-events: none;
   }
 
   #sc-hero-{{ section.id }} .sc-hero__inner {
     position: relative;
-    z-index: 2;
+    z-index: 3;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     width: calc(1100 * var(--rem));
     max-width: 100%;
-    min-height: calc(400 * var(--rem));
+    min-height: calc({{ sc_height }} * var(--rem));
     margin: 0 auto;
     padding: calc(80 * var(--rem)) calc(30 * var(--rem));
+    pointer-events: none;
   }
 
   #sc-hero-{{ section.id }} .sc-hero__accent {
@@ -76,40 +113,75 @@
   }
 
   #sc-hero-{{ section.id }} .sc-hero__eyebrow {
-    margin: 0 0 calc(16 * var(--rem));
+    margin: 0 0 calc({{ sc_eyebrow_gap }} * var(--rem));
     color: #ffffff;
-    font-size: calc(12 * var(--rem));
+    font-size: calc({{ sc_eyebrow_size }} * var(--rem));
     letter-spacing: 0.14em;
-    line-height: calc(18 * var(--rem));
+    line-height: 1.4;
     text-transform: uppercase;
   }
 
   #sc-hero-{{ section.id }} .sc-hero__title {
-    margin: 0 0 calc(16 * var(--rem));
+    margin: 0 0 calc({{ sc_title_gap }} * var(--rem));
     color: #ffffff;
-    font-size: calc(32 * var(--rem));
+    font-size: calc({{ sc_title_size }} * var(--rem));
     font-weight: 600;
     line-height: 1.1;
     letter-spacing: -0.02em;
   }
 
   #sc-hero-{{ section.id }} .sc-hero__subtitle {
-    margin: 0;
+    margin: 0 0 calc({{ sc_subtitle_gap }} * var(--rem));
     max-width: calc(560 * var(--rem));
     color: #ffffff;
-    font-size: calc(12 * var(--rem));
-    line-height: calc(24 * var(--rem));
+    font-size: calc({{ sc_subtitle_size }} * var(--rem));
+    line-height: 1.5;
   }
 
-  @media screen and (max-width: 749px) {
-    #sc-hero-{{ section.id }} {
-      min-height: calc(480 * var(--rem));
+  #sc-hero-{{ section.id }} .sc-hero__dots {
+    position: absolute;
+    z-index: 4;
+    left: 0;
+    right: 0;
+    bottom: calc(24 * var(--rem));
+    display: flex;
+    justify-content: center;
+    gap: calc(8 * var(--rem));
+  }
+
+  #sc-hero-{{ section.id }} .sc-hero__dot {
+    width: calc(8 * var(--rem));
+    height: calc(8 * var(--rem));
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 45%);
+    cursor: pointer;
+  }
+
+  #sc-hero-{{ section.id }} .sc-hero__dot[aria-selected='true'] {
+    background: #ffffff;
+  }
+
+  @media screen and (max-width: 768px) {
+    #sc-hero-{{ section.id }},
+    #sc-hero-{{ section.id }} .sc-hero__inner {
+      min-height: calc({{ sc_height_mob }} * var(--rem));
     }
 
     #sc-hero-{{ section.id }} .sc-hero__inner {
       width: 100%;
-      min-height: calc(480 * var(--rem));
       padding: calc(88 * var(--rem)) calc(40 * var(--rem));
+    }
+
+    #sc-hero-{{ section.id }} .sc-hero__video--pc,
+    #sc-hero-{{ section.id }} .sc-hero__poster--pc {
+      display: none;
+    }
+
+    #sc-hero-{{ section.id }} .sc-hero__video--mobile,
+    #sc-hero-{{ section.id }} .sc-hero__poster--mobile {
+      display: block;
     }
 
     #sc-hero-{{ section.id }} .sc-hero__accent {
@@ -119,41 +191,25 @@
     }
 
     #sc-hero-{{ section.id }} .sc-hero__eyebrow {
-      margin-bottom: calc(20 * var(--rem));
-      font-size: calc(20 * var(--rem));
-      line-height: calc(32 * var(--rem));
+      margin-bottom: calc({{ sc_eyebrow_gap_mob }} * var(--rem));
+      font-size: calc({{ sc_eyebrow_size_mob }} * var(--rem));
     }
 
     #sc-hero-{{ section.id }} .sc-hero__title {
-      margin-bottom: calc(20 * var(--rem));
-      font-size: calc(48 * var(--rem));
+      margin-bottom: calc({{ sc_title_gap_mob }} * var(--rem));
+      font-size: calc({{ sc_title_size_mob }} * var(--rem));
       line-height: 1.15;
     }
 
     #sc-hero-{{ section.id }} .sc-hero__subtitle {
-      font-size: calc(20 * var(--rem));
-      line-height: calc(32 * var(--rem));
+      margin-bottom: calc({{ sc_subtitle_gap_mob }} * var(--rem));
+      font-size: calc({{ sc_subtitle_size_mob }} * var(--rem));
     }
   }
 
-  @media screen and (min-width: 750px) and (max-width: 768px) {
-    #sc-hero-{{ section.id }} .sc-hero__inner {
-      width: 100%;
-      padding: calc(168 * var(--rem)) calc(34 * var(--rem));
-    }
-
-    #sc-hero-{{ section.id }} .sc-hero__eyebrow {
-      font-size: calc(20 * var(--rem));
-      line-height: calc(32 * var(--rem));
-    }
-
-    #sc-hero-{{ section.id }} .sc-hero__title {
-      font-size: calc(48 * var(--rem));
-    }
-
-    #sc-hero-{{ section.id }} .sc-hero__subtitle {
-      font-size: calc(20 * var(--rem));
-      line-height: calc(32 * var(--rem));
+  @media (prefers-reduced-motion: reduce) {
+    #sc-hero-{{ section.id }} .sc-hero__slide {
+      transition: none;
     }
   }
 {% endstyle %}
@@ -163,49 +219,179 @@
   id="sc-hero-{{ section.id }}"
   style="--sc-hero-overlay: {{ sc_overlay }};"
 >
-  <div class="sc-hero__bg" aria-hidden="true">
-    {%- if sc_hero_img != blank or sc_hero_img_mob != blank -%}
-      <picture>
-        {%- if sc_hero_img_mob != blank -%}
-          <source
-            media="(max-width: 749px)"
-            srcset="{{ sc_hero_img_mob | image_url: width: 750 }} 750w, {{ sc_hero_img_mob | image_url: width: 1500 }} 1500w"
-            sizes="100vw"
-          >
+  {%- if section.blocks.size > 0 -%}
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign slide_image = block.settings.image
+        assign slide_image_mob = block.settings.image_mobile | default: slide_image
+        assign slide_video = block.settings.video
+        assign slide_video_mob = block.settings.video_mobile | default: slide_video
+        assign slide_poster = block.settings.poster | default: slide_image
+        if slide_poster == blank and slide_video != blank
+          assign slide_poster = slide_video.preview_image
+        endif
+        assign slide_poster_mob = block.settings.poster_mobile | default: block.settings.image_mobile
+        if slide_poster_mob == blank
+          assign slide_poster_mob = slide_poster
+        endif
+        assign slide_alt = block.settings.image_alt | default: sc_hero_title
+        assign slide_eager = false
+        if forloop.first
+          assign slide_eager = true
+        endif
+      -%}
+      <div
+        class="sc-hero__slide{% if forloop.first %} is-active{% endif %}"
+        {{ block.shopify_attributes }}
+      >
+        <div class="sc-hero__media" aria-hidden="true">
+          {%- if slide_video != blank or slide_video_mob != blank -%}
+            {%- if slide_poster != blank -%}
+              <img
+                class="sc-hero__poster{% if slide_poster_mob != blank and slide_poster_mob != slide_poster %} sc-hero__poster--pc{% endif %}"
+                src="{{ slide_poster | image_url: width: 1600 }}"
+                srcset="{{ slide_poster | image_url: width: 1100 }} 1100w, {{ slide_poster | image_url: width: 1600 }} 1600w, {{ slide_poster | image_url: width: 1920 }} 1920w"
+                sizes="100vw"
+                width="1600"
+                height="{{ 1600 | divided_by: slide_poster.aspect_ratio | round }}"
+                alt=""
+                {% if slide_eager %}
+                  loading="eager"
+                  fetchpriority="high"
+                {% else %}
+                  loading="lazy"
+                {% endif %}
+              >
+            {%- endif -%}
+            {%- if slide_poster_mob != blank and slide_poster_mob != slide_poster -%}
+              <img
+                class="sc-hero__poster sc-hero__poster--mobile"
+                src="{{ slide_poster_mob | image_url: width: 1100 }}"
+                srcset="{{ slide_poster_mob | image_url: width: 750 }} 750w, {{ slide_poster_mob | image_url: width: 1100 }} 1100w, {{ slide_poster_mob | image_url: width: 1500 }} 1500w"
+                sizes="100vw"
+                width="1100"
+                height="{{ 1100 | divided_by: slide_poster_mob.aspect_ratio | round }}"
+                alt=""
+                {% if slide_eager %}
+                  loading="eager"
+                  fetchpriority="high"
+                {% else %}
+                  loading="lazy"
+                {% endif %}
+              >
+            {%- endif -%}
+            {%- if slide_video != blank -%}
+              {%- capture slide_video_class -%}sc-hero__video{% if block.settings.video_mobile != blank %} sc-hero__video--pc{% endif %}{%- endcapture -%}
+              {%- if slide_eager -%}
+                {{ slide_video | video_tag: class: slide_video_class, autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata' }}
+              {%- else -%}
+                {{ slide_video | video_tag: class: slide_video_class, autoplay: false, loop: true, muted: true, controls: false, playsinline: true, preload: 'none' }}
+              {%- endif -%}
+            {%- endif -%}
+            {%- if block.settings.video_mobile != blank -%}
+              {{ block.settings.video_mobile | video_tag: class: 'sc-hero__video sc-hero__video--mobile', autoplay: false, loop: true, muted: true, controls: false, playsinline: true, preload: 'none' }}
+            {%- endif -%}
+          {%- elsif slide_image != blank or slide_image_mob != blank -%}
+            <picture>
+              {%- if slide_image_mob != blank -%}
+                <source
+                  media="(max-width: 768px)"
+                  srcset="{{ slide_image_mob | image_url: width: 750 }} 750w, {{ slide_image_mob | image_url: width: 1100 }} 1100w, {{ slide_image_mob | image_url: width: 1500 }} 1500w"
+                  sizes="100vw"
+                >
+              {%- endif -%}
+              {%- if slide_image != blank -%}
+                <img
+                  src="{{ slide_image | image_url: width: 1600 }}"
+                  srcset="{{ slide_image | image_url: width: 1100 }} 1100w, {{ slide_image | image_url: width: 1600 }} 1600w, {{ slide_image | image_url: width: 1920 }} 1920w"
+                  sizes="100vw"
+                  width="1600"
+                  height="{{ 1600 | divided_by: slide_image.aspect_ratio | round }}"
+                  alt="{{ slide_alt | escape }}"
+                  {% if slide_eager %}
+                    loading="eager"
+                    fetchpriority="high"
+                  {% else %}
+                    loading="lazy"
+                  {% endif %}
+                >
+              {%- else -%}
+                <img
+                  src="{{ slide_image_mob | image_url: width: 1100 }}"
+                  srcset="{{ slide_image_mob | image_url: width: 750 }} 750w, {{ slide_image_mob | image_url: width: 1100 }} 1100w, {{ slide_image_mob | image_url: width: 1500 }} 1500w"
+                  sizes="100vw"
+                  width="1100"
+                  height="{{ 1100 | divided_by: slide_image_mob.aspect_ratio | round }}"
+                  alt="{{ slide_alt | escape }}"
+                  {% if slide_eager %}
+                    loading="eager"
+                    fetchpriority="high"
+                  {% else %}
+                    loading="lazy"
+                  {% endif %}
+                >
+              {%- endif -%}
+            </picture>
+          {%- else -%}
+            <div style="width:100%;height:100%;background:#1a1a1a;"></div>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  {%- else -%}
+    {%- liquid
+      assign slide_image = section.settings.image
+      assign slide_image_mob = section.settings.image_mobile | default: slide_image
+      assign slide_alt = section.settings.image_alt | default: sc_hero_title
+    -%}
+    <div class="sc-hero__slide is-active">
+      <div class="sc-hero__media" aria-hidden="true">
+        {%- if slide_image != blank or slide_image_mob != blank -%}
+          <picture>
+            {%- if slide_image_mob != blank -%}
+              <source
+                media="(max-width: 768px)"
+                srcset="{{ slide_image_mob | image_url: width: 750 }} 750w, {{ slide_image_mob | image_url: width: 1100 }} 1100w, {{ slide_image_mob | image_url: width: 1500 }} 1500w"
+                sizes="100vw"
+              >
+            {%- endif -%}
+            {%- if slide_image != blank -%}
+              <img
+                src="{{ slide_image | image_url: width: 1600 }}"
+                srcset="{{ slide_image | image_url: width: 1100 }} 1100w, {{ slide_image | image_url: width: 1600 }} 1600w, {{ slide_image | image_url: width: 1920 }} 1920w"
+                sizes="100vw"
+                width="1600"
+                height="{{ 1600 | divided_by: slide_image.aspect_ratio | round }}"
+                alt="{{ slide_alt | escape }}"
+                loading="eager"
+                fetchpriority="high"
+              >
+            {%- else -%}
+              <img
+                src="{{ slide_image_mob | image_url: width: 1100 }}"
+                srcset="{{ slide_image_mob | image_url: width: 750 }} 750w, {{ slide_image_mob | image_url: width: 1100 }} 1100w, {{ slide_image_mob | image_url: width: 1500 }} 1500w"
+                sizes="100vw"
+                width="1100"
+                height="{{ 1100 | divided_by: slide_image_mob.aspect_ratio | round }}"
+                alt="{{ slide_alt | escape }}"
+                loading="eager"
+                fetchpriority="high"
+              >
+            {%- endif -%}
+          </picture>
+        {%- else -%}
+          <div style="width:100%;height:100%;background:#1a1a1a;"></div>
         {%- endif -%}
-        {%- if sc_hero_img != blank -%}
-          <img
-            src="{{ sc_hero_img | image_url: width: 1600 }}"
-            srcset="{{ sc_hero_img | image_url: width: 1100 }} 1100w, {{ sc_hero_img | image_url: width: 1600 }} 1600w, {{ sc_hero_img | image_url: width: 1920 }} 1920w"
-            sizes="100vw"
-            width="1600"
-            height="{{ 1600 | divided_by: sc_hero_img.aspect_ratio | round }}"
-            alt="{{ section.settings.image_alt | default: sc_hero_title | escape }}"
-            loading="eager"
-            fetchpriority="high"
-          >
-        {%- elsif sc_hero_img_mob != blank -%}
-          <img
-            src="{{ sc_hero_img_mob | image_url: width: 1500 }}"
-            srcset="{{ sc_hero_img_mob | image_url: width: 750 }} 750w, {{ sc_hero_img_mob | image_url: width: 1500 }} 1500w"
-            sizes="100vw"
-            width="1500"
-            height="{{ 1500 | divided_by: sc_hero_img_mob.aspect_ratio | round }}"
-            alt="{{ section.settings.image_alt | default: sc_hero_title | escape }}"
-            loading="eager"
-            fetchpriority="high"
-          >
-        {%- endif -%}
-      </picture>
-    {%- else -%}
-      <div style="width:100%;height:100%;background:#1a1a1a;"></div>
-    {%- endif -%}
-  </div>
+      </div>
+    </div>
+  {%- endif -%}
 
   <div class="sc-hero__overlay" aria-hidden="true"></div>
 
   <div class="sc-hero__inner">
-    <span class="sc-hero__accent" aria-hidden="true"></span>
+    {%- if section.settings.show_accent != false -%}
+      <span class="sc-hero__accent" aria-hidden="true"></span>
+    {%- endif -%}
     {%- if sc_hero_eyebrow != blank -%}
       <p class="sc-hero__eyebrow">{{ sc_hero_eyebrow | escape }}</p>
     {%- endif -%}
@@ -216,7 +402,88 @@
       <p class="sc-hero__subtitle">{{ sc_hero_subtitle | escape }}</p>
     {%- endif -%}
   </div>
+
+  {%- if section.blocks.size > 1 -%}
+    <div class="sc-hero__dots" role="tablist" aria-label="{{ sc_hero_title | escape }}">
+      {%- for block in section.blocks -%}
+        <button
+          type="button"
+          class="sc-hero__dot"
+          role="tab"
+          aria-label="{{ forloop.index }}"
+          aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+        ></button>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
 </section>
+
+{%- if section.blocks.size > 1 -%}
+  <script>
+    (function () {
+      var root = document.getElementById('sc-hero-{{ section.id }}');
+      if (!root) return;
+      var slides = root.querySelectorAll('.sc-hero__slide');
+      var dots = root.querySelectorAll('.sc-hero__dot');
+      var index = 0;
+      var timer;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      var playSlide = function (slide) {
+        root.querySelectorAll('video').forEach(function (video) {
+          video.pause();
+        });
+        if (reduce) return;
+        slide.querySelectorAll('video').forEach(function (video) {
+          if (window.getComputedStyle(video).display === 'none') return;
+          var playing = video.play();
+          if (playing && playing.catch) playing.catch(function () {});
+        });
+      };
+
+      var go = function (next) {
+        index = (next + slides.length) % slides.length;
+        slides.forEach(function (slide, i) {
+          slide.classList.toggle('is-active', i === index);
+        });
+        dots.forEach(function (dot, i) {
+          dot.setAttribute('aria-selected', i === index ? 'true' : 'false');
+        });
+        playSlide(slides[index]);
+      };
+
+      var start = function () {
+        clearInterval(timer);
+        if (reduce) return;
+        timer = setInterval(function () {
+          go(index + 1);
+        }, 5000);
+      };
+
+      dots.forEach(function (dot, i) {
+        dot.addEventListener('click', function () {
+          go(i);
+          start();
+        });
+      });
+
+      if (reduce) {
+        root.querySelectorAll('video').forEach(function (video) {
+          video.pause();
+          video.removeAttribute('autoplay');
+        });
+        return;
+      }
+
+      root.addEventListener('mouseenter', function () {
+        clearInterval(timer);
+      });
+      root.addEventListener('mouseleave', start);
+      playSlide(slides[0]);
+      start();
+    })();
+  </script>
+{%- endif -%}
 
 {% schema %}
 {
@@ -225,42 +492,34 @@
   "class": "section",
   "settings": [
     {
-      "type": "image_picker",
-      "id": "image",
-      "label": "背景图（PC）",
-      "info": "建议上传：1920 × 800 px（宽 × 高）。展示：全宽，高度约 400px。"
-    },
-    {
-      "type": "image_picker",
-      "id": "image_mobile",
-      "label": "背景图（手机）",
-      "info": "建议上传：1500 × 960 px（宽 × 高）。展示：全宽，高度约 480px。未上传时使用 PC 图。"
-    },
-    {
-      "type": "text",
-      "id": "image_alt",
-      "label": "背景图 Alt"
+      "type": "select",
+      "id": "height",
+      "label": "PC 高度",
+      "options": [
+        { "value": "400", "label": "400" },
+        { "value": "700", "label": "700" }
+      ],
+      "default": "400"
     },
     {
       "type": "select",
-      "id": "image_position",
-      "label": "背景图位置",
+      "id": "height_mobile",
+      "label": "手机高度",
       "options": [
-        { "value": "center center", "label": "居中" },
-        { "value": "left center", "label": "偏左" },
-        { "value": "right center", "label": "偏右" }
+        { "value": "480", "label": "480" },
+        { "value": "1000", "label": "1000" }
       ],
-      "default": "center center"
+      "default": "480"
     },
     {
-      "type": "range",
-      "id": "overlay_opacity",
-      "min": 0,
-      "max": 80,
-      "step": 5,
-      "unit": "%",
-      "label": "遮罩透明度",
-      "default": 45
+      "type": "checkbox",
+      "id": "show_accent",
+      "label": "显示装饰条",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "文案"
     },
     {
       "type": "text",
@@ -279,11 +538,230 @@
       "id": "subtitle",
       "label": "说明文字",
       "default": "UL and TUV Safety Certified - UL 2849 / UL 2271"
+    },
+    {
+      "type": "header",
+      "content": "文案样式（PC）"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size",
+      "min": 10,
+      "max": 40,
+      "step": 1,
+      "label": "副标题字号",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_gap",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "label": "副标题下间距",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 20,
+      "max": 80,
+      "step": 1,
+      "label": "主标题字号",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "title_gap",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "label": "主标题下间距",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "min": 10,
+      "max": 40,
+      "step": 1,
+      "label": "说明字号",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "subtitle_gap",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "label": "说明下间距",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "文案样式（手机）"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size_mobile",
+      "min": 12,
+      "max": 48,
+      "step": 1,
+      "label": "副标题字号",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_gap_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "label": "副标题下间距",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "min": 24,
+      "max": 80,
+      "step": 1,
+      "label": "主标题字号",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "title_gap_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "label": "主标题下间距",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size_mobile",
+      "min": 12,
+      "max": 48,
+      "step": 1,
+      "label": "说明字号",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "subtitle_gap_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "label": "说明下间距",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "背景"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "label": "遮罩透明度",
+      "default": 45
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "画面位置",
+      "options": [
+        { "value": "center center", "label": "居中" },
+        { "value": "left center", "label": "偏左" },
+        { "value": "right center", "label": "偏右" }
+      ],
+      "default": "center center"
+    },
+    {
+      "type": "header",
+      "content": "旧版单张背景",
+      "info": "没有添加轮播项时才使用。"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "背景图（PC）"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "背景图（手机）"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "背景图 Alt"
     }
   ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "轮播项",
+      "settings": [
+        {
+          "type": "header",
+          "content": "PC"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "图片（PC）",
+          "info": "建议 1920 × 800 或 1920 × 1400。有视频时作为封面备用。"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "视频（PC）"
+        },
+        {
+          "type": "image_picker",
+          "id": "poster",
+          "label": "视频封面（PC）"
+        },
+        {
+          "type": "header",
+          "content": "手机"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "图片（手机）",
+          "info": "建议 1500 × 960 或 1500 × 2000。未上传时使用 PC 图。"
+        },
+        {
+          "type": "video",
+          "id": "video_mobile",
+          "label": "视频（手机）",
+          "info": "未上传时使用 PC 视频。"
+        },
+        {
+          "type": "image_picker",
+          "id": "poster_mobile",
+          "label": "视频封面（手机）"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "图片 Alt"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
   "presets": [
     {
-      "name": "Safety Certified Hero"
+      "name": "Safety Certified Hero",
+      "blocks": [
+        { "type": "slide" }
+      ]
     }
   ]
 }
