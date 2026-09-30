@@ -1,1 +1,27 @@
-{"sections":{"main":{"type":"main-blog","settings":{"layout":"collage","show_image":true,"image_height":"medium","show_date":true,"show_author":false,"padding_top":36,"padding_bottom":36}}},"order":["main"]}
+{
+  "sections": {
+    "blog_list_hero": {
+      "type": "blog-list-hero",
+      "settings": {
+        "image": "shopify://shop_images/maozi.webp",
+        "image_fit": "fixed",
+        "image_alt": "AOTOS Blog",
+        "title": "AOTOS Blog",
+        "subtitle": "Articles, tech guides, and rider stories.",
+        "overlay": 55
+      }
+    },
+    "main": {
+      "type": "main-blog",
+      "settings": {
+        "category_label": "Category",
+        "per_page": 9,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
+    }
+  },
+  "order": ["blog_list_hero", "main"]
+}

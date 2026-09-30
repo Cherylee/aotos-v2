@@ -1,89 +1,581 @@
-{{ 'section-blog-post.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+  #Article-{{ section.id }} {
+    padding-top: calc({{ section.settings.padding_top | default: 80, allow_false: true }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80, allow_false: true }} * var(--rem));
+    overflow-x: clip;
+    background: #ffffff;
+    color: #000000;
+  }
 
-<article class="article-template">
+  #Article-{{ section.id }} .article-template__shell {
+    width: calc(800 * var(--rem));
+    max-width: 100%;
+    min-width: 0;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  #Article-{{ section.id }} .article-template__header {
+    margin-bottom: calc(28 * var(--rem));
+  }
+
+  #Article-{{ section.id }} .article-template__title {
+    margin: 0;
+    color: #000000;
+    font-weight: 700;
+  }
+
+  #Article-{{ section.id }} .article-template__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(8 * var(--rem)) calc(16 * var(--rem));
+    margin-top: calc(12 * var(--rem));
+    color: #999999;
+    font-size: calc(12 * var(--rem));
+    font-weight: 400;
+    line-height: calc(16 * var(--rem));
+  }
+
+  #Article-{{ section.id }} .article-template__share {
+    margin-bottom: calc(18 * var(--rem));
+  }
+
+  #Article-{{ section.id }} .article-share {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(16 * var(--rem));
+  }
+
+  #Article-{{ section.id }} .article-share__label {
+    color: #000000;
+    font-size: calc(14 * var(--rem));
+    font-weight: 600;
+    line-height: calc(18 * var(--rem));
+  }
+
+  #Article-{{ section.id }} .article-share__links {
+    display: flex;
+    align-items: center;
+    gap: calc(12 * var(--rem));
+  }
+
+  #Article-{{ section.id }} .article-share__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(28 * var(--rem));
+    height: calc(28 * var(--rem));
+    color: #1877f2;
+    text-decoration: none;
+  }
+
+  #Article-{{ section.id }} .article-share__link .svg-wrapper,
+  #Article-{{ section.id }} .article-share__link .icon {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  #Article-{{ section.id }} .article-share__link--x {
+    color: #ffffff;
+    background: #000000;
+    border-radius: 50%;
+  }
+
+  #Article-{{ section.id }} .article-share__link--x .svg-wrapper,
+  #Article-{{ section.id }} .article-share__link--x .icon {
+    width: calc(14 * var(--rem));
+    height: calc(14 * var(--rem));
+  }
+
+  #Article-{{ section.id }} .article-share__link--pinterest {
+    color: #e60023;
+  }
+
+  #Article-{{ section.id }} .article-share__copy {
+    position: relative;
+  }
+
+  #Article-{{ section.id }} .article-share__copy-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(8 * var(--rem));
+    min-height: calc(var(--aotos-button-height, 40) * var(--rem));
+    padding: 0 calc(16 * var(--rem));
+    border: 1px solid var(--aotos-theme-color, #ff6501);
+    border-radius: var(--buttons-radius, calc(40 * var(--rem)));
+    background: var(--aotos-theme-color, #ff6501);
+    color: #ffffff;
+    font-size: calc(var(--aotos-button-font-size, 14) * var(--rem));
+    font-weight: var(--aotos-button-font-weight, 600);
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  #Article-{{ section.id }} .article-share__copy-btn .svg-wrapper,
+  #Article-{{ section.id }} .article-share__copy-btn .icon {
+    display: block;
+    width: calc(14 * var(--rem));
+    height: calc(14 * var(--rem));
+    color: currentColor;
+  }
+
+  #Article-{{ section.id }} .article-share__message {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 8 * var(--rem));
+    transform: translateX(-50%);
+    padding: calc(4 * var(--rem)) calc(8 * var(--rem));
+    border-radius: calc(4 * var(--rem));
+    background: #000000;
+    color: #ffffff;
+    font-size: calc(12 * var(--rem));
+    font-weight: 400;
+    line-height: calc(16 * var(--rem));
+    white-space: nowrap;
+  }
+
+  @media (hover: hover) {
+    #Article-{{ section.id }} .article-share__link {
+      transition: transform 0.2s ease;
+    }
+
+    #Article-{{ section.id }} .article-share__link:hover {
+      transform: scale(1.08);
+    }
+
+    #Article-{{ section.id }} .article-share__copy-btn:hover {
+      background: #ffffff;
+      color: var(--aotos-theme-color, #ff6501);
+    }
+  }
+
+  #Article-{{ section.id }} .article-template__content {
+    max-width: 100%;
+    min-width: 0;
+    color: #000000;
+    font-size: calc(12 * var(--rem));
+    font-weight: 400;
+    line-height: calc(22 * var(--rem));
+  }
+
+  #Article-{{ section.id }} .article-template__content table {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: calc(24 * var(--rem)) 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #Article-{{ section.id }} .article-template__content th,
+  #Article-{{ section.id }} .article-template__content td {
+    padding: calc(10 * var(--rem)) calc(12 * var(--rem));
+    border: 1px solid #e5e5e5;
+    color: #000000;
+    font-size: calc(14 * var(--rem));
+    font-weight: 600;
+    line-height: calc(18 * var(--rem));
+    text-align: left;
+    vertical-align: top;
+    white-space: nowrap;
+  }
+
+  #Article-{{ section.id }} .article-template__content > *:first-child {
+    margin-top: 0;
+  }
+
+  #Article-{{ section.id }} .article-template__content > *:last-child {
+    margin-bottom: 0;
+  }
+
+  #Article-{{ section.id }} .article-template__content h2,
+  #Article-{{ section.id }} .article-template__content h3,
+  #Article-{{ section.id }} .article-template__content h4,
+  #Article-{{ section.id }} .article-template__content strong,
+  #Article-{{ section.id }} .article-template__content b {
+    color: #000000;
+    font-size: calc(14 * var(--rem));
+    font-weight: 600;
+    line-height: calc(18 * var(--rem));
+  }
+
+  #Article-{{ section.id }} .article-template__content h2,
+  #Article-{{ section.id }} .article-template__content h3,
+  #Article-{{ section.id }} .article-template__content h4 {
+    margin: calc(32 * var(--rem)) 0 calc(12 * var(--rem));
+  }
+
+  #Article-{{ section.id }} .article-template__content p,
+  #Article-{{ section.id }} .article-template__content li {
+    margin: 0 0 calc(16 * var(--rem));
+  }
+
+  #Article-{{ section.id }} .article-template__content ul,
+  #Article-{{ section.id }} .article-template__content ol {
+    margin: 0 0 calc(16 * var(--rem));
+    padding-left: calc(20 * var(--rem));
+  }
+
+  #Article-{{ section.id }} .article-template__content a {
+    color: var(--aotos-theme-color, #ff6501);
+  }
+
+  #Article-{{ section.id }} .article-template__content img,
+  #Article-{{ section.id }} .article-template__content video {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: calc(24 * var(--rem)) 0;
+    border: 0;
+    border-radius: calc(16 * var(--rem));
+    box-shadow: none;
+  }
+
+  #Article-{{ section.id }} .article-template__content iframe {
+    width: 100%;
+    max-width: 100%;
+    margin: calc(24 * var(--rem)) 0;
+    border: 0;
+    border-radius: calc(16 * var(--rem));
+  }
+
+  #Article-{{ section.id }} .article-template__content blockquote {
+    margin: calc(24 * var(--rem)) 0;
+    padding-left: calc(16 * var(--rem));
+    border-left: calc(3 * var(--rem)) solid var(--aotos-theme-color, #ff6501);
+    color: #000000;
+  }
+
+  #Article-{{ section.id }} .article-template__back {
+    margin-top: calc(48 * var(--rem));
+  }
+
+  #Article-{{ section.id }} .article-template__link {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(8 * var(--rem));
+    color: #000000;
+    font-size: calc(14 * var(--rem));
+    font-weight: 600;
+    line-height: calc(18 * var(--rem));
+    text-decoration: none;
+  }
+
+  #Article-{{ section.id }} .article-template__link .svg-wrapper {
+    width: calc(14 * var(--rem));
+    height: calc(14 * var(--rem));
+  }
+
+  #Article-{{ section.id }} .article-template__link .icon-wrap {
+    display: flex;
+    transform: rotate(180deg);
+  }
+
+  #Article-{{ section.id }} .article-template__comment-wrapper {
+    margin-top: calc(80 * var(--rem));
+    padding: calc(48 * var(--rem)) 0;
+    background: #f7f7f7;
+  }
+
+  #Article-{{ section.id }} .article-template__comment-wrapper h2 {
+    margin: 0 0 calc(48 * var(--rem));
+    color: #000000;
+    font-weight: 700;
+  }
+
+  #Article-{{ section.id }} .article-template__comments {
+    margin-bottom: calc(48 * var(--rem));
+  }
+
+  #Article-{{ section.id }} .article-template__comments-comment {
+    margin-bottom: calc(16 * var(--rem));
+    padding: calc(20 * var(--rem));
+    background: #ffffff;
+    border-radius: calc(16 * var(--rem));
+    color: #000000;
+    font-size: calc(12 * var(--rem));
+    font-weight: 400;
+    line-height: calc(16 * var(--rem));
+  }
+
+  #Article-{{ section.id }} .article-template__comments-comment p {
+    margin: 0 0 calc(12 * var(--rem));
+  }
+
+  #Article-{{ section.id }} .article-template__comments-comment footer {
+    color: #999999;
+    font-size: calc(12 * var(--rem));
+    font-weight: 400;
+    line-height: calc(16 * var(--rem));
+  }
+
+  #Article-{{ section.id }} .article-template__comment-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: calc(16 * var(--rem));
+    margin-bottom: calc(16 * var(--rem));
+  }
+
+  #Article-{{ section.id }} .article-template__comment-fields > * {
+    margin: 0;
+  }
+
+  #Article-{{ section.id }} .field__input,
+  #Article-{{ section.id }} .text-area {
+    padding: calc(34 * var(--rem)) calc(16 * var(--rem)) calc(16 * var(--rem));
+    color: #000000;
+    font-size: calc(14 * var(--rem));
+    line-height: calc(18 * var(--rem));
+  }
+
+  #Article-{{ section.id }} .text-area {
+    min-height: calc(140 * var(--rem));
+  }
+
+  #Article-{{ section.id }} .field__label {
+    left: calc(16 * var(--rem));
+    top: calc(10 * var(--rem));
+    color: #999999;
+    font-size: calc(14 * var(--rem));
+    letter-spacing: 0;
+    line-height: calc(18 * var(--rem));
+  }
+
+  #Article-{{ section.id }} .field__input:focus ~ .field__label,
+  #Article-{{ section.id }} .field__input:not(:placeholder-shown) ~ .field__label,
+  #Article-{{ section.id }} .field__input:-webkit-autofill ~ .field__label {
+    top: calc(4 * var(--rem));
+    left: calc(16 * var(--rem));
+    font-size: calc(12 * var(--rem));
+    letter-spacing: 0;
+  }
+
+  #Article-{{ section.id }} .article-template__comment-warning {
+    margin: calc(16 * var(--rem)) 0;
+    color: #999999;
+    font-size: calc(12 * var(--rem));
+    line-height: calc(16 * var(--rem));
+  }
+
+  #Article-{{ section.id }} .article-template__comment-wrapper .button {
+    margin-top: calc(16 * var(--rem));
+  }
+
+  @media screen and (max-width: 768px) {
+    #Article-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }} * var(--rem));
+    }
+
+    #Article-{{ section.id }} .article-template__shell {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: calc(10 * var(--rem)) calc(40 * var(--rem));
+    }
+
+    #Article-{{ section.id }} .article-template__meta {
+      margin-top: calc(16 * var(--rem));
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #Article-{{ section.id }} .article-share {
+      gap: calc(20 * var(--rem));
+    }
+
+    #Article-{{ section.id }} .article-share__label {
+      font-size: calc(22 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #Article-{{ section.id }} .article-share__links {
+      gap: calc(16 * var(--rem));
+    }
+
+    #Article-{{ section.id }} .article-share__link {
+      width: calc(48 * var(--rem));
+      height: calc(48 * var(--rem));
+    }
+
+    #Article-{{ section.id }} .article-share__link--x .svg-wrapper,
+    #Article-{{ section.id }} .article-share__link--x .icon {
+      width: calc(24 * var(--rem));
+      height: calc(24 * var(--rem));
+    }
+
+    #Article-{{ section.id }} .article-share__copy-btn {
+      min-height: calc(var(--aotos-button-height-mobile, 80) * var(--rem));
+      padding: 0 calc(28 * var(--rem));
+      font-size: calc(var(--aotos-button-font-size-mobile, 22) * var(--rem));
+    }
+
+    #Article-{{ section.id }} .article-share__copy-btn .svg-wrapper,
+    #Article-{{ section.id }} .article-share__copy-btn .icon {
+      width: calc(28 * var(--rem));
+      height: calc(28 * var(--rem));
+    }
+
+    #Article-{{ section.id }} .article-template__content {
+      font-size: calc(22 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #Article-{{ section.id }} .article-template__content th,
+    #Article-{{ section.id }} .article-template__content td {
+      font-size: calc(20 * var(--rem));
+      font-weight: 600;
+      line-height: calc(32 * var(--rem));
+    }
+
+    #Article-{{ section.id }} .article-template__content h2 {
+      font-size: var(--aotos-section-title-size);
+      font-weight: 700;
+      line-height: calc(48 * var(--rem));
+    }
+
+    #Article-{{ section.id }} .article-template__content h3,
+    #Article-{{ section.id }} .article-template__content h4,
+    #Article-{{ section.id }} .article-template__content strong,
+    #Article-{{ section.id }} .article-template__content b {
+      font-size: calc(22 * var(--rem));
+      font-weight: 600;
+      line-height: calc(32 * var(--rem));
+    }
+
+    #Article-{{ section.id }} .article-template__content ul,
+    #Article-{{ section.id }} .article-template__content ol {
+      padding-left: calc(32 * var(--rem));
+    }
+
+    #Article-{{ section.id }} .article-template__link {
+      font-size: calc(22 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #Article-{{ section.id }} .article-template__link .svg-wrapper {
+      width: calc(22 * var(--rem));
+      height: calc(22 * var(--rem));
+    }
+
+    #Article-{{ section.id }} .article-template__comment-wrapper {
+      margin-top: calc(88 * var(--rem));
+      padding: calc(48 * var(--rem)) 0;
+    }
+
+    #Article-{{ section.id }} .article-template__comment-fields {
+      grid-template-columns: 1fr;
+    }
+
+    #Article-{{ section.id }} .article-template__comments-comment {
+      font-size: calc(22 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #Article-{{ section.id }} .article-template__comments-comment footer,
+    #Article-{{ section.id }} .article-template__comment-warning {
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #Article-{{ section.id }} .field__input,
+    #Article-{{ section.id }} .text-area,
+    #Article-{{ section.id }} .field__label {
+      font-size: calc(22 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #Article-{{ section.id }} .field__input:focus ~ .field__label,
+    #Article-{{ section.id }} .field__input:not(:placeholder-shown) ~ .field__label,
+    #Article-{{ section.id }} .field__input:-webkit-autofill ~ .field__label {
+      font-size: calc(20 * var(--rem));
+    }
+  }
+{%- endstyle -%}
+
+<article id="Article-{{ section.id }}" class="article-template">
   {%- for block in section.blocks -%}
     {%- case block.type -%}
       {%- when '@app' -%}
-        <div class="page-width page-width--narrow">
+        <div class="article-template__shell" {{ block.shopify_attributes }}>
           {% render block %}
         </div>
-      {%- when 'featured_image' -%}
-        {%- if article.image -%}
-          <div
-            class="article-template__hero-container{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
-            {{ block.shopify_attributes }}
-          >
-            <div
-              class="article-template__hero-{{ block.settings.image_height }} media"
-              {% if block.settings.image_height == 'adapt' and article.image %}
-                style="padding-bottom: {{ 1 | divided_by: article.image.aspect_ratio | times: 100 }}%;"
-              {% endif %}
-            >
-              <img
-                srcset="
-                  {% if article.image.width >= 350 %}{{ article.image | image_url: width: 350 }} 350w,{% endif %}
-                  {% if article.image.width >= 750 %}{{ article.image | image_url: width: 750 }} 750w,{% endif %}
-                  {% if article.image.width >= 1100 %}{{ article.image | image_url: width: 1100 }} 1100w,{% endif %}
-                  {% if article.image.width >= 1500 %}{{ article.image | image_url: width: 1500 }} 1500w,{% endif %}
-                  {% if article.image.width >= 2200 %}{{ article.image | image_url: width: 2200 }} 2200w,{% endif %}
-                  {% if article.image.width >= 3000 %}{{ article.image | image_url: width: 3000 }} 3000w,{% endif %}
-                  {{ article.image | image_url }} {{ article.image.width }}w
-                "
-                sizes="(min-width: {{ 1200 }}px) {{ 1200 | minus: 100 }}px, (min-width: 750px) calc(100vw - 10rem), 100vw"
-                src="{{ article.image | image_url: width: 1100 }}"
-                loading="eager"
-                fetchpriority="high"
-                width="{{ article.image.width }}"
-                height="{{ article.image.height }}"
-                alt="{{ article.image.alt | escape }}"
-              >
-            </div>
-          </div>
-        {%- endif -%}
 
       {%- when 'title' -%}
-        <header
-          class="page-width page-width--narrow{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
-          {{ block.shopify_attributes }}
-        >
-          <h1
-            class="article-template__title"
-          >
-            {{ article.title | escape }}
-          </h1>
-          {%- if block.settings.blog_show_date -%}
-            <span class="circle-divider caption-with-letter-spacing">
-              {{- article.published_at | time_tag: format: 'date' -}}
-            </span>
-          {%- endif -%}
-          {%- if block.settings.blog_show_author -%}
-            <span class="caption-with-letter-spacing">
-              <span>{{ article.author }}</span>
-            </span>
+        <header class="article-template__shell article-template__header" {{ block.shopify_attributes }}>
+          <h1 class="article-template__title aotos-section-title">{{ article.title | escape }}</h1>
+          {%- if block.settings.blog_show_date or block.settings.blog_show_author -%}
+            <div class="article-template__meta">
+              {%- if block.settings.blog_show_date -%}
+                {{- article.published_at | time_tag: format: 'date' -}}
+              {%- endif -%}
+              {%- if block.settings.blog_show_author -%}
+                <span>{{ article.author }}</span>
+              {%- endif -%}
+            </div>
           {%- endif -%}
         </header>
 
       {%- when 'content' -%}
-        <div
-          class="article-template__content page-width page-width--narrow rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-          {{ block.shopify_attributes }}
-        >
+        <div class="article-template__shell article-template__content rte" {{ block.shopify_attributes }}>
           {{ article.content }}
         </div>
 
       {%- when 'share' -%}
-        <div
-          class="article-template__social-sharing page-width page-width--narrow{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-          {{ block.shopify_attributes }}
-        >
-          {% assign share_url = request.origin | append: article.url %}
-          {% render 'share-button', block: block, share_link: share_url %}
+        <div class="article-template__shell article-template__share" {{ block.shopify_attributes }}>
+          {%- assign share_url = request.origin | append: article.url -%}
+          <div class="article-share">
+            {%- if block.settings.share_label != blank -%}
+              <span class="article-share__label">{{ block.settings.share_label | escape }}:</span>
+            {%- endif -%}
+            <div class="article-share__links">
+              <a
+                class="article-share__link article-share__link--facebook"
+                href="https://www.facebook.com/sharer/sharer.php?u={{ share_url | url_encode }}"
+                target="_blank"
+                rel="noopener"
+                aria-label="{{ 'general.social.alt_text.share_on_facebook' | t }}"
+              >
+                <span class="svg-wrapper">{{ 'icon-facebook.svg' | inline_asset_content }}</span>
+              </a>
+              <a
+                class="article-share__link article-share__link--x"
+                href="https://twitter.com/intent/tweet?url={{ share_url | url_encode }}"
+                target="_blank"
+                rel="noopener"
+                aria-label="{{ 'general.social.alt_text.share_on_twitter' | t }}"
+              >
+                <span class="svg-wrapper">{{ 'icon-twitter.svg' | inline_asset_content }}</span>
+              </a>
+              <a
+                class="article-share__link article-share__link--pinterest"
+                href="https://pinterest.com/pin/create/button/?url={{ share_url | url_encode }}"
+                target="_blank"
+                rel="noopener"
+                aria-label="{{ 'general.social.alt_text.share_on_pinterest' | t }}"
+              >
+                <span class="svg-wrapper">{{ 'icon-pinterest.svg' | inline_asset_content }}</span>
+              </a>
+            </div>
+            <div class="article-share__copy">
+              <button type="button" class="article-share__copy-btn" data-share-url="{{ share_url | escape }}">
+                <span class="svg-wrapper">{{ 'icon-copy.svg' | inline_asset_content }}</span>
+                <span>{{ 'general.share.copy_to_clipboard' | t }}</span>
+              </button>
+              <span class="article-share__message" role="status" hidden>{{ 'general.share.success_message' | t }}</span>
+            </div>
+          </div>
         </div>
+
     {%- endcase -%}
   {%- endfor -%}
 
-  <div class="article-template__back element-margin-top center{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-    <a href="{{ blog.url }}" class="article-template__link link animate-arrow">
+  <div class="article-template__shell article-template__back">
+    <a href="{{ blog.url }}" class="article-template__link">
       <span class="icon-wrap">
         <span class="svg-wrapper">
           {{- 'icon-arrow.svg' | inline_asset_content -}}
@@ -92,16 +584,13 @@
       {{ 'blogs.article.back_to_blog' | t: title: blog.title | escape }}
     </a>
   </div>
+
   {%- if blog.comments_enabled? -%}
-    <div class="article-template__comment-wrapper background-secondary">
-      <div
-        id="comments"
-        class="page-width page-width--narrow{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-      >
+    <div class="article-template__comment-wrapper">
+      <div id="comments" class="article-template__shell">
         {%- if article.comments_count > 0 -%}
           {%- assign anchorId = '#Comments-' | append: article.id -%}
-
-          <h2 id="Comments-{{ article.id }}" tabindex="-1">
+          <h2 id="Comments-{{ article.id }}" class="aotos-section-title" tabindex="-1">
             {{ 'blogs.article.comments' | t: count: article.comments_count }}
           </h2>
           {% paginate article.comments by 5 %}
@@ -109,20 +598,15 @@
               {%- if comment.status == 'pending' and comment.content -%}
                 <article id="{{ comment.id }}" class="article-template__comments-comment">
                   {{ comment.content }}
-                  <footer class="right">
-                    <span class="circle-divider caption-with-letter-spacing">{{ comment.author }}</span>
-                  </footer>
+                  <footer>{{ comment.author }}</footer>
                 </article>
               {%- endif -%}
-
               {%- for comment in article.comments -%}
                 <article id="{{ comment.id }}" class="article-template__comments-comment">
                   {{ comment.content }}
-                  <footer class="right">
-                    <span class="circle-divider caption-with-letter-spacing">{{ comment.author }}</span
-                    ><span class="caption-with-letter-spacing">
-                      {{- comment.created_at | time_tag: format: 'date' -}}
-                    </span>
+                  <footer>
+                    <span>{{ comment.author }}</span>
+                    {{- comment.created_at | time_tag: format: 'date' -}}
                   </footer>
                 </article>
               {%- endfor -%}
@@ -130,6 +614,7 @@
             </div>
           {% endpaginate %}
         {%- endif -%}
+
         {% form 'new_comment', article %}
           {%- liquid
             assign post_message = 'blogs.article.success'
@@ -137,7 +622,7 @@
               assign post_message = 'blogs.article.success_moderated'
             endif
           -%}
-          <h2>{{ 'blogs.article.comment_form_title' | t }}</h2>
+          <h2 class="aotos-section-title">{{ 'blogs.article.comment_form_title' | t }}</h2>
           {%- if form.errors -%}
             <div class="form__message" role="alert">
               <h3 class="form-status caption-large text-body" tabindex="-1" autofocus>
@@ -198,8 +683,8 @@
                 >
                 <label class="field__label" for="CommentForm-author">
                   {{- 'blogs.article.name' | t }}
-                  <span aria-hidden="true">*</span></label
-                >
+                  <span aria-hidden="true">*</span>
+                </label>
                 {%- if form.errors contains 'author' -%}
                   <small id="CommentForm-author-error">
                     <span class="form__message">
@@ -207,8 +692,8 @@
                         {{- 'icon-error.svg' | inline_asset_content -}}
                       </span>
                       {{- 'blogs.article.name' | t }}
-                      {{ form.errors.messages.author }}.</span
-                    >
+                      {{ form.errors.messages.author }}.
+                    </span>
                   </small>
                 {%- endif -%}
               </div>
@@ -232,8 +717,8 @@
                 >
                 <label class="field__label" for="CommentForm-email">
                   {{- 'blogs.article.email' | t }}
-                  <span aria-hidden="true">*</span></label
-                >
+                  <span aria-hidden="true">*</span>
+                </label>
                 {%- if form.errors contains 'email' -%}
                   <small id="CommentForm-email-error">
                     <span class="form__message">
@@ -241,8 +726,8 @@
                         {{- 'icon-error.svg' | inline_asset_content -}}
                       </span>
                       {{- 'blogs.article.email' | t }}
-                      {{ form.errors.messages.email }}.</span
-                    >
+                      {{ form.errors.messages.email }}.
+                    </span>
                   </small>
                 {%- endif -%}
               </div>
@@ -263,8 +748,8 @@
               >{{ form.body }}</textarea>
               <label class="form__label field__label" for="CommentForm-body">
                 {{- 'blogs.article.message' | t }}
-                <span aria-hidden="true">*</span></label
-              >
+                <span aria-hidden="true">*</span>
+              </label>
             </div>
             {%- if form.errors contains 'body' -%}
               <small id="CommentForm-body-error">
@@ -273,13 +758,13 @@
                     {{- 'icon-error.svg' | inline_asset_content -}}
                   </span>
                   {{- 'blogs.article.message' | t }}
-                  {{ form.errors.messages.body }}.</span
-                >
+                  {{ form.errors.messages.body }}.
+                </span>
               </small>
             {%- endif -%}
           </div>
           {%- if blog.moderated? -%}
-            <p class="article-template__comment-warning caption">{{ 'blogs.article.moderated' | t }}</p>
+            <p class="article-template__comment-warning">{{ 'blogs.article.moderated' | t }}</p>
           {%- endif -%}
           <input type="submit" class="button" value="{{ 'blogs.article.post' | t }}">
         {% endform %}
@@ -291,12 +776,74 @@
 <script type="application/ld+json">
   {{ article | structured_data }}
 </script>
+<script>
+  (function () {
+    var root = document.getElementById('Article-{{ section.id }}');
+    if (!root) return;
+    root.querySelectorAll('.article-share__copy-btn').forEach(function (button) {
+      button.addEventListener('click', function () {
+        var url = button.getAttribute('data-share-url');
+        var message = button.parentElement.querySelector('.article-share__message');
+        if (!url || !navigator.clipboard) return;
+        navigator.clipboard.writeText(url).then(function () {
+          if (!message) return;
+          message.hidden = false;
+          window.setTimeout(function () {
+            message.hidden = true;
+          }, 2000);
+        });
+      });
+    });
+  })();
+</script>
 
 {% schema %}
 {
   "name": "t:sections.main-article.name",
   "tag": "section",
   "class": "section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "上边距（PC）",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "下边距（PC）",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "上边距（手机）",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "下边距（手机）",
+      "default": 88
+    }
+  ],
   "blocks": [
     {
       "type": "@app"

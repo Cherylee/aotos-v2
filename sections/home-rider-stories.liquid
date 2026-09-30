@@ -102,6 +102,7 @@
     height: 100%;
     padding: calc(20 * var(--rem));
     background: #ffffff;
+    border-radius: inherit;
     box-sizing: border-box;
   }
 
@@ -314,8 +315,15 @@
       display: none;
     }
 
+    #HomeRiders-{{ section.id }}:not(.home-riders--articles) .home-riders__viewport {
+      padding: calc(4 * var(--rem));
+      margin: calc(-4 * var(--rem));
+      scroll-padding-inline: calc(4 * var(--rem));
+    }
+
     #HomeRiders-{{ section.id }} .home-riders__card {
       flex-basis: 100%;
+      background-clip: padding-box;
     }
 
     #HomeRiders-{{ section.id }} .home-riders__face {

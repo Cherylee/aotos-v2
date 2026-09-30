@@ -1,0 +1,198 @@
+{%- liquid
+  assign hero = section.settings.image
+  assign shade = section.settings.overlay | default: 55, allow_false: true
+  assign hero_width = 1920
+-%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} + .shopify-section {
+    margin-top: 0;
+  }
+
+  #BlogHero-{{ section.id }} {
+    position: relative;
+    width: 100%;
+    background: #111111;
+    color: #ffffff;
+  }
+
+  #BlogHero-{{ section.id }} .blog-hero__image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  #BlogHero-{{ section.id }}:not(.blog-hero--empty)::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgb(0 0 0 / {{ shade | divided_by: 100.0 }});
+    pointer-events: none;
+  }
+
+  #BlogHero-{{ section.id }} .blog-hero__content {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 calc(40 * var(--rem));
+    text-align: center;
+  }
+
+  #BlogHero-{{ section.id }} .blog-hero__title {
+    margin: 0;
+    color: #ffffff;
+    font-size: calc(48 * var(--rem));
+    font-weight: 700;
+    line-height: 1.15;
+  }
+
+  #BlogHero-{{ section.id }} .blog-hero__subtitle {
+    max-width: calc(720 * var(--rem));
+    margin: calc(16 * var(--rem)) 0 0;
+    color: rgb(255 255 255 / 88%);
+    font-size: calc(18 * var(--rem));
+    font-weight: 400;
+    line-height: calc(26 * var(--rem));
+  }
+
+  #BlogHero-{{ section.id }}.blog-hero--fixed {
+    height: calc(420 * var(--rem));
+    overflow: hidden;
+  }
+
+  #BlogHero-{{ section.id }}.blog-hero--fixed .blog-hero__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  #BlogHero-{{ section.id }}.blog-hero--empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(360 * var(--rem));
+  }
+
+  #BlogHero-{{ section.id }}.blog-hero--empty .blog-hero__content {
+    position: relative;
+    inset: auto;
+    padding: calc(80 * var(--rem)) calc(40 * var(--rem));
+  }
+
+  @media screen and (max-width: 768px) {
+    #BlogHero-{{ section.id }} .blog-hero__title {
+      font-size: calc(56 * var(--rem));
+    }
+
+    #BlogHero-{{ section.id }} .blog-hero__subtitle {
+      font-size: calc(24 * var(--rem));
+      line-height: calc(36 * var(--rem));
+    }
+
+    #BlogHero-{{ section.id }}.blog-hero--fixed,
+    #BlogHero-{{ section.id }}.blog-hero--fixed.blog-hero--empty {
+      height: calc(530 * var(--rem));
+      min-height: calc(530 * var(--rem));
+    }
+
+    #BlogHero-{{ section.id }}.blog-hero--empty {
+      min-height: calc(420 * var(--rem));
+    }
+  }
+{%- endstyle -%}
+
+<div id="BlogHero-{{ section.id }}" class="blog-hero blog-hero--{{ section.settings.image_fit | default: 'fixed' }}{% if hero == blank %} blog-hero--empty{% endif %}">
+  {%- if hero != blank -%}
+    <img
+      class="blog-hero__image"
+      src="{{ hero | image_url: width: hero_width }}"
+      srcset="{{ hero | image_url: width: 800 }} 800w, {{ hero | image_url: width: 1200 }} 1200w, {{ hero | image_url: width: 1600 }} 1600w, {{ hero | image_url: width: hero_width }} {{ hero_width }}w"
+      sizes="100vw"
+      alt="{{ section.settings.image_alt | default: section.settings.title | escape }}"
+      width="{{ hero_width }}"
+      height="{{ hero_width | divided_by: hero.aspect_ratio | round }}"
+      loading="eager"
+      fetchpriority="high"
+    >
+  {%- endif -%}
+  <div class="blog-hero__content">
+    {%- if section.settings.title != blank -%}
+      <h1 class="blog-hero__title">{{ section.settings.title | escape }}</h1>
+    {%- endif -%}
+    {%- if section.settings.subtitle != blank -%}
+      <p class="blog-hero__subtitle">{{ section.settings.subtitle | escape }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "博客横幅",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "背景图"
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "展示方式",
+      "default": "fixed",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "高度跟随图片"
+        },
+        {
+          "value": "fixed",
+          "label": "固定高度"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "图片描述",
+      "default": "AOTOS Blog"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "标题",
+      "default": "AOTOS Blog"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "副标题",
+      "default": "Articles, tech guides, and rider stories."
+    },
+    {
+      "type": "range",
+      "id": "overlay",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "label": "黑色蒙层",
+      "default": 55
+    }
+  ],
+  "presets": [
+    {
+      "name": "博客横幅"
+    }
+  ]
+}
+{% endschema %}
