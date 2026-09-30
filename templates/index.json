@@ -134,7 +134,11 @@
         "content_mobile": "top",
         "overlay_opacity": 45,
         "image_position": "center center",
-        "image_alt": ""
+        "image_alt": "",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
       }
     },
     "home_trust_bar": {
@@ -222,7 +226,7 @@
         "button_link": "",
         "padding_top": 60,
         "padding_bottom": 80,
-        "padding_top_mobile": 88,
+        "padding_top_mobile": 60,
         "padding_bottom_mobile": 88
       }
     },
@@ -295,7 +299,11 @@
         "content_mobile": "split",
         "overlay_opacity": 45,
         "image_position": "center center",
-        "image_alt": ""
+        "image_alt": "",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
       }
     },
     "home_split_cards": {
@@ -551,7 +559,7 @@
         "date_format": "%B %d, %Y",
         "padding_top": 0,
         "padding_bottom": 80,
-        "padding_top_mobile": 88,
+        "padding_top_mobile": 0,
         "padding_bottom_mobile": 88
       }
     },
@@ -603,9 +611,9 @@
       "settings": {
         "heading": "Explore More",
         "subtitle": "Discover how AOTOS is shaping the future of electric riding.",
-        "padding_top": 80,
+        "padding_top": 0,
         "padding_bottom": 80,
-        "padding_top_mobile": 88,
+        "padding_top_mobile": 0,
         "padding_bottom_mobile": 88
       }
     },
@@ -618,9 +626,9 @@
         "post_limit": 8,
         "show_date": true,
         "date_format": "%B %d, %Y",
-        "padding_top": 80,
+        "padding_top": 0,
         "padding_bottom": 80,
-        "padding_top_mobile": 88,
+        "padding_top_mobile": 0,
         "padding_bottom_mobile": 88
       }
     }
