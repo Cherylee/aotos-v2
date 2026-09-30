@@ -1,0 +1,228 @@
+{% style %}
+  .fd-why-{{ section.id }} {
+    --fd-orange: #ff6501;
+    --fd-border: #e4e4e4;
+    --eyebrow-size: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'eyebrow_font_size_pc', fallback: 12 %};
+    --title-size: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'title_font_size_pc', fallback: 18 %};
+    --title-color: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'title_color', fallback: '#111111' %};
+    --text-size: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'text_font_size_pc', fallback: 13 %};
+    --text-line-height: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'text_line_height', fallback: '1.5' %};
+    --text-color: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'text_color', fallback: '#8a8a8a' %};
+    background: #fff;
+    width: 100%;
+  }
+
+  .fd-why-{{ section.id }} .fd-why__inner {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+    padding-top: calc({{ section.settings.padding_top | default: 40, allow_false: true }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80, allow_false: true }} * var(--rem));
+  }
+
+  .fd-why-{{ section.id }} .fd-why__eyebrow {
+    margin: 0 0 calc(10 * var(--rem));
+    font-size: calc(12 * var(--rem));
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fd-orange);
+  }
+
+  .fd-why-{{ section.id }} .fd-why__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: calc(32 * var(--rem));
+    border-top: 1px solid var(--fd-border);
+    padding-top: calc(32 * var(--rem));
+  }
+
+  .fd-why-{{ section.id }} .fd-why__item {
+    display: flex;
+    flex-direction: column;
+    gap: calc(12 * var(--rem));
+  }
+
+  .fd-why-{{ section.id }} .fd-why__icon {
+    width: calc(36 * var(--rem));
+    height: calc(36 * var(--rem));
+  }
+
+  .fd-why-{{ section.id }} .fd-why__icon img,
+  .fd-why-{{ section.id }} .fd-why__icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .fd-why-{{ section.id }} .fd-why__title {
+    margin: 0;
+    font-size: calc(14 * var(--rem));
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--title-color);
+  }
+
+  .fd-why-{{ section.id }} .fd-why__text {
+    margin: 0;
+    font-size: calc(10 * var(--rem));
+    line-height: var(--text-line-height);
+    font-weight: 400;
+    color: var(--text-color);
+  }
+
+  @media screen and (max-width: 768px) {
+    .fd-why-{{ section.id }} {
+      --eyebrow-size: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'eyebrow_font_size_mob', fallback: 22 %};
+      --title-size: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'title_font_size_mob', fallback: 28 %};
+      --text-size: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'text_font_size_mob', fallback: 22 %};
+    }
+
+    .fd-why-{{ section.id }} .fd-why__inner {
+      width: 100%;
+      padding: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem)) calc(40 * var(--rem)) calc({{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }} * var(--rem));
+      box-sizing: border-box;
+    }
+
+    .fd-why-{{ section.id }} .fd-why__eyebrow {
+      margin-bottom: calc(32 * var(--rem));
+    }
+
+    .fd-why-{{ section.id }} .fd-why__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: calc(40 * var(--rem));
+      padding-top: calc(40 * var(--rem));
+    }
+
+    .fd-why-{{ section.id }} .fd-why__item {
+      gap: calc(16 * var(--rem));
+    }
+
+    .fd-why-{{ section.id }} .fd-why__icon {
+      width: calc(56 * var(--rem));
+      height: calc(56 * var(--rem));
+    }
+  }
+{% endstyle %}
+
+<section class="fd-why-{{ section.id }}">
+  <div class="fd-why__inner">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="fd-why__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+
+    <div class="fd-why__grid">
+      {%- for block in section.blocks -%}
+        <div class="fd-why__item" {{ block.shopify_attributes }}>
+          <div class="fd-why__icon">
+            {%- assign why_icon_asset = block.settings.fallback_icon_asset | strip -%}
+            {%- if block.settings.icon != blank -%}
+              <img
+                src="{{ block.settings.icon | image_url: width: 144 }}"
+                srcset="{{ block.settings.icon | image_url: width: 72 }} 72w, {{ block.settings.icon | image_url: width: 144 }} 144w, {{ block.settings.icon | image_url: width: 216 }} 216w"
+                sizes="72px"
+                width="72"
+                height="72"
+                alt=""
+                loading="lazy"
+              >
+            {%- elsif why_icon_asset != blank -%}
+              <img src="{{ why_icon_asset | asset_url }}" alt="" loading="lazy" width="72" height="72">
+            {%- else -%}
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" stroke="#111" stroke-width="1.5"/>
+              </svg>
+            {%- endif -%}
+          </div>
+          {%- if block.settings.title != blank -%}
+            <h3 class="fd-why__title">{{ block.settings.title }}</h3>
+          {%- endif -%}
+          {%- if block.settings.text != blank -%}
+            <p class="fd-why__text">{{ block.settings.text }}</p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "经销商优势",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "眉题", "default": "WHY CHOOSE AN AOTOS DEALER" },
+    { "type": "header", "content": "字体" },
+    { "type": "number", "id": "eyebrow_font_size_pc", "label": "眉题字号（PC）", "default": 12 },
+    { "type": "number", "id": "eyebrow_font_size_mob", "label": "眉题字号（手机）", "default": 22 },
+    { "type": "number", "id": "title_font_size_pc", "label": "标题字号（PC）", "default": 18 },
+    { "type": "number", "id": "title_font_size_mob", "label": "标题字号（手机）", "default": 28 },
+    { "type": "color", "id": "title_color", "label": "标题颜色", "default": "#111111" },
+    { "type": "number", "id": "text_font_size_pc", "label": "说明字号（PC）", "default": 13 },
+    { "type": "number", "id": "text_font_size_mob", "label": "说明字号（手机）", "default": 22 },
+    { "type": "text", "id": "text_line_height", "label": "说明行高", "default": "1.5" },
+    { "type": "color", "id": "text_color", "label": "说明颜色", "default": "#8a8a8a" },
+    { "type": "header", "content": "间距" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "上边距（PC）", "default": 40 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "下边距（PC）", "default": 80 },
+    { "type": "range", "id": "padding_top_mobile", "min": 0, "max": 200, "step": 4, "unit": "px", "label": "上边距（手机）", "default": 88 },
+    { "type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 200, "step": 4, "unit": "px", "label": "下边距（手机）", "default": 88 }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "优势",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "图标" },
+        { "type": "text", "id": "fallback_icon_asset", "label": "备用图标文件名" },
+        { "type": "text", "id": "title", "label": "标题", "default": "Test Ride Before You Buy" },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "说明",
+          "default": "Experience the power and performance in person."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "经销商优势",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "fallback_icon_asset": "fd-icon-bike.svg",
+            "title": "Test Ride Before You Buy",
+            "text": "Experience the power, comfort, and performance of AOTOS in person."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "fallback_icon_asset": "fd-icon-tools.svg",
+            "title": "Expert Service & Support",
+            "text": "Get professional service and genuine AOTOS parts from your local dealer.（Coming Soon）"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "fallback_icon_asset": "fd-icon-support.svg",
+            "title": "Personalized Local Support",
+            "text": "Get helpful advice from a local team that understands your riding needs"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "fallback_icon_asset": "fd-icon-gear.svg",
+            "title": "Accessories & Replacement Parts",
+            "text": "Find compatible accessories and replacement parts with local assistance.（Coming Soon）"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,7 +1,13 @@
 {%- liquid
   assign hero = section.settings.image
+  assign hero_mobile = section.settings.image_mobile
   assign shade = section.settings.overlay | default: 55, allow_false: true
   assign hero_width = 1920
+  assign title_size = section.settings.title_size | default: 48
+  assign title_size_mobile = section.settings.title_size_mobile | default: 56
+  assign title_weight = section.settings.title_weight | default: '700'
+  assign content_align = section.settings.content_align | default: 'center'
+  assign image_position = section.settings.image_position | default: 'center'
 -%}
 
 {%- style -%}
@@ -22,14 +28,20 @@
     height: auto;
   }
 
-  #BlogHero-{{ section.id }}:not(.blog-hero--empty)::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: rgb(0 0 0 / {{ shade | divided_by: 100.0 }});
-    pointer-events: none;
+  #BlogHero-{{ section.id }} .blog-hero__image--mobile {
+    display: none;
   }
+
+  {%- if shade > 0 -%}
+    #BlogHero-{{ section.id }}:not(.blog-hero--empty)::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: rgb(0 0 0 / {{ shade | divided_by: 100.0 }});
+      pointer-events: none;
+    }
+  {%- endif -%}
 
   #BlogHero-{{ section.id }} .blog-hero__content {
     position: absolute;
@@ -45,19 +57,43 @@
 
   #BlogHero-{{ section.id }} .blog-hero__title {
     margin: 0;
-    color: #ffffff;
-    font-size: calc(48 * var(--rem));
-    font-weight: 700;
+    color: {{ section.settings.title_color | default: '#ffffff' }};
+    font-size: calc({{ title_size }} * var(--rem));
+    font-weight: {{ title_weight }};
     line-height: 1.15;
   }
 
   #BlogHero-{{ section.id }} .blog-hero__subtitle {
     max-width: calc(720 * var(--rem));
     margin: calc(16 * var(--rem)) 0 0;
-    color: rgb(255 255 255 / 88%);
+    color: {{ section.settings.subtitle_color | default: '#ffffff' }};
     font-size: calc(18 * var(--rem));
     font-weight: 400;
     line-height: calc(26 * var(--rem));
+  }
+
+  #BlogHero-{{ section.id }} .blog-hero__subtitle p {
+    margin: 0;
+  }
+
+  #BlogHero-{{ section.id }} .blog-hero__subtitle p + p {
+    margin-top: calc(8 * var(--rem));
+  }
+
+  #BlogHero-{{ section.id }}.blog-hero--left .blog-hero__content {
+    align-items: flex-start;
+    justify-content: center;
+    left: 50%;
+    right: auto;
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    padding: 0;
+    text-align: left;
+    transform: translateX(-50%);
+  }
+
+  #BlogHero-{{ section.id }}.blog-hero--left .blog-hero__subtitle {
+    max-width: calc(420 * var(--rem));
   }
 
   #BlogHero-{{ section.id }}.blog-hero--fixed {
@@ -72,6 +108,18 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
+  }
+
+  #BlogHero-{{ section.id }}.blog-hero--pos-left .blog-hero__image {
+    object-position: left center;
+  }
+
+  #BlogHero-{{ section.id }}.blog-hero--pos-right .blog-hero__image {
+    object-position: right center;
+  }
+
+  #BlogHero-{{ section.id }}.blog-hero--plain {
+    background: #f2f2f2;
   }
 
   #BlogHero-{{ section.id }}.blog-hero--empty {
@@ -89,7 +137,15 @@
 
   @media screen and (max-width: 768px) {
     #BlogHero-{{ section.id }} .blog-hero__title {
-      font-size: calc(56 * var(--rem));
+      font-size: calc({{ title_size_mobile }} * var(--rem));
+    }
+
+    #BlogHero-{{ section.id }}.blog-hero--left .blog-hero__content {
+      left: 0;
+      right: 0;
+      width: 100%;
+      padding: 0 calc(40 * var(--rem));
+      transform: none;
     }
 
     #BlogHero-{{ section.id }} .blog-hero__subtitle {
@@ -103,16 +159,53 @@
       min-height: calc(530 * var(--rem));
     }
 
+    {%- if hero_mobile != blank -%}
+      #BlogHero-{{ section.id }}.blog-hero--fixed,
+      #BlogHero-{{ section.id }}.blog-hero--fixed.blog-hero--empty {
+        height: auto;
+        min-height: 0;
+        overflow: visible;
+      }
+
+      #BlogHero-{{ section.id }} .blog-hero__image--desktop {
+        display: none;
+      }
+
+      #BlogHero-{{ section.id }}.blog-hero--fixed .blog-hero__image--mobile,
+      #BlogHero-{{ section.id }} .blog-hero__image--mobile {
+        display: block;
+        position: relative;
+        inset: auto;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        object-position: center;
+      }
+    {%- endif -%}
+
     #BlogHero-{{ section.id }}.blog-hero--empty {
       min-height: calc(420 * var(--rem));
     }
   }
 {%- endstyle -%}
 
-<div id="BlogHero-{{ section.id }}" class="blog-hero blog-hero--{{ section.settings.image_fit | default: 'fixed' }}{% if hero == blank %} blog-hero--empty{% endif %}">
+<div id="BlogHero-{{ section.id }}" class="blog-hero blog-hero--{{ section.settings.image_fit | default: 'fixed' }} blog-hero--{{ content_align }} blog-hero--pos-{{ image_position }}{% if shade == 0 %} blog-hero--plain{% endif %}{% if hero == blank %} blog-hero--empty{% endif %}">
   {%- if hero != blank -%}
+    {%- if hero_mobile != blank -%}
+      <img
+        class="blog-hero__image blog-hero__image--mobile"
+        src="{{ hero_mobile | image_url: width: 1200 }}"
+        srcset="{{ hero_mobile | image_url: width: 750 }} 750w, {{ hero_mobile | image_url: width: 1125 }} 1125w, {{ hero_mobile | image_url: width: 1500 }} 1500w"
+        sizes="100vw"
+        alt="{{ section.settings.image_alt | default: section.settings.title | escape }}"
+        width="1200"
+        height="{{ 1200 | divided_by: hero_mobile.aspect_ratio | round }}"
+        loading="eager"
+        fetchpriority="high"
+      >
+    {%- endif -%}
     <img
-      class="blog-hero__image"
+      class="blog-hero__image{% if hero_mobile != blank %} blog-hero__image--desktop{% endif %}"
       src="{{ hero | image_url: width: hero_width }}"
       srcset="{{ hero | image_url: width: 800 }} 800w, {{ hero | image_url: width: 1200 }} 1200w, {{ hero | image_url: width: 1600 }} 1600w, {{ hero | image_url: width: hero_width }} {{ hero_width }}w"
       sizes="100vw"
@@ -128,7 +221,7 @@
       <h1 class="blog-hero__title">{{ section.settings.title | escape }}</h1>
     {%- endif -%}
     {%- if section.settings.subtitle != blank -%}
-      <p class="blog-hero__subtitle">{{ section.settings.subtitle | escape }}</p>
+      <div class="blog-hero__subtitle">{{ section.settings.subtitle }}</div>
     {%- endif -%}
   </div>
 </div>
@@ -161,10 +254,36 @@
       ]
     },
     {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "手机背景图"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "图片焦点",
+      "default": "center",
+      "options": [
+        { "value": "center", "label": "居中" },
+        { "value": "left", "label": "靠左" },
+        { "value": "right", "label": "靠右" }
+      ]
+    },
+    {
       "type": "text",
       "id": "image_alt",
       "label": "图片描述",
       "default": "AOTOS Blog"
+    },
+    {
+      "type": "select",
+      "id": "content_align",
+      "label": "文案对齐",
+      "default": "center",
+      "options": [
+        { "value": "center", "label": "水平居中" },
+        { "value": "left", "label": "靠左，上下居中" }
+      ]
     },
     {
       "type": "text",
@@ -173,10 +292,51 @@
       "default": "AOTOS Blog"
     },
     {
-      "type": "textarea",
+      "type": "range",
+      "id": "title_size",
+      "min": 24,
+      "max": 80,
+      "step": 2,
+      "label": "标题字号",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "min": 28,
+      "max": 80,
+      "step": 2,
+      "label": "标题字号（手机）",
+      "default": 56
+    },
+    {
+      "type": "select",
+      "id": "title_weight",
+      "label": "标题字重",
+      "default": "700",
+      "options": [
+        { "value": "400", "label": "400" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "标题颜色",
+      "default": "#ffffff"
+    },
+    {
+      "type": "richtext",
       "id": "subtitle",
       "label": "副标题",
-      "default": "Articles, tech guides, and rider stories."
+      "default": "<p>Articles, tech guides, and rider stories.</p>"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "副标题颜色",
+      "default": "#ffffff"
     },
     {
       "type": "range",

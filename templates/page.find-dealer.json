@@ -1,5 +1,24 @@
 {
   "sections": {
+    "find_dealer_hero": {
+      "type": "blog-list-hero",
+      "settings": {
+        "image": "shopify://shop_images/315d1d44-7d11-4fe7-a7ac-133b63bc2010.webp",
+        "image_mobile": "shopify://shop_images/ea0b81af-9628-4d18-9084-d1c71aa4bdda.webp",
+        "image_fit": "fixed",
+        "image_position": "right",
+        "image_alt": "FIND AN AOTOS DEALER",
+        "content_align": "left",
+        "title": "FIND AN AOTOS DEALER",
+        "title_size": 56,
+        "title_size_mobile": 48,
+        "title_weight": "700",
+        "title_color": "#111111",
+        "subtitle": "<p>Find test rides, local service, and trusted support near you.</p>",
+        "subtitle_color": "#3a3a3a",
+        "overlay": 0
+      }
+    },
     "find_dealer_search": {
       "type": "find-dealer-search",
       "settings": {
@@ -39,9 +58,189 @@
         "padding_top_mobile": 88,
         "padding_bottom_mobile": 88
       }
+    },
+    "find_dealer_why": {
+      "type": "find-dealer-why-visit",
+      "blocks": {
+        "w1": {
+          "type": "feature",
+          "settings": {
+            "fallback_icon_asset": "fd-icon-bike.svg",
+            "title": "Test Ride Before You Buy",
+            "text": "Experience the power, comfort, and performance of AOTOS in person."
+          }
+        },
+        "w2": {
+          "type": "feature",
+          "settings": {
+            "fallback_icon_asset": "fd-icon-tools.svg",
+            "title": "Expert Service & Support",
+            "text": "Get professional service and genuine AOTOS parts from your local dealer.（Coming Soon）"
+          }
+        },
+        "w3": {
+          "type": "feature",
+          "settings": {
+            "fallback_icon_asset": "fd-icon-support.svg",
+            "title": "Personalized Local Support",
+            "text": "Get helpful advice from a local team that understands your riding needs"
+          }
+        },
+        "w4": {
+          "type": "feature",
+          "settings": {
+            "fallback_icon_asset": "fd-icon-gear.svg",
+            "title": "Accessories & Replacement Parts",
+            "text": "Find compatible accessories and replacement parts with local assistance.（Coming Soon）"
+          }
+        }
+      },
+      "block_order": ["w1", "w2", "w3", "w4"],
+      "settings": {
+        "eyebrow": "WHY CHOOSE AN AOTOS DEALER",
+        "eyebrow_font_size_pc": 12,
+        "eyebrow_font_size_mob": 22,
+        "title_font_size_pc": 18,
+        "title_font_size_mob": 28,
+        "title_color": "#111111",
+        "text_font_size_pc": 13,
+        "text_font_size_mob": 22,
+        "text_line_height": "1.5",
+        "text_color": "#8a8a8a",
+        "padding_top": 40,
+        "padding_bottom": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 88
+      }
+    },
+    "find_dealer_promo": {
+      "type": "find-dealer-promo",
+      "blocks": {
+        "p1": {
+          "type": "promo",
+          "settings": {
+            "eyebrow": "GROWING DEALER NETWORK",
+            "title": "Find an AOTOS Dealer Near You",
+            "text": "Our dealer network is growing across the U.S. Find a nearby location for test rides, local service, accessories, and support.",
+            "button_label": "VIEW ALL DEALERS",
+            "button_link": "#dealer-search",
+            "fallback_asset": "fd-network-map.svg"
+          }
+        },
+        "p2": {
+          "type": "promo",
+          "settings": {
+            "eyebrow": "BUILT FOR MORE",
+            "title": "MEET THE FLUX X26",
+            "text": "Discover the Flux X26, a high-performance electric dirt bike built for off-road adventures and everyday exploration.",
+            "button_label": "EXPLORE FLUX X26",
+            "button_link": "shopify://products/flux-x26-pro",
+            "image": "shopify://shop_images/pro_eb03.png",
+            "fallback_asset": "eb02-bike-alt.webp"
+          }
+        }
+      },
+      "block_order": ["p1", "p2"],
+      "settings": {
+        "eyebrow_font_size_pc": 11,
+        "eyebrow_font_size_mob": 20,
+        "title_font_size_pc": 18,
+        "title_font_size_mob": 44,
+        "title_line_height": "1.1",
+        "title_color": "#111111",
+        "text_font_size_pc": 12,
+        "text_font_size_mob": 24,
+        "text_line_height": "1.5",
+        "text_color": "#8a8a8a",
+        "btn_font_size_pc": 12,
+        "btn_font_size_mob": 22,
+        "btn_color": "#111111",
+        "padding_top": 0,
+        "padding_bottom": 40,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "find_dealer_partner": {
+      "type": "find-dealer-partner",
+      "blocks": {
+        "b1": {
+          "type": "benefit",
+          "settings": {
+            "fallback_icon_asset": "fd-icon-brand.svg",
+            "text": "Dedicated Dealer Support"
+          }
+        },
+        "b2": {
+          "type": "benefit",
+          "settings": {
+            "fallback_icon_asset": "fd-icon-marketing.svg",
+            "text": "Marketing & Sales Resources"
+          }
+        },
+        "b3": {
+          "type": "benefit",
+          "settings": {
+            "fallback_icon_asset": "fd-icon-product.svg",
+            "text": "In-Demand Electric Rides"
+          }
+        }
+      },
+      "block_order": ["b1", "b2", "b3"],
+      "settings": {
+        "image": "shopify://shop_images/9d3ceef6-0bc9-4c10-9d20-93e32c8a0a2d.webp",
+        "fallback_asset": "fd-dealer-storefront.svg",
+        "eyebrow": "BECOME AN AOTOS DEALER",
+        "title": "Grow Your Business with AOTOS",
+        "text": "Join our growing dealer network and bring the future of electric mobility to your community.",
+        "button_label": "",
+        "button_link": "shopify://pages/partner-with-aotos",
+        "eyebrow_font_size_pc": 11,
+        "eyebrow_font_size_mob": 20,
+        "title_font_size_pc": 26,
+        "title_font_size_mob": 40,
+        "title_color": "#111111",
+        "text_font_size_pc": 14,
+        "text_font_size_mob": 24,
+        "text_line_height": "1.5",
+        "text_color": "#8a8a8a",
+        "btn_font_size_pc": 13,
+        "btn_font_size_mob": 22,
+        "btn_color": "#ffffff",
+        "benefit_font_size_pc": 12,
+        "benefit_font_size_mob": 22,
+        "benefit_line_height": "1.35",
+        "benefit_color": "#222222",
+        "padding_top": 40,
+        "padding_bottom": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 88
+      }
+    },
+    "find_dealer_form": {
+      "type": "apps",
+      "blocks": {
+        "powerful_form_builder_app_block_kaxck3": {
+          "type": "shopify://apps/powerful-form-builder/blocks/app-block/e4bcb1eb-35b2-42e6-bc37-bfe0e1542c9d",
+          "settings": {
+            "shortcode": "<div class=\"globo-formbuilder\" data-id=\"MTU5Nzk5\"></div>"
+          }
+        }
+      },
+      "block_order": [
+        "powerful_form_builder_app_block_kaxck3"
+      ],
+      "settings": {
+        "include_margins": true
+      }
     }
   },
   "order": [
-    "find_dealer_search"
+    "find_dealer_hero",
+    "find_dealer_search",
+    "find_dealer_why",
+    "find_dealer_promo",
+    "find_dealer_partner",
+    "find_dealer_form"
   ]
 }

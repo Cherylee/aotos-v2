@@ -1,0 +1,318 @@
+{% style %}
+  .fd-partner-{{ section.id }} {
+    --fd-orange: #ff6501;
+    --fd-border: #e4e4e4;
+    --eyebrow-size: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'eyebrow_font_size_pc', fallback: 11 %};
+    --title-size: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'title_font_size_pc', fallback: 26 %};
+    --title-color: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'title_color', fallback: '#111111' %};
+    --text-size: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'text_font_size_pc', fallback: 14 %};
+    --text-line-height: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'text_line_height', fallback: '1.5' %};
+    --text-color: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'text_color', fallback: '#8a8a8a' %};
+    --btn-size: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'btn_font_size_pc', fallback: 13 %};
+    --btn-color: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'btn_color', fallback: '#ffffff' %};
+    --benefit-size: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'benefit_font_size_pc', fallback: 12 %};
+    --benefit-line-height: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'benefit_line_height', fallback: '1.35' %};
+    --benefit-color: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'benefit_color', fallback: '#222222' %};
+    background: #fff;
+    width: 100%;
+  }
+
+  .fd-partner-{{ section.id }} .fd-partner__inner {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+    padding-top: calc({{ section.settings.padding_top | default: 40, allow_false: true }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80, allow_false: true }} * var(--rem));
+  }
+
+  .fd-partner-{{ section.id }} .fd-partner__card {
+    display: grid;
+    grid-template-columns: calc(280 * var(--rem)) minmax(0, 1fr) auto;
+    gap: calc(32 * var(--rem));
+    align-items: center;
+    padding: calc(28 * var(--rem));
+    border: 1px solid var(--fd-border);
+    border-radius: calc(12 * var(--rem));
+    background: #fff;
+    box-sizing: border-box;
+  }
+
+  .fd-partner-{{ section.id }} .fd-partner__media {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: calc(8 * var(--rem));
+    background: #eef0f2;
+  }
+
+  .fd-partner-{{ section.id }} .fd-partner__media img,
+  .fd-partner-{{ section.id }} .fd-partner__media svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .fd-partner-{{ section.id }} .fd-partner__eyebrow {
+    margin: 0 0 calc(10 * var(--rem));
+    font-size: calc(var(--eyebrow-size) * var(--rem));
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fd-orange);
+  }
+
+  .fd-partner-{{ section.id }} .fd-partner__title {
+    margin: 0 0 calc(10 * var(--rem));
+    font-size: calc(var(--title-size) * var(--rem));
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--title-color);
+  }
+
+  .fd-partner-{{ section.id }} .fd-partner__text {
+    margin: 0;
+    max-width: calc(360 * var(--rem));
+    font-size: calc(var(--text-size) * var(--rem));
+    line-height: var(--text-line-height);
+    color: var(--text-color);
+  }
+
+  .fd-partner-{{ section.id }} .fd-partner__text + .fd-partner__btn {
+    margin-top: calc(18 * var(--rem));
+  }
+
+  .fd-partner-{{ section.id }} .fd-partner__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(36 * var(--rem));
+    padding: 0 calc(22 * var(--rem));
+    border-radius: calc(4 * var(--rem));
+    background: var(--fd-orange);
+    color: var(--btn-color);
+    font-size: calc(var(--btn-size) * var(--rem));
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  @media (hover: hover) {
+    .fd-partner-{{ section.id }} .fd-partner__btn:hover {
+      opacity: 0.88;
+    }
+  }
+
+  .fd-partner-{{ section.id }} .fd-partner__benefits {
+    display: flex;
+    flex-direction: column;
+    gap: calc(20 * var(--rem));
+    padding-left: calc(28 * var(--rem));
+    border-left: 1px solid var(--fd-border);
+  }
+
+  .fd-partner-{{ section.id }} .fd-partner__benefit {
+    display: flex;
+    align-items: flex-start;
+    gap: calc(12 * var(--rem));
+    max-width: calc(180 * var(--rem));
+  }
+
+  .fd-partner-{{ section.id }} .fd-partner__benefit-icon {
+    flex: 0 0 auto;
+    width: calc(22 * var(--rem));
+    height: calc(22 * var(--rem));
+  }
+
+  .fd-partner-{{ section.id }} .fd-partner__benefit-icon img,
+  .fd-partner-{{ section.id }} .fd-partner__benefit-icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .fd-partner-{{ section.id }} .fd-partner__benefit-text {
+    margin: 0;
+    font-size: calc(var(--benefit-size) * var(--rem));
+    line-height: var(--benefit-line-height);
+    font-weight: 600;
+    color: var(--benefit-color);
+  }
+
+  @media screen and (max-width: 768px) {
+    .fd-partner-{{ section.id }} {
+      --eyebrow-size: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'eyebrow_font_size_mob', fallback: 20 %};
+      --title-size: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'title_font_size_mob', fallback: 40 %};
+      --text-size: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'text_font_size_mob', fallback: 24 %};
+      --btn-size: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'btn_font_size_mob', fallback: 22 %};
+      --benefit-size: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'benefit_font_size_mob', fallback: 22 %};
+    }
+
+    .fd-partner-{{ section.id }} .fd-partner__inner {
+      width: 100%;
+      padding: calc({{ section.settings.padding_top_mobile | default: 40, allow_false: true }} * var(--rem)) calc(40 * var(--rem)) calc({{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }} * var(--rem));
+      box-sizing: border-box;
+    }
+
+    .fd-partner-{{ section.id }} .fd-partner__card {
+      grid-template-columns: 1fr;
+      gap: calc(32 * var(--rem));
+      padding: calc(32 * var(--rem));
+      border-radius: calc(16 * var(--rem));
+    }
+
+    .fd-partner-{{ section.id }} .fd-partner__media {
+      aspect-ratio: 16 / 9;
+      border-radius: calc(12 * var(--rem));
+    }
+
+    .fd-partner-{{ section.id }} .fd-partner__text {
+      max-width: none;
+    }
+
+    .fd-partner-{{ section.id }} .fd-partner__btn {
+      min-height: calc(var(--aotos-button-height-mobile, 80) * var(--rem));
+      padding: 0 calc(40 * var(--rem));
+      border-radius: calc(8 * var(--rem));
+    }
+
+    .fd-partner-{{ section.id }} .fd-partner__benefits {
+      gap: calc(28 * var(--rem));
+      padding-top: calc(28 * var(--rem));
+      padding-left: 0;
+      border-left: 0;
+      border-top: 1px solid var(--fd-border);
+    }
+
+    .fd-partner-{{ section.id }} .fd-partner__benefit {
+      max-width: none;
+      gap: calc(16 * var(--rem));
+    }
+
+    .fd-partner-{{ section.id }} .fd-partner__benefit-icon {
+      width: calc(40 * var(--rem));
+      height: calc(40 * var(--rem));
+    }
+  }
+{% endstyle %}
+
+<section id="partner-with-aotos" class="fd-partner-{{ section.id }}">
+  <div class="fd-partner__inner">
+    <div class="fd-partner__card">
+      <div class="fd-partner__media">
+        {%- assign partner_asset = section.settings.fallback_asset | strip -%}
+        {%- if section.settings.image != blank -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 720 }}"
+            srcset="{{ section.settings.image | image_url: width: 480 }} 480w, {{ section.settings.image | image_url: width: 720 }} 720w, {{ section.settings.image | image_url: width: 1080 }} 1080w"
+            sizes="(max-width: 768px) 84vw, 360px"
+            width="720"
+            height="{{ 720 | divided_by: section.settings.image.aspect_ratio | round }}"
+            alt=""
+            loading="lazy"
+          >
+        {%- elsif partner_asset != blank -%}
+          <img src="{{ partner_asset | asset_url }}" alt="" loading="lazy" width="720" height="450">
+        {%- endif -%}
+      </div>
+
+      <div class="fd-partner__body">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="fd-partner__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h2 class="fd-partner__title">{{ section.settings.title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <p class="fd-partner__text">{{ section.settings.text }}</p>
+        {%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          <a class="fd-partner__btn" href="{{ section.settings.button_link | default: '#' }}">
+            {{- section.settings.button_label -}}
+          </a>
+        {%- endif -%}
+      </div>
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="fd-partner__benefits">
+          {%- for block in section.blocks -%}
+            <div class="fd-partner__benefit" {{ block.shopify_attributes }}>
+              <div class="fd-partner__benefit-icon">
+                {%- assign benefit_icon_asset = block.settings.fallback_icon_asset | strip -%}
+                {%- if block.settings.icon != blank -%}
+                  <img
+                    src="{{ block.settings.icon | image_url: width: 96 }}"
+                    srcset="{{ block.settings.icon | image_url: width: 48 }} 48w, {{ block.settings.icon | image_url: width: 96 }} 96w"
+                    sizes="40px"
+                    width="48"
+                    height="48"
+                    alt=""
+                    loading="lazy"
+                  >
+                {%- elsif benefit_icon_asset != blank -%}
+                  <img src="{{ benefit_icon_asset | asset_url }}" alt="" loading="lazy" width="48" height="48">
+                {%- endif -%}
+              </div>
+              {%- if block.settings.text != blank -%}
+                <p class="fd-partner__benefit-text">{{ block.settings.text }}</p>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "成为经销商",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "图片" },
+    { "type": "text", "id": "fallback_asset", "label": "备用图片文件名" },
+    { "type": "text", "id": "eyebrow", "label": "眉题", "default": "BECOME AN AOTOS DEALER" },
+    { "type": "text", "id": "title", "label": "标题", "default": "Grow Your Business with AOTOS" },
+    { "type": "textarea", "id": "text", "label": "说明" },
+    { "type": "text", "id": "button_label", "label": "按钮文字" },
+    { "type": "url", "id": "button_link", "label": "按钮链接" },
+    { "type": "header", "content": "字体" },
+    { "type": "number", "id": "eyebrow_font_size_pc", "label": "眉题字号（PC）", "default": 11 },
+    { "type": "number", "id": "eyebrow_font_size_mob", "label": "眉题字号（手机）", "default": 20 },
+    { "type": "number", "id": "title_font_size_pc", "label": "标题字号（PC）", "default": 26 },
+    { "type": "number", "id": "title_font_size_mob", "label": "标题字号（手机）", "default": 40 },
+    { "type": "color", "id": "title_color", "label": "标题颜色", "default": "#111111" },
+    { "type": "number", "id": "text_font_size_pc", "label": "说明字号（PC）", "default": 14 },
+    { "type": "number", "id": "text_font_size_mob", "label": "说明字号（手机）", "default": 24 },
+    { "type": "text", "id": "text_line_height", "label": "说明行高", "default": "1.5" },
+    { "type": "color", "id": "text_color", "label": "说明颜色", "default": "#8a8a8a" },
+    { "type": "number", "id": "btn_font_size_pc", "label": "按钮字号（PC）", "default": 13 },
+    { "type": "number", "id": "btn_font_size_mob", "label": "按钮字号（手机）", "default": 22 },
+    { "type": "color", "id": "btn_color", "label": "按钮文字颜色", "default": "#ffffff" },
+    { "type": "number", "id": "benefit_font_size_pc", "label": "权益字号（PC）", "default": 12 },
+    { "type": "number", "id": "benefit_font_size_mob", "label": "权益字号（手机）", "default": 22 },
+    { "type": "text", "id": "benefit_line_height", "label": "权益行高", "default": "1.35" },
+    { "type": "color", "id": "benefit_color", "label": "权益颜色", "default": "#222222" },
+    { "type": "header", "content": "间距" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "上边距（PC）", "default": 40 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "下边距（PC）", "default": 80 },
+    { "type": "range", "id": "padding_top_mobile", "min": 0, "max": 200, "step": 4, "unit": "px", "label": "上边距（手机）", "default": 40 },
+    { "type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 200, "step": 4, "unit": "px", "label": "下边距（手机）", "default": 88 }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "权益",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "图标" },
+        { "type": "text", "id": "fallback_icon_asset", "label": "备用图标文件名" },
+        { "type": "text", "id": "text", "label": "文案", "default": "Dedicated Dealer Support" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "成为经销商" }
+  ]
+}
+{% endschema %}

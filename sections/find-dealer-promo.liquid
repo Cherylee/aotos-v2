@@ -1,0 +1,251 @@
+{% style %}
+  .fd-promo-{{ section.id }} {
+    --fd-orange: #ff6501;
+    --fd-border: #e4e4e4;
+    --eyebrow-size: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'eyebrow_font_size_pc', fallback: 11 %};
+    --title-size: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'title_font_size_pc', fallback: 18 %};
+    --title-line-height: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'title_line_height', fallback: '1.1' %};
+    --title-color: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'title_color', fallback: '#111111' %};
+    --text-size: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'text_font_size_pc', fallback: 12 %};
+    --text-line-height: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'text_line_height', fallback: '1.5' %};
+    --text-color: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'text_color', fallback: '#8a8a8a' %};
+    --btn-size: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'btn_font_size_pc', fallback: 12 %};
+    --btn-color: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'btn_color', fallback: '#111111' %};
+    background: #fff;
+    width: 100%;
+  }
+
+  .fd-promo-{{ section.id }} .fd-promo__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: calc(18 * var(--rem));
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+    padding-top: calc({{ section.settings.padding_top | default: 0, allow_false: true }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 40, allow_false: true }} * var(--rem));
+  }
+
+  .fd-promo-{{ section.id }} .fd-promo__card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(16 * var(--rem));
+    min-height: calc(165 * var(--rem));
+    padding: calc(28 * var(--rem));
+    border: 1px solid var(--fd-border);
+    border-radius: calc(12 * var(--rem));
+    background: #fafafa;
+    box-sizing: border-box;
+  }
+
+  .fd-promo-{{ section.id }} .fd-promo__body {
+    flex: 1 1 auto;
+    max-width: calc(240 * var(--rem));
+  }
+
+  .fd-promo-{{ section.id }} .fd-promo__eyebrow {
+    margin: 0 0 calc(10 * var(--rem));
+    font-size: calc(var(--eyebrow-size) * var(--rem));
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fd-orange);
+  }
+
+  .fd-promo-{{ section.id }} .fd-promo__title {
+    margin: 0 0 calc(10 * var(--rem));
+    font-size: calc(var(--title-size) * var(--rem));
+    font-weight: 700;
+    line-height: var(--title-line-height);
+    color: var(--title-color);
+  }
+
+  .fd-promo-{{ section.id }} .fd-promo__text {
+    margin: 0 0 calc(16 * var(--rem));
+    font-size: calc(var(--text-size) * var(--rem));
+    line-height: var(--text-line-height);
+    color: var(--text-color);
+  }
+
+  .fd-promo-{{ section.id }} .fd-promo__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(36 * var(--rem));
+    padding: 0 calc(20 * var(--rem));
+    border: 1px solid #111;
+    border-radius: calc(4 * var(--rem));
+    font-size: calc(var(--btn-size) * var(--rem));
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--btn-color);
+    text-decoration: none;
+  }
+
+  @media (hover: hover) {
+    .fd-promo-{{ section.id }} .fd-promo__btn:hover {
+      background: #111;
+      color: #fff;
+    }
+  }
+
+  .fd-promo-{{ section.id }} .fd-promo__media {
+    flex: 0 0 calc(200 * var(--rem));
+    width: calc(200 * var(--rem));
+    aspect-ratio: 4 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .fd-promo-{{ section.id }} .fd-promo__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  @media screen and (max-width: 768px) {
+    .fd-promo-{{ section.id }} {
+      --eyebrow-size: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'eyebrow_font_size_mob', fallback: 20 %};
+      --title-size: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'title_font_size_mob', fallback: 44 %};
+      --text-size: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'text_font_size_mob', fallback: 24 %};
+      --btn-size: {% render 'aotos-eb02-type-var', settings: section.settings, id: 'btn_font_size_mob', fallback: 22 %};
+    }
+
+    .fd-promo-{{ section.id }} .fd-promo__inner {
+      grid-template-columns: 1fr;
+      gap: calc(32 * var(--rem));
+      width: 100%;
+      padding: calc({{ section.settings.padding_top_mobile | default: 40, allow_false: true }} * var(--rem)) calc(40 * var(--rem)) calc({{ section.settings.padding_bottom_mobile | default: 40, allow_false: true }} * var(--rem));
+      box-sizing: border-box;
+    }
+
+    .fd-promo-{{ section.id }} .fd-promo__card {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: calc(28 * var(--rem));
+      min-height: 0;
+      padding: calc(40 * var(--rem));
+      border-radius: calc(16 * var(--rem));
+    }
+
+    .fd-promo-{{ section.id }} .fd-promo__body {
+      max-width: 100%;
+    }
+
+    .fd-promo-{{ section.id }} .fd-promo__eyebrow {
+      margin-bottom: calc(16 * var(--rem));
+    }
+
+    .fd-promo-{{ section.id }} .fd-promo__title {
+      margin-bottom: calc(16 * var(--rem));
+    }
+
+    .fd-promo-{{ section.id }} .fd-promo__text {
+      margin-bottom: calc(28 * var(--rem));
+    }
+
+    .fd-promo-{{ section.id }} .fd-promo__btn {
+      min-height: calc(var(--aotos-button-height-mobile, 80) * var(--rem));
+      padding: 0 calc(40 * var(--rem));
+      border-radius: calc(8 * var(--rem));
+    }
+
+    .fd-promo-{{ section.id }} .fd-promo__media {
+      order: -1;
+      flex: none;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+    }
+  }
+{% endstyle %}
+
+<section class="fd-promo-{{ section.id }}">
+  <div class="fd-promo__inner">
+    {%- for block in section.blocks -%}
+      <div class="fd-promo__card" {{ block.shopify_attributes }}>
+        <div class="fd-promo__body">
+          {%- if block.settings.eyebrow != blank -%}
+            <p class="fd-promo__eyebrow">{{ block.settings.eyebrow }}</p>
+          {%- endif -%}
+          {%- if block.settings.title != blank -%}
+            <h3 class="fd-promo__title">{{ block.settings.title }}</h3>
+          {%- endif -%}
+          {%- if block.settings.text != blank -%}
+            <p class="fd-promo__text">{{ block.settings.text }}</p>
+          {%- endif -%}
+          {%- if block.settings.button_label != blank -%}
+            <a class="fd-promo__btn" href="{{ block.settings.button_link | default: '#' }}">
+              {{- block.settings.button_label -}}
+            </a>
+          {%- endif -%}
+        </div>
+        {%- assign promo_asset = block.settings.fallback_asset | strip -%}
+        {%- if block.settings.image != blank -%}
+          <div class="fd-promo__media">
+            <img
+              src="{{ block.settings.image | image_url: width: 640 }}"
+              srcset="{{ block.settings.image | image_url: width: 400 }} 400w, {{ block.settings.image | image_url: width: 640 }} 640w, {{ block.settings.image | image_url: width: 960 }} 960w"
+              sizes="(max-width: 768px) 80vw, 280px"
+              width="640"
+              height="{{ 640 | divided_by: block.settings.image.aspect_ratio | round }}"
+              alt=""
+              loading="lazy"
+            >
+          </div>
+        {%- elsif promo_asset != blank -%}
+          <div class="fd-promo__media">
+            <img src="{{ promo_asset | asset_url }}" alt="" loading="lazy" width="640" height="480">
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "经销商推广卡片",
+  "settings": [
+    { "type": "header", "content": "字体" },
+    { "type": "number", "id": "eyebrow_font_size_pc", "label": "眉题字号（PC）", "default": 11 },
+    { "type": "number", "id": "eyebrow_font_size_mob", "label": "眉题字号（手机）", "default": 20 },
+    { "type": "number", "id": "title_font_size_pc", "label": "标题字号（PC）", "default": 18 },
+    { "type": "number", "id": "title_font_size_mob", "label": "标题字号（手机）", "default": 44 },
+    { "type": "text", "id": "title_line_height", "label": "标题行高", "default": "1.1" },
+    { "type": "color", "id": "title_color", "label": "标题颜色", "default": "#111111" },
+    { "type": "number", "id": "text_font_size_pc", "label": "说明字号（PC）", "default": 12 },
+    { "type": "number", "id": "text_font_size_mob", "label": "说明字号（手机）", "default": 24 },
+    { "type": "text", "id": "text_line_height", "label": "说明行高", "default": "1.5" },
+    { "type": "color", "id": "text_color", "label": "说明颜色", "default": "#8a8a8a" },
+    { "type": "number", "id": "btn_font_size_pc", "label": "按钮字号（PC）", "default": 12 },
+    { "type": "number", "id": "btn_font_size_mob", "label": "按钮字号（手机）", "default": 22 },
+    { "type": "color", "id": "btn_color", "label": "按钮文字颜色", "default": "#111111" },
+    { "type": "header", "content": "间距" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "上边距（PC）", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "下边距（PC）", "default": 40 },
+    { "type": "range", "id": "padding_top_mobile", "min": 0, "max": 200, "step": 4, "unit": "px", "label": "上边距（手机）", "default": 40 },
+    { "type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 200, "step": 4, "unit": "px", "label": "下边距（手机）", "default": 40 }
+  ],
+  "blocks": [
+    {
+      "type": "promo",
+      "name": "卡片",
+      "settings": [
+        { "type": "text", "id": "eyebrow", "label": "眉题", "default": "GROWING DEALER NETWORK" },
+        { "type": "text", "id": "title", "label": "标题", "default": "Find an AOTOS Dealer Near You" },
+        { "type": "textarea", "id": "text", "label": "说明" },
+        { "type": "text", "id": "button_label", "label": "按钮文字" },
+        { "type": "url", "id": "button_link", "label": "按钮链接" },
+        { "type": "image_picker", "id": "image", "label": "图片" },
+        { "type": "text", "id": "fallback_asset", "label": "备用图片文件名" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "经销商推广卡片" }
+  ]
+}
+{% endschema %}
