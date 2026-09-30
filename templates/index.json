@@ -631,6 +631,51 @@
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 88
       }
+    },
+    "home_dealer_card": {
+      "type": "service-repair-banner",
+      "settings": {
+        "layout": "card",
+        "copy_align": "split",
+        "heading": "Test Ride with Local Service & Trusted Support.",
+        "text": "Backed by a reliable network of local dealers.",
+        "primary_label": "Find a dealer",
+        "primary_link": "shopify://pages/find-a-dealer",
+        "secondary_label": "",
+        "image": "shopify://shop_images/0312.webp",
+        "image_alt": "Dealer network map",
+        "background_color": "#ffffff",
+        "accent_color": "#ff6501",
+        "padding_top": 0,
+        "padding_bottom": 80,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 88
+      }
+    },
+    "home_app_card": {
+      "type": "service-repair-banner",
+      "settings": {
+        "layout": "card",
+        "copy_align": "center",
+        "eyebrow": "SMART CONNECT",
+        "heading": "Smarter rides. Connected world.",
+        "text": "Track performance, customize settings, and stay connected.",
+        "primary_label": "",
+        "secondary_label": "",
+        "image": "shopify://shop_images/Engineered_Strength._Precision_Form._983854fe-7386-4499-bce9-64bcb883edee.webp",
+        "image_alt": "AOTOS app on a phone",
+        "store_image_1": "shopify://shop_images/png-clipart-app-store-apple-google-play-iphone-mid-autumn-lantern-text-logo_1.webp",
+        "store_link_1": "https://apps.apple.com/us/app/aotos/id6743829984",
+        "store_alt_1": "Download on the App Store",
+        "store_image_2": "shopify://shop_images/en_badge_web_generic_1.webp",
+        "store_link_2": "https://play.google.com/store/apps/details?id=com.dt.smart.aotos&hl=ln",
+        "store_alt_2": "Get it on Google Play",
+        "background_color": "#ffffff",
+        "padding_top": 0,
+        "padding_bottom": 80,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 88
+      }
     }
   },
   "order": [
@@ -641,6 +686,8 @@
     "home_split_cards",
     "home_rider_stories",
     "home_explore_cards",
-    "home_spotlight"
+    "home_dealer_card",
+    "home_spotlight",
+    "home_app_card"
   ]
 }

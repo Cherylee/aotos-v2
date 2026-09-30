@@ -457,6 +457,10 @@
     transform: translateY(-50%) rotate(-45deg);
   }
 
+  html.aotos-nav-open .section-header.shopify-section-group-header-group {
+    z-index: 20;
+  }
+
   .aotos-nav__backdrop {
     display: block;
     position: fixed;

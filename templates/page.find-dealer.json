@@ -1,0 +1,47 @@
+{
+  "sections": {
+    "find_dealer_search": {
+      "type": "find-dealer-search",
+      "settings": {
+        "widget_tag": "map_93eyv2v3",
+        "min_height": 500,
+        "min_height_mobile": 760,
+        "loading_text": "Loading store locator...",
+        "eyebrow": "Find AOTOS Near You",
+        "title": "",
+        "heading_align": "left",
+        "subtitle": "Enter your city or ZIP code to find an AOTOS dealer or test ride location near you.<br>\n*Service locations are currently being rolled out and will be available soon.",
+        "accent_color": "#ff6501",
+        "background": "#ffffff",
+        "eyebrow_font_size_pc": 12,
+        "eyebrow_font_size_mob": 22,
+        "title_font_size_pc": 34,
+        "title_font_size_mob": 48,
+        "title_line_height": "1.1",
+        "title_color": "#111111",
+        "subtitle_font_size_pc": 16,
+        "subtitle_font_size_mob": 26,
+        "subtitle_line_height": "1.5",
+        "subtitle_color": "#666666",
+        "loading_font_size_pc": 15,
+        "loading_font_size_mob": 26,
+        "loading_color": "#999999",
+        "notice_font_size_pc": 15,
+        "notice_font_size_mob": 26,
+        "notice_color": "#888888",
+        "spacing_mode": "rem",
+        "pc_padding_top": 48,
+        "pc_padding_bottom": 48,
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 48,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
+    }
+  },
+  "order": [
+    "find_dealer_search"
+  ]
+}

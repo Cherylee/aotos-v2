@@ -12,6 +12,49 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  .section-{{ section.id }}-padding .rte ul,
+  .section-{{ section.id }}-padding .rte ol {
+    margin: 0 0 calc(16 * var(--rem));
+    padding-left: calc(22 * var(--rem));
+    list-style-position: outside;
+  }
+
+  .section-{{ section.id }}-padding .rte ul {
+    list-style-type: disc;
+  }
+
+  .section-{{ section.id }}-padding .rte ul ul {
+    list-style-type: circle;
+  }
+
+  .section-{{ section.id }}-padding .rte ol {
+    list-style-type: decimal;
+  }
+
+  .section-{{ section.id }}-padding .rte ol ol {
+    list-style-type: lower-alpha;
+  }
+
+  .section-{{ section.id }}-padding .rte li {
+    margin: 0 0 calc(8 * var(--rem));
+    padding: 0;
+  }
+
+  .section-{{ section.id }}-padding .rte li:last-child {
+    margin-bottom: 0;
+  }
+
+  .section-{{ section.id }}-padding .rte li > p {
+    display: inline;
+    margin: 0;
+  }
+
+  .section-{{ section.id }}-padding .rte li > ul,
+  .section-{{ section.id }}-padding .rte li > ol {
+    display: block;
+    margin-top: calc(8 * var(--rem));
+  }
 {%- endstyle -%}
 
 <div class="page-width page-width--narrow section-{{ section.id }}-padding">
