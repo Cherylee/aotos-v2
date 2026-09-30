@@ -80,14 +80,14 @@
           "type": "nav_link",
           "settings": {
             "title": "FLUX X26 & Pro",
-            "link": "/collections/all"
+            "link": "shopify://pages/flux-x26"
           }
         },
         "nav-dealer": {
           "type": "nav_link",
           "settings": {
             "title": "Dealer Locator",
-            "link": "/pages/dealer-locator"
+            "link": "shopify://pages/find-a-dealer"
           }
         },
         "nav-about": {
