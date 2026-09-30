@@ -15,16 +15,7 @@
       "settings": {
         "image": "shopify://shop_images/2880X680_c18da4c4-fd5d-4990-9d4b-4fbfb7d23e4c.jpg",
         "image_mobile": "shopify://shop_images/21c96ddb-8669-4121-9763-2e9769786f4d.png",
-        "image_overlay_opacity": 0,
-        "image_height": "adapt",
-        "desktop_content_position": "middle-center",
-        "show_text_box": false,
-        "desktop_content_alignment": "center",
-        "color_scheme": "",
-        "image_behavior": "none",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": true,
-        "show_text_below": true
+        "image_height": "adapt"
       }
     },
     "giveaway_prizes": {
@@ -179,16 +170,7 @@
       "settings": {
         "image": "shopify://shop_images/2880X360.jpg",
         "image_mobile": "shopify://shop_images/111112.png",
-        "image_overlay_opacity": 0,
-        "image_height": "adapt",
-        "desktop_content_position": "middle-center",
-        "show_text_box": true,
-        "desktop_content_alignment": "center",
-        "color_scheme": "",
-        "image_behavior": "none",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": true,
-        "show_text_below": true
+        "image_height": "adapt"
       }
     }
   },
