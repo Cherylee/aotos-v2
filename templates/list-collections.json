@@ -1,1 +1,47 @@
-{"sections":{"main":{"type":"main-list-collections","settings":{"title":"Collections","sort":"alphabetical","image_ratio":"square","columns_desktop":3,"columns_mobile":"2"}}},"order":["main"]}
+{
+  "sections": {
+    "main": {
+      "type": "collection-list",
+      "blocks": {
+        "cat_flux": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "smart-electric-bicycle"
+          }
+        },
+        "cat_suitcase": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "l2-smart-rideable-suitcase"
+          }
+        },
+        "cat_accessories": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "accessories"
+          }
+        },
+        "cat_scooter": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "aotos-electric-scooter"
+          }
+        }
+      },
+      "block_order": ["cat_flux", "cat_suitcase", "cat_accessories", "cat_scooter"],
+      "settings": {
+        "title": "Categories",
+        "heading_size": "h1",
+        "image_ratio": "square",
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "show_view_all": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": ["main"]
+}

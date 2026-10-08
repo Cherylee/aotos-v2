@@ -1,1 +1,73 @@
-{"sections":{"banner":{"type":"main-collection-banner","settings":{"show_collection_description":true,"show_collection_image":false,"color_scheme":"scheme-1"}},"product-grid":{"type":"main-collection-product-grid","settings":{"products_per_page":16,"columns_desktop":4,"color_scheme":"scheme-1","image_ratio":"adapt","image_shape":"default","show_secondary_image":false,"show_vendor":false,"show_rating":false,"quick_add":"none","enable_filtering":true,"filter_type":"horizontal","enable_sorting":true,"columns_mobile":"2","padding_top":36,"padding_bottom":36}}},"order":["banner","product-grid"]}
+{
+  "sections": {
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 3,
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": true,
+        "quick_add": "none",
+        "enable_filtering": true,
+        "filter_type": "vertical",
+        "enable_sorting": true,
+        "columns_mobile": "1",
+        "show_breadcrumb": true,
+        "show_heading": true,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
+    },
+    "why-choose": {
+      "type": "collection-why-choose",
+      "blocks": {
+        "card_featured": {
+          "type": "card",
+          "settings": {
+            "badge": "Newly Released",
+            "title": "Flux X26 Pro",
+            "text": "Power whenever you need it",
+            "button_label": "Learn More",
+            "button_link": "shopify://products/flux-x26-pro"
+          }
+        },
+        "card_helmet": {
+          "type": "card",
+          "settings": {
+            "badge": "Accessories",
+            "title": "Keep Your Safe With Helmet",
+            "text": "Safety First",
+            "button_label": "",
+            "button_link": "shopify://products/aotos-helmet"
+          }
+        },
+        "card_subscribe": {
+          "type": "card",
+          "settings": {
+            "badge": "Subscribe",
+            "title": "Get Your Ebike Tips",
+            "text": "Join Us",
+            "button_label": "",
+            "button_link": "/#newsletter"
+          }
+        }
+      },
+      "block_order": ["card_featured", "card_helmet", "card_subscribe"],
+      "settings": {
+        "heading": "Why choose AOTOS E-Bike",
+        "heading_align": "center",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
+    }
+  },
+  "order": ["product-grid", "why-choose"]
+}
