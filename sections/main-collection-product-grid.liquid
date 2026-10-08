@@ -439,7 +439,16 @@
 <div class="aotos-collection-{{ section.id }}">
   <div class="aotos-collection__inner">
   {%- liquid
-    assign cat_query = request.query_parameters.cat | default: ''
+    assign cat_query = ''
+    if request.query_string contains 'cat=flux'
+      assign cat_query = 'flux'
+    elsif request.query_string contains 'cat=suitcase'
+      assign cat_query = 'suitcase'
+    elsif request.query_string contains 'cat=accessories'
+      assign cat_query = 'accessories'
+    elsif request.query_string contains 'cat=scooter'
+      assign cat_query = 'scooter'
+    endif
     assign grid_collection = collection
     if collection.products_count == 0
       if collection.handle == 'smart-electric-bicycle' or collection.handle contains 'flux' or collection.handle contains 'ebike'
@@ -571,7 +580,7 @@
             endif
           -%}
           {%- if section.settings.cat_1_label != blank or section.settings.cat_2_label != blank or section.settings.cat_3_label != blank or section.settings.cat_4_label != blank -%}
-            <nav class="aotos-collection-cats" aria-label="Categories">
+            <nav class="aotos-collection-cats" aria-label="Categories" data-cat="{{ cat_query | escape }}" data-qs="{{ request.query_string | escape }}">
               <h2 class="aotos-collection-cats__title">Categories</h2>
               <ul class="aotos-collection-cats__list">
                 {%- if section.settings.cat_1_label != blank -%}
