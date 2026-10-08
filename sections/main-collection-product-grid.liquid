@@ -37,8 +37,6 @@
     box-sizing: border-box;
   }
 
-<<<<<<< HEAD
-=======
   .aotos-collection-{{ section.id }} .aotos-collection__crumb {
     display: flex;
     flex-wrap: wrap;
@@ -95,7 +93,6 @@
     margin-top: 0;
   }
 
->>>>>>> sit
   .aotos-collection-{{ section.id }} .aotos-collection__layout,
   .aotos-collection-{{ section.id }} .facets-vertical {
     display: flex;
@@ -127,22 +124,14 @@
   .aotos-collection-{{ section.id }} .aotos-collection-cats__list {
     display: flex;
     flex-direction: column;
-<<<<<<< HEAD
-    gap: calc(4 * var(--rem));
-=======
     gap: calc(8 * var(--rem));
->>>>>>> sit
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
   .aotos-collection-{{ section.id }} .aotos-collection-cats__link {
-<<<<<<< HEAD
-    display: block;
-=======
     display: inline-block;
->>>>>>> sit
     padding: calc(8 * var(--rem)) 0;
     font-size: calc(14 * var(--rem));
     line-height: calc(18 * var(--rem));
@@ -235,35 +224,8 @@
     object-position: center center;
   }
 
-<<<<<<< HEAD
-  .aotos-collection-{{ section.id }} .card__badge,
-  .aotos-collection-{{ section.id }} .card__badge.top,
-  .aotos-collection-{{ section.id }} .card__badge.bottom,
-  .aotos-collection-{{ section.id }} .card__badge.left,
-  .aotos-collection-{{ section.id }} .card__badge.right {
-    position: absolute;
-    top: calc(12 * var(--rem));
-    left: calc(12 * var(--rem));
-    right: auto;
-    bottom: auto;
-    z-index: 2;
-    display: flex;
-    margin: 0;
-  }
-
-  .aotos-collection-{{ section.id }} .badge {
-    background: var(--aotos-theme-color, #ff6501);
-    color: #fff;
-    border: 0;
-    border-radius: calc(40 * var(--rem));
-    padding: calc(4 * var(--rem)) calc(10 * var(--rem));
-    font-size: calc(12 * var(--rem));
-    font-weight: 600;
-    line-height: 1.2;
-=======
   .aotos-collection-{{ section.id }} .card__badge {
     display: none;
->>>>>>> sit
   }
 
   .aotos-collection-{{ section.id }} .product-card-wrapper .card__information {
@@ -406,15 +368,12 @@
       padding: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem)) calc(40 * var(--rem)) calc({{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }} * var(--rem));
     }
 
-<<<<<<< HEAD
-=======
     .aotos-collection-{{ section.id }} .aotos-collection__crumb {
       margin-bottom: calc(16 * var(--rem));
       font-size: calc(20 * var(--rem));
       line-height: calc(32 * var(--rem));
     }
 
->>>>>>> sit
     .aotos-collection-{{ section.id }} .aotos-collection__layout,
     .aotos-collection-{{ section.id }} .facets-vertical {
       flex-direction: column;
@@ -469,14 +428,6 @@
       line-height: calc(28 * var(--rem));
     }
 
-<<<<<<< HEAD
-    .aotos-collection-{{ section.id }} .badge {
-      font-size: calc(22 * var(--rem));
-      padding: calc(8 * var(--rem)) calc(18 * var(--rem));
-    }
-
-=======
->>>>>>> sit
     .aotos-collection-{{ section.id }} .facets.small-hide,
     .aotos-collection-{{ section.id }} .facets-vertical-sort {
       display: none !important;
@@ -504,20 +455,6 @@
     }
 
     .aotos-collection-{{ section.id }} .aotos-collection-cats {
-<<<<<<< HEAD
-      width: 100%;
-      margin-bottom: calc(16 * var(--rem));
-    }
-
-    .aotos-collection-{{ section.id }} .aotos-collection-cats__title {
-      font-size: calc(22 * var(--rem));
-      line-height: calc(32 * var(--rem));
-    }
-
-    .aotos-collection-{{ section.id }} .aotos-collection-cats__link {
-      font-size: calc(20 * var(--rem));
-      line-height: calc(32 * var(--rem));
-=======
       width: auto;
       max-width: none;
       margin: 0 calc(-40 * var(--rem)) calc(24 * var(--rem));
@@ -558,15 +495,12 @@
 
     .aotos-collection-{{ section.id }} .aotos-collection-cats__link.is-active {
       border-color: var(--aotos-theme-color, #ff6501);
->>>>>>> sit
     }
   }
 {%- endstyle -%}
 
 <div class="aotos-collection-{{ section.id }}">
   <div class="aotos-collection__inner">
-<<<<<<< HEAD
-=======
     {%- if section.settings.show_breadcrumb -%}
       <nav class="aotos-collection__crumb" aria-label="Breadcrumb">
         <ol class="aotos-collection__crumb-list">
@@ -587,7 +521,6 @@
     {%- else -%}
       <h1 class="visually-hidden">{{ collection.title | escape }}</h1>
     {%- endif -%}
->>>>>>> sit
   {%- paginate collection.products by section.settings.products_per_page -%}
     {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
     {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
@@ -661,11 +594,7 @@
         >
           <nav class="aotos-collection-cats" aria-label="Categories">
             <h2 class="aotos-collection-cats__title">Categories</h2>
-<<<<<<< HEAD
-            <ul class="aotos-collection-cats__list">
-=======
             <ul class="aotos-collection-cats__list" id="AotosCollectionCats-{{ section.id }}">
->>>>>>> sit
               {%- if collections.all != blank -%}
                 <li>
                   <a
@@ -695,8 +624,6 @@
               {%- endfor -%}
             </ul>
           </nav>
-<<<<<<< HEAD
-=======
           <script>
             (function () {
               var list = document.getElementById('AotosCollectionCats-{{ section.id }}');
@@ -713,7 +640,6 @@
               window.addEventListener('load', centerActive, { once: true });
             })();
           </script>
->>>>>>> sit
           {% render 'facets',
             results: collection,
             enable_filtering: section.settings.enable_filtering,
