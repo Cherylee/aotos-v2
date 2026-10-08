@@ -23,21 +23,435 @@
 {%- endif -%}
 
 {%- style -%}
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  .aotos-collection-{{ section.id }} {
+    background: #fff;
+    width: 100%;
   }
 
-  @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
+  .aotos-collection-{{ section.id }} .aotos-collection__inner {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+    padding-top: calc({{ section.settings.padding_top | default: 80, allow_false: true }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80, allow_false: true }} * var(--rem));
+    box-sizing: border-box;
+  }
+
+  .aotos-collection-{{ section.id }} .aotos-collection__layout,
+  .aotos-collection-{{ section.id }} .facets-vertical {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: calc(32 * var(--rem));
+    width: 100%;
+  }
+
+  .aotos-collection-{{ section.id }} .facets-wrapper {
+    flex: 0 0 calc(240 * var(--rem));
+    width: calc(240 * var(--rem));
+    max-width: 100%;
+    padding-right: 0;
+  }
+
+  .aotos-collection-{{ section.id }} .aotos-collection-cats {
+    margin: 0 0 calc(24 * var(--rem));
+  }
+
+  .aotos-collection-{{ section.id }} .aotos-collection-cats__title {
+    margin: 0 0 calc(12 * var(--rem));
+    font-size: calc(14 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    font-weight: 700;
+    color: #000000;
+  }
+
+  .aotos-collection-{{ section.id }} .aotos-collection-cats__list {
+    display: flex;
+    flex-direction: column;
+    gap: calc(4 * var(--rem));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .aotos-collection-{{ section.id }} .aotos-collection-cats__link {
+    display: block;
+    padding: calc(8 * var(--rem)) 0;
+    font-size: calc(14 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    font-weight: 400;
+    color: #000000;
+    text-decoration: none;
+  }
+
+  .aotos-collection-{{ section.id }} .aotos-collection-cats__link.is-active {
+    font-weight: 700;
+    color: var(--aotos-theme-color, #ff6501);
+  }
+
+  .aotos-collection-{{ section.id }} .facets__form-vertical {
+    width: 100%;
+  }
+
+  .aotos-collection-{{ section.id }} .product-grid-container {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
+  }
+
+  .aotos-collection-{{ section.id }} .facets-vertical-sort {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto calc(16 * var(--rem));
+  }
+
+  .aotos-collection-{{ section.id }} #product-grid {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.columns_desktop | default: 3 }}, minmax(0, 1fr));
+    gap: calc(18 * var(--rem));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .aotos-collection-{{ section.id }} #product-grid > .grid__item {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+  }
+
+  .aotos-collection-{{ section.id }} .card-wrapper {
+    height: 100%;
+  }
+
+  .aotos-collection-{{ section.id }} .card {
+    position: relative;
+    border-radius: calc(12 * var(--rem));
+    overflow: hidden;
+  }
+
+  .aotos-collection-{{ section.id }} .product-card-wrapper .card {
+    background: #fff;
+    box-shadow: none;
+    border: 1px solid #f0f0f0;
+    border-radius: calc(6 * var(--rem));
+  }
+
+  .aotos-collection-{{ section.id }} .product-card-wrapper .card__inner {
+    background: #fff;
+    padding: calc(28 * var(--rem)) calc(24 * var(--rem)) calc(8 * var(--rem));
+    box-sizing: border-box;
+    --ratio-percent: 100%;
+  }
+
+  .aotos-collection-{{ section.id }} .product-card-wrapper .card__inner.ratio::before {
+    padding-bottom: 100%;
+  }
+
+  .aotos-collection-{{ section.id }} .product-card-wrapper .card__media,
+  .aotos-collection-{{ section.id }} .product-card-wrapper .card__inner .media {
+    inset: 0;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .aotos-collection-{{ section.id }} .product-card-wrapper .card__inner .media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    object-fit: contain;
+    object-position: center center;
+  }
+
+  .aotos-collection-{{ section.id }} .card__badge,
+  .aotos-collection-{{ section.id }} .card__badge.top,
+  .aotos-collection-{{ section.id }} .card__badge.bottom,
+  .aotos-collection-{{ section.id }} .card__badge.left,
+  .aotos-collection-{{ section.id }} .card__badge.right {
+    position: absolute;
+    top: calc(12 * var(--rem));
+    left: calc(12 * var(--rem));
+    right: auto;
+    bottom: auto;
+    z-index: 2;
+    display: flex;
+    margin: 0;
+  }
+
+  .aotos-collection-{{ section.id }} .badge {
+    background: var(--aotos-theme-color, #ff6501);
+    color: #fff;
+    border: 0;
+    border-radius: calc(40 * var(--rem));
+    padding: calc(4 * var(--rem)) calc(10 * var(--rem));
+    font-size: calc(12 * var(--rem));
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .aotos-collection-{{ section.id }} .product-card-wrapper .card__information {
+    padding: calc(6 * var(--rem)) calc(12 * var(--rem)) calc(12 * var(--rem));
+  }
+
+  .aotos-collection-{{ section.id }} .card__heading {
+    margin: 0 0 calc(2 * var(--rem));
+    width: 100%;
+    min-width: 0;
+    font-size: calc(12 * var(--rem));
+    line-height: calc(16 * var(--rem));
+    font-weight: 500;
+    color: #000000;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .aotos-collection-{{ section.id }} .card__heading a {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .aotos-collection-{{ section.id }} .card-information {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: calc(2 * var(--rem));
+  }
+
+  .aotos-collection-{{ section.id }} .card-information > .caption-large {
+    display: none;
+  }
+
+  .aotos-collection-{{ section.id }} .rating-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    gap: calc(6 * var(--rem));
+  }
+
+  .aotos-collection-{{ section.id }} .rating {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(2 * var(--rem));
+    margin: 0;
+    line-height: 1;
+  }
+
+  .aotos-collection-{{ section.id }} .rating-star-icon {
+    display: block;
+    width: calc(14 * var(--rem));
+    height: calc(14 * var(--rem));
+    flex: 0 0 auto;
+    overflow: visible;
+  }
+
+  .aotos-collection-{{ section.id }} .rating-star-icon .rating-star-outline {
+    fill: none;
+    stroke: var(--aotos-theme-color, #ff6501);
+    stroke-width: 1.8;
+  }
+
+  .aotos-collection-{{ section.id }} .rating-star-icon.is-filled .rating-star-outline {
+    fill: var(--aotos-theme-color, #ff6501);
+  }
+
+  .aotos-collection-{{ section.id }} .rating-star-icon.is-half .rating-star-fill {
+    fill: var(--aotos-theme-color, #ff6501);
+    stroke: none;
+  }
+
+  .aotos-collection-{{ section.id }} .rating-count {
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+    font-size: calc(12 * var(--rem));
+    line-height: calc(14 * var(--rem));
+    font-weight: 400;
+    letter-spacing: 0;
+    color: #999999;
+  }
+
+  .aotos-collection-{{ section.id }} .price {
+    width: auto;
+    max-width: 100%;
+    margin: calc(2 * var(--rem)) 0 0;
+    font-size: calc(12 * var(--rem));
+    font-weight: 600;
+    line-height: calc(16 * var(--rem));
+    color: #000000;
+    white-space: nowrap;
+  }
+
+  .aotos-collection-{{ section.id }} .price .price-item {
+    margin: 0;
+  }
+
+  .aotos-collection-{{ section.id }} .price__sale {
+    display: none;
+  }
+
+  .aotos-collection-{{ section.id }} .price--on-sale .price__regular {
+    display: none;
+  }
+
+  .aotos-collection-{{ section.id }} .price--on-sale .price__sale {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    white-space: nowrap;
+    gap: calc(6 * var(--rem));
+  }
+
+  .aotos-collection-{{ section.id }} .price--on-sale .price-item--sale::before {
+    content: 'From ';
+    font-weight: 600;
+  }
+
+  .aotos-collection-{{ section.id }} .price--on-sale .price-item--sale,
+  .aotos-collection-{{ section.id }} .price--on-sale .price-item--last {
+    color: var(--aotos-theme-color, #ff6501);
+  }
+
+  .aotos-collection-{{ section.id }} .price--on-sale .price-item--regular {
+    color: #999999;
+    font-size: calc(10 * var(--rem));
+    font-weight: 400;
+    line-height: calc(14 * var(--rem));
+  }
+
+  @media screen and (max-width: 768px) {
+    .aotos-collection-{{ section.id }} .aotos-collection__inner {
+      width: 100%;
+      padding: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem)) calc(40 * var(--rem)) calc({{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }} * var(--rem));
+    }
+
+    .aotos-collection-{{ section.id }} .aotos-collection__layout,
+    .aotos-collection-{{ section.id }} .facets-vertical {
+      flex-direction: column;
+      gap: calc(24 * var(--rem));
+    }
+
+    .aotos-collection-{{ section.id }} .facets-wrapper {
+      flex: none;
+      width: 100%;
+      padding: 0;
+    }
+
+    .aotos-collection-{{ section.id }} .product-grid-container {
+      width: 100%;
+    }
+
+    .aotos-collection-{{ section.id }} #product-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: calc(24 * var(--rem));
+    }
+
+    .aotos-collection-{{ section.id }} .product-card-wrapper .card__inner {
+      padding: calc(48 * var(--rem)) calc(96 * var(--rem)) calc(24 * var(--rem));
+    }
+
+    .aotos-collection-{{ section.id }} .product-card-wrapper .card__information {
+      padding: calc(16 * var(--rem)) calc(32 * var(--rem)) calc(20 * var(--rem));
+    }
+
+    .aotos-collection-{{ section.id }} .card__heading {
+      font-size: calc(28 * var(--rem));
+      line-height: calc(36 * var(--rem));
+    }
+
+    .aotos-collection-{{ section.id }} .rating-count {
+      font-size: calc(24 * var(--rem));
+      line-height: calc(28 * var(--rem));
+    }
+
+    .aotos-collection-{{ section.id }} .rating-star-icon {
+      width: calc(28 * var(--rem));
+      height: calc(28 * var(--rem));
+    }
+
+    .aotos-collection-{{ section.id }} .price {
+      font-size: calc(28 * var(--rem));
+      line-height: calc(36 * var(--rem));
+    }
+
+    .aotos-collection-{{ section.id }} .price--on-sale .price-item--regular {
+      font-size: calc(22 * var(--rem));
+      line-height: calc(28 * var(--rem));
+    }
+
+    .aotos-collection-{{ section.id }} .badge {
+      font-size: calc(22 * var(--rem));
+      padding: calc(8 * var(--rem)) calc(18 * var(--rem));
+    }
+
+    .aotos-collection-{{ section.id }} .facets.small-hide,
+    .aotos-collection-{{ section.id }} .facets-vertical-sort {
+      display: none !important;
+    }
+
+    .aotos-collection-{{ section.id }} .mobile-facets__wrapper.medium-hide,
+    .aotos-collection-{{ section.id }} .mobile-facets__wrapper.large-up-hide {
+      display: block !important;
+    }
+
+    .aotos-collection-{{ section.id }} .mobile-facets__open-label.medium-hide,
+    .aotos-collection-{{ section.id }} .mobile-facets__open-label.large-up-hide,
+    .aotos-collection-{{ section.id }} .mobile-facets__heading.medium-hide,
+    .aotos-collection-{{ section.id }} .mobile-facets__heading.large-up-hide {
+      display: inline !important;
+    }
+
+    .aotos-collection-{{ section.id }} .mobile-facets__heading.medium-hide {
+      display: block !important;
+    }
+
+    .aotos-collection-{{ section.id }} .mobile-facets__open-label.small-hide,
+    .aotos-collection-{{ section.id }} .mobile-facets__heading.small-hide {
+      display: none !important;
+    }
+
+    .aotos-collection-{{ section.id }} .aotos-collection-cats {
+      width: 100%;
+      margin-bottom: calc(16 * var(--rem));
+    }
+
+    .aotos-collection-{{ section.id }} .aotos-collection-cats__title {
+      font-size: calc(22 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    .aotos-collection-{{ section.id }} .aotos-collection-cats__link {
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
     }
   }
 {%- endstyle -%}
 
-<div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
-  {%- paginate collection.products by section.settings.products_per_page -%}
+<div class="aotos-collection-{{ section.id }}">
+  <div class="aotos-collection__inner">
+  {%- liquid
+    assign cat_query = request.query_parameters.cat | default: ''
+    assign grid_collection = collection
+    if collection.products_count == 0
+      if collection.handle == 'smart-electric-bicycle' or collection.handle contains 'flux' or collection.handle contains 'ebike'
+        assign cat_query = 'flux'
+        assign grid_collection = collections.all
+      elsif collection.handle contains 'suitcase'
+        assign cat_query = 'suitcase'
+        assign grid_collection = collections.all
+      endif
+    endif
+  -%}
+  {%- paginate grid_collection.products by section.settings.products_per_page -%}
     {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
     {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
       <facet-filters-form class="facets facets-vertical-sort page-width small-hide">
@@ -97,7 +511,7 @@
       </facet-filters-form>
     {%- endif -%}
 
-    <div class="{% if section.settings.filter_type == 'vertical' %} facets-vertical page-width{% endif %}">
+    <div class="aotos-collection__layout{% if section.settings.filter_type == 'vertical' %} facets-vertical{% endif %}">
       {{ 'component-menu-drawer.css' | asset_url | stylesheet_tag }}
       {{ 'component-facets.css' | asset_url | stylesheet_tag }}
       <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
@@ -108,6 +522,89 @@
           id="main-collection-filters"
           data-id="{{ section.id }}"
         >
+          {%- liquid
+            assign cat_1 = section.settings.cat_1_collection
+            assign cat_2 = section.settings.cat_2_collection
+            assign cat_3 = section.settings.cat_3_collection
+            assign cat_4 = section.settings.cat_4_collection
+            assign all_url = collections.all.url | default: '/collections/all'
+            assign cat_url_1 = all_url | append: '?cat=flux'
+            assign cat_url_2 = all_url | append: '?cat=suitcase'
+            assign cat_url_3 = all_url | append: '?cat=accessories'
+            assign cat_url_4 = all_url | append: '?cat=scooter'
+            assign cat_on_1 = false
+            assign cat_on_2 = false
+            assign cat_on_3 = false
+            assign cat_on_4 = false
+            if cat_query == 'flux'
+              assign cat_on_1 = true
+            elsif cat_query == 'suitcase'
+              assign cat_on_2 = true
+            elsif cat_query == 'accessories'
+              assign cat_on_3 = true
+            elsif cat_query == 'scooter'
+              assign cat_on_4 = true
+            endif
+            if cat_1 != blank and cat_1.products_count > 0
+              assign cat_url_1 = cat_1.url
+              if collection.handle == cat_1.handle
+                assign cat_on_1 = true
+              endif
+            endif
+            if cat_2 != blank and cat_2.products_count > 0
+              assign cat_url_2 = cat_2.url
+              if collection.handle == cat_2.handle
+                assign cat_on_2 = true
+              endif
+            endif
+            if cat_3 != blank and cat_3.products_count > 0
+              assign cat_url_3 = cat_3.url
+              if collection.handle == cat_3.handle
+                assign cat_on_3 = true
+              endif
+            endif
+            if cat_4 != blank and cat_4.products_count > 0
+              assign cat_url_4 = cat_4.url
+              if collection.handle == cat_4.handle
+                assign cat_on_4 = true
+              endif
+            endif
+          -%}
+          {%- if section.settings.cat_1_label != blank or section.settings.cat_2_label != blank or section.settings.cat_3_label != blank or section.settings.cat_4_label != blank -%}
+            <nav class="aotos-collection-cats" aria-label="Categories">
+              <h2 class="aotos-collection-cats__title">Categories</h2>
+              <ul class="aotos-collection-cats__list">
+                {%- if section.settings.cat_1_label != blank -%}
+                  <li>
+                    <a class="aotos-collection-cats__link{% if cat_on_1 %} is-active{% endif %}" href="{{ cat_url_1 }}">
+                      {{ section.settings.cat_1_label | escape }}
+                    </a>
+                  </li>
+                {%- endif -%}
+                {%- if section.settings.cat_2_label != blank -%}
+                  <li>
+                    <a class="aotos-collection-cats__link{% if cat_on_2 %} is-active{% endif %}" href="{{ cat_url_2 }}">
+                      {{ section.settings.cat_2_label | escape }}
+                    </a>
+                  </li>
+                {%- endif -%}
+                {%- if section.settings.cat_3_label != blank -%}
+                  <li>
+                    <a class="aotos-collection-cats__link{% if cat_on_3 %} is-active{% endif %}" href="{{ cat_url_3 }}">
+                      {{ section.settings.cat_3_label | escape }}
+                    </a>
+                  </li>
+                {%- endif -%}
+                {%- if section.settings.cat_4_label != blank -%}
+                  <li>
+                    <a class="aotos-collection-cats__link{% if cat_on_4 %} is-active{% endif %}" href="{{ cat_url_4 }}">
+                      {{ section.settings.cat_4_label | escape }}
+                    </a>
+                  </li>
+                {%- endif -%}
+              </ul>
+            </nav>
+          {%- endif -%}
           {% render 'facets',
             results: collection,
             enable_filtering: section.settings.enable_filtering,
@@ -125,7 +622,7 @@
           data-cascade
         {% endif %}
       >
-        {%- if collection.products.size == 0 -%}
+        {%- if grid_collection.products.size == 0 -%}
           <div class="collection collection--empty page-width" id="product-grid" data-id="{{ section.id }}">
             <div class="loading-overlay gradient"></div>
             <div class="title-wrapper center">
@@ -154,32 +651,60 @@
               "
             >
               {% assign skip_card_product_styles = false %}
-              {%- for product in collection.products -%}
-                {% assign lazy_load = false %}
-                {%- if forloop.index > 2 -%}
-                  {%- assign lazy_load = true -%}
+              {%- for product in grid_collection.products -%}
+                {%- liquid
+                  assign show_product = true
+                  assign product_handle = product.handle
+                  if cat_query == 'flux'
+                    assign show_product = false
+                    if product_handle == 'flux-x26-pro' or product_handle contains 'ebike'
+                      assign show_product = true
+                    endif
+                  elsif cat_query == 'suitcase'
+                    assign show_product = false
+                    if product_handle == 'l2-smart-rideable-suitcase'
+                      assign show_product = true
+                    endif
+                  elsif cat_query == 'accessories'
+                    assign show_product = true
+                    if product_handle == 'flux-x26-pro' or product_handle contains 'ebike' or product_handle == 'l2-smart-rideable-suitcase' or product_handle contains 'scooter'
+                      assign show_product = false
+                    endif
+                  elsif cat_query == 'scooter'
+                    assign show_product = false
+                    if product_handle contains 'scooter'
+                      assign show_product = true
+                    endif
+                  endif
+                -%}
+                {%- if show_product -%}
+                  {% assign lazy_load = false %}
+                  {%- if forloop.index > 2 -%}
+                    {%- assign lazy_load = true -%}
+                  {%- endif -%}
+                  <li
+                    class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                    {% if settings.animations_reveal_on_scroll %}
+                      data-cascade
+                      style="--animation-order: {{ forloop.index }};"
+                    {% endif %}
+                  >
+                    {% render 'card-product',
+                      card_product: product,
+                      media_aspect_ratio: 'square',
+                      image_shape: section.settings.image_shape,
+                      show_secondary_image: section.settings.show_secondary_image,
+                      show_vendor: section.settings.show_vendor,
+                      show_rating: true,
+                      lazy_load: lazy_load,
+                      skip_styles: skip_card_product_styles,
+                      quick_add: section.settings.quick_add,
+                      section_id: section.id,
+                      hide_from_prefix: true
+                    %}
+                  </li>
+                  {%- assign skip_card_product_styles = true -%}
                 {%- endif -%}
-                <li
-                  class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-                  {% if settings.animations_reveal_on_scroll %}
-                    data-cascade
-                    style="--animation-order: {{ forloop.index }};"
-                  {% endif %}
-                >
-                  {% render 'card-product',
-                    card_product: product,
-                    media_aspect_ratio: section.settings.image_ratio,
-                    image_shape: section.settings.image_shape,
-                    show_secondary_image: section.settings.show_secondary_image,
-                    show_vendor: section.settings.show_vendor,
-                    show_rating: section.settings.show_rating,
-                    lazy_load: lazy_load,
-                    skip_styles: skip_card_product_styles,
-                    quick_add: section.settings.quick_add,
-                    section_id: section.id
-                  %}
-                </li>
-                {%- assign skip_card_product_styles = true -%}
               {%- endfor -%}
             </ul>
 
@@ -194,6 +719,7 @@
   {% if section.settings.image_shape == 'arch' %}
     {{ 'mask-arch.svg' | inline_asset_content }}
   {%- endif -%}
+  </div>
 </div>
 
 {% schema %}
@@ -216,7 +742,7 @@
       "min": 1,
       "max": 6,
       "step": 1,
-      "default": 4,
+      "default": 3,
       "label": "t:sections.main-collection-product-grid.settings.columns_desktop.label"
     },
     {
@@ -306,7 +832,7 @@
     {
       "type": "checkbox",
       "id": "show_rating",
-      "default": false,
+      "default": true,
       "label": "t:sections.main-collection-product-grid.settings.show_rating.label",
       "info": "t:sections.main-collection-product-grid.settings.show_rating.info"
     },
@@ -359,7 +885,7 @@
           "label": "t:sections.main-collection-product-grid.settings.filter_type.options__3.label"
         }
       ],
-      "default": "horizontal",
+      "default": "vertical",
       "label": "t:sections.main-collection-product-grid.settings.filter_type.label",
       "info": "t:sections.main-collection-product-grid.settings.filter_type.info"
     },
@@ -376,7 +902,7 @@
     {
       "type": "select",
       "id": "columns_mobile",
-      "default": "2",
+      "default": "1",
       "label": "t:sections.main-collection-product-grid.settings.columns_mobile.label",
       "options": [
         {
@@ -391,27 +917,95 @@
     },
     {
       "type": "header",
+      "content": "分类"
+    },
+    {
+      "type": "text",
+      "id": "cat_1_label",
+      "label": "分类1名称",
+      "default": "FLUX"
+    },
+    {
+      "type": "collection",
+      "id": "cat_1_collection",
+      "label": "分类1系列"
+    },
+    {
+      "type": "text",
+      "id": "cat_2_label",
+      "label": "分类2名称",
+      "default": "Suitcase"
+    },
+    {
+      "type": "collection",
+      "id": "cat_2_collection",
+      "label": "分类2系列"
+    },
+    {
+      "type": "text",
+      "id": "cat_3_label",
+      "label": "分类3名称",
+      "default": "Accessories"
+    },
+    {
+      "type": "collection",
+      "id": "cat_3_collection",
+      "label": "分类3系列"
+    },
+    {
+      "type": "text",
+      "id": "cat_4_label",
+      "label": "分类4名称",
+      "default": "Electric Scooter"
+    },
+    {
+      "type": "collection",
+      "id": "cat_4_collection",
+      "label": "分类4系列"
+    },
+    {
+      "type": "header",
       "content": "t:sections.all.padding.section_padding_heading"
     },
     {
       "type": "range",
       "id": "padding_top",
       "min": 0,
-      "max": 100,
+      "max": 160,
       "step": 4,
       "unit": "px",
-      "label": "t:sections.all.padding.padding_top",
-      "default": 36
+      "label": "上边距（PC）",
+      "default": 80
     },
     {
       "type": "range",
       "id": "padding_bottom",
       "min": 0,
-      "max": 100,
+      "max": 160,
       "step": 4,
       "unit": "px",
-      "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
+      "label": "下边距（PC）",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "上边距（手机）",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "下边距（手机）",
+      "default": 88
     }
   ]
 }
