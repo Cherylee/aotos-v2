@@ -39,6 +39,7 @@
         "card_featured": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/Long-Range_Riding.webp",
             "badge": "Newly Released",
             "title": "Flux X26 Pro",
             "text": "Power whenever you need it",
@@ -49,28 +50,34 @@
         "card_helmet": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/zzz_helmet_on_thank_you_page.jpg",
             "badge": "Accessories",
             "title": "Keep Your Safe With Helmet",
             "text": "Safety First",
             "button_label": "",
-            "button_link": "shopify://products/aotos-helmet"
+            "button_link": "shopify://collections/accessories"
           }
         },
         "card_subscribe": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/Engineered_Strength._Precision_Form._a2df3f6b-82c7-431f-9d3c-dd579da495ce.webp",
             "badge": "Subscribe",
             "title": "Get Your Ebike Tips",
             "text": "Join Us",
             "button_label": "",
-            "button_link": "/#newsletter"
+            "button_link": "shopify://blogs/knowledge"
           }
         }
       },
-      "block_order": ["card_featured", "card_helmet", "card_subscribe"],
+      "block_order": [
+        "card_featured",
+        "card_helmet",
+        "card_subscribe"
+      ],
       "settings": {
         "heading": "Why choose AOTOS E-Bike",
-        "heading_align": "center",
+        "heading_align": "left",
         "padding_top": 80,
         "padding_bottom": 80,
         "padding_top_mobile": 88,
@@ -78,5 +85,8 @@
       }
     }
   },
-  "order": ["product-grid", "why-choose"]
+  "order": [
+    "product-grid",
+    "why-choose"
+  ]
 }
