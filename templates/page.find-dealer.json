@@ -65,7 +65,7 @@
         "w1": {
           "type": "feature",
           "settings": {
-            "fallback_icon_asset": "fd-icon-bike.svg",
+            "fallback_icon_asset": "https://aotos.com/cdn/shop/t/61/assets/fd-icon-bike.svg",
             "title": "Test Ride Before You Buy",
             "text": "Experience the power, comfort, and performance of AOTOS in person."
           }
@@ -73,7 +73,7 @@
         "w2": {
           "type": "feature",
           "settings": {
-            "fallback_icon_asset": "fd-icon-tools.svg",
+            "fallback_icon_asset": "https://aotos.com/cdn/shop/t/61/assets/fd-icon-tools.svg",
             "title": "Expert Service & Support",
             "text": "Get professional service and genuine AOTOS parts from your local dealer.（Coming Soon）"
           }
@@ -81,7 +81,7 @@
         "w3": {
           "type": "feature",
           "settings": {
-            "fallback_icon_asset": "fd-icon-support.svg",
+            "fallback_icon_asset": "https://aotos.com/cdn/shop/t/61/assets/fd-icon-support.svg",
             "title": "Personalized Local Support",
             "text": "Get helpful advice from a local team that understands your riding needs"
           }
@@ -89,7 +89,7 @@
         "w4": {
           "type": "feature",
           "settings": {
-            "fallback_icon_asset": "fd-icon-gear.svg",
+            "fallback_icon_asset": "https://aotos.com/cdn/shop/t/61/assets/fd-icon-gear.svg",
             "title": "Accessories & Replacement Parts",
             "text": "Find compatible accessories and replacement parts with local assistance.（Coming Soon）"
           }
@@ -124,7 +124,7 @@
             "text": "Our dealer network is growing across the U.S. Find a nearby location for test rides, local service, accessories, and support.",
             "button_label": "VIEW ALL DEALERS",
             "button_link": "#dealer-search",
-            "fallback_asset": "fd-network-map.svg"
+            "fallback_asset": "https://aotos.com/cdn/shop/t/61/assets/fd-network-map.svg"
           }
         },
         "p2": {
@@ -136,7 +136,7 @@
             "button_label": "EXPLORE FLUX X26",
             "button_link": "shopify://products/flux-x26-pro",
             "image": "shopify://shop_images/pro_eb03.png",
-            "fallback_asset": "eb02-bike-alt.webp"
+            "fallback_asset": "https://aotos.com/cdn/shop/t/61/assets/eb02-bike-alt.webp"
           }
         }
       },
@@ -167,21 +167,21 @@
         "b1": {
           "type": "benefit",
           "settings": {
-            "fallback_icon_asset": "fd-icon-brand.svg",
+            "fallback_icon_asset": "https://aotos.com/cdn/shop/t/61/assets/fd-icon-brand.svg",
             "text": "Dedicated Dealer Support"
           }
         },
         "b2": {
           "type": "benefit",
           "settings": {
-            "fallback_icon_asset": "fd-icon-marketing.svg",
+            "fallback_icon_asset": "https://aotos.com/cdn/shop/t/61/assets/fd-icon-marketing.svg",
             "text": "Marketing & Sales Resources"
           }
         },
         "b3": {
           "type": "benefit",
           "settings": {
-            "fallback_icon_asset": "fd-icon-product.svg",
+            "fallback_icon_asset": "https://aotos.com/cdn/shop/t/61/assets/fd-icon-product.svg",
             "text": "In-Demand Electric Rides"
           }
         }

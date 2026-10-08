@@ -116,7 +116,11 @@
       {%- for block in section.blocks -%}
         <div class="fd-why__item" {{ block.shopify_attributes }}>
           <div class="fd-why__icon">
-            {%- assign why_icon_asset = block.settings.fallback_icon_asset | strip -%}
+            {%- assign why_icon_src = block.settings.fallback_icon_asset | strip -%}
+            {%- if why_icon_src != blank and why_icon_src contains '://' -%}
+            {%- elsif why_icon_src != blank -%}
+              {%- assign why_icon_src = 'https://aotos.com/cdn/shop/t/61/assets/' | append: why_icon_src -%}
+            {%- endif -%}
             {%- if block.settings.icon != blank -%}
               <img
                 src="{{ block.settings.icon | image_url: width: 144 }}"
@@ -127,8 +131,8 @@
                 alt=""
                 loading="lazy"
               >
-            {%- elsif why_icon_asset != blank -%}
-              <img src="{{ why_icon_asset | asset_url }}" alt="" loading="lazy" width="72" height="72">
+            {%- elsif why_icon_src != blank -%}
+              <img src="{{ why_icon_src }}" alt="" loading="lazy" width="72" height="72">
             {%- else -%}
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <circle cx="12" cy="12" r="9" stroke="#111" stroke-width="1.5"/>
@@ -174,7 +178,7 @@
       "name": "优势",
       "settings": [
         { "type": "image_picker", "id": "icon", "label": "图标" },
-        { "type": "text", "id": "fallback_icon_asset", "label": "备用图标文件名" },
+        { "type": "text", "id": "fallback_icon_asset", "label": "备用图标 URL" },
         { "type": "text", "id": "title", "label": "标题", "default": "Test Ride Before You Buy" },
         {
           "type": "textarea",
@@ -192,7 +196,7 @@
         {
           "type": "feature",
           "settings": {
-            "fallback_icon_asset": "fd-icon-bike.svg",
+            "fallback_icon_asset": "https://aotos.com/cdn/shop/t/61/assets/fd-icon-bike.svg",
             "title": "Test Ride Before You Buy",
             "text": "Experience the power, comfort, and performance of AOTOS in person."
           }
@@ -200,7 +204,7 @@
         {
           "type": "feature",
           "settings": {
-            "fallback_icon_asset": "fd-icon-tools.svg",
+            "fallback_icon_asset": "https://aotos.com/cdn/shop/t/61/assets/fd-icon-tools.svg",
             "title": "Expert Service & Support",
             "text": "Get professional service and genuine AOTOS parts from your local dealer.（Coming Soon）"
           }
@@ -208,7 +212,7 @@
         {
           "type": "feature",
           "settings": {
-            "fallback_icon_asset": "fd-icon-support.svg",
+            "fallback_icon_asset": "https://aotos.com/cdn/shop/t/61/assets/fd-icon-support.svg",
             "title": "Personalized Local Support",
             "text": "Get helpful advice from a local team that understands your riding needs"
           }
@@ -216,7 +220,7 @@
         {
           "type": "feature",
           "settings": {
-            "fallback_icon_asset": "fd-icon-gear.svg",
+            "fallback_icon_asset": "https://aotos.com/cdn/shop/t/61/assets/fd-icon-gear.svg",
             "title": "Accessories & Replacement Parts",
             "text": "Find compatible accessories and replacement parts with local assistance.（Coming Soon）"
           }

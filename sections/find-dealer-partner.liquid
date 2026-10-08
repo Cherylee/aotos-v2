@@ -240,7 +240,11 @@
           {%- for block in section.blocks -%}
             <div class="fd-partner__benefit" {{ block.shopify_attributes }}>
               <div class="fd-partner__benefit-icon">
-                {%- assign benefit_icon_asset = block.settings.fallback_icon_asset | strip -%}
+                {%- assign benefit_icon_src = block.settings.fallback_icon_asset | strip -%}
+                {%- if benefit_icon_src != blank and benefit_icon_src contains '://' -%}
+                {%- elsif benefit_icon_src != blank -%}
+                  {%- assign benefit_icon_src = 'https://aotos.com/cdn/shop/t/61/assets/' | append: benefit_icon_src -%}
+                {%- endif -%}
                 {%- if block.settings.icon != blank -%}
                   <img
                     src="{{ block.settings.icon | image_url: width: 96 }}"
@@ -251,8 +255,8 @@
                     alt=""
                     loading="lazy"
                   >
-                {%- elsif benefit_icon_asset != blank -%}
-                  <img src="{{ benefit_icon_asset | asset_url }}" alt="" loading="lazy" width="48" height="48">
+                {%- elsif benefit_icon_src != blank -%}
+                  <img src="{{ benefit_icon_src }}" alt="" loading="lazy" width="48" height="48">
                 {%- endif -%}
               </div>
               {%- if block.settings.text != blank -%}
@@ -306,7 +310,7 @@
       "name": "权益",
       "settings": [
         { "type": "image_picker", "id": "icon", "label": "图标" },
-        { "type": "text", "id": "fallback_icon_asset", "label": "备用图标文件名" },
+        { "type": "text", "id": "fallback_icon_asset", "label": "备用图标 URL" },
         { "type": "text", "id": "text", "label": "文案", "default": "Dedicated Dealer Support" }
       ]
     }

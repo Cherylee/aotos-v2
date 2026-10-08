@@ -168,43 +168,84 @@
 
             <span class="caption-large light">{{ block.settings.description | escape }}</span>
 
-            {%- if show_rating and card_product.metafields.reviews.rating.value != blank -%}
-              {% liquid
-                assign rating_decimal = 0
-                assign decimal = card_product.metafields.reviews.rating.value.rating | modulo: 1
-                if decimal >= 0.3 and decimal <= 0.7
-                  assign rating_decimal = 0.5
-                elsif decimal > 0.7
-                  assign rating_decimal = 1
+            {%- if show_rating and card_product.metafields.reviews.rating_count > 0 -%}
+              {%- liquid
+                assign rating_value = 0
+                assign rating_max = 5
+                assign rating_count = card_product.metafields.reviews.rating_count | plus: 0
+                assign rating_full = 0
+                assign rating_has_half = false
+                if card_product.metafields.reviews.rating.value != blank
+                  assign rating_value = card_product.metafields.reviews.rating.value.rating
+                  assign rating_max = card_product.metafields.reviews.rating.value.scale_max | default: 5
+                  assign rating_full = rating_value | floor
+                  assign rating_decimal = rating_value | minus: rating_full
+                  if rating_decimal >= 0.75
+                    assign rating_full = rating_full | plus: 1
+                  elsif rating_decimal >= 0.25
+                    assign rating_has_half = true
+                  endif
+                  if rating_full > rating_max
+                    assign rating_full = rating_max
+                    assign rating_has_half = false
+                  endif
                 endif
-              %}
-              <div
-                class="rating"
-                role="img"
-                aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: card_product.metafields.reviews.rating.value, rating_max: card_product.metafields.reviews.rating.value.scale_max }}"
-              >
-                <span
-                  aria-hidden="true"
-                  class="rating-star"
-                  style="--rating: {{ card_product.metafields.reviews.rating.value.rating | floor }}; --rating-max: {{ card_product.metafields.reviews.rating.value.scale_max }}; --rating-decimal: {{ rating_decimal }};"
-                ></span>
+                assign rating_half_index = rating_full | plus: 1
+              -%}
+              <div class="rating-wrapper">
+                <div
+                  class="rating"
+                  role="img"
+                  aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: rating_value, rating_max: rating_max }}"
+                >
+                  {%- for i in (1..5) -%}
+                    {%- if i <= rating_full -%}
+                      {%- assign star_state = 'is-filled' -%}
+                    {%- elsif rating_has_half and i == rating_half_index -%}
+                      {%- assign star_state = 'is-half' -%}
+                    {%- else -%}
+                      {%- assign star_state = 'is-empty' -%}
+                    {%- endif -%}
+                    <svg
+                      class="rating-star-icon {{ star_state }}"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      {%- if star_state == 'is-half' -%}
+                        <defs>
+                          <clipPath id="rating-half-{{ section_id }}-{{ card_product.id }}-{{ i }}">
+                            <rect x="0" y="0" width="12" height="24"></rect>
+                          </clipPath>
+                        </defs>
+                      {%- endif -%}
+                      <path
+                        class="rating-star-outline"
+                        d="M12 3.2l2.35 5.4 5.85.52-4.42 3.86 1.32 5.72L12 15.7 6.9 18.7l1.32-5.72L3.8 9.12l5.85-.52L12 3.2z"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                      />
+                      {%- if star_state == 'is-half' -%}
+                        <path
+                          class="rating-star-fill"
+                          d="M12 3.2l2.35 5.4 5.85.52-4.42 3.86 1.32 5.72L12 15.7 6.9 18.7l1.32-5.72L3.8 9.12l5.85-.52L12 3.2z"
+                          clip-path="url(#rating-half-{{ section_id }}-{{ card_product.id }}-{{ i }})"
+                        />
+                      {%- endif -%}
+                    </svg>
+                  {%- endfor -%}
+                </div>
+                <p class="rating-count caption">
+                  <span aria-hidden="true">({{ rating_count }})</span>
+                  <span class="visually-hidden">
+                    {{- rating_count }}
+                    {{ 'accessibility.total_reviews' | t -}}
+                  </span>
+                </p>
               </div>
-              <p class="rating-text caption">
-                <span aria-hidden="true">
-                  {{- card_product.metafields.reviews.rating.value }} /
-                  {{ card_product.metafields.reviews.rating.value.scale_max -}}
-                </span>
-              </p>
-              <p class="rating-count caption">
-                <span aria-hidden="true">({{ card_product.metafields.reviews.rating_count }})</span>
-                <span class="visually-hidden">
-                  {{- card_product.metafields.reviews.rating_count }}
-                  {{ 'accessibility.total_reviews' | t -}}
-                </span>
-              </p>
             {%- endif -%}
 
-            {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
+            {% render 'price', product: card_product, price_class: '', show_compare_at_price: true, hide_from_prefix: hide_from_prefix %}
             {%- if card_product.quantity_price_breaks_configured? -%}
               {% if card_product.variants.size == 1 and quick_add == 'bulk' %}
                 {% liquid

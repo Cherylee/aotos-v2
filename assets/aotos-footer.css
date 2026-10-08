@@ -375,6 +375,10 @@
     font-size: calc(22 * var(--rem));
   }
 
+  .aotos-footer__field input {
+    font-size: max(16px, calc(22 * var(--rem)));
+  }
+
   .aotos-footer__social a {
     width: calc(56 * var(--rem));
     height: calc(56 * var(--rem));

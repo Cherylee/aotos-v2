@@ -218,6 +218,8 @@
     "search": {
       "no_results": "No results found for “{{ terms }}”. Check the spelling or use a different word or phrase.",
       "page": "Page",
+      "pages": "Pages",
+      "articles": "Articles",
       "products": "Products",
       "results_pages_with_count": {
         "one": "{{ count }} page",
@@ -241,8 +243,7 @@
       },
       "title": "Search results",
       "search_for": "Search for “{{ terms }}”",
-      "suggestions": "Suggestions",
-      "pages": "Pages"
+      "suggestions": "Suggestions"
     },
     "cart": {
       "cart": "Cart"

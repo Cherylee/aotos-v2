@@ -182,7 +182,11 @@
             </a>
           {%- endif -%}
         </div>
-        {%- assign promo_asset = block.settings.fallback_asset | strip -%}
+        {%- assign promo_src = block.settings.fallback_asset | strip -%}
+        {%- if promo_src != blank and promo_src contains '://' -%}
+        {%- elsif promo_src != blank -%}
+          {%- assign promo_src = 'https://aotos.com/cdn/shop/t/61/assets/' | append: promo_src -%}
+        {%- endif -%}
         {%- if block.settings.image != blank -%}
           <div class="fd-promo__media">
             <img
@@ -195,9 +199,9 @@
               loading="lazy"
             >
           </div>
-        {%- elsif promo_asset != blank -%}
+        {%- elsif promo_src != blank -%}
           <div class="fd-promo__media">
-            <img src="{{ promo_asset | asset_url }}" alt="" loading="lazy" width="640" height="480">
+            <img src="{{ promo_src }}" alt="" loading="lazy" width="640" height="480">
           </div>
         {%- endif -%}
       </div>
@@ -240,7 +244,7 @@
         { "type": "text", "id": "button_label", "label": "按钮文字" },
         { "type": "url", "id": "button_link", "label": "按钮链接" },
         { "type": "image_picker", "id": "image", "label": "图片" },
-        { "type": "text", "id": "fallback_asset", "label": "备用图片文件名" }
+        { "type": "text", "id": "fallback_asset", "label": "备用图片 URL" }
       ]
     }
   ],

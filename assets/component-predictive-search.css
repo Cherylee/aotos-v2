@@ -23,6 +23,8 @@
 
 .predictive-search__results-groups-wrapper {
   display: flex;
+  flex-direction: column;
+  gap: 2rem;
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
   padding-bottom: 1rem;
 }
@@ -32,17 +34,6 @@
     right: 0;
     left: 0;
     top: 100%;
-  }
-
-  .predictive-search__results-groups-wrapper {
-    flex-direction: column;
-  }
-
-  .predictive-search__results-groups-wrapper:not(.predictive-search__results-groups-wrapper--no-suggestions) {
-    /* On mobile, when there are no suggestions the first .predictive-search__results-groups-wrapper
-     * is virtually empty due to a display: hidden on the predictive-search__pages-wrapper child.
-     * This causes the gap to render and look like a big top margin */
-    gap: 2rem;
   }
 }
 
@@ -69,32 +60,13 @@ predictive-search[loading] .predictive-search {
   gap: 2rem;
 }
 
-.predictive-search__result-group:first-child .predictive-search__pages-wrapper {
-  display: none;
-}
-
-@media screen and (min-width: 750px) {
-  .predictive-search__results-groups-wrapper--no-products .predictive-search__result-group:nth-child(2),
-  .predictive-search__result-group:last-child .predictive-search__pages-wrapper {
-    display: none;
-  }
-  .predictive-search__result-group:first-child .predictive-search__pages-wrapper {
-    display: initial;
-  }
-  .predictive-search__result-group:first-child {
-    flex: 0 0 26.4rem;
-  }
-  .predictive-search__results-groups-wrapper--no-products .predictive-search__result-group:first-child,
-  .predictive-search__result-group:only-child {
-    flex-grow: 1;
-  }
-}
-
 .predictive-search__heading {
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
   margin: 0 2rem;
   padding: 1.5rem 0 0.75rem;
   color: rgba(var(--color-foreground), 0.7);
+  text-transform: none;
+  letter-spacing: normal;
 }
 
 predictive-search .spinner {
