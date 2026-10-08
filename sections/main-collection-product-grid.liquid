@@ -438,19 +438,7 @@
 
 <div class="aotos-collection-{{ section.id }}">
   <div class="aotos-collection__inner">
-  {%- liquid
-    assign grid_collection = collection
-    assign filter_handles = ''
-    if collection.products_count == 0
-      assign grid_collection = collections.all
-      if collection.handle == 'smart-electric-bicycle' or collection.handle contains 'flux' or collection.handle contains 'ebike'
-        assign filter_handles = 'flux-x26-pro'
-      elsif collection.handle contains 'suitcase'
-        assign filter_handles = 'l2-smart-rideable-suitcase'
-      endif
-    endif
-  -%}
-  {%- paginate grid_collection.products by section.settings.products_per_page -%}
+  {%- paginate collection.products by section.settings.products_per_page -%}
     {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
     {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
       <facet-filters-form class="facets facets-vertical-sort page-width small-hide">
@@ -526,44 +514,33 @@
             assign cat_2 = section.settings.cat_2_collection
             assign cat_3 = section.settings.cat_3_collection
             assign cat_4 = section.settings.cat_4_collection
-            assign all_url = collections.all.url | default: '/collections/all'
-            assign suitcase_type = 'Luggage & Bags > Suitcases > Suitcase Travel Sets' | url_encode
-            assign cat_url_1 = all_url | append: '/ebike'
-            assign cat_url_2 = all_url | append: '?filter.p.product_type=' | append: suitcase_type
-            assign cat_url_3 = all_url | append: '/accessories'
-            assign cat_url_4 = all_url | append: '/scooter'
+            assign cat_url_1 = routes.collections_url
+            assign cat_url_2 = routes.collections_url
+            assign cat_url_3 = routes.collections_url
+            assign cat_url_4 = routes.collections_url
             assign cat_on_1 = false
             assign cat_on_2 = false
             assign cat_on_3 = false
             assign cat_on_4 = false
-            if current_tags contains 'ebike'
-              assign cat_on_1 = true
-            endif
-            if current_tags contains 'accessories'
-              assign cat_on_3 = true
-            endif
-            if request.query_string contains 'filter.p.product_type' and request.query_string contains 'Suitcase'
-              assign cat_on_2 = true
-            endif
-            if cat_1 != blank and cat_1.products_count > 0
+            if cat_1 != blank
               assign cat_url_1 = cat_1.url
               if collection.handle == cat_1.handle
                 assign cat_on_1 = true
               endif
             endif
-            if cat_2 != blank and cat_2.products_count > 0
+            if cat_2 != blank
               assign cat_url_2 = cat_2.url
               if collection.handle == cat_2.handle
                 assign cat_on_2 = true
               endif
             endif
-            if cat_3 != blank and cat_3.products_count > 0
+            if cat_3 != blank
               assign cat_url_3 = cat_3.url
               if collection.handle == cat_3.handle
                 assign cat_on_3 = true
               endif
             endif
-            if cat_4 != blank and cat_4.products_count > 0
+            if cat_4 != blank
               assign cat_url_4 = cat_4.url
               if collection.handle == cat_4.handle
                 assign cat_on_4 = true
@@ -622,7 +599,7 @@
           data-cascade
         {% endif %}
       >
-        {%- if grid_collection.products.size == 0 -%}
+        {%- if collection.products.size == 0 -%}
           <div class="collection collection--empty page-width" id="product-grid" data-id="{{ section.id }}">
             <div class="loading-overlay gradient"></div>
             <div class="title-wrapper center">
@@ -651,44 +628,33 @@
               "
             >
               {% assign skip_card_product_styles = false %}
-              {%- for product in grid_collection.products -%}
-                {%- liquid
-                  assign show_product = true
-                  if filter_handles != blank
-                    assign show_product = false
-                    if filter_handles contains product.handle
-                      assign show_product = true
-                    endif
-                  endif
-                -%}
-                {%- if show_product -%}
-                  {% assign lazy_load = false %}
-                  {%- if forloop.index > 2 -%}
-                    {%- assign lazy_load = true -%}
-                  {%- endif -%}
-                  <li
-                    class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-                    {% if settings.animations_reveal_on_scroll %}
-                      data-cascade
-                      style="--animation-order: {{ forloop.index }};"
-                    {% endif %}
-                  >
-                    {% render 'card-product',
-                      card_product: product,
-                      media_aspect_ratio: 'square',
-                      image_shape: section.settings.image_shape,
-                      show_secondary_image: section.settings.show_secondary_image,
-                      show_vendor: section.settings.show_vendor,
-                      show_rating: true,
-                      lazy_load: lazy_load,
-                      skip_styles: skip_card_product_styles,
-                      quick_add: section.settings.quick_add,
-                      section_id: section.id,
-                      hide_from_prefix: true
-                    %}
-                  </li>
-                  {%- assign skip_card_product_styles = true -%}
+              {%- for product in collection.products -%}
+                {% assign lazy_load = false %}
+                {%- if forloop.index > 2 -%}
+                  {%- assign lazy_load = true -%}
                 {%- endif -%}
+                <li
+                  class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                  {% if settings.animations_reveal_on_scroll %}
+                    data-cascade
+                    style="--animation-order: {{ forloop.index }};"
+                  {% endif %}
+                >
+                  {% render 'card-product',
+                    card_product: product,
+                    media_aspect_ratio: 'square',
+                    image_shape: section.settings.image_shape,
+                    show_secondary_image: section.settings.show_secondary_image,
+                    show_vendor: section.settings.show_vendor,
+                    show_rating: true,
+                    lazy_load: lazy_load,
+                    skip_styles: skip_card_product_styles,
+                    quick_add: section.settings.quick_add,
+                    section_id: section.id,
+                    hide_from_prefix: true
+                  %}
+                </li>
+                {%- assign skip_card_product_styles = true -%}
               {%- endfor -%}
             </ul>
 
