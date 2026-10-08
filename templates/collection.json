@@ -1,27 +1,5 @@
-<<<<<<< HEAD
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "banner": {
-      "type": "main-collection-banner",
-      "settings": {
-        "show_collection_description": true,
-        "show_collection_image": false,
-        "color_scheme": "scheme-1"
-      }
-    },
-=======
-{
-  "sections": {
->>>>>>> sit
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
@@ -38,8 +16,6 @@
         "filter_type": "vertical",
         "enable_sorting": true,
         "columns_mobile": "1",
-<<<<<<< HEAD
-=======
         "show_breadcrumb": true,
         "show_heading": true,
         "padding_top": 80,
@@ -86,7 +62,6 @@
       "settings": {
         "heading": "Why choose AOTOS E-Bike",
         "heading_align": "center",
->>>>>>> sit
         "padding_top": 80,
         "padding_bottom": 80,
         "padding_top_mobile": 88,
@@ -94,9 +69,5 @@
       }
     }
   },
-<<<<<<< HEAD
-  "order": ["banner", "product-grid"]
-=======
   "order": ["product-grid", "why-choose"]
->>>>>>> sit
 }
