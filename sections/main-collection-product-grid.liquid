@@ -509,79 +509,38 @@
           id="main-collection-filters"
           data-id="{{ section.id }}"
         >
-          {%- liquid
-            assign cat_1 = section.settings.cat_1_collection
-            assign cat_2 = section.settings.cat_2_collection
-            assign cat_3 = section.settings.cat_3_collection
-            assign cat_4 = section.settings.cat_4_collection
-            assign cat_url_1 = routes.collections_url
-            assign cat_url_2 = routes.collections_url
-            assign cat_url_3 = routes.collections_url
-            assign cat_url_4 = routes.collections_url
-            assign cat_on_1 = false
-            assign cat_on_2 = false
-            assign cat_on_3 = false
-            assign cat_on_4 = false
-            if cat_1 != blank
-              assign cat_url_1 = cat_1.url
-              if collection.handle == cat_1.handle
-                assign cat_on_1 = true
-              endif
-            endif
-            if cat_2 != blank
-              assign cat_url_2 = cat_2.url
-              if collection.handle == cat_2.handle
-                assign cat_on_2 = true
-              endif
-            endif
-            if cat_3 != blank
-              assign cat_url_3 = cat_3.url
-              if collection.handle == cat_3.handle
-                assign cat_on_3 = true
-              endif
-            endif
-            if cat_4 != blank
-              assign cat_url_4 = cat_4.url
-              if collection.handle == cat_4.handle
-                assign cat_on_4 = true
-              endif
-            endif
-          -%}
-          {%- if section.settings.cat_1_label != blank or section.settings.cat_2_label != blank or section.settings.cat_3_label != blank or section.settings.cat_4_label != blank -%}
-            <nav class="aotos-collection-cats" aria-label="Categories">
-              <h2 class="aotos-collection-cats__title">Categories</h2>
-              <ul class="aotos-collection-cats__list">
-                {%- if section.settings.cat_1_label != blank -%}
-                  <li>
-                    <a class="aotos-collection-cats__link{% if cat_on_1 %} is-active{% endif %}" href="{{ cat_url_1 }}">
-                      {{ section.settings.cat_1_label | escape }}
-                    </a>
-                  </li>
+          <nav class="aotos-collection-cats" aria-label="Categories">
+            <h2 class="aotos-collection-cats__title">Categories</h2>
+            <ul class="aotos-collection-cats__list">
+              {%- if collections.all != blank -%}
+                <li>
+                  <a
+                    class="aotos-collection-cats__link{% if collection.handle == 'all' %} is-active{% endif %}"
+                    href="{{ collections.all.url }}"
+                  >
+                    {{ collections.all.title | escape }}
+                  </a>
+                </li>
+              {%- endif -%}
+              {%- for cat_col in collections -%}
+                {%- if cat_col.handle == 'all' or cat_col.products_count == 0 -%}
+                  {%- continue -%}
                 {%- endif -%}
-                {%- if section.settings.cat_2_label != blank -%}
-                  <li>
-                    <a class="aotos-collection-cats__link{% if cat_on_2 %} is-active{% endif %}" href="{{ cat_url_2 }}">
-                      {{ section.settings.cat_2_label | escape }}
-                    </a>
-                  </li>
+                {%- assign cat_handle_down = cat_col.handle | downcase -%}
+                {%- if cat_handle_down contains 'avada' -%}
+                  {%- continue -%}
                 {%- endif -%}
-                {%- if section.settings.cat_3_label != blank -%}
-                  <li>
-                    <a class="aotos-collection-cats__link{% if cat_on_3 %} is-active{% endif %}" href="{{ cat_url_3 }}">
-                      {{ section.settings.cat_3_label | escape }}
-                    </a>
-                  </li>
-                {%- endif -%}
-                {%- if section.settings.cat_4_label != blank -%}
-                  <li>
-                    <a class="aotos-collection-cats__link{% if cat_on_4 %} is-active{% endif %}" href="{{ cat_url_4 }}">
-                      {{ section.settings.cat_4_label | escape }}
-                    </a>
-                  </li>
-                {%- endif -%}
-              </ul>
-            </nav>
-          {%- endif -%}
+                <li>
+                  <a
+                    class="aotos-collection-cats__link{% if collection.handle == cat_col.handle %} is-active{% endif %}"
+                    href="{{ cat_col.url }}"
+                  >
+                    {{ cat_col.title | escape }}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </nav>
           {% render 'facets',
             results: collection,
             enable_filtering: section.settings.enable_filtering,
@@ -864,54 +823,6 @@
           "label": "t:sections.main-collection-product-grid.settings.columns_mobile.options__2.label"
         }
       ]
-    },
-    {
-      "type": "header",
-      "content": "分类"
-    },
-    {
-      "type": "text",
-      "id": "cat_1_label",
-      "label": "分类1名称",
-      "default": "FLUX"
-    },
-    {
-      "type": "collection",
-      "id": "cat_1_collection",
-      "label": "分类1系列"
-    },
-    {
-      "type": "text",
-      "id": "cat_2_label",
-      "label": "分类2名称",
-      "default": "Suitcase"
-    },
-    {
-      "type": "collection",
-      "id": "cat_2_collection",
-      "label": "分类2系列"
-    },
-    {
-      "type": "text",
-      "id": "cat_3_label",
-      "label": "分类3名称",
-      "default": "Accessories"
-    },
-    {
-      "type": "collection",
-      "id": "cat_3_collection",
-      "label": "分类3系列"
-    },
-    {
-      "type": "text",
-      "id": "cat_4_label",
-      "label": "分类4名称",
-      "default": "Electric Scooter"
-    },
-    {
-      "type": "collection",
-      "id": "cat_4_collection",
-      "label": "分类4系列"
     },
     {
       "type": "header",
