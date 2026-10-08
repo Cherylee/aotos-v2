@@ -439,24 +439,14 @@
 <div class="aotos-collection-{{ section.id }}">
   <div class="aotos-collection__inner">
   {%- liquid
-    assign cat_query = ''
-    if request.query_string contains 'cat=flux'
-      assign cat_query = 'flux'
-    elsif request.query_string contains 'cat=suitcase'
-      assign cat_query = 'suitcase'
-    elsif request.query_string contains 'cat=accessories'
-      assign cat_query = 'accessories'
-    elsif request.query_string contains 'cat=scooter'
-      assign cat_query = 'scooter'
-    endif
     assign grid_collection = collection
+    assign filter_handles = ''
     if collection.products_count == 0
+      assign grid_collection = collections.all
       if collection.handle == 'smart-electric-bicycle' or collection.handle contains 'flux' or collection.handle contains 'ebike'
-        assign cat_query = 'flux'
-        assign grid_collection = collections.all
+        assign filter_handles = 'flux-x26-pro'
       elsif collection.handle contains 'suitcase'
-        assign cat_query = 'suitcase'
-        assign grid_collection = collections.all
+        assign filter_handles = 'l2-smart-rideable-suitcase'
       endif
     endif
   -%}
@@ -537,22 +527,23 @@
             assign cat_3 = section.settings.cat_3_collection
             assign cat_4 = section.settings.cat_4_collection
             assign all_url = collections.all.url | default: '/collections/all'
-            assign cat_url_1 = all_url | append: '?cat=flux'
-            assign cat_url_2 = all_url | append: '?cat=suitcase'
-            assign cat_url_3 = all_url | append: '?cat=accessories'
-            assign cat_url_4 = all_url | append: '?cat=scooter'
+            assign suitcase_type = 'Luggage & Bags > Suitcases > Suitcase Travel Sets' | url_encode
+            assign cat_url_1 = all_url | append: '/ebike'
+            assign cat_url_2 = all_url | append: '?filter.p.product_type=' | append: suitcase_type
+            assign cat_url_3 = all_url | append: '/accessories'
+            assign cat_url_4 = all_url | append: '/scooter'
             assign cat_on_1 = false
             assign cat_on_2 = false
             assign cat_on_3 = false
             assign cat_on_4 = false
-            if cat_query == 'flux'
+            if current_tags contains 'ebike'
               assign cat_on_1 = true
-            elsif cat_query == 'suitcase'
-              assign cat_on_2 = true
-            elsif cat_query == 'accessories'
+            endif
+            if current_tags contains 'accessories'
               assign cat_on_3 = true
-            elsif cat_query == 'scooter'
-              assign cat_on_4 = true
+            endif
+            if request.query_string contains 'filter.p.product_type' and request.query_string contains 'Suitcase'
+              assign cat_on_2 = true
             endif
             if cat_1 != blank and cat_1.products_count > 0
               assign cat_url_1 = cat_1.url
@@ -580,7 +571,7 @@
             endif
           -%}
           {%- if section.settings.cat_1_label != blank or section.settings.cat_2_label != blank or section.settings.cat_3_label != blank or section.settings.cat_4_label != blank -%}
-            <nav class="aotos-collection-cats" aria-label="Categories" data-cat="{{ cat_query | escape }}" data-qs="{{ request.query_string | escape }}">
+            <nav class="aotos-collection-cats" aria-label="Categories">
               <h2 class="aotos-collection-cats__title">Categories</h2>
               <ul class="aotos-collection-cats__list">
                 {%- if section.settings.cat_1_label != blank -%}
@@ -663,25 +654,9 @@
               {%- for product in grid_collection.products -%}
                 {%- liquid
                   assign show_product = true
-                  assign product_handle = product.handle
-                  if cat_query == 'flux'
+                  if filter_handles != blank
                     assign show_product = false
-                    if product_handle == 'flux-x26-pro' or product_handle contains 'ebike'
-                      assign show_product = true
-                    endif
-                  elsif cat_query == 'suitcase'
-                    assign show_product = false
-                    if product_handle == 'l2-smart-rideable-suitcase'
-                      assign show_product = true
-                    endif
-                  elsif cat_query == 'accessories'
-                    assign show_product = true
-                    if product_handle == 'flux-x26-pro' or product_handle contains 'ebike' or product_handle == 'l2-smart-rideable-suitcase' or product_handle contains 'scooter'
-                      assign show_product = false
-                    endif
-                  elsif cat_query == 'scooter'
-                    assign show_product = false
-                    if product_handle contains 'scooter'
+                    if filter_handles contains product.handle
                       assign show_product = true
                     endif
                   endif

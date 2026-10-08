@@ -51,7 +51,7 @@
           "settings": {
             "title": "Products",
             "item_1_title": "Electric Bicycle",
-            "item_1_url": "/collections/all?cat=flux",
+            "item_1_url": "/collections/all/ebike",
             "item_1_product_1": "flux-x26-pro",
             "item_1_product_2": "",
             "item_1_product_3": "",
