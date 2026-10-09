@@ -1,0 +1,52 @@
+{%- liquid
+  assign payment_icon_string = section.settings.payment_icons | default: 'visa,master,american_express,discover,jcb,klarna,paypal,maestro,venmo,afterpay'
+  assign payment_icon_string = payment_icon_string | replace: '，', ','
+  assign payment_icons = payment_icon_string | split: ','
+  assign collapsed_count = section.settings.payment_collapsed_count | default: 7
+  assign payment_label = section.settings.payment_accessibility_label | default: 'View accepted payment methods'
+-%}
+<details class="product-payment-accordion">
+  <summary class="product-payment-accordion__summary" aria-label="{{ payment_label | escape }}">
+    <span class="product-payment-accordion__icons">
+      {%- for type in payment_icons limit: collapsed_count -%}
+        {%- liquid
+          assign icon_type = type | strip | downcase
+          case icon_type
+            when 'mastercard', 'master-card', 'master_card'
+              assign icon_type = 'master'
+            when 'amex', 'americanexpress', 'american-express', 'american express'
+              assign icon_type = 'american_express'
+          endcase
+        -%}
+        {%- if icon_type != blank -%}
+          <span class="product-payment-accordion__icon">
+            {{ icon_type | payment_type_svg_tag }}
+          </span>
+        {%- endif -%}
+      {%- endfor -%}
+    </span>
+    <span class="product-payment-accordion__toggle" aria-hidden="true"></span>
+  </summary>
+  {%- if payment_icons.size > collapsed_count -%}
+    <div class="product-payment-accordion__expanded">
+      <div class="product-payment-accordion__icons">
+        {%- for type in payment_icons offset: collapsed_count -%}
+          {%- liquid
+            assign icon_type = type | strip | downcase
+            case icon_type
+              when 'mastercard', 'master-card', 'master_card'
+                assign icon_type = 'master'
+              when 'amex', 'americanexpress', 'american-express', 'american express'
+                assign icon_type = 'american_express'
+            endcase
+          -%}
+          {%- if icon_type != blank -%}
+            <span class="product-payment-accordion__icon">
+              {{ icon_type | payment_type_svg_tag }}
+            </span>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+</details>

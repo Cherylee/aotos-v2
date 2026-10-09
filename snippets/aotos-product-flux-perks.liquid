@@ -1,0 +1,41 @@
+<div class="aotos-flux-perks" {{ block.shopify_attributes }}>
+  <div class="aotos-flux-perks__list">
+    {%- for i in (1..4) -%}
+      {%- liquid
+        assign icon_key = 'icon_' | append: i
+        assign text_key = 'text_' | append: i
+        assign detail_key = 'detail_' | append: i
+        assign item_icon = block.settings[icon_key]
+        assign item_text = block.settings[text_key]
+        assign item_detail = block.settings[detail_key]
+        assign popover_id = 'PerkPopover-' | append: section.id | append: '-' | append: i
+      -%}
+      {%- if item_text != blank -%}
+        <div class="aotos-flux-perks__item">
+          <span class="aotos-flux-perks__icon" aria-hidden="true">
+            {%- if item_icon != blank -%}
+              {{ item_icon | image_url: width: 96 | image_tag: loading: 'lazy', widths: '32, 48, 64, 96' }}
+            {%- endif -%}
+          </span>
+          <span class="aotos-flux-perks__text">{{ item_text | escape }}</span>
+          {%- if item_detail != blank -%}
+            <button
+              type="button"
+              class="aotos-flux-perks__plus"
+              aria-label="Show details for {{ item_text | escape }}"
+              aria-controls="{{ popover_id }}"
+              aria-expanded="false"
+              data-perk-popover-toggle
+            >
+              <svg viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                <path class="aotos-flux-perks__plus-vertical" d="M5 1v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M1 5h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <div id="{{ popover_id }}" class="aotos-flux-perks__popover" role="tooltip">{{ item_detail }}</div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</div>
