@@ -73,6 +73,8 @@ if (!customElements.get('product-form')) {
                 cartData: response,
               });
             this.error = false;
+            const optionModal = this.closest('aotos-option-modal');
+            if (optionModal && typeof optionModal.close === 'function') optionModal.close();
             const quickAddModal = this.closest('quick-add-modal');
             if (quickAddModal) {
               document.body.addEventListener(

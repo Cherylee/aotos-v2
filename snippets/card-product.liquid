@@ -16,6 +16,7 @@
   - horizontal_class: {Boolean} Add a card--horizontal class if set to true. Default: false (optional)
   - horizontal_quick_add: {Boolean} Changes the quick add button styles when set to true. Default: false (optional)
   - placeholder_image: {String} The placeholder image to use when no product exists. Default: 'product-apparel-2' (optional)
+  - show_cart_buttons: {Boolean} Show Choose options and Buy Now under the price. Default: false (optional)
 
   Usage:
   {% render 'card-product', show_vendor: section.settings.show_vendor %}
@@ -328,6 +329,84 @@
               {% endif %}
             {%- endif -%}
           </div>
+          {%- if show_cart_buttons -%}
+            {%- liquid
+              assign buy_variant = card_product.selected_or_first_available_variant
+              assign has_card_options = false
+              if card_product.has_only_default_variant == false and card_product.variants.size > 1
+                assign has_card_options = true
+              endif
+              assign card_add_form_id = 'AotosAdd-' | append: section_id | append: '-' | append: card_product.id
+              assign card_opt_id = 'AotosOpt-' | append: section_id | append: '-' | append: card_product.id
+            -%}
+            <div class="aotos-card-actions">
+              {%- if has_card_options -%}
+                <button
+                  type="button"
+                  class="aotos-card-actions__opt"
+                  data-aotos-opt-open="{{ card_opt_id }}"
+                >
+                  {{ 'products.product.choose_options' | t }}
+                </button>
+              {%- else -%}
+                <product-form data-section-id="{{ section_id }}" data-hide-errors="true">
+                  {%- form 'product',
+                    card_product,
+                    id: card_add_form_id,
+                    class: 'aotos-card-actions__add-form',
+                    novalidate: 'novalidate',
+                    data-type: 'add-to-cart-form'
+                  -%}
+                    <input
+                      type="hidden"
+                      name="id"
+                      class="product-variant-id"
+                      value="{{ buy_variant.id }}"
+                      {% unless buy_variant.available %}
+                        disabled
+                      {% endunless %}
+                    >
+                    <button
+                      type="submit"
+                      name="add"
+                      class="aotos-card-actions__opt"
+                      {% unless buy_variant.available %}
+                        disabled
+                      {% endunless %}
+                    >
+                      <span>
+                        {%- if buy_variant.available -%}
+                          {{ 'products.product.add_to_cart' | t }}
+                        {%- else -%}
+                          {{ 'products.product.sold_out' | t }}
+                        {%- endif -%}
+                      </span>
+                      {%- render 'loading-spinner' -%}
+                    </button>
+                  {%- endform -%}
+                </product-form>
+              {%- endif -%}
+              <form
+                class="aotos-card-actions__buy-form"
+                method="post"
+                action="{{ routes.cart_add_url }}"
+                accept-charset="UTF-8"
+              >
+                <input type="hidden" name="id" value="{{ buy_variant.id }}">
+                <input type="hidden" name="quantity" value="1">
+                <input type="hidden" name="return_to" value="/checkout">
+                <button
+                  type="submit"
+                  class="aotos-card-actions__buy"
+                  {% unless buy_variant.available %}
+                    disabled
+                  {% endunless %}
+                >
+                  {{ 'products.product.buy_now' | t }}
+                </button>
+              </form>
+            </div>
+          {%- endif -%}
         </div>
         {% assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id %}
         {% if quick_add == 'standard' %}
@@ -609,6 +688,9 @@
       </div>
     </div>
   </div>
+  {%- if show_cart_buttons and card_product.has_only_default_variant == false and card_product.variants.size > 1 -%}
+    {% render 'aotos-option-modal', product: card_product, section_id: section_id %}
+  {%- endif -%}
 {%- else -%}
   {%- liquid
     assign ratio = 1

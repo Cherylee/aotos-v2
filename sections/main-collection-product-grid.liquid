@@ -1,6 +1,7 @@
 {{ 'template-collection.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'aotos-collection-grid.css' | asset_url | stylesheet_tag }}
 
 {% if section.settings.image_shape == 'blob' %}
   {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
@@ -9,6 +10,12 @@
 {%- unless section.settings.quick_add == 'none' -%}
   {{ 'quick-add.css' | asset_url | stylesheet_tag }}
 {%- endunless -%}
+
+{%- if section.settings.show_cart_buttons -%}
+  {{ 'aotos-option-modal.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'aotos-option-modal.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
 
 {%- if section.settings.quick_add == 'standard' -%}
   <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
@@ -163,20 +170,33 @@
 
   .aotos-collection-{{ section.id }} #product-grid {
     display: grid;
-    grid-template-columns: repeat({{ section.settings.columns_desktop | default: 3 }}, minmax(0, 1fr));
-    gap: calc(18 * var(--rem));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: calc(12 * var(--rem));
+    row-gap: calc(16 * var(--rem));
     margin: 0;
     padding: 0;
     list-style: none;
+    width: 100%;
   }
 
   .aotos-collection-{{ section.id }} #product-grid > .grid__item {
+    display: flex;
     width: 100%;
-    max-width: none;
+    max-width: 100%;
+    min-width: 0;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
     padding: 0;
+    box-sizing: border-box;
   }
 
-  .aotos-collection-{{ section.id }} .card-wrapper {
+  .aotos-collection-{{ section.id }} .card-wrapper,
+  .aotos-collection-{{ section.id }} .product-card-wrapper {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
     height: 100%;
   }
 
@@ -187,10 +207,20 @@
   }
 
   .aotos-collection-{{ section.id }} .product-card-wrapper .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     background: #fff;
     box-shadow: none;
     border: 1px solid #f0f0f0;
     border-radius: calc(6 * var(--rem));
+  }
+
+  .aotos-collection-{{ section.id }} .product-card-wrapper .card > .card__content {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    justify-content: flex-start;
   }
 
   .aotos-collection-{{ section.id }} .product-card-wrapper .card__inner {
@@ -224,12 +254,87 @@
     object-position: center center;
   }
 
-  .aotos-collection-{{ section.id }} .card__badge {
-    display: none;
+  .aotos-collection-{{ section.id }} .product-card-wrapper .card__information {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    width: 100%;
+    padding: calc(6 * var(--rem)) calc(12 * var(--rem)) calc(12 * var(--rem));
   }
 
-  .aotos-collection-{{ section.id }} .product-card-wrapper .card__information {
-    padding: calc(6 * var(--rem)) calc(12 * var(--rem)) calc(12 * var(--rem));
+  .aotos-collection-{{ section.id }} .card__heading a::after {
+    z-index: 1;
+  }
+
+  .aotos-collection-{{ section.id }} .aotos-card-actions {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: stretch;
+    gap: calc(8 * var(--rem));
+    width: 100%;
+    margin-top: auto;
+    padding-top: calc(10 * var(--rem));
+  }
+
+  .aotos-collection-{{ section.id }} .aotos-card-actions__opt,
+  .aotos-collection-{{ section.id }} .aotos-card-actions__buy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: calc(32 * var(--rem));
+    padding: 0 calc(8 * var(--rem));
+    border-radius: var(--buttons-radius, calc(40 * var(--rem)));
+    font-size: calc(10 * var(--rem));
+    font-weight: var(--aotos-button-font-weight, 600);
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+
+  .aotos-collection-{{ section.id }} .aotos-card-actions__opt {
+    color: #000000;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+  }
+
+  .aotos-collection-{{ section.id }} .aotos-card-actions product-form,
+  .aotos-collection-{{ section.id }} .aotos-card-actions__add-form,
+  .aotos-collection-{{ section.id }} .aotos-card-actions__buy-form {
+    display: flex;
+    flex: 1 1 0;
+    min-width: 0;
+    margin: 0;
+  }
+
+  .aotos-collection-{{ section.id }} .aotos-card-actions__add-form .aotos-card-actions__opt {
+    width: 100%;
+  }
+
+  .aotos-collection-{{ section.id }} .aotos-card-actions__buy {
+    width: 100%;
+    color: #ffffff;
+    background: var(--aotos-theme-color, #ff6501);
+    border: 1px solid var(--aotos-theme-color, #ff6501);
+  }
+
+  .aotos-collection-{{ section.id }} .aotos-card-actions__buy:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  @media (hover: hover) {
+    .aotos-collection-{{ section.id }} .aotos-card-actions__opt:hover {
+      border-color: #cccccc;
+    }
+
+    .aotos-collection-{{ section.id }} .aotos-card-actions__buy:hover:not(:disabled) {
+      filter: brightness(0.96);
+    }
   }
 
   .aotos-collection-{{ section.id }} .card__heading {
@@ -257,6 +362,8 @@
     flex-direction: column;
     align-items: flex-start;
     gap: calc(2 * var(--rem));
+    flex: 0 0 auto;
+    width: 100%;
   }
 
   .aotos-collection-{{ section.id }} .card-information > .caption-large {
@@ -392,7 +499,8 @@
 
     .aotos-collection-{{ section.id }} #product-grid {
       grid-template-columns: minmax(0, 1fr);
-      gap: calc(24 * var(--rem));
+      column-gap: 0;
+      row-gap: calc(24 * var(--rem));
     }
 
     .aotos-collection-{{ section.id }} .product-card-wrapper .card__inner {
@@ -401,6 +509,17 @@
 
     .aotos-collection-{{ section.id }} .product-card-wrapper .card__information {
       padding: calc(16 * var(--rem)) calc(32 * var(--rem)) calc(20 * var(--rem));
+    }
+
+    .aotos-collection-{{ section.id }} .aotos-card-actions {
+      gap: calc(12 * var(--rem));
+      margin-top: calc(20 * var(--rem));
+    }
+
+    .aotos-collection-{{ section.id }} .aotos-card-actions__opt,
+    .aotos-collection-{{ section.id }} .aotos-card-actions__buy {
+      min-height: calc(56 * var(--rem));
+      font-size: calc(var(--aotos-button-font-size-mobile, 22) * var(--rem));
     }
 
     .aotos-collection-{{ section.id }} .card__heading {
@@ -679,11 +798,7 @@
             <ul
               id="product-grid"
               data-id="{{ section.id }}"
-              class="
-                grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
-                grid--{{ section.settings.columns_desktop }}-col-desktop
-                {% if section.settings.quick_add == 'bulk' %} collection-quick-add-bulk{% endif %}
-              "
+              class="aotos-collection-grid product-grid{% if section.settings.quick_add == 'bulk' %} collection-quick-add-bulk{% endif %}"
             >
               {% assign skip_card_product_styles = false %}
               {%- for product in collection.products -%}
@@ -709,7 +824,8 @@
                     skip_styles: skip_card_product_styles,
                     quick_add: section.settings.quick_add,
                     section_id: section.id,
-                    hide_from_prefix: true
+                    hide_from_prefix: true,
+                    show_cart_buttons: section.settings.show_cart_buttons
                   %}
                 </li>
                 {%- assign skip_card_product_styles = true -%}
@@ -843,6 +959,12 @@
       "default": true,
       "label": "t:sections.main-collection-product-grid.settings.show_rating.label",
       "info": "t:sections.main-collection-product-grid.settings.show_rating.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart_buttons",
+      "default": true,
+      "label": "显示加购/结算按钮"
     },
     {
       "type": "select",
