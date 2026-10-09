@@ -1,0 +1,398 @@
+{{ 'aotos-product-flux.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'aotos-product-flux.js' | asset_url }}" defer="defer"></script>
+<style>
+  #shopify-section-{{ section.id }} {
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80, allow_false: true }} * var(--rem));
+  }
+</style>
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign product_form_id = 'product-form-' | append: section.id
+  assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src'
+  assign showcase_images = current_variant.metafields.custom.product_showcase_image.value
+-%}
+
+<product-info
+  id="ProductInfo-{{ section.id }}"
+  class="aotos-flux aotos-flux-section"
+  data-section="{{ section.id }}"
+  data-product-id="{{ product.id }}"
+  data-update-url="false"
+  data-url="{{ product.url }}"
+>
+  <div class="velotric-product__container velotric-product--layout-1100">
+    <div class="velotric-product__media">
+      {%- if product != blank -%}
+        <velotric-carousel class="velotric-custom-carousel">
+          <div class="velotric-custom-carousel__viewport">
+            <div class="velotric-custom-carousel__track" id="VelotricCarouselTrack-{{ section.id }}">
+              {%- if showcase_images != blank -%}
+                {%- for image in showcase_images -%}
+                  {%- assign vc_h = 720 | divided_by: image.aspect_ratio | round -%}
+                  <div class="velotric-custom-carousel__slide" data-index="{{ forloop.index }}" data-media-id="{{ image.id }}" data-zoom-src="{{ image | image_url: width: 1920 }}">
+                    <img
+                      src="{{ image | image_url: width: 720 }}"
+                      srcset="{{ image | image_url: width: 400 }} 400w, {{ image | image_url: width: 540 }} 540w, {{ image | image_url: width: 720 }} 720w"
+                      sizes="(max-width: 768px) 92vw, 520px"
+                      width="720"
+                      height="{{ vc_h }}"
+                      alt="{{ image.alt | default: product.title | escape }}"
+                      class="velotric-carousel-img"
+                      loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                      {% if forloop.first %}fetchpriority="high"{% endif %}
+                    >
+                  </div>
+                {%- endfor -%}
+              {%- else -%}
+                {%- assign media_index = 0 -%}
+                {%- for media in product.media -%}
+                  {%- liquid
+                    assign should_hide = false
+                    if variant_images contains media.src and media.id != current_variant.featured_media.id
+                      assign should_hide = true
+                    endif
+                  -%}
+                  {%- unless should_hide -%}
+                    {%- assign media_index = media_index | plus: 1 -%}
+                    <div class="velotric-custom-carousel__slide" data-index="{{ media_index }}" data-media-id="{{ media.id }}" {% if media.media_type == 'image' %}data-zoom-src="{{ media | image_url: width: 1920 }}"{% endif %}>
+                      {%- if media.media_type == 'image' -%}
+                        {%- assign vc_h = 720 | divided_by: media.aspect_ratio | round -%}
+                        <img
+                          src="{{ media | image_url: width: 720 }}"
+                          srcset="{{ media | image_url: width: 400 }} 400w, {{ media | image_url: width: 540 }} 540w, {{ media | image_url: width: 720 }} 720w"
+                          sizes="(max-width: 768px) 92vw, 520px"
+                          width="720"
+                          height="{{ vc_h }}"
+                          alt="{{ media.alt | default: product.title | escape }}"
+                          class="velotric-carousel-img"
+                          loading="{% if media_index == 1 %}eager{% else %}lazy{% endif %}"
+                          {% if media_index == 1 %}fetchpriority="high"{% endif %}
+                        >
+                      {%- else -%}
+                        {{ media | media_tag: autoplay: true, loop: true, controls: false, preload: 'none' }}
+                      {%- endif -%}
+                    </div>
+                  {%- endunless -%}
+                {%- endfor -%}
+              {%- endif -%}
+            </div>
+            <button type="button" class="velotric-carousel__arrow velotric-carousel__arrow--prev velotric-carousel-prev" aria-label="Previous">
+              <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12l4.58-4.59z" fill="currentColor"/></svg>
+            </button>
+            <button type="button" class="velotric-carousel__arrow velotric-carousel__arrow--next velotric-carousel-next" aria-label="Next">
+              <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6z" fill="currentColor"/></svg>
+            </button>
+            <button type="button" class="velotric-carousel-zoom" aria-label="Zoom image">
+              <span class="svg-wrapper">{{- 'icon-zoom.svg' | inline_asset_content -}}</span>
+            </button>
+            {%- if section.settings.award_image != blank -%}
+              <div class="aotos-flux-award">
+                {%- assign award_h = 112 | divided_by: section.settings.award_image.aspect_ratio | round -%}
+                <img
+                  src="{{ section.settings.award_image | image_url: width: 112 }}"
+                  srcset="{{ section.settings.award_image | image_url: width: 80 }} 80w, {{ section.settings.award_image | image_url: width: 112 }} 112w, {{ section.settings.award_image | image_url: width: 160 }} 160w"
+                  sizes="56px"
+                  width="112"
+                  height="{{ award_h }}"
+                  alt=""
+                  loading="eager"
+                >
+                {%- if section.settings.award_caption != blank -%}
+                  <span>{{ section.settings.award_caption | escape }}</span>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          </div>
+          <div class="velotric-custom-carousel__thumbnails" id="VelotricCarouselDots-{{ section.id }}">
+            {%- assign thumb_index = 0 -%}
+            {%- if showcase_images != blank -%}
+              {%- for image in showcase_images -%}
+                {%- assign thumb_index = thumb_index | plus: 1 -%}
+                <button type="button" class="velotric-carousel-dot{% if thumb_index == 1 %} is-active{% endif %}" data-index="{{ thumb_index | minus: 1 }}" aria-label="Go to slide {{ thumb_index }}">
+                  <img src="{{ image | image_url: width: 80 }}" alt="" loading="lazy" width="48" height="48">
+                </button>
+              {%- endfor -%}
+            {%- else -%}
+              {%- for media in product.media -%}
+                {%- liquid
+                  assign should_hide_thumb = false
+                  if variant_images contains media.src and media.id != current_variant.featured_media.id
+                    assign should_hide_thumb = true
+                  endif
+                -%}
+                {%- unless should_hide_thumb -%}
+                  {%- assign thumb_index = thumb_index | plus: 1 -%}
+                  <button type="button" class="velotric-carousel-dot{% if thumb_index == 1 %} is-active{% endif %}" data-index="{{ thumb_index | minus: 1 }}" aria-label="Go to slide {{ thumb_index }}">
+                    <img src="{{ media.preview_image | image_url: width: 80 }}" alt="" loading="lazy" width="48" height="48">
+                  </button>
+                {%- endunless -%}
+              {%- endfor -%}
+            {%- endif -%}
+          </div>
+          <div class="velotric-image-lightbox" hidden role="dialog" aria-modal="true" aria-label="Zoomed product image">
+            <button type="button" class="velotric-image-lightbox__close" aria-label="Close">&times;</button>
+            <button type="button" class="velotric-image-lightbox__nav velotric-image-lightbox__nav--prev" aria-label="Previous image">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12l4.58-4.59z" fill="currentColor"/></svg>
+            </button>
+            <button type="button" class="velotric-image-lightbox__nav velotric-image-lightbox__nav--next" aria-label="Next image">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6z" fill="currentColor"/></svg>
+            </button>
+            <img class="velotric-image-lightbox__img" alt="" width="1920" height="1920">
+          </div>
+        </velotric-carousel>
+      {%- endif -%}
+      <div data-product-specs-desktop>
+        <div class="product-specs-grid" data-product-specs>
+          <div class="product-specs-grid__list">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'spec' -%}
+                {%- liquid
+                  assign feature_value = block.settings.value
+                  assign variant_configs = block.settings.variant_values | newline_to_br | replace: '<br />', '<br>' | split: '<br>'
+                  capture variant_value_map
+                    echo '{'
+                    for variant in product.variants
+                      assign mapped_value = block.settings.value
+                      assign variant_title_downcase = variant.title | downcase
+                      for config_line in variant_configs
+                        assign clean_line = config_line | replace: '<br>', '' | strip
+                        if clean_line contains ':'
+                          assign config_parts = clean_line | split: ':'
+                          assign config_name = config_parts[0] | strip
+                          assign config_name_downcase = config_name | downcase
+                          if variant_title_downcase contains config_name_downcase
+                            assign mapped_value = clean_line | remove_first: config_name | remove_first: ':' | strip
+                            break
+                          endif
+                        endif
+                      endfor
+                      unless forloop.first
+                        echo ','
+                      endunless
+                      echo '"'
+                      echo variant.id
+                      echo '":'
+                      echo mapped_value | json
+                    endfor
+                    echo '}'
+                  endcapture
+                  assign current_title_downcase = current_variant.title | downcase
+                  for config_line in variant_configs
+                    assign clean_line = config_line | replace: '<br>', '' | strip
+                    if clean_line contains ':'
+                      assign config_parts = clean_line | split: ':'
+                      assign config_name = config_parts[0] | strip
+                      assign config_name_downcase = config_name | downcase
+                      if current_title_downcase contains config_name_downcase
+                        assign feature_value = clean_line | remove_first: config_name | remove_first: ':' | strip
+                        break
+                      endif
+                    endif
+                  endfor
+                -%}
+                <div class="product-specs-grid__item" {{ block.shopify_attributes }}>
+                  <div class="product-specs-grid__icon">
+                    {%- if block.settings.icon != blank -%}
+                      {{ block.settings.icon | image_url: width: 96 | image_tag: loading: 'lazy', widths: '32, 48, 64, 96' }}
+                    {%- endif -%}
+                  </div>
+                  <div class="product-specs-grid__content">
+                    <div class="product-specs-grid__title">{{ block.settings.title | escape }}</div>
+                    <div class="product-specs-grid__value" data-product-spec-values="{{ variant_value_map | strip | escape }}">{{ feature_value | escape }}</div>
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="velotric-product__info">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when '@app' -%}
+            {% render block %}
+          {%- when 'title' -%}
+            <div class="velotric-product__title" {{ block.shopify_attributes }}>
+              <h1>{{ product.title | escape }}</h1>
+            </div>
+          {%- when 'rating' -%}
+            {%- liquid
+              assign static_rating = product.metafields.loox.avg_rating | default: block.settings.rating | plus: 0
+              assign static_review_count = product.metafields.loox.num_reviews | default: block.settings.review_count
+              assign rendered_star_count = static_rating | ceil
+            -%}
+            <div class="product-rating" id="product-rating-{{ block.id }}" {{ block.shopify_attributes }}>
+              <a class="product-rating__link" href="#looxReviews">
+                <div class="product-rating__stars product-rating__placeholder" aria-label="{{ static_rating }} out of 5 stars">
+                  {%- for i in (1..5) -%}
+                    {%- if i <= rendered_star_count -%}
+                      <svg class="loox-icon" viewBox="0 0 24 24" data-lx-fill="full" aria-hidden="true">
+                        <path d="M24 9.425c0 .212-.125.443-.375.693l-5.236 5.105 1.24 7.212c.01.067.015.164.015.289a.85.85 0 0 1-.151.511.51.51 0 0 1-.44.21c-.183 0-.375-.058-.577-.174L12 19.869l-6.476 3.404c-.212.115-.404.173-.577.173-.202 0-.353-.07-.454-.21a.85.85 0 0 1-.152-.511c0-.058.01-.154.03-.289l1.24-7.211-5.25-5.106C.12 9.858 0 9.628 0 9.425c0-.355.27-.577.808-.663l7.24-1.053 3.245-6.562c.183-.395.418-.592.707-.592s.524.197.707.592l3.245 6.562 7.24 1.053c.539.086.808.308.808.663Z"/>
+                      </svg>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+                <div
+                  class="loox-rating product-rating__loox"
+                  data-id="{{ product.id }}"
+                  data-rating="{{ product.metafields.loox.avg_rating }}"
+                  data-raters="{{ product.metafields.loox.num_reviews }}"
+                ></div>
+              </a>
+              <div class="product-rating__count">{{ static_review_count }} {{ block.settings.review_text | default: 'reviews' }}</div>
+            </div>
+          {%- when 'text' -%}
+            {%- if block.settings.text != blank -%}
+              <div class="velotric-product__text" {{ block.shopify_attributes }}>
+                {{ block.settings.text }}
+              </div>
+            {%- endif -%}
+          {%- when 'price' -%}
+            {%- liquid
+              assign price = current_variant.price
+              assign compare_at_price = current_variant.compare_at_price
+              assign on_sale = false
+              if compare_at_price > price
+                assign on_sale = true
+              endif
+            -%}
+            <div class="velotric-product__price" id="price-{{ section.id }}" {{ block.shopify_attributes }}>
+              <div class="velotric-product__price-wrapper aotos-flux-price__row{% if on_sale %} velotric-price--on-sale is-sale{% endif %}">
+                <span class="velotric-price-item velotric-price-item--regular aotos-flux-price__regular">{{ price | money }}</span>
+                <span class="velotric-price__compare aotos-flux-price__compare">
+                  <s class="velotric-price-item aotos-flux-price__compare-value">{% if on_sale %}{{ compare_at_price | money }}{% endif %}</s>
+                </span>
+              </div>
+            </div>
+          {%- when 'variant_picker' -%}
+            {%- render 'aotos-product-flux-variants', product: product, block: block, section: section, product_form_id: product_form_id -%}
+            <div data-product-specs-mobile></div>
+          {%- when 'buy_buttons' -%}
+            <div class="velotric-product__buy-buttons" {{ block.shopify_attributes }}>
+              {% render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: false %}
+            </div>
+          {%- when 'spec' -%}
+            {%- comment -%} rendered in specs grid below via collection {%- endcomment -%}
+          {%- when 'perks' -%}
+            {%- render 'aotos-product-flux-perks', block: block, section: section -%}
+            {%- render 'aotos-product-flux-payment', block: block, section: section -%}
+          {%- when 'accordion' -%}
+            <details class="product-features-accordion" {{ block.shopify_attributes }} {% if block.settings.open_by_default %}open{% endif %}>
+              <summary class="product-features-accordion__summary">
+                <span class="product-features-accordion__icon">
+                  {%- if block.settings.icon != blank -%}
+                    {{ block.settings.icon | image_url: width: 48 | image_tag: loading: 'lazy', widths: '24, 32, 48' }}
+                  {%- endif -%}
+                </span>
+                <span class="product-features-accordion__title">{{ block.settings.title | escape }}</span>
+                <span class="product-features-accordion__toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="product-features-accordion__content rte">{{ block.settings.content }}</div>
+            </details>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</product-info>
+
+{% schema %}
+{
+  "name": "FLUX product buy",
+  "tag": "section",
+  "class": "section",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "image_picker", "id": "award_image", "label": "Award badge image" },
+    { "type": "text", "id": "award_caption", "label": "Award caption", "default": "reddot winner 2026" },
+    { "type": "text", "id": "payment_icons", "label": "Payment icons", "default": "visa,master,american_express,discover,jcb,klarna,paypal,maestro,venmo,afterpay" },
+    { "type": "range", "id": "payment_collapsed_count", "min": 1, "max": 10, "step": 1, "label": "Icons shown when collapsed", "default": 7 },
+    { "type": "text", "id": "payment_accessibility_label", "label": "Payment accessibility label", "default": "View accepted payment methods" },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding bottom", "default": 80 }
+  ],
+  "blocks": [
+    { "type": "@app" },
+    { "type": "title", "name": "Title", "limit": 1, "settings": [] },
+    {
+      "type": "rating",
+      "name": "Rating",
+      "limit": 1,
+      "settings": [
+        { "type": "range", "id": "rating", "min": 0, "max": 5, "step": 0.5, "label": "Fallback rating", "default": 5 },
+        { "type": "number", "id": "review_count", "label": "Fallback review count", "default": 86 },
+        { "type": "text", "id": "review_text", "label": "Review text", "default": "reviews" }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 1,
+      "settings": [{ "type": "richtext", "id": "text", "label": "Fallback text" }]
+    },
+    { "type": "price", "name": "Price", "limit": 1, "settings": [] },
+    {
+      "type": "variant_picker",
+      "name": "Model picker",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "picker_title", "label": "Title", "default": "Choose your model:" },
+        { "type": "checkbox", "id": "show_size_guide", "label": "Show Size & Fit", "default": true },
+        { "type": "text", "id": "size_guide_text", "label": "Size & Fit label", "default": "Size & Fit" },
+        { "type": "image_picker", "id": "size_guide_icon", "label": "Size & Fit icon" }
+      ]
+    },
+    {
+      "type": "buy_buttons",
+      "name": "Buy buttons",
+      "limit": 1,
+      "settings": [
+        { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Show dynamic checkout", "default": true },
+        { "type": "checkbox", "id": "show_gift_card_recipient", "label": "Show gift card recipient", "default": false }
+      ]
+    },
+    {
+      "type": "spec",
+      "name": "Spec",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "text", "id": "value", "label": "Default value" },
+        { "type": "textarea", "id": "variant_values", "label": "Per variant values", "info": "One per line: Flux X26 Pro: 100 Nm" }
+      ]
+    },
+    {
+      "type": "perks",
+      "name": "Perks grid",
+      "limit": 1,
+      "settings": [
+        { "type": "image_picker", "id": "icon_1", "label": "Icon 1" },
+        { "type": "text", "id": "text_1", "label": "Text 1" },
+        { "type": "richtext", "id": "detail_1", "label": "Detail 1" },
+        { "type": "image_picker", "id": "icon_2", "label": "Icon 2" },
+        { "type": "text", "id": "text_2", "label": "Text 2" },
+        { "type": "richtext", "id": "detail_2", "label": "Detail 2" },
+        { "type": "image_picker", "id": "icon_3", "label": "Icon 3" },
+        { "type": "text", "id": "text_3", "label": "Text 3" },
+        { "type": "richtext", "id": "detail_3", "label": "Detail 3" },
+        { "type": "image_picker", "id": "icon_4", "label": "Icon 4" },
+        { "type": "text", "id": "text_4", "label": "Text 4" },
+        { "type": "richtext", "id": "detail_4", "label": "Detail 4" }
+      ]
+    },
+    {
+      "type": "accordion",
+      "name": "Accordion",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "richtext", "id": "content", "label": "Content" },
+        { "type": "checkbox", "id": "open_by_default", "label": "Open by default", "default": false }
+      ]
+    }
+  ],
+  "presets": [{ "name": "FLUX product buy" }]
+}
+{% endschema %}

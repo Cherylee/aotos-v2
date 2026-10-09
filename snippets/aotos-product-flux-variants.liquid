@@ -1,0 +1,307 @@
+{%- liquid
+  assign size_fit_drawer_id = 'SizeFitDrawer-' | append: section.id | append: '-' | append: block.id
+  assign initial_size_fit_variant = product.selected_or_first_available_variant
+  assign enable_flux_enhancements = true
+  assign merge_flux_size_fit_tabs = false
+  if enable_flux_enhancements and product.handle == 'flux-x26-pro' and product.variants.size == 2
+    assign merge_flux_size_fit_tabs = true
+    assign merged_size_fit_variant = product.variants.first
+    assign merged_size_fit_label = product.variants.first.title | append: ' & ' | append: product.variants.last.title
+  endif
+-%}
+
+<div class="velotric-product__variants" {{ block.shopify_attributes }}>
+  <div class="variant-picker__title-row">
+    <div class="variant-picker__title">
+      {%- if enable_flux_enhancements -%}
+        {{ block.settings.picker_title | default: 'Choose your model:' | escape }}
+      {%- else -%}
+        {{ block.settings.size_guide_text | default: 'Choose your model:' | escape }}
+      {%- endif -%}
+    </div>
+    {%- if enable_flux_enhancements and block.settings.show_size_guide and block.settings.size_guide_text != blank -%}
+      <size-fit-drawer data-initial-variant="{{ initial_size_fit_variant.id }}">
+        <button
+          type="button"
+          class="velotric-size-guide"
+          aria-controls="{{ size_fit_drawer_id }}"
+          aria-expanded="false"
+          data-size-fit-open
+        >
+          {%- if block.settings.size_guide_icon != blank -%}
+            {%- assign size_guide_icon_url = block.settings.size_guide_icon | image_url: width: 64 -%}
+            <span
+              class="velotric-size-guide__icon velotric-size-guide__icon--custom"
+              style="--size-guide-icon: url('{{ size_guide_icon_url }}');"
+              aria-hidden="true"
+            ></span>
+          {%- else -%}
+            <svg class="velotric-size-guide__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M3.5 15.5 15.5 3.5l5 5-12 12h-5v-5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"></path>
+              <path d="m13 6 2 2M10.5 8.5l2 2M8 11l2 2M5.5 13.5l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path>
+            </svg>
+          {%- endif -%}
+          <span>{{ block.settings.size_guide_text | escape }}</span>
+        </button>
+
+        <button type="button" class="size-fit-drawer__overlay" aria-label="Close Size & Fit" data-size-fit-close></button>
+        <aside
+          id="{{ size_fit_drawer_id }}"
+          class="size-fit-drawer__panel"
+          role="dialog"
+          aria-modal="true"
+          aria-hidden="true"
+          aria-labelledby="{{ size_fit_drawer_id }}-title"
+          tabindex="-1"
+          data-size-fit-panel
+        >
+          <div class="size-fit-drawer__header">
+            <h2 id="{{ size_fit_drawer_id }}-title" class="size-fit-drawer__title">
+              {{ block.settings.size_guide_text | escape }}
+            </h2>
+            <button type="button" class="size-fit-drawer__close" aria-label="Close Size & Fit" data-size-fit-close>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+              </svg>
+            </button>
+          </div>
+
+          <div class="size-fit-drawer__images">
+            {%- for variant in product.variants -%}
+              {%- if merge_flux_size_fit_tabs and forloop.first == false -%}
+                {%- continue -%}
+              {%- endif -%}
+              {%- assign size_fit_image = variant.metafields.custom.size_fit_image.value -%}
+              <div
+                id="{{ size_fit_drawer_id }}-panel-{{ variant.id }}"
+                class="size-fit-drawer__image-panel"
+                role="tabpanel"
+                aria-labelledby="{{ size_fit_drawer_id }}-tab-{{ variant.id }}"
+                aria-hidden="{% if merge_flux_size_fit_tabs or variant.id == initial_size_fit_variant.id %}false{% else %}true{% endif %}"
+                data-size-fit-image="{{ variant.id }}"
+              >
+                {%- if size_fit_image != blank -%}
+                  {{
+                    size_fit_image
+                    | image_url: width: 1200
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '360, 540, 720, 960, 1200',
+                      sizes: '(max-width: 750px) 82vw, 396px',
+                      class: 'size-fit-drawer__image',
+                      alt: variant.title
+                  }}
+                {%- else -%}
+                  <div class="size-fit-drawer__placeholder" aria-label="Size & Fit image not configured"></div>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+
+          <div
+            class="size-fit-drawer__tabs{% if merge_flux_size_fit_tabs %} size-fit-drawer__tabs--merged{% endif %}"
+            role="tablist"
+            aria-label="Product variants"
+          >
+            {%- if merge_flux_size_fit_tabs -%}
+              <button
+                type="button"
+                id="{{ size_fit_drawer_id }}-tab-{{ merged_size_fit_variant.id }}"
+                class="size-fit-drawer__tab"
+                role="tab"
+                aria-controls="{{ size_fit_drawer_id }}-panel-{{ merged_size_fit_variant.id }}"
+                aria-selected="true"
+                tabindex="0"
+                data-size-fit-tab="{{ merged_size_fit_variant.id }}"
+              >
+                {{ merged_size_fit_label | escape }}
+              </button>
+            {%- else -%}
+              {%- for variant in product.variants -%}
+                <button
+                  type="button"
+                  id="{{ size_fit_drawer_id }}-tab-{{ variant.id }}"
+                  class="size-fit-drawer__tab"
+                  role="tab"
+                  aria-controls="{{ size_fit_drawer_id }}-panel-{{ variant.id }}"
+                  aria-selected="{% if variant.id == initial_size_fit_variant.id %}true{% else %}false{% endif %}"
+                  tabindex="{% if variant.id == initial_size_fit_variant.id %}0{% else %}-1{% endif %}"
+                  data-size-fit-tab="{{ variant.id }}"
+                >
+                  {{ variant.title | escape }}
+                </button>
+              {%- endfor -%}
+            {%- endif -%}
+          </div>
+        </aside>
+      </size-fit-drawer>
+    {%- endif -%}
+  </div>
+
+  {%- if product != blank and product.has_only_default_variant == false -%}
+    {%- liquid
+      assign product_form_id = 'product-form-' | append: section.id
+    -%}
+    <variant-selects
+      id="variant-selects-{{ section.id }}"
+      data-section="{{ section.id }}"
+      {{ block.shopify_attributes }}
+    >
+      {%- for option in product.options_with_values -%}
+        <fieldset class="js product-form__input product-form__input--pill">
+          {%- for value in option.values -%}
+            {%- liquid
+              assign input_id = section.id | append: '-' | append: option.position | append: '-' | append: forloop.index0
+              assign input_name = option.name | append: '-' | append: option.position
+              assign escaped_value = value | escape
+
+              assign option_index = 'option' | append: option.position
+              assign variant = product.variants | where: option_index, value | first
+              assign is_recommended = false
+              if variant.metafields.custom.is_recommended
+                assign is_recommended = true
+              endif
+              assign short_desc = variant.metafields.custom.variant_description | default: 'Premium performance and range.'
+            -%}
+
+            <input
+              type="radio"
+              id="{{ input_id }}"
+              name="{{ input_name | escape }}"
+              value="{{ escaped_value }}"
+              form="{{ product_form_id }}"
+              {% if value.selected %}
+                checked
+              {% endif %}
+              data-option-value-id="{{ value.id }}"
+            >
+            <label for="{{ input_id }}" class="variant-card">
+              <div class="variant-card__media">
+                {%- liquid
+                  assign card_image = nil
+                  if variant.featured_media != blank
+                    assign card_image = variant.featured_media
+                  elsif variant.metafields.custom.product_showcase_image.value != blank
+                    assign card_image = variant.metafields.custom.product_showcase_image.value | first
+                  endif
+                -%}
+                {% if card_image != blank %}
+                  {{ card_image | image_url: width: 160 | image_tag: loading: 'lazy', widths: '80, 120, 160, 240', sizes: '80px' }}
+                {% else %}
+                  {{ 'product-1' | placeholder_svg_tag }}
+                {% endif %}
+              </div>
+              <div class="variant-card__info">
+                <div class="variant-card__header">
+                  {%- liquid
+                    assign main_title = value
+                    assign accent_title = ''
+                    if value contains ' Pro'
+                      assign main_title = value | split: ' Pro' | first
+                      assign accent_title = 'Pro'
+                    endif
+                  -%}
+                  <span>{{ main_title }}</span>
+                  {%- if accent_title != blank %}
+                    <span class="brand-accent">{{ accent_title }}</span>
+                  {%- endif %}
+                </div>
+                <div class="variant-card__price">
+                  {{ cart.currency.iso_code }}
+                  {{ variant.price | money }}
+                </div>
+                <div class="variant-card__desc">
+                  {{ short_desc }}
+                </div>
+              </div>
+              {% if is_recommended %}
+                <div class="variant-card__badge">Recommended</div>
+              {% endif %}
+            </label>
+          {%- endfor -%}
+        </fieldset>
+      {%- endfor -%}
+
+      <script type="application/json" data-selected-variant>
+        {"id":{{ product.selected_or_first_available_variant.id | json }}}
+      </script>
+
+      <script type="application/json" data-variants-map>
+        {
+          {%- for variant in product.variants -%}
+            {%- liquid
+              assign featured_image_url = ""
+              assign featured_image_object = blank
+              if variant.featured_media != blank
+                assign featured_image_object = variant.featured_media.preview_image
+              elsif variant.metafields.custom.product_showcase_image.value != blank
+                assign showcase_first_image = variant.metafields.custom.product_showcase_image.value | first
+                if showcase_first_image != blank
+                  assign featured_image_object = showcase_first_image
+                endif
+              endif
+              if featured_image_object != blank
+                assign featured_image_url = featured_image_object | image_url: width: 400
+              endif
+              assign v_desc = variant.metafields.custom.variant_description | default: 'Premium performance and range.'
+            -%}
+            "{{ variant.id }}": {
+              "id": {{ variant.id }},
+              "title": {{ variant.title | json }},
+              "featured_image": {
+                "src": {{ featured_image_url | json }},
+                "width": 400,
+                "height": {% if featured_image_object != blank %}{{ 400 | divided_by: featured_image_object.aspect_ratio | round }}{% else %}400{% endif %}
+              },
+              "options": {{ variant.options | json }},
+              "price": {{ variant.price | json }},
+              "price_formatted": {{ variant.price | money | json }},
+              "compare_at_price": {{ variant.compare_at_price | json }},
+              "compare_at_price_formatted": {{ variant.compare_at_price | money | json }},
+              "available": {{ variant.available | json }},
+              "description": {{ v_desc | json }},
+              "images": [
+                {%- assign rendered_image_count = 0 -%}
+                {%- if variant.metafields.custom.product_showcase_image.value != blank -%}
+                  {%- for img in variant.metafields.custom.product_showcase_image.value -%}
+                    {%- if rendered_image_count > 0 -%},{%- endif -%}
+                    {
+                      "src": {{ img | image_url: width: 720 | json }},
+                      "zoom_src": {{ img | image_url: width: 1920 | json }},
+                      "width": 720,
+                      "height": {{ 720 | divided_by: img.aspect_ratio | round }},
+                      "alt": {{ img.alt | default: product.title | json }}
+                    }
+                    {%- assign rendered_image_count = rendered_image_count | plus: 1 -%}
+                  {%- endfor -%}
+                {%- else -%}
+                  {%- assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' -%}
+                  {%- for media in product.media -%}
+                    {%- liquid
+                      assign should_hide = false
+                      if variant.featured_media != blank and variant_images contains media.src and media.id != variant.featured_media.id
+                        assign should_hide = true
+                      endif
+                      assign variant_preview = media.preview_image | default: media
+                    -%}
+                    {%- unless should_hide -%}
+                      {%- if rendered_image_count > 0 -%},{%- endif -%}
+                      {
+                        "src": {{ variant_preview | image_url: width: 720 | json }},
+                        "zoom_src": {{ variant_preview | image_url: width: 1920 | json }},
+                        "width": 720,
+                        "height": {{ 720 | divided_by: variant_preview.aspect_ratio | round }},
+                        "alt": {{ variant_preview.alt | default: product.title | json }}
+                      }
+                      {%- assign rendered_image_count = rendered_image_count | plus: 1 -%}
+                    {%- endunless -%}
+                  {%- endfor -%}
+                {%- endif -%}
+              ]
+            }{%- unless forloop.last -%},{%- endunless -%}
+          {%- endfor -%}
+        }
+      </script>
+    </variant-selects>
+  {%- endif -%}
+</div>

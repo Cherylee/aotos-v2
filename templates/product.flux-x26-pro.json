@@ -1,0 +1,195 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product-flux",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {
+            "rating": 5,
+            "review_count": 86,
+            "review_text": "reviews"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Ride Further. Ride Smarter.</p>"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "paypal_messaging": {
+          "type": "shopify://apps/paypal-payments-studio/blocks/paypal-messaging/019df789-f519-7bce-9967-1ff928443aa9",
+          "settings": {
+            "font_size": 15,
+            "letter_spacing": 0
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_title": "Choose your model:",
+            "show_size_guide": true,
+            "size_guide_text": "Size & Fit",
+            "size_guide_icon": "shopify://shop_images/288aa83db3c7f157c94fe470a81f4032.webp"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": false
+          }
+        },
+        "perks": {
+          "type": "perks",
+          "settings": {
+            "icon_1": "shopify://shop_images/2_1.png",
+            "text_1": "Fast Free Shipping in 2–5 Days",
+            "detail_1": "<p>We offer <strong>free shipping</strong> on all orders to the contiguous 48 states in the United States.</p><ul><li>Processing time: 1–3 business days</li><li>Shipping time: usually 2–5 business days (depending on your location)</li><li>Carriers: UPS / FedEx</li></ul><p><strong>Note:</strong><br/>We currently do not ship to Alaska, Hawaii, Puerto Rico, PO Boxes, or APO/FPO addresses.<br/>You will receive a tracking number once your order ships.<a href=\"/pages/shipping-policy\" title=\"Shipping Policy\"> More</a></p>",
+            "icon_2": "shopify://shop_images/2_3.png",
+            "text_2": "30-Day Free Returns",
+            "detail_2": "<p>We offer a <strong>30-day free return policy</strong>.</p><ul><li>You may return the bike within 30 days of delivery if it is in new, unused condition with original packaging.</li><li>To start a return, please email us at <a href=\"mailto:support@aotos.com\" target=\"_blank\"><strong>support@aotos.com</strong></a> with your order number and photos/videos if needed.</li><li>We will review your request within 3 business days.</li></ul><p><strong>Return shipping:</strong></p><ul><li>If the return is due to our error (wrong item, quality issue, etc.), we cover the return shipping cost.</li><li>If the return is due to change of mind, the customer is responsible for return shipping.</li><li>No restocking fee will be charged.</li></ul><p>   <a href=\"/pages/return-refund-policy\" title=\"Return & Refund Policy\">  More</a></p>",
+            "icon_3": "shopify://shop_images/2_923b391a-8035-4372-a1e6-b88e92751e4f.png",
+            "text_3": "1-Year Warranty",
+            "detail_3": "<p>Your Flux X26 Series is covered by our limited warranty:</p><ul><li><strong>Main Components</strong> (Frame, Fork, Handlebar, Motor, Battery, Controller, Display, etc.): <strong>1 Year</strong></li><li><strong>Main Accessories</strong> (Throttle, Lights, Brake Levers, Charger, Shock Absorber, etc.): <strong>6 Months</strong></li><li><strong>Wear & Tear Parts</strong> (Tires, Fenders, Seat, Foot Pegs, Plastic Parts, etc.): <strong>3 Months</strong></li></ul><p><strong>Battery Note:</strong><br/>Covered for 1 year or 500 charge cycles (whichever comes first), with capacity remaining at least 80% of rated capacity under normal conditions.</p><p>Warranty does not cover damage caused by improper use, accidents, or unauthorized modifications.<a href=\"/pages/warranty-policy\" title=\"Warranty Policy\">More</a></p>",
+            "icon_4": "shopify://shop_images/2_2_2393cb17-6719-43ff-821d-2a7ba1d45a5b.png",
+            "text_4": "Customer Support",
+            "detail_4": "<p>We’re here to help!</p><ul><li><strong>Email:</strong> <a href=\"mailto:support@aotos.com\" target=\"_blank\">support@aotos.com</a></li><li><strong>Hours:</strong> 10:00 AM–8:30 PM (HKT)</li></ul><p>For the fastest response, please include your order number when contacting us.<br/>Our team typically replies within 1 business day.</p>"
+          }
+        },
+        "accordion_box": {
+          "type": "accordion",
+          "settings": {
+            "icon": "shopify://shop_images/1_9b74d37f-ee92-4622-9912-020d30cc685d.webp",
+            "title": "What's in the Box",
+            "content": "<p>Bluetooth module ×1<br/>Mudguard brackets ×2<br/>Accessory box ×1<br/>Mudguard bracket covers ×2<br/>Water bottle holder ×1<br/>Front reflector ×1<br/>Power cord ×1<br/>Pedals ×2<br/>Wrench ×1<br/>Ratchet wrench ×1</p>",
+            "open_by_default": false
+          }
+        },
+        "spec_motor": {
+          "type": "spec",
+          "settings": {
+            "icon": "shopify://shop_images/Motor_987a092e-a8c8-469d-b48d-610681999762.svg",
+            "title": "Motor",
+            "value": "750W rated / 2000W Peak in Boost",
+            "variant_values": "Flux X26 Pro: 750W rated / 2000W Peak in Boost\nFlux X26: 750W rated / 1200W Peak in Boost"
+          }
+        },
+        "spec_torque": {
+          "type": "spec",
+          "settings": {
+            "icon": "shopify://shop_images/Torque_bc1a12dc-b32a-484d-9a7b-636330936ffc.svg",
+            "title": "Torque",
+            "value": "100 Nm torque",
+            "variant_values": "Flux X26 Pro: 100 Nm torque\nFlux X26: 80 Nm torque"
+          }
+        },
+        "spec_speed": {
+          "type": "spec",
+          "settings": {
+            "icon": "shopify://shop_images/Top_Speed_03910da7-e533-4487-ae1b-8e47624b98ae.svg",
+            "title": "Top Speed",
+            "value": "28 mph (in Boost*)",
+            "variant_values": "Flux X26 Pro: 28 mph (in Boost*)\nFlux X26: 28 mph (in Boost*)"
+          }
+        },
+        "spec_battery": {
+          "type": "spec",
+          "settings": {
+            "icon": "shopify://shop_images/Battery_e82c59a5-1329-4520-9cd3-ec2cec88761a.svg",
+            "title": "Battery",
+            "value": "48V 21Ah battery",
+            "variant_values": "Flux X26 Pro: 48V 21Ah battery\nFlux X26: 48V 18Ah battery"
+          }
+        },
+        "spec_range": {
+          "type": "spec",
+          "settings": {
+            "icon": "shopify://shop_images/Range_7a0fa706-b5c5-412d-9821-44d96150f59b.svg",
+            "title": "Range",
+            "value": "Up to 70 miles",
+            "variant_values": "Flux X26 Pro: Up to 70 miles\nFlux X26: Up to 50 miles"
+          }
+        },
+        "spec_brakes": {
+          "type": "spec",
+          "settings": {
+            "icon": "shopify://shop_images/Brakes_57fb5536-a409-43eb-9820-cd5367083e0b.svg",
+            "title": "Brakes",
+            "value": "Hydraulic disc brakes",
+            "variant_values": "Flux X26 Pro: Hydraulic disc brakes\nFlux X26: Hydraulic disc brakes"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "rating",
+        "text",
+        "price",
+        "paypal_messaging",
+        "variant_picker",
+        "buy_buttons",
+        "perks",
+        "accordion_box",
+        "spec_motor",
+        "spec_torque",
+        "spec_speed",
+        "spec_battery",
+        "spec_range",
+        "spec_brakes"
+      ],
+      "settings": {
+        "award_caption": "reddot winner 2026",
+        "payment_icons": "visa,master,american_express,discover,jcb,klarna,paypal,maestro,venmo,afterpay",
+        "payment_collapsed_count": 7,
+        "payment_accessibility_label": "View accepted payment methods",
+        "padding_bottom": 80
+      }
+    },
+    "reviews": {
+      "type": "apps",
+      "blocks": {
+        "loox_reviews": {
+          "type": "shopify://apps/loox-reviews/blocks/loox-dynamic-section/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
+          "settings": {
+            "reviews_to_display": "product_reviews_only",
+            "default_tab": "automatic",
+            "only_photos": false,
+            "aggregated": false,
+            "limit": 20,
+            "hide_thumbnails": false,
+            "maxwidth": 1080,
+            "is_sample": false
+          }
+        }
+      },
+      "block_order": [
+        "loox_reviews"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "reviews"
+  ]
+}
