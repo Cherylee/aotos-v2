@@ -9,6 +9,15 @@
  */
 {
   "sections": {
+    "image_banner_HTF3zQ": {
+      "type": "image-banner",
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/1a0ec33e-5639-46d3-9e12-896739a326ea.webp",
+        "image_mobile": "shopify://shop_images/1a0ec33e-5639-46d3-9e12-896739a326ea.webp",
+        "image_height": "small"
+      }
+    },
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
@@ -87,6 +96,7 @@
     }
   },
   "order": [
+    "image_banner_HTF3zQ",
     "product-grid",
     "why-choose"
   ]
