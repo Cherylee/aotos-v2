@@ -1,16 +1,25 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "find_dealer_hero": {
       "type": "blog-list-hero",
       "settings": {
         "image": "shopify://shop_images/315d1d44-7d11-4fe7-a7ac-133b63bc2010.webp",
-        "image_mobile": "shopify://shop_images/ea0b81af-9628-4d18-9084-d1c71aa4bdda.webp",
         "image_fit": "fixed",
+        "image_mobile": "shopify://shop_images/ea0b81af-9628-4d18-9084-d1c71aa4bdda.webp",
         "image_position": "right",
         "image_alt": "FIND AN AOTOS DEALER",
         "content_align": "left",
         "title": "FIND AN AOTOS DEALER",
-        "title_size": 56,
+        "title_size": 52,
         "title_size_mobile": 48,
         "title_weight": "700",
         "title_color": "#111111",
@@ -95,7 +104,12 @@
           }
         }
       },
-      "block_order": ["w1", "w2", "w3", "w4"],
+      "block_order": [
+        "w1",
+        "w2",
+        "w3",
+        "w4"
+      ],
       "settings": {
         "eyebrow": "WHY CHOOSE AN AOTOS DEALER",
         "eyebrow_font_size_pc": 12,
@@ -140,7 +154,10 @@
           }
         }
       },
-      "block_order": ["p1", "p2"],
+      "block_order": [
+        "p1",
+        "p2"
+      ],
       "settings": {
         "eyebrow_font_size_pc": 11,
         "eyebrow_font_size_mob": 20,
@@ -186,7 +203,11 @@
           }
         }
       },
-      "block_order": ["b1", "b2", "b3"],
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ],
       "settings": {
         "image": "shopify://shop_images/9d3ceef6-0bc9-4c10-9d20-93e32c8a0a2d.webp",
         "fallback_asset": "fd-dealer-storefront.svg",
