@@ -13,8 +13,6 @@
       "type": "main-page",
       "disabled": true,
       "settings": {
-        "color_scheme": "scheme-5",
-        "heading_size": "h1",
         "padding_top": 32,
         "padding_bottom": 60
       }
