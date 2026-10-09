@@ -1,0 +1,479 @@
+<section
+  class="ifa-subscribe section-{{ section.id }}"
+  id="IfaSubscribe-{{ section.id }}"
+  style="
+    --ifa-subscribe-accent: {{ section.settings.accent_color | default: '#ff6501' }};
+    --ifa-subscribe-bg: {{ section.settings.background_color | default: '#111111' }};
+    padding-top: calc({{ section.settings.padding_top | default: 80 }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80 }} * var(--rem));
+  "
+>
+  <div class="ifa-subscribe__shell" id="ifa-berlin-2026-subscribe">
+    {%- assign subscribe_form_id = 'IfaSubscribeForm-' | append: section.id -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="ifa-subscribe__heading">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.contact_role != blank or section.settings.contact_name != blank -%}
+      <p class="ifa-subscribe__contact">
+        {%- if section.settings.contact_role != blank -%}
+          <span>{{ section.settings.contact_role | escape }}</span>
+        {%- endif -%}
+        {%- if section.settings.contact_name != blank -%}
+          <strong>{{ section.settings.contact_name | escape }}</strong>
+        {%- endif -%}
+      </p>
+    {%- endif -%}
+
+    {%- if section.settings.contact_email != blank -%}
+      <a class="ifa-subscribe__email" href="mailto:{{ section.settings.contact_email | escape }}">
+        {{ section.settings.contact_email | escape }}
+      </a>
+    {%- endif -%}
+
+    {%- form 'customer', id: subscribe_form_id, class: 'ifa-subscribe__form' -%}
+      <input type="hidden" name="contact[tags]" value="{{ section.settings.newsletter_tag | default: 'newsletter' | escape }}">
+      {%- if section.settings.return_to != blank -%}
+        <input type="hidden" name="return_to" value="{{ section.settings.return_to | escape }}">
+      {%- endif -%}
+
+      <div class="ifa-subscribe__field">
+        <input
+          id="IfaSubscribeEmail-{{ section.id }}"
+          type="email"
+          name="contact[email]"
+          class="ifa-subscribe__input"
+          value="{{ form.email }}"
+          placeholder="{{ section.settings.email_placeholder | default: 'Enter your email' | escape }}"
+          autocorrect="off"
+          autocapitalize="off"
+          autocomplete="email"
+          aria-required="true"
+          required
+          {% if form.errors %}
+            aria-invalid="true"
+            aria-describedby="IfaSubscribeError-{{ section.id }}"
+            autofocus
+          {% elsif form.posted_successfully? %}
+            aria-describedby="IfaSubscribeSuccess-{{ section.id }}"
+          {% endif %}
+        >
+        <button
+          type="submit"
+          class="ifa-subscribe__button"
+          name="commit"
+          aria-label="{{ section.settings.button_label | default: 'Subscribe' | escape }}"
+        >
+          {{ section.settings.button_label | default: 'Subscribe' | escape }}
+        </button>
+      </div>
+
+      {%- if form.errors -%}
+        <p class="ifa-subscribe__message ifa-subscribe__message--error" id="IfaSubscribeError-{{ section.id }}">
+          {{- form.errors.translated_fields.email | capitalize -}}
+          {{- form.errors.messages.email -}}
+        </p>
+      {%- endif -%}
+
+      {%- if form.posted_successfully? -%}
+        <p class="ifa-subscribe__message ifa-subscribe__message--success" id="IfaSubscribeSuccess-{{ section.id }}" tabindex="-1">
+          {{ section.settings.success_message | default: 'Thanks for subscribing!' | escape }}
+        </p>
+      {%- endif -%}
+    {%- endform -%}
+
+    {%- if section.settings.footer_note != blank -%}
+      <p class="ifa-subscribe__note">{{ section.settings.footer_note | escape }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  .ifa-subscribe {
+    background: var(--ifa-subscribe-bg);
+    color: #ffffff;
+    text-align: center;
+  }
+
+  .ifa-subscribe__shell {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+    padding-inline: calc(40 * var(--rem));
+    box-sizing: border-box;
+  }
+
+  .ifa-subscribe__heading {
+    margin: 0 0 calc(24 * var(--rem));
+    color: #ffffff;
+    font-size: calc(36 * var(--rem));
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  .ifa-subscribe__contact {
+    margin: 0 0 calc(8 * var(--rem));
+    color: rgba(255, 255, 255, 0.92);
+    font-size: calc(16 * var(--rem));
+    line-height: 1.5;
+  }
+
+  .ifa-subscribe__contact strong {
+    font-weight: 600;
+  }
+
+  .ifa-subscribe__email {
+    display: inline-block;
+    margin: 0 0 calc(32 * var(--rem));
+    color: var(--ifa-subscribe-accent);
+    font-size: calc(16 * var(--rem));
+    font-weight: 500;
+    line-height: 1.5;
+    text-decoration: none;
+    transition: opacity 0.25s ease;
+  }
+
+  .ifa-subscribe__email:hover {
+    opacity: 0.85;
+  }
+
+  .ifa-subscribe__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+  }
+
+  .ifa-subscribe__field {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(8 * var(--rem));
+    width: 100%;
+    max-width: calc(520 * var(--rem));
+    padding: calc(6 * var(--rem));
+    padding-left: calc(20 * var(--rem));
+    box-sizing: border-box;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .ifa-subscribe__input {
+    flex: 1 1 auto;
+    min-width: 0;
+    height: calc(40 * var(--rem));
+    border: 0;
+    background: transparent;
+    color: #ffffff;
+    font-size: calc(16 * var(--rem));
+    line-height: 1.4;
+    outline: none;
+  }
+
+  .ifa-subscribe__input::placeholder {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .ifa-subscribe__button {
+    flex: 0 0 auto;
+    height: calc(40 * var(--rem));
+    padding: 0 calc(24 * var(--rem));
+    border: 0;
+    border-radius: 999px;
+    background: var(--ifa-subscribe-accent);
+    color: #111111;
+    font-size: calc(14 * var(--rem));
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .ifa-subscribe__button:hover {
+    opacity: 0.92;
+    transform: scale(1.02);
+  }
+
+  .ifa-subscribe__message {
+    margin: calc(12 * var(--rem)) 0 0;
+    font-size: calc(14 * var(--rem));
+    line-height: 1.4;
+  }
+
+  .ifa-subscribe__message--error {
+    color: #ff8a65;
+  }
+
+  .ifa-subscribe__message--success {
+    color: var(--ifa-subscribe-accent);
+  }
+
+  .ifa-subscribe__note {
+    margin: calc(20 * var(--rem)) 0 0;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: calc(14 * var(--rem));
+    line-height: 1.5;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ifa-subscribe {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 48 }} * var(--rem)) !important;
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 48 }} * var(--rem)) !important;
+    }
+
+    .ifa-subscribe__shell {
+      width: 100%;
+      padding-inline: calc(40 * var(--rem));
+    }
+
+    .ifa-subscribe__heading {
+      margin-bottom: calc(20 * var(--rem));
+      font-size: calc(28 * var(--rem));
+    }
+
+    .ifa-subscribe__contact,
+    .ifa-subscribe__email {
+      font-size: calc(26 * var(--rem));
+    }
+
+    .ifa-subscribe__email {
+      margin-bottom: calc(24 * var(--rem));
+    }
+
+    .ifa-subscribe__field {
+      flex-direction: column;
+      align-items: stretch;
+      gap: calc(12 * var(--rem));
+      max-width: 100%;
+      padding: calc(12 * var(--rem));
+      border-radius: calc(16 * var(--rem));
+    }
+
+    .ifa-subscribe__input {
+      height: calc(48 * var(--rem));
+      font-size: calc(24 * var(--rem));
+      text-align: center;
+    }
+
+    .ifa-subscribe__button {
+      width: 100%;
+      height: calc(88 * var(--rem));
+      font-size: calc(24 * var(--rem));
+    }
+
+    .ifa-subscribe__note,
+    .ifa-subscribe__message {
+      font-size: calc(22 * var(--rem));
+    }
+  }
+
+  @media screen and (min-width: 750px) and (max-width: 768px) {
+    .ifa-subscribe {
+      padding-top: calc(90 * var(--rem)) !important;
+      padding-bottom: calc(90 * var(--rem)) !important;
+    }
+
+    .ifa-subscribe__shell {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding-inline: calc(34 * var(--rem));
+    }
+
+    .ifa-subscribe__heading {
+      font-size: calc(34 * var(--rem));
+    }
+
+    .ifa-subscribe__contact,
+    .ifa-subscribe__email {
+      font-size: calc(20 * var(--rem));
+    }
+
+    .ifa-subscribe__input,
+    .ifa-subscribe__button {
+      height: calc(56 * var(--rem));
+      font-size: calc(12 * var(--rem));
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    var SUBSCRIBE_ID = 'ifa-berlin-2026-subscribe';
+
+    function subscribeTarget() {
+      var el = document.getElementById(SUBSCRIBE_ID);
+      if (!el) return null;
+      if (el.classList.contains('ifa-subscribe__shell')) return el;
+      return el.querySelector('.ifa-subscribe__shell') || el;
+    }
+
+    function scrollSubscribeToCenter() {
+      var el = subscribeTarget();
+      if (!el) return;
+      el.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+    }
+
+    function hrefIsSubscribe(href) {
+      if (!href) return false;
+      try {
+        var url = new URL(href, window.location.href);
+        return url.hash === '#' + SUBSCRIBE_ID;
+      } catch (err) {
+        return href.indexOf('#' + SUBSCRIBE_ID) !== -1;
+      }
+    }
+
+    document.addEventListener('click', function (event) {
+      var link = event.target.closest('a[href], a[data-ifa-scroll-center]');
+      if (!link) return;
+      var href = link.getAttribute('href') || '';
+      var marked = link.getAttribute('data-ifa-scroll-center') === SUBSCRIBE_ID;
+      if (!marked && !hrefIsSubscribe(href)) return;
+      if (!subscribeTarget()) return;
+      event.preventDefault();
+      if (window.history && window.history.pushState) {
+        window.history.pushState(null, '', '#' + SUBSCRIBE_ID);
+      }
+      scrollSubscribeToCenter();
+    });
+
+    function maybeScrollFromHash() {
+      if (window.location.hash === '#' + SUBSCRIBE_ID) {
+        window.requestAnimationFrame(scrollSubscribeToCenter);
+      }
+    }
+
+    if (document.readyState === 'complete') {
+      maybeScrollFromHash();
+    } else {
+      window.addEventListener('load', maybeScrollFromHash);
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "IFA Exhibition Subscribe",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Contact Us for Details or to Book Your Booth Visit"
+    },
+    {
+      "type": "text",
+      "id": "contact_role",
+      "label": "Contact role label",
+      "default": "PR Manager:"
+    },
+    {
+      "type": "text",
+      "id": "contact_name",
+      "label": "Contact name",
+      "default": "Osmond Ye"
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "Contact email",
+      "default": "media@aotos.com"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email placeholder",
+      "default": "Enter your email"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Subscribe"
+    },
+    {
+      "type": "text",
+      "id": "footer_note",
+      "label": "Footer note",
+      "default": "Get the latest news and event updates from AOTOS."
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thanks for subscribing!"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_tag",
+      "label": "Newsletter tag",
+      "default": "newsletter",
+      "info": "Customer tag applied on subscribe."
+    },
+    {
+      "type": "url",
+      "id": "return_to",
+      "label": "Redirect after subscribe",
+      "info": "Optional. Leave blank to stay on the current page."
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#ff6501"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#111111"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top (desktop)",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom (desktop)",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding top (mobile)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding bottom (mobile)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "IFA Exhibition Subscribe"
+    }
+  ]
+}
+{% endschema %}

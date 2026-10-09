@@ -1,0 +1,308 @@
+<section
+  class="ifa-schedule section-{{ section.id }}"
+  id="IfaSchedule-{{ section.id }}"
+  style="
+    padding-top: calc({{ section.settings.padding_top | default: 80 }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80 }} * var(--rem));
+  "
+>
+  <div class="ifa-schedule__shell">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="ifa-schedule__heading">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+
+    <div class="ifa-schedule__table" role="table" aria-label="{{ section.settings.heading | escape }}">
+      <div class="ifa-schedule__row ifa-schedule__row--head" role="row">
+        <div class="ifa-schedule__cell ifa-schedule__cell--activity" role="columnheader">
+          {{ section.settings.column_activity | default: 'activity' | escape }}
+        </div>
+        <div class="ifa-schedule__cell ifa-schedule__cell--time" role="columnheader">
+          {{ section.settings.column_time | default: 'time' | escape }}
+        </div>
+        <div class="ifa-schedule__cell ifa-schedule__cell--location" role="columnheader">
+          {{ section.settings.column_location | default: 'location' | escape }}
+        </div>
+      </div>
+
+      {%- for block in section.blocks -%}
+        <div class="ifa-schedule__row" role="row" {{ block.shopify_attributes }}>
+          <div class="ifa-schedule__cell ifa-schedule__cell--activity" role="cell">
+            {{ block.settings.activity | escape }}
+          </div>
+          <div class="ifa-schedule__cell ifa-schedule__cell--time" role="cell">
+            {{ block.settings.time | escape }}
+          </div>
+          <div class="ifa-schedule__cell ifa-schedule__cell--location" role="cell">
+            {{ block.settings.location | escape }}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .ifa-schedule {
+    background: #ffffff;
+  }
+
+  .ifa-schedule__shell {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+    padding-inline: calc(40 * var(--rem));
+    box-sizing: border-box;
+  }
+
+  .ifa-schedule__heading {
+    margin: 0 0 calc(32 * var(--rem));
+    color: #111111;
+    font-size: calc(36 * var(--rem));
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .ifa-schedule__table {
+    overflow: hidden;
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    border-radius: calc(12 * var(--rem));
+    background: #ffffff;
+  }
+
+  .ifa-schedule__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1.2fr);
+    gap: calc(24 * var(--rem));
+    align-items: center;
+    padding: calc(20 * var(--rem)) calc(28 * var(--rem));
+    border-top: 1px solid rgba(17, 17, 17, 0.08);
+  }
+
+  .ifa-schedule__row:first-child {
+    border-top: 0;
+  }
+
+  .ifa-schedule__row--head {
+    background: #fafafa;
+  }
+
+  .ifa-schedule__cell {
+    min-width: 0;
+    color: #111111;
+    font-size: calc(16 * var(--rem));
+    line-height: 1.5;
+    word-break: break-word;
+  }
+
+  .ifa-schedule__row--head .ifa-schedule__cell {
+    color: rgba(17, 17, 17, 0.45);
+    font-size: calc(14 * var(--rem));
+    font-weight: 500;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ifa-schedule {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 48 }} * var(--rem)) !important;
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 48 }} * var(--rem)) !important;
+    }
+
+    .ifa-schedule__shell {
+      width: 100%;
+      padding-inline: calc(40 * var(--rem));
+    }
+
+    .ifa-schedule__heading {
+      margin-bottom: calc(20 * var(--rem));
+      font-size: calc(28 * var(--rem));
+    }
+
+    .ifa-schedule__row {
+      grid-template-columns: 1fr;
+      gap: calc(8 * var(--rem));
+      padding: calc(24 * var(--rem)) calc(28 * var(--rem));
+    }
+
+    .ifa-schedule__row--head {
+      display: none;
+    }
+
+    .ifa-schedule__cell {
+      font-size: calc(26 * var(--rem));
+    }
+
+    .ifa-schedule__cell::before {
+      display: block;
+      margin-bottom: calc(4 * var(--rem));
+      color: rgba(17, 17, 17, 0.45);
+      font-size: calc(20 * var(--rem));
+      font-weight: 500;
+    }
+
+    .ifa-schedule__cell--activity::before {
+      content: '{{ section.settings.column_activity | default: "activity" | escape }}';
+    }
+
+    .ifa-schedule__cell--time::before {
+      content: '{{ section.settings.column_time | default: "time" | escape }}';
+    }
+
+    .ifa-schedule__cell--location::before {
+      content: '{{ section.settings.column_location | default: "location" | escape }}';
+    }
+  }
+
+  @media screen and (min-width: 750px) and (max-width: 768px) {
+    .ifa-schedule {
+      padding-top: calc(90 * var(--rem)) !important;
+      padding-bottom: calc(90 * var(--rem)) !important;
+    }
+
+    .ifa-schedule__shell {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding-inline: calc(34 * var(--rem));
+    }
+
+    .ifa-schedule__heading {
+      font-size: calc(34 * var(--rem));
+      margin-bottom: calc(38 * var(--rem));
+    }
+
+    .ifa-schedule__cell {
+      font-size: calc(20 * var(--rem));
+    }
+
+    .ifa-schedule__row--head .ifa-schedule__cell {
+      font-size: calc(20 * var(--rem));
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "IFA Exhibition Schedule",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading",
+      "default": "AOTOS Schedule"
+    },
+    {
+      "type": "text",
+      "id": "column_activity",
+      "label": "Activity column label",
+      "default": "activity"
+    },
+    {
+      "type": "text",
+      "id": "column_time",
+      "label": "Time column label",
+      "default": "time"
+    },
+    {
+      "type": "text",
+      "id": "column_location",
+      "label": "Location column label",
+      "default": "location"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top (desktop)",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom (desktop)",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding top (mobile)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding bottom (mobile)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Schedule row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "activity",
+          "label": "Activity",
+          "default": "new product launch keynote"
+        },
+        {
+          "type": "text",
+          "id": "time",
+          "label": "Time",
+          "default": "2026/01/07 10:00-11:00"
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Location",
+          "default": "Messe Berlin, hall 12, booth 12345"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "IFA Exhibition Schedule",
+      "blocks": [
+        {
+          "type": "row",
+          "settings": {
+            "activity": "new product launch keynote",
+            "time": "2026/01/07 10:00-11:00",
+            "location": "Messe Berlin, hall 12, booth 12345"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "activity": "test ride experience",
+            "time": "2026/01/07 14:00-17:00",
+            "location": "Messe Berlin, outdoor demo zone"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "activity": "media q&a and meet greet",
+            "time": "2026/01/08 11:00-12:00",
+            "location": "Messe Berlin, hall 12, booth 12345"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

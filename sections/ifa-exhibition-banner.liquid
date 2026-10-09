@@ -1,0 +1,436 @@
+{%- liquid
+  assign desktop_image = section.settings.image
+  assign mobile_image = section.settings.image_mobile
+  if desktop_image == blank
+    assign desktop_image = mobile_image
+  endif
+  if mobile_image == blank
+    assign mobile_image = desktop_image
+  endif
+  assign overlay_opacity = section.settings.overlay_opacity | default: 35 | times: 0.01
+-%}
+
+<section
+  class="ifa-banner section-{{ section.id }}"
+  id="IfaBanner-{{ section.id }}"
+  style="--ifa-accent: {{ section.settings.accent_color | default: '#ff6501' }}; --ifa-overlay: {{ overlay_opacity }};"
+>
+  <div class="ifa-banner__frame{% if desktop_image != blank %} ifa-banner__frame--has-image{% else %} ifa-banner__frame--placeholder{% endif %}">
+    {%- if desktop_image != blank -%}
+      <picture class="ifa-banner__media" aria-hidden="true">
+        {%- if mobile_image != blank -%}
+          <source
+            media="(max-width: 749px)"
+            srcset="
+              {{ mobile_image | image_url: width: 375 }} 375w,
+              {{ mobile_image | image_url: width: 750 }} 750w,
+              {{ mobile_image | image_url: width: 1000 }} 1000w
+            "
+            sizes="100vw"
+          >
+        {%- endif -%}
+        {{
+          desktop_image
+          | image_url: width: 3840
+          | image_tag:
+            loading: 'eager',
+            fetchpriority: 'high',
+            sizes: '100vw',
+            widths: '750, 1100, 1440, 1920, 2560, 3200, 3840',
+            class: 'ifa-banner__media-image',
+            alt: ''
+        }}
+      </picture>
+      {%- if overlay_opacity > 0 -%}
+        <span class="ifa-banner__overlay" aria-hidden="true"></span>
+      {%- endif -%}
+    {%- else -%}
+      <div class="ifa-banner__fallback" aria-hidden="true">
+        <span class="ifa-banner__fallback-label">{{ section.settings.placeholder_label | default: 'Banner background image' | escape }}</span>
+      </div>
+    {%- endif -%}
+
+    <div class="ifa-banner__content">
+      <div class="ifa-banner__copy">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="ifa-banner__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h1 class="ifa-banner__heading">{{ section.settings.heading | escape }}</h1>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <div class="ifa-banner__description rte">{{ section.settings.description }}</div>
+        {%- endif -%}
+        <div class="ifa-banner__actions">
+          {%- if section.settings.primary_button_label != blank -%}
+            <a
+              {% if section.settings.primary_button_link != blank %}
+                href="{{ section.settings.primary_button_link }}"
+              {% else %}
+                role="link" aria-disabled="true"
+              {% endif %}
+              class="ifa-banner__button ifa-banner__button--primary"
+            >
+              {{ section.settings.primary_button_label | escape }}
+            </a>
+          {%- endif -%}
+          {%- if section.settings.secondary_button_label != blank -%}
+            <a
+              {% if section.settings.secondary_button_link != blank %}
+                href="{{ section.settings.secondary_button_link }}"
+              {% else %}
+                role="link" aria-disabled="true"
+              {% endif %}
+              class="ifa-banner__button ifa-banner__button--secondary"
+            >
+              {{ section.settings.secondary_button_label | escape }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .shopify-section:has(.ifa-banner, .ifa-schedule, .ifa-series, .ifa-find-us, .ifa-subscribe)
+    + .shopify-section:has(.ifa-banner, .ifa-schedule, .ifa-series, .ifa-find-us, .ifa-subscribe) {
+    margin-top: 0 !important;
+  }
+
+  .ifa-banner {
+    width: 100%;
+  }
+
+  .ifa-banner__frame {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .ifa-banner__frame--has-image {
+    height: auto;
+  }
+
+  .ifa-banner__media {
+    display: block;
+    width: 100%;
+    line-height: 0;
+  }
+
+  .ifa-banner__media-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .ifa-banner__frame--placeholder {
+    min-height: calc(420 * var(--rem));
+    background: #1a1a1a;
+  }
+
+  .ifa-banner__fallback {
+    position: relative;
+    width: 100%;
+    min-height: calc(420 * var(--rem));
+    background: #1a1a1a;
+  }
+
+  .ifa-banner__fallback-label {
+    position: absolute;
+    top: 50%;
+    right: calc(120 * var(--rem));
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(480 * var(--rem));
+    max-width: calc(100% - calc(640 * var(--rem)));
+    min-height: calc(320 * var(--rem));
+    padding: calc(24 * var(--rem));
+    box-sizing: border-box;
+    border-radius: calc(16 * var(--rem));
+    background: #3a3a3a;
+    color: rgba(255, 255, 255, 0.35);
+    font-size: calc(16 * var(--rem));
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  .ifa-banner__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, var(--ifa-overlay, 0.35));
+    pointer-events: none;
+  }
+
+  .ifa-banner__content {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: calc(80 * var(--rem)) calc(120 * var(--rem));
+  }
+
+  .ifa-banner__copy {
+    width: calc(520 * var(--rem));
+    max-width: 100%;
+  }
+
+  .ifa-banner__eyebrow {
+    margin: 0 0 calc(12 * var(--rem));
+    color: var(--ifa-accent, #ff6501);
+    font-size: calc(14 * var(--rem));
+    font-weight: 600;
+    letter-spacing: calc(1.4 * var(--rem));
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .ifa-banner__heading {
+    margin: 0 0 calc(20 * var(--rem));
+    color: #ffffff;
+    font-size: calc(56 * var(--rem));
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: calc(0.5 * var(--rem));
+    text-transform: uppercase;
+  }
+
+  .ifa-banner__description {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: calc(16 * var(--rem));
+    line-height: 1.6;
+  }
+
+  .ifa-banner__description p {
+    margin: 0;
+  }
+
+  .ifa-banner__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(16 * var(--rem));
+    margin-top: calc(32 * var(--rem));
+  }
+
+  .ifa-banner__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(44 * var(--rem));
+    padding: calc(10 * var(--rem)) calc(28 * var(--rem));
+    border-radius: calc(999 * var(--rem));
+    font-size: calc(14 * var(--rem));
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: calc(0.4 * var(--rem));
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 150ms ease, background-color 150ms ease, color 150ms ease;
+  }
+
+  .ifa-banner__button--primary {
+    background: var(--ifa-accent, #ff6501);
+    color: #ffffff;
+    border: 1px solid var(--ifa-accent, #ff6501);
+  }
+
+  .ifa-banner__button--secondary {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.85);
+  }
+
+  @media (hover: hover) {
+    .ifa-banner__button--primary:hover,
+    .ifa-banner__button--secondary:hover {
+      opacity: 0.88;
+      text-decoration: none;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ifa-banner__frame--placeholder,
+    .ifa-banner__fallback {
+      min-height: calc(780 * var(--rem));
+    }
+
+    .ifa-banner__fallback-label {
+      right: calc(40 * var(--rem));
+      left: calc(40 * var(--rem));
+      width: auto;
+      max-width: none;
+      min-height: calc(280 * var(--rem));
+      font-size: calc(24 * var(--rem));
+    }
+
+    .ifa-banner__content {
+      align-items: flex-end;
+      padding: calc(48 * var(--rem)) calc(40 * var(--rem));
+    }
+
+    .ifa-banner__copy {
+      width: 100%;
+    }
+
+    .ifa-banner__eyebrow {
+      margin-bottom: calc(10 * var(--rem));
+      font-size: calc(22 * var(--rem));
+      letter-spacing: calc(2 * var(--rem));
+    }
+
+    .ifa-banner__heading {
+      margin-bottom: calc(16 * var(--rem));
+      font-size: calc(48 * var(--rem));
+    }
+
+    .ifa-banner__description {
+      font-size: calc(26 * var(--rem));
+    }
+
+    .ifa-banner__actions {
+      gap: calc(20 * var(--rem));
+      margin-top: calc(28 * var(--rem));
+    }
+
+    .ifa-banner__button {
+      min-height: calc(72 * var(--rem));
+      padding: calc(16 * var(--rem)) calc(36 * var(--rem));
+      font-size: calc(26 * var(--rem));
+    }
+  }
+
+  @media screen and (min-width: 750px) and (max-width: 768px) {
+    .ifa-banner__content {
+      padding: calc(90 * var(--rem)) calc(34 * var(--rem));
+    }
+
+    .ifa-banner__copy {
+      width: 100%;
+    }
+
+    .ifa-banner__eyebrow {
+      font-size: calc(16 * var(--rem));
+    }
+
+    .ifa-banner__heading {
+      font-size: calc(18 * var(--rem));
+    }
+
+    .ifa-banner__description {
+      max-width: calc(320 * var(--rem));
+      font-size: calc(12 * var(--rem));
+    }
+
+    .ifa-banner__button {
+      min-height: calc(22 * var(--rem));
+      padding: calc(16 * var(--rem)) calc(36 * var(--rem));
+      font-size: calc(12 * var(--rem));
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "IFA Exhibition Banner",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image (desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Background image (mobile)",
+      "info": "Optional. Falls back to desktop image when empty."
+    },
+    {
+      "type": "text",
+      "id": "placeholder_label",
+      "label": "Placeholder label",
+      "default": "Banner background image",
+      "info": "Shown when no background image is uploaded."
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Dark overlay opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 35,
+      "info": "Improves text readability over bright images."
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#ff6501"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "RIDE THE FUTURE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "RULE OF INNOVATION"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>AOTOS brings intelligent electric mobility to IFA 2026. Experience the next generation of urban adventure.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Primary button"
+    },
+    {
+      "type": "text",
+      "id": "primary_button_label",
+      "label": "Label",
+      "default": "book a visit"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Secondary button"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_label",
+      "label": "Label",
+      "default": "view products"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "IFA Exhibition Banner"
+    }
+  ]
+}
+{% endschema %}

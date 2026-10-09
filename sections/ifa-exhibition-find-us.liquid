@@ -1,0 +1,678 @@
+<div
+  class="ifa-find-us section-{{ section.id }}"
+  id="IfaFindUs-{{ section.id }}"
+  style="
+    padding-top: calc({{ section.settings.padding_top | default: 80 }} * var(--rem));
+    padding-bottom: calc({{ section.settings.find_us_padding_bottom | default: 80 }} * var(--rem));
+  "
+>
+  <div class="ifa-find-us__shell">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="ifa-find-us__heading">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.description != blank -%}
+      <div class="ifa-find-us__description rte">{{ section.settings.description }}</div>
+    {%- endif -%}
+
+    <div class="ifa-find-us__media">
+      {%- if section.settings.image != blank -%}
+        {{
+          section.settings.image
+          | image_url: width: 2000
+          | image_tag:
+            loading: 'lazy',
+            widths: '750, 1100, 1440, 1920, 2000',
+            sizes: '(min-width: 750px) 1100px, 100vw',
+            class: 'ifa-find-us__media-image',
+            alt: section.settings.image.alt | default: section.settings.heading | escape
+        }}
+      {%- else -%}
+        <div class="ifa-find-us__media-placeholder" aria-hidden="true">
+          <span>{{ section.settings.placeholder_label | default: 'Map illustration' | escape }}</span>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.accent_text != blank -%}
+        <span class="ifa-find-us__accent">{{ section.settings.accent_text | escape }}</span>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{%- if section.settings.show_carousel -%}
+  {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
+  <div
+    class="ifa-ces-carousel"
+    id="IfaCesCarousel-{{ section.id }}"
+    style="
+      padding-top: calc({{ section.settings.carousel_padding_top | default: 80 }} * var(--rem));
+      padding-bottom: calc({{ section.settings.carousel_padding_bottom | default: 80 }} * var(--rem));
+    "
+  >
+    <div class="ifa-ces-carousel__shell">
+      {%- if section.settings.carousel_heading != blank -%}
+        <h2 class="ifa-ces-carousel__heading">{{ section.settings.carousel_heading | escape }}</h2>
+      {%- endif -%}
+    </div>
+
+    <div class="ifa-ces-carousel__viewport">
+      <div
+        class="ifa-ces-carousel__swiper swiper"
+        data-ifa-ces-swiper
+        data-autoplay="{{ section.settings.autoplay | default: true }}"
+        data-autoplay-delay="{{ section.settings.autoplay_delay | default: 4 }}"
+        data-loop="{{ section.settings.loop | default: true }}"
+      >
+        <div class="swiper-wrapper">
+          {%- assign carousel_slide_count = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'carousel_slide' -%}
+              {%- assign carousel_slide_count = carousel_slide_count | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if carousel_slide_count > 0 -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'carousel_slide' -%}
+              <div class="swiper-slide" {{ block.shopify_attributes }}>
+                {%- if block.settings.link != blank -%}
+                  <a href="{{ block.settings.link }}" class="ifa-ces-carousel__card ifa-ces-carousel__card--link">
+                {%- else -%}
+                  <div class="ifa-ces-carousel__card">
+                {%- endif -%}
+                  {%- if block.settings.image != blank -%}
+                    {{
+                      block.settings.image
+                      | image_url: width: 1200
+                      | image_tag:
+                        loading: 'lazy',
+                        widths: '600, 800, 1000, 1200',
+                        sizes: '(min-width: 750px) 32vw, 78vw',
+                        class: 'ifa-ces-carousel__card-image',
+                        alt: block.settings.image.alt | default: block.settings.caption | escape
+                    }}
+                  {%- else -%}
+                    <div class="ifa-ces-carousel__card-placeholder" aria-hidden="true">
+                      <span>{{ block.settings.placeholder_label | default: 'Carousel image' | escape }}</span>
+                    </div>
+                  {%- endif -%}
+                  {%- if block.settings.caption != blank -%}
+                    <span class="ifa-ces-carousel__caption">{{ block.settings.caption | escape }}</span>
+                  {%- endif -%}
+                {%- if block.settings.link != blank -%}
+                  </a>
+                {%- else -%}
+                  </div>
+                {%- endif -%}
+              </div>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- else -%}
+            {%- for i in (1..4) -%}
+              <div class="swiper-slide">
+                <div class="ifa-ces-carousel__card">
+                  <div class="ifa-ces-carousel__card-placeholder" aria-hidden="true">
+                    <span>Carousel image {{ i }}</span>
+                  </div>
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- endif -%}
+          </div>
+        </div>
+      </div>
+
+    <div class="ifa-ces-carousel__shell">
+      <div class="ifa-ces-carousel__pagination swiper-pagination"></div>
+    </div>
+  </div>
+{%- endif -%}
+
+<style>
+  .ifa-find-us {
+    background: #ffffff;
+  }
+
+  .ifa-find-us__shell,
+  .ifa-ces-carousel__shell {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+    padding-inline: calc(40 * var(--rem));
+    box-sizing: border-box;
+  }
+
+  .ifa-find-us__heading {
+    margin: 0 0 calc(24 * var(--rem));
+    color: #111111;
+    font-size: calc(36 * var(--rem));
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .ifa-find-us__description {
+    max-width: calc(760 * var(--rem));
+    margin: 0 auto calc(24 * var(--rem));
+    color: rgba(17, 17, 17, 0.78);
+    font-size: calc(16 * var(--rem));
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  .ifa-find-us__description p {
+    margin: 0;
+  }
+
+  .ifa-find-us__media {
+    position: relative;
+    overflow: hidden;
+    border-radius: calc(16 * var(--rem));
+    background: #ececec;
+  }
+
+  .ifa-find-us__media-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .ifa-find-us__media-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(360 * var(--rem));
+    padding: calc(24 * var(--rem));
+    box-sizing: border-box;
+    color: rgba(17, 17, 17, 0.35);
+    font-size: calc(16 * var(--rem));
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  .ifa-find-us__accent {
+    position: absolute;
+    right: calc(28 * var(--rem));
+    bottom: calc(24 * var(--rem));
+    color: #ff6501;
+    font-size: calc(18 * var(--rem));
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1;
+    transform: rotate(-12deg);
+    pointer-events: none;
+  }
+
+  .ifa-ces-carousel {
+    background: #111111;
+    overflow: hidden;
+    max-width: 100%;
+  }
+
+  .ifa-ces-carousel__heading {
+    margin: 0 0 calc(32 * var(--rem));
+    color: #ffffff;
+    font-size: calc(36 * var(--rem));
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: left;
+  }
+
+  .ifa-ces-carousel__viewport {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    margin-inline: 0;
+  }
+
+  .ifa-ces-carousel__swiper {
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .ifa-ces-carousel__swiper .swiper-slide {
+    width: calc(280 * var(--rem));
+    height: auto;
+    box-sizing: border-box;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+
+  .ifa-ces-carousel__swiper .swiper-slide:not(.swiper-slide-active) {
+    opacity: 0.55;
+    transform: scale(0.94);
+  }
+
+  .ifa-ces-carousel__swiper .swiper-slide-active {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .ifa-ces-carousel__card,
+  .ifa-ces-carousel__card--link {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: calc(16 * var(--rem));
+    background: #2a2a2a;
+    text-decoration: none;
+  }
+
+  .ifa-ces-carousel__card-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .ifa-ces-carousel__card-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 4 / 3;
+    padding: calc(24 * var(--rem));
+    box-sizing: border-box;
+    color: rgba(255, 255, 255, 0.35);
+    font-size: calc(16 * var(--rem));
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  .ifa-ces-carousel__caption {
+    position: absolute;
+    left: calc(16 * var(--rem));
+    right: calc(16 * var(--rem));
+    bottom: calc(16 * var(--rem));
+    color: #ffffff;
+    font-size: calc(14 * var(--rem));
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .ifa-ces-carousel__pagination {
+    position: static;
+    margin-top: calc(24 * var(--rem));
+    text-align: center;
+  }
+
+  .ifa-ces-carousel__pagination .swiper-pagination-bullet {
+    width: calc(8 * var(--rem));
+    height: calc(8 * var(--rem));
+    margin: 0 calc(6 * var(--rem)) !important;
+    background: rgba(255, 255, 255, 0.35);
+    opacity: 1;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+  }
+
+  .ifa-ces-carousel__pagination .swiper-pagination-bullet-active {
+    background: #ff6501;
+    transform: scale(1.15);
+  }
+
+  @media screen and (min-width: 750px) {
+    .ifa-ces-carousel__swiper .swiper-slide {
+      width: calc(320 * var(--rem));
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .ifa-ces-carousel__swiper .swiper-slide {
+      width: calc(340 * var(--rem));
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ifa-find-us {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 48 }} * var(--rem)) !important;
+      padding-bottom: calc({{ section.settings.find_us_padding_bottom_mobile | default: 48 }} * var(--rem)) !important;
+    }
+
+    .ifa-ces-carousel {
+      padding-top: calc({{ section.settings.carousel_padding_top_mobile | default: 48 }} * var(--rem)) !important;
+      padding-bottom: calc({{ section.settings.carousel_padding_bottom_mobile | default: 48 }} * var(--rem)) !important;
+    }
+
+    .ifa-find-us__shell,
+    .ifa-ces-carousel__shell {
+      width: 100%;
+      padding-inline: calc(40 * var(--rem));
+    }
+
+    .ifa-find-us__heading,
+    .ifa-ces-carousel__heading {
+      margin-bottom: calc(20 * var(--rem));
+      font-size: calc(28 * var(--rem));
+    }
+
+    .ifa-find-us__description {
+      font-size: calc(26 * var(--rem));
+    }
+
+    .ifa-find-us__media-placeholder,
+    .ifa-ces-carousel__card-placeholder {
+      font-size: calc(24 * var(--rem));
+    }
+
+    .ifa-find-us__accent {
+      right: calc(20 * var(--rem));
+      bottom: calc(20 * var(--rem));
+      font-size: calc(28 * var(--rem));
+    }
+
+    .ifa-ces-carousel__caption {
+      font-size: calc(22 * var(--rem));
+    }
+  }
+
+  @media screen and (min-width: 750px) and (max-width: 768px) {
+    .ifa-find-us {
+      padding-top: calc(90 * var(--rem)) !important;
+      padding-bottom: calc(90 * var(--rem)) !important;
+    }
+
+    .ifa-ces-carousel {
+      padding-top: calc(90 * var(--rem)) !important;
+      padding-bottom: calc(90 * var(--rem)) !important;
+    }
+
+    .ifa-find-us__shell,
+    .ifa-ces-carousel__shell {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding-inline: calc(34 * var(--rem));
+    }
+
+    .ifa-find-us__heading,
+    .ifa-ces-carousel__heading {
+      font-size: calc(34 * var(--rem));
+    }
+
+    .ifa-find-us__description {
+      font-size: calc(20 * var(--rem));
+    }
+  }
+</style>
+
+{%- if section.settings.show_carousel -%}
+<script>
+(function () {
+  'use strict';
+
+  function initIfaCesCarousel() {
+    var root = document.getElementById('IfaCesCarousel-{{ section.id }}');
+    if (!root) return;
+
+    if (typeof Swiper === 'undefined') {
+      setTimeout(initIfaCesCarousel, 80);
+      return;
+    }
+
+    var swiperEl = root.querySelector('[data-ifa-ces-swiper]');
+    if (!swiperEl) return;
+    if (swiperEl.swiper) swiperEl.swiper.destroy(true, true);
+
+    var slideCount = swiperEl.querySelectorAll('.swiper-slide:not(.swiper-slide-duplicate)').length;
+    if (!slideCount) return;
+
+    var autoplayEnabled = swiperEl.getAttribute('data-autoplay') !== 'false';
+    var autoplayDelay = Number(swiperEl.getAttribute('data-autoplay-delay') || 4) * 1000;
+    var loopSetting = swiperEl.getAttribute('data-loop') !== 'false';
+    var canLoop = loopSetting && slideCount > 1;
+    var canAutoplay = autoplayEnabled && slideCount > 1;
+    var initialSlide = slideCount > 2 ? Math.floor((slideCount - 1) / 2) : 0;
+
+    var swiper = new Swiper(swiperEl, {
+      slidesPerView: 'auto',
+      centeredSlides: true,
+      centerInsufficientSlides: true,
+      slidesPerGroup: 1,
+      spaceBetween: 16,
+      speed: 600,
+      grabCursor: slideCount > 1,
+      slideToClickedSlide: slideCount > 1,
+      watchOverflow: true,
+      observer: true,
+      observeParents: true,
+      loop: canLoop,
+      loopAdditionalSlides: slideCount,
+      loopedSlides: slideCount,
+      initialSlide: initialSlide,
+      autoplay: canAutoplay ? {
+        delay: autoplayDelay,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true
+      } : false,
+      pagination: {
+        el: root.querySelector('.ifa-ces-carousel__pagination'),
+        clickable: true
+      },
+      breakpoints: {
+        750: {
+          spaceBetween: 20
+        },
+        990: {
+          spaceBetween: 24
+        }
+      },
+      on: {
+        init: function (instance) {
+          if (instance.autoplay && canAutoplay) {
+            instance.autoplay.start();
+          }
+        }
+      }
+    });
+
+    root._ifaCesSwiper = swiper;
+  }
+
+  document.addEventListener('DOMContentLoaded', initIfaCesCarousel);
+  document.addEventListener('shopify:section:load', function (event) {
+    if (event.target && event.target.querySelector('#IfaCesCarousel-{{ section.id }}')) {
+      initIfaCesCarousel();
+    }
+  });
+
+  if (document.readyState !== 'loading') {
+    initIfaCesCarousel();
+  }
+})();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "IFA Exhibition Find Us",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "How To Find Us"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "How To Find Us"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_label",
+      "label": "Image placeholder label",
+      "default": "Map illustration"
+    },
+    {
+      "type": "text",
+      "id": "accent_text",
+      "label": "Accent text on image",
+      "info": "Optional decorative text overlay."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top (desktop)",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "find_us_padding_bottom",
+      "label": "Padding bottom (desktop)",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding top (mobile)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "find_us_padding_bottom_mobile",
+      "label": "Padding bottom (mobile)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 48
+    },
+    {
+      "type": "header",
+      "content": "CES Carousel"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_carousel",
+      "label": "Show carousel",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "carousel_heading",
+      "label": "Carousel heading",
+      "default": "Experience Our Tech in CES 2026"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_delay",
+      "label": "Autoplay interval",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "loop",
+      "label": "Loop slides",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "carousel_padding_top",
+      "label": "Carousel padding top (desktop)",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "carousel_padding_bottom",
+      "label": "Carousel padding bottom (desktop)",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "carousel_padding_top_mobile",
+      "label": "Carousel padding top (mobile)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "carousel_padding_bottom_mobile",
+      "label": "Carousel padding bottom (mobile)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "carousel_slide",
+      "name": "Carousel slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "placeholder_label",
+          "label": "Placeholder label",
+          "default": "Carousel image"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "IFA Exhibition Find Us",
+      "blocks": [
+        { "type": "carousel_slide" },
+        { "type": "carousel_slide" },
+        { "type": "carousel_slide" },
+        { "type": "carousel_slide" }
+      ]
+    }
+  ]
+}
+{% endschema %}

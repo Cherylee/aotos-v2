@@ -1,0 +1,563 @@
+<section
+  class="ifa-series section-{{ section.id }}"
+  id="IfaSeries-{{ section.id }}"
+  style="
+    --ifa-series-accent: {{ section.settings.accent_color | default: '#ff6501' }};
+    padding-top: calc({{ section.settings.padding_top | default: 80 }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80 }} * var(--rem));
+  "
+>
+  <div class="ifa-series__shell">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="ifa-series__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="ifa-series__rows">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign layout = block.settings.layout
+          if layout == 'alternate'
+            assign row_mod = forloop.index | modulo: 2
+            if row_mod == 1
+              assign layout = 'text_left'
+            else
+              assign layout = 'text_right'
+            endif
+          endif
+          assign card_theme = block.settings.card_theme | default: 'light'
+        -%}
+        <div
+          class="ifa-series__row ifa-series__row--{{ layout }}"
+          {{ block.shopify_attributes }}
+        >
+          <div class="ifa-series__card ifa-series__card--{{ card_theme }}">
+            {%- if block.settings.eyebrow != blank -%}
+              <p class="ifa-series__eyebrow">{{ block.settings.eyebrow }}</p>
+            {%- endif -%}
+            {%- if block.settings.title != blank -%}
+              <h3 class="ifa-series__title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.description != blank -%}
+              <div class="ifa-series__description rte">{{ block.settings.description }}</div>
+            {%- endif -%}
+            {%- if block.settings.button_label != blank -%}
+              {%- liquid
+                assign series_btn_href = block.settings.button_link
+                assign series_btn_is_subscribe = false
+                if series_btn_href != blank and series_btn_href contains 'ifa-berlin-2026-subscribe'
+                  assign series_btn_is_subscribe = true
+                endif
+              -%}
+              <a
+                {% if series_btn_href != blank %}
+                  href="{{ series_btn_href }}"
+                {% else %}
+                  role="link" aria-disabled="true"
+                {% endif %}
+                class="ifa-series__button ifa-series__button--{{ block.settings.button_style | default: 'solid' }} ifa-series__button--on-{{ card_theme }}"
+                {% if series_btn_is_subscribe %}data-ifa-scroll-center="ifa-berlin-2026-subscribe"{% endif %}
+              >
+                {{ block.settings.button_label }}
+              </a>
+            {%- endif -%}
+          </div>
+
+          <div class="ifa-series__media">
+            {%- if block.settings.image != blank -%}
+              {{
+                block.settings.image
+                | image_url: width: 1200
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '600, 800, 1000, 1200',
+                  sizes: '(min-width: 750px) 50vw, 100vw',
+                  class: 'ifa-series__media-image',
+                  alt: block.settings.image.alt | default: block.settings.title 
+              }}
+            {%- else -%}
+              <div class="ifa-series__media-placeholder" aria-hidden="true">
+                <span>{{ block.settings.placeholder_label | default: 'Product image' }}</span>
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.disclaimer != blank -%}
+      <p class="ifa-series__disclaimer">{{ section.settings.disclaimer }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  .ifa-series {
+    background: #f5f5f5;
+  }
+
+  .ifa-series__shell {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+    padding-inline: calc(40 * var(--rem));
+    box-sizing: border-box;
+  }
+
+  .ifa-series__heading {
+    margin: 0 0 calc(32 * var(--rem));
+    color: #111111;
+    font-size: calc(36 * var(--rem));
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .ifa-series__rows {
+    display: flex;
+    flex-direction: column;
+    gap: calc(24 * var(--rem));
+  }
+
+  .ifa-series__row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: calc(24 * var(--rem));
+    align-items: stretch;
+  }
+
+  .ifa-series__row--text_right .ifa-series__card {
+    order: 2;
+  }
+
+  .ifa-series__row--text_right .ifa-series__media {
+    order: 1;
+  }
+
+  .ifa-series__card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(360 * var(--rem));
+    padding: calc(40 * var(--rem));
+    box-sizing: border-box;
+    border-radius: calc(16 * var(--rem));
+  }
+
+  .ifa-series__card--light {
+    background: #ffffff;
+    color: #111111;
+  }
+
+  .ifa-series__card--dark {
+    background: #1a1a1a;
+    color: #ffffff;
+  }
+
+  .ifa-series__eyebrow {
+    margin: 0 0 calc(12 * var(--rem));
+    color: var(--ifa-series-accent, #ff6501);
+    font-size: calc(12 * var(--rem));
+    font-weight: 600;
+    letter-spacing: calc(1.2 * var(--rem));
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .ifa-series__title {
+    margin: 0 0 calc(20 * var(--rem));
+    font-size: calc(32 * var(--rem));
+    font-weight: 700;
+    line-height: 1.15;
+    color: #111111;
+  }
+  .ifa-series__card--dark .ifa-series__title {
+    color: #ffffff;
+  }
+
+  .ifa-series__description {
+    margin: 0;
+    font-size: calc(14 * var(--rem));
+    line-height: 1.7;
+  }
+
+  .ifa-series__card--light .ifa-series__description {
+    color: rgba(17, 17, 17, 0.78);
+  }
+
+  .ifa-series__card--dark .ifa-series__description {
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .ifa-series__description ul {
+    margin: 0;
+    padding-left: calc(0 * var(--rem));
+  }
+
+  .ifa-series__description li + li {
+    margin-top: calc(8 * var(--rem));
+  }
+
+  .ifa-series__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+    min-height: calc(40 * var(--rem));
+    margin-top: calc(28 * var(--rem));
+    padding: calc(10 * var(--rem)) calc(24 * var(--rem));
+    border-radius: calc(999 * var(--rem));
+    font-size: calc(14 * var(--rem));
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 150ms ease, background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+  }
+
+  .ifa-series__button--solid.ifa-series__button--on-light {
+    background: #111111;
+    color: #ffffff;
+    border: 1px solid #111111;
+  }
+
+  .ifa-series__button--solid.ifa-series__button--on-dark {
+    background: #ffffff;
+    color: #111111;
+    border: 1px solid #ffffff;
+  }
+
+  .ifa-series__button--outline {
+    background: transparent;
+    color: var(--ifa-series-accent, #ff6501);
+    border: 1px solid var(--ifa-series-accent, #ff6501);
+  }
+
+  .ifa-series__media {
+    overflow: hidden;
+    border-radius: calc(16 * var(--rem));
+    background: #e8e8e8;
+  }
+
+  .ifa-series__media-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: calc(360 * var(--rem));
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .ifa-series__media-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(360 * var(--rem));
+    padding: calc(24 * var(--rem));
+    box-sizing: border-box;
+    color: rgba(17, 17, 17, 0.35);
+    font-size: calc(16 * var(--rem));
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  .ifa-series__disclaimer {
+    margin: calc(32 * var(--rem)) 0 0;
+    color: rgba(17, 17, 17, 0.45);
+    font-size: calc(12 * var(--rem));
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  @media (hover: hover) {
+    .ifa-series__button:hover {
+      opacity: 0.88;
+      text-decoration: none;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ifa-series {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 48 }} * var(--rem)) !important;
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 48 }} * var(--rem)) !important;
+    }
+
+    .ifa-series__shell {
+      width: 100%;
+      padding-inline: calc(40 * var(--rem));
+    }
+
+    .ifa-series__heading {
+      margin-bottom: calc(20 * var(--rem));
+      font-size: calc(28 * var(--rem));
+    }
+
+    .ifa-series__rows {
+      gap: calc(20 * var(--rem));
+    }
+
+    .ifa-series__row {
+      grid-template-columns: 1fr;
+      gap: calc(16 * var(--rem));
+      {% comment %} border: 1px solid #e8e8e8; {% endcomment %}
+      border-radius: calc(20 * var(--rem));
+      overflow: hidden;
+      background: #ffffff;
+    }
+    .ifa-series__row--text_right{
+      background: #1a1a1a;
+    }
+    .ifa-series__row--text_right .ifa-series__card,
+    .ifa-series__row--text_right .ifa-series__media {
+      order: unset;
+      border-radius: 0;
+    }
+
+    .ifa-series__card {
+      min-height: 0;
+      padding: calc(32 * var(--rem));
+      border-radius: 0;
+    }
+    .ifa-series__media {
+      border-radius: 0;
+    }
+
+    .ifa-series__eyebrow {
+      font-size: calc(20 * var(--rem));
+    }
+
+    .ifa-series__title {
+      font-size: calc(36 * var(--rem));
+    }
+
+    .ifa-series__description {
+      font-size: calc(24 * var(--rem));
+    }
+
+    .ifa-series__button {
+      min-height: calc(64 * var(--rem));
+      margin-top: calc(24 * var(--rem));
+      padding: calc(14 * var(--rem)) calc(32 * var(--rem));
+      font-size: calc(24 * var(--rem));
+    }
+
+    .ifa-series__media-image,
+    .ifa-series__media-placeholder {
+      min-height: calc(280 * var(--rem));
+    }
+
+    .ifa-series__media-placeholder {
+      font-size: calc(24 * var(--rem));
+    }
+
+    .ifa-series__disclaimer {
+      margin-top: calc(24 * var(--rem));
+      font-size: calc(20 * var(--rem));
+    }
+  }
+
+  @media screen and (min-width: 750px) and (max-width: 768px) {
+    .ifa-series {
+      padding-top: calc(90 * var(--rem)) !important;
+      padding-bottom: calc(90 * var(--rem)) !important;
+    }
+
+    .ifa-series__shell {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding-inline: calc(34 * var(--rem));
+    }
+
+    .ifa-series__heading {
+      font-size: calc(34 * var(--rem));
+      margin-bottom: calc(38 * var(--rem));
+    }
+
+    .ifa-series__title {
+      font-size: calc(16 * var(--rem));
+    }
+
+    .ifa-series__description {
+      font-size: calc(12 * var(--rem));
+    }
+
+    .ifa-series__button {
+      font-size: calc(12 * var(--rem));
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "IFA Exhibition Series",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading",
+      "default": "E-Bike Series"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#ff6501"
+    },
+    {
+      "type": "text",
+      "id": "disclaimer",
+      "label": "Disclaimer",
+      "default": "*Product availability and spec are subjected to regional differences."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top (desktop)",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom (desktop)",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding top (mobile)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding bottom (mobile)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Series item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "layout",
+          "label": "Layout",
+          "default": "alternate",
+          "options": [
+            { "value": "alternate", "label": "Auto alternate" },
+            { "value": "text_left", "label": "Text left, image right" },
+            { "value": "text_right", "label": "Image left, text right" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "card_theme",
+          "label": "Text card theme",
+          "default": "light",
+          "options": [
+            { "value": "light", "label": "Light" },
+            { "value": "dark", "label": "Dark" }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "placeholder_label",
+          "label": "Image placeholder label",
+          "default": "Product image"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": "FLUX X26 SERIES"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "The Next Generation of Riding"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<ul><li>High-Performance Powertrain for Maximum Efficiency</li><li>100Nm High-Torque for Effortless Climbing</li><li>Up to 80km Range with Smart Battery Management</li><li>Dual Hydraulic Brakes for All-Weather Safety</li></ul>"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Learn More"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "default": "solid",
+          "options": [
+            { "value": "solid", "label": "Solid" },
+            { "value": "outline", "label": "Outline" }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "IFA Exhibition Series",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "layout": "text_left",
+            "card_theme": "light",
+            "placeholder_label": "Flux X26 product image",
+            "eyebrow": "FLUX X26 SERIES",
+            "title": "The Next Generation of Riding",
+            "button_label": "Learn More",
+            "button_style": "solid"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "layout": "text_right",
+            "card_theme": "dark",
+            "placeholder_label": "Flux T28 product image",
+            "eyebrow": "FLUX T28 SERIES",
+            "title": "Turn the City On",
+            "description": "<ul><li>Compact Urban Design for Daily Commutes</li><li>750W Motor with Smart Assist Modes</li><li>Integrated Lighting for Night Safety</li><li>Foldable Frame for Easy Storage</li></ul>",
+            "button_label": "Coming Soon",
+            "button_style": "outline"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

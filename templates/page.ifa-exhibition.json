@@ -1,0 +1,224 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-5",
+        "heading_size": "h1",
+        "padding_top": 32,
+        "padding_bottom": 60
+      }
+    },
+    "ifa_banner": {
+      "type": "ifa-exhibition-banner",
+      "settings": {
+        "image": "shopify://shop_images/1_b0067a5a-9e31-4c6e-b8f8-66f605ce870c.jpg",
+        "image_mobile": "shopify://shop_images/2_4a77e23a-5772-4cd5-84aa-5393e0ec550e.jpg",
+        "placeholder_label": "Banner background image",
+        "overlay_opacity": 0,
+        "accent_color": "#ff6501",
+        "eyebrow": "Ride the Future",
+        "heading": "AOTOS | IFA",
+        "description": "<p>Booth CCBB-113<br/>4 Sep. 2026 - 8 Sep. 2026<br/>Messe Berlin</p>",
+        "primary_button_label": "",
+        "primary_button_link": "",
+        "secondary_button_label": "",
+        "secondary_button_link": ""
+      }
+    },
+    "ifa_schedule": {
+      "type": "ifa-exhibition-schedule",
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "activity": "Media Day (ShowStoppers)",
+            "time": "3 Sep. 2026 18:00-21:00",
+            "location": "Hall 5.3, Messe Berlin"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "activity": "AOTOS IFA Booth Display",
+            "time": "4 Sep. 2026 - 8 Sep. 2026",
+            "location": "#113, Hall CCBB, Messe Berlin"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "activity": "AOTOS Test Ride",
+            "time": "4 Sep. 2026 - 8 Sep. 2026",
+            "location": "#MT-103, In front of City Cube"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3"
+      ],
+      "settings": {
+        "heading": "Activity Time Site",
+        "column_activity": "Activity",
+        "column_time": "Tme",
+        "column_location": "Site",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "ifa_series": {
+      "type": "ifa-exhibition-series",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "layout": "text_left",
+            "card_theme": "light",
+            "image": "shopify://shop_images/5_9d226c53-76a6-4a54-9688-3791703bd2d4.jpg",
+            "placeholder_label": "Flux X26 product image",
+            "eyebrow": "FLUX X26 SERIES",
+            "title": "The Next Generation of Riding",
+            "description": "<ul><li><strong>High-Performance Powertrain</strong><br/>750W rated output with up to 2000W peak power.</li><li><strong>100Nm High-Torque Drive System</strong><br/>Delivers dynamic acceleration for confident urban riding.</li><li><strong>1008Wh Removable Battery</strong><br/>Provides up to 70 miles of real-world range.</li><li><strong>Integrated Smart Cockpit</strong><br/>Features a TFT display, navigation, and connected security.</li></ul>",
+            "button_label": "Learn More",
+            "button_link": "shopify://products/flux-x26-pro",
+            "button_style": "solid"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "layout": "text_right",
+            "card_theme": "dark",
+            "image": "shopify://shop_images/6_98feb185-4c12-4dbe-8a6b-e45f38eecb2d.jpg",
+            "placeholder_label": "Flux T26 product image",
+            "eyebrow": "FLUX T26 SERIES",
+            "title": "Turn the City On",
+            "description": "<ul><li><strong>Futuristic Moto-Inspired Design</strong><br/>Features a hidden battery for a clean, streamlined look.</li><li><strong>20×4 Fat Tires & Hydraulic Disc Brakes</strong><br/>Deliver confident control and superior stopping power.</li><li><strong>Keyless Access</strong><br/>Unlock with proximity sensing, NFC, or passcode.</li><li><strong>AOTOS App</strong><br/>Includes navigation, ride data tracking, and smart vehicle management.</li></ul>",
+            "button_label": "Subscribe",
+            "button_link": "#ifa-berlin-2026-subscribe",
+            "button_style": "outline"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2"
+      ],
+      "settings": {
+        "heading": "E-Bike Series",
+        "accent_color": "#ff6501",
+        "disclaimer": "*Product availability and spec are subjected to regional differences.",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "ifa_find_us": {
+      "type": "ifa-exhibition-find-us",
+      "blocks": {
+        "slide_1": {
+          "type": "carousel_slide",
+          "settings": {
+            "placeholder_label": "CES image 1",
+            "caption": "",
+            "link": ""
+          }
+        },
+        "slide_2": {
+          "type": "carousel_slide",
+          "settings": {
+            "placeholder_label": "CES image 2",
+            "caption": "",
+            "link": ""
+          }
+        },
+        "slide_3": {
+          "type": "carousel_slide",
+          "settings": {
+            "placeholder_label": "CES image 3",
+            "caption": "",
+            "link": ""
+          }
+        },
+        "slide_4": {
+          "type": "carousel_slide",
+          "settings": {
+            "placeholder_label": "CES image 4",
+            "caption": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_1",
+        "slide_2",
+        "slide_3",
+        "slide_4"
+      ],
+      "settings": {
+        "heading": "How To Find Us",
+        "description": "",
+        "image": "shopify://shop_images/7_55c61993-8c22-4f39-8e28-209b9b282edb.jpg",
+        "placeholder_label": "Map illustration",
+        "accent_text": "",
+        "padding_top": 80,
+        "find_us_padding_bottom": 80,
+        "padding_top_mobile": 48,
+        "find_us_padding_bottom_mobile": 48,
+        "show_carousel": false,
+        "carousel_heading": "Explore AOTOS latest E-Bike at IFA 2026",
+        "autoplay": true,
+        "autoplay_delay": 4,
+        "loop": true,
+        "carousel_padding_top": 80,
+        "carousel_padding_bottom": 80,
+        "carousel_padding_top_mobile": 48,
+        "carousel_padding_bottom_mobile": 48
+      }
+    },
+    "ifa_subscribe": {
+      "type": "ifa-exhibition-subscribe",
+      "settings": {
+        "heading": "Contact Us for Details or to Book Your Booth Visit",
+        "contact_role": "PR Manager:",
+        "contact_name": "Osmond Ye",
+        "contact_email": "media@aotos.com",
+        "email_placeholder": "Enter your email",
+        "button_label": "Subscribe",
+        "footer_note": "Get the latest news and event updates from AOTOS.",
+        "success_message": "Thanks for subscribing!",
+        "newsletter_tag": "ifa subscribe",
+        "return_to": "",
+        "accent_color": "#ff6501",
+        "background_color": "#111111",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ifa_banner",
+    "ifa_schedule",
+    "ifa_series",
+    "ifa_find_us",
+    "ifa_subscribe"
+  ]
+}
