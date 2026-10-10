@@ -24,6 +24,10 @@
             "review_text": "reviews"
           }
         },
+        "judge_me_reviews_preview_badge_CjPMDe": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
         "text": {
           "type": "text",
           "settings": {
@@ -141,6 +145,7 @@
       "block_order": [
         "title",
         "rating",
+        "judge_me_reviews_preview_badge_CjPMDe",
         "text",
         "price",
         "paypal_messaging",
@@ -1049,7 +1054,7 @@
         "image_position": "right center",
         "fallback_asset": "service-repair-banner.png",
         "accent_color": "#ff6501",
-        "background_color": "#FFFFFF",
+        "background_color": "#ffffff",
         "padding_top": 80,
         "padding_bottom": 80,
         "padding_top_mobile": 88,
@@ -1160,22 +1165,18 @@
     "reviews": {
       "type": "apps",
       "blocks": {
-        "loox_reviews": {
-          "type": "shopify://apps/loox-reviews/blocks/loox-dynamic-section/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
+        "judge_me_reviews_review_widget_jedQtp": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
-            "reviews_to_display": "product_reviews_only",
-            "default_tab": "automatic",
-            "only_photos": false,
-            "aggregated": false,
-            "limit": 20,
-            "hide_thumbnails": false,
-            "maxwidth": 1080,
-            "is_sample": false
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
           }
         }
       },
       "block_order": [
-        "loox_reviews"
+        "judge_me_reviews_review_widget_jedQtp"
       ],
       "settings": {
         "include_margins": true
