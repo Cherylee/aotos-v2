@@ -18,6 +18,7 @@
         },
         "rating": {
           "type": "rating",
+          "disabled": true,
           "settings": {
             "rating": 5,
             "review_count": 86,
