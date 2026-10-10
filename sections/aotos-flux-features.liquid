@@ -1,5 +1,4 @@
-{{ 'aotos-flux-below.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'aotos-flux-below.js' | asset_url }}" defer="defer"></script>
+{% render 'aotos-flux-below-assets', with_js: true %}
 
 <flux-features
   class="fxb fxb-features"
@@ -20,7 +19,7 @@
                   {%- assign poster_h = 800 | divided_by: poster.aspect_ratio | round -%}
                   <img src="{{ poster | image_url: width: 800 }}" srcset="{{ poster | image_url: width: 480 }} 480w, {{ poster | image_url: width: 800 }} 800w, {{ poster | image_url: width: 1200 }} 1200w" sizes="(max-width: 768px) 92vw, 560px" width="800" height="{{ poster_h }}" alt="{{ block.settings.heading | escape }}" loading="lazy">
                 {%- endif -%}
-                {{ block.settings.video | video_tag: autoplay: false, loop: true, muted: true, controls: false, playsinline: true, preload: 'none', image_size: '800x' }}
+                {{ block.settings.video | video_tag: autoplay: false, loop: true, muted: true, controls: false, playsinline: true, preload: 'none' }}
               {%- elsif block.settings.image != blank -%}
                 {%- assign img_h = 800 | divided_by: block.settings.image.aspect_ratio | round -%}
                 <img src="{{ block.settings.image | image_url: width: 800 }}" srcset="{{ block.settings.image | image_url: width: 480 }} 480w, {{ block.settings.image | image_url: width: 800 }} 800w" sizes="(max-width: 768px) 92vw, 560px" width="800" height="{{ img_h }}" alt="{{ block.settings.heading | escape }}" loading="lazy">

@@ -1,5 +1,4 @@
-{{ 'aotos-flux-below.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'aotos-flux-below.js' | asset_url }}" defer="defer"></script>
+{% render 'aotos-flux-below-assets', with_js: true %}
 
 <flux-tabs class="fxb fxb-experts-wrap" style="--fxb-bg: {{ section.settings.bg_color }}; --fxb-color: #fff; --fxb-pt: {{ section.settings.padding_top | default: 80, allow_false: true }}; --fxb-pb: {{ section.settings.padding_bottom | default: 80, allow_false: true }}; --fxb-pt-m: {{ section.settings.padding_top_mobile | default: 88, allow_false: true }}; --fxb-pb-m: {{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }};">
   <flux-experts class="fxb-shell fxb-experts">
@@ -71,7 +70,7 @@
                   <img src="{{ cover | image_url: width: 420 }}" srcset="{{ cover | image_url: width: 280 }} 280w, {{ cover | image_url: width: 420 }} 420w, {{ cover | image_url: width: 640 }} 640w" sizes="(max-width: 768px) 46vw, 260px" width="420" height="{{ cover_h }}" alt="" loading="lazy">
                 {%- endif -%}
                 {%- if block.settings.video != blank -%}
-                  {{ block.settings.video | video_tag: playsinline: true, preload: 'none', controls: false, image_size: '640x' }}
+                  {{ block.settings.video | video_tag: playsinline: true, preload: 'none', controls: false }}
                   <button type="button" class="fxb-experts__play" data-fxb-video aria-label="Play">
                     <svg viewBox="0 0 68 48" aria-hidden="true">
                       <path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74.13 13.06 0 24 0 24s.13 10.94 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.87 34.94 68 24 68 24s-.13-10.94-1.48-16.26z" fill="#ff0000"></path>

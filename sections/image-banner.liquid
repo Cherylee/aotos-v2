@@ -20,6 +20,12 @@
   if poster_mob == blank
     assign poster_mob = poster_pc
   endif
+  assign banner_defer_video = false
+  if section.index > 1
+    if banner_video != blank or banner_video_mob != blank
+      assign banner_defer_video = true
+    endif
+  endif
 -%}
 
 {%- if section.settings.image_height == 'adapt' and poster_pc != blank -%}
@@ -100,6 +106,16 @@
     display: none;
   }
 
+  {%- if banner_defer_video -%}
+    #Banner-{{ section.id }} .banner__poster {
+      z-index: 2;
+    }
+
+    #Banner-{{ section.id }}.is-video-ready .banner__poster {
+      visibility: hidden;
+    }
+  {%- endif -%}
+
   @media screen and (max-width: 749px) {
     #Banner-{{ section.id }} .banner__video--pc {
       display: none;
@@ -153,10 +169,18 @@
       {%- endif -%}
       {%- if banner_video != blank -%}
         {%- capture banner_video_class -%}banner__video{% if banner_video_mob != blank %} banner__video--pc{% endif %}{%- endcapture -%}
-        {{ banner_video | video_tag: class: banner_video_class, autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata' }}
+        {%- if banner_defer_video -%}
+          {{ banner_video | video_tag: class: banner_video_class, autoplay: false, loop: true, muted: true, controls: false, playsinline: true, preload: 'none' }}
+        {%- else -%}
+          {{ banner_video | video_tag: class: banner_video_class, autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata' }}
+        {%- endif -%}
       {%- endif -%}
       {%- if banner_video_mob != blank -%}
-        {{ banner_video_mob | video_tag: class: 'banner__video banner__video--mobile', autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata' }}
+        {%- if banner_defer_video -%}
+          {{ banner_video_mob | video_tag: class: 'banner__video banner__video--mobile', autoplay: false, loop: true, muted: true, controls: false, playsinline: true, preload: 'none' }}
+        {%- else -%}
+          {{ banner_video_mob | video_tag: class: 'banner__video banner__video--mobile', autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata' }}
+        {%- endif -%}
       {%- endif -%}
     {%- elsif banner_img_pc != blank -%}
       {%- assign pc_tag_h = 1600 | divided_by: banner_img_pc.aspect_ratio | round -%}
@@ -218,6 +242,49 @@
       }
     }
   {%- endstyle -%}
+{%- endif -%}
+
+{%- if banner_defer_video -%}
+  <script>
+    (function () {
+      var root = document.getElementById('Banner-{{ section.id }}');
+      if (!root) return;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var videos = root.querySelectorAll('video');
+      if (!videos.length || reduce) return;
+
+      var visible = function (video) {
+        return window.getComputedStyle(video).display !== 'none';
+      };
+
+      var sync = function (video, on) {
+        if (!on || !visible(video)) {
+          video.pause();
+          return;
+        }
+        video.preload = 'auto';
+        var play = video.play();
+        if (play && play.then) {
+          play.then(function () {
+            root.classList.add('is-video-ready');
+          }).catch(function () {});
+        }
+      };
+
+      if (!('IntersectionObserver' in window)) {
+        videos.forEach(function (video) { sync(video, true); });
+        return;
+      }
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          sync(entry.target, entry.isIntersecting);
+        });
+      }, { threshold: 0.15 });
+
+      videos.forEach(function (video) { io.observe(video); });
+    })();
+  </script>
 {%- endif -%}
 
 {% schema %}

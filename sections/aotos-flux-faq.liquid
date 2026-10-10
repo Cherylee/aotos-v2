@@ -1,5 +1,4 @@
-{{ 'aotos-flux-below.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'aotos-flux-below.js' | asset_url }}" defer="defer"></script>
+{% render 'aotos-flux-below-assets', with_js: true %}
 
 <section class="fxb fxb-faq" style="--fxb-bg: #fff; --fxb-pt: {{ section.settings.padding_top | default: 80, allow_false: true }}; --fxb-pb: {{ section.settings.padding_bottom | default: 80, allow_false: true }}; --fxb-pt-m: {{ section.settings.padding_top_mobile | default: 88, allow_false: true }}; --fxb-pb-m: {{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }};">
   <div class="fxb-shell">

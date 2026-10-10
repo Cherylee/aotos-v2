@@ -1,0 +1,6 @@
+{%- if once or request.design_mode -%}
+  {{ 'aotos-flux-below.css' | asset_url | stylesheet_tag }}
+  {%- if with_js -%}
+    <script src="{{ 'aotos-flux-below.js' | asset_url }}" defer="defer"></script>
+  {%- endif -%}
+{%- endif -%}

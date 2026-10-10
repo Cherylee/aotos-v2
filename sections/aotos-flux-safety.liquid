@@ -1,5 +1,4 @@
-{{ 'aotos-flux-below.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'aotos-flux-below.js' | asset_url }}" defer="defer"></script>
+{% render 'aotos-flux-below-assets', with_js: true %}
 
 {%- liquid
   assign bg = section.settings.background_image

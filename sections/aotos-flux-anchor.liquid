@@ -1,5 +1,4 @@
-{{ 'aotos-flux-below.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'aotos-flux-below.js' | asset_url }}" defer="defer"></script>
+{% render 'aotos-flux-below-assets', once: true, with_js: true %}
 
 <div class="fxb-anchor-sentinel" aria-hidden="true">&#8203;</div>
 <div class="fxb-anchor-section" style="--fxb-bg: {{ section.settings.background_color }};">
