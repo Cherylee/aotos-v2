@@ -889,6 +889,10 @@
         "box_tab_1": "FLUX X26 Pro",
         "box_tab_2": "FLUX X26",
         "card_background": "#1a1a1a",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88,
         "grid_columns": "2"
       }
     },
@@ -898,7 +902,11 @@
         "title": "Playful by choice. Predictable by design.",
         "description": "The FLUX X26 brings excitement without the guesswork. Smooth acceleration, stable handling, and responsive power work together to keep every ride fun, confident, and in control.",
         "image": "shopify://shop_images/flux26_slide4.jpg",
-        "bg_color": "#1a1a1a"
+        "bg_color": "#1a1a1a",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
       }
     },
     "flux_experts": {
@@ -1025,7 +1033,11 @@
       ],
       "settings": {
         "title": "Hear from the Experts",
-        "bg_color": "#000000"
+        "bg_color": "#000000",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
       }
     },
     "service_repair_banner_r44PMj": {
@@ -1124,7 +1136,11 @@
       ],
       "name": "Support FAQ",
       "settings": {
-        "faq_title": "Frequently Asked Questions"
+        "faq_title": "Frequently Asked Questions",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
       }
     },
     "flux_safety": {
@@ -1161,6 +1177,9 @@
       "name": "Flux FAQ",
       "settings": {
         "faq_title": "Customer Reviews",
+        "padding_top": 80,
+        "padding_bottom": 0,
+        "padding_top_mobile": 88,
         "padding_bottom_mobile": 0
       }
     },
