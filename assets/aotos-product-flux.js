@@ -502,6 +502,30 @@ document.addEventListener('change', (event) => {
       if (span) span.textContent = window.variantStrings ? window.variantStrings.soldOut : 'Sold out';
     }
   });
+  document.querySelectorAll('[data-flux-buybar]').forEach((bar) => {
+    const price = bar.querySelector('[data-flux-buybar-price]');
+    if (price) price.textContent = variant.price_formatted;
+    const compare = bar.querySelector('[data-flux-buybar-compare]');
+    const barOnSale = variant.compare_at_price > variant.price;
+    if (compare) compare.textContent = barOnSale ? variant.compare_at_price_formatted : '';
+    const barProduct = bar.querySelector('.aotos-flux-buybar__product');
+    if (barProduct) barProduct.classList.toggle('is-sale', barOnSale);
+    const img = bar.querySelector('[data-flux-buybar-img]');
+    if (img && variant.featured_image && variant.featured_image.src) {
+      img.src = variant.featured_image.src;
+      img.srcset = `${variant.featured_image.src} 640w`;
+    }
+    const atc = bar.querySelector('[data-flux-buybar-atc]');
+    const buy = bar.querySelector('[data-flux-buybar-buy]');
+    const label = variant.available
+      ? (window.variantStrings ? window.variantStrings.addToCart : 'Add to cart')
+      : (window.variantStrings ? window.variantStrings.soldOut : 'Sold out');
+    if (atc) {
+      atc.disabled = !variant.available;
+      atc.textContent = label;
+    }
+    if (buy) buy.disabled = !variant.available;
+  });
   document.querySelectorAll('product-form input.product-variant-id, product-form input[name="id"]').forEach((input) => {
     input.value = variant.id;
     input.dispatchEvent(new Event('change', { bubbles: true }));
@@ -673,4 +697,47 @@ document.querySelectorAll('.product-rating').forEach((root) => {
   };
   const observer = new MutationObserver(reveal);
   if (!reveal()) observer.observe(badge, { childList: true, subtree: true, characterData: true });
+});
+
+document.querySelectorAll('[data-flux-buybar]').forEach((bar) => {
+  const watch = document.getElementById(bar.getAttribute('data-watch'));
+  const atc = bar.querySelector('[data-flux-buybar-atc]');
+  const buy = bar.querySelector('[data-flux-buybar-buy]');
+  if (!watch || !atc || !buy) return;
+  const setVisible = (show) => {
+    bar.classList.toggle('is-visible', show);
+    bar.setAttribute('aria-hidden', show ? 'false' : 'true');
+  };
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => setVisible(!entry.isIntersecting));
+    }, { threshold: 0 });
+    io.observe(watch);
+  }
+  atc.addEventListener('click', () => {
+    if (!atc.disabled) watch.click();
+  });
+  buy.addEventListener('click', () => {
+    const form = watch.closest('form');
+    if (!form || buy.disabled || watch.disabled) return;
+    buy.disabled = true;
+    const config = {
+      method: 'POST',
+      headers: { 'X-Requested-With': 'XMLHttpRequest', Accept: 'application/javascript' },
+      body: new FormData(form)
+    };
+    const addUrl = (window.routes && window.routes.cart_add_url) || '/cart/add';
+    fetch(addUrl, config)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data && data.status) {
+          buy.disabled = false;
+          return;
+        }
+        window.location.href = bar.getAttribute('data-checkout') || '/checkout';
+      })
+      .catch(() => {
+        buy.disabled = false;
+      });
+  });
 });

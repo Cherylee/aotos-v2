@@ -298,6 +298,46 @@
       {%- endfor -%}
     </div>
   </div>
+
+  {%- liquid
+    assign bar_image = current_variant.featured_image | default: product.featured_image
+    assign bar_sale = false
+    if current_variant.compare_at_price > current_variant.price
+      assign bar_sale = true
+    endif
+  -%}
+  <div class="aotos-flux-buybar" data-flux-buybar data-watch="ProductSubmitButton-{{ section.id }}" data-checkout="{{ routes.root_url }}checkout" aria-hidden="true">
+    <div class="aotos-flux-buybar__product{% if bar_sale %} is-sale{% endif %}">
+      {%- if bar_image != blank -%}
+        <img
+          class="aotos-flux-buybar__img"
+          data-flux-buybar-img
+          src="{{ bar_image | image_url: width: 240 }}"
+          srcset="{{ bar_image | image_url: width: 160 }} 160w, {{ bar_image | image_url: width: 240 }} 240w, {{ bar_image | image_url: width: 360 }} 360w"
+          sizes="(max-width: 768px) 10vw, 4vw"
+          width="240"
+          height="{{ 240 | divided_by: bar_image.aspect_ratio | round }}"
+          alt=""
+        >
+      {%- endif -%}
+      <span class="aotos-flux-buybar__prices">
+        <span class="aotos-flux-buybar__price" data-flux-buybar-price>{{ current_variant.price | money }}</span>
+        <s class="aotos-flux-buybar__compare" data-flux-buybar-compare>{% if bar_sale %}{{ current_variant.compare_at_price | money }}{% endif %}</s>
+      </span>
+    </div>
+    <div class="aotos-flux-buybar__actions">
+      <button type="button" class="aotos-flux-buybar__atc" data-flux-buybar-atc {% if current_variant.available == false %}disabled{% endif %}>
+        {%- if current_variant.available -%}
+          {{ 'products.product.add_to_cart' | t }}
+        {%- else -%}
+          {{ 'products.product.sold_out' | t }}
+        {%- endif -%}
+      </button>
+      <button type="button" class="aotos-flux-buybar__buy" data-flux-buybar-buy {% if current_variant.available == false %}disabled{% endif %}>
+        {{ 'products.product.buy_now' | t }}
+      </button>
+    </div>
+  </div>
 </product-info>
 
 {% schema %}

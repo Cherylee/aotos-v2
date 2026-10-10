@@ -241,7 +241,7 @@
                 endif
               endif
               if featured_image_object != blank
-                assign featured_image_url = featured_image_object | image_url: width: 400
+                assign featured_image_url = featured_image_object | image_url: width: 640
               endif
               assign v_desc = variant.metafields.custom.variant_description | default: 'Premium performance and range.'
             -%}
@@ -250,8 +250,8 @@
               "title": {{ variant.title | json }},
               "featured_image": {
                 "src": {{ featured_image_url | json }},
-                "width": 400,
-                "height": {% if featured_image_object != blank %}{{ 400 | divided_by: featured_image_object.aspect_ratio | round }}{% else %}400{% endif %}
+                "width": 640,
+                "height": {% if featured_image_object != blank %}{{ 640 | divided_by: featured_image_object.aspect_ratio | round }}{% else %}640{% endif %}
               },
               "options": {{ variant.options | json }},
               "price": {{ variant.price | json }},

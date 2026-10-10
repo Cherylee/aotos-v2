@@ -2275,3 +2275,184 @@ body.size-fit-drawer-open {
     font-size: calc(18 * var(--rem));
   }
 }
+
+.aotos-flux-buybar {
+  --flux-btn-h: clamp(25px, calc(48 * var(--rem)), 55px);
+  --flux-btn-r: calc(48 * var(--rem));
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 12;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(24 * var(--rem));
+  padding: calc(12 * var(--rem)) calc(170 * var(--rem));
+  padding-bottom: calc(12 * var(--rem) + env(safe-area-inset-bottom, 0px));
+  background: #fff;
+  box-shadow: 0 calc(-6 * var(--rem)) calc(24 * var(--rem)) rgba(0, 0, 0, 0.08);
+  transform: translateY(110%);
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 0.25s ease;
+}
+
+.aotos-flux-buybar.is-visible {
+  transform: none;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.aotos-flux-buybar__product {
+  display: flex;
+  align-items: center;
+  gap: calc(16 * var(--rem));
+  min-width: 0;
+}
+
+.aotos-flux-buybar__img {
+  width: calc(56 * var(--rem));
+  height: calc(56 * var(--rem));
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.aotos-flux-buybar__prices {
+  display: flex;
+  align-items: flex-end;
+  gap: calc(8 * var(--rem));
+  min-width: 0;
+}
+
+.aotos-flux-buybar__price {
+  color: #000;
+  font-size: calc(18 * var(--rem));
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.aotos-flux-buybar__compare {
+  display: none;
+  color: #858585;
+  font-size: calc(14 * var(--rem));
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: line-through;
+  white-space: nowrap;
+}
+
+.aotos-flux-buybar__actions {
+  display: flex;
+  align-items: center;
+  gap: calc(16 * var(--rem));
+  flex-shrink: 0;
+}
+
+.aotos-flux-buybar__atc,
+.aotos-flux-buybar__buy {
+  width: calc(237 * var(--rem));
+  flex: 0 0 calc(237 * var(--rem));
+  height: var(--flux-btn-h);
+  min-height: var(--flux-btn-h);
+  max-height: var(--flux-btn-h);
+  padding: 0 calc(28 * var(--rem));
+  border-radius: var(--flux-btn-r);
+  font-family: inherit;
+  font-size: calc(14 * var(--rem));
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.aotos-flux-buybar__atc {
+  background: #fff;
+  color: var(--aotos-theme-color, #ff6501);
+  border: 1px solid var(--aotos-theme-color, #ff6501);
+}
+
+.aotos-flux-buybar__buy {
+  background: var(--aotos-theme-color, #ff6501);
+  color: #fff;
+  border: 1px solid var(--aotos-theme-color, #ff6501);
+}
+
+.aotos-flux-buybar__atc:disabled,
+.aotos-flux-buybar__buy:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+@media (hover: hover) {
+  .aotos-flux-buybar__atc:hover:not(:disabled) {
+    background: var(--aotos-theme-color, #ff6501);
+    color: #fff;
+  }
+
+  .aotos-flux-buybar__buy:hover:not(:disabled) {
+    opacity: 0.92;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .aotos-flux-buybar {
+    --flux-btn-h: clamp(25px, calc(var(--aotos-button-height-mobile, 80) * var(--rem)), 55px);
+    --flux-btn-r: calc(var(--aotos-button-height-mobile, 80) * var(--rem));
+    flex-wrap: nowrap;
+    gap: calc(16 * var(--rem));
+    padding: calc(16 * var(--rem)) calc(40 * var(--rem));
+    padding-bottom: calc(16 * var(--rem) + env(safe-area-inset-bottom, 0px));
+  }
+
+  .aotos-flux-buybar__product {
+    flex: 1 1 auto;
+    min-width: 0;
+    gap: calc(10 * var(--rem));
+  }
+
+  .aotos-flux-buybar__img {
+    display: none;
+  }
+
+  .aotos-flux-buybar__prices {
+    gap: calc(10 * var(--rem));
+  }
+
+  .aotos-flux-buybar__price {
+    font-size: calc(38 * var(--rem));
+    font-weight: 600;
+  }
+
+  .aotos-flux-buybar__product.is-sale .aotos-flux-buybar__compare {
+    display: inline;
+    margin-bottom: calc(4 * var(--rem));
+    font-size: calc(22 * var(--rem));
+  }
+
+  .aotos-flux-buybar__actions {
+    flex: 0 0 calc((100% - calc(16 * var(--rem))) / 2);
+    width: calc((100% - calc(16 * var(--rem))) / 2);
+    min-width: 0;
+  }
+
+  .aotos-flux-buybar__atc {
+    display: none;
+  }
+
+  .aotos-flux-buybar__buy {
+    width: 100%;
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 0 calc(16 * var(--rem));
+    font-size: calc(22 * var(--rem));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aotos-flux-buybar {
+    transition: none;
+  }
+}
