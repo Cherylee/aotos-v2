@@ -1,0 +1,35 @@
+{{ 'aotos-flux-below.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'aotos-flux-below.js' | asset_url }}" defer="defer"></script>
+
+<section class="fxb fxb-faq" style="--fxb-bg: #fff; --fxb-pt: 80; --fxb-pb: 80; --fxb-pt-m: 88; --fxb-pb-m: 88;">
+  <div class="fxb-shell">
+    <h2 class="fxb-title aotos-section-title">{{ section.settings.faq_title | escape }}</h2>
+    {%- for block in section.blocks -%}
+      <details class="fxb-faq__item" {{ block.shopify_attributes }}>
+        <summary>{{ block.settings.question }}<span class="support-faq-arrow">▼</span></summary>
+        <div class="fxb-faq__answer"><div class="fxb-faq__answer-inner">{{ block.settings.answer }}</div></div>
+      </details>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Flux FAQ",
+  "settings": [
+    { "type": "text", "id": "faq_title", "label": "Title", "default": "Frequently Asked Questions" }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question" },
+        { "type": "product", "id": "related_product", "label": "Related product" },
+        { "type": "richtext", "id": "answer", "label": "Answer" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Flux FAQ" }]
+}
+{% endschema %}

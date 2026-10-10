@@ -877,28 +877,28 @@
                     {{ 'templates.search.products' | t }}
                   </h2>
                   <ul class="aotos-search__grid" role="list">
-                    {%- assign skip_card_product_styles = false -%}
+                {%- assign skip_card_product_styles = false -%}
                     {%- assign product_index = 0 -%}
-                    {%- for item in search.results -%}
+                {%- for item in search.results -%}
                       {%- if item.object_type == 'product' -%}
                         {%- assign product_index = product_index | plus: 1 -%}
-                        {%- assign lazy_load = true -%}
+                    {%- assign lazy_load = true -%}
                         {%- if product_index <= 2 -%}
                           {%- assign lazy_load = false -%}
-                        {%- endif -%}
+                  {%- endif -%}
                         <li>
-                          {% render 'card-product',
-                            card_product: item,
+                        {% render 'card-product',
+                          card_product: item,
                             media_aspect_ratio: 'square',
-                            image_shape: section.settings.image_shape,
-                            show_secondary_image: section.settings.show_secondary_image,
-                            show_vendor: section.settings.show_vendor,
-                            show_rating: section.settings.show_rating,
-                            lazy_load: lazy_load,
+                          image_shape: section.settings.image_shape,
+                          show_secondary_image: section.settings.show_secondary_image,
+                          show_vendor: section.settings.show_vendor,
+                          show_rating: section.settings.show_rating,
+                          lazy_load: lazy_load,
                             skip_styles: skip_card_product_styles,
                             hide_from_prefix: true
-                          %}
-                          {%- assign skip_card_product_styles = true -%}
+                        %}
+                        {%- assign skip_card_product_styles = true -%}
                         </li>
                       {%- endif -%}
                     {%- endfor -%}
@@ -915,13 +915,13 @@
                     {%- for item in search.results -%}
                       {%- if item.object_type == 'article' -%}
                         <li>
-                          {% render 'article-card',
-                            article: item,
-                            show_image: true,
-                            show_date: section.settings.article_show_date,
-                            show_author: section.settings.article_show_author,
-                            show_badge: true,
-                            media_aspect_ratio: 1,
+                        {% render 'article-card',
+                          article: item,
+                          show_image: true,
+                          show_date: section.settings.article_show_date,
+                          show_author: section.settings.article_show_author,
+                          show_badge: true,
+                          media_aspect_ratio: 1,
                             lazy_load: true
                           %}
                         </li>
@@ -942,24 +942,24 @@
                         <li>
                           <div class="article-card-wrapper card-wrapper">
                             <div class="card card--card card--text">
-                              <div class="card__content">
+                            <div class="card__content">
                                 <div class="card__badge">
                                   <span class="badge color-scheme-1">{{ 'templates.search.page' | t }}</span>
                                 </div>
-                                <div class="card__information">
-                                  <h3 class="card__heading">
-                                    <a href="{{ item.url }}" class="full-unstyled-link">
+                              <div class="card__information">
+                                <h3 class="card__heading">
+                                  <a href="{{ item.url }}" class="full-unstyled-link">
                                       {{ item.title | escape }}
-                                    </a>
-                                  </h3>
-                                </div>
+                                  </a>
+                                </h3>
+                              </div>
                               </div>
                             </div>
                           </div>
-                        </li>
+                  </li>
                       {%- endif -%}
-                    {%- endfor -%}
-                  </ul>
+                {%- endfor -%}
+              </ul>
                 </section>
               {%- endif -%}
 
@@ -970,7 +970,7 @@
           {%- endif -%}
         </div>
       {%- endif -%}
-    </div>
+      </div>
   </div>
 {% endpaginate %}
 

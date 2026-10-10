@@ -1,0 +1,122 @@
+{{ 'aotos-flux-below.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'aotos-flux-below.js' | asset_url }}" defer="defer"></script>
+
+<flux-tabs class="fxb fxb-experts-wrap" style="--fxb-bg: {{ section.settings.bg_color }}; --fxb-color: #fff; --fxb-pt: 80; --fxb-pb: 80; --fxb-pt-m: 88; --fxb-pb-m: 88;">
+  <flux-experts class="fxb-shell fxb-experts">
+    <h2 class="fxb-title aotos-section-title fxb-experts__title">{{ section.settings.title | escape }}</h2>
+    <div class="fxb-experts__head">
+      <button type="button" class="fxb-experts__arrow" data-fxb-dir="-1" aria-label="Previous">‹</button>
+      <div class="fxb-experts__tabs">
+        <button type="button" class="fxb-experts__tab is-active" data-fxb-tab="youtube">YouTube Videos</button>
+        <button type="button" class="fxb-experts__tab" data-fxb-tab="social">Social Posts</button>
+      </div>
+      <button type="button" class="fxb-experts__arrow" data-fxb-dir="1" aria-label="Next">›</button>
+    </div>
+    <div class="fxb-experts__panel is-active" data-fxb-panel="youtube">
+      <div class="fxb-experts__track">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'youtube_item' -%}
+            {%- liquid
+              assign yt = block.settings.video_url
+              assign yt_id = ''
+              if yt contains 'youtu.be/'
+                assign yt_id = yt | split: 'youtu.be/' | last | split: '?' | first
+              elsif yt contains 'v='
+                assign yt_id = yt | split: 'v=' | last | split: '&' | first
+              endif
+              assign cover = block.settings.cover_image
+              assign author = block.settings.author_image
+            -%}
+            <article class="fxb-experts__card" {{ block.shopify_attributes }}>
+              <div class="fxb-experts__media">
+                {%- if cover != blank -%}
+                  {%- assign cover_h = 640 | divided_by: cover.aspect_ratio | round -%}
+                  <img src="{{ cover | image_url: width: 640 }}" srcset="{{ cover | image_url: width: 360 }} 360w, {{ cover | image_url: width: 640 }} 640w" sizes="(max-width: 768px) 82vw, 340px" width="640" height="{{ cover_h }}" alt="" loading="lazy">
+                {%- endif -%}
+                {%- if yt_id != blank -%}
+                  <button type="button" class="fxb-experts__play" data-fxb-yt="{{ yt_id }}" aria-label="{{ block.settings.title | escape }}">
+                    <svg viewBox="0 0 68 48" aria-hidden="true">
+                      <path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74.13 13.06 0 24 0 24s.13 10.94 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.87 34.94 68 24 68 24s-.13-10.94-1.48-16.26z" fill="#ff0000"></path>
+                      <path d="M45 24 27 14v20z" fill="#fff"></path>
+                    </svg>
+                  </button>
+                {%- endif -%}
+              </div>
+              <div class="fxb-experts__body">
+                <h3 class="fxb-experts__name">{{ block.settings.title }}</h3>
+                <div class="fxb-experts__author">
+                  {%- if author != blank -%}
+                    <img src="{{ author | image_url: width: 64 }}" width="64" height="64" alt="" loading="lazy">
+                  {%- endif -%}
+                  <span>{{ block.settings.author_name }}</span>
+                </div>
+              </div>
+            </article>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+    <div class="fxb-experts__panel" data-fxb-panel="social">
+      <div class="fxb-experts__track">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'instagram_item' -%}
+            {%- assign cover = block.settings.cover_image -%}
+            {%- if cover == blank and block.settings.video != blank -%}
+              {%- assign cover = block.settings.video.preview_image -%}
+            {%- endif -%}
+            <article class="fxb-experts__card" {{ block.shopify_attributes }}>
+              <div class="fxb-experts__media">
+                {%- if cover != blank -%}
+                  {%- assign cover_h = 420 | divided_by: cover.aspect_ratio | round -%}
+                  <img src="{{ cover | image_url: width: 420 }}" srcset="{{ cover | image_url: width: 280 }} 280w, {{ cover | image_url: width: 420 }} 420w, {{ cover | image_url: width: 640 }} 640w" sizes="(max-width: 768px) 46vw, 260px" width="420" height="{{ cover_h }}" alt="" loading="lazy">
+                {%- endif -%}
+                {%- if block.settings.video != blank -%}
+                  {{ block.settings.video | video_tag: playsinline: true, preload: 'none', controls: false, image_size: '640x' }}
+                  <button type="button" class="fxb-experts__play" data-fxb-video aria-label="Play">
+                    <svg viewBox="0 0 68 48" aria-hidden="true">
+                      <path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74.13 13.06 0 24 0 24s.13 10.94 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.87 34.94 68 24 68 24s-.13-10.94-1.48-16.26z" fill="#ff0000"></path>
+                      <path d="M45 24 27 14v20z" fill="#fff"></path>
+                    </svg>
+                  </button>
+                {%- endif -%}
+              </div>
+            </article>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </flux-experts>
+</flux-tabs>
+
+{% schema %}
+{
+  "name": "Flux experts",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Hear from the Experts" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#000000" }
+  ],
+  "blocks": [
+    {
+      "type": "youtube_item",
+      "name": "YouTube",
+      "settings": [
+        { "type": "image_picker", "id": "cover_image", "label": "Cover" },
+        { "type": "url", "id": "video_url", "label": "YouTube URL" },
+        { "type": "text", "id": "date", "label": "Date" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "text", "id": "author_name", "label": "Author" },
+        { "type": "image_picker", "id": "author_image", "label": "Author image" }
+      ]
+    },
+    {
+      "type": "instagram_item",
+      "name": "Social",
+      "settings": [
+        { "type": "image_picker", "id": "cover_image", "label": "Cover" },
+        { "type": "video", "id": "video", "label": "Video" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Flux experts" }]
+}
+{% endschema %}
