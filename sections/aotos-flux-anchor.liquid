@@ -1,0 +1,47 @@
+{{ 'aotos-flux-below.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'aotos-flux-below.js' | asset_url }}" defer="defer"></script>
+
+<div class="fxb-anchor-sentinel" aria-hidden="true">&#8203;</div>
+<div class="fxb-anchor-section" style="--fxb-bg: {{ section.settings.background_color }};">
+  <flux-anchor
+    class="fxb-anchor fxb-shell"
+    style="--fxb-bg: {{ section.settings.background_color }}; --fxb-text: {{ section.settings.text_color }}; --fxb-active: {{ section.settings.active_color }}; --fxb-line: {{ section.settings.underline_color }}; --fxb-hover: {{ section.settings.hover_color }};"
+  >
+    <ul class="fxb-anchor__list">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.show_in_nav and block.settings.label != blank and block.settings.section_key != blank -%}
+          <li {{ block.shopify_attributes }}>
+            <button type="button" class="fxb-anchor__link" data-fxb-key="{{ block.settings.section_key | escape }}">
+              {{ block.settings.label }}
+            </button>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </flux-anchor>
+</div>
+
+{% schema %}
+{
+  "name": "Flux anchor nav",
+  "settings": [
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#eeeeee" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#000000" },
+    { "type": "color", "id": "active_color", "label": "Active", "default": "#ff6501" },
+    { "type": "color", "id": "underline_color", "label": "Underline", "default": "#ff6501" },
+    { "type": "color", "id": "hover_color", "label": "Hover", "default": "#ff6501" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        { "type": "checkbox", "id": "show_in_nav", "label": "Show", "default": true },
+        { "type": "text", "id": "label", "label": "Label", "default": "Overview" },
+        { "type": "text", "id": "section_key", "label": "Section id" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Flux anchor nav" }]
+}
+{% endschema %}

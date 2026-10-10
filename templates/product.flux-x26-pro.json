@@ -122,7 +122,7 @@
         "spec_brakes": {
           "type": "spec",
           "settings": {
-            "icon": "shopify://shop_images/Brakes_57fb5536-a409-43eb-9820-cd5367083e0b.svg",
+            "icon": "shopify://shop_images/Group_25_1_6e34c942-be4d-4b4a-9856-2f6ac9e81653.webp",
             "title": "Brakes",
             "value": "Hydraulic disc brakes",
             "variant_values": "Flux X26 Pro: Hydraulic disc brakes\nFlux X26: Hydraulic disc brakes"
@@ -177,10 +177,953 @@
       "settings": {
         "include_margins": true
       }
+    },
+    "flux_compare": {
+      "type": "aotos-flux-compare",
+      "blocks": {
+        "spec_row_8yqDGM": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Motor",
+            "value_1": "750W rated / 2000W Peak in Boost*",
+            "value_2": "750W rated / 1200W Peak in Boost*"
+          }
+        },
+        "spec_row_zVatzz": {
+          "type": "spec_row",
+          "disabled": true,
+          "settings": {
+            "label": "Motor",
+            "value_1": "Rated 750W / Peak 2000W",
+            "value_2": "Rated 750W / Peak 1200W"
+          }
+        },
+        "spec_row_PQRtQT": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Torque",
+            "value_1": "100 Nm",
+            "value_2": "80 Nm"
+          }
+        },
+        "spec_row_MJtbPQ": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Top Speed",
+            "value_1": "28 mph (in Boost*)",
+            "value_2": "28 mph (in Boost*)"
+          }
+        },
+        "spec_row_CycLHB": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Battery",
+            "value_1": "48V 21Ah battery",
+            "value_2": "48V 18Ah battery"
+          }
+        },
+        "spec_row_8WJmh3": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Range",
+            "value_1": "Up to 70 Miles",
+            "value_2": "Up to 50 Miles"
+          }
+        },
+        "spec_row_6kKbWk": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Brakes",
+            "value_1": "Hydraulic disc brakes",
+            "value_2": "Hydraulic disc brakes"
+          }
+        },
+        "spec_row_VBK8Y4": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Suspension",
+            "value_1": "Dual hydraulic suspension",
+            "value_2": "Dual hydraulic suspension"
+          }
+        },
+        "spec_row_QhwUiG": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Tires",
+            "value_1": "20 × 4.0 in fat tires",
+            "value_2": "20 × 4.0 in fat tires"
+          }
+        },
+        "spec_row_7bMHJN": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Tire Pressure Monitoring",
+            "value_1": "Yes",
+            "value_2": "No"
+          }
+        },
+        "spec_row_GywwnT": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Under-Frame Storage Bag",
+            "value_1": "Yes",
+            "value_2": "No"
+          }
+        },
+        "spec_row_NM64J9": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Security",
+            "value_1": "App + 4G GPS tracking* + physical lock",
+            "value_2": "App"
+          }
+        },
+        "spec_row_EiE8tJ": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Connectivity",
+            "value_1": "App support",
+            "value_2": "App support"
+          }
+        },
+        "spec_row_Agcwpq": {
+          "type": "spec_row",
+          "settings": {
+            "label": "IP Rating",
+            "value_1": "IPX5 vehicle / IPX6 battery",
+            "value_2": "IPX5"
+          }
+        },
+        "spec_row_gT3bEF": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Net Weight",
+            "value_1": "97 lb / 45 kg",
+            "value_2": "97 lb / 45 kg"
+          }
+        },
+        "spec_row_jbjHbF": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Maximum Load",
+            "value_1": "330 lb",
+            "value_2": "330 lb"
+          }
+        }
+      },
+      "block_order": [
+        "spec_row_8yqDGM",
+        "spec_row_zVatzz",
+        "spec_row_PQRtQT",
+        "spec_row_MJtbPQ",
+        "spec_row_CycLHB",
+        "spec_row_8WJmh3",
+        "spec_row_6kKbWk",
+        "spec_row_VBK8Y4",
+        "spec_row_QhwUiG",
+        "spec_row_7bMHJN",
+        "spec_row_GywwnT",
+        "spec_row_NM64J9",
+        "spec_row_EiE8tJ",
+        "spec_row_Agcwpq",
+        "spec_row_gT3bEF",
+        "spec_row_jbjHbF"
+      ],
+      "name": "Comparison Table",
+      "settings": {
+        "title": "FLUX X26 Pro VS Flux X26",
+        "model_label": "Model",
+        "show_footnote": true,
+        "footnote": "<p>*Boost Mode allows your bike to output it's max torque and power for up to 10 seconds at a time.&nbsp;<br/>*Enjoy One year of free 4G/GPS service. Afterward, plans start at $2.90/month or $29 for 12 months (Best Value). Cancel anytime through the AOTOS app.</p>",
+        "highlighted_column": "1",
+        "product_1_name": "FLUX X26 Pro",
+        "product_1_highlight": "Pro",
+        "product_1_image": "shopify://shop_images/eb03_010-cropped.webp",
+        "product_1_tagline": "Sharper response for riders who want instant acceleration.",
+        "product_1_url": "",
+        "product_2_name": "FLUX X26",
+        "product_2_highlight": "",
+        "product_2_image": "shopify://shop_images/eb03020-cropped.webp",
+        "product_2_tagline": "Smooth, predictable power for everyday rides.",
+        "product_2_url": "",
+        "bg_color": "#ffffff",
+        "title_color": "#000000",
+        "label_color": "#999999",
+        "value_color": "#000000",
+        "highlight_word_color": "#ff4500",
+        "divider_color": "#e5e5e5",
+        "highlight_bg": "#f5f5f5",
+        "highlight_border": "#e0e0e0"
+      }
+    },
+    "flux_features": {
+      "type": "aotos-flux-features",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "video": "shopify://files/videos/002.mp4",
+            "pre_heading": "Boost Mode",
+            "heading": "Instant Torque. Controlled Launch.",
+            "description": "<p>Tap Boost to send maximum torque to the rear wheel, giving you stronger acceleration when you need an extra burst of power.</p>"
+          }
+        },
+        "card_4": {
+          "type": "card",
+          "settings": {
+            "video": "shopify://files/videos/005.mp4",
+            "pre_heading": "Long-Range Battery",
+            "heading": "Up to 70 Miles",
+            "description": "<p>The high-capacity 1008 Wh battery gives you the range for daily commutes, weekend rides, and longer routes without constant recharging.</p>"
+          }
+        },
+        "card_6": {
+          "type": "card",
+          "settings": {
+            "video": "shopify://files/videos/gfawegawehaw.mp4",
+            "pre_heading": "Smart Security System",
+            "heading": "Track It. Protect It.",
+            "description": "<p>On the Pro model, built-in GPS tracking and an anti-theft vibration alarm help protect your bike, send instant alerts, and make it easier to locate when needed.</p>"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "video": "shopify://files/videos/004.mp4",
+            "pre_heading": "6061-T6 Aerospace-Grade Frame",
+            "heading": "Strength Meets Precision",
+            "description": "<p>Built with aerospace-grade 6061-T6 aluminum, the Flux X26 Series delivers the rigidity, durability, and sharp futuristic profile built for everyday rides and bigger adventures.</p>"
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "video": "shopify://files/videos/001.mp4",
+            "pre_heading": "Dual Hydraulic Suspension",
+            "heading": "Smooth Over Rough Roads",
+            "description": "<p>Front and rear hydraulic suspension helps absorb bumps, gravel, and uneven terrain, giving you a smoother ride and better control across changing road conditions.</p>"
+          }
+        },
+        "card_5": {
+          "type": "card",
+          "settings": {
+            "video": "shopify://files/videos/fh2q90pg.mp4",
+            "pre_heading": "5.5-Inch TFT Smart Display",
+            "heading": "Navigation at a Glance",
+            "description": "<p>The full-color 5.5-inch TFT display shows speed, battery level, ride mode, range, and alerts, with turn-by-turn navigation synced directly from your phone.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_4",
+        "card_6",
+        "card_2",
+        "card_3",
+        "card_5"
+      ],
+      "settings": {
+        "heading": "",
+        "subtitle": "",
+        "show_progress": false,
+        "bg_color": "#ffffff",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
+    },
+    "flux_specs": {
+      "type": "aotos-flux-specs",
+      "blocks": {
+        "geo_1": {
+          "type": "geometry_item",
+          "settings": {
+            "label_id": "A",
+            "label": "Overall Length",
+            "value": "70.5\""
+          }
+        },
+        "geo_2": {
+          "type": "geometry_item",
+          "settings": {
+            "label_id": "B",
+            "label": "Handlebar Height",
+            "value": "40.9\""
+          }
+        },
+        "geo_3": {
+          "type": "geometry_item",
+          "settings": {
+            "label_id": "C",
+            "label": "Wheelbase",
+            "value": "46.9\""
+          }
+        },
+        "geo_4": {
+          "type": "geometry_item",
+          "settings": {
+            "label_id": "D",
+            "label": "Seat Height",
+            "value": "33.5\""
+          }
+        },
+        "geo_5": {
+          "type": "geometry_item",
+          "settings": {
+            "label_id": "E",
+            "label": "Seat Length",
+            "value": "23.6\""
+          }
+        },
+        "geo_6": {
+          "type": "geometry_item",
+          "settings": {
+            "label_id": "F",
+            "label": "Tire Size",
+            "value": "20\" × 4.0\""
+          }
+        },
+        "geo_7": {
+          "type": "geometry_item",
+          "settings": {
+            "label_id": "G",
+            "label": "Handlebar Width",
+            "value": "28.5\""
+          }
+        },
+        "geo_8": {
+          "type": "geometry_item",
+          "settings": {
+            "label_id": "H",
+            "label": "Recommended Rider Height",
+            "value": "5'2\"–6'7\""
+          }
+        },
+        "spec_1": {
+          "type": "spec_item",
+          "settings": {
+            "label": "Motor",
+            "value": "<p>750W rated / 2000W peak motor</p>"
+          }
+        },
+        "spec_2": {
+          "type": "spec_item",
+          "settings": {
+            "label": "Display",
+            "value": "<p>5.5-inch TFT smart display</p>"
+          }
+        },
+        "spec_3": {
+          "type": "spec_item",
+          "settings": {
+            "label": "Suspension",
+            "value": "<p>Dual hydraulic suspension</p>"
+          }
+        },
+        "spec_4": {
+          "type": "spec_item",
+          "settings": {
+            "label": "Frame",
+            "value": "<p>6061-T6 aluminum frame</p>"
+          }
+        },
+        "spec_5": {
+          "type": "spec_item",
+          "settings": {
+            "label": "Max Climbing Grade",
+            "value": "<p>25%</p>"
+          }
+        },
+        "spec_6": {
+          "type": "spec_item",
+          "settings": {
+            "label": "Bike Weight",
+            "value": "<p>97 lb / 45 kg</p>"
+          }
+        },
+        "spec_7": {
+          "type": "spec_item",
+          "settings": {
+            "label": "Range",
+            "value": "<p>Up to 70 miles</p>"
+          }
+        },
+        "spec_8": {
+          "type": "spec_item",
+          "settings": {
+            "label": "Tires",
+            "value": "<p>20\" × 4.0\" fat tires</p>"
+          }
+        },
+        "spec_item_K4meDW": {
+          "type": "spec_item",
+          "settings": {
+            "label": "Charging Time",
+            "value": "<p>Approx. 6 hours</p>"
+          }
+        },
+        "spec_item_RR4BHe": {
+          "type": "spec_item",
+          "settings": {
+            "label": "Ride Modes",
+            "value": "<p>3 ride modes</p>"
+          }
+        },
+        "spec_item_CJbpU8": {
+          "type": "spec_item",
+          "settings": {
+            "label": "Battery",
+            "value": "<p>48V 21Ah battery</p>"
+          }
+        },
+        "spec_item_a7bCHw": {
+          "type": "spec_item",
+          "settings": {
+            "label": "Brakes",
+            "value": "<p>Front and rear hydraulic disc brakes</p>"
+          }
+        },
+        "spec_item_zqBakt": {
+          "type": "spec_item",
+          "settings": {
+            "label": "IP Rating",
+            "value": "<p>Vehicle: IPX5 / Battery: IPX6</p>"
+          }
+        },
+        "spec_item_nEYbF9": {
+          "type": "spec_item",
+          "settings": {
+            "label": "Maximum Load",
+            "value": "<p>330 Ib</p>"
+          }
+        },
+        "spec_item_4WUrE9": {
+          "type": "spec_item",
+          "settings": {
+            "label": "Smart Features",
+            "value": "<p>Keyless unlock、Instrument sync navigation、4G+GPS、Tire pressure monitoring</p>"
+          }
+        },
+        "box_featured": {
+          "type": "featured",
+          "settings": {
+            "box_tab": "tab1",
+            "title": "FLUX X26 Pro",
+            "image": "shopify://shop_images/aotos.webp",
+            "link": ""
+          }
+        },
+        "box_item_1": {
+          "type": "item",
+          "settings": {
+            "box_tab": "tab1",
+            "title": "Charger",
+            "image": "shopify://shop_images/2_1.webp",
+            "link": "",
+            "link_label": "Download"
+          }
+        },
+        "box_item_2": {
+          "type": "item",
+          "settings": {
+            "box_tab": "tab1",
+            "title": "Adapter",
+            "link": "",
+            "link_label": "Download"
+          }
+        },
+        "box_item_3": {
+          "type": "item",
+          "settings": {
+            "box_tab": "tab1",
+            "title": "User Manual",
+            "link": "",
+            "link_label": "Download"
+          }
+        },
+        "box_item_4": {
+          "type": "item",
+          "settings": {
+            "box_tab": "tab1",
+            "title": "Accessories",
+            "link": "",
+            "link_label": "Download"
+          }
+        },
+        "box_featured_x26": {
+          "type": "featured",
+          "settings": {
+            "box_tab": "tab2",
+            "title": "FLUX X26",
+            "image": "shopify://shop_images/aotos.webp",
+            "link": ""
+          }
+        },
+        "box_item_x26_1": {
+          "type": "item",
+          "settings": {
+            "box_tab": "tab2",
+            "title": "Charger",
+            "image": "shopify://shop_images/2_1.webp",
+            "link": "",
+            "link_label": "Download"
+          }
+        },
+        "box_item_x26_2": {
+          "type": "item",
+          "settings": {
+            "box_tab": "tab2",
+            "title": "Adapter",
+            "link": "",
+            "link_label": "Download"
+          }
+        },
+        "box_item_x26_3": {
+          "type": "item",
+          "settings": {
+            "box_tab": "tab2",
+            "title": "User Manual",
+            "link": "",
+            "link_label": "Download"
+          }
+        },
+        "box_item_x26_4": {
+          "type": "item",
+          "settings": {
+            "box_tab": "tab2",
+            "title": "Accessories",
+            "link": "",
+            "link_label": "Download"
+          }
+        },
+        "box_list_1": {
+          "type": "box_item",
+          "settings": {
+            "label_id": "1",
+            "label": "Bluetooth module ×1"
+          }
+        },
+        "box_list_2": {
+          "type": "box_item",
+          "settings": {
+            "label_id": "2",
+            "label": "Mudguard brackets ×2"
+          }
+        },
+        "box_list_3": {
+          "type": "box_item",
+          "settings": {
+            "label_id": "3",
+            "label": "Accessory box ×1"
+          }
+        },
+        "box_list_4": {
+          "type": "box_item",
+          "settings": {
+            "label_id": "4",
+            "label": "Mudguard bracket covers ×2"
+          }
+        },
+        "box_list_5": {
+          "type": "box_item",
+          "settings": {
+            "label_id": "5",
+            "label": "Water bottle holder ×1"
+          }
+        },
+        "box_list_6": {
+          "type": "box_item",
+          "settings": {
+            "label_id": "6",
+            "label": "Front reflector ×1"
+          }
+        },
+        "box_list_7": {
+          "type": "box_item",
+          "settings": {
+            "label_id": "7",
+            "label": "Power cord ×1"
+          }
+        },
+        "box_list_8": {
+          "type": "box_item",
+          "settings": {
+            "label_id": "8",
+            "label": "Pedals ×2"
+          }
+        },
+        "box_list_9": {
+          "type": "box_item",
+          "settings": {
+            "label_id": "9",
+            "label": "Wrench ×1"
+          }
+        },
+        "box_list_10": {
+          "type": "box_item",
+          "settings": {
+            "label_id": "10",
+            "label": "Ratchet wrench ×1"
+          }
+        }
+      },
+      "block_order": [
+        "geo_1",
+        "geo_2",
+        "geo_3",
+        "geo_4",
+        "geo_5",
+        "geo_6",
+        "geo_7",
+        "geo_8",
+        "spec_1",
+        "spec_2",
+        "spec_3",
+        "spec_4",
+        "spec_5",
+        "spec_6",
+        "spec_7",
+        "spec_8",
+        "spec_item_K4meDW",
+        "spec_item_RR4BHe",
+        "spec_item_CJbpU8",
+        "spec_item_a7bCHw",
+        "spec_item_zqBakt",
+        "spec_item_nEYbF9",
+        "spec_item_4WUrE9",
+        "box_featured",
+        "box_item_1",
+        "box_item_2",
+        "box_item_3",
+        "box_item_4",
+        "box_featured_x26",
+        "box_item_x26_1",
+        "box_item_x26_2",
+        "box_item_x26_3",
+        "box_item_x26_4",
+        "box_list_1",
+        "box_list_2",
+        "box_list_3",
+        "box_list_4",
+        "box_list_5",
+        "box_list_6",
+        "box_list_7",
+        "box_list_8",
+        "box_list_9",
+        "box_list_10"
+      ],
+      "settings": {
+        "title": "Specs & Geometry",
+        "bg_color": "#000000",
+        "geometry_image": "shopify://shop_images/e68160140fed42559d7070c6299792f5.png",
+        "box_layout": "list",
+        "box_tab_1": "FLUX X26 Pro",
+        "box_tab_2": "FLUX X26",
+        "card_background": "#1a1a1a",
+        "grid_columns": "2"
+      }
+    },
+    "flux_story": {
+      "type": "aotos-flux-story",
+      "settings": {
+        "title": "Playful by choice. Predictable by design.",
+        "description": "The FLUX X26 brings excitement without the guesswork. Smooth acceleration, stable handling, and responsive power work together to keep every ride fun, confident, and in control.",
+        "image": "shopify://shop_images/flux26_slide4.jpg",
+        "bg_color": "#1a1a1a"
+      }
+    },
+    "flux_experts": {
+      "type": "aotos-flux-experts",
+      "blocks": {
+        "youtube_item_8QNGfd": {
+          "type": "youtube_item",
+          "settings": {
+            "cover_image": "shopify://shop_images/hqdefault_10.webp",
+            "video_url": "https://www.youtube.com/watch?v=uQiikbQcuns",
+            "date": "",
+            "title": "400+ Miles Later: Let’s Talk About the AOTOS Flux X26 Pro",
+            "author_name": "Nardo's Pizza Studios",
+            "author_image": "shopify://shop_images/channels4_profile_b790c71e-8cac-4578-9738-aa11d4dc8911.jpg"
+          }
+        },
+        "youtube_item_wydQgL": {
+          "type": "youtube_item",
+          "settings": {
+            "cover_image": "shopify://shop_images/hqdefault_11.webp",
+            "video_url": "https://www.youtube.com/watch?v=EpIetghXjos",
+            "date": "",
+            "title": "The SMARTEST Fat Tire E-Bike I’ve Tested! | Aotos Flux Pro Review",
+            "author_name": "Triple M",
+            "author_image": "shopify://shop_images/channels4_profile_6cf69983-5e40-469b-a44c-e2844666a11a.jpg"
+          }
+        },
+        "youtube_item_9rGD4w": {
+          "type": "youtube_item",
+          "settings": {
+            "cover_image": "shopify://shop_images/hqdefault_12.webp",
+            "video_url": "https://www.youtube.com/watch?v=LR4h4LIUXGA&t=392s",
+            "date": "",
+            "title": "SUPER HIGH TECH E-BIKE AUTOS FLUX X26 PLUS PRO!",
+            "author_name": "Prepper Princess",
+            "author_image": "shopify://shop_images/unnamed_e4c9a624-5fab-4fdc-8610-dfaeb918e801.jpg"
+          }
+        },
+        "youtube_item_GKHFhp": {
+          "type": "youtube_item",
+          "settings": {
+            "cover_image": "shopify://shop_images/hqdefault_14.webp",
+            "video_url": "https://www.youtube.com/watch?v=HFi_j91FbRo&t=742s",
+            "date": "",
+            "title": "Aotos Flux X26 Review – The Best Futuristic E-Bike of 2026",
+            "author_name": "Android Tech",
+            "author_image": "shopify://shop_images/channels4_profile_1_e3d6bd6a-74a8-4744-af13-f7bc65e2cc66.jpg"
+          }
+        },
+        "yt_1": {
+          "type": "youtube_item",
+          "settings": {
+            "cover_image": "shopify://shop_images/hqdefault_13.webp",
+            "video_url": "https://www.youtube.com/watch?v=NaVPnR1pmXo",
+            "date": "",
+            "title": "I Hosted My First Ever Mini E-Bike Rideout",
+            "author_name": "Offline Dylon",
+            "author_image": "shopify://shop_images/flux26_slide3.jpg"
+          }
+        },
+        "yt_2": {
+          "type": "youtube_item",
+          "settings": {
+            "cover_image": "shopify://shop_images/hqdefault_15.webp",
+            "video_url": "https://www.youtube.com/watch?v=RD3-S1v4Jnc",
+            "date": "",
+            "title": "I Lost Control Of My New E Bike..",
+            "author_name": "Offline Red",
+            "author_image": "shopify://shop_images/flux26_slide2.jpg"
+          }
+        },
+        "yt_3": {
+          "type": "youtube_item",
+          "settings": {
+            "cover_image": "shopify://shop_images/hqdefault_16.webp",
+            "video_url": "https://www.youtube.com/watch?v=5kmblD4jcEI",
+            "date": "",
+            "title": "This Unreleased Budget E-Bike Is What I Expected",
+            "author_name": "Zay Solis",
+            "author_image": "shopify://shop_images/flux26_slide4.jpg"
+          }
+        },
+        "instagram_item_rx7PPw": {
+          "type": "instagram_item",
+          "settings": {
+            "cover_image": "shopify://shop_images/9d7bb4d757eb483ba62bba987cf8efbd.webp",
+            "video": "shopify://files/videos/YTDown.com_Shorts_AOTOS-Flux-X26-Pro-2-Rider-Demo_Media_9iLHvrmJtFI_001_720p.mp4"
+          }
+        },
+        "instagram_item_WrwzkT": {
+          "type": "instagram_item",
+          "settings": {
+            "cover_image": "shopify://shop_images/7f6f9bfdc256431aa9e26fabeb5e9281.webp",
+            "video": "shopify://files/videos/YTDown.com_Shorts_AOTOS-Flux-x26-Pro-ASMR-Link-in-Descript_Media_fxPmAfQA4kg_001_1080p.mp4"
+          }
+        },
+        "ig_5": {
+          "type": "instagram_item",
+          "settings": {
+            "cover_image": "shopify://shop_images/8e080471f1c14aee853e1690234020bb.webp",
+            "video": "shopify://files/videos/e5858363-c084-4e4c-99ab-20c661869fed.webm"
+          }
+        },
+        "ig_6": {
+          "type": "instagram_item",
+          "settings": {
+            "cover_image": "shopify://shop_images/d636b2a70c914e4f8b965c662592930c.webp",
+            "video": "shopify://files/videos/44a7a3f8-1ef6-47b9-b3e4-5e17c5979278.webm"
+          }
+        }
+      },
+      "block_order": [
+        "youtube_item_8QNGfd",
+        "youtube_item_wydQgL",
+        "youtube_item_9rGD4w",
+        "youtube_item_GKHFhp",
+        "yt_1",
+        "yt_2",
+        "yt_3",
+        "instagram_item_rx7PPw",
+        "instagram_item_WrwzkT",
+        "ig_5",
+        "ig_6"
+      ],
+      "settings": {
+        "title": "Hear from the Experts",
+        "bg_color": "#000000"
+      }
+    },
+    "flux_faq": {
+      "type": "aotos-flux-faq",
+      "blocks": {
+        "faq_item_cCt6Eh": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What’s the difference between the FLUX X26 and Flux X26 Pro?",
+            "related_product": "",
+            "answer": "<p>The FLUX X26 is the standard model built for everyday rides, while the Flux X26 Pro is the high-performance version with more power, a larger battery, and advanced smart features. Both models share the same premium frame and suspension.</p>"
+          }
+        },
+        "faq_item_UCRNeq": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What are the key specs of the FLUX X26 and Flux X26 Pro?",
+            "related_product": "",
+            "answer": "<p>FLUX X26: 750W rated / 1200WPeak in Boost*, 80 Nm torque, 48V 18Ah battery, and up to 50 miles of range.</p><p>FLUX X26 Pro: 750W rated / 2000W Peak in Boost*, 100 Nm torque, 48V 21Ah battery, and up to 70 miles of range.</p><p>Both models offer a top speed of 20 mph, a 330 lb max load, and an IPX5/IPX6 water-resistance rating. The Pro model adds advanced 4G, GPS, and TPMS smart features.</p>"
+          }
+        },
+        "faq_item_T3fWcU": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What smart features are included?",
+            "related_product": "",
+            "answer": "<p>Both models support app connectivity and keyless unlocking. The Pro model adds 4G connectivity, real-time GPS tracking, tire pressure monitoring, and turn-by-turn navigation.</p>"
+          }
+        },
+        "faq_item_jgHhTe": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What does the warranty cover?",
+            "related_product": "",
+            "answer": "<p>Warranty coverage varies by component type:</p><p></p><ul><li><strong>Main Components</strong> (Frame, Fork, Handlebar, Kickstand, Motor, Battery, Controller, Display, etc.): <strong>1 Year</strong></li><li><strong>Main Accessories</strong> (Throttle, Headlight, Taillight, Brake Levers, Charger, Shock Absorber, Crank, etc.): <strong>6 Months</strong></li><li><strong>Wear & Tear Parts</strong> (Tires, Fenders, Foot Pegs, Reflectors, Seat, Storage Box, Plastic Parts, etc.): <strong>3 Months</strong></li></ul><p></p><p><strong>Battery Note:</strong> Covered for 1 year or 500 charge cycles (whichever comes first), with capacity remaining at least 80% of rated capacity under 25°C conditions.</p>"
+          }
+        },
+        "faq_item_qWeaLj": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What are your return and shipping policies?",
+            "related_product": "",
+            "answer": "<p>We offer 30-day returns on bikes in new condition. Free shipping is available within the contiguous U.S. See our Shipping & Returns Policy for full details.</p>"
+          }
+        },
+        "faq_item_f6n3ff": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is Shipping Protection?",
+            "related_product": "",
+            "answer": "<p>Shipping Protection is an optional coverage powered by Xcotton that gives you peace of mind when your order is on the way. It protects your package against common shipping risks.</p><p><strong>Shipping Protection cover:</strong></p><ul><li>Loss and damage in transit</li><li>Theft / Porch piracy</li><li>Mis-delivery by the courier</li><li>Quick and easy claims resolution</li></ul>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_cCt6Eh",
+        "faq_item_UCRNeq",
+        "faq_item_T3fWcU",
+        "faq_item_jgHhTe",
+        "faq_item_qWeaLj",
+        "faq_item_f6n3ff"
+      ],
+      "name": "Support FAQ",
+      "settings": {
+        "faq_title": "Frequently Asked Questions"
+      }
+    },
+    "flux_safety": {
+      "type": "aotos-flux-safety",
+      "name": "Product Safety Certified",
+      "settings": {
+        "background_image": "shopify://shop_images/1440X200_24d2b984-3a40-4597-9aa9-5169b237dcae.jpg",
+        "background_image_mobile": "shopify://shop_images/UL_68.jpg",
+        "image_position": "center center",
+        "overlay_opacity": 25,
+        "section_bg_color": "#ffffff",
+        "logo_1": "shopify://shop_images/lR3PKH6cyikcXnPMocyNsJ6iDVyBb6leCnWNqmNdgwA.png",
+        "logo_1_alt": "UL Certified",
+        "logo_2": "shopify://shop_images/lR3PJwnkyoEUbnPMocyosAmmC7gX1O9eCnWNqmNdgwE_6743390d-3834-4c7a-87db-04880de8542d.png",
+        "logo_2_alt": "TÜV Rheinland Certified",
+        "title": "TUV Safety Certified",
+        "subtitle": "In accordance with UL 2849",
+        "button_label": "LEARN MORE",
+        "modal_image": "shopify://shop_images/1120X320.jpg",
+        "modal_image_mobile": "shopify://shop_images/1340X400.jpg",
+        "modal_eyebrow": "SAFETY FIRST",
+        "modal_heading": "Safety Certified in accordance with UL 2849",
+        "modal_body": "<p>Meeting the UL and/or TUV standards for Ebikes and batteries assures consumers that AOTOS electric bikes have been certified to meet critical electrical and fire safety standards. For more information on certifications, please visit the UL website or TUV website.</p>",
+        "modal_cta_label": "VIEW OUR CERTIFICATIONS",
+        "modal_cta_link": "shopify://pages/safety-certified",
+        "padding_top": 4,
+        "padding_bottom": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0
+      }
+    },
+    "flux_anchor": {
+      "type": "aotos-flux-anchor",
+      "blocks": {
+        "nav_overview": {
+          "type": "item",
+          "settings": {
+            "show_in_nav": true,
+            "label": "Overview",
+            "section_key": "main"
+          }
+        },
+        "nav_compare": {
+          "type": "item",
+          "settings": {
+            "show_in_nav": true,
+            "label": "Compare",
+            "section_key": "flux_compare"
+          }
+        },
+        "nav_specs": {
+          "type": "item",
+          "settings": {
+            "show_in_nav": true,
+            "label": "Specs",
+            "section_key": "flux_specs"
+          }
+        },
+        "nav_faq": {
+          "type": "item",
+          "settings": {
+            "show_in_nav": true,
+            "label": "FAQ",
+            "section_key": "flux_faq"
+          }
+        },
+        "nav_reviews": {
+          "type": "item",
+          "settings": {
+            "show_in_nav": true,
+            "label": "Reviews",
+            "section_key": "reviews"
+          }
+        }
+      },
+      "block_order": [
+        "nav_overview",
+        "nav_compare",
+        "nav_specs",
+        "nav_faq",
+        "nav_reviews"
+      ],
+      "settings": {
+        "background_color": "#eeeeee",
+        "text_color": "#000000",
+        "active_color": "#ff6501",
+        "underline_color": "#ff6501",
+        "hover_color": "#ff6501"
+      }
     }
   },
   "order": [
     "main",
+    "flux_anchor",
+    "flux_compare",
+    "flux_features",
+    "flux_specs",
+    "flux_story",
+    "flux_experts",
+    "flux_faq",
+    "flux_safety",
     "reviews"
   ]
 }

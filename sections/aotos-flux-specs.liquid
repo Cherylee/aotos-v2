@@ -1,0 +1,131 @@
+{{ 'aotos-flux-below.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'aotos-flux-below.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign geo = section.settings.geometry_image
+  assign specs = section.blocks | where: 'type', 'spec_item'
+  assign boxes = section.blocks | where: 'type', 'box_item'
+  assign half_specs = specs.size | plus: 1 | divided_by: 2
+  assign half_boxes = boxes.size | plus: 1 | divided_by: 2
+-%}
+
+<flux-tabs
+  class="fxb fxb-specs"
+  style="--fxb-bg: {{ section.settings.bg_color }}; --fxb-color: #fff; --fxb-pt: 80; --fxb-pb: 80; --fxb-pt-m: 88; --fxb-pb-m: 88;"
+>
+  <div class="fxb-shell">
+    <h2 class="fxb-title aotos-section-title">{{ section.settings.title | escape }}</h2>
+    <div class="fxb-specs__tabs" role="tablist">
+      <button type="button" class="fxb-specs__tab is-active" data-fxb-tab="geometry"><span class="fxb-specs__desk">Geometry</span><span class="fxb-specs__mob">Geo</span></button>
+      <button type="button" class="fxb-specs__tab" data-fxb-tab="specs"><span class="fxb-specs__desk">Specifications</span><span class="fxb-specs__mob">Spec</span></button>
+      <button type="button" class="fxb-specs__tab" data-fxb-tab="box"><span class="fxb-specs__desk">What's in the Box</span><span class="fxb-specs__mob">In Box</span></button>
+    </div>
+    <div class="fxb-specs__panel is-active" data-fxb-panel="geometry">
+      <div class="fxb-specs__geo">
+        {%- if geo != blank -%}
+          {%- assign geo_h = 640 | divided_by: geo.aspect_ratio | round -%}
+          <img src="{{ geo | image_url: width: 640 }}" srcset="{{ geo | image_url: width: 360 }} 360w, {{ geo | image_url: width: 640 }} 640w, {{ geo | image_url: width: 960 }} 960w" sizes="(max-width: 768px) 92vw, 480px" width="640" height="{{ geo_h }}" alt="" loading="lazy">
+        {%- endif -%}
+        <div>
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'geometry_item' -%}
+              <div class="fxb-specs__row" {{ block.shopify_attributes }}>
+                <span class="fxb-specs__name"><span class="fxb-specs__badge">{{ block.settings.label_id }}</span>{{ block.settings.label }}</span>
+                <span class="fxb-specs__value">{{ block.settings.value }}</span>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+    <div class="fxb-specs__panel" data-fxb-panel="specs">
+      <div class="fxb-specs__cols">
+        <div>
+          {%- for block in specs limit: half_specs -%}
+            <div class="fxb-specs__row" {{ block.shopify_attributes }}>
+              <span class="fxb-specs__name">{{ block.settings.label }}</span>
+              <span class="fxb-specs__value">{{ block.settings.value }}</span>
+            </div>
+          {%- endfor -%}
+        </div>
+        <div>
+          {%- for block in specs offset: half_specs -%}
+            <div class="fxb-specs__row" {{ block.shopify_attributes }}>
+              <span class="fxb-specs__name">{{ block.settings.label }}</span>
+              <span class="fxb-specs__value">{{ block.settings.value }}</span>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+    <div class="fxb-specs__panel" data-fxb-panel="box">
+      <div class="fxb-specs__cols">
+        <div>
+          {%- for block in boxes limit: half_boxes -%}
+            <div class="fxb-specs__row" {{ block.shopify_attributes }}>
+              <span class="fxb-specs__name"><span class="fxb-specs__badge">{{ block.settings.label_id }}</span>{{ block.settings.label }}</span>
+            </div>
+          {%- endfor -%}
+        </div>
+        <div>
+          {%- for block in boxes offset: half_boxes -%}
+            <div class="fxb-specs__row" {{ block.shopify_attributes }}>
+              <span class="fxb-specs__name"><span class="fxb-specs__badge">{{ block.settings.label_id }}</span>{{ block.settings.label }}</span>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</flux-tabs>
+
+{% schema %}
+{
+  "name": "Flux specs",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Specs & Geometry" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#000000" },
+    { "type": "image_picker", "id": "geometry_image", "label": "Geometry image" },
+    { "type": "select", "id": "box_layout", "label": "Box layout", "default": "list", "options": [
+      { "value": "list", "label": "List" },
+      { "value": "cards", "label": "Cards" }
+    ]},
+    { "type": "text", "id": "box_tab_1", "label": "Box tab 1", "default": "FLUX X26 Pro" },
+    { "type": "text", "id": "box_tab_2", "label": "Box tab 2", "default": "FLUX X26" },
+    { "type": "color", "id": "card_background", "label": "Card background", "default": "#1a1a1a" },
+    { "type": "select", "id": "grid_columns", "label": "Columns", "default": "2", "options": [
+      { "value": "2", "label": "2" },
+      { "value": "3", "label": "3" }
+    ]}
+  ],
+  "blocks": [
+    { "type": "geometry_item", "name": "Geometry", "settings": [
+      { "type": "text", "id": "label_id", "label": "Mark" },
+      { "type": "text", "id": "label", "label": "Label" },
+      { "type": "text", "id": "value", "label": "Value" }
+    ]},
+    { "type": "spec_item", "name": "Spec", "settings": [
+      { "type": "text", "id": "label", "label": "Label" },
+      { "type": "richtext", "id": "value", "label": "Value" }
+    ]},
+    { "type": "box_item", "name": "Box item", "settings": [
+      { "type": "text", "id": "label_id", "label": "Mark" },
+      { "type": "text", "id": "label", "label": "Label" }
+    ]},
+    { "type": "featured", "name": "Box featured", "settings": [
+      { "type": "text", "id": "box_tab", "label": "Tab" },
+      { "type": "text", "id": "title", "label": "Title" },
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "url", "id": "link", "label": "Link" }
+    ]},
+    { "type": "item", "name": "Box card", "settings": [
+      { "type": "text", "id": "box_tab", "label": "Tab" },
+      { "type": "text", "id": "title", "label": "Title" },
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "url", "id": "link", "label": "Link" },
+      { "type": "text", "id": "link_label", "label": "Link label" }
+    ]}
+  ],
+  "presets": [{ "name": "Flux specs" }]
+}
+{% endschema %}

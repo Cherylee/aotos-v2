@@ -1,0 +1,120 @@
+{{ 'aotos-flux-below.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'aotos-flux-below.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign bg = section.settings.background_image
+  assign bg_mob = section.settings.background_image_mobile | default: bg
+  assign modal = section.settings.modal_image
+  assign modal_mob = section.settings.modal_image_mobile | default: modal
+  assign overlay = section.settings.overlay_opacity | default: 25 | divided_by: 100.0
+-%}
+
+<flux-safety
+  class="fxb fxb-safety"
+  style="--fxb-bg: {{ section.settings.section_bg_color }}; --fxb-overlay: {{ overlay }}; --fxb-pt: {{ section.settings.padding_top | default: 4, allow_false: true }}; --fxb-pb: {{ section.settings.padding_bottom | default: 0, allow_false: true }}; --fxb-pt-m: {{ section.settings.padding_top_mobile | default: 0, allow_false: true }}; --fxb-pb-m: {{ section.settings.padding_bottom_mobile | default: 0, allow_false: true }};"
+>
+  <div class="fxb-shell">
+    <div class="fxb-safety__banner">
+      {%- if bg != blank or bg_mob != blank -%}
+        <picture>
+          {%- if bg_mob != blank -%}
+            <source media="(max-width: 768px)" srcset="{{ bg_mob | image_url: width: 750 }} 750w, {{ bg_mob | image_url: width: 1200 }} 1200w" sizes="100vw">
+          {%- endif -%}
+          {%- if bg != blank -%}
+            {%- assign bg_h = 1400 | divided_by: bg.aspect_ratio | round -%}
+            <img src="{{ bg | image_url: width: 1400 }}" srcset="{{ bg | image_url: width: 800 }} 800w, {{ bg | image_url: width: 1400 }} 1400w, {{ bg | image_url: width: 1800 }} 1800w" sizes="(max-width: 768px) 100vw, 1100px" width="1400" height="{{ bg_h }}" alt="" loading="lazy">
+          {%- endif -%}
+        </picture>
+      {%- endif -%}
+      <div class="fxb-safety__shade"></div>
+      <div class="fxb-safety__inner">
+        <div class="fxb-safety__logos">
+          {%- if section.settings.logo_1 != blank -%}
+            <img src="{{ section.settings.logo_1 | image_url: width: 128 }}" width="128" height="128" alt="{{ section.settings.logo_1_alt | escape }}" loading="lazy">
+          {%- endif -%}
+          {%- if section.settings.logo_2 != blank -%}
+            <img src="{{ section.settings.logo_2 | image_url: width: 128 }}" width="128" height="128" alt="{{ section.settings.logo_2_alt | escape }}" loading="lazy">
+          {%- endif -%}
+        </div>
+        <div>
+          <h2 class="fxb-safety__title">{{ section.settings.title | escape }}</h2>
+          <p class="fxb-safety__sub">{{ section.settings.subtitle | escape }}</p>
+          {%- if section.settings.button_label != blank -%}
+            <button type="button" class="fxb-safety__btn" data-fxb-open>{{ section.settings.button_label | escape }}</button>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fxb-modal" hidden>
+    <button type="button" class="fxb-modal__overlay" data-fxb-close aria-label="Close"></button>
+    <div class="fxb-modal__dialog" role="dialog" aria-modal="true">
+      <button type="button" class="fxb-modal__close" data-fxb-close aria-label="Close">×</button>
+      <div class="fxb-modal__header">
+        <div class="fxb-modal__media">
+          {%- if modal != blank or modal_mob != blank -%}
+            <picture>
+              {%- if modal_mob != blank -%}
+                <source media="(max-width: 768px)" srcset="{{ modal_mob | image_url: width: 750 }} 750w, {{ modal_mob | image_url: width: 1340 }} 1340w" sizes="92vw">
+              {%- endif -%}
+              {%- if modal != blank -%}
+                {%- assign modal_h = 1120 | divided_by: modal.aspect_ratio | round -%}
+                <img src="{{ modal | image_url: width: 1120 }}" srcset="{{ modal | image_url: width: 560 }} 560w, {{ modal | image_url: width: 1120 }} 1120w" sizes="(max-width: 768px) 92vw, 720px" width="1120" height="{{ modal_h }}" alt="" loading="lazy">
+              {%- endif -%}
+            </picture>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.logo_1 != blank or section.settings.logo_2 != blank -%}
+          <div class="fxb-modal__logos">
+            {%- if section.settings.logo_1 != blank -%}
+              <img class="fxb-modal__logo" src="{{ section.settings.logo_1 | image_url: width: 128 }}" srcset="{{ section.settings.logo_1 | image_url: width: 64 }} 64w, {{ section.settings.logo_1 | image_url: width: 96 }} 96w, {{ section.settings.logo_1 | image_url: width: 128 }} 128w" sizes="(max-width: 768px) 72px, 64px" width="64" height="{{ 64 | divided_by: section.settings.logo_1.aspect_ratio | round }}" alt="{{ section.settings.logo_1_alt | escape }}" loading="lazy">
+            {%- endif -%}
+            {%- if section.settings.logo_2 != blank -%}
+              <img class="fxb-modal__logo" src="{{ section.settings.logo_2 | image_url: width: 128 }}" srcset="{{ section.settings.logo_2 | image_url: width: 64 }} 64w, {{ section.settings.logo_2 | image_url: width: 96 }} 96w, {{ section.settings.logo_2 | image_url: width: 128 }} 128w" sizes="(max-width: 768px) 72px, 64px" width="64" height="{{ 64 | divided_by: section.settings.logo_2.aspect_ratio | round }}" alt="{{ section.settings.logo_2_alt | escape }}" loading="lazy">
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+      <div class="fxb-modal__body">
+        <p class="fxb-modal__eyebrow">{{ section.settings.modal_eyebrow | escape }}</p>
+        <h3 class="fxb-modal__heading">{{ section.settings.modal_heading | escape }}</h3>
+        <div class="fxb-modal__copy">{{ section.settings.modal_body }}</div>
+        {%- if section.settings.modal_cta_label != blank and section.settings.modal_cta_link != blank -%}
+          <a class="fxb-modal__cta" href="{{ section.settings.modal_cta_link }}">{{ section.settings.modal_cta_label | escape }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</flux-safety>
+
+{% schema %}
+{
+  "name": "Flux safety",
+  "settings": [
+    { "type": "image_picker", "id": "background_image", "label": "Background" },
+    { "type": "image_picker", "id": "background_image_mobile", "label": "Background mobile" },
+    { "type": "text", "id": "image_position", "label": "Image position", "default": "center center" },
+    { "type": "range", "id": "overlay_opacity", "label": "Overlay", "min": 0, "max": 80, "step": 5, "default": 25 },
+    { "type": "color", "id": "section_bg_color", "label": "Section background", "default": "#ffffff" },
+    { "type": "image_picker", "id": "logo_1", "label": "Logo 1" },
+    { "type": "text", "id": "logo_1_alt", "label": "Logo 1 alt" },
+    { "type": "image_picker", "id": "logo_2", "label": "Logo 2" },
+    { "type": "text", "id": "logo_2_alt", "label": "Logo 2 alt" },
+    { "type": "text", "id": "title", "label": "Title", "default": "TUV Safety Certified" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "In accordance with UL 2849" },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "LEARN MORE" },
+    { "type": "image_picker", "id": "modal_image", "label": "Modal image" },
+    { "type": "image_picker", "id": "modal_image_mobile", "label": "Modal image mobile" },
+    { "type": "text", "id": "modal_eyebrow", "label": "Modal eyebrow" },
+    { "type": "text", "id": "modal_heading", "label": "Modal heading" },
+    { "type": "richtext", "id": "modal_body", "label": "Modal text" },
+    { "type": "text", "id": "modal_cta_label", "label": "Modal button" },
+    { "type": "url", "id": "modal_cta_link", "label": "Modal link" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 120, "step": 4, "default": 4 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 120, "step": 4, "default": 0 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Padding top mobile", "min": 0, "max": 160, "step": 4, "default": 0 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Padding bottom mobile", "min": 0, "max": 160, "step": 4, "default": 0 }
+  ],
+  "presets": [{ "name": "Flux safety" }]
+}
+{% endschema %}

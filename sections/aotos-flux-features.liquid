@@ -1,0 +1,83 @@
+{{ 'aotos-flux-below.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'aotos-flux-below.js' | asset_url }}" defer="defer"></script>
+
+<flux-features
+  class="fxb fxb-features"
+  style="--fxb-bg: {{ section.settings.bg_color }}; --fxb-pt: {{ section.settings.padding_top | default: 80, allow_false: true }}; --fxb-pb: {{ section.settings.padding_bottom | default: 80, allow_false: true }}; --fxb-pt-m: {{ section.settings.padding_top_mobile | default: 88, allow_false: true }}; --fxb-pb-m: {{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }};"
+>
+  <div class="fxb-shell">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="fxb-title aotos-section-title">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+    <div class="fxb-features__stage">
+      <div class="fxb-features__track">
+        {%- for block in section.blocks -%}
+          <article class="fxb-features__slide{% if forloop.first %} is-active{% endif %}" {{ block.shopify_attributes }}>
+            <div class="fxb-features__media">
+              {%- if block.settings.video != blank -%}
+                {%- assign poster = block.settings.image | default: block.settings.video.preview_image -%}
+                {%- if poster != blank -%}
+                  {%- assign poster_h = 800 | divided_by: poster.aspect_ratio | round -%}
+                  <img src="{{ poster | image_url: width: 800 }}" srcset="{{ poster | image_url: width: 480 }} 480w, {{ poster | image_url: width: 800 }} 800w, {{ poster | image_url: width: 1200 }} 1200w" sizes="(max-width: 768px) 92vw, 560px" width="800" height="{{ poster_h }}" alt="{{ block.settings.heading | escape }}" loading="lazy">
+                {%- endif -%}
+                {{ block.settings.video | video_tag: autoplay: false, loop: true, muted: true, controls: false, playsinline: true, preload: 'none', image_size: '800x' }}
+              {%- elsif block.settings.image != blank -%}
+                {%- assign img_h = 800 | divided_by: block.settings.image.aspect_ratio | round -%}
+                <img src="{{ block.settings.image | image_url: width: 800 }}" srcset="{{ block.settings.image | image_url: width: 480 }} 480w, {{ block.settings.image | image_url: width: 800 }} 800w" sizes="(max-width: 768px) 92vw, 560px" width="800" height="{{ img_h }}" alt="{{ block.settings.heading | escape }}" loading="lazy">
+              {%- endif -%}
+            </div>
+            <div>
+              {%- if block.settings.pre_heading != blank -%}
+                <p class="fxb-features__kicker">{{ block.settings.pre_heading | escape }}</p>
+              {%- endif -%}
+              {%- if block.settings.heading != blank -%}
+                <h3 class="fxb-features__heading">{{ block.settings.heading | escape }}</h3>
+              {%- endif -%}
+              {%- if block.settings.description != blank -%}
+                <div class="fxb-features__text">{{ block.settings.description }}</div>
+              {%- endif -%}
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+      <button type="button" class="fxb-features__nav fxb-features__nav--prev" aria-label="Previous">‹</button>
+      <button type="button" class="fxb-features__nav fxb-features__nav--next" aria-label="Next">›</button>
+    </div>
+    <div class="fxb-features__dots">
+      {%- for block in section.blocks -%}
+        <button type="button" class="fxb-features__dot{% if forloop.first %} is-active{% endif %}" aria-label="Slide {{ forloop.index }}"></button>
+      {%- endfor -%}
+    </div>
+  </div>
+</flux-features>
+
+{% schema %}
+{
+  "name": "Flux features",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle" },
+    { "type": "checkbox", "id": "show_progress", "label": "Progress", "default": false },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#ffffff" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 120, "step": 4, "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 120, "step": 4, "default": 80 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Padding top mobile", "min": 0, "max": 160, "step": 4, "default": 88 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Padding bottom mobile", "min": 0, "max": 160, "step": 4, "default": 88 }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "video", "id": "video", "label": "Video" },
+        { "type": "video_url", "id": "video_url", "label": "External video", "accept": ["youtube", "vimeo"] },
+        { "type": "image_picker", "id": "image", "label": "Poster" },
+        { "type": "text", "id": "pre_heading", "label": "Eyebrow", "default": "BOOST MODE" },
+        { "type": "text", "id": "heading", "label": "Heading" },
+        { "type": "richtext", "id": "description", "label": "Text" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Flux features" }]
+}
+{% endschema %}

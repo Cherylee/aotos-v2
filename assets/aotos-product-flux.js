@@ -534,6 +534,7 @@ document.addEventListener('click', (event) => {
     });
     item.classList.toggle('is-open', open);
     toggle.setAttribute('aria-expanded', String(open));
+    if (!open) toggle.blur();
     return;
   }
   if (!event.target.closest('.aotos-flux-perks__item')) {
@@ -629,6 +630,24 @@ const relocateSpecs = () => {
 };
 relocateSpecs();
 window.addEventListener('resize', relocateSpecs, { passive: true });
+
+const relocateXcotton = () => {
+  document.querySelectorAll('.aotos-flux').forEach((root) => {
+    const mount = root.querySelector('#ProductBlockXcotton');
+    if (!mount || mount.dataset.xcottonBound) return;
+    mount.dataset.xcottonBound = '1';
+    const place = () => {
+      root.querySelectorAll('.xcotton-productProtection-detail-warp').forEach((widget) => {
+        if (!mount.contains(widget)) mount.appendChild(widget);
+      });
+      const inside = mount.querySelectorAll('.xcotton-productProtection-detail-warp');
+      for (let i = 0; i < inside.length - 1; i += 1) inside[i].remove();
+    };
+    place();
+    new MutationObserver(place).observe(root, { childList: true, subtree: true });
+  });
+};
+relocateXcotton();
 
 document.querySelectorAll('.product-rating').forEach((root) => {
   const looxRating = root.querySelector('.product-rating__loox');

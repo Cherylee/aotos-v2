@@ -1,0 +1,123 @@
+{{ 'aotos-flux-below.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign p1 = section.settings.product_1_image
+  assign p2 = section.settings.product_2_image
+  assign hl = section.settings.highlighted_column
+-%}
+
+<section
+  class="fxb fxb-compare"
+  style="--fxb-bg: {{ section.settings.bg_color }}; --fxb-color: {{ section.settings.title_color }}; --fxb-label: {{ section.settings.label_color }}; --fxb-value: {{ section.settings.value_color }}; --fxb-accent: {{ section.settings.highlight_word_color }}; --fxb-line: {{ section.settings.divider_color }}; --fxb-hl: {{ section.settings.highlight_bg }}; --fxb-hl-border: {{ section.settings.highlight_border }}; --fxb-pt: {{ section.settings.padding_top | default: 80, allow_false: true }}; --fxb-pb: {{ section.settings.padding_bottom | default: 80, allow_false: true }}; --fxb-pt-m: {{ section.settings.padding_top_mobile | default: 88, allow_false: true }}; --fxb-pb-m: {{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }};"
+>
+  <div class="fxb-shell">
+    <h2 class="fxb-title aotos-section-title">{{ section.settings.title | escape }}</h2>
+    <div class="fxb-compare__scroll">
+      <table class="fxb-compare__table">
+        <thead>
+          <tr>
+            <th class="fxb-compare__cell fxb-compare__label fxb-compare__head" scope="col">{{ section.settings.model_label | escape }}</th>
+            <th class="fxb-compare__cell fxb-compare__head{% if hl == '1' %} fxb-compare__hl{% endif %}" scope="col">
+              <div class="fxb-compare__product">
+                {%- if p1 != blank -%}
+                  <img class="fxb-compare__photo" src="{{ p1 | image_url: width: 160 }}" srcset="{{ p1 | image_url: width: 120 }} 120w, {{ p1 | image_url: width: 160 }} 160w, {{ p1 | image_url: width: 240 }} 240w" sizes="72px" width="160" height="{{ 160 | divided_by: p1.aspect_ratio | round }}" alt="{{ section.settings.product_1_name | escape }}" loading="lazy">
+                {%- endif -%}
+                <div>
+                  <span class="fxb-compare__name">
+                    {%- if section.settings.product_1_highlight != blank -%}
+                      {{ section.settings.product_1_name | remove: section.settings.product_1_highlight }}
+                      <span class="fxb-compare__accent">{{ section.settings.product_1_highlight }}</span>
+                    {%- else -%}
+                      {{ section.settings.product_1_name }}
+                    {%- endif -%}
+                  </span>
+                  {%- if section.settings.product_1_tagline != blank -%}
+                    <p class="fxb-compare__tag">{{ section.settings.product_1_tagline }}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+            </th>
+            <th class="fxb-compare__cell fxb-compare__head{% if hl == '2' %} fxb-compare__hl{% endif %}" scope="col">
+              <div class="fxb-compare__product">
+                {%- if p2 != blank -%}
+                  <img class="fxb-compare__photo" src="{{ p2 | image_url: width: 160 }}" srcset="{{ p2 | image_url: width: 120 }} 120w, {{ p2 | image_url: width: 160 }} 160w, {{ p2 | image_url: width: 240 }} 240w" sizes="72px" width="160" height="{{ 160 | divided_by: p2.aspect_ratio | round }}" alt="{{ section.settings.product_2_name | escape }}" loading="lazy">
+                {%- endif -%}
+                <div>
+                  <span class="fxb-compare__name">{{ section.settings.product_2_name }}</span>
+                  {%- if section.settings.product_2_tagline != blank -%}
+                    <p class="fxb-compare__tag">{{ section.settings.product_2_tagline }}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for block in section.blocks -%}
+            {%- unless block.settings.disabled or block.disabled -%}
+              <tr {{ block.shopify_attributes }}>
+                <th class="fxb-compare__cell fxb-compare__label" scope="row">{{ block.settings.label }}</th>
+                <td class="fxb-compare__cell{% if hl == '1' %} fxb-compare__hl{% endif %}">{{ block.settings.value_1 }}</td>
+                <td class="fxb-compare__cell{% if hl == '2' %} fxb-compare__hl{% endif %}">{{ block.settings.value_2 }}</td>
+              </tr>
+            {%- endunless -%}
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+    {%- if section.settings.show_footnote and section.settings.footnote != blank -%}
+      <div class="fxb-compare__note">{{ section.settings.footnote }}</div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Flux compare",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "FLUX X26 Pro VS Flux X26" },
+    { "type": "text", "id": "model_label", "label": "Model label", "default": "Model" },
+    { "type": "checkbox", "id": "show_footnote", "label": "Show footnote", "default": true },
+    { "type": "richtext", "id": "footnote", "label": "Footnote" },
+    { "type": "select", "id": "highlighted_column", "label": "Highlight", "default": "1", "options": [
+      { "value": "1", "label": "Column 1" },
+      { "value": "2", "label": "Column 2" },
+      { "value": "0", "label": "None" }
+    ]},
+    { "type": "text", "id": "product_1_name", "label": "Product 1", "default": "FLUX X26 Pro" },
+    { "type": "text", "id": "product_1_highlight", "label": "Product 1 accent", "default": "Pro" },
+    { "type": "image_picker", "id": "product_1_image", "label": "Product 1 image" },
+    { "type": "text", "id": "product_1_tagline", "label": "Product 1 tagline" },
+    { "type": "url", "id": "product_1_url", "label": "Product 1 link" },
+    { "type": "text", "id": "product_2_name", "label": "Product 2", "default": "FLUX X26" },
+    { "type": "text", "id": "product_2_highlight", "label": "Product 2 accent" },
+    { "type": "image_picker", "id": "product_2_image", "label": "Product 2 image" },
+    { "type": "text", "id": "product_2_tagline", "label": "Product 2 tagline" },
+    { "type": "url", "id": "product_2_url", "label": "Product 2 link" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#ffffff" },
+    { "type": "color", "id": "title_color", "label": "Title", "default": "#000000" },
+    { "type": "color", "id": "label_color", "label": "Label", "default": "#999999" },
+    { "type": "color", "id": "value_color", "label": "Value", "default": "#000000" },
+    { "type": "color", "id": "highlight_word_color", "label": "Accent", "default": "#ff6501" },
+    { "type": "color", "id": "divider_color", "label": "Divider", "default": "#e5e5e5" },
+    { "type": "color", "id": "highlight_bg", "label": "Highlight background", "default": "#f5f5f5" },
+    { "type": "color", "id": "highlight_border", "label": "Highlight border", "default": "#e0e0e0" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 120, "step": 4, "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 120, "step": 4, "default": 80 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Padding top mobile", "min": 0, "max": 160, "step": 4, "default": 88 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Padding bottom mobile", "min": 0, "max": 160, "step": 4, "default": 88 }
+  ],
+  "blocks": [
+    {
+      "type": "spec_row",
+      "name": "Row",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "text", "id": "value_1", "label": "Value 1" },
+        { "type": "text", "id": "value_2", "label": "Value 2" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Flux compare" }]
+}
+{% endschema %}
