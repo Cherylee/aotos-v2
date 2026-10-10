@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -154,28 +163,71 @@
         "padding_bottom": 80
       }
     },
-    "reviews": {
-      "type": "apps",
+    "flux_anchor": {
+      "type": "aotos-flux-anchor",
       "blocks": {
-        "loox_reviews": {
-          "type": "shopify://apps/loox-reviews/blocks/loox-dynamic-section/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
+        "nav_overview": {
+          "type": "item",
           "settings": {
-            "reviews_to_display": "product_reviews_only",
-            "default_tab": "automatic",
-            "only_photos": false,
-            "aggregated": false,
-            "limit": 20,
-            "hide_thumbnails": false,
-            "maxwidth": 1080,
-            "is_sample": false
+            "show_in_nav": true,
+            "label": "Overview",
+            "section_key": "main"
+          }
+        },
+        "nav_compare": {
+          "type": "item",
+          "settings": {
+            "show_in_nav": true,
+            "label": "Compare",
+            "section_key": "flux_compare"
+          }
+        },
+        "nav_specs": {
+          "type": "item",
+          "settings": {
+            "show_in_nav": true,
+            "label": "Specs",
+            "section_key": "flux_specs"
+          }
+        },
+        "nav_faq": {
+          "type": "item",
+          "settings": {
+            "show_in_nav": true,
+            "label": "FAQ",
+            "section_key": "flux_faq"
+          }
+        },
+        "nav_reviews": {
+          "type": "item",
+          "settings": {
+            "show_in_nav": true,
+            "label": "Reviews",
+            "section_key": "reviews"
           }
         }
       },
       "block_order": [
-        "loox_reviews"
+        "nav_overview",
+        "nav_compare",
+        "nav_specs",
+        "nav_faq",
+        "nav_reviews"
       ],
       "settings": {
-        "include_margins": true
+        "background_color": "#eeeeee",
+        "text_color": "#000000",
+        "active_color": "#ff6501",
+        "underline_color": "#ff6501",
+        "hover_color": "#ff6501"
+      }
+    },
+    "image_banner_Prm77L": {
+      "type": "image-banner",
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "video": "shopify://files/videos/pro-main.mp4",
+        "image_height": "large"
       }
     },
     "flux_compare": {
@@ -353,7 +405,11 @@
         "highlight_word_color": "#ff4500",
         "divider_color": "#e5e5e5",
         "highlight_bg": "#f5f5f5",
-        "highlight_border": "#e0e0e0"
+        "highlight_border": "#e0e0e0",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
       }
     },
     "flux_features": {
@@ -362,7 +418,8 @@
         "card_1": {
           "type": "card",
           "settings": {
-            "video": "shopify://files/videos/002.mp4",
+            "video": "shopify://files/videos/pro1.mp4",
+            "video_url": "",
             "pre_heading": "Boost Mode",
             "heading": "Instant Torque. Controlled Launch.",
             "description": "<p>Tap Boost to send maximum torque to the rear wheel, giving you stronger acceleration when you need an extra burst of power.</p>"
@@ -371,7 +428,8 @@
         "card_4": {
           "type": "card",
           "settings": {
-            "video": "shopify://files/videos/005.mp4",
+            "video": "shopify://files/videos/pro2.mp4",
+            "video_url": "",
             "pre_heading": "Long-Range Battery",
             "heading": "Up to 70 Miles",
             "description": "<p>The high-capacity 1008 Wh battery gives you the range for daily commutes, weekend rides, and longer routes without constant recharging.</p>"
@@ -380,7 +438,8 @@
         "card_6": {
           "type": "card",
           "settings": {
-            "video": "shopify://files/videos/gfawegawehaw.mp4",
+            "video": "shopify://files/videos/pro3.mp4",
+            "video_url": "",
             "pre_heading": "Smart Security System",
             "heading": "Track It. Protect It.",
             "description": "<p>On the Pro model, built-in GPS tracking and an anti-theft vibration alarm help protect your bike, send instant alerts, and make it easier to locate when needed.</p>"
@@ -389,7 +448,8 @@
         "card_2": {
           "type": "card",
           "settings": {
-            "video": "shopify://files/videos/004.mp4",
+            "video": "shopify://files/videos/pro4.mp4",
+            "video_url": "",
             "pre_heading": "6061-T6 Aerospace-Grade Frame",
             "heading": "Strength Meets Precision",
             "description": "<p>Built with aerospace-grade 6061-T6 aluminum, the Flux X26 Series delivers the rigidity, durability, and sharp futuristic profile built for everyday rides and bigger adventures.</p>"
@@ -398,7 +458,8 @@
         "card_3": {
           "type": "card",
           "settings": {
-            "video": "shopify://files/videos/001.mp4",
+            "video": "shopify://files/videos/pro5.mp4",
+            "video_url": "",
             "pre_heading": "Dual Hydraulic Suspension",
             "heading": "Smooth Over Rough Roads",
             "description": "<p>Front and rear hydraulic suspension helps absorb bumps, gravel, and uneven terrain, giving you a smoother ride and better control across changing road conditions.</p>"
@@ -407,7 +468,8 @@
         "card_5": {
           "type": "card",
           "settings": {
-            "video": "shopify://files/videos/fh2q90pg.mp4",
+            "video": "shopify://files/videos/pro6.mp4",
+            "video_url": "",
             "pre_heading": "5.5-Inch TFT Smart Display",
             "heading": "Navigation at a Glance",
             "description": "<p>The full-color 5.5-inch TFT display shows speed, battery level, ride mode, range, and alerts, with turn-by-turn navigation synced directly from your phone.</p>"
@@ -427,9 +489,9 @@
         "subtitle": "",
         "show_progress": false,
         "bg_color": "#ffffff",
-        "padding_top": 80,
+        "padding_top": 0,
         "padding_bottom": 80,
-        "padding_top_mobile": 88,
+        "padding_top_mobile": 0,
         "padding_bottom_mobile": 88
       }
     },
@@ -960,6 +1022,40 @@
         "bg_color": "#000000"
       }
     },
+    "service_repair_banner_r44PMj": {
+      "type": "service-repair-banner",
+      "name": "Service Repair Banner",
+      "settings": {
+        "layout": "card",
+        "copy_align": "center",
+        "eyebrow": "SMART CONNECT",
+        "heading": "Smarter rides. Connected world.",
+        "heading_color": "#000000",
+        "text": "Track performance, customize settings, and stay connected.",
+        "text_color": "#999999",
+        "primary_label": "",
+        "primary_link": "",
+        "secondary_label": "",
+        "secondary_link": "",
+        "image_ratio": "5/2",
+        "image": "shopify://shop_images/Engineered_Strength._Precision_Form._983854fe-7386-4499-bce9-64bcb883edee_2.webp",
+        "image_alt": "",
+        "store_image_1": "shopify://shop_images/png-clipart-app-store-apple-google-play-iphone-mid-autumn-lantern-text-logo_1_535d3bfe-44e8-4449-a353-9716168c9d5a.webp",
+        "store_link_1": "https://apps.apple.com/us/app/aotos/id6743829984",
+        "store_alt_1": "Download on the App Store",
+        "store_image_2": "shopify://shop_images/en_badge_web_generic_1_e12176cc-492d-4f35-84e9-c4929b9eb547.webp",
+        "store_link_2": "https://play.google.com/store/apps/details?id=com.dt.smart.aotos&hl=ln",
+        "store_alt_2": "Get it on Google Play",
+        "image_position": "right center",
+        "fallback_asset": "service-repair-banner.png",
+        "accent_color": "#ff6501",
+        "background_color": "#FFFFFF",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
+    },
     "flux_faq": {
       "type": "aotos-flux-faq",
       "blocks": {
@@ -1054,76 +1150,51 @@
         "padding_bottom_mobile": 0
       }
     },
-    "flux_anchor": {
-      "type": "aotos-flux-anchor",
+    "aotos_flux_faq_qQqXtc": {
+      "type": "aotos-flux-faq",
+      "name": "Flux FAQ",
+      "settings": {
+        "faq_title": "Customer Reviews"
+      }
+    },
+    "reviews": {
+      "type": "apps",
       "blocks": {
-        "nav_overview": {
-          "type": "item",
+        "loox_reviews": {
+          "type": "shopify://apps/loox-reviews/blocks/loox-dynamic-section/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
           "settings": {
-            "show_in_nav": true,
-            "label": "Overview",
-            "section_key": "main"
-          }
-        },
-        "nav_compare": {
-          "type": "item",
-          "settings": {
-            "show_in_nav": true,
-            "label": "Compare",
-            "section_key": "flux_compare"
-          }
-        },
-        "nav_specs": {
-          "type": "item",
-          "settings": {
-            "show_in_nav": true,
-            "label": "Specs",
-            "section_key": "flux_specs"
-          }
-        },
-        "nav_faq": {
-          "type": "item",
-          "settings": {
-            "show_in_nav": true,
-            "label": "FAQ",
-            "section_key": "flux_faq"
-          }
-        },
-        "nav_reviews": {
-          "type": "item",
-          "settings": {
-            "show_in_nav": true,
-            "label": "Reviews",
-            "section_key": "reviews"
+            "reviews_to_display": "product_reviews_only",
+            "default_tab": "automatic",
+            "only_photos": false,
+            "aggregated": false,
+            "limit": 20,
+            "hide_thumbnails": false,
+            "maxwidth": 1080,
+            "is_sample": false
           }
         }
       },
       "block_order": [
-        "nav_overview",
-        "nav_compare",
-        "nav_specs",
-        "nav_faq",
-        "nav_reviews"
+        "loox_reviews"
       ],
       "settings": {
-        "background_color": "#eeeeee",
-        "text_color": "#000000",
-        "active_color": "#ff6501",
-        "underline_color": "#ff6501",
-        "hover_color": "#ff6501"
+        "include_margins": true
       }
     }
   },
   "order": [
     "main",
     "flux_anchor",
+    "image_banner_Prm77L",
     "flux_compare",
     "flux_features",
     "flux_specs",
     "flux_story",
     "flux_experts",
+    "service_repair_banner_r44PMj",
     "flux_faq",
     "flux_safety",
+    "aotos_flux_faq_qQqXtc",
     "reviews"
   ]
 }
