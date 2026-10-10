@@ -258,6 +258,7 @@
               "price_formatted": {{ variant.price | money | json }},
               "compare_at_price": {{ variant.compare_at_price | json }},
               "compare_at_price_formatted": {{ variant.compare_at_price | money | json }},
+              "save_formatted": {% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | minus: variant.price | money | json }}{% else %}""{% endif %},
               "available": {{ variant.available | json }},
               "description": {{ v_desc | json }},
               "images": [

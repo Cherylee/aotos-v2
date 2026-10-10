@@ -486,8 +486,11 @@ document.addEventListener('change', (event) => {
     if (comparePrice) {
       comparePrice.textContent = variant.compare_at_price > variant.price ? variant.compare_at_price_formatted : '';
     }
+    const onSale = variant.compare_at_price > variant.price;
+    const saveBadge = priceBox.querySelector('.aotos-flux-price__save');
+    if (saveBadge) saveBadge.textContent = onSale && variant.save_formatted ? `SAVE  ${variant.save_formatted}` : '';
     const wrapper = priceBox.querySelector('.aotos-flux-price__row');
-    if (wrapper) wrapper.classList.toggle('is-sale', variant.compare_at_price > variant.price);
+    if (wrapper) wrapper.classList.toggle('is-sale', onSale);
   });
   document.querySelectorAll('[id^="ProductSubmitButton-"]').forEach((btn) => {
     const span = btn.querySelector('span');

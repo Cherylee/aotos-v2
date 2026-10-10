@@ -253,8 +253,10 @@
               assign price = current_variant.price
               assign compare_at_price = current_variant.compare_at_price
               assign on_sale = false
+              assign save_amount = 0
               if compare_at_price > price
                 assign on_sale = true
+                assign save_amount = compare_at_price | minus: price
               endif
             -%}
             <div class="velotric-product__price" id="price-{{ section.id }}" {{ block.shopify_attributes }}>
@@ -263,6 +265,7 @@
                 <span class="velotric-price__compare aotos-flux-price__compare">
                   <s class="velotric-price-item aotos-flux-price__compare-value">{% if on_sale %}{{ compare_at_price | money }}{% endif %}</s>
                 </span>
+                <span class="aotos-flux-price__save">{% if on_sale %}SAVE {{ save_amount | money }}{% endif %}</span>
               </div>
             </div>
           {%- when 'variant_picker' -%}

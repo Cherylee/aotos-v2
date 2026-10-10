@@ -251,6 +251,7 @@ html.fxb-anchor-stuck .fxb-compare thead .fxb-compare__cell {
   border-radius: calc(16 * var(--rem));
   overflow: hidden;
   background: #111;
+  width: 100%;
 }
 
 .fxb-features__media img,
@@ -1180,4 +1181,28 @@ html.js .fxb-faq__answer {
 @media (prefers-reduced-motion: reduce) {
   .fxb-features__track,
   .fxb-experts__track { scroll-behavior: auto; }
+}
+
+.jm-verified-buyer-badge__text {
+  background: #00a651 !important;
+  color: #fff !important;
+  border-color: #00a651 !important;
+}
+
+.jdgm-write-review-modal__stars .jdgm-star,
+.jdgm-write-review-modal__stars .jdgm-star::before {
+  color: var(--aotos-theme-color, #ff6501) !important;
+}
+
+.jdgm-write-review-modal__nav-btn-next,
+.jdgm-write-review-modal__nav-btn-close {
+  background: var(--aotos-theme-color, #ff6501) !important;
+  border-color: var(--aotos-theme-color, #ff6501) !important;
+  color: #fff !important;
+}
+
+@media screen and (max-width: 768px) {
+  .jm-review-widget {
+    padding-top: 0 !important;
+  }
 }

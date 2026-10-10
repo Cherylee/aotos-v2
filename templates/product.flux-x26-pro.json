@@ -1160,7 +1160,8 @@
       "type": "aotos-flux-faq",
       "name": "Flux FAQ",
       "settings": {
-        "faq_title": "Customer Reviews"
+        "faq_title": "Customer Reviews",
+        "padding_bottom_mobile": 0
       }
     },
     "reviews": {

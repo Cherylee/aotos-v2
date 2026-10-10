@@ -1,7 +1,7 @@
 {{ 'aotos-flux-below.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'aotos-flux-below.js' | asset_url }}" defer="defer"></script>
 
-<section class="fxb fxb-faq" style="--fxb-bg: #fff; --fxb-pt: 80; --fxb-pb: 80; --fxb-pt-m: 88; --fxb-pb-m: 88;">
+<section class="fxb fxb-faq" style="--fxb-bg: #fff; --fxb-pt: {{ section.settings.padding_top | default: 80, allow_false: true }}; --fxb-pb: {{ section.settings.padding_bottom | default: 80, allow_false: true }}; --fxb-pt-m: {{ section.settings.padding_top_mobile | default: 88, allow_false: true }}; --fxb-pb-m: {{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }};">
   <div class="fxb-shell">
     <h2 class="fxb-title aotos-section-title">{{ section.settings.faq_title | escape }}</h2>
     {%- for block in section.blocks -%}
@@ -17,7 +17,11 @@
 {
   "name": "Flux FAQ",
   "settings": [
-    { "type": "text", "id": "faq_title", "label": "Title", "default": "Frequently Asked Questions" }
+    { "type": "text", "id": "faq_title", "label": "Title", "default": "Frequently Asked Questions" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 120, "step": 4, "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 120, "step": 4, "default": 80 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Padding top mobile", "min": 0, "max": 160, "step": 4, "default": 88 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Padding bottom mobile", "min": 0, "max": 160, "step": 4, "default": 88 }
   ],
   "blocks": [
     {

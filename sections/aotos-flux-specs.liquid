@@ -11,7 +11,7 @@
 
 <flux-tabs
   class="fxb fxb-specs"
-  style="--fxb-bg: {{ section.settings.bg_color }}; --fxb-color: #fff; --fxb-pt: 80; --fxb-pb: 80; --fxb-pt-m: 88; --fxb-pb-m: 88;"
+  style="--fxb-bg: {{ section.settings.bg_color }}; --fxb-color: #fff; --fxb-pt: {{ section.settings.padding_top | default: 80, allow_false: true }}; --fxb-pb: {{ section.settings.padding_bottom | default: 80, allow_false: true }}; --fxb-pt-m: {{ section.settings.padding_top_mobile | default: 88, allow_false: true }}; --fxb-pb-m: {{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }};"
 >
   <div class="fxb-shell">
     <h2 class="fxb-title aotos-section-title">{{ section.settings.title | escape }}</h2>
@@ -93,6 +93,10 @@
     { "type": "text", "id": "box_tab_1", "label": "Box tab 1", "default": "FLUX X26 Pro" },
     { "type": "text", "id": "box_tab_2", "label": "Box tab 2", "default": "FLUX X26" },
     { "type": "color", "id": "card_background", "label": "Card background", "default": "#1a1a1a" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 120, "step": 4, "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 120, "step": 4, "default": 80 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Padding top mobile", "min": 0, "max": 160, "step": 4, "default": 88 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Padding bottom mobile", "min": 0, "max": 160, "step": 4, "default": 88 },
     { "type": "select", "id": "grid_columns", "label": "Columns", "default": "2", "options": [
       { "value": "2", "label": "2" },
       { "value": "3", "label": "3" }
