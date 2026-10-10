@@ -455,13 +455,21 @@ body.velotric-lightbox-open {
 
 .product-rating .jdgm-preview-badge,
 .product-rating .jdgm-prev-badge,
-.product-rating .jdgm-prev-badge__stars {
+.product-rating .jdgm-prev-badge__stars,
+.velotric-product__info .jdgm-prev-badge__stars {
   display: inline-flex !important;
   align-items: center;
   margin: 0 !important;
   padding: 0 !important;
   line-height: 1 !important;
-  font-size: 1em !important;
+  font-size: calc(14 * var(--rem)) !important;
+}
+
+.product-rating .jdgm-star,
+.product-rating .jdgm-star::before,
+.velotric-product__info .jdgm-star,
+.velotric-product__info .jdgm-star::before {
+  font-size: calc(14 * var(--rem)) !important;
 }
 
 .product-rating .jdgm-prev-badge__text {
@@ -489,7 +497,7 @@ body.velotric-lightbox-open {
 
 .velotric-product__info .jdgm-prev-badge__text {
   color: #000 !important;
-  font-size: calc(18 * var(--rem)) !important;
+  font-size: calc(14 * var(--rem)) !important;
   line-height: 1 !important;
   font-weight: 500;
 }
@@ -1841,8 +1849,13 @@ body.size-fit-drawer-open {
     color: #000 !important;
   }
 
-  .product-rating .jdgm-prev-badge__stars {
-    font-size: 1em !important;
+  .product-rating .jdgm-prev-badge__stars,
+  .product-rating .jdgm-star,
+  .product-rating .jdgm-star::before,
+  .velotric-product__info .jdgm-prev-badge__stars,
+  .velotric-product__info .jdgm-star,
+  .velotric-product__info .jdgm-star::before {
+    font-size: calc(24 * var(--rem)) !important;
   }
 
   .velotric-product__price {
