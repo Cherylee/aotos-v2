@@ -221,27 +221,24 @@
             </div>
           {%- when 'rating' -%}
             {%- liquid
-              assign static_rating = product.metafields.loox.avg_rating | default: block.settings.rating | plus: 0
-              assign static_review_count = product.metafields.loox.num_reviews | default: block.settings.review_count
+              assign static_rating = product.metafields.reviews.rating.value.rating | default: block.settings.rating | plus: 0
+              assign static_review_count = product.metafields.reviews.rating_count.value | default: block.settings.review_count
               assign rendered_star_count = static_rating | ceil
             -%}
             <div class="product-rating" id="product-rating-{{ block.id }}" {{ block.shopify_attributes }}>
-              <a class="product-rating__link" href="#looxReviews">
+              <a class="product-rating__link" href="#judgeme_product_reviews">
                 <div class="product-rating__stars product-rating__placeholder" aria-label="{{ static_rating }} out of 5 stars">
                   {%- for i in (1..5) -%}
                     {%- if i <= rendered_star_count -%}
-                      <svg class="loox-icon" viewBox="0 0 24 24" data-lx-fill="full" aria-hidden="true">
+                      <svg class="loox-icon" viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M24 9.425c0 .212-.125.443-.375.693l-5.236 5.105 1.24 7.212c.01.067.015.164.015.289a.85.85 0 0 1-.151.511.51.51 0 0 1-.44.21c-.183 0-.375-.058-.577-.174L12 19.869l-6.476 3.404c-.212.115-.404.173-.577.173-.202 0-.353-.07-.454-.21a.85.85 0 0 1-.152-.511c0-.058.01-.154.03-.289l1.24-7.211-5.25-5.106C.12 9.858 0 9.628 0 9.425c0-.355.27-.577.808-.663l7.24-1.053 3.245-6.562c.183-.395.418-.592.707-.592s.524.197.707.592l3.245 6.562 7.24 1.053c.539.086.808.308.808.663Z"/>
                       </svg>
                     {%- endif -%}
                   {%- endfor -%}
                 </div>
-                <div
-                  class="loox-rating product-rating__loox"
-                  data-id="{{ product.id }}"
-                  data-rating="{{ product.metafields.loox.avg_rating }}"
-                  data-raters="{{ product.metafields.loox.num_reviews }}"
-                ></div>
+                <div class="jdgm-widget jdgm-preview-badge product-rating__badge" data-id="{{ product.id }}" aria-hidden="true">
+                  {{ product.metafields.judgeme.badge }}
+                </div>
               </a>
               <div class="product-rating__count">{{ static_review_count }} {{ block.settings.review_text | default: 'reviews' }}</div>
             </div>

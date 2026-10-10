@@ -650,16 +650,24 @@ const relocateXcotton = () => {
 relocateXcotton();
 
 document.querySelectorAll('.product-rating').forEach((root) => {
-  const looxRating = root.querySelector('.product-rating__loox');
+  const badge = root.querySelector('.product-rating__badge');
   const placeholder = root.querySelector('.product-rating__placeholder');
-  if (!looxRating || !placeholder) return;
+  if (!badge || !placeholder) return;
   const reveal = () => {
-    if (looxRating.childElementCount === 0 && looxRating.textContent.trim() === '') return false;
-    root.classList.add('is-loox-ready');
+    const badgeRoot = badge.querySelector('.jdgm-prev-badge');
+    const count = parseInt(badgeRoot?.getAttribute('data-number-of-reviews') || '0', 10);
+    if (!badgeRoot || count < 1) return false;
+    const countEl = root.querySelector('.product-rating__count');
+    if (countEl) {
+      const label = countEl.textContent.replace(/^\s*\d+\s*/, '').trim() || 'reviews';
+      countEl.textContent = `${count} ${label}`;
+    }
+    root.classList.add('is-rating-ready');
+    badge.removeAttribute('aria-hidden');
     placeholder.setAttribute('aria-hidden', 'true');
     observer.disconnect();
     return true;
   };
   const observer = new MutationObserver(reveal);
-  if (!reveal()) observer.observe(looxRating, { childList: true, subtree: true, characterData: true });
+  if (!reveal()) observer.observe(badge, { childList: true, subtree: true, characterData: true });
 });
