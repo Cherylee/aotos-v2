@@ -143,6 +143,7 @@
           </div>
         </velotric-carousel>
       {%- endif -%}
+      {%- if section.settings.show_specs -%}
       <div data-product-specs-desktop>
         <div class="product-specs-grid" data-product-specs>
           <div class="product-specs-grid__list">
@@ -208,6 +209,7 @@
           </div>
         </div>
       </div>
+      {%- endif -%}
     </div>
 
     <div class="velotric-product__info">
@@ -347,6 +349,7 @@
   "class": "section",
   "enabled_on": { "templates": ["product"] },
   "settings": [
+    { "type": "checkbox", "id": "show_specs", "label": "显示规格", "default": true },
     { "type": "image_picker", "id": "award_image", "label": "Award badge image" },
     { "type": "text", "id": "award_caption", "label": "Award caption", "default": "reddot winner 2026" },
     { "type": "text", "id": "payment_icons", "label": "Payment icons", "default": "visa,master,american_express,discover,jcb,klarna,paypal,maestro,venmo,afterpay" },

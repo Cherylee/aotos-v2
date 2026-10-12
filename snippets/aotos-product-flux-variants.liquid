@@ -10,6 +10,7 @@
   endif
 -%}
 
+{%- if product != blank and product.has_only_default_variant == false -%}
 <div class="velotric-product__variants" {{ block.shopify_attributes }}>
   <div class="variant-picker__title-row">
     <div class="variant-picker__title">
@@ -138,11 +139,10 @@
     {%- endif -%}
   </div>
 
-  {%- if product != blank and product.has_only_default_variant == false -%}
-    {%- liquid
-      assign product_form_id = 'product-form-' | append: section.id
-    -%}
-    <variant-selects
+  {%- liquid
+    assign product_form_id = 'product-form-' | append: section.id
+  -%}
+  <variant-selects
       id="variant-selects-{{ section.id }}"
       data-section="{{ section.id }}"
       {{ block.shopify_attributes }}
@@ -303,6 +303,6 @@
           {%- endfor -%}
         }
       </script>
-    </variant-selects>
-  {%- endif -%}
+  </variant-selects>
 </div>
+{%- endif -%}
