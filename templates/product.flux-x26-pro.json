@@ -1049,6 +1049,8 @@
         "eyebrow": "SMART CONNECT",
         "heading": "Smarter rides. Connected world.",
         "heading_color": "#000000",
+        "heading_font_size_pc": 32,
+        "heading_font_size_mob": 38,
         "text": "Track performance, customize settings, and stay connected.",
         "text_color": "#999999",
         "primary_label": "",

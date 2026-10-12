@@ -2,7 +2,7 @@
  * ------------------------------------------------------------
  * IMPORTANT: The contents of this file are auto-generated.
  *
- * This file may be updated by the Shopify admin theme editor
+ * This file may be updated by the Shopify admin theme editor.
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
@@ -14,8 +14,19 @@
       "type": "service-repair-banner",
       "settings": {
         "layout": "banner",
+        "copy_padding_x": 170,
         "copy_align": "center",
+        "show_breadcrumb": true,
+        "crumb_home": "Home",
+        "crumb_parent_label": "Support",
+        "crumb_parent_url": "/pages/support",
+        "crumb_current": "User Manuals",
+        "crumb_color": "#999999",
+        "crumb_current_color": "#000000",
+        "crumb_margin_top": 40,
+        "crumb_margin_bottom": 40,
         "eyebrow": "AOTOS SUPPORT",
+        "eyebrow_color": "#ff6501",
         "heading": "Find the right guide for your ride.",
         "heading_color": "#000000",
         "text": "Select your model and purchase channel to view the correct manual, setup videos and app download.",
