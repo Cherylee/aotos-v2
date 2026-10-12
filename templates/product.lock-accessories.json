@@ -25,16 +25,6 @@
             "review_text": "reviews"
           }
         },
-        "judge_me_reviews_preview_badge_CjPMDe": {
-          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {}
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Ride Further. Ride Smarter.</p>"
-          }
-        },
         "price": {
           "type": "price",
           "settings": {}
@@ -50,7 +40,7 @@
           "type": "variant_picker",
           "settings": {
             "picker_title": "Choose your model:",
-            "show_size_guide": true,
+            "show_size_guide": false,
             "size_guide_text": "Size & Fit",
             "size_guide_icon": "shopify://shop_images/288aa83db3c7f157c94fe470a81f4032.webp"
           }
@@ -77,15 +67,6 @@
             "icon_4": "shopify://shop_images/2_2_2393cb17-6719-43ff-821d-2a7ba1d45a5b.png",
             "text_4": "Customer Support",
             "detail_4": "<p>We’re here to help!</p><ul><li><strong>Email:</strong> <a href=\"mailto:support@aotos.com\" target=\"_blank\">support@aotos.com</a></li><li><strong>Hours:</strong> 10:00 AM–8:30 PM (HKT)</li></ul><p>For the fastest response, please include your order number when contacting us.<br/>Our team typically replies within 1 business day.</p>"
-          }
-        },
-        "accordion_box": {
-          "type": "accordion",
-          "settings": {
-            "icon": "shopify://shop_images/1_9b74d37f-ee92-4622-9912-020d30cc685d.webp",
-            "title": "What's in the Box",
-            "content": "<p>Bluetooth module ×1<br/>Mudguard brackets ×2<br/>Accessory box ×1<br/>Mudguard bracket covers ×2<br/>Water bottle holder ×1<br/>Front reflector ×1<br/>Power cord ×1<br/>Pedals ×2<br/>Wrench ×1<br/>Ratchet wrench ×1</p>",
-            "open_by_default": false
           }
         },
         "spec_motor": {
@@ -146,14 +127,11 @@
       "block_order": [
         "title",
         "rating",
-        "judge_me_reviews_preview_badge_CjPMDe",
-        "text",
         "price",
         "paypal_messaging",
         "variant_picker",
         "buy_buttons",
         "perks",
-        "accordion_box",
         "spec_motor",
         "spec_torque",
         "spec_speed",

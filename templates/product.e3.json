@@ -25,16 +25,6 @@
             "review_text": "reviews"
           }
         },
-        "judge_me_reviews_preview_badge_CjPMDe": {
-          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {}
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Ride Further. Ride Smarter.</p>"
-          }
-        },
         "price": {
           "type": "price",
           "settings": {}
@@ -81,85 +71,24 @@
         },
         "accordion_box": {
           "type": "accordion",
+          "disabled": true,
           "settings": {
             "icon": "shopify://shop_images/1_9b74d37f-ee92-4622-9912-020d30cc685d.webp",
             "title": "What's in the Box",
             "content": "<p>Bluetooth module ×1<br/>Mudguard brackets ×2<br/>Accessory box ×1<br/>Mudguard bracket covers ×2<br/>Water bottle holder ×1<br/>Front reflector ×1<br/>Power cord ×1<br/>Pedals ×2<br/>Wrench ×1<br/>Ratchet wrench ×1</p>",
             "open_by_default": false
           }
-        },
-        "spec_motor": {
-          "type": "spec",
-          "settings": {
-            "icon": "shopify://shop_images/Motor_987a092e-a8c8-469d-b48d-610681999762.svg",
-            "title": "Motor",
-            "value": "750W rated / 2000W Peak in Boost",
-            "variant_values": "Flux X26 Pro: 750W rated / 2000W Peak in Boost\nFlux X26: 750W rated / 1200W Peak in Boost"
-          }
-        },
-        "spec_torque": {
-          "type": "spec",
-          "settings": {
-            "icon": "shopify://shop_images/Torque_bc1a12dc-b32a-484d-9a7b-636330936ffc.svg",
-            "title": "Torque",
-            "value": "100 Nm torque",
-            "variant_values": "Flux X26 Pro: 100 Nm torque\nFlux X26: 80 Nm torque"
-          }
-        },
-        "spec_speed": {
-          "type": "spec",
-          "settings": {
-            "icon": "shopify://shop_images/Top_Speed_03910da7-e533-4487-ae1b-8e47624b98ae.svg",
-            "title": "Top Speed",
-            "value": "28 mph (in Boost*)",
-            "variant_values": "Flux X26 Pro: 28 mph (in Boost*)\nFlux X26: 28 mph (in Boost*)"
-          }
-        },
-        "spec_battery": {
-          "type": "spec",
-          "settings": {
-            "icon": "shopify://shop_images/Battery_e82c59a5-1329-4520-9cd3-ec2cec88761a.svg",
-            "title": "Battery",
-            "value": "48V 21Ah battery",
-            "variant_values": "Flux X26 Pro: 48V 21Ah battery\nFlux X26: 48V 18Ah battery"
-          }
-        },
-        "spec_range": {
-          "type": "spec",
-          "settings": {
-            "icon": "shopify://shop_images/Range_7a0fa706-b5c5-412d-9821-44d96150f59b.svg",
-            "title": "Range",
-            "value": "Up to 70 miles",
-            "variant_values": "Flux X26 Pro: Up to 70 miles\nFlux X26: Up to 50 miles"
-          }
-        },
-        "spec_brakes": {
-          "type": "spec",
-          "settings": {
-            "icon": "shopify://shop_images/Group_25_1_6e34c942-be4d-4b4a-9856-2f6ac9e81653.webp",
-            "title": "Brakes",
-            "value": "Hydraulic disc brakes",
-            "variant_values": "Flux X26 Pro: Hydraulic disc brakes\nFlux X26: Hydraulic disc brakes"
-          }
         }
       },
       "block_order": [
         "title",
         "rating",
-        "judge_me_reviews_preview_badge_CjPMDe",
-        "text",
         "price",
         "paypal_messaging",
         "variant_picker",
         "buy_buttons",
         "perks",
-        "accordion_box",
-        "spec_motor",
-        "spec_torque",
-        "spec_speed",
-        "spec_battery",
-        "spec_range",
-        "spec_brakes"
+        "accordion_box"
       ],
       "settings": {
         "award_caption": "reddot winner 2026",
@@ -192,11 +121,11 @@
     },
     "image_banner_z8UinF": {
       "type": "image-banner",
+      "disabled": true,
       "settings": {
         "image": "shopify://shop_images/MA__04a.jpg",
         "image_height": "adapt"
-      },
-      "disabled": true
+      }
     },
     "image_banner_LhLJVK": {
       "type": "image-banner",

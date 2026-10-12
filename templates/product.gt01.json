@@ -25,16 +25,6 @@
             "review_text": "reviews"
           }
         },
-        "judge_me_reviews_preview_badge_CjPMDe": {
-          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {}
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Ride Further. Ride Smarter.</p>"
-          }
-        },
         "price": {
           "type": "price",
           "settings": {}
@@ -50,7 +40,7 @@
           "type": "variant_picker",
           "settings": {
             "picker_title": "Choose your model:",
-            "show_size_guide": true,
+            "show_size_guide": false,
             "size_guide_text": "Size & Fit",
             "size_guide_icon": "shopify://shop_images/288aa83db3c7f157c94fe470a81f4032.webp"
           }
@@ -81,6 +71,7 @@
         },
         "accordion_box": {
           "type": "accordion",
+          "disabled": true,
           "settings": {
             "icon": "shopify://shop_images/1_9b74d37f-ee92-4622-9912-020d30cc685d.webp",
             "title": "What's in the Box",
@@ -146,8 +137,6 @@
       "block_order": [
         "title",
         "rating",
-        "judge_me_reviews_preview_badge_CjPMDe",
-        "text",
         "price",
         "paypal_messaging",
         "variant_picker",
