@@ -132,6 +132,11 @@
                       assign item_title = block.settings[title_key]
                       assign item_url = block.settings[url_key]
                       assign product_1 = block.settings[product_1_key]
+                      assign nav_handle = item_url | split: '/collections/' | last | split: '/' | first | split: '?' | first | split: '#' | first
+                      assign nav_collection = blank
+                      if item_url contains '/collections/' and nav_handle == 'accessories'
+                        assign nav_collection = collections[nav_handle]
+                      endif
                     -%}
                     {%- if item_title != blank or product_1 != blank -%}
                       <li class="aotos-nav__mega-item{% if forloop.first %} is-active{% endif %}">
@@ -139,34 +144,29 @@
                           {{ item_title | default: product_1.title | escape }}
                         </a>
                         <div class="aotos-nav__mega-products">
+                          {%- liquid
+                            assign shown_handles = '|'
+                          -%}
                           {%- for n in (1..6) -%}
                             {%- liquid
                               assign product_key = 'item_' | append: i | append: '_product_' | append: n
                               assign nav_product = block.settings[product_key]
                             -%}
                             {%- if nav_product != blank -%}
-                              <a class="aotos-nav__card{% if request.path == nav_product.url %} is-current{% endif %}" href="{{ nav_product.url }}">
-                                <span class="aotos-nav__card-media">
-                                  {%- if nav_product.featured_image != blank -%}
-                                    {%- assign card_width = 320 -%}
-                                    {%- assign card_height = card_width | divided_by: nav_product.featured_image.aspect_ratio | round -%}
-                                    {{
-                                      nav_product.featured_image
-                                      | image_url: width: card_width
-                                      | image_tag:
-                                        widths: '160, 240, 320',
-                                        sizes: '(max-width: 768px) 28vw, 11vw',
-                                        width: card_width,
-                                        height: card_height,
-                                        loading: 'lazy',
-                                        alt: nav_product.title
-                                    }}
-                                  {%- endif -%}
-                                </span>
-                                <span class="aotos-nav__card-title">{{ nav_product.title | escape }}</span>
-                              </a>
+                              {%- render 'aotos-nav-card', nav_product: nav_product -%}
+                              {%- capture shown_handles -%}{{ shown_handles }}{{ nav_product.handle }}|{%- endcapture -%}
                             {%- endif -%}
                           {%- endfor -%}
+                          {%- if nav_collection != blank -%}
+                            {%- for nav_product in nav_collection.products -%}
+                              {%- liquid
+                                assign handle_token = '|' | append: nav_product.handle | append: '|'
+                              -%}
+                              {%- unless shown_handles contains handle_token -%}
+                                {%- render 'aotos-nav-card', nav_product: nav_product -%}
+                              {%- endunless -%}
+                            {%- endfor -%}
+                          {%- endif -%}
                         </div>
                       </li>
                     {%- endif -%}
