@@ -87,6 +87,7 @@
 
     .fd-why-{{ section.id }} .fd-why__eyebrow {
       margin-bottom: calc(32 * var(--rem));
+      font-size: calc(20 * var(--rem));
     }
 
     .fd-why-{{ section.id }} .fd-why__grid {
@@ -112,16 +113,17 @@
     }
   }
 {% endstyle %}
+{% render 'aotos-fd-enter' %}
 
 <section class="fd-why-{{ section.id }}">
   <div class="fd-why__inner">
     {%- if section.settings.eyebrow != blank -%}
-      <p class="fd-why__eyebrow">{{ section.settings.eyebrow }}</p>
+      <p class="fd-why__eyebrow fd-anim fd-fade-up">{{ section.settings.eyebrow }}</p>
     {%- endif -%}
 
-    <div class="fd-why__grid">
+    <div class="fd-why__grid fd-anim fd-stagger">
       {%- for block in section.blocks -%}
-        <div class="fd-why__item" {{ block.shopify_attributes }}>
+        <div class="fd-why__item fd-stagger__item" {{ block.shopify_attributes }}>
           <div class="fd-why__icon">
             {%- assign why_icon_src = block.settings.fallback_icon_asset | strip -%}
             {%- if why_icon_src != blank and why_icon_src contains '://' -%}

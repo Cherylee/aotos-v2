@@ -197,11 +197,13 @@
     }
   }
 {% endstyle %}
+{% render 'aotos-fd-enter' %}
+{% render 'gsap-title-reveal' %}
 
 <section id="partner-with-aotos" class="fd-partner-{{ section.id }}">
   <div class="fd-partner__inner">
     <div class="fd-partner__card">
-      <div class="fd-partner__media">
+      <div class="fd-partner__media fd-anim fd-from-left fd-zoom">
         {%- assign partner_asset = section.settings.fallback_asset | strip -%}
         {%- if section.settings.image != blank -%}
           <img
@@ -218,27 +220,27 @@
         {%- endif -%}
       </div>
 
-      <div class="fd-partner__body">
+      <div class="fd-partner__body fd-anim fd-from-right">
         {%- if section.settings.eyebrow != blank -%}
-          <p class="fd-partner__eyebrow">{{ section.settings.eyebrow }}</p>
+          <p class="fd-partner__eyebrow fd-anim fd-fade-up">{{ section.settings.eyebrow }}</p>
         {%- endif -%}
         {%- if section.settings.title != blank -%}
-          <h2 class="fd-partner__title">{{ section.settings.title }}</h2>
+          <h2 class="fd-partner__title gsap-title-reveal" data-reveal-duration="1" data-reveal-stagger="0.15">{{ section.settings.title }}</h2>
         {%- endif -%}
         {%- if section.settings.text != blank -%}
-          <p class="fd-partner__text">{{ section.settings.text }}</p>
+          <p class="fd-partner__text fd-anim fd-fade-up">{{ section.settings.text }}</p>
         {%- endif -%}
         {%- if section.settings.button_label != blank -%}
-          <a class="fd-partner__btn" href="{{ section.settings.button_link | default: '#' }}">
+          <a class="fd-partner__btn fd-anim fd-fade-up" href="{{ section.settings.button_link | default: '#' }}">
             {{- section.settings.button_label -}}
           </a>
         {%- endif -%}
       </div>
 
       {%- if section.blocks.size > 0 -%}
-        <div class="fd-partner__benefits">
+        <div class="fd-partner__benefits fd-anim fd-stagger">
           {%- for block in section.blocks -%}
-            <div class="fd-partner__benefit" {{ block.shopify_attributes }}>
+            <div class="fd-partner__benefit fd-stagger__item" {{ block.shopify_attributes }}>
               <div class="fd-partner__benefit-icon">
                 {%- assign benefit_icon_src = block.settings.fallback_icon_asset | strip -%}
                 {%- if benefit_icon_src != blank and benefit_icon_src contains '://' -%}

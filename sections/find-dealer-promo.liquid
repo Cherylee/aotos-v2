@@ -161,11 +161,12 @@
     }
   }
 {% endstyle %}
+{% render 'aotos-fd-enter' %}
 
 <section class="fd-promo-{{ section.id }}">
-  <div class="fd-promo__inner">
+  <div class="fd-promo__inner fd-anim fd-stagger">
     {%- for block in section.blocks -%}
-      <div class="fd-promo__card" {{ block.shopify_attributes }}>
+      <div class="fd-promo__card fd-stagger__item" {{ block.shopify_attributes }}>
         <div class="fd-promo__body">
           {%- if block.settings.eyebrow != blank -%}
             <p class="fd-promo__eyebrow">{{ block.settings.eyebrow }}</p>
@@ -188,7 +189,7 @@
           {%- assign promo_src = 'https://aotos.com/cdn/shop/t/61/assets/' | append: promo_src -%}
         {%- endif -%}
         {%- if block.settings.image != blank -%}
-          <div class="fd-promo__media">
+          <div class="fd-promo__media fd-anim fd-zoom">
             <img
               src="{{ block.settings.image | image_url: width: 640 }}"
               srcset="{{ block.settings.image | image_url: width: 400 }} 400w, {{ block.settings.image | image_url: width: 640 }} 640w, {{ block.settings.image | image_url: width: 960 }} 960w"
@@ -200,7 +201,7 @@
             >
           </div>
         {%- elsif promo_src != blank -%}
-          <div class="fd-promo__media">
+          <div class="fd-promo__media fd-anim fd-zoom">
             <img src="{{ promo_src }}" alt="" loading="lazy" width="640" height="480">
           </div>
         {%- endif -%}
