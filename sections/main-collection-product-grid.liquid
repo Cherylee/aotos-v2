@@ -801,11 +801,32 @@
               class="aotos-collection-grid product-grid{% if section.settings.quick_add == 'bulk' %} collection-quick-add-bulk{% endif %}"
             >
               {% assign skip_card_product_styles = false %}
+              {%- liquid
+                assign accessories_handle = 'accessories'
+                if section.settings.accessories_collection != blank
+                  assign accessories_handle = section.settings.accessories_collection.handle
+                endif
+              -%}
               {%- for product in collection.products -%}
                 {% assign lazy_load = false %}
                 {%- if forloop.index > 2 -%}
                   {%- assign lazy_load = true -%}
                 {%- endif -%}
+                {%- liquid
+                  assign show_card_rating = section.settings.show_rating
+                  unless section.settings.show_accessories_rating
+                    if collection.handle == accessories_handle
+                      assign show_card_rating = false
+                    else
+                      for product_collection in product.collections
+                        if product_collection.handle == accessories_handle
+                          assign show_card_rating = false
+                          break
+                        endif
+                      endfor
+                    endif
+                  endunless
+                -%}
                 <li
                   class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
                   {% if settings.animations_reveal_on_scroll %}
@@ -819,7 +840,7 @@
                     image_shape: section.settings.image_shape,
                     show_secondary_image: section.settings.show_secondary_image,
                     show_vendor: section.settings.show_vendor,
-                    show_rating: true,
+                    show_rating: show_card_rating,
                     lazy_load: lazy_load,
                     skip_styles: skip_card_product_styles,
                     quick_add: section.settings.quick_add,
@@ -959,6 +980,18 @@
       "default": true,
       "label": "t:sections.main-collection-product-grid.settings.show_rating.label",
       "info": "t:sections.main-collection-product-grid.settings.show_rating.info"
+    },
+    {
+      "type": "collection",
+      "id": "accessories_collection",
+      "label": "配件系列"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_accessories_rating",
+      "default": false,
+      "label": "显示配件评论",
+      "info": "只控制配件系列里的商品。关闭后，这些商品在系列页不显示星级。"
     },
     {
       "type": "checkbox",

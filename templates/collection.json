@@ -29,6 +29,8 @@
         "show_secondary_image": false,
         "show_vendor": false,
         "show_rating": true,
+        "accessories_collection": "accessories",
+        "show_accessories_rating": false,
         "show_cart_buttons": true,
         "quick_add": "none",
         "enable_filtering": true,
