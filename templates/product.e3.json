@@ -40,7 +40,7 @@
           "type": "variant_picker",
           "settings": {
             "picker_title": "Choose your model:",
-            "show_size_guide": true,
+            "show_size_guide": false,
             "size_guide_text": "Size & Fit",
             "size_guide_icon": "shopify://shop_images/288aa83db3c7f157c94fe470a81f4032.webp"
           }
@@ -91,6 +91,7 @@
         "accordion_box"
       ],
       "settings": {
+        "show_specs": false,
         "award_caption": "reddot winner 2026",
         "payment_icons": "visa,master,american_express,discover,jcb,klarna,paypal,maestro,venmo,afterpay",
         "payment_collapsed_count": 7,
