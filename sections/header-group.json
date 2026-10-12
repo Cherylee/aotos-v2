@@ -64,16 +64,18 @@
             "item_2_product_4": "",
             "item_3_title": "Accessories",
             "item_3_url": "/collections/accessories",
-            "item_3_product_1": "aotos-battery",
+            "item_3_product_1": "aotos-helmet",
             "item_3_product_2": "aotos-security-lock",
-            "item_3_product_3": "aotos-under-frame-storage-bag-3-1l",
-            "item_3_product_4": "aotos-helmet",
+            "item_3_product_3": "aotos-led-flux-x26-turn-signals",
+            "item_3_product_4": "aotos-flux-x26-tire-pressure-sensor",
+            "item_3_product_5": "aotos-under-frame-storage-bag-3-1l",
+            "item_3_product_6": "aotos-battery",
             "item_4_title": "Electric Scooter",
             "item_4_url": "/collections/aotos-electric-scooter",
-            "item_4_product_1": "",
-            "item_4_product_2": "",
-            "item_4_product_3": "",
-            "item_4_product_4": ""
+            "item_4_product_1": "aotos-e3-electric-scooter",
+            "item_4_product_2": "aotos-m1-electric-scooter",
+            "item_4_product_3": "aotos-m1-lite-electric-scooter",
+            "item_4_product_4": "aotos-gt01-electric-scooter"
           }
         },
         "nav-flux": {
