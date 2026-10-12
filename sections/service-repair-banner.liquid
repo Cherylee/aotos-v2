@@ -4,7 +4,7 @@
   assign sr_img = section.settings.image
   assign sr_img_mob = section.settings.image_mobile | default: sr_img
   assign sr_alt = section.settings.image_alt | default: sr_heading
-  assign sr_fallback = section.settings.fallback_asset | strip | default: 'service-repair-banner.png'
+  assign sr_fallback = section.settings.fallback_asset | strip
   assign sr_ratio = section.settings.image_ratio | default: '5/2'
   assign sr_ratio_w = sr_ratio | split: '/' | first | plus: 0
   assign sr_ratio_h = sr_ratio | split: '/' | last | plus: 0

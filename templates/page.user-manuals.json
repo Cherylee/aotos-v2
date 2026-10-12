@@ -1,0 +1,183 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "layout": "theme",
+  "sections": {
+    "user_manuals_hero": {
+      "type": "service-repair-banner",
+      "settings": {
+        "layout": "banner",
+        "copy_align": "center",
+        "eyebrow": "AOTOS SUPPORT",
+        "heading": "Find the right guide for your ride.",
+        "heading_color": "#000000",
+        "text": "Select your model and purchase channel to view the correct manual, setup videos and app download.",
+        "text_color": "#999999",
+        "primary_label": "",
+        "secondary_label": "",
+        "image_alt": "User Manuals",
+        "image_position": "right center",
+        "fallback_asset": "",
+        "accent_color": "#ff6501",
+        "background_color": "#f5f5f5",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
+    },
+    "user_manuals_picker": {
+      "type": "user-manuals-picker",
+      "blocks": {
+        "bike_eb03": {
+          "type": "bike",
+          "settings": {
+            "badge": "EB03",
+            "series": "EB03 SERIES",
+            "model": "FLUX X26",
+            "image": "shopify://shop_images/EB03_0919_2.webp",
+            "aotos_version_label": "AOTOS VERSION",
+            "aotos_pdf": "https://cdn.shopify.com/s/files/1/0719/2736/5851/files/B010030973__compressed.pdf?v=17879571034",
+            "aotos_version": "Version 1.4",
+            "aotos_updated": "Updated Aug 2026",
+            "aotos_size": "18.6 MB",
+            "costco_version_label": "COSTCO VERSION",
+            "costco_pdf": "https://cdn.shopify.com/s/files/1/0719/2736/5851/files/B010030973__compressed.pdf?v=1787957103",
+            "costco_version": "Version 1.4",
+            "costco_updated": "Updated Aug 2026",
+            "costco_size": "18.6 MB"
+          }
+        },
+        "bike_eb02": {
+          "type": "bike",
+          "settings": {
+            "badge": "EB02",
+            "series": "EB02 SERIES",
+            "model": "FLUX T26",
+            "image": "shopify://shop_images/eb02-bike-alt.webp",
+            "aotos_version_label": "AOTOS VERSION",
+            "aotos_pdf": "",
+            "aotos_version": "Version 1.4",
+            "aotos_updated": "Updated Aug 2026",
+            "aotos_size": "18.6 MB",
+            "costco_version_label": "COSTCO VERSION",
+            "costco_pdf": "",
+            "costco_version": "Version 1.4",
+            "costco_updated": "Updated Aug 2026",
+            "costco_size": "18.6 MB"
+          }
+        }
+      },
+      "block_order": [
+        "bike_eb03",
+        "bike_eb02"
+      ],
+      "settings": {
+        "step1_title": "Select your e-bike",
+        "step1_hint": "Check the model name on the frame or your order confirmation.",
+        "step2_title": "Select purchase channel",
+        "channel_aotos": "AOTOS.com",
+        "channel_aotos_version": "AOTOS VERSION",
+        "channel_costco": "Costco",
+        "channel_costco_version": "COSTCO VERSION",
+        "resources_eyebrow": "YOUR RESOURCES",
+        "resources_lead": "Assembly, setup and daily-use support in one place.",
+        "manual_tag": "PDF · ENGLISH",
+        "manual_title": "Owner's Manual",
+        "manual_desc": "Safety, assembly, controls, charging and maintenance.",
+        "manual_btn": "Download PDF",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
+    },
+    "user_manuals_videos": {
+      "type": "user-manuals-videos",
+      "blocks": {
+        "vid_01": {
+          "type": "video",
+          "settings": {
+            "index": "01",
+            "duration": "",
+            "label": "START HERE",
+            "title": "Unboxing & Assembly",
+            "video_url": "https://www.youtube.com/watch?v=HFi_j91FbRo"
+          }
+        },
+        "vid_02": {
+          "type": "video",
+          "settings": {
+            "index": "02",
+            "duration": "",
+            "label": "APP SETUP",
+            "title": "Connect the AOTOS App",
+            "video_url": ""
+          }
+        },
+        "vid_03": {
+          "type": "video",
+          "settings": {
+            "index": "03",
+            "duration": "",
+            "label": "DAILY USE",
+            "title": "Display & Ride Modes",
+            "video_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "vid_01",
+        "vid_02",
+        "vid_03"
+      ],
+      "settings": {
+        "step_num": "3",
+        "heading": "Setup videos",
+        "hint": "Watch each step directly—no download needed.",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
+    },
+    "user_manuals_app": {
+      "type": "user-manuals-app",
+      "settings": {
+        "eyebrow": "AOTOS APP",
+        "heading": "Stay connected to every ride.",
+        "description": "Unlock your bike, check ride data, update firmware and manage smart features from your phone.",
+        "note": "Search 'AOTOS' in your app store or scan the QR code in your manual.",
+        "phone_image": "shopify://shop_images/Engineered_Strength._Precision_Form._983854fe-7386-4499-bce9-64bcb883edee_2.webp",
+        "app_store_image": "shopify://shop_images/png-clipart-app-store-apple-google-play-iphone-mid-autumn-lantern-text-logo_1_535d3bfe-44e8-4449-a353-9716168c9d5a.webp",
+        "app_store_url": "",
+        "app_store_alt": "App Store",
+        "google_play_image": "shopify://shop_images/en_badge_web_generic_1_e12176cc-492d-4f35-84e9-c4929b9eb547.webp",
+        "google_play_url": "",
+        "google_play_alt": "Google Play",
+        "show_banner": true,
+        "banner_title": "Need more help?",
+        "banner_text": "Our U.S. support team is ready to assist.",
+        "banner_btn": "Contact Support →",
+        "banner_url": "",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
+    }
+  },
+  "order": [
+    "user_manuals_hero",
+    "user_manuals_picker",
+    "user_manuals_videos",
+    "user_manuals_app"
+  ]
+}

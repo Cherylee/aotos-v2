@@ -1,0 +1,564 @@
+{%- liquid
+  assign uma_id = section.id
+-%}
+
+{% style %}
+  #user-manuals-app-{{ uma_id }} {
+    display: block;
+    width: 100%;
+    color: #000000;
+    font-family: var(--font-body-family);
+  }
+
+  #user-manuals-app-{{ uma_id }} * {
+    box-sizing: border-box;
+  }
+
+  #user-manuals-app-{{ uma_id }} .uma-main {
+    padding-top: calc({{ section.settings.padding_top | default: 80 }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80 }} * var(--rem));
+  }
+
+  #user-manuals-app-{{ uma_id }} .uma-shell {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  #user-manuals-app-{{ uma_id }} .uma-grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(64 * var(--rem));
+  }
+
+  #user-manuals-app-{{ uma_id }} .uma-copy {
+    width: calc(320 * var(--rem));
+    flex-shrink: 0;
+  }
+
+  #user-manuals-app-{{ uma_id }} .uma-phone {
+    width: auto;
+    max-width: calc(180 * var(--rem));
+    margin: 0;
+    flex-shrink: 0;
+  }
+
+  #user-manuals-app-{{ uma_id }} .uma-phone img,
+  #user-manuals-app-{{ uma_id }} .uma-phone svg {
+    display: block;
+    width: auto;
+    max-width: calc(180 * var(--rem));
+    height: auto;
+  }
+
+  #user-manuals-app-{{ uma_id }} .uma-phone svg {
+    aspect-ratio: 9 / 16;
+    background: #ececec;
+  }
+
+  #user-manuals-app-{{ uma_id }} .uma-eyebrow {
+    margin: 0 0 calc(12 * var(--rem));
+    font-size: calc(12 * var(--rem));
+    line-height: calc(16 * var(--rem));
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #ff6501;
+  }
+
+  #user-manuals-app-{{ uma_id }} .uma-title {
+    margin: 0 0 calc(48 * var(--rem));
+    font-size: var(--aotos-section-title-size);
+    font-weight: 700;
+    line-height: 1.15;
+    color: #000000;
+  }
+
+  #user-manuals-app-{{ uma_id }} .uma-desc {
+    margin: 0 0 calc(24 * var(--rem));
+    font-size: calc(12 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    color: #999999;
+  }
+
+  #user-manuals-app-{{ uma_id }} .uma-stores {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(12 * var(--rem));
+    margin: 0 0 calc(16 * var(--rem));
+  }
+
+  #user-manuals-app-{{ uma_id }} .uma-store {
+    display: block;
+    line-height: 0;
+  }
+
+  #user-manuals-app-{{ uma_id }} .uma-store img,
+  #user-manuals-app-{{ uma_id }} .uma-store svg {
+    display: block;
+    height: calc(40 * var(--rem));
+    width: auto;
+    max-width: calc(160 * var(--rem));
+  }
+
+  #user-manuals-app-{{ uma_id }} .uma-note {
+    margin: 0;
+    font-size: calc(12 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    color: #999999;
+  }
+
+  #user-manuals-app-{{ uma_id }} .uma-banner {
+    background: #ff6501;
+    color: #ffffff;
+  }
+
+  #user-manuals-app-{{ uma_id }} .uma-banner__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(24 * var(--rem));
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+    padding-top: calc(32 * var(--rem));
+    padding-bottom: calc(32 * var(--rem));
+  }
+
+  #user-manuals-app-{{ uma_id }} .uma-banner__title {
+    margin: 0 0 calc(8 * var(--rem));
+    font-size: calc(18 * var(--rem));
+    line-height: calc(22 * var(--rem));
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  #user-manuals-app-{{ uma_id }} .uma-banner__text {
+    margin: 0;
+    font-size: calc(14 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    color: #ffffff;
+  }
+
+  #user-manuals-app-{{ uma_id }} .uma-banner__btn {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    padding: calc(12 * var(--rem)) calc(20 * var(--rem));
+    background: #ffffff;
+    color: #000000;
+    font-size: calc(12 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    text-decoration: none;
+    border-radius: calc(4 * var(--rem));
+  }
+
+  @media (hover: hover) {
+    #user-manuals-app-{{ uma_id }} .uma-banner__btn:hover {
+      filter: brightness(0.97);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #user-manuals-app-{{ uma_id }} .uma-main {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 88 }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88 }} * var(--rem));
+    }
+
+    #user-manuals-app-{{ uma_id }} .uma-shell,
+    #user-manuals-app-{{ uma_id }} .uma-banner__inner {
+      width: 100%;
+      padding-left: calc(40 * var(--rem));
+      padding-right: calc(40 * var(--rem));
+    }
+
+    #user-manuals-app-{{ uma_id }} .uma-grid {
+      flex-direction: column;
+      gap: calc(48 * var(--rem));
+    }
+
+    #user-manuals-app-{{ uma_id }} .uma-copy {
+      width: 100%;
+    }
+
+    #user-manuals-app-{{ uma_id }} .uma-phone {
+      width: 100%;
+      max-width: calc(420 * var(--rem));
+    }
+
+    #user-manuals-app-{{ uma_id }} .uma-phone img,
+    #user-manuals-app-{{ uma_id }} .uma-phone svg {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    #user-manuals-app-{{ uma_id }} .uma-title {
+      margin-bottom: calc(48 * var(--rem));
+    }
+
+    #user-manuals-app-{{ uma_id }} .uma-desc,
+    #user-manuals-app-{{ uma_id }} .uma-note,
+    #user-manuals-app-{{ uma_id }} .uma-banner__text,
+    #user-manuals-app-{{ uma_id }} .uma-banner__btn {
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #user-manuals-app-{{ uma_id }} .uma-banner__title {
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #user-manuals-app-{{ uma_id }} .uma-banner__inner {
+      flex-direction: column;
+      align-items: flex-start;
+      padding-top: calc(48 * var(--rem));
+      padding-bottom: calc(48 * var(--rem));
+    }
+
+    #user-manuals-app-{{ uma_id }} .uma-store img,
+    #user-manuals-app-{{ uma_id }} .uma-store svg {
+      height: calc(64 * var(--rem));
+      max-width: calc(280 * var(--rem));
+    }
+    #user-manuals-app-{{ uma_id }} .uma-eyebrow {
+      font-size: calc(20 * var(--rem));
+    }
+  }
+
+  @media screen and (min-width: 750px) and (max-width: 768px) {
+    #user-manuals-app-{{ uma_id }} .uma-main {
+      padding-top: calc(0 * var(--rem));
+      padding-bottom: calc(168 * var(--rem));
+    }
+
+    #user-manuals-app-{{ uma_id }} .uma-shell,
+    #user-manuals-appgit-{{ uma_id }} .uma-banner__inner {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding-left: calc(34 * var(--rem));
+      padding-right: calc(34 * var(--rem));
+    }
+
+    #user-manuals-app-{{ uma_id }} .uma-grid {
+      flex-direction: column;
+      gap: calc(90 * var(--rem));
+    }
+
+    #user-manuals-app-{{ uma_id }} .uma-copy {
+      width: 100%;
+    }
+
+    #user-manuals-app-{{ uma_id }} .uma-title {
+      margin-bottom: calc(90 * var(--rem));
+    }
+
+    #user-manuals-app-{{ uma_id }} .uma-desc,
+    #user-manuals-app-{{ uma_id }} .uma-note,
+    #user-manuals-app-{{ uma_id }} .uma-banner__text,
+    #user-manuals-app-{{ uma_id }} .uma-banner__btn {
+      font-size: calc(24 * var(--rem));
+      line-height: calc(61 * var(--rem));
+    }
+
+    #user-manuals-app-{{ uma_id }} .uma-banner__title {
+      font-size: calc(42 * var(--rem));
+      line-height: calc(42 * var(--rem));
+    }
+
+    #user-manuals-app-{{ uma_id }} .uma-banner__inner {
+      flex-direction: column;
+      align-items: flex-start;
+      padding-top: calc(61 * var(--rem));
+      padding-bottom: calc(61 * var(--rem));
+    }
+
+    #user-manuals-app-{{ uma_id }} .uma-store img,
+    #user-manuals-app-{{ uma_id }} .uma-store svg {
+      height: calc(76 * var(--rem));
+      max-width: calc(304 * var(--rem));
+    }
+  }
+{% endstyle %}
+
+<section
+  class="user-manuals-app"
+  id="user-manuals-app-{{ uma_id }}"
+>
+  <div class="uma-main">
+    <div class="uma-shell">
+      <div class="uma-grid">
+        <div class="uma-phone">
+          {%- if section.settings.phone_image != blank -%}
+            {{
+              section.settings.phone_image
+              | image_url: width: 540
+              | image_tag:
+                loading: 'lazy',
+                widths: '360, 540, 720',
+                sizes: '(max-width: 749px) 70vw, 420px',
+                alt: section.settings.heading
+            }}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'uma-phone__ph' }}
+          {%- endif -%}
+        </div>
+
+        <div class="uma-copy">
+          {%- if section.settings.eyebrow != blank -%}
+            <p class="uma-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+          {%- endif -%}
+          {%- if section.settings.heading != blank -%}
+            <h2 class="uma-title aotos-section-title">{{ section.settings.heading | escape }}</h2>
+          {%- endif -%}
+          {%- if section.settings.description != blank -%}
+            <p class="uma-desc">{{ section.settings.description | escape }}</p>
+          {%- endif -%}
+
+          <div class="uma-stores">
+            <a
+              class="uma-store"
+              href="{{ section.settings.app_store_url | default: '#' }}"
+              {% if section.settings.app_store_url != blank %}target="_blank" rel="noopener"{% endif %}
+              aria-label="{{ section.settings.app_store_alt | default: 'App Store' | escape }}"
+            >
+              {%- if section.settings.app_store_image != blank -%}
+                {{
+                  section.settings.app_store_image
+                  | image_url: width: 320
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '160, 240, 320',
+                    sizes: '(max-width: 749px) 40vw, 140px',
+                    alt: section.settings.app_store_alt
+                }}
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'uma-store__ph' }}
+              {%- endif -%}
+            </a>
+            <a
+              class="uma-store"
+              href="{{ section.settings.google_play_url | default: '#' }}"
+              {% if section.settings.google_play_url != blank %}target="_blank" rel="noopener"{% endif %}
+              aria-label="{{ section.settings.google_play_alt | default: 'Google Play' | escape }}"
+            >
+              {%- if section.settings.google_play_image != blank -%}
+                {{
+                  section.settings.google_play_image
+                  | image_url: width: 320
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '160, 240, 320',
+                    sizes: '(max-width: 749px) 40vw, 140px',
+                    alt: section.settings.google_play_alt
+                }}
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'uma-store__ph' }}
+              {%- endif -%}
+            </a>
+          </div>
+
+          {%- if section.settings.note != blank -%}
+            <p class="uma-note">{{ section.settings.note | escape }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- if section.settings.show_banner -%}
+    <div class="uma-banner">
+      <div class="uma-banner__inner">
+        <div>
+          {%- if section.settings.banner_title != blank -%}
+            <p class="uma-banner__title">{{ section.settings.banner_title | escape }}</p>
+          {%- endif -%}
+          {%- if section.settings.banner_text != blank -%}
+            <p class="uma-banner__text">{{ section.settings.banner_text | escape }}</p>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.banner_btn != blank -%}
+          <a class="uma-banner__btn" href="{{ section.settings.banner_url | default: '#' }}">
+            {{ section.settings.banner_btn | escape }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "User Manuals App",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "文案"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "小标题",
+      "default": "AOTOS APP"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "标题",
+      "default": "Stay connected to every ride."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "描述",
+      "default": "Unlock your bike, check ride data, update firmware and manage smart features from your phone."
+    },
+    {
+      "type": "textarea",
+      "id": "note",
+      "label": "按钮下方说明",
+      "default": "Search 'AOTOS' in your app store or scan the QR code in your manual."
+    },
+    {
+      "type": "image_picker",
+      "id": "phone_image",
+      "label": "左侧手机图",
+      "info": "建议图片比例 9:16（宽:高）"
+    },
+    {
+      "type": "header",
+      "content": "App Store"
+    },
+    {
+      "type": "image_picker",
+      "id": "app_store_image",
+      "label": "按钮图片"
+    },
+    {
+      "type": "url",
+      "id": "app_store_url",
+      "label": "跳转链接"
+    },
+    {
+      "type": "text",
+      "id": "app_store_alt",
+      "label": "Alt",
+      "default": "App Store"
+    },
+    {
+      "type": "header",
+      "content": "Google Play"
+    },
+    {
+      "type": "image_picker",
+      "id": "google_play_image",
+      "label": "按钮图片"
+    },
+    {
+      "type": "url",
+      "id": "google_play_url",
+      "label": "跳转链接"
+    },
+    {
+      "type": "text",
+      "id": "google_play_alt",
+      "label": "Alt",
+      "default": "Google Play"
+    },
+    {
+      "type": "header",
+      "content": "底部橙色条"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_banner",
+      "label": "显示",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "banner_title",
+      "label": "标题",
+      "default": "Need more help?"
+    },
+    {
+      "type": "text",
+      "id": "banner_text",
+      "label": "描述",
+      "default": "Our U.S. support team is ready to assist."
+    },
+    {
+      "type": "text",
+      "id": "banner_btn",
+      "label": "按钮文案",
+      "default": "Contact Support →"
+    },
+    {
+      "type": "url",
+      "id": "banner_url",
+      "label": "按钮链接"
+    },
+    {
+      "type": "header",
+      "content": "间距"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "上间距 (PC)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "下间距 (PC)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "上间距 (手机)",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "下间距 (手机)",
+      "default": 88
+    }
+  ],
+  "presets": [
+    {
+      "name": "User Manuals App",
+      "settings": {
+        "eyebrow": "AOTOS APP",
+        "heading": "Stay connected to every ride.",
+        "description": "Unlock your bike, check ride data, update firmware and manage smart features from your phone.",
+        "note": "Search 'AOTOS' in your app store or scan the QR code in your manual.",
+        "show_banner": true
+      }
+    }
+  ]
+}
+{% endschema %}

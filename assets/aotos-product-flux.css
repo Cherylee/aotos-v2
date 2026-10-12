@@ -1344,6 +1344,10 @@ body.size-fit-drawer-open {
   font-weight: 600;
 }
 
+.shopify-section:has(.aotos-flux-perks__plus:hover),
+.shopify-section:has(.aotos-flux-perks__popover:hover),
+.shopify-section:has(.aotos-flux-perks__item.is-open),
+.shopify-section:has(.aotos-flux-perks__item:focus-within),
 .aotos-flux:has(.aotos-flux-perks__plus:hover),
 .aotos-flux:has(.aotos-flux-perks__popover:hover),
 .aotos-flux:has(.aotos-flux-perks__item.is-open),
@@ -2109,18 +2113,11 @@ body.size-fit-drawer-open {
     transform-origin: center;
   }
 
-  .aotos-flux:has(.aotos-flux-perks__plus:hover),
-  .aotos-flux:has(.aotos-flux-perks__popover:hover),
-  .aotos-flux:has(.aotos-flux-perks__item.is-open),
-  .aotos-flux:has(.aotos-flux-perks__item:focus-within) {
-    z-index: auto;
-  }
-
   .aotos-flux-perks__item.is-open,
   .aotos-flux-perks__item:focus-within,
   .aotos-flux-perks__item:has(.aotos-flux-perks__plus:hover),
   .aotos-flux-perks__item:has(.aotos-flux-perks__popover:hover) {
-    z-index: 1;
+    z-index: 2;
   }
 
   .aotos-flux-perks {

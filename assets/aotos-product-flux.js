@@ -709,10 +709,19 @@ document.querySelectorAll('[data-flux-buybar]').forEach((bar) => {
     bar.setAttribute('aria-hidden', show ? 'false' : 'true');
   };
   if ('IntersectionObserver' in window) {
+    const footer = document.querySelector('.shopify-section-group-footer-group') || document.querySelector('footer.aotos-footer');
+    let atcInView = true;
+    let footerInView = false;
+    const sync = () => setVisible(!atcInView && !footerInView);
     const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => setVisible(!entry.isIntersecting));
+      entries.forEach((entry) => {
+        if (entry.target === watch) atcInView = entry.isIntersecting;
+        if (footer && entry.target === footer) footerInView = entry.isIntersecting;
+      });
+      sync();
     }, { threshold: 0 });
     io.observe(watch);
+    if (footer) io.observe(footer);
   }
   atc.addEventListener('click', () => {
     if (!atc.disabled) watch.click();

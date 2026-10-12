@@ -1,0 +1,1141 @@
+{%- liquid
+  assign ump_id = section.id
+-%}
+
+{% style %}
+  #user-manuals-picker-{{ ump_id }} {
+    display: block;
+    width: 100%;
+    background: #ffffff;
+    color: #000000;
+    font-family: var(--font-body-family);
+    padding-top: calc({{ section.settings.padding_top | default: 80 }} * var(--rem));
+    padding-bottom: 0;
+  }
+
+  #user-manuals-picker-{{ ump_id }} * {
+    box-sizing: border-box;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-shell {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-step {
+    margin: 0 0 calc(48 * var(--rem));
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-step__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(16 * var(--rem));
+    margin: 0 0 calc(24 * var(--rem));
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-step__title {
+    display: flex;
+    align-items: center;
+    gap: calc(12 * var(--rem));
+    margin: 0;
+    font-size: calc(18 * var(--rem));
+    line-height: calc(22 * var(--rem));
+    font-weight: 700;
+    color: #000000;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-step__num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(24 * var(--rem));
+    height: calc(24 * var(--rem));
+    border-radius: 50%;
+    background: #ff6501;
+    color: #ffffff;
+    font-size: calc(10 * var(--rem));
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-step__hint {
+    margin: 0;
+    font-size: calc(14 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    color: #999999;
+    text-align: right;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-bikes {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: calc(16 * var(--rem));
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-bike {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: calc(1 * var(--rem)) solid #e8e8e8;
+    border-radius: calc(8 * var(--rem));
+    background: #f5f5f5;
+    cursor: pointer;
+    text-align: left;
+    color: inherit;
+    font: inherit;
+    overflow: hidden;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-bike[aria-pressed='true'] {
+    border-color: #ff6501;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-bike__media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: #ededed;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-bike__media img,
+  #user-manuals-picker-{{ ump_id }} .ump-bike__media svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-bike__badge {
+    position: absolute;
+    top: calc(16 * var(--rem));
+    left: calc(16 * var(--rem));
+    z-index: 1;
+    padding: calc(4 * var(--rem)) calc(8 * var(--rem));
+    background: #ffffff;
+    font-size: calc(12 * var(--rem));
+    line-height: 1.2;
+    font-weight: 700;
+    color: #000000;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-bike__foot {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: calc(12 * var(--rem));
+    padding: calc(16 * var(--rem));
+    background: #ffffff;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-bike__series {
+    margin: 0 0 calc(4 * var(--rem));
+    font-size: calc(12 * var(--rem));
+    line-height: calc(16 * var(--rem));
+    color: #999999;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-bike__model {
+    margin: 0;
+    font-size: calc(18 * var(--rem));
+    line-height: calc(22 * var(--rem));
+    font-weight: 700;
+    color: #000000;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-bike__mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(28 * var(--rem));
+    height: calc(28 * var(--rem));
+    border-radius: 50%;
+    background: #e8e8e8;
+    color: #999999;
+    flex-shrink: 0;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-bike[aria-pressed='true'] .ump-bike__mark {
+    background: #ff6501;
+    color: #ffffff;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-bike__mark svg {
+    display: none;
+    width: calc(12 * var(--rem));
+    height: calc(12 * var(--rem));
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-bike .ump-bike__ico--arrow {
+    display: block;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-bike[aria-pressed='true'] .ump-bike__ico--arrow {
+    display: none;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-bike[aria-pressed='true'] .ump-bike__ico--check {
+    display: block;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-rule {
+    height: 1px;
+    margin: calc(48 * var(--rem)) 0;
+    background: #e8e8e8;
+    border: 0;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-ch {
+    display: inline-flex;
+    align-items: center;
+    padding: calc(4 * var(--rem));
+    gap: calc(4 * var(--rem));
+    border-radius: calc(6 * var(--rem));
+    background: #eeeeee;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-ch__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(8 * var(--rem));
+    margin: 0;
+    padding: calc(8 * var(--rem)) calc(14 * var(--rem));
+    border: 0;
+    border-radius: calc(4 * var(--rem));
+    background: transparent;
+    color: #999999;
+    font: inherit;
+    font-size: calc(12 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    cursor: pointer;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-ch__btn[aria-pressed='true'] {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-ch__ico {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(20 * var(--rem));
+    height: calc(20 * var(--rem));
+    border-radius: calc(3 * var(--rem));
+    background: #bbbbbb;
+    color: #ffffff;
+    font-size: calc(11 * var(--rem));
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-ch__btn[aria-pressed='true'] .ump-ch__ico {
+    background: #ff6501;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-res-wrap {
+    margin-top: calc(48 * var(--rem));
+    padding: calc(48 * var(--rem)) 0 calc({{ section.settings.padding_bottom | default: 80 }} * var(--rem));
+    background: #f5f5f5;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-res[hidden] {
+    display: none;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-res__meta {
+    margin: 0 0 calc(8 * var(--rem));
+    font-size: calc(10 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    color: #999999;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-res__meta-channel {
+    color: #ff6501;
+    font-weight: 600;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-res__eyebrow {
+    margin: 0 0 calc(12 * var(--rem));
+    font-size: calc(12 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #999999;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-res__top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: calc(24 * var(--rem));
+    margin: 0 0 calc(48 * var(--rem));
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-res__title {
+    margin: 0;
+    font-size: var(--aotos-section-title-size);
+    font-weight: 700;
+    color: #000000;
+    line-height: 1.15;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-res__lead {
+    margin: 0;
+    max-width: calc(460 * var(--rem));
+    font-size: calc(12 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    color: #999999;
+    text-align: right;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-cards {
+    display: block;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-manual {
+    background: #ffffff;
+    border-radius: calc(8 * var(--rem));
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    min-height: calc(280 * var(--rem));
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-manual__copy {
+    display: flex;
+    flex-direction: column;
+    padding: calc(28 * var(--rem));
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-manual__tag {
+    margin: 0 0 calc(12 * var(--rem));
+    font-size: calc(10 * var(--rem));
+    line-height: calc(16 * var(--rem));
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #ff6501;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-manual__name {
+    margin: 0 0 calc(12 * var(--rem));
+    font-size: calc(18 * var(--rem));
+    line-height: calc(22 * var(--rem));
+    font-weight: 700;
+    color: #000000;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-manual__desc {
+    margin: 0 0 calc(20 * var(--rem));
+    font-size: calc(12 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    color: #999999;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-manual__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(8 * var(--rem));
+    width: fit-content;
+    margin-top: auto;
+    padding: calc(12 * var(--rem)) calc(20 * var(--rem));
+    border-radius: calc(4 * var(--rem));
+    background: #ff6501;
+    color: #ffffff;
+    font-size: calc(14 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-manual__btn[aria-disabled='true'] {
+    pointer-events: none;
+    opacity: 0.45;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-manual__btn svg {
+    width: calc(14 * var(--rem));
+    height: calc(14 * var(--rem));
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-manual__meta {
+    margin: calc(12 * var(--rem)) 0 0;
+    font-size: calc(10 * var(--rem));
+    line-height: calc(16 * var(--rem));
+    color: #999999;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-manual__cover {
+    /* background: #f5e36b; */
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: calc(24 * var(--rem));
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-manual__cover img,
+  #user-manuals-picker-{{ ump_id }} .ump-manual__cover svg {
+    display: block;
+    width: calc(140 * var(--rem));
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+  }
+
+  @media (hover: hover) {
+    #user-manuals-picker-{{ ump_id }} .ump-bike:hover {
+      border-color: #ff6501;
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-manual__btn:hover {
+      filter: brightness(1.05);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #user-manuals-picker-{{ ump_id }} {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 88 }} * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-shell {
+      width: 100%;
+      padding: 0 calc(40 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-step__head {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: calc(32 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-step__title {
+      font-size: calc(22 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-step__num {
+      width: calc(36 * var(--rem));
+      height: calc(36 * var(--rem));
+      font-size: calc(18 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-step__hint {
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+      text-align: left;
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-bikes {
+      grid-template-columns: 1fr;
+      gap: calc(24 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-bike__model {
+      font-size: calc(22 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-bike__series,
+    #user-manuals-picker-{{ ump_id }} .ump-ch__btn,
+    #user-manuals-picker-{{ ump_id }} .ump-res__meta,
+    #user-manuals-picker-{{ ump_id }} .ump-res__eyebrow,
+    #user-manuals-picker-{{ ump_id }} .ump-res__lead,
+    #user-manuals-picker-{{ ump_id }} .ump-manual__desc,
+    #user-manuals-picker-{{ ump_id }} .ump-manual__btn {
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-rule {
+      margin: calc(48 * var(--rem)) 0;
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-step--ch .ump-step__head {
+      flex-direction: column;
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-ch {
+      width: 100%;
+      padding: calc(8 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-ch__btn {
+      flex: 1;
+      justify-content: center;
+      padding: calc(14 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-res-wrap {
+      margin-top: calc(48 * var(--rem));
+      padding: calc(48 * var(--rem)) 0 calc({{ section.settings.padding_bottom_mobile | default: 88 }} * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-res__top {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: calc(48 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-res__lead {
+      max-width: none;
+      text-align: left;
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-manual {
+      grid-template-columns: 1fr;
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-manual__name {
+      font-size: calc(22 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-manual__cover img,
+    #user-manuals-picker-{{ ump_id }} .ump-manual__cover svg {
+      width: calc(220 * var(--rem));
+    }
+    #user-manuals-picker-{{ ump_id }} .ump-bike__badge {
+      font-size: calc(20 * var(--rem));
+    }
+    #user-manuals-picker-{{ ump_id }} .ump-bike__mark {
+      width: calc(48 * var(--rem));
+      height: calc(48 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-bike__mark svg {
+      width: calc(20 * var(--rem));
+      height: calc(20 * var(--rem));
+    }
+    #user-manuals-picker-{{ ump_id }} .ump-manual__tag {
+      font-size: calc(20 * var(--rem));
+    }
+    #user-manuals-picker-{{ ump_id }} .ump-manual__meta {
+      font-size: calc(18 * var(--rem));
+    }
+    #user-manuals-picker-{{ ump_id }} .ump-manual__btn svg {
+      width: calc(20 * var(--rem));
+      height: calc(20 * var(--rem));
+    }
+  }
+
+  @media screen and (min-width: 750px) and (max-width: 768px) {
+    #user-manuals-picker-{{ ump_id }} {
+      padding-top: calc(88 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-shell {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 0 calc(34 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-step__head {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: calc(46 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-step__title {
+      font-size: calc(42 * var(--rem));
+      line-height: calc(61 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-step__num {
+      width: calc(46 * var(--rem));
+      height: calc(46 * var(--rem));
+      font-size: calc(23 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-step__hint {
+      font-size: calc(38 * var(--rem));
+      line-height: calc(61 * var(--rem));
+      text-align: left;
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-bikes {
+      grid-template-columns: 1fr;
+      gap: calc(46 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-bike__model,
+    #user-manuals-picker-{{ ump_id }} .ump-manual__name {
+      font-size: calc(42 * var(--rem));
+      line-height: calc(42 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-bike__series,
+    #user-manuals-picker-{{ ump_id }} .ump-ch__btn,
+    #user-manuals-picker-{{ ump_id }} .ump-res__meta,
+    #user-manuals-picker-{{ ump_id }} .ump-res__eyebrow,
+    #user-manuals-picker-{{ ump_id }} .ump-res__lead,
+    #user-manuals-picker-{{ ump_id }} .ump-manual__desc,
+    #user-manuals-picker-{{ ump_id }} .ump-manual__btn {
+      font-size: calc(38 * var(--rem));
+      line-height: calc(61 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-rule {
+      margin: calc(90 * var(--rem)) 0;
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-ch {
+      width: 100%;
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-ch__btn {
+      flex: 1;
+      justify-content: center;
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-res-wrap {
+      margin-top: calc(90 * var(--rem));
+      padding: calc(90 * var(--rem)) 0 calc(168 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-res__top {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: calc(90 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-res__lead {
+      max-width: none;
+      text-align: left;
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-manual {
+      grid-template-columns: 1fr;
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-manual__cover img,
+    #user-manuals-picker-{{ ump_id }} .ump-manual__cover svg {
+      width: calc(268 * var(--rem));
+    }
+  }
+{% endstyle %}
+
+<section
+  class="user-manuals-picker"
+  id="user-manuals-picker-{{ ump_id }}"
+>
+  <div class="ump-shell">
+    <div class="ump-step">
+      <div class="ump-step__head">
+        <h2 class="ump-step__title">
+          <span class="ump-step__num">1</span>
+          {{ section.settings.step1_title | default: 'Select your e-bike' | escape }}
+        </h2>
+        {%- if section.settings.step1_hint != blank -%}
+          <p class="ump-step__hint">{{ section.settings.step1_hint | escape }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="ump-bikes">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'bike' -%}
+            {%- liquid
+              assign ump_pressed = false
+              if forloop.first
+                assign ump_pressed = true
+              endif
+              assign ump_bike_alt = block.settings.model | default: block.settings.image.alt
+            -%}
+            <button
+              class="ump-bike"
+              type="button"
+              data-bike="{{ block.id }}"
+              aria-pressed="{% if ump_pressed %}true{% else %}false{% endif %}"
+              {{ block.shopify_attributes }}
+            >
+              <div class="ump-bike__media">
+                {%- if block.settings.badge != blank -%}
+                  <span class="ump-bike__badge">{{ block.settings.badge | escape }}</span>
+                {%- endif -%}
+                {%- if block.settings.image != blank -%}
+                  {{
+                    block.settings.image
+                    | image_url: width: 540
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '400, 540, 800',
+                      sizes: '(max-width: 749px) 92vw, 542px',
+                      alt: ump_bike_alt
+                  }}
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag: 'ump-bike__ph' }}
+                {%- endif -%}
+              </div>
+              <div class="ump-bike__foot">
+                <div>
+                  {%- if block.settings.series != blank -%}
+                    <p class="ump-bike__series">{{ block.settings.series | escape }}</p>
+                  {%- endif -%}
+                  {%- if block.settings.model != blank -%}
+                    <p class="ump-bike__model">{{ block.settings.model | escape }}</p>
+                  {%- endif -%}
+                </div>
+                <span class="ump-bike__mark" aria-hidden="true">
+                  <svg class="ump-bike__ico ump-bike__ico--check" viewBox="0 0 12 12" fill="none">
+                    <path d="M2 6.2L4.7 9L10 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <svg class="ump-bike__ico ump-bike__ico--arrow" viewBox="0 0 12 12" fill="none">
+                    <path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </div>
+            </button>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <hr class="ump-rule">
+
+    <div class="ump-step ump-step--ch">
+      <div class="ump-step__head">
+        <h2 class="ump-step__title">
+          <span class="ump-step__num">2</span>
+          {{ section.settings.step2_title | default: 'Select purchase channel' | escape }}
+        </h2>
+        <div class="ump-ch" role="group" aria-label="{{ section.settings.step2_title | default: 'Select purchase channel' | escape }}">
+          <button class="ump-ch__btn" type="button" data-channel="aotos" aria-pressed="true">
+            {{ section.settings.channel_aotos | default: 'AOTOS.com' | escape }}
+          </button>
+          <button class="ump-ch__btn" type="button" data-channel="costco" aria-pressed="false">
+            {{ section.settings.channel_costco | default: 'Costco' | escape }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ump-res-wrap">
+    <div class="ump-shell">
+      {%- assign ump_ch_list = 'aotos,costco' | split: ',' -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'bike' -%}
+          {%- assign ump_first_bike = forloop.first -%}
+          {%- for ch in ump_ch_list -%}
+            {%- liquid
+              if ch == 'aotos'
+                assign ump_pdf = block.settings.aotos_pdf
+                assign ump_ver = block.settings.aotos_version
+                assign ump_upd = block.settings.aotos_updated
+                assign ump_size = block.settings.aotos_size
+                assign ump_cover = block.settings.aotos_cover
+                assign ump_ch_label = block.settings.aotos_version_label | default: section.settings.channel_aotos_version
+              else
+                assign ump_pdf = block.settings.costco_pdf
+                assign ump_ver = block.settings.costco_version
+                assign ump_upd = block.settings.costco_updated
+                assign ump_size = block.settings.costco_size
+                assign ump_cover = block.settings.costco_cover
+                assign ump_ch_label = block.settings.costco_version_label | default: section.settings.channel_costco_version
+              endif
+              assign ump_show = false
+              if ump_first_bike and ch == 'aotos'
+                assign ump_show = true
+              endif
+            -%}
+            <div
+              class="ump-res"
+              data-bike="{{ block.id }}"
+              data-channel="{{ ch }}"
+              {% unless ump_show %}hidden{% endunless %}
+            >
+              <p class="ump-res__meta">
+                <span class="ump-res__meta-series">{{ block.settings.series | default: block.settings.badge | escape }}</span>
+                ·
+                <span class="ump-res__meta-channel">{{ ump_ch_label | default: ch | upcase | escape }}</span>
+              </p>
+              {%- if section.settings.resources_eyebrow != blank -%}
+                <p class="ump-res__eyebrow">{{ section.settings.resources_eyebrow | escape }}</p>
+              {%- endif -%}
+              <div class="ump-res__top">
+                <h2 class="ump-res__title aotos-section-title">{{ block.settings.model | escape }}</h2>
+                {%- if section.settings.resources_lead != blank -%}
+                  <p class="ump-res__lead">{{ section.settings.resources_lead | escape }}</p>
+                {%- endif -%}
+              </div>
+
+              <div class="ump-cards">
+                <article class="ump-manual">
+                  <div class="ump-manual__copy">
+                    {%- if section.settings.manual_tag != blank -%}
+                      <p class="ump-manual__tag">{{ section.settings.manual_tag | escape }}</p>
+                    {%- endif -%}
+                    <h3 class="ump-manual__name">{{ section.settings.manual_title | default: "Owner's Manual" | escape }}</h3>
+                    {%- if section.settings.manual_desc != blank -%}
+                      <p class="ump-manual__desc">{{ section.settings.manual_desc | escape }}</p>
+                    {%- endif -%}
+                    <a
+                      class="ump-manual__btn"
+                      href="{% if ump_pdf != blank %}{{ ump_pdf }}{% else %}#{% endif %}"
+                      {% if ump_pdf != blank %}download{% else %}aria-disabled="true"{% endif %}
+                    >
+                      {{ section.settings.manual_btn | default: 'Download PDF' | escape }}
+                      <svg viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                        <path d="M7 2v8M3.5 7.5L7 11l3.5-3.5M2.5 12.5h9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </a>
+                    {%- if ump_ver != blank or ump_upd != blank or ump_size != blank -%}
+                      <p class="ump-manual__meta">
+                        {%- if ump_ver != blank -%}{{ ump_ver | escape }}{%- endif -%}
+                        {%- if ump_upd != blank -%} · {{ ump_upd | escape }}{%- endif -%}
+                        {%- if ump_size != blank -%} · {{ ump_size | escape }}{%- endif -%}
+                      </p>
+                    {%- endif -%}
+                  </div>
+                  <div class="ump-manual__cover">
+                    {%- if ump_cover != blank -%}
+                      {{
+                        ump_cover
+                        | image_url: width: 280
+                        | image_tag:
+                          loading: 'lazy',
+                          widths: '200, 280, 400',
+                          sizes: '(max-width: 749px) 40vw, 140px',
+                          alt: block.settings.model
+                      }}
+                    {%- else -%}
+                      {{ 'image' | placeholder_svg_tag: 'ump-cover__ph' }}
+                    {%- endif -%}
+                  </div>
+                </article>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('user-manuals-picker-{{ ump_id }}');
+    if (!root) return;
+
+    var bikeBtn = root.querySelector('.ump-bike[aria-pressed="true"]') || root.querySelector('.ump-bike');
+    var chBtn = root.querySelector('.ump-ch__btn[aria-pressed="true"]') || root.querySelector('.ump-ch__btn');
+    var bike = bikeBtn ? bikeBtn.getAttribute('data-bike') : '';
+    var channel = chBtn ? chBtn.getAttribute('data-channel') : 'aotos';
+
+    function apply() {
+      root.querySelectorAll('.ump-bike').forEach(function (btn) {
+        btn.setAttribute('aria-pressed', btn.getAttribute('data-bike') === bike ? 'true' : 'false');
+      });
+      root.querySelectorAll('.ump-ch__btn').forEach(function (btn) {
+        btn.setAttribute('aria-pressed', btn.getAttribute('data-channel') === channel ? 'true' : 'false');
+      });
+      root.querySelectorAll('.ump-res').forEach(function (panel) {
+        var on = panel.getAttribute('data-bike') === bike && panel.getAttribute('data-channel') === channel;
+        panel.hidden = !on;
+      });
+    }
+
+    root.addEventListener('click', function (e) {
+      var b = e.target.closest('.ump-bike');
+      var c = e.target.closest('.ump-ch__btn');
+      if (b) {
+        bike = b.getAttribute('data-bike');
+        apply();
+      }
+      if (c) {
+        channel = c.getAttribute('data-channel');
+        apply();
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "User Manuals Picker",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "步骤 1"
+    },
+    {
+      "type": "text",
+      "id": "step1_title",
+      "label": "标题",
+      "default": "Select your e-bike"
+    },
+    {
+      "type": "text",
+      "id": "step1_hint",
+      "label": "右侧提示",
+      "default": "Check the model name on the frame or your order confirmation."
+    },
+    {
+      "type": "header",
+      "content": "步骤 2"
+    },
+    {
+      "type": "text",
+      "id": "step2_title",
+      "label": "标题",
+      "default": "Select purchase channel"
+    },
+    {
+      "type": "text",
+      "id": "channel_aotos",
+      "label": "渠道 A 名称",
+      "default": "AOTOS.com"
+    },
+    {
+      "type": "text",
+      "id": "channel_aotos_version",
+      "label": "渠道 A 版本文案",
+      "default": "AOTOS VERSION"
+    },
+    {
+      "type": "text",
+      "id": "channel_costco",
+      "label": "渠道 B 名称",
+      "default": "Costco"
+    },
+    {
+      "type": "text",
+      "id": "channel_costco_version",
+      "label": "渠道 B 版本文案",
+      "default": "COSTCO VERSION"
+    },
+    {
+      "type": "header",
+      "content": "资源区"
+    },
+    {
+      "type": "text",
+      "id": "resources_eyebrow",
+      "label": "小标题",
+      "default": "YOUR RESOURCES"
+    },
+    {
+      "type": "textarea",
+      "id": "resources_lead",
+      "label": "右侧说明",
+      "default": "Assembly, setup and daily-use support in one place."
+    },
+    {
+      "type": "text",
+      "id": "manual_tag",
+      "label": "手册标签",
+      "default": "PDF · ENGLISH"
+    },
+    {
+      "type": "text",
+      "id": "manual_title",
+      "label": "手册标题",
+      "default": "Owner's Manual"
+    },
+    {
+      "type": "textarea",
+      "id": "manual_desc",
+      "label": "手册描述",
+      "default": "Safety, assembly, controls, charging and maintenance."
+    },
+    {
+      "type": "text",
+      "id": "manual_btn",
+      "label": "下载按钮",
+      "default": "Download PDF"
+    },
+    {
+      "type": "header",
+      "content": "间距"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "上间距 (PC)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "下间距 (PC)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "上间距 (手机)",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "下间距 (手机)",
+      "default": 88
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bike",
+      "name": "车型",
+      "settings": [
+        {
+          "type": "header",
+          "content": "卡片"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "角标",
+          "default": "EB03"
+        },
+        {
+          "type": "text",
+          "id": "series",
+          "label": "系列名",
+          "default": "EB03 SERIES"
+        },
+        {
+          "type": "text",
+          "id": "model",
+          "label": "型号名",
+          "default": "FLUX X26"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "产品图"
+        },
+        {
+          "type": "header",
+          "content": "AOTOS.com"
+        },
+        {
+          "type": "text",
+          "id": "aotos_version_label",
+          "label": "版本标签",
+          "default": "AOTOS VERSION"
+        },
+        {
+          "type": "url",
+          "id": "aotos_pdf",
+          "label": "PDF 下载链接"
+        },
+        {
+          "type": "text",
+          "id": "aotos_version",
+          "label": "版本号",
+          "default": "Version 1.4"
+        },
+        {
+          "type": "text",
+          "id": "aotos_updated",
+          "label": "更新日期",
+          "default": "Updated Aug 2026"
+        },
+        {
+          "type": "text",
+          "id": "aotos_size",
+          "label": "文件大小",
+          "default": "18.6 MB"
+        },
+        {
+          "type": "image_picker",
+          "id": "aotos_cover",
+          "label": "手册封面",
+          "info": "建议图片比例 3:4（宽:高）"
+        },
+        {
+          "type": "header",
+          "content": "Costco"
+        },
+        {
+          "type": "text",
+          "id": "costco_version_label",
+          "label": "版本标签",
+          "default": "COSTCO VERSION"
+        },
+        {
+          "type": "url",
+          "id": "costco_pdf",
+          "label": "PDF 下载链接"
+        },
+        {
+          "type": "text",
+          "id": "costco_version",
+          "label": "版本号",
+          "default": "Version 1.4"
+        },
+        {
+          "type": "text",
+          "id": "costco_updated",
+          "label": "更新日期",
+          "default": "Updated Aug 2026"
+        },
+        {
+          "type": "text",
+          "id": "costco_size",
+          "label": "文件大小",
+          "default": "18.6 MB"
+        },
+        {
+          "type": "image_picker",
+          "id": "costco_cover",
+          "label": "手册封面",
+          "info": "建议图片比例 3:4（宽:高）"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "User Manuals Picker",
+      "blocks": [
+        {
+          "type": "bike",
+          "settings": {
+            "badge": "EB03",
+            "series": "EB03 SERIES",
+            "model": "FLUX X26"
+          }
+        },
+        {
+          "type": "bike",
+          "settings": {
+            "badge": "EB02",
+            "series": "EB02 SERIES",
+            "model": "FLUX T26"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

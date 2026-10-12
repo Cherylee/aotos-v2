@@ -140,11 +140,16 @@
       font-size: calc({{ title_size_mobile }} * var(--rem));
     }
 
+    #BlogHero-{{ section.id }} .blog-hero__content {
+      justify-content: flex-start;
+      padding-top: calc(40 * var(--rem));
+    }
+
     #BlogHero-{{ section.id }}.blog-hero--left .blog-hero__content {
       left: 0;
       right: 0;
       width: 100%;
-      padding: 0 calc(40 * var(--rem));
+      padding: calc(40 * var(--rem)) calc(40 * var(--rem)) 0;
       transform: none;
     }
 
