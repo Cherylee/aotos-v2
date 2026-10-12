@@ -2,7 +2,7 @@
  * ------------------------------------------------------------
  * IMPORTANT: The contents of this file are auto-generated.
  *
- * This file may be updated by the Shopify admin theme editor.
+ * This file may be updated by the Shopify admin theme editor
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
@@ -27,13 +27,26 @@
         "crumb_margin_bottom": 40,
         "eyebrow": "AOTOS SUPPORT",
         "eyebrow_color": "#ff6501",
+        "eyebrow_font_size_pc": 12,
+        "eyebrow_font_size_mob": 18,
         "heading": "Find the right guide for your ride.",
         "heading_color": "#000000",
+        "heading_font_size_pc": 28,
+        "heading_font_size_mob": 32,
         "text": "Select your model and purchase channel to view the correct manual, setup videos and app download.",
         "text_color": "#999999",
+        "text_font_size_pc": 14,
+        "text_font_size_mob": 20,
         "primary_label": "",
+        "primary_link": "",
         "secondary_label": "",
+        "secondary_link": "",
+        "image_ratio": "5/2",
         "image_alt": "User Manuals",
+        "store_link_1": "",
+        "store_alt_1": "Download on the App Store",
+        "store_link_2": "",
+        "store_alt_2": "Get it on Google Play",
         "image_position": "right center",
         "fallback_asset": "",
         "accent_color": "#ff6501",
