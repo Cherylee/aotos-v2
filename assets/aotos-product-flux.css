@@ -320,8 +320,24 @@ body.velotric-lightbox-open {
 }
 
 .velotric-product__info .shopify-app-block:has(.paypal-messaging) + .velotric-product__variants,
-.velotric-product__info .shopify-block:has(.paypal-messaging) + .velotric-product__variants {
+.velotric-product__info .shopify-block:has(.paypal-messaging) + .velotric-product__variants,
+.velotric-product__info .shopify-app-block:has(.affirm-as-low-as) + .velotric-product__variants,
+.velotric-product__info .shopify-block:has(.affirm-as-low-as) + .velotric-product__variants {
   margin-top: calc(14 * var(--rem));
+}
+
+.velotric-product__info .affirm-as-low-as,
+.velotric-product__info .affirm-as-low-as .affirm-ala-price {
+  margin: calc(4 * var(--rem)) 0 0;
+  color: #000000;
+  font-size: calc(12 * var(--rem));
+  line-height: calc(18 * var(--rem));
+}
+
+.velotric-product__info .affirm-as-low-as .affirm-modal-trigger {
+  color: #000000;
+  font-weight: 700;
+  text-decoration: underline;
 }
 
 .velotric-product__info .paypal-messaging .paypal-messaging__content {
@@ -1167,7 +1183,7 @@ body.size-fit-drawer-open {
 .velotric-product__buy-buttons select[data-essential-upsell-element] {
   --fontSize: calc(12 * var(--rem)) !important;
   --lineHeight: calc(16 * var(--rem)) !important;
-  font-size: calc(12 * var(--rem)) !important;
+  font-size: max(16px, calc(12 * var(--rem))) !important;
   line-height: calc(16 * var(--rem)) !important;
 }
 
@@ -1818,6 +1834,12 @@ body.size-fit-drawer-open {
     font-size: calc(10 * var(--rem)) !important;
   }
 
+  .velotric-product__info .affirm-as-low-as,
+  .velotric-product__info .affirm-as-low-as .affirm-ala-price {
+    font-size: calc(20 * var(--rem));
+    line-height: calc(32 * var(--rem));
+  }
+
   .velotric-product__info .shopify-app-block:has(.paypal-messaging) + .velotric-product__variants,
   .velotric-product__info .shopify-block:has(.paypal-messaging) + .velotric-product__variants {
     margin-top: calc(28 * var(--rem));
@@ -2088,12 +2110,18 @@ body.size-fit-drawer-open {
     max-height: calc(120 * var(--rem)) !important;
   }
 
-  .velotric-product__buy-buttons [data-essential-upsell-element="product"] [data-essential-upsell-element="title"],
-  .velotric-product__buy-buttons [data-essential-upsell-element="variant-select"] [data-essential-upsell-element="value"],
-  .velotric-product__buy-buttons select[data-essential-upsell-element] {
+  .velotric-product__buy-buttons [data-essential-upsell-element="product"] [data-essential-upsell-element="title"] {
     --fontSize: calc(20 * var(--rem)) !important;
     --lineHeight: calc(32 * var(--rem)) !important;
     font-size: calc(20 * var(--rem)) !important;
+    line-height: calc(32 * var(--rem)) !important;
+  }
+
+  .velotric-product__buy-buttons [data-essential-upsell-element="variant-select"] [data-essential-upsell-element="value"],
+  .velotric-product__buy-buttons select[data-essential-upsell-element] {
+    --fontSize: max(16px, calc(20 * var(--rem))) !important;
+    --lineHeight: calc(32 * var(--rem)) !important;
+    font-size: max(16px, calc(20 * var(--rem))) !important;
     line-height: calc(32 * var(--rem)) !important;
   }
 

@@ -1,0 +1,111 @@
+{%- liquid
+  assign detail_pictures = product.metafields.custom.detail_pictures.value
+  assign detail_count = 0
+  if detail_pictures != blank
+    for picture in detail_pictures
+      assign detail_count = detail_count | plus: 1
+    endfor
+  endif
+-%}
+{%- if detail_count > 0 -%}
+  <button type="button" class="l2-detail-btn" data-l2-detail-open>
+    Detail
+    <svg viewBox="0 0 1024 1024" aria-hidden="true">
+      <path d="M253.44 491.52m-74.24 0a74.24 74.24 0 1 0 148.48 0 74.24 74.24 0 1 0-148.48 0Z"></path>
+      <path d="M537.6 491.52m-74.24 0a74.24 74.24 0 1 0 148.48 0 74.24 74.24 0 1 0-148.48 0Z"></path>
+      <path d="M821.76 491.52m-74.24 0a74.24 74.24 0 1 0 148.48 0 74.24 74.24 0 1 0-148.48 0Z"></path>
+    </svg>
+  </button>
+  <div class="l2-detail" data-l2-detail hidden>
+    <button type="button" class="l2-detail__nav l2-detail__nav--prev" data-l2-detail-prev aria-label="Previous">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="#fff"></circle><path d="M26 16 18 24l8 8M18 24h14" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    </button>
+    <div class="l2-detail__viewport">
+      <div class="l2-detail__track" data-l2-detail-track>
+        {%- for picture in detail_pictures -%}
+          <figure class="l2-detail__slide">
+            {%- assign detail_w = 1400 -%}
+            {%- assign detail_h = detail_w | divided_by: picture.aspect_ratio | round -%}
+            {{
+              picture
+              | image_url: width: detail_w
+              | image_tag:
+                widths: '600, 900, 1200, 1400',
+                sizes: '(max-width: 768px) 86vw, 70vw',
+                width: detail_w,
+                height: detail_h,
+                loading: 'lazy',
+                alt: picture.alt
+            }}
+            <button type="button" class="l2-detail__close" data-l2-detail-close aria-label="Close">
+              <svg viewBox="0 0 35 35" aria-hidden="true"><circle cx="17.5" cy="17.5" r="17.5" fill="#545454"></circle><path d="M11 17.5h13M17.5 11v13" stroke="#fff" stroke-width="2" stroke-linecap="round"></path></svg>
+            </button>
+          </figure>
+        {%- endfor -%}
+      </div>
+      <div class="l2-detail__dots" data-l2-detail-dots>
+        {%- for picture in detail_pictures -%}
+          <button type="button" data-l2-detail-dot="{{ forloop.index0 }}" aria-label="Image {{ forloop.index }}"{% if forloop.first %} class="is-active"{% endif %}></button>
+        {%- endfor -%}
+      </div>
+    </div>
+    <button type="button" class="l2-detail__nav l2-detail__nav--next" data-l2-detail-next aria-label="Next">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="#fff"></circle><path d="M22 16l8 8-8 8M16 24h14" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    </button>
+  </div>
+  <script>
+    (function () {
+      var root = document.querySelector('[data-l2-detail]');
+      var openBtn = document.querySelector('[data-l2-detail-open]');
+      if (!root || !openBtn || root.dataset.bound === '1') return;
+      root.dataset.bound = '1';
+      var track = root.querySelector('[data-l2-detail-track]');
+      var slides = root.querySelectorAll('.l2-detail__slide');
+      var dots = root.querySelectorAll('[data-l2-detail-dot]');
+      var index = 0;
+      function place() {
+        var slide = slides[index];
+        if (!slide) return;
+        var viewport = root.querySelector('.l2-detail__viewport');
+        var offset = slide.offsetLeft - (viewport.clientWidth - slide.offsetWidth) / 2;
+        track.style.transform = 'translateX(' + (-offset) + 'px)';
+        dots.forEach(function (dot, i) {
+          dot.classList.toggle('is-active', i === index);
+        });
+      }
+      function go(next) {
+        index = (next + slides.length) % slides.length;
+        place();
+      }
+      function open() {
+        root.hidden = false;
+        document.documentElement.classList.add('l2-detail-open');
+        place();
+      }
+      function close() {
+        root.hidden = true;
+        document.documentElement.classList.remove('l2-detail-open');
+      }
+      openBtn.addEventListener('click', open);
+      root.querySelector('[data-l2-detail-prev]').addEventListener('click', function () { go(index - 1); });
+      root.querySelector('[data-l2-detail-next]').addEventListener('click', function () { go(index + 1); });
+      root.querySelectorAll('[data-l2-detail-close]').forEach(function (btn) {
+        btn.addEventListener('click', close);
+      });
+      dots.forEach(function (dot) {
+        dot.addEventListener('click', function () {
+          go(Number(dot.getAttribute('data-l2-detail-dot')));
+        });
+      });
+      document.addEventListener('keydown', function (event) {
+        if (root.hidden) return;
+        if (event.key === 'Escape') close();
+        if (event.key === 'ArrowLeft') go(index - 1);
+        if (event.key === 'ArrowRight') go(index + 1);
+      });
+      window.addEventListener('resize', function () {
+        if (!root.hidden) place();
+      });
+    })();
+  </script>
+{%- endif -%}

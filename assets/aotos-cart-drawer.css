@@ -183,7 +183,7 @@ cart-drawer.is-empty .drawer__close {
 }
 
 .cart-drawer .quantity__input {
-  font-size: calc(12 * var(--rem));
+  font-size: max(16px, calc(12 * var(--rem)));
   font-weight: 600;
   padding: 0;
 }
@@ -417,7 +417,7 @@ cart-drawer.is-empty .drawer__close {
   }
 
   .cart-drawer .quantity__input {
-    font-size: calc(24 * var(--rem));
+    font-size: max(16px, calc(24 * var(--rem)));
   }
 }
 

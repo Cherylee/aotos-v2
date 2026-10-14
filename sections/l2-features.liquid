@@ -1,0 +1,46 @@
+{{ 'l2-page.css' | asset_url | stylesheet_tag }}
+<section class="l2-band l2-features">
+  <div class="l2-shell">
+    {%- for block in section.blocks -%}
+      <article class="l2-feature" {{ block.shopify_attributes }}>
+        <div class="l2-feature__copy">
+          {%- if block.settings.title != blank -%}
+            <h3>{{ block.settings.title | escape }}</h3>
+          {%- endif -%}
+          {%- if block.settings.text != blank -%}
+            <p>{{ block.settings.text | newline_to_br }}</p>
+          {%- endif -%}
+          {%- if block.settings.tag != blank -%}
+            <span class="l2-feature__tag">{{ block.settings.tag | escape }}</span>
+          {%- endif -%}
+        </div>
+        <div class="l2-feature__media">
+          {%- if block.settings.image != blank -%}
+            {% render 'l2-picture', image: block.settings.image, width: 1100, widths: '540, 720, 960, 1100', sizes: '(max-width: 768px) 84vw, 530px' %}
+          {%- endif -%}
+        </div>
+      </article>
+    {%- endfor -%}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "L2 Features",
+  "tag": "section",
+  "class": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "卖点",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "图片" },
+        { "type": "text", "id": "title", "label": "标题" },
+        { "type": "textarea", "id": "text", "label": "说明" },
+        { "type": "text", "id": "tag", "label": "标签" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "L2 Features" }]
+}
+{% endschema %}

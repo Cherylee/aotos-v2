@@ -357,7 +357,7 @@ cart-items cart-remove-button .icon-remove {
   }
 
   cart-items .quantity__input {
-    font-size: calc(22 * var(--rem));
+    font-size: max(16px, calc(22 * var(--rem)));
     padding: 0;
   }
 }

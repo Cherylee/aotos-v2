@@ -1,0 +1,297 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "judge_me_reviews_preview_badge": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "l2_intro": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'l2-buy-notes' %}"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "l2_notices": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'l2-buy-notes', part: 'notices' %}"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": false
+          }
+        },
+        "l2_pay": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'l2-pay' %}"
+          }
+        },
+        "paypal_messaging": {
+          "type": "shopify://apps/paypal-payments-studio/blocks/paypal-messaging/019df789-f519-7bce-9967-1ff928443aa9",
+          "settings": {
+            "font_size": 15,
+            "letter_spacing": 0
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "judge_me_reviews_preview_badge",
+        "price",
+        "l2_intro",
+        "variant_picker",
+        "l2_notices",
+        "buy_buttons",
+        "l2_pay",
+        "paypal_messaging"
+      ],
+      "settings": {
+        "enable_sticky_info": false,
+        "color_scheme": "scheme-1",
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail_slider",
+        "media_position": "left",
+        "image_zoom": "none",
+        "mobile_thumbnails": "hide",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 40,
+        "padding_bottom": 20
+      }
+    },
+    "l2_video": {
+      "type": "l2-video",
+      "settings": {
+        "title": "Travel Smart, <br>Arrive in Style.",
+        "video": "shopify://files/videos/pc_video.mp4",
+        "video_mobile": "shopify://files/videos/mb_video.mp4"
+      }
+    },
+    "l2_features": {
+      "type": "l2-features",
+      "blocks": {
+        "item_space": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/2_443f6d36-238d-4de1-962f-7529fb1b1b24.webp",
+            "title": "Premium Craftsmanship, Lasting Appeal",
+            "text": "This 20-inch suitcase offers a 31L capacity for organized travel. Check its dimensions and weight against your airline’s baggage requirements before you fly.",
+            "tag": "Space-Savvy"
+          }
+        },
+        "item_durable": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/3_2adbad9c-0f92-4bdc-9509-7ce38976d87d.webp",
+            "title": "Seamless Strength, Built to Last",
+            "text": "Crafted with an integrated aluminum alloy frame, this suitcase delivers unmatched durability and supports up to 242 lbs—designed for long-lasting performance on every journey.",
+            "tag": "Durable Design"
+          }
+        },
+        "item_speed": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/2_bb110765-7fd8-4784-a656-a89024c0cf5e.webp",
+            "title": "Swift Ride, Extended Range",
+            "text": "Reach speeds up to 6.2 mph and travel as far as 6.2 miles on a single charge—engineered for efficient, reliable mobility wherever your journey takes you.",
+            "tag": "Speed & Stamina"
+          }
+        },
+        "item_energy": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/1_8d822628-6bec-472f-b5e0-3c4bd048c35d.webp",
+            "title": "Dual-Purpose Power Solution",
+            "text": "Featuring a detachable power bank that fuels both the suitcase and your mobile devices, this design ensures seamless energy for your journey—anytime, anywhere.\n\n*For your safety, if you choose to check your suitcase, please remember to remove the detachable battery before handing it over.",
+            "tag": "Versatile Energy"
+          }
+        }
+      },
+      "block_order": ["item_space", "item_durable", "item_speed", "item_energy"],
+      "settings": {}
+    },
+    "l2_highlights": {
+      "type": "l2-highlights",
+      "blocks": {
+        "item_design": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/2_f988eb8f-9393-4821-951b-c3c43dc5e8d5.webp",
+            "title": "Refined Design, Premium Feel",
+            "text": "Meticulously crafted with high-quality materials, this suitcase exudes sophistication and durability, delivering a luxurious feel that elevates your travel style."
+          }
+        },
+        "item_light": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/3_cdfd9623-8e8f-412f-8577-920e37336786.webp",
+            "title": "Stylish Illumination, App-Controlled",
+            "text": "Featuring stylish lighting on both sides that can be customized through the app, this suitcase lets you switch modes effortlessly—adding a bold, modern flair to your travels."
+          }
+        },
+        "item_handle": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/1_fd18f7d7-1389-46be-a233-7d75bb1abb4c.webp",
+            "title": "Smart Handle, Space-Saving Design",
+            "text": "Equipped with a foldable, intuitive handle for precise control, this suitcase maximizes space efficiency, blending functionality with a sleek, compact form."
+          }
+        }
+      },
+      "block_order": ["item_design", "item_light", "item_handle"],
+      "settings": {}
+    },
+    "l2_app": {
+      "type": "l2-app",
+      "blocks": {
+        "card_overview": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Group_215.png",
+            "title": "See your luggage status instantly.",
+            "tag": "Overview",
+            "tag_color": "#eef840",
+            "icon": "overview"
+          }
+        },
+        "card_records": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Group_209.png",
+            "title": "Track your travel data easily.",
+            "tag": "Records",
+            "tag_color": "#c9acef",
+            "icon": "records"
+          }
+        },
+        "card_lighting": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Group_216.png",
+            "title": "Adjust the lights to your style.",
+            "tag": "Lighting",
+            "tag_color": "#aff5dd",
+            "icon": "lighting"
+          }
+        },
+        "card_control": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Group_210.png",
+            "title": "Control your luggage with the app.",
+            "tag": "Control",
+            "tag_color": "#ffffff",
+            "icon": "control"
+          }
+        }
+      },
+      "block_order": ["card_overview", "card_records", "card_lighting", "card_control"],
+      "settings": {
+        "title": "Unlock Smarter<br>Travel with the App",
+        "text": "Control your journey with the AOTOS app, enhancing your experience with smart connectivity and key features—smart travel controls at your fingertips",
+        "app_store_image": "shopify://shop_images/png-clipart-app-store-apple-google-play-iphone-mid-autumn-lantern-text-logo_1_535d3bfe-44e8-4449-a353-9716168c9d5a.webp",
+        "app_store_link": "https://apps.apple.com/us/app/aotos/id6743829984",
+        "google_play_image": "shopify://shop_images/en_badge_web_generic_1_e12176cc-492d-4f35-84e9-c4929b9eb547.webp",
+        "google_play_link": "https://play.google.com/store/apps/details?id=com.dt.smart.aotos&hl=zh"
+      }
+    },
+    "l2_specs": {
+      "type": "l2-specs",
+      "blocks": {
+        "spec_size": { "type": "spec", "settings": { "title": "Size", "value": "14.2 x 9.9 x 21.7 in" } },
+        "spec_volume": { "type": "spec", "settings": { "title": "Volume", "value": "31 L" } },
+        "spec_battery": { "type": "spec", "settings": { "title": "Battery", "value": "37V, 2.5Ah" } },
+        "spec_motor": { "type": "spec", "settings": { "title": "Motor", "value": "200W" } },
+        "spec_charge": { "type": "spec", "settings": { "title": "Charging Time", "value": "3-4 hours" } },
+        "spec_weight": { "type": "spec", "settings": { "title": "Weight", "value": "17.3 lbs" } },
+        "spec_brake": { "type": "spec", "settings": { "title": "Brake", "value": "Electric Brake" } },
+        "spec_speed": { "type": "spec", "settings": { "title": "Max Speed", "value": "6.2 mph" } },
+        "spec_range": { "type": "spec", "settings": { "title": "Max Range", "value": "6.2 miles" } },
+        "spec_load": { "type": "spec", "settings": { "title": "Max Load", "value": "242 lbs" } },
+        "spec_tire_size": { "type": "spec", "settings": { "title": "Tire Size", "value": "4-inch" } },
+        "spec_ip": { "type": "spec", "settings": { "title": "IP Rating", "value": "IPX4" } },
+        "spec_tire": { "type": "spec", "settings": { "title": "Tire", "value": "4-inch solid tire" } },
+        "spec_material": { "type": "spec", "settings": { "title": "Material", "value": "ABS+PC" } }
+      },
+      "block_order": [
+        "spec_size",
+        "spec_volume",
+        "spec_battery",
+        "spec_motor",
+        "spec_charge",
+        "spec_weight",
+        "spec_brake",
+        "spec_speed",
+        "spec_range",
+        "spec_load",
+        "spec_tire_size",
+        "spec_ip",
+        "spec_tire",
+        "spec_material"
+      ],
+      "settings": {
+        "title": "L2 Specs",
+        "button_label": "View Manual",
+        "button_link": "https://cdn.shopify.com/s/files/1/0719/2736/5851/files/AOTOS_L2_User_Manual.pdf?v=1743152039"
+      }
+    },
+    "l2_newsletter": {
+      "type": "l2-newsletter",
+      "settings": {
+        "title": "Subscribe to Our Newsletter",
+        "text": "Subscribe to receive updates on new arrivals and exclusive discounts"
+      }
+    },
+    "reviews": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": ["judge_me_reviews_review_widget"],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "l2_video",
+    "l2_features",
+    "l2_highlights",
+    "l2_app",
+    "l2_specs",
+    "l2_newsletter",
+    "reviews"
+  ]
+}

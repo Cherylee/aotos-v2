@@ -57,7 +57,7 @@
     height: calc(var(--aotos-button-height, 40) * var(--rem));
     padding: 0 calc(48 * var(--rem)) 0 calc(18 * var(--rem));
     border-radius: var(--buttons-radius, calc(40 * var(--rem)));
-    font-size: calc(14 * var(--rem));
+    font-size: max(16px, calc(14 * var(--rem)));
     font-weight: 400;
     color: #000000;
     background: #fff;
@@ -638,7 +638,7 @@
 
     .aotos-search-{{ section.id }} .aotos-search__facets .facets__summary,
     .aotos-search-{{ section.id }} .aotos-search__facets .facet-filters__sort {
-      font-size: calc(16 * var(--rem));
+      font-size: max(16px, calc(16 * var(--rem)));
     }
 
     .aotos-search-{{ section.id }} .aotos-search__facets .facets__heading,

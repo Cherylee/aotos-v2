@@ -39,8 +39,20 @@
           "type": "price",
           "settings": {}
         },
+        "affirm_pay_over_time_messaging_product_block_Mp6Lry": {
+          "type": "shopify://apps/affirm-pay-over-time-messaging/blocks/product-block/6dce54be-130d-4d13-9636-1e8f611b3071",
+          "settings": {
+            "logo_align": "left",
+            "font_size": 16,
+            "logo_color": "blue",
+            "logo_type": "logo",
+            "public_api_key": "P8QU49AGSFMKUTOH",
+            "price_selector": ""
+          }
+        },
         "paypal_messaging": {
           "type": "shopify://apps/paypal-payments-studio/blocks/paypal-messaging/019df789-f519-7bce-9967-1ff928443aa9",
+          "disabled": true,
           "settings": {
             "font_size": 15,
             "letter_spacing": 0
@@ -149,6 +161,7 @@
         "judge_me_reviews_preview_badge_CjPMDe",
         "text",
         "price",
+        "affirm_pay_over_time_messaging_product_block_Mp6Lry",
         "paypal_messaging",
         "variant_picker",
         "buy_buttons",

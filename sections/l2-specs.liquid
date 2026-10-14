@@ -1,0 +1,47 @@
+{{ 'l2-page.css' | asset_url | stylesheet_tag }}
+<section class="l2-band l2-specs">
+  <div class="l2-shell">
+    <div class="l2-specs__box">
+      <div class="l2-specs__head">
+        <div class="l2-specs__brand">
+          <img src="https://cdn.shopify.com/s/files/1/0719/2736/5851/files/AOTOS_logo.svg?v=1742970226" alt="AOTOS" width="120" height="26">
+          <h2>{{ section.settings.title | escape }}</h2>
+        </div>
+        {%- if section.settings.button_label != blank -%}
+          <a class="l2-specs__btn" href="{{ section.settings.button_link }}" target="_blank" rel="noopener noreferrer">{{ section.settings.button_label | escape }}</a>
+        {%- endif -%}
+      </div>
+      <dl class="l2-specs__list">
+        {%- for block in section.blocks -%}
+          <div {{ block.shopify_attributes }}>
+            <dt>{{ block.settings.title | escape }}</dt>
+            <dd>{{ block.settings.value | escape }}</dd>
+          </div>
+        {%- endfor -%}
+      </dl>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "L2 Specs",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "标题", "default": "L2 Specs" },
+    { "type": "text", "id": "button_label", "label": "按钮文字" },
+    { "type": "url", "id": "button_link", "label": "按钮链接" }
+  ],
+  "blocks": [
+    {
+      "type": "spec",
+      "name": "参数",
+      "settings": [
+        { "type": "text", "id": "title", "label": "名称" },
+        { "type": "text", "id": "value", "label": "数值" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "L2 Specs" }]
+}
+{% endschema %}

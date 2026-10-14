@@ -1,0 +1,282 @@
+{{ 'l2-page.css' | asset_url | stylesheet_tag }}
+<section class="l2-band l2-app" id="l2-app-{{ section.id }}">
+  <div class="l2-app__stage" style="--l2-steps: {{ section.blocks.size }}">
+  <div class="l2-shell">
+    <div class="l2-app__card">
+      {%- if section.settings.title != blank or section.settings.text != blank or section.settings.app_store_image != blank or section.settings.google_play_image != blank -%}
+      <div class="l2-app__head">
+      {%- if section.settings.title != blank -%}
+        <h2 class="l2-app__title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <p class="l2-app__text">{{ section.settings.text | escape }}</p>
+      {%- endif -%}
+      <div class="l2-app__stores">
+        <a class="l2-app__store" href="{{ section.settings.app_store_link | default: 'https://apps.apple.com/us/app/aotos/id6743829984' }}" aria-label="App Store">
+          {% render 'l2-app-store-badge' %}
+        </a>
+        <a class="l2-app__store" href="{{ section.settings.google_play_link | default: 'https://play.google.com/store/apps/details?id=com.dt.smart.aotos&hl=zh' }}" aria-label="Google Play">
+          {% render 'l2-app-play-badge' %}
+        </a>
+      </div>
+      </div>
+      {%- endif -%}
+      <div class="l2-app__grid">
+        <div class="l2-app__phone">
+          <div class="l2-app__shots">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.image != blank -%}
+              <div data-l2-shot="{{ forloop.index0 }}"{% unless forloop.first %} hidden{% endunless %}>
+                {% render 'l2-picture', image: block.settings.image, width: 900, widths: '420, 640, 900', sizes: '(max-width: 768px) 70vw, 420px' %}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+          </div>
+        </div>
+        {%- for block in section.blocks -%}
+          <button type="button" class="l2-app__item{% if forloop.first %} is-active{% endif %}" data-l2-app="{{ forloop.index0 }}" style="--l2-tag: {{ block.settings.tag_color }};" {{ block.shopify_attributes }}>
+            <h3>{{ block.settings.title | escape }}</h3>
+            <span>{{ block.settings.tag | escape }}</span>
+            {%- render 'l2-app-icon', icon: block.settings.icon -%}
+            {%- if block.settings.image != blank -%}
+              {% render 'l2-picture', image: block.settings.image, width: 640, widths: '320, 480, 640', sizes: '(max-width: 768px) 84vw, 280px' %}
+            {%- endif -%}
+          </button>
+        {%- endfor -%}
+      </div>
+      <div class="l2-app__dots">
+        {%- for block in section.blocks -%}
+          <button type="button" data-l2-dot="{{ forloop.index0 }}"{% if forloop.first %} class="is-active" aria-current="true"{% endif %} aria-label="{{ block.settings.tag | escape }}"></button>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+<script>
+  (function () {
+    var root = document.getElementById('l2-app-{{ section.id }}');
+    if (!root) return;
+    var stage = root.querySelector('.l2-app__stage');
+    var card = root.querySelector('.l2-app__card');
+      var head = card.querySelector('.l2-app__head');
+    var shots = root.querySelectorAll('[data-l2-shot]');
+    var shotTrack = root.querySelector('.l2-app__shots');
+    var dots = root.querySelectorAll('[data-l2-dot]');
+    var items = root.querySelectorAll('[data-l2-app]');
+    var shotIndex = 0;
+    var desktop = window.matchMedia('(min-width: 769px)');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var ticking = false;
+    var smooth = null;
+    var lastTime = 0;
+
+    function resetMobile() {
+      stage.style.height = '';
+      card.classList.remove('is-pinned');
+      items.forEach(function (item) {
+        item.style.opacity = '';
+        item.style.transform = '';
+        var title = item.querySelector('h3');
+        if (title) {
+          title.style.maxHeight = '';
+          title.style.opacity = '';
+          title.style.marginBottom = '';
+        }
+      });
+      if (head) {
+        head.style.opacity = '';
+        head.style.transform = '';
+        head.style.maxHeight = '';
+        head.style.overflow = '';
+      }
+      shots.forEach(function (shot, i) {
+        shot.style.opacity = '';
+        shot.classList.remove('is-on');
+        shot.hidden = i !== 0;
+      });
+      showShot(0);
+      items.forEach(function (item, i) {
+        item.classList.toggle('is-active', i === 0);
+      });
+    }
+
+    function easeOut(value) {
+      var t = Math.min(1, Math.max(0, value));
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    function frame(now) {
+      ticking = false;
+      if (!desktop.matches || reduce.matches) return;
+      var scrollable = stage.offsetHeight - window.innerHeight;
+      var passed = Math.min(scrollable, Math.max(0, -stage.getBoundingClientRect().top));
+      var progress = scrollable > 0 ? passed / scrollable : 0;
+      if (smooth == null) smooth = progress;
+      var dt = lastTime ? Math.min(48, now - lastTime) : 16;
+      lastTime = now;
+      smooth += (progress - smooth) * (1 - Math.exp(-dt / 420));
+      if (Math.abs(progress - smooth) > 0.001) requestFrame();
+      var count = items.length || 1;
+      var segments = count + 2;
+      var clock = smooth * segments;
+      function part(index) {
+        return easeOut(clock - index);
+      }
+      var headerP = part(0);
+      if (head) {
+        if (!head.dataset.fullHeight) head.dataset.fullHeight = String(head.scrollHeight);
+        var fullHeight = Number(head.dataset.fullHeight) || head.scrollHeight;
+        head.style.overflow = 'hidden';
+        head.style.maxHeight = (1 - headerP) * fullHeight + 'px';
+        head.style.opacity = String(1 - headerP);
+        head.style.transform = 'scale(' + (1 - headerP * 0.5) + ')';
+      }
+      var rise = card.clientHeight || 640;
+      items.forEach(function (item, i) {
+        var local = part(i + 1);
+        item.style.opacity = String(local);
+        item.style.transform = 'translateY(' + ((1 - local) * rise) + 'px)';
+        var title = item.querySelector('h3');
+        var collapse = i < count - 1 ? part(i + 2) : part(count + 1);
+        if (title) {
+          if (!title.dataset.fullHeight) title.dataset.fullHeight = String(title.scrollHeight);
+          var titleHeight = Number(title.dataset.fullHeight) || title.scrollHeight;
+          title.style.overflow = 'hidden';
+          title.style.marginBottom = (1 - collapse) * 12 + 'px';
+          title.style.maxHeight = (1 - collapse) * titleHeight + 'px';
+          title.style.opacity = '1';
+        }
+      });
+      shots.forEach(function (shot, i) {
+        var fadeIn = i === 0 ? 1 : part(i + 1);
+        var fadeOut = i < count - 1 ? part(i + 2) : 0;
+        shot.style.opacity = String(Math.max(0, Math.min(fadeIn, 1 - fadeOut)));
+        shot.hidden = false;
+        shot.classList.toggle('is-on', fadeIn > 0.5 && fadeOut < 0.5);
+      });
+    }
+
+    function requestFrame() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(frame);
+    }
+
+    function bindClicks() {
+      items.forEach(function (button) {
+        button.addEventListener('click', function () {
+          if (desktop.matches && !reduce.matches) {
+            var index = Number(button.getAttribute('data-l2-app'));
+            var count = items.length || 1;
+            var target = ((index + 1.5) / (count + 2)) * (stage.offsetHeight - window.innerHeight);
+            var top = stage.getBoundingClientRect().top + window.scrollY + target;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+            return;
+          }
+          showShot(Number(button.getAttribute('data-l2-app')));
+        });
+      });
+      dots.forEach(function (dot) {
+        dot.addEventListener('click', function () {
+          showShot(Number(dot.getAttribute('data-l2-dot')));
+        });
+      });
+      if (shotTrack) {
+        shotTrack.addEventListener('scroll', function () {
+          if (desktop.matches && !reduce.matches) return;
+          var width = shotTrack.clientWidth || 1;
+          var index = Math.round(shotTrack.scrollLeft / width);
+          if (index !== shotIndex) markShot(index);
+        }, { passive: true });
+      }
+    }
+
+    function markShot(index) {
+      shotIndex = Math.max(0, Math.min(shots.length - 1, index));
+      items.forEach(function (item, i) {
+        item.classList.toggle('is-active', i === shotIndex);
+      });
+      dots.forEach(function (dot, i) {
+        var on = i === shotIndex;
+        dot.classList.toggle('is-active', on);
+        if (on) dot.setAttribute('aria-current', 'true');
+        else dot.removeAttribute('aria-current');
+      });
+    }
+
+    function showShot(index) {
+      if (!shots.length) return;
+      if (!desktop.matches || reduce.matches) {
+        shots.forEach(function (shot) { shot.hidden = false; });
+        if (shotTrack) {
+          var width = shotTrack.clientWidth || 0;
+          shotTrack.scrollTo({ left: Math.max(0, Math.min(shots.length - 1, index)) * width, behavior: 'smooth' });
+        }
+      }
+      markShot(index);
+    }
+
+    function applyMode() {
+      var pin = desktop.matches && !reduce.matches;
+      card.classList.toggle('is-pinned', pin);
+      smooth = null;
+      lastTime = 0;
+      if (!pin) {
+        resetMobile();
+        return;
+      }
+      if (shotTrack) {
+        shotTrack.style.transform = '';
+        shotTrack.scrollLeft = 0;
+      }
+      shots.forEach(function (shot) { shot.hidden = false; });
+      requestFrame();
+    }
+
+    bindClicks();
+    applyMode();
+    window.addEventListener('scroll', requestFrame, { passive: true });
+    desktop.addEventListener('change', applyMode);
+  })();
+</script>
+{% schema %}
+{
+  "name": "L2 App",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "html", "id": "title", "label": "标题", "default": "Unlock Smarter<br>Travel with the App" },
+    { "type": "textarea", "id": "text", "label": "说明" },
+    { "type": "image_picker", "id": "app_store_image", "label": "App Store 图标" },
+    { "type": "url", "id": "app_store_link", "label": "App Store 链接" },
+    { "type": "image_picker", "id": "google_play_image", "label": "Google Play 图标" },
+    { "type": "url", "id": "google_play_link", "label": "Google Play 链接" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "功能",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "手机截图" },
+        { "type": "text", "id": "title", "label": "标题" },
+        { "type": "text", "id": "tag", "label": "标签" },
+        { "type": "color", "id": "tag_color", "label": "标签颜色", "default": "#ffffff" },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "图标",
+          "default": "overview",
+          "options": [
+            { "value": "overview", "label": "电量" },
+            { "value": "records", "label": "记录" },
+            { "value": "lighting", "label": "灯光" },
+            { "value": "control", "label": "控制" }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [{ "name": "L2 App" }]
+}
+{% endschema %}

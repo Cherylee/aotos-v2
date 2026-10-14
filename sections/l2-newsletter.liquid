@@ -1,0 +1,37 @@
+{{ 'l2-page.css' | asset_url | stylesheet_tag }}
+<section class="l2-band l2-newsletter">
+  <div class="l2-shell">
+    {%- if section.settings.title != blank -%}
+      <h2 class="l2-newsletter__title">{{ section.settings.title | escape }}</h2>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <p class="l2-newsletter__text">{{ section.settings.text | escape }}</p>
+    {%- endif -%}
+    {% form 'customer', class: 'l2-newsletter__form' %}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <label class="visually-hidden" for="L2Newsletter-{{ section.id }}">Email</label>
+      <input id="L2Newsletter-{{ section.id }}" type="email" name="contact[email]" value="{{ form.email }}" placeholder="Enter Your Email" required autocomplete="email">
+      <button type="submit" aria-label="Subscribe">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      {%- if form.posted_successfully? -%}
+        <p class="l2-newsletter__msg">Thanks for subscribing.</p>
+      {%- endif -%}
+      {%- if form.errors -%}
+        <p class="l2-newsletter__msg">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+      {%- endif -%}
+    {% endform %}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "L2 Newsletter",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "标题", "default": "Subscribe to Our Newsletter" },
+    { "type": "textarea", "id": "text", "label": "说明", "default": "Subscribe to receive updates on new arrivals and exclusive discounts" }
+  ],
+  "presets": [{ "name": "L2 Newsletter" }]
+}
+{% endschema %}

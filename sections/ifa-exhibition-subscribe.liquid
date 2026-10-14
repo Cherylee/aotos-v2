@@ -166,7 +166,7 @@
     border: 0;
     background: transparent;
     color: #ffffff;
-    font-size: calc(16 * var(--rem));
+    font-size: max(16px, calc(16 * var(--rem)));
     line-height: 1.4;
     outline: none;
   }
@@ -253,7 +253,7 @@
 
     .ifa-subscribe__input {
       height: calc(48 * var(--rem));
-      font-size: calc(24 * var(--rem));
+      font-size: max(16px, calc(24 * var(--rem)));
       text-align: center;
     }
 
@@ -294,7 +294,7 @@
     .ifa-subscribe__input,
     .ifa-subscribe__button {
       height: calc(56 * var(--rem));
-      font-size: calc(12 * var(--rem));
+      font-size: max(16px, calc(12 * var(--rem)));
     }
   }
 </style>

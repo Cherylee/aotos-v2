@@ -1,0 +1,16 @@
+{%- liquid
+  assign l2_w = width | default: 720
+  assign l2_h = l2_w | divided_by: image.aspect_ratio | round
+  assign l2_alt = alt | default: image.alt
+-%}
+{{
+  image
+  | image_url: width: l2_w
+  | image_tag:
+    widths: widths,
+    sizes: sizes,
+    width: l2_w,
+    height: l2_h,
+    loading: 'lazy',
+    alt: l2_alt
+}}

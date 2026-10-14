@@ -19,6 +19,17 @@
     --rem: calc(100vw / var(--aotos-design-width-mob));
     --aotos-section-title-size: calc(var(--aotos-section-title-mob) * var(--rem));
   }
+
+  /* 字号小于 16px 时，iOS 聚焦输入框会放大页面 */
+  input,
+  textarea,
+  select {
+    font-size: max(16px, 1em);
+  }
+
+  .jdgm-write-review-modal__field-input {
+    font-size: 16px !important;
+  }
 }
 
 .aotos-section-title {

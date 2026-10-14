@@ -1,0 +1,60 @@
+{{ 'l2-page.css' | asset_url | stylesheet_tag }}
+{%- if part == 'notices' -%}
+  <div id="l2-variant-notices">
+    <div class="l2-buy__notice" data-variant-id="46385187619035" hidden>
+      <strong>Available for Pre-Order</strong>
+      <p>Estimated ship date: <strong>Oct 28, 2026</strong></p>
+    </div>
+    <div class="l2-buy__notice" data-variant-id="46382811218139" hidden>
+      <strong>Available for Pre-Order</strong>
+      <p>Estimated ship date: <strong>Oct 28, 2026</strong></p>
+    </div>
+    <div class="l2-buy__notice is-muted" data-variant-id="46382811250907" hidden>
+      <strong>Currently Sold Out</strong>
+      <p>This color is currently unavailable.</p>
+    </div>
+    <div class="l2-buy__notice is-muted" data-variant-id="46382811185371" hidden>
+      <strong>Available for Pre-Order</strong>
+      <p>Estimated ship date: <strong>Oct 28, 2026</strong></p>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var root = document.getElementById('l2-variant-notices');
+      if (!root || root.dataset.bound === '1') return;
+      root.dataset.bound = '1';
+      function sync() {
+        var input = document.querySelector('product-info [name="id"]');
+        var id = input ? String(input.value) : '';
+        root.querySelectorAll('[data-variant-id]').forEach(function (el) {
+          el.hidden = el.getAttribute('data-variant-id') !== id;
+        });
+      }
+      document.addEventListener('change', sync);
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', sync);
+      } else {
+        sync();
+      }
+    })();
+  </script>
+{%- else -%}
+  {%- if cart.currency.iso_code == 'USD' -%}
+    <div class="l2-buy__promo">
+      <p><strong>$399 USD after $100 off</strong></p>
+      <p>Discount applied automatically in cart. Final total shown at checkout.</p>
+    </div>
+  {%- endif -%}
+  <ul class="l2-buy__chips">
+    <li>Auto $100 Off</li>
+    <li>31 L Capacity</li>
+    <li>Smart Control</li>
+    <li>Sleek Tech Look</li>
+  </ul>
+  <p class="l2-buy__note">A rideable suitcase with app control and a removable battery.</p>
+  <details class="l2-buy__note">
+    <summary>Check before you fly</summary>
+    <p>Dimensions: 14.2 × 9.9 × 21.7 in. Product weight: 17.3 lbs. Battery: 37V, 2.5Ah, removable.</p>
+    <p>Carry-on dimensions, weight limits and electric luggage rules vary by airline. Confirm acceptance with your airline before travel. Remove the battery before checking the suitcase.</p>
+  </details>
+{%- endif -%}

@@ -173,6 +173,20 @@ alwaysApply: true
 
 旧模块里的 `orientation: portrait` 可保留，不必主动改。
 
+## 手机输入框不要放大页面
+
+iOS 在 `input` / `textarea` / `select` 的字号小于 **16px** 时，一点输入框就会放大整页。
+
+手机端（`max-width: 768px`）可输入控件的字号写成 `max(16px, calc(N * var(--rem)))`。`--rem` 在窄屏上会把 `N` 算到 16px 以下，不能只写 `calc`。单选、复选、隐藏域不用管。
+
+```css
+@media screen and (max-width: 768px) {
+  .example-field input {
+    font-size: max(16px, calc(22 * var(--rem)));
+  }
+}
+```
+
 ## 注意
 
 - Hover 动效包在 `@media (hover: hover)` 里，避免触控误触。

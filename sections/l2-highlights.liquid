@@ -1,0 +1,190 @@
+{{ 'l2-page.css' | asset_url | stylesheet_tag }}
+<section class="l2-band l2-highlights" id="l2-highlights-{{ section.id }}">
+  <div class="l2-shell">
+    <div class="l2-highlights__layout">
+      <div class="l2-highlight__photos">
+        {%- for block in section.blocks -%}
+          <div class="l2-highlight__photo" data-l2-photo="{{ forloop.index0 }}">
+            {%- if block.settings.image != blank -%}
+              {% render 'l2-picture', image: block.settings.image, width: 1100, widths: '540, 720, 960, 1100', sizes: '(max-width: 768px) 84vw, 530px' %}
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+      <div class="l2-highlight__list">
+        {%- for block in section.blocks -%}
+          <div class="l2-highlight__item{% if forloop.first %} is-active{% endif %}" data-l2-item="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+            <button type="button" class="l2-highlight__head">
+              <span>{{ block.settings.title | escape }}</span>
+              <svg class="l2-highlight__arrow" width="80" height="80" viewBox="0 0 80 80" fill="none" aria-hidden="true">
+                <g clip-path="url(#l2-arrow-{{ section.id }}-{{ forloop.index }})">
+                  <path d="M68.2194 68.2206C83.8755 52.5644 83.9324 27.2378 68.3466 11.652C52.7608 -3.93381 27.4342 -3.87683 11.7781 11.7793C-3.87803 27.4354 -3.93502 52.762 11.6508 68.3478C27.2366 83.9337 52.5632 83.8767 68.2194 68.2206Z" fill="#fff"></path>
+                  <path d="M41.6504 53.0599L54.6504 39.9999L41.6504 26.9399" stroke="#232323" stroke-width="4.57" stroke-miterlimit="10"></path>
+                  <path d="M54.6499 40H23.4399" stroke="#232323" stroke-width="4.57" stroke-miterlimit="10"></path>
+                </g>
+                <defs>
+                  <clipPath id="l2-arrow-{{ section.id }}-{{ forloop.index }}">
+                    <rect width="80" height="80" fill="#fff"></rect>
+                  </clipPath>
+                </defs>
+              </svg>
+            </button>
+            <div class="l2-highlight__body">
+              {%- if block.settings.image != blank -%}
+                <div class="l2-highlight__shot">
+                  {% render 'l2-picture', image: block.settings.image, width: 1100, widths: '540, 720, 960, 1100', sizes: '84vw' %}
+                </div>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <p>{{ block.settings.text | escape }}</p>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+    <div class="l2-highlight__slider">
+      <div class="l2-highlight__viewport">
+        <div class="l2-highlight__track">
+          {%- for block in section.blocks -%}
+            <article class="l2-highlight__slide">
+              {%- if block.settings.image != blank -%}
+                {% render 'l2-picture', image: block.settings.image, width: 900, widths: '480, 720, 900', sizes: '84vw' %}
+              {%- endif -%}
+              <h3>{{ block.settings.title | escape }}</h3>
+              {%- if block.settings.text != blank -%}
+                <p>{{ block.settings.text | escape }}</p>
+              {%- endif -%}
+            </article>
+          {%- endfor -%}
+        </div>
+      </div>
+      <div class="l2-highlight__nav">
+        <button type="button" data-l2-prev aria-label="Previous">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" aria-hidden="true">
+            <path d="M68.2194 68.2206C83.8755 52.5644 83.9324 27.2378 68.3466 11.652C52.7608 -3.93381 27.4342 -3.87683 11.7781 11.7793C-3.87803 27.4354 -3.93502 52.762 11.6508 68.3478C27.2366 83.9337 52.5632 83.8767 68.2194 68.2206Z" fill="url(#l2-prev-{{ section.id }})"></path>
+            <path d="M38.3501 26.9399L25.3501 39.9999L38.3501 53.0599" stroke="#000" stroke-width="4.57" stroke-miterlimit="10"></path>
+            <path d="M25.3501 40H56.5601" stroke="#000" stroke-width="4.57" stroke-miterlimit="10"></path>
+            <defs>
+              <linearGradient id="l2-prev-{{ section.id }}" x1="80" y1="40" x2="0" y2="40">
+                <stop stop-color="#DDCAF9"></stop>
+                <stop offset="1" stop-color="#9AB2F7"></stop>
+              </linearGradient>
+            </defs>
+          </svg>
+        </button>
+        <button type="button" data-l2-next aria-label="Next">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" aria-hidden="true">
+            <path d="M68.2194 68.2206C83.8755 52.5644 83.9324 27.2378 68.3466 11.652C52.7608 -3.93381 27.4342 -3.87683 11.7781 11.7793C-3.87803 27.4354 -3.93502 52.762 11.6508 68.3478C27.2366 83.9337 52.5632 83.8767 68.2194 68.2206Z" fill="url(#l2-next-{{ section.id }})"></path>
+            <path d="M41.6504 53.0599L54.6504 39.9999L41.6504 26.9399" stroke="#000" stroke-width="4.57" stroke-miterlimit="10"></path>
+            <path d="M54.6499 40H23.4399" stroke="#000" stroke-width="4.57" stroke-miterlimit="10"></path>
+            <defs>
+              <linearGradient id="l2-next-{{ section.id }}" x1="40" y1="80" x2="40" y2="0">
+                <stop stop-color="#DDCAF9"></stop>
+                <stop offset="1" stop-color="#9AB2F7"></stop>
+              </linearGradient>
+            </defs>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  (function () {
+    var root = document.getElementById('l2-highlights-{{ section.id }}');
+    if (!root) return;
+    var photos = root.querySelectorAll('[data-l2-photo]');
+    var items = root.querySelectorAll('[data-l2-item]');
+    var desktop = window.matchMedia('(min-width: 769px)');
+    var active = -1;
+    function setActive(index) {
+      if (index === active) return;
+      active = index;
+      items.forEach(function (item, i) {
+        var body = item.querySelector('.l2-highlight__body');
+        var on = i === index;
+        item.classList.toggle('is-active', on);
+        if (!body || !desktop.matches) return;
+        body.style.height = on ? body.scrollHeight + 'px' : '0px';
+      });
+    }
+    function spy() {
+      if (!desktop.matches) return;
+      var mid = window.innerHeight / 2;
+      var index = 0;
+      photos.forEach(function (photo, i) {
+        if (photo.getBoundingClientRect().top < mid) index = i;
+      });
+      setActive(index);
+    }
+    items.forEach(function (item, i) {
+      item.querySelector('.l2-highlight__head').addEventListener('click', function () {
+        if (!desktop.matches) {
+          setActive(active === i ? -1 : i);
+          var body = item.querySelector('.l2-highlight__body');
+          if (body) body.style.height = '';
+          return;
+        }
+        var header = document.querySelector('.section-header');
+        var offset = header ? header.offsetHeight : 0;
+        var top = photos[i].getBoundingClientRect().top + window.scrollY - offset - 24;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      });
+    });
+    if (desktop.matches) {
+      var first = items[0] && items[0].querySelector('.l2-highlight__body');
+      if (first) first.style.height = first.scrollHeight + 'px';
+      active = 0;
+      spy();
+    }
+    window.addEventListener('scroll', function () {
+      requestAnimationFrame(spy);
+    }, { passive: true });
+    desktop.addEventListener('change', function () {
+      items.forEach(function (item) {
+        var body = item.querySelector('.l2-highlight__body');
+        if (body) body.style.height = '';
+      });
+      active = -1;
+      if (desktop.matches) spy();
+      else go(index);
+    });
+
+    var track = root.querySelector('.l2-highlight__track');
+    var slides = track ? track.children : [];
+    var index = 0;
+    function go(next) {
+      if (!track || desktop.matches) return;
+      index = Math.max(0, Math.min(slides.length - 1, next));
+      track.style.transform = 'translateX(' + (-index * 100) + '%)';
+      root.querySelector('[data-l2-prev]').disabled = index === 0;
+      root.querySelector('[data-l2-next]').disabled = index === slides.length - 1;
+    }
+    var prev = root.querySelector('[data-l2-prev]');
+    var next = root.querySelector('[data-l2-next]');
+    if (prev) prev.addEventListener('click', function () { go(index - 1); });
+    if (next) next.addEventListener('click', function () { go(index + 1); });
+    go(0);
+  })();
+</script>
+{% schema %}
+{
+  "name": "L2 Highlights",
+  "tag": "section",
+  "class": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "亮点",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "图片" },
+        { "type": "text", "id": "title", "label": "标题" },
+        { "type": "textarea", "id": "text", "label": "说明" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "L2 Highlights" }]
+}
+{% endschema %}
