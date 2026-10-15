@@ -35,7 +35,10 @@
           }
         }
       },
-      "block_order": ["pro", "base"],
+      "block_order": [
+        "pro",
+        "base"
+      ],
       "settings": {
         "title": "Mecha-Inspired Parametric Design",
         "subtitle": "",
@@ -53,29 +56,159 @@
     "flux_compare": {
       "type": "aotos-flux-compare",
       "blocks": {
-        "spec_row_8yqDGM": { "type": "spec_row", "settings": { "label": "Motor", "value_1": "750W rated / 2000W Peak in Boost*", "value_2": "750W rated / 1200W Peak in Boost*" } },
-        "spec_row_zVatzz": { "type": "spec_row", "disabled": true, "settings": { "label": "Motor", "value_1": "Rated 750W / Peak 2000W", "value_2": "Rated 750W / Peak 1200W" } },
-        "spec_row_PQRtQT": { "type": "spec_row", "settings": { "label": "Torque", "value_1": "100 Nm", "value_2": "80 Nm" } },
-        "spec_row_MJtbPQ": { "type": "spec_row", "settings": { "label": "Top Speed", "value_1": "28 mph (in Boost*)", "value_2": "28 mph (in Boost*)" } },
-        "spec_row_CycLHB": { "type": "spec_row", "settings": { "label": "Battery", "value_1": "48V 21Ah battery", "value_2": "48V 18Ah battery" } },
-        "spec_row_8WJmh3": { "type": "spec_row", "settings": { "label": "Range", "value_1": "Up to 70 Miles", "value_2": "Up to 50 Miles" } },
-        "spec_row_6kKbWk": { "type": "spec_row", "settings": { "label": "Brakes", "value_1": "Hydraulic disc brakes", "value_2": "Hydraulic disc brakes" } },
-        "spec_row_VBK8Y4": { "type": "spec_row", "settings": { "label": "Suspension", "value_1": "Dual hydraulic suspension", "value_2": "Dual hydraulic suspension" } },
-        "spec_row_QhwUiG": { "type": "spec_row", "settings": { "label": "Tires", "value_1": "20 × 4.0 in fat tires", "value_2": "20 × 4.0 in fat tires" } },
-        "spec_row_7bMHJN": { "type": "spec_row", "settings": { "label": "Tire Pressure Monitoring", "value_1": "Yes", "value_2": "No" } },
-        "spec_row_GywwnT": { "type": "spec_row", "settings": { "label": "Under-Frame Storage Bag", "value_1": "Yes", "value_2": "No" } },
-        "spec_row_NM64J9": { "type": "spec_row", "settings": { "label": "Security", "value_1": "App + 4G GPS tracking* + physical lock", "value_2": "App" } },
-        "spec_row_EiE8tJ": { "type": "spec_row", "settings": { "label": "Connectivity", "value_1": "App support", "value_2": "App support" } },
-        "spec_row_Agcwpq": { "type": "spec_row", "settings": { "label": "IP Rating", "value_1": "IPX5 vehicle / IPX6 battery", "value_2": "IPX5" } },
-        "spec_row_gT3bEF": { "type": "spec_row", "settings": { "label": "Net Weight", "value_1": "97 lb / 45 kg", "value_2": "97 lb / 45 kg" } },
-        "spec_row_jbjHbF": { "type": "spec_row", "settings": { "label": "Maximum Load", "value_1": "330 lb", "value_2": "330 lb" } }
+        "spec_row_8yqDGM": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Motor",
+            "value_1": "750W rated / 2000W Peak in Boost*",
+            "value_2": "750W rated / 1200W Peak in Boost*"
+          }
+        },
+        "spec_row_zVatzz": {
+          "type": "spec_row",
+          "disabled": true,
+          "settings": {
+            "label": "Motor",
+            "value_1": "Rated 750W / Peak 2000W",
+            "value_2": "Rated 750W / Peak 1200W"
+          }
+        },
+        "spec_row_PQRtQT": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Torque",
+            "value_1": "100 Nm",
+            "value_2": "80 Nm"
+          }
+        },
+        "spec_row_MJtbPQ": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Top Speed",
+            "value_1": "28 mph (in Boost*)",
+            "value_2": "28 mph (in Boost*)"
+          }
+        },
+        "spec_row_CycLHB": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Battery",
+            "value_1": "48V 21Ah battery",
+            "value_2": "48V 18Ah battery"
+          }
+        },
+        "spec_row_8WJmh3": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Range",
+            "value_1": "Up to 70 Miles",
+            "value_2": "Up to 50 Miles"
+          }
+        },
+        "spec_row_6kKbWk": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Brakes",
+            "value_1": "Hydraulic disc brakes",
+            "value_2": "Hydraulic disc brakes"
+          }
+        },
+        "spec_row_VBK8Y4": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Suspension",
+            "value_1": "Dual hydraulic suspension",
+            "value_2": "Dual hydraulic suspension"
+          }
+        },
+        "spec_row_QhwUiG": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Tires",
+            "value_1": "20 × 4.0 in fat tires",
+            "value_2": "20 × 4.0 in fat tires"
+          }
+        },
+        "spec_row_7bMHJN": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Tire Pressure Monitoring",
+            "value_1": "Yes",
+            "value_2": "No"
+          }
+        },
+        "spec_row_GywwnT": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Under-Frame Storage Bag",
+            "value_1": "Yes",
+            "value_2": "No"
+          }
+        },
+        "spec_row_NM64J9": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Security",
+            "value_1": "App + 4G GPS tracking* + physical lock",
+            "value_2": "App"
+          }
+        },
+        "spec_row_EiE8tJ": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Connectivity",
+            "value_1": "App support",
+            "value_2": "App support"
+          }
+        },
+        "spec_row_Agcwpq": {
+          "type": "spec_row",
+          "settings": {
+            "label": "IP Rating",
+            "value_1": "IPX5 vehicle / IPX6 battery",
+            "value_2": "IPX5"
+          }
+        },
+        "spec_row_gT3bEF": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Net Weight",
+            "value_1": "97 lb / 45 kg",
+            "value_2": "97 lb / 45 kg"
+          }
+        },
+        "spec_row_jbjHbF": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Maximum Load",
+            "value_1": "330 lb",
+            "value_2": "330 lb"
+          }
+        }
       },
-      "block_order": ["spec_row_8yqDGM", "spec_row_zVatzz", "spec_row_PQRtQT", "spec_row_MJtbPQ", "spec_row_CycLHB", "spec_row_8WJmh3", "spec_row_6kKbWk", "spec_row_VBK8Y4", "spec_row_QhwUiG", "spec_row_7bMHJN", "spec_row_GywwnT", "spec_row_NM64J9", "spec_row_EiE8tJ", "spec_row_Agcwpq", "spec_row_gT3bEF", "spec_row_jbjHbF"],
+      "block_order": [
+        "spec_row_8yqDGM",
+        "spec_row_zVatzz",
+        "spec_row_PQRtQT",
+        "spec_row_MJtbPQ",
+        "spec_row_CycLHB",
+        "spec_row_8WJmh3",
+        "spec_row_6kKbWk",
+        "spec_row_VBK8Y4",
+        "spec_row_QhwUiG",
+        "spec_row_7bMHJN",
+        "spec_row_GywwnT",
+        "spec_row_NM64J9",
+        "spec_row_EiE8tJ",
+        "spec_row_Agcwpq",
+        "spec_row_gT3bEF",
+        "spec_row_jbjHbF"
+      ],
       "settings": {
         "title": "FLUX X26 Pro VS Flux X26",
         "model_label": "Model",
         "show_footnote": true,
-        "footnote": "<p>*Boost Mode allows your bike to output it's max torque and power for up to 10 seconds at a time.<br>*Enjoy One year of free 4G/GPS service. Afterward, plans start at $2.90/month or $29 for 12 months (Best Value). Cancel anytime through the AOTOS app.</p>",
+        "footnote": "<p>*Boost Mode allows your bike to output it's max torque and power for up to 10 seconds at a time.<br/>*Enjoy One year of free 4G/GPS service. Afterward, plans start at $2.90/month or $29 for 12 months (Best Value). Cancel anytime through the AOTOS app.</p>",
         "highlighted_column": "1",
         "product_1_name": "FLUX X26 Pro",
         "product_1_highlight": "Pro",
@@ -95,7 +228,7 @@
         "divider_color": "#e5e5e5",
         "highlight_bg": "#f5f5f5",
         "highlight_border": "#e0e0e0",
-        "padding_top": 80,
+        "padding_top": 0,
         "padding_bottom": 80,
         "padding_top_mobile": 88,
         "padding_bottom_mobile": 88
@@ -109,8 +242,18 @@
         "modal_video": "https://cdn.shopify.com/videos/c/o/v/3268e0a18d39481d93e3fbf4cc880f40.mp4",
         "cover": "shopify://shop_images/Snipaste_2026-03-14_01-35-37.png",
         "play_label": "Play video",
+        "bar_color": "#1a1a1a",
+        "title": "",
+        "text": "",
+        "show_button": false,
+        "button_label": "Learn More",
+        "button_link": "",
+        "title_color": "#ffffff",
+        "button_bg": "#ffffff",
+        "button_text": "#000000",
+        "caption": "",
         "bg_color": "#ffffff",
-        "padding_top": 80,
+        "padding_top": 0,
         "padding_bottom": 0,
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 0
@@ -119,11 +262,30 @@
     "flux_phones": {
       "type": "flux-lp-stage",
       "blocks": {
-        "a": { "type": "shot", "settings": { "image": "shopify://shop_images/Engineered_Strength._Precision_Form._983854fe-7386-4499-bce9-64bcb883edee.webp" } },
-        "b": { "type": "shot", "settings": { "image": "shopify://shop_images/Engineered_Strength._Precision_Form._7612a769-3d35-44b4-a490-53a3d219ff09.webp" } },
-        "c": { "type": "shot", "settings": { "image": "shopify://shop_images/Engineered_Strength._Precision_Form._dd7a540c-c15d-4d6b-a727-2db3abd4816c.webp" } }
+        "a": {
+          "type": "shot",
+          "settings": {
+            "image": "shopify://shop_images/Engineered_Strength._Precision_Form._983854fe-7386-4499-bce9-64bcb883edee.webp"
+          }
+        },
+        "b": {
+          "type": "shot",
+          "settings": {
+            "image": "shopify://shop_images/Engineered_Strength._Precision_Form._7612a769-3d35-44b4-a490-53a3d219ff09.webp"
+          }
+        },
+        "c": {
+          "type": "shot",
+          "settings": {
+            "image": "shopify://shop_images/Engineered_Strength._Precision_Form._dd7a540c-c15d-4d6b-a727-2db3abd4816c.webp"
+          }
+        }
       },
-      "block_order": ["a", "b", "c"],
+      "block_order": [
+        "a",
+        "b",
+        "c"
+      ],
       "settings": {
         "style": "phones",
         "title": "Your Flux X26. Connected to You.",
@@ -131,6 +293,13 @@
         "title_mobile": "Your Flux X26. Personalized.\nConnected.",
         "text_mobile": "Every Flux X26 is uniquely linked to its owner. Unlock hands-free with the app, and stay updated with real-time bike status, alerts, and key settings. Built to feel personal. Designed to stay in sync.",
         "title_color": "#000000",
+        "word_a": "Boost",
+        "word_b": "Mode",
+        "word_a_color": "#1a1a1a",
+        "word_b_color": "#b0b0b0",
+        "spec_color": "#333333",
+        "color_off": "#9d9d9d",
+        "color_on": "#000000",
         "bg_color": "#ffffff",
         "padding_top": 80,
         "padding_bottom": 80,
@@ -141,17 +310,54 @@
     "flux_stats": {
       "type": "flux-lp-media",
       "blocks": {
-        "rated": { "type": "stat", "settings": { "number": "750", "unit": "W", "label": "Rated" } },
-        "peak": { "type": "stat", "settings": { "number": "2000", "unit": "W*", "label": "Peak (PRO)" } },
-        "torque": { "type": "stat", "settings": { "number": "100", "unit": "Nm", "label": "Max. Motor Torque" } }
+        "rated": {
+          "type": "stat",
+          "settings": {
+            "number": "750",
+            "unit": "W",
+            "label": "Rated"
+          }
+        },
+        "peak": {
+          "type": "stat",
+          "settings": {
+            "number": "2000",
+            "unit": "W*",
+            "label": "Peak (PRO)"
+          }
+        },
+        "torque": {
+          "type": "stat",
+          "settings": {
+            "number": "100",
+            "unit": "Nm",
+            "label": "Max. Motor Torque"
+          }
+        }
       },
-      "block_order": ["rated", "peak", "torque"],
+      "block_order": [
+        "rated",
+        "peak",
+        "torque"
+      ],
       "settings": {
         "style": "stats",
+        "video_url": "",
+        "modal_video": "",
+        "play_label": "Play video",
         "bar_color": "#1a1a1a",
+        "title": "",
+        "text": "",
+        "show_button": false,
+        "button_label": "Learn More",
+        "button_link": "",
+        "title_color": "#ffffff",
+        "button_bg": "#ffffff",
+        "button_text": "#000000",
+        "caption": "",
         "bg_color": "#ffffff",
         "padding_top": 16,
-        "padding_bottom": 16,
+        "padding_bottom": 80,
         "padding_top_mobile": 40,
         "padding_bottom_mobile": 40
       }
@@ -160,6 +366,10 @@
       "type": "flux-lp-media",
       "settings": {
         "style": "hero",
+        "video_url": "",
+        "modal_video": "",
+        "play_label": "Play video",
+        "bar_color": "#1a1a1a",
         "title": "Support You Can Trust\nAOTOS Community",
         "text": "Ride with confidence, backed by a growing owner community and a nationwide service network with 100+ authorized service centers across the U.S.",
         "show_button": true,
@@ -170,6 +380,8 @@
         "button_text": "#000000",
         "image": "shopify://shop_images/Engineered_Strength._Precision_Form._a2df3f6b-82c7-431f-9d3c-dd579da495ce.png",
         "image_mobile": "shopify://shop_images/Mask_group.webp",
+        "caption": "",
+        "bg_color": "#ffffff",
         "padding_top": 0,
         "padding_bottom": 0,
         "padding_top_mobile": 0,
@@ -181,7 +393,19 @@
       "disabled": true,
       "settings": {
         "style": "morph",
+        "title": "",
+        "text": "",
+        "title_mobile": "",
+        "text_mobile": "",
+        "title_color": "#000000",
         "shopify_video": "shopify://files/videos/73feeb34537f4ff991674c3d7db5a9a9.mp4",
+        "word_a": "Boost",
+        "word_b": "Mode",
+        "word_a_color": "#1a1a1a",
+        "word_b_color": "#b0b0b0",
+        "spec_color": "#333333",
+        "color_off": "#9d9d9d",
+        "color_on": "#000000",
         "bg_color": "#ffffff",
         "padding_top": 0,
         "padding_bottom": 0,
@@ -191,21 +415,53 @@
     },
     "flux_boost": {
       "type": "flux-lp-stage",
-      "disabled": true,
       "blocks": {
-        "s1": { "type": "line", "settings": { "text": "750W (2000W Peak)" } },
-        "s2": { "type": "line", "settings": { "text": "100Nm Torque" } },
-        "s3": { "type": "line", "settings": { "text": "20 MPH (Class 2)" } },
-        "s4": { "type": "line", "settings": { "text": "28 MPH (Class 3, where allowed)" } }
+        "s1": {
+          "type": "line",
+          "settings": {
+            "text": "750W (2000W Peak)"
+          }
+        },
+        "s2": {
+          "type": "line",
+          "settings": {
+            "text": "100Nm Torque"
+          }
+        },
+        "s3": {
+          "type": "line",
+          "settings": {
+            "text": "20 MPH (Class 2)"
+          }
+        },
+        "s4": {
+          "type": "line",
+          "settings": {
+            "text": "28 MPH (Class 3, where allowed)"
+          }
+        }
       },
-      "block_order": ["s1", "s2", "s3", "s4"],
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ],
+      "disabled": true,
       "settings": {
         "style": "boost",
+        "title": "",
+        "text": "",
+        "title_mobile": "",
+        "text_mobile": "",
+        "title_color": "#000000",
         "word_a": "Boost",
         "word_b": "Mode",
         "word_a_color": "#1a1a1a",
         "word_b_color": "#b0b0b0",
         "spec_color": "#333333",
+        "color_off": "#9d9d9d",
+        "color_on": "#000000",
         "bg_color": "#ffffff",
         "padding_top": 0,
         "padding_bottom": 0,
@@ -218,6 +474,18 @@
       "disabled": true,
       "settings": {
         "style": "expand",
+        "video_url": "",
+        "modal_video": "",
+        "play_label": "Play video",
+        "bar_color": "#1a1a1a",
+        "title": "",
+        "text": "",
+        "show_button": false,
+        "button_label": "Learn More",
+        "button_link": "",
+        "title_color": "#ffffff",
+        "button_bg": "#ffffff",
+        "button_text": "#000000",
         "shopify_video": "shopify://files/videos/90a815c99f1d434197c718bbb2a0038f.mp4",
         "caption": "Instant, Wheelie-Capable Power",
         "bg_color": "#ffffff",
@@ -229,14 +497,37 @@
     },
     "flux_reveal": {
       "type": "flux-lp-stage",
-      "disabled": true,
       "blocks": {
-        "p1": { "type": "paragraph", "settings": { "text": "The head-raising assist system gives you lift when accelerating — while keeping the bike stable and predictable." } },
-        "p2": { "type": "paragraph", "settings": { "text": "This is where play meets control." } }
+        "p1": {
+          "type": "paragraph",
+          "settings": {
+            "text": "The head-raising assist system gives you lift when accelerating — while keeping the bike stable and predictable."
+          }
+        },
+        "p2": {
+          "type": "paragraph",
+          "settings": {
+            "text": "This is where play meets control."
+          }
+        }
       },
-      "block_order": ["p1", "p2"],
+      "block_order": [
+        "p1",
+        "p2"
+      ],
+      "disabled": true,
       "settings": {
         "style": "reveal",
+        "title": "",
+        "text": "",
+        "title_mobile": "",
+        "text_mobile": "",
+        "title_color": "#000000",
+        "word_a": "Boost",
+        "word_b": "Mode",
+        "word_a_color": "#1a1a1a",
+        "word_b_color": "#b0b0b0",
+        "spec_color": "#333333",
         "color_off": "#9d9d9d",
         "color_on": "#000000",
         "bg_color": "#ffffff",
@@ -274,13 +565,17 @@
           }
         }
       },
-      "block_order": ["brake", "fork", "shock"],
+      "block_order": [
+        "brake",
+        "fork",
+        "shock"
+      ],
       "settings": {
         "title": "Power Means Nothing Without Control",
         "text": "The Flux X26 is built to keep power predictable, braking confident, and handling stable — so every ride feels responsive without feeling out of control.",
+        "bg_color": "#ffffff",
         "title_color": "#000000",
         "text_color": "#333333",
-        "bg_color": "#ffffff",
         "padding_top": 80,
         "padding_bottom": 80,
         "padding_top_mobile": 88,
@@ -347,13 +642,17 @@
           }
         }
       },
-      "block_order": ["night", "weekend", "city"],
+      "block_order": [
+        "night",
+        "weekend",
+        "city"
+      ],
       "settings": {
         "title": "Built for Weekdays.\nReady for Weekends.",
         "text": "The Flux X26 is made for more than spec sheets. From daily routes to spontaneous detours, it brings power, comfort, and control into the rides you actually take.",
+        "bg_color": "#ffffff",
         "title_color": "#000000",
         "text_color": "#333333",
-        "bg_color": "#ffffff",
         "padding_top": 80,
         "padding_bottom": 80,
         "padding_top_mobile": 88,
@@ -394,13 +693,17 @@
           }
         }
       },
-      "block_order": ["mark", "sarah", "james"],
+      "block_order": [
+        "mark",
+        "sarah",
+        "james"
+      ],
       "settings": {
         "title": "Stories from the Road",
         "bg_color": "#ffffff",
         "title_color": "#000000",
         "card_color": "#111111",
-        "padding_top": 80,
+        "padding_top": 0,
         "padding_bottom": 80,
         "padding_top_mobile": 88,
         "padding_bottom_mobile": 88
@@ -410,13 +713,23 @@
       "type": "flux-lp-media",
       "settings": {
         "style": "hero",
+        "video_url": "",
+        "modal_video": "",
+        "play_label": "Play video",
+        "bar_color": "#1a1a1a",
         "title": "Your Style.\nYour Vibe.",
         "text": "Dynamic ambient lighting gives the Flux X26 a signature glow in the city, adding presence and personality to every ride. It’s a detail that turns heads — and makes your bike feel unmistakably yours.",
         "show_button": false,
+        "button_label": "Learn More",
+        "button_link": "",
         "title_color": "#ffffff",
+        "button_bg": "#ffffff",
+        "button_text": "#000000",
         "image": "shopify://shop_images/Confidence_is_the_real_safety_feature_3ef23657-25a8-4923-9c08-068bef26f9c3.webp",
         "image_mobile": "shopify://shop_images/Mask_group_1.webp",
-        "padding_top": 80,
+        "caption": "",
+        "bg_color": "#ffffff",
+        "padding_top": 0,
         "padding_bottom": 80,
         "padding_top_mobile": 88,
         "padding_bottom_mobile": 88
@@ -453,12 +766,16 @@
           }
         }
       },
-      "block_order": ["v1", "v2", "v3"],
+      "block_order": [
+        "v1",
+        "v2",
+        "v3"
+      ],
       "settings": {
         "title": "Tested by Riders. Trusted by Experts.",
         "bg_color": "#ffffff",
         "title_color": "#000000",
-        "padding_top": 80,
+        "padding_top": 0,
         "padding_bottom": 80,
         "padding_top_mobile": 88,
         "padding_bottom_mobile": 88
@@ -466,14 +783,43 @@
     },
     "flux_quotes": {
       "type": "flux-lp-quotes",
-      "disabled": true,
       "blocks": {
-        "q1": { "type": "quote", "settings": { "image": "shopify://shop_images/Frame_2147225630.webp", "quote": "\"An impressive pedaling experience.\"" } },
-        "q2": { "type": "quote", "settings": { "image": "shopify://shop_images/Frame_2147225632.webp", "quote": "\"An impressive pedaling experience.\"" } },
-        "q3": { "type": "quote", "settings": { "image": "shopify://shop_images/Group_1509999401.webp", "quote": "\"An impressive pedaling experience.\"" } },
-        "q4": { "type": "quote", "settings": { "image": "shopify://shop_images/Frame_2147225633.webp", "quote": "\"An impressive pedaling experience.\"" } }
+        "q1": {
+          "type": "quote",
+          "settings": {
+            "image": "shopify://shop_images/Frame_2147225630.webp",
+            "quote": "\"An impressive pedaling experience.\""
+          }
+        },
+        "q2": {
+          "type": "quote",
+          "settings": {
+            "image": "shopify://shop_images/Frame_2147225632.webp",
+            "quote": "\"An impressive pedaling experience.\""
+          }
+        },
+        "q3": {
+          "type": "quote",
+          "settings": {
+            "image": "shopify://shop_images/Group_1509999401.webp",
+            "quote": "\"An impressive pedaling experience.\""
+          }
+        },
+        "q4": {
+          "type": "quote",
+          "settings": {
+            "image": "shopify://shop_images/Frame_2147225633.webp",
+            "quote": "\"An impressive pedaling experience.\""
+          }
+        }
       },
-      "block_order": ["q1", "q2", "q3", "q4"],
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ],
+      "disabled": true,
       "settings": {
         "note": "— The Heart of Tech —",
         "bg_color": "#ffffff",
@@ -487,20 +833,75 @@
     "flux_logos": {
       "type": "flux-lp-logos",
       "blocks": {
-        "l1": { "type": "logo", "settings": { "image": "shopify://shop_images/6_3f275b4c-f50c-463e-834f-f83e6039f432.png", "new_tab": true } },
-        "l2": { "type": "logo", "settings": { "image": "shopify://shop_images/5_22b47d5d-a360-4f12-b799-c225ede03a4a.png", "new_tab": true } },
-        "l3": { "type": "logo", "settings": { "image": "shopify://shop_images/Bike-Exif-Logo.png", "new_tab": true } },
-        "l4": { "type": "logo", "settings": { "image": "shopify://shop_images/cropped-new-electrek-logo.webp", "new_tab": true } },
-        "l5": { "type": "logo", "settings": { "image": "shopify://shop_images/8_5b8841f2-5f05-46b3-8f06-e3df9c951133.png", "new_tab": true } },
-        "l6": { "type": "logo", "settings": { "image": "shopify://shop_images/4_096a7543-ac19-4a78-9739-9d33b6c92afb.png", "new_tab": true } }
+        "l1": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/6_3f275b4c-f50c-463e-834f-f83e6039f432.png",
+            "alt": "",
+            "link": "",
+            "new_tab": true
+          }
+        },
+        "l2": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/5_22b47d5d-a360-4f12-b799-c225ede03a4a.png",
+            "alt": "",
+            "link": "",
+            "new_tab": true
+          }
+        },
+        "l3": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Bike-Exif-Logo.png",
+            "alt": "",
+            "link": "",
+            "new_tab": true
+          }
+        },
+        "l4": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/cropped-new-electrek-logo.webp",
+            "alt": "",
+            "link": "",
+            "new_tab": true
+          }
+        },
+        "l5": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/8_5b8841f2-5f05-46b3-8f06-e3df9c951133.png",
+            "alt": "",
+            "link": "",
+            "new_tab": true
+          }
+        },
+        "l6": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/4_096a7543-ac19-4a78-9739-9d33b6c92afb.png",
+            "alt": "",
+            "link": "",
+            "new_tab": true
+          }
+        }
       },
-      "block_order": ["l1", "l2", "l3", "l4", "l5", "l6"],
+      "block_order": [
+        "l1",
+        "l2",
+        "l3",
+        "l4",
+        "l5",
+        "l6"
+      ],
       "settings": {
         "title": "Endorsed By",
         "bg_color": "#f8f8f8",
         "inner_color": "#ffffff",
         "title_color": "#000000",
-        "padding_top": 80,
+        "padding_top": 0,
         "padding_bottom": 80,
         "padding_top_mobile": 88,
         "padding_bottom_mobile": 88
@@ -508,13 +909,32 @@
     },
     "flux_marquee": {
       "type": "flux-lp-marquee",
-      "disabled": true,
       "blocks": {
-        "m1": { "type": "item", "settings": { "text": "Ride the future" } },
-        "m2": { "type": "item", "settings": { "text": "Ride the future" } },
-        "m3": { "type": "item", "settings": { "text": "Ride the future" } }
+        "m1": {
+          "type": "item",
+          "settings": {
+            "text": "Ride the future"
+          }
+        },
+        "m2": {
+          "type": "item",
+          "settings": {
+            "text": "Ride the future"
+          }
+        },
+        "m3": {
+          "type": "item",
+          "settings": {
+            "text": "Ride the future"
+          }
+        }
       },
-      "block_order": ["m1", "m2", "m3"],
+      "block_order": [
+        "m1",
+        "m2",
+        "m3"
+      ],
+      "disabled": true,
       "settings": {
         "bg_color": "#000000",
         "text_color": "#ffffff",
