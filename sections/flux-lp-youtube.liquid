@@ -1,0 +1,73 @@
+{% render 'flux-landing-assets' %}
+<section
+  class="flp flp-youtube"
+  style="--pad-t: {{ section.settings.padding_top | default: 60, allow_false: true }}; --pad-b: {{ section.settings.padding_bottom | default: 60, allow_false: true }}; --pad-tm: {{ section.settings.padding_top_mobile | default: 80, allow_false: true }}; --pad-bm: {{ section.settings.padding_bottom_mobile | default: 80, allow_false: true }}; --flp-bg: {{ section.settings.bg_color }}; --flp-title: {{ section.settings.title_color }};"
+>
+  <div class="flp-shell">
+    <h2 class="flp-display aotos-section-title flp-reveal"><span>{{ section.settings.title | escape }}</span></h2>
+    <div class="flp-youtube__grid">
+      {%- for block in section.blocks -%}
+        {%- assign yt = block.settings.url | split: 'v=' | last | split: '&' | first -%}
+        <button class="flp-youtube__card" type="button" data-yt="{{ yt | escape }}" {{ block.shopify_attributes }}>
+          <span class="flp-youtube__thumb">
+            {%- if block.settings.image != blank -%}
+              {{
+                block.settings.image
+                | image_url: width: 720
+                | image_tag:
+                  widths: '360, 540, 720',
+                  sizes: '(max-width: 768px) 78vw, 360px',
+                  width: 720,
+                  height: 405,
+                  loading: 'lazy',
+                  alt: block.settings.title
+              }}
+            {%- endif -%}
+            <svg class="flp-youtube__play" viewBox="0 0 70 49" aria-hidden="true" focusable="false">
+              <rect width="70" height="49" rx="10" fill="#FF0000"></rect>
+              <path d="M28 15L50 24.5L28 34V15Z" fill="#fff"></path>
+            </svg>
+          </span>
+          <h3>{{ block.settings.title | escape }}</h3>
+          <p>{{ block.settings.text | escape }}</p>
+        </button>
+      {%- endfor -%}
+    </div>
+  </div>
+  <div class="flp-modal" hidden>
+    <button class="flp-modal__hit" type="button" data-flp-close aria-label="Close"></button>
+    <div class="flp-modal__box">
+      <button class="flp-modal__x" type="button" data-flp-close aria-label="Close">×</button>
+      <iframe title="YouTube" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "FLUX 视频评测",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "标题", "default": "Tested by Riders. Trusted by Experts." },
+    { "type": "color", "id": "bg_color", "label": "背景", "default": "#ffffff" },
+    { "type": "color", "id": "title_color", "label": "标题颜色", "default": "#000000" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "上边距", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "下边距", "default": 60 },
+    { "type": "range", "id": "padding_top_mobile", "min": 0, "max": 200, "step": 4, "unit": "px", "label": "手机上边距", "default": 80 },
+    { "type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 200, "step": 4, "unit": "px", "label": "手机下边距", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "视频",
+      "settings": [
+        { "type": "text", "id": "url", "label": "YouTube 链接" },
+        { "type": "image_picker", "id": "image", "label": "封面" },
+        { "type": "text", "id": "title", "label": "标题" },
+        { "type": "text", "id": "text", "label": "说明" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "FLUX 视频评测" }]
+}
+{% endschema %}

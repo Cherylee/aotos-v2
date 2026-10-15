@@ -1,0 +1,50 @@
+{% render 'flux-landing-assets' %}
+<section
+  class="flp flp-quotes"
+  style="--pad-t: {{ section.settings.padding_top | default: 52, allow_false: true }}; --pad-b: {{ section.settings.padding_bottom | default: 52, allow_false: true }}; --pad-tm: {{ section.settings.padding_top_mobile | default: 80, allow_false: true }}; --pad-bm: {{ section.settings.padding_bottom_mobile | default: 80, allow_false: true }}; --flp-bg: {{ section.settings.bg_color }}; --flp-title: {{ section.settings.text_color }};"
+>
+  <div class="flp-track" data-flp-scroller>
+    {%- for block in section.blocks -%}
+      <article class="flp-quotes__card" {{ block.shopify_attributes }}>
+        {%- if block.settings.image != blank -%}
+          {{
+            block.settings.image
+            | image_url: width: 320
+            | image_tag: widths: '160, 240, 320', sizes: '160px', width: 320, height: 80, loading: 'lazy', alt: ''
+          }}
+        {%- endif -%}
+        <p>{{ block.settings.quote | escape }}</p>
+      </article>
+    {%- endfor -%}
+  </div>
+  {%- if section.settings.note != blank -%}
+    <p class="flp-quotes__note">{{ section.settings.note | escape }}</p>
+  {%- endif -%}
+</section>
+{% schema %}
+{
+  "name": "FLUX 媒体评价",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "note", "label": "底部短句", "default": "— The Heart of Tech —" },
+    { "type": "color", "id": "bg_color", "label": "背景", "default": "#ffffff" },
+    { "type": "color", "id": "text_color", "label": "文字颜色", "default": "#000000" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "上边距", "default": 52 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "下边距", "default": 52 },
+    { "type": "range", "id": "padding_top_mobile", "min": 0, "max": 200, "step": 4, "unit": "px", "label": "手机上边距", "default": 80 },
+    { "type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 200, "step": 4, "unit": "px", "label": "手机下边距", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "评价",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Logo" },
+        { "type": "textarea", "id": "quote", "label": "引文" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "FLUX 媒体评价" }]
+}
+{% endschema %}

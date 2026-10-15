@@ -1,0 +1,87 @@
+{% render 'flux-landing-assets' %}
+<section
+  class="flp flp-stories"
+  style="--pad-t: {{ section.settings.padding_top | default: 45, allow_false: true }}; --pad-b: {{ section.settings.padding_bottom | default: 45, allow_false: true }}; --pad-tm: {{ section.settings.padding_top_mobile | default: 80, allow_false: true }}; --pad-bm: {{ section.settings.padding_bottom_mobile | default: 80, allow_false: true }}; --flp-bg: {{ section.settings.bg_color }}; --flp-title: {{ section.settings.title_color }}; --flp-card: {{ section.settings.card_color }};"
+>
+  <div class="flp-stories__head">
+    <h2 class="flp-display aotos-section-title flp-reveal"><span>{{ section.settings.title | escape }}</span></h2>
+  </div>
+  <div class="flp-track flp-peek" data-flp-scroller data-flp-peek>
+    {%- for block in section.blocks -%}
+      <article class="flp-stories__card" {{ block.shopify_attributes }}>
+        {%- if block.settings.image != blank -%}
+          {%- assign story_h = 960 | divided_by: block.settings.image.aspect_ratio | round -%}
+          {{
+            block.settings.image
+            | image_url: width: 960
+            | image_tag:
+              class: 'flp-stories__photo',
+              widths: '480, 720, 960, 1200',
+              sizes: '(max-width: 768px) 72vw, 24vw',
+              width: 960,
+              height: story_h,
+              loading: 'lazy',
+              alt: block.settings.author
+          }}
+        {%- endif -%}
+        <div class="flp-stories__body">
+          <div>
+            {%- if block.settings.quote_icon != blank -%}
+              {{
+                block.settings.quote_icon
+                | image_url: width: 64
+                | image_tag: width: 32, height: 32, loading: 'lazy', alt: ''
+              }}
+            {%- endif -%}
+            <p>{{ block.settings.quote | escape }}</p>
+          </div>
+          <div class="flp-stories__who">
+            {%- if block.settings.avatar != blank -%}
+              {{
+                block.settings.avatar
+                | image_url: width: 192
+                | image_tag: widths: '96, 144, 192', sizes: '(max-width: 768px) 48px, 30px', width: 96, height: 96, loading: 'lazy', alt: block.settings.author
+              }}
+            {%- endif -%}
+            <span>{{ block.settings.author | escape }}</span>
+          </div>
+        </div>
+      </article>
+    {%- endfor -%}
+  </div>
+  <div class="flp-nav">
+    <button type="button" data-flp-nav="prev" aria-label="Previous">‹</button>
+    <button type="button" data-flp-nav="next" aria-label="Next">›</button>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "FLUX 骑行故事",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "标题", "default": "Stories from the Road" },
+    { "type": "color", "id": "bg_color", "label": "背景", "default": "#ffffff" },
+    { "type": "color", "id": "title_color", "label": "标题颜色", "default": "#000000" },
+    { "type": "color", "id": "card_color", "label": "卡片背景", "default": "#111111" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "上边距", "default": 44 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "下边距", "default": 44 },
+    { "type": "range", "id": "padding_top_mobile", "min": 0, "max": 200, "step": 4, "unit": "px", "label": "手机上边距", "default": 80 },
+    { "type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 200, "step": 4, "unit": "px", "label": "手机下边距", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "story",
+      "name": "故事",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "图片" },
+        { "type": "image_picker", "id": "quote_icon", "label": "引号图标" },
+        { "type": "textarea", "id": "quote", "label": "引文" },
+        { "type": "image_picker", "id": "avatar", "label": "头像" },
+        { "type": "text", "id": "author", "label": "作者" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "FLUX 骑行故事" }]
+}
+{% endschema %}

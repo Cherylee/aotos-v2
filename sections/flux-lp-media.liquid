@@ -1,0 +1,165 @@
+{% render 'flux-landing-assets' %}
+{%- liquid
+  assign style = section.settings.style
+  assign pad = '--pad-t: ' | append: section.settings.padding_top | append: '; --pad-b: ' | append: section.settings.padding_bottom | append: '; --pad-tm: ' | append: section.settings.padding_top_mobile | append: '; --pad-bm: ' | append: section.settings.padding_bottom_mobile
+-%}
+{%- case style -%}
+  {%- when 'video' -%}
+    <section class="flp flp-video" style="{{ pad }}; --flp-bg: {{ section.settings.bg_color }};">
+      <div class="flp-video__stage">
+        {%- if section.settings.cover != blank -%}
+          {%- assign cover_h = 1600 | divided_by: section.settings.cover.aspect_ratio | round -%}
+          {{
+            section.settings.cover
+            | image_url: width: 1600
+            | image_tag:
+              class: 'flp-video__cover',
+              widths: '750, 1100, 1600, 1920',
+              sizes: '100vw',
+              width: 1600,
+              height: cover_h,
+              loading: 'lazy',
+              alt: ''
+          }}
+        {%- endif -%}
+        <button class="flp-video__play" type="button" data-flp-play aria-label="{{ section.settings.play_label | escape }}">
+          <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <circle cx="32" cy="32" r="32"></circle>
+            <path d="M27 21L44 32L27 43V21Z"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="flp-modal" hidden>
+        <button class="flp-modal__hit" type="button" data-flp-close aria-label="Close"></button>
+        <div class="flp-modal__box">
+          <button class="flp-modal__x" type="button" data-flp-close aria-label="Close">×</button>
+          <video controls playsinline preload="none" {% if section.settings.modal_video != blank %}data-src="{{ section.settings.modal_video }}"{% endif %}></video>
+        </div>
+      </div>
+    </section>
+  {%- when 'stats' -%}
+    <section class="flp flp-stats" style="{{ pad }}; --flp-bg: {{ section.settings.bg_color }}; --flp-bar: {{ section.settings.bar_color }};">
+      <div class="flp-stats__bar">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'stat' -%}
+            <div {{ block.shopify_attributes }}>
+              <div class="flp-stats__num">
+                <span data-count="{{ block.settings.number }}">0</span><small>{{ block.settings.unit | escape }}</small>
+              </div>
+              <span class="flp-stats__label">{{ block.settings.label | escape }}</span>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </section>
+  {%- when 'hero' -%}
+    <section class="flp flp-hero" style="{{ pad }}; --flp-title: {{ section.settings.title_color }}; --flp-btn: {{ section.settings.button_bg }}; --flp-btn-text: {{ section.settings.button_text }};">
+      <div class="flp-hero__media">
+        {%- if section.settings.image != blank -%}
+          {%- assign hero_h = 1600 | divided_by: section.settings.image.aspect_ratio | round -%}
+          {{
+            section.settings.image
+            | image_url: width: 1600
+            | image_tag:
+              class: 'flp-hero__pc',
+              widths: '750, 1100, 1600',
+              sizes: '100vw',
+              width: 1600,
+              height: hero_h,
+              loading: 'lazy',
+              alt: ''
+          }}
+        {%- endif -%}
+        {%- if section.settings.image_mobile != blank -%}
+          {%- assign hero_mh = 800 | divided_by: section.settings.image_mobile.aspect_ratio | round -%}
+          {{
+            section.settings.image_mobile
+            | image_url: width: 800
+            | image_tag:
+              class: 'flp-hero__mob',
+              widths: '400, 600, 800',
+              sizes: '100vw',
+              width: 800,
+              height: hero_mh,
+              loading: 'lazy',
+              alt: ''
+          }}
+        {%- endif -%}
+      </div>
+      <div class="flp-hero__copy">
+        {%- if section.settings.title != blank -%}
+          <h2 class="flp-display aotos-section-title flp-reveal"><span>{{ section.settings.title | newline_to_br }}</span></h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="flp-lead">{{ section.settings.text | newline_to_br }}</div>
+        {%- endif -%}
+        {%- if section.settings.show_button and section.settings.button_label != blank -%}
+          <a class="flp-hero__btn" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>
+        {%- endif -%}
+      </div>
+    </section>
+  {%- when 'expand' -%}
+    <section class="flp flp-expand" data-flp-scrub="desktop" style="{{ pad }}; --flp-bg: {{ section.settings.bg_color }};">
+      <div class="flp-expand__pin">
+        {%- if section.settings.shopify_video != blank -%}
+          {{ section.settings.shopify_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, class: 'flp-expand__video', image_size: '1200x' }}
+        {%- endif -%}
+        {%- if section.settings.caption != blank -%}
+          <p class="flp-expand__cap">{{ section.settings.caption | escape }}</p>
+        {%- endif -%}
+      </div>
+    </section>
+{%- endcase -%}
+{% schema %}
+{
+  "name": "FLUX 媒体",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "select", "id": "style", "label": "款式", "default": "video", "options": [
+      { "value": "video", "label": "全屏视频" },
+      { "value": "stats", "label": "规格计数" },
+      { "value": "hero", "label": "图文主视觉" },
+      { "value": "expand", "label": "滚动放大视频" }
+    ]},
+    { "type": "header", "content": "全屏视频" },
+    { "type": "text", "id": "video_url", "label": "背景视频地址" },
+    { "type": "text", "id": "modal_video", "label": "弹窗视频地址" },
+    { "type": "image_picker", "id": "cover", "label": "封面" },
+    { "type": "text", "id": "play_label", "label": "播放按钮", "default": "Play video" },
+    { "type": "header", "content": "规格计数" },
+    { "type": "color", "id": "bar_color", "label": "计数条背景", "default": "#1a1a1a" },
+    { "type": "header", "content": "图文主视觉" },
+    { "type": "textarea", "id": "title", "label": "标题" },
+    { "type": "textarea", "id": "text", "label": "说明" },
+    { "type": "checkbox", "id": "show_button", "label": "显示按钮", "default": false },
+    { "type": "text", "id": "button_label", "label": "按钮文字", "default": "Learn More" },
+    { "type": "url", "id": "button_link", "label": "按钮链接" },
+    { "type": "color", "id": "title_color", "label": "文字颜色", "default": "#ffffff" },
+    { "type": "color", "id": "button_bg", "label": "按钮背景", "default": "#ffffff" },
+    { "type": "color", "id": "button_text", "label": "按钮文字颜色", "default": "#000000" },
+    { "type": "image_picker", "id": "image", "label": "电脑图片" },
+    { "type": "image_picker", "id": "image_mobile", "label": "手机图片" },
+    { "type": "header", "content": "滚动放大" },
+    { "type": "video", "id": "shopify_video", "label": "视频" },
+    { "type": "text", "id": "caption", "label": "字幕" },
+    { "type": "color", "id": "bg_color", "label": "背景", "default": "#ffffff" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "上边距", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "下边距", "default": 0 },
+    { "type": "range", "id": "padding_top_mobile", "min": 0, "max": 200, "step": 4, "unit": "px", "label": "手机上边距", "default": 0 },
+    { "type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 200, "step": 4, "unit": "px", "label": "手机下边距", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "数字",
+      "settings": [
+        { "type": "text", "id": "number", "label": "数字", "default": "750" },
+        { "type": "text", "id": "unit", "label": "单位", "default": "W" },
+        { "type": "text", "id": "label", "label": "说明", "default": "Rated" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "FLUX 媒体" }]
+}
+{% endschema %}

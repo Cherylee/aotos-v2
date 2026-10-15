@@ -1,0 +1,85 @@
+{% render 'flux-landing-assets' %}
+<section
+  class="flp flp-showcase"
+  style="--pad-t: {{ section.settings.padding_top | default: 45, allow_false: true }}; --pad-b: {{ section.settings.padding_bottom | default: 45, allow_false: true }}; --pad-tm: {{ section.settings.padding_top_mobile | default: 80, allow_false: true }}; --pad-bm: {{ section.settings.padding_bottom_mobile | default: 80, allow_false: true }}; --flp-bg: {{ section.settings.bg_color }}; --flp-title: {{ section.settings.title_color }}; --flp-accent: {{ section.settings.highlight_color }}; --flp-muted: {{ section.settings.specs_color }}; --flp-btn: {{ section.settings.btn_color }};"
+>
+  <div class="flp-shell">
+    <div class="flp-showcase__head">
+      {%- if section.settings.title != blank -%}
+        <h2 class="flp-display aotos-section-title flp-showcase__title flp-reveal"><span>{{ section.settings.title | escape }}</span></h2>
+      {%- endif -%}
+      {%- if section.settings.subtitle != blank -%}
+        <p class="flp-lead">{{ section.settings.subtitle | escape }}</p>
+      {%- endif -%}
+    </div>
+    <div class="flp-showcase__grid">
+      {%- for block in section.blocks -%}
+        <article class="flp-showcase__card" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            {%- assign shot_h = 700 | divided_by: block.settings.image.aspect_ratio | round -%}
+            {{
+              block.settings.image
+              | image_url: width: 700
+              | image_tag:
+                widths: '360, 520, 700',
+                sizes: '(max-width: 768px) 78vw, 353px',
+                width: 700,
+                height: shot_h,
+                loading: 'lazy',
+                alt: block.settings.name
+            }}
+          {%- endif -%}
+          <h3 class="flp-showcase__name">
+            {%- if block.settings.highlight != blank -%}
+              {{ block.settings.name | remove: block.settings.highlight | escape }}
+              <span>{{ block.settings.highlight | escape }}</span>
+            {%- else -%}
+              {{ block.settings.name | escape }}
+            {%- endif -%}
+          </h3>
+          {%- if block.settings.specs != blank -%}
+            <p class="flp-showcase__specs">{{ block.settings.specs | newline_to_br }}</p>
+          {%- endif -%}
+          {%- if block.settings.link != blank -%}
+            <a class="flp-showcase__btn" href="{{ block.settings.link }}">{{ block.settings.button | escape }}</a>
+          {%- endif -%}
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "FLUX 产品卡",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "标题", "default": "Mecha-Inspired Parametric Design" },
+    { "type": "textarea", "id": "subtitle", "label": "副标题" },
+    { "type": "color", "id": "bg_color", "label": "背景", "default": "#ffffff" },
+    { "type": "color", "id": "title_color", "label": "标题颜色", "default": "#000000" },
+    { "type": "color", "id": "highlight_color", "label": "强调色", "default": "#ff4500" },
+    { "type": "color", "id": "specs_color", "label": "规格颜色", "default": "#666666" },
+    { "type": "color", "id": "btn_color", "label": "按钮颜色", "default": "#ff4500" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "上边距", "default": 44 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "下边距", "default": 44 },
+    { "type": "range", "id": "padding_top_mobile", "min": 0, "max": 200, "step": 4, "unit": "px", "label": "手机上边距", "default": 80 },
+    { "type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 200, "step": 4, "unit": "px", "label": "手机下边距", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "产品",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "图片" },
+        { "type": "text", "id": "name", "label": "名称", "default": "Flux X26" },
+        { "type": "text", "id": "highlight", "label": "高亮词" },
+        { "type": "textarea", "id": "specs", "label": "规格" },
+        { "type": "text", "id": "button", "label": "按钮", "default": "Learn More" },
+        { "type": "url", "id": "link", "label": "链接" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "FLUX 产品卡" }]
+}
+{% endschema %}

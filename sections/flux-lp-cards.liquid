@@ -1,0 +1,68 @@
+{% render 'flux-landing-assets' %}
+<section
+  class="flp flp-cards"
+  style="--pad-t: {{ section.settings.padding_top | default: 90, allow_false: true }}; --pad-b: {{ section.settings.padding_bottom | default: 45, allow_false: true }}; --pad-tm: {{ section.settings.padding_top_mobile | default: 88, allow_false: true }}; --pad-bm: {{ section.settings.padding_bottom_mobile | default: 48, allow_false: true }}; --flp-bg: {{ section.settings.bg_color }}; --flp-title: {{ section.settings.title_color }}; --flp-text: {{ section.settings.text_color }};"
+>
+  <div class="flp-cards__head flp-shell">
+    {%- if section.settings.title != blank -%}
+      <h2 class="flp-display aotos-section-title flp-reveal"><span>{{ section.settings.title | newline_to_br }}</span></h2>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <div class="flp-lead">{{ section.settings.text | newline_to_br }}</div>
+    {%- endif -%}
+  </div>
+  <div class="flp-track flp-peek flp-cards__track" data-flp-scroller data-flp-peek>
+    {%- for block in section.blocks -%}
+      <article class="flp-cards__card" {{ block.shopify_attributes }}>
+        {%- if block.settings.image != blank -%}
+          {%- assign card_h = 1200 | divided_by: block.settings.image.aspect_ratio | round -%}
+          {{
+            block.settings.image
+            | image_url: width: 1200
+            | image_tag:
+              widths: '600, 900, 1200, 1600',
+              sizes: '(max-width: 768px) 78vw, 48vw',
+              width: 1200,
+              height: card_h,
+              loading: 'lazy',
+              alt: block.settings.title
+          }}
+        {%- endif -%}
+        <div>
+          <h3>{{ block.settings.title | escape }}</h3>
+          <p>{{ block.settings.text | escape }}</p>
+        </div>
+      </article>
+    {%- endfor -%}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "FLUX 场景卡",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "textarea", "id": "title", "label": "标题" },
+    { "type": "textarea", "id": "text", "label": "说明" },
+    { "type": "color", "id": "bg_color", "label": "背景", "default": "#ffffff" },
+    { "type": "color", "id": "title_color", "label": "标题颜色", "default": "#000000" },
+    { "type": "color", "id": "text_color", "label": "说明颜色", "default": "#333333" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "上边距", "default": 88 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "下边距", "default": 44 },
+    { "type": "range", "id": "padding_top_mobile", "min": 0, "max": 200, "step": 4, "unit": "px", "label": "手机上边距", "default": 88 },
+    { "type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 200, "step": 4, "unit": "px", "label": "手机下边距", "default": 48 }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "卡片",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "图片" },
+        { "type": "text", "id": "title", "label": "标题" },
+        { "type": "textarea", "id": "text", "label": "说明" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "FLUX 场景卡" }]
+}
+{% endschema %}

@@ -14,7 +14,8 @@
           if (!target) return;
           event.preventDefault();
           this.setActive(link.dataset.fxbKey);
-          target.style.scrollMarginTop = `${this.offset()}px`;
+          const scrollingUp = target.getBoundingClientRect().top < 0;
+          target.style.scrollMarginTop = `${this.offset(scrollingUp)}px`;
           target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
         };
         this.addEventListener('click', this.onClick);
@@ -43,11 +44,19 @@
         window.removeEventListener('scroll', this.onScroll);
         document.documentElement.classList.remove('fxb-anchor-stuck');
       }
+      headerOffset(force) {
+        const header = document.querySelector('.section-header');
+        if (!header) return 0;
+        const visible = header.classList.contains('shopify-section-header-sticky')
+          && !header.classList.contains('shopify-section-header-hidden');
+        return visible || force ? header.offsetHeight : 0;
+      }
       syncStuck() {
         const bar = this.sectionEl?.querySelector('.fxb-anchor-section');
         if (bar) document.documentElement.style.setProperty('--fxb-anchor-h', `${bar.offsetHeight}px`);
         const top = this.sentinel?.getBoundingClientRect().top ?? 1;
-        const headerH = document.querySelector('.section-header')?.offsetHeight || 0;
+        const headerH = this.headerOffset(false);
+        document.documentElement.style.setProperty('--fxb-anchor-top', `${headerH}px`);
         document.documentElement.classList.toggle('fxb-anchor-stuck', top <= headerH);
       }
       syncActive() {
@@ -77,8 +86,9 @@
       setActive(key) {
         this.links.forEach((link) => link.classList.toggle('is-active', link.dataset.fxbKey === key));
       }
-      offset() {
-        return this.sectionEl?.querySelector('.fxb-anchor-section')?.offsetHeight || 0;
+      offset(forceHeader) {
+        const bar = this.sectionEl?.querySelector('.fxb-anchor-section')?.offsetHeight || 0;
+        return bar + this.headerOffset(forceHeader);
       }
       find(key) {
         return document.getElementById(`shopify-section-${key}`)

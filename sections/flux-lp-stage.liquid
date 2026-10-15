@@ -1,0 +1,129 @@
+{% render 'flux-landing-assets' %}
+{%- liquid
+  assign style = section.settings.style
+  assign pad = '--pad-t: ' | append: section.settings.padding_top | append: '; --pad-b: ' | append: section.settings.padding_bottom | append: '; --pad-tm: ' | append: section.settings.padding_top_mobile | append: '; --pad-bm: ' | append: section.settings.padding_bottom_mobile
+-%}
+{%- case style -%}
+  {%- when 'phones' -%}
+    <section class="flp flp-phones" style="{{ pad }}; --flp-bg: {{ section.settings.bg_color }}; --flp-title: {{ section.settings.title_color }};">
+      <div class="flp-phones__head flp-phones__pc flp-shell">
+        {%- if section.settings.title != blank -%}
+          <h2 class="flp-display aotos-section-title gsap-title-reveal">{{ section.settings.title | newline_to_br }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="flp-lead gsap-title-reveal" data-reveal-delay="0.12">{{ section.settings.text | newline_to_br }}</div>
+        {%- endif -%}
+      </div>
+      <div class="flp-phones__head flp-phones__mob flp-shell">
+        <h2 class="flp-display aotos-section-title gsap-title-reveal">{{ section.settings.title_mobile | default: section.settings.title | newline_to_br }}</h2>
+        {%- if section.settings.text_mobile != blank or section.settings.text != blank -%}
+          <div class="flp-lead gsap-title-reveal" data-reveal-delay="0.12">{{ section.settings.text_mobile | default: section.settings.text | newline_to_br }}</div>
+        {%- endif -%}
+      </div>
+      <div class="flp-phones__row">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'shot' and block.settings.image != blank -%}
+            {%- assign shot_h = 480 | divided_by: block.settings.image.aspect_ratio | round -%}
+            <figure {{ block.shopify_attributes }}>
+              {{
+                block.settings.image
+                | image_url: width: 480
+                | image_tag:
+                  widths: '240, 360, 480',
+                  sizes: '(max-width: 768px) 43vw, 236px',
+                  width: 480,
+                  height: shot_h,
+                  loading: 'lazy',
+                  alt: ''
+              }}
+            </figure>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </section>
+    {% render 'gsap-title-reveal' %}
+  {%- when 'morph' -%}
+    <section class="flp flp-pin flp-stage--morph" data-flp-scrub style="{{ pad }}; --flp-bg: {{ section.settings.bg_color }};">
+      <div class="flp-pin__view">
+        <div class="flp-morph__frame">
+          {%- if section.settings.shopify_video != blank -%}
+            {{ section.settings.shopify_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, image_size: '1200x' }}
+          {%- endif -%}
+          <div class="flp-morph__mark" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+  {%- when 'boost' -%}
+    <section class="flp flp-pin flp-stage--boost flp-reveal" data-flp-scrub="desktop" style="{{ pad }}; --flp-bg: {{ section.settings.bg_color }}; --flp-a: {{ section.settings.word_a_color }}; --flp-b: {{ section.settings.word_b_color }};">
+      <div class="flp-pin__view">
+        <div>
+          <div class="flp-boost__words">
+            <span class="flp-boost__a">{{ section.settings.word_a | escape }}</span>
+            <span class="flp-boost__b">{{ section.settings.word_b | escape }}</span>
+          </div>
+          <ul class="flp-boost__specs">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'line' -%}
+                <li {{ block.shopify_attributes }} style="color: {{ section.settings.spec_color }}">{{ block.settings.text | escape }}</li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </div>
+      </div>
+    </section>
+  {%- when 'reveal' -%}
+    <section class="flp flp-pin flp-stage--reveal" data-flp-scrub style="{{ pad }}; --flp-bg: {{ section.settings.bg_color }}; --flp-off: {{ section.settings.color_off }}; --flp-on: {{ section.settings.color_on }};">
+      <div class="flp-pin__view">
+        <div class="flp-copy">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'paragraph' -%}
+              <p data-flp-copy {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</p>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+{%- endcase -%}
+{% schema %}
+{
+  "name": "FLUX 舞台",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "select", "id": "style", "label": "款式", "default": "phones", "options": [
+      { "value": "phones", "label": "手机展示" },
+      { "value": "morph", "label": "Logo 变视频" },
+      { "value": "boost", "label": "大标题规格" },
+      { "value": "reveal", "label": "文字揭示" }
+    ]},
+    { "type": "header", "content": "手机展示" },
+    { "type": "textarea", "id": "title", "label": "电脑标题" },
+    { "type": "textarea", "id": "text", "label": "电脑说明" },
+    { "type": "textarea", "id": "title_mobile", "label": "手机标题" },
+    { "type": "textarea", "id": "text_mobile", "label": "手机说明" },
+    { "type": "color", "id": "title_color", "label": "标题颜色", "default": "#000000" },
+    { "type": "header", "content": "Logo 变视频 / 滚动放大共用视频" },
+    { "type": "video", "id": "shopify_video", "label": "视频" },
+    { "type": "header", "content": "大标题规格" },
+    { "type": "text", "id": "word_a", "label": "左词", "default": "Boost" },
+    { "type": "text", "id": "word_b", "label": "右词", "default": "Mode" },
+    { "type": "color", "id": "word_a_color", "label": "左词颜色", "default": "#1a1a1a" },
+    { "type": "color", "id": "word_b_color", "label": "右词颜色", "default": "#b0b0b0" },
+    { "type": "color", "id": "spec_color", "label": "规格颜色", "default": "#333333" },
+    { "type": "header", "content": "文字揭示" },
+    { "type": "color", "id": "color_off", "label": "未亮颜色", "default": "#9d9d9d" },
+    { "type": "color", "id": "color_on", "label": "点亮颜色", "default": "#000000" },
+    { "type": "color", "id": "bg_color", "label": "背景", "default": "#ffffff" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "上边距", "default": 40 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "下边距", "default": 40 },
+    { "type": "range", "id": "padding_top_mobile", "min": 0, "max": 200, "step": 4, "unit": "px", "label": "手机上边距", "default": 80 },
+    { "type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 200, "step": 4, "unit": "px", "label": "手机下边距", "default": 48 }
+  ],
+  "blocks": [
+    { "type": "shot", "name": "手机图", "settings": [{ "type": "image_picker", "id": "image", "label": "图片" }] },
+    { "type": "line", "name": "规格", "settings": [{ "type": "text", "id": "text", "label": "文字" }] },
+    { "type": "paragraph", "name": "段落", "settings": [{ "type": "textarea", "id": "text", "label": "文字" }] }
+  ],
+  "presets": [{ "name": "FLUX 舞台" }]
+}
+{% endschema %}

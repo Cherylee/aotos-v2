@@ -47,16 +47,11 @@ html.fxb-anchor-stuck .fxb-anchor-sentinel {
 
 html.fxb-anchor-stuck .fxb-anchor-section {
   position: fixed;
-  top: 0;
+  top: var(--fxb-anchor-top, 0px);
   left: 0;
   right: 0;
-}
-
-html.fxb-anchor-stuck .section-header,
-html.fxb-anchor-stuck .section-header.shopify-section-header-sticky,
-html.fxb-anchor-stuck .section-header.shopify-section-header-hidden {
-  position: relative !important;
-  top: auto !important;
+  z-index: 2;
+  transition: top 0.15s ease-out;
 }
 
 .fxb-anchor {
@@ -122,10 +117,19 @@ html.fxb-anchor-stuck .section-header.shopify-section-header-hidden {
   z-index: 4;
   background: var(--fxb-bg, #fff);
   box-shadow: 0 1px 0 var(--fxb-line, #e5e5e5);
+  transition: top 0.15s ease-out;
+}
+
+html:has(.section-header.shopify-section-header-sticky:not(.shopify-section-header-hidden)) .fxb-compare thead .fxb-compare__cell {
+  top: var(--header-height, 0px);
 }
 
 html.fxb-anchor-stuck .fxb-compare thead .fxb-compare__cell {
   top: var(--fxb-anchor-h, 52px);
+}
+
+html.fxb-anchor-stuck:has(.section-header.shopify-section-header-sticky:not(.shopify-section-header-hidden)) .fxb-compare thead .fxb-compare__cell {
+  top: calc(var(--fxb-anchor-h, 52px) + var(--header-height, 0px));
 }
 
 .fxb-compare thead .fxb-compare__hl {
