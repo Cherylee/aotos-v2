@@ -50,8 +50,12 @@
     {%- endfor -%}
   </div>
   <div class="flp-nav">
-    <button type="button" data-flp-nav="prev" aria-label="Previous">‹</button>
-    <button type="button" data-flp-nav="next" aria-label="Next">›</button>
+    <button type="button" data-flp-nav="prev" aria-label="Previous">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14.5 6.5L9 12l5.5 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    </button>
+    <button type="button" data-flp-nav="next" aria-label="Next">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.5 6.5L15 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    </button>
   </div>
 </section>
 {% schema %}

@@ -48,7 +48,11 @@
   <div class="fxb-modal" hidden>
     <button type="button" class="fxb-modal__overlay" data-fxb-close aria-label="Close"></button>
     <div class="fxb-modal__dialog" role="dialog" aria-modal="true">
-      <button type="button" class="fxb-modal__close" data-fxb-close aria-label="Close">×</button>
+      <button type="button" class="fxb-modal__close" data-fxb-close aria-label="Close">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+        </svg>
+      </button>
       <div class="fxb-modal__header">
         <div class="fxb-modal__media">
           {%- if modal != blank or modal_mob != blank -%}

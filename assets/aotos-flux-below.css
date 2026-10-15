@@ -802,13 +802,25 @@ html.js .fxb-faq__answer {
   z-index: 2;
   width: calc(32 * var(--rem));
   height: calc(32 * var(--rem));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
   border: 0;
   border-radius: 50%;
   background: #fff;
   color: #111;
   -webkit-text-fill-color: #111;
+  line-height: 0;
   cursor: pointer;
-  font-size: calc(18* var(--rem));
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.fxb-modal__close svg {
+  display: block;
+  width: calc(16 * var(--rem));
+  height: calc(16 * var(--rem));
 }
 
 .fxb-modal__header {
@@ -1187,7 +1199,10 @@ html.js .fxb-faq__answer {
   .fxb-modal__close {
     width: calc(62 * var(--rem));
     height: calc(62 * var(--rem));
-    font-size: calc(28* var(--rem));
+  }
+  .fxb-modal__close svg {
+    width: calc(28 * var(--rem));
+    height: calc(28 * var(--rem));
   }
   .fxb-experts__author img {
     width: calc(48 * var(--rem));

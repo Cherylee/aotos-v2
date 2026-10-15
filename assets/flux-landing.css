@@ -89,16 +89,27 @@
 }
 
 .flp-nav button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: calc(44 * var(--rem));
   height: calc(44 * var(--rem));
+  padding: 0;
   border-radius: 50%;
   border: 1px solid #d8d8d8;
   background: #fff;
   color: #000;
   -webkit-text-fill-color: #000;
+  line-height: 0;
   cursor: pointer;
-  font-size: calc(18 * var(--rem));
-  line-height: 1;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.flp-nav button svg {
+  display: block;
+  width: calc(18 * var(--rem));
+  height: calc(18 * var(--rem));
 }
 
 .flp-modal[hidden] { display: none; }
@@ -827,7 +838,10 @@ html.flp-lock { overflow: hidden; }
   .flp-stories .flp-nav button {
     width: max(48px, calc(88 * var(--rem)));
     height: max(48px, calc(88 * var(--rem)));
-    font-size: max(22px, calc(36 * var(--rem)));
+  }
+  .flp-stories .flp-nav button svg {
+    width: calc(32 * var(--rem));
+    height: calc(32 * var(--rem));
   }
   .flp-peek {
     --flp-peek-gap: calc(24 * var(--rem));
