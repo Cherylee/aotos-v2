@@ -271,6 +271,7 @@
       var startY = 0;
       var startLeft = 0;
       scroller.addEventListener('pointerdown', function (event) {
+        if (event.pointerType === 'touch') return;
         if (event.pointerType === 'mouse' && event.button !== 0) return;
         var prev = peekFrame.get(scroller);
         if (prev) cancelAnimationFrame(prev);
@@ -313,7 +314,8 @@
       scroller.addEventListener('pointerup', stopDrag);
       scroller.addEventListener('pointercancel', stopDrag);
       scroller.addEventListener('dragstart', function (event) { event.preventDefault(); });
-      scroller.addEventListener('scrollend', function () {
+      var settle;
+      function snapIfIdle() {
         if (dragging || scroller.getAttribute('data-peek-anim') === '1') return;
         var near = peekSlides(scroller)[peekIndex(scroller)];
         if (Math.abs(scroller.scrollLeft - peekLeft(scroller, near)) > 2) {
@@ -321,7 +323,13 @@
           return;
         }
         peekRebase(scroller);
-      });
+      }
+      scroller.addEventListener('scroll', function () {
+        if (dragging || scroller.getAttribute('data-peek-anim') === '1') return;
+        clearTimeout(settle);
+        settle = setTimeout(snapIfIdle, 90);
+      }, { passive: true });
+      scroller.addEventListener('scrollend', snapIfIdle);
     });
   }
 

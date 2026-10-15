@@ -524,6 +524,16 @@
     border-bottom: 1px solid #eee;
   }
 
+  .aotos-nav__item > .aotos-nav__link,
+  .aotos-nav__row .aotos-nav__link,
+  .aotos-nav__drop-link,
+  .aotos-nav__mega-link {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
   .aotos-nav__link {
     height: auto;
     padding: calc(28 * var(--rem)) 0;

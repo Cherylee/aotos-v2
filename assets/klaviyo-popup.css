@@ -26,6 +26,27 @@
 @media screen and (max-width: 768px) {
   .kl-teaser-WeHz4K {
     bottom: calc(140 * var(--rem)) !important;
+    border: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .kl-teaser-WeHz4K [role="button"],
+  .kl-teaser-WeHz4K button {
+    border: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .kl-teaser-WeHz4K [role="button"]:focus,
+  .kl-teaser-WeHz4K [role="button"]:focus-visible,
+  .kl-teaser-WeHz4K button:focus,
+  .kl-teaser-WeHz4K button:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
   }
 }
 

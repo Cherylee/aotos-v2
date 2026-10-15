@@ -94,6 +94,8 @@
   border-radius: 50%;
   border: 1px solid #d8d8d8;
   background: #fff;
+  color: #000;
+  -webkit-text-fill-color: #000;
   cursor: pointer;
   font-size: calc(18 * var(--rem));
   line-height: 1;
@@ -758,7 +760,14 @@ html.flp-lock { overflow: hidden; }
   .flp-control__card h3 { font-size: calc(40 * var(--rem)); line-height: calc(48 * var(--rem)); margin-top: calc(40 * var(--rem)); }
   .flp-control__card p { font-size: calc(24 * var(--rem)); line-height: calc(30 * var(--rem)); }
   .flp-cards .flp-peek,
-  .flp-stories .flp-peek { touch-action: pan-y; }
+  .flp-stories .flp-peek {
+    touch-action: pan-x pan-y;
+    -webkit-overflow-scrolling: touch;
+  }
+  .flp-peek img {
+    -webkit-user-drag: none;
+    user-select: none;
+  }
   .flp-feature__media { height: auto; }
   .flp-feature .flp-display { padding-top: calc(120 * var(--rem)); }
   .flp-feature__media img { height: auto; }

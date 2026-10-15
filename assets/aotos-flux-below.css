@@ -805,6 +805,8 @@ html.js .fxb-faq__answer {
   border: 0;
   border-radius: 50%;
   background: #fff;
+  color: #111;
+  -webkit-text-fill-color: #111;
   cursor: pointer;
   font-size: calc(18* var(--rem));
 }
