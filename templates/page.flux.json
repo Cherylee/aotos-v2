@@ -73,14 +73,14 @@
       "name": "Safety Certified Hero",
       "settings": {
         "height": "adapt",
-        "height_mobile": "adapt",
+        "height_mobile": "1000",
         "content_mobile": "top",
         "overlay_opacity": 45,
         "image_position": "center center",
         "image_alt": "",
         "padding_top": 80,
         "padding_bottom": 80,
-        "padding_top_mobile": 88,
+        "padding_top_mobile": 160,
         "padding_bottom_mobile": 88
       }
     },
@@ -89,14 +89,15 @@
       "name": "t:sections.image-banner.presets.name",
       "settings": {
         "image": "shopify://shop_images/AOTOS-Flux-X26-Pro-electric-bike-group_1_1.webp",
+        "image_mobile": "shopify://shop_images/AOTOS-Flux-X26-Pro-electric-bike-group_2_1.webp",
         "heading": "Flux X26 Pro Riding Highlights",
         "heading_color": "#ffffff",
-        "bg_color": "#000000",
-        "image_height": "adapt",
+        "bg_color": "#101216",
         "padding_top": 80,
         "padding_bottom": 80,
         "padding_top_mobile": 88,
-        "padding_bottom_mobile": 88
+        "padding_bottom_mobile": 88,
+        "image_height": "adapt"
       }
     },
     "flux_showcase": {
