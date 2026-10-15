@@ -521,6 +521,10 @@
         if forloop.first
           assign slide_eager = true
         endif
+        assign video_loop = false
+        if section.blocks.size == 1
+          assign video_loop = true
+        endif
       -%}
       <div
         class="sc-hero__slide{% if forloop.first %} is-active{% endif %}"
@@ -565,13 +569,13 @@
             {%- if slide_video != blank -%}
               {%- capture slide_video_class -%}sc-hero__video{% if block.settings.video_mobile != blank %} sc-hero__video--pc{% endif %}{%- endcapture -%}
               {%- if slide_eager -%}
-                {{ slide_video | video_tag: class: slide_video_class, autoplay: true, loop: false, muted: true, controls: false, playsinline: true, preload: 'metadata' }}
+                {{ slide_video | video_tag: class: slide_video_class, autoplay: true, loop: video_loop, muted: true, controls: false, playsinline: true, preload: 'metadata' }}
               {%- else -%}
-                {{ slide_video | video_tag: class: slide_video_class, autoplay: false, loop: false, muted: true, controls: false, playsinline: true, preload: 'none' }}
+                {{ slide_video | video_tag: class: slide_video_class, autoplay: false, loop: video_loop, muted: true, controls: false, playsinline: true, preload: 'none' }}
               {%- endif -%}
             {%- endif -%}
             {%- if block.settings.video_mobile != blank -%}
-              {{ block.settings.video_mobile | video_tag: class: 'sc-hero__video sc-hero__video--mobile', autoplay: false, loop: false, muted: true, controls: false, playsinline: true, preload: 'none' }}
+              {{ block.settings.video_mobile | video_tag: class: 'sc-hero__video sc-hero__video--mobile', autoplay: video_loop, loop: video_loop, muted: true, controls: false, playsinline: true, preload: 'none' }}
             {%- endif -%}
           {%- elsif slide_image != blank or slide_image_mob != blank -%}
             <picture>

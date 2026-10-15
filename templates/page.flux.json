@@ -89,7 +89,14 @@
       "name": "t:sections.image-banner.presets.name",
       "settings": {
         "image": "shopify://shop_images/AOTOS-Flux-X26-Pro-electric-bike-group_1_1.webp",
-        "image_height": "adapt"
+        "heading": "Flux X26 Pro Riding Highlights",
+        "heading_color": "#ffffff",
+        "bg_color": "#000000",
+        "image_height": "adapt",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
       }
     },
     "flux_showcase": {
