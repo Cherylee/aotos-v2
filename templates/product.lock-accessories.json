@@ -16,6 +16,18 @@
           "type": "title",
           "settings": {}
         },
+        "summary": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Complete your ride with the AOTOS Helmet. With a clean, sporty look that pairs perfectly with your AOTOS eBike, it’s an everyday essential for city commutes, weekend cruises, and exploring new routes.</p>",
+            "learn_more_label": "Learn more",
+            "learn_more_anchor": "product-description"
+          }
+        },
+        "judge_me_reviews_preview_badge_lock": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
         "rating": {
           "type": "rating",
           "disabled": true,
@@ -126,6 +138,8 @@
       },
       "block_order": [
         "title",
+        "summary",
+        "judge_me_reviews_preview_badge_lock",
         "rating",
         "price",
         "paypal_messaging",
@@ -147,9 +161,22 @@
         "payment_accessibility_label": "View accepted payment methods",
         "padding_bottom": 80
       }
+    },
+    "product_description": {
+      "type": "aotos-product-description",
+      "settings": {
+        "heading": "Product Details",
+        "heading_align": "center",
+        "anchor_id": "product-description",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "product_description"
   ]
 }

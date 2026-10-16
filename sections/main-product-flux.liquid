@@ -245,7 +245,32 @@
               <div class="product-rating__count">{{ static_review_count }} {{ block.settings.review_text | default: 'reviews' }}</div>
             </div>
           {%- when 'text' -%}
-            {%- if block.settings.text != blank -%}
+            {%- if block.settings.learn_more_anchor != blank -%}
+              {%- liquid
+                assign text_more = block.settings.learn_more_label | default: 'Learn more'
+                assign text_anchor = block.settings.learn_more_anchor | replace: '#', '' | strip
+                assign text_plain = product.description | strip_html | strip
+              -%}
+              {%- if text_plain != blank -%}
+                <div class="velotric-product__text velotric-product__text--summary" id="product-text-{{ block.id }}" {{ block.shopify_attributes }}>
+                  <div class="velotric-product__text-body">{{ product.description }}</div>
+                  <a class="velotric-product__text-more" href="#{{ text_anchor | escape }}"><span>{{ text_more | escape }}</span></a>
+                </div>
+                <script>
+                  (function () {
+                    var root = document.getElementById('product-text-{{ block.id }}');
+                    if (!root) return;
+                    var body = root.querySelector('.velotric-product__text-body');
+                    var fit = function () {
+                      root.classList.toggle('is-clamped', body.scrollHeight > body.clientHeight + 1);
+                    };
+                    fit();
+                    window.addEventListener('resize', fit);
+                    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+                  })();
+                </script>
+              {%- endif -%}
+            {%- elsif block.settings.text != blank -%}
               <div class="velotric-product__text" {{ block.shopify_attributes }}>
                 {{ block.settings.text }}
               </div>
@@ -374,7 +399,11 @@
       "type": "text",
       "name": "Text",
       "limit": 1,
-      "settings": [{ "type": "richtext", "id": "text", "label": "Fallback text" }]
+      "settings": [
+        { "type": "richtext", "id": "text", "label": "文案" },
+        { "type": "text", "id": "learn_more_label", "label": "Learn more 文案", "default": "Learn more" },
+        { "type": "text", "id": "learn_more_anchor", "label": "跳转锚点 ID", "info": "填写后显示产品描述，超出两行出现 Learn more。不要带 #" }
+      ]
     },
     { "type": "price", "name": "Price", "limit": 1, "settings": [] },
     {

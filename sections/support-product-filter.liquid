@@ -1,0 +1,355 @@
+<div class="spf" id="spf-{{ section.id }}">
+  <div class="spf__dropdown">
+    <button class="spf__trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+      <span class="spf__current">
+        <img class="spf__thumb" alt="" width="40" height="40" hidden>
+        <span class="spf__label">{% if section.settings.show_all %}All Products{% else %}Select Product{% endif %}</span>
+      </span>
+      <svg class="spf__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
+        <path d="M6 9l6 6 6-6"/>
+      </svg>
+    </button>
+    <div class="spf__list" role="listbox">
+      {%- if section.settings.show_all -%}
+        <button class="spf__option is-active" type="button" data-filter="all">All Products</button>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var rootId = 'spf-{{ section.id }}';
+    var showAll = {{ section.settings.show_all | json }};
+    var defaultFilter = {{ section.settings.default_filter | json }};
+    var itemSelector = '.support-manual-item, .support-faq-item, .support-video-card';
+    var sectionSelector = '.support-manual-container, .support-faq-container, .support-video-container';
+
+    function init() {
+      var root = document.getElementById(rootId);
+      if (!root || root.dataset.ready === '1') return;
+      root.dataset.ready = '1';
+
+      var dropdown = root.querySelector('.spf__dropdown');
+      var trigger = root.querySelector('.spf__trigger');
+      var list = root.querySelector('.spf__list');
+      var label = root.querySelector('.spf__label');
+      var thumb = root.querySelector('.spf__thumb');
+      var products = new Map();
+
+      document.querySelectorAll(itemSelector).forEach(function (node) {
+        var id = node.getAttribute('data-product');
+        if (!id || products.has(id)) return;
+        products.set(id, {
+          title: node.getAttribute('data-product-title') || '',
+          image: node.getAttribute('data-product-image') || ''
+        });
+      });
+
+      products.forEach(function (data, id) {
+        var option = document.createElement('button');
+        option.type = 'button';
+        option.className = 'spf__option';
+        option.dataset.filter = id;
+        if (data.image) {
+          var img = document.createElement('img');
+          img.src = data.image;
+          img.alt = '';
+          img.width = 40;
+          img.height = 40;
+          option.appendChild(img);
+        }
+        var text = document.createElement('span');
+        text.className = 'spf__option-title';
+        text.textContent = data.title;
+        option.appendChild(text);
+        list.appendChild(option);
+      });
+
+      function apply(filter) {
+        document.querySelectorAll(itemSelector).forEach(function (node) {
+          var match = filter === 'all' || node.getAttribute('data-product') === filter;
+          node.hidden = !match;
+        });
+        document.querySelectorAll(sectionSelector).forEach(function (section) {
+          var visible = 0;
+          section.querySelectorAll(itemSelector).forEach(function (node) {
+            if (!node.hidden) visible += 1;
+          });
+          section.hidden = visible === 0 && filter !== 'all';
+        });
+      }
+
+      function select(filter, text, image) {
+        list.querySelectorAll('.spf__option').forEach(function (option) {
+          option.classList.toggle('is-active', option.dataset.filter === filter);
+        });
+        label.textContent = text;
+        if (image && filter !== 'all') {
+          thumb.src = image;
+          thumb.hidden = false;
+        } else {
+          thumb.removeAttribute('src');
+          thumb.hidden = true;
+        }
+        dropdown.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+        apply(filter);
+      }
+
+      trigger.addEventListener('click', function (event) {
+        event.stopPropagation();
+        var open = dropdown.classList.toggle('is-open');
+        trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+
+      list.addEventListener('click', function (event) {
+        var option = event.target.closest('.spf__option');
+        if (!option) return;
+        event.stopPropagation();
+        var img = option.querySelector('img');
+        var title = option.querySelector('.spf__option-title');
+        select(option.dataset.filter, title ? title.textContent : option.textContent.trim(), img ? img.src : '');
+      });
+
+      if (!window.supportFilterDocBound) {
+        window.supportFilterDocBound = true;
+        document.addEventListener('click', function () {
+          document.querySelectorAll('.spf__dropdown.is-open').forEach(function (node) {
+            node.classList.remove('is-open');
+            var button = node.querySelector('.spf__trigger');
+            if (button) button.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
+      if (defaultFilter === 'first' && products.size > 0) {
+        var firstId = products.keys().next().value;
+        var first = products.get(firstId);
+        select(firstId, first.title, first.image);
+      } else if (showAll) {
+        apply('all');
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+
+    document.addEventListener('shopify:section:load', function (event) {
+      var root = document.getElementById(rootId);
+      if (!root || (event.target && event.target.contains(root))) return;
+      root.querySelectorAll('.spf__option:not([data-filter="all"])').forEach(function (node) {
+        node.remove();
+      });
+      delete root.dataset.ready;
+      init();
+    });
+  })();
+</script>
+
+{% style %}
+  .support-manual-container[hidden],
+  .support-faq-container[hidden],
+  .support-manual-item[hidden],
+  .support-faq-item[hidden] {
+    display: none !important;
+  }
+
+  #shopify-section-{{ section.id }} {
+    position: sticky;
+    top: 0;
+    z-index: 4;
+  }
+
+  #spf-{{ section.id }} {
+    background: #fdfdfd;
+    border-top: 1px solid #e5e5e7;
+    padding: calc(14 * var(--rem)) 0;
+  }
+
+  #spf-{{ section.id }} .spf__dropdown {
+    position: relative;
+    width: calc(300 * var(--rem));
+    max-width: calc(100% - 80 * var(--rem));
+    margin: 0 auto;
+  }
+
+  #spf-{{ section.id }} .spf__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(12 * var(--rem));
+    width: 100%;
+    padding: calc(6 * var(--rem)) calc(22 * var(--rem));
+    border: 1px solid #e5e5e7;
+    border-radius: calc(40 * var(--rem));
+    background: #ffffff;
+    color: #000000;
+    font-size: calc(12 * var(--rem));
+    font-weight: 500;
+    line-height: 1.2;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  #spf-{{ section.id }} .spf__current {
+    display: flex;
+    align-items: center;
+    gap: calc(12 * var(--rem));
+    min-width: 0;
+    flex: 1;
+  }
+
+  #spf-{{ section.id }} .spf__label {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  #spf-{{ section.id }} .spf__thumb,
+  #spf-{{ section.id }} .spf__option img {
+    width: calc(30 * var(--rem));
+    height: calc(30 * var(--rem));
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  #spf-{{ section.id }} .spf__chevron {
+    flex: 0 0 auto;
+    width: calc(15 * var(--rem));
+    height: calc(15 * var(--rem));
+    transition: transform 0.3s ease;
+  }
+
+  #spf-{{ section.id }} .spf__dropdown.is-open .spf__chevron {
+    transform: rotate(180deg);
+  }
+
+  #spf-{{ section.id }} .spf__list {
+    position: absolute;
+    top: calc(100% + 8 * var(--rem));
+    left: 0;
+    display: none;
+    flex-direction: column;
+    gap: calc(6 * var(--rem));
+    width: 100%;
+    max-height: calc(375 * var(--rem));
+    padding: calc(12 * var(--rem));
+    border: 1px solid #e5e5e7;
+    border-radius: calc(15 * var(--rem));
+    background: #ffffff;
+    box-shadow: 0 calc(12 * var(--rem)) calc(30 * var(--rem)) rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+  }
+
+  #spf-{{ section.id }} .spf__dropdown.is-open .spf__list {
+    display: flex;
+  }
+
+  #spf-{{ section.id }} .spf__option {
+    display: flex;
+    align-items: center;
+    gap: calc(12 * var(--rem));
+    width: 100%;
+    padding: calc(6 * var(--rem)) calc(15 * var(--rem));
+    border: 0;
+    border-radius: calc(22 * var(--rem));
+    background: transparent;
+    color: #000000;
+    font-size: calc(12 * var(--rem));
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  #spf-{{ section.id }} .spf__option.is-active,
+  #spf-{{ section.id }} .spf__option:hover {
+    background: #f5f5f7;
+  }
+
+  @media (hover: hover) {
+    #spf-{{ section.id }} .spf__trigger {
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    #spf-{{ section.id }} .spf__trigger:hover {
+      border-color: #000000;
+      box-shadow: 0 calc(3 * var(--rem)) calc(12 * var(--rem)) rgba(0, 0, 0, 0.05);
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #spf-{{ section.id }} {
+      padding: calc(30 * var(--rem)) 0;
+    }
+
+    #spf-{{ section.id }} .spf__dropdown {
+      width: calc(100% - 80 * var(--rem));
+      max-width: none;
+    }
+
+    #spf-{{ section.id }} .spf__trigger {
+      padding: calc(16 * var(--rem)) calc(32 * var(--rem));
+      border-radius: calc(50 * var(--rem));
+      font-size: max(16px, calc(28 * var(--rem)));
+    }
+
+    #spf-{{ section.id }} .spf__thumb,
+    #spf-{{ section.id }} .spf__option img {
+      width: calc(40 * var(--rem));
+      height: calc(40 * var(--rem));
+    }
+
+    #spf-{{ section.id }} .spf__chevron {
+      width: calc(24 * var(--rem));
+      height: calc(24 * var(--rem));
+    }
+
+    #spf-{{ section.id }} .spf__list {
+      top: calc(100% + 8 * var(--rem));
+      gap: calc(12 * var(--rem));
+      max-height: calc(600 * var(--rem));
+      padding: calc(16 * var(--rem));
+      border-radius: calc(24 * var(--rem));
+    }
+
+    #spf-{{ section.id }} .spf__option {
+      gap: calc(16 * var(--rem));
+      padding: calc(12 * var(--rem)) calc(24 * var(--rem));
+      border-radius: calc(40 * var(--rem));
+      font-size: max(16px, calc(26 * var(--rem)));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #spf-{{ section.id }} .spf__chevron,
+    #spf-{{ section.id }} .spf__trigger {
+      transition: none;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Support Product Filter",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "checkbox", "id": "show_all", "label": "显示 All Products", "default": true },
+    {
+      "type": "select",
+      "id": "default_filter",
+      "label": "默认筛选",
+      "default": "all",
+      "options": [
+        { "value": "all", "label": "全部产品" },
+        { "value": "first", "label": "第一个产品" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Support Product Filter" }]
+}
+{% endschema %}

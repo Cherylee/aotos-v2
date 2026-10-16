@@ -1,0 +1,331 @@
+{%- liquid
+  assign app_video = section.settings.video_desktop
+  assign app_video_mobile = section.settings.video_mobile
+  assign app_overlay = section.settings.overlay_opacity | default: 5, allow_false: true
+  assign app_same_video = false
+  if app_video == blank and app_video_mobile != blank
+    assign app_video = app_video_mobile
+    assign app_same_video = true
+  elsif app_video != blank and app_video_mobile != blank and app_video.id == app_video_mobile.id
+    assign app_same_video = true
+  endif
+  assign app_image = section.settings.image_desktop
+  assign app_image_mobile = section.settings.image_mobile | default: app_image
+-%}
+
+<section class="sad{% if app_same_video == false and app_video_mobile != blank %} sad--split{% endif %}" id="sad-{{ section.id }}" style="--sad-bg: {{ section.settings.background_color | default: '#000000' }}; --sad-overlay: {{ app_overlay | divided_by: 100.0 }};">
+  <div class="sad__media" aria-hidden="true">
+    {%- if app_video != blank or app_video_mobile != blank -%}
+      {%- if app_video != blank -%}
+        {{ app_video | video_tag: class: 'sad__video sad__video--desktop', autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata', image_size: '1600x' }}
+      {%- endif -%}
+      {%- if app_same_video == false and app_video_mobile != blank -%}
+        {{ app_video_mobile | video_tag: class: 'sad__video sad__video--mobile', autoplay: false, loop: true, muted: true, controls: false, playsinline: true, preload: 'none', image_size: '1100x' }}
+      {%- endif -%}
+    {%- elsif app_image != blank -%}
+      <picture>
+        {%- if app_image_mobile != blank and app_image_mobile != app_image -%}
+          <source
+            media="(max-width: 768px)"
+            srcset="{{ app_image_mobile | image_url: width: 750 }} 750w, {{ app_image_mobile | image_url: width: 1100 }} 1100w"
+            sizes="100vw"
+          >
+        {%- endif -%}
+        <img
+          class="sad__image"
+          src="{{ app_image | image_url: width: 1600 }}"
+          srcset="{{ app_image | image_url: width: 1100 }} 1100w, {{ app_image | image_url: width: 1600 }} 1600w, {{ app_image | image_url: width: 2000 }} 2000w"
+          sizes="100vw"
+          width="1600"
+          height="{{ 1600 | divided_by: app_image.aspect_ratio | round }}"
+          alt=""
+          loading="lazy"
+        >
+      </picture>
+    {%- endif -%}
+  </div>
+  <div class="sad__overlay"></div>
+  <div class="sad__shell">
+    <div class="sad__copy">
+      {%- if section.settings.subheading != blank -%}
+        <p class="sad__sub">{{ section.settings.subheading | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="sad__title">{{ section.settings.heading | escape | newline_to_br }}</h2>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <p class="sad__desc">{{ section.settings.description | escape | newline_to_br }}</p>
+      {%- endif -%}
+      {%- if section.settings.google_play_link != blank or section.settings.app_store_link != blank -%}
+        <div class="sad__links">
+          {%- if section.settings.links_label != blank -%}
+            <span class="sad__label">{{ section.settings.links_label | escape }}</span>
+          {%- endif -%}
+          <div class="sad__badges">
+            {%- if section.settings.google_play_link != blank and section.settings.google_play_badge != blank -%}
+              <a class="sad__badge" href="{{ section.settings.google_play_link }}" target="_blank" rel="noopener" aria-label="Get it on Google Play">
+                <img
+                  src="{{ section.settings.google_play_badge | image_url: width: 240 }}"
+                  srcset="{{ section.settings.google_play_badge | image_url: width: 160 }} 160w, {{ section.settings.google_play_badge | image_url: width: 240 }} 240w, {{ section.settings.google_play_badge | image_url: width: 360 }} 360w"
+                  sizes="(max-width: 768px) 240px, 120px"
+                  width="240"
+                  height="{{ 240 | divided_by: section.settings.google_play_badge.aspect_ratio | round }}"
+                  alt=""
+                  loading="lazy"
+                >
+              </a>
+            {%- endif -%}
+            {%- if section.settings.app_store_link != blank and section.settings.app_store_badge != blank -%}
+              <a class="sad__badge" href="{{ section.settings.app_store_link }}" target="_blank" rel="noopener" aria-label="Download on the App Store">
+                <img
+                  src="{{ section.settings.app_store_badge | image_url: width: 240 }}"
+                  srcset="{{ section.settings.app_store_badge | image_url: width: 160 }} 160w, {{ section.settings.app_store_badge | image_url: width: 240 }} 240w, {{ section.settings.app_store_badge | image_url: width: 360 }} 360w"
+                  sizes="(max-width: 768px) 240px, 120px"
+                  width="240"
+                  height="{{ 240 | divided_by: section.settings.app_store_badge.aspect_ratio | round }}"
+                  alt=""
+                  loading="lazy"
+                >
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('sad-{{ section.id }}');
+    if (!root || root.dataset.ready === '1') return;
+    root.dataset.ready = '1';
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var narrow = window.matchMedia('(max-width: 768px)');
+    var desktop = root.querySelector('.sad__video--desktop');
+    var mobile = root.querySelector('.sad__video--mobile');
+    function sync() {
+      if (reduce) {
+        if (desktop) desktop.pause();
+        if (mobile) mobile.pause();
+        return;
+      }
+      var isMobile = narrow.matches && mobile;
+      if (desktop) {
+        if (isMobile) desktop.pause();
+        else desktop.play().catch(function () {});
+      }
+      if (mobile) {
+        if (narrow.matches) mobile.play().catch(function () {});
+        else mobile.pause();
+      }
+    }
+    if (narrow.addEventListener) narrow.addEventListener('change', sync);
+    sync();
+  })();
+</script>
+
+{% style %}
+  #sad-{{ section.id }} {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: calc(450 * var(--rem));
+    overflow: hidden;
+    background: var(--sad-bg);
+    color: #ffffff;
+  }
+
+  #sad-{{ section.id }} .sad__media,
+  #sad-{{ section.id }} .sad__overlay {
+    position: absolute;
+    inset: 0;
+  }
+
+  #sad-{{ section.id }} .sad__media {
+    z-index: 0;
+  }
+
+  #sad-{{ section.id }} .sad__video,
+  #sad-{{ section.id }} .sad__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #sad-{{ section.id }} .sad__video--mobile {
+    display: none;
+  }
+
+  #sad-{{ section.id }} .sad__overlay {
+    z-index: 1;
+    background: rgba(0, 0, 0, var(--sad-overlay));
+  }
+
+  #sad-{{ section.id }} .sad__shell {
+    position: relative;
+    z-index: 2;
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+    padding: calc(48 * var(--rem)) 0;
+    box-sizing: border-box;
+  }
+
+  #sad-{{ section.id }} .sad__copy {
+    max-width: calc(375 * var(--rem));
+  }
+
+  #sad-{{ section.id }} .sad__sub {
+    margin: 0 0 calc(9 * var(--rem));
+    color: #ffffff;
+    font-size: calc(14 * var(--rem));
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  #sad-{{ section.id }} .sad__title {
+    margin: 0 0 calc(15 * var(--rem));
+    color: #ffffff;
+    font-size: calc(42 * var(--rem));
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  #sad-{{ section.id }} .sad__desc {
+    margin: 0 0 calc(30 * var(--rem));
+    color: #ffffff;
+    font-size: calc(14 * var(--rem));
+    font-weight: 400;
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+
+  #sad-{{ section.id }} .sad__label {
+    display: block;
+    margin-bottom: calc(12 * var(--rem));
+    color: #ffffff;
+    font-size: calc(12 * var(--rem));
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  #sad-{{ section.id }} .sad__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(12 * var(--rem));
+  }
+
+  #sad-{{ section.id }} .sad__badge {
+    display: block;
+    height: calc(36 * var(--rem));
+  }
+
+  #sad-{{ section.id }} .sad__badge img {
+    display: block;
+    height: 100%;
+    width: auto;
+    border-radius: calc(5 * var(--rem));
+  }
+
+  @media (hover: hover) {
+    #sad-{{ section.id }} .sad__badge {
+      transition: transform 0.2s ease;
+    }
+
+    #sad-{{ section.id }} .sad__badge:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #sad-{{ section.id }} {
+      align-items: flex-start;
+      min-height: calc(1000 * var(--rem));
+      padding-top: calc(120 * var(--rem));
+    }
+
+    #sad-{{ section.id }}.sad--split .sad__video--desktop {
+      display: none;
+    }
+
+    #sad-{{ section.id }}.sad--split .sad__video--mobile {
+      display: block;
+    }
+
+    #sad-{{ section.id }} .sad__shell {
+      width: 100%;
+      padding: 0 calc(40 * var(--rem)) calc(80 * var(--rem));
+    }
+
+    #sad-{{ section.id }} .sad__copy {
+      max-width: none;
+      text-align: center;
+    }
+
+    #sad-{{ section.id }} .sad__sub {
+      margin-bottom: calc(24 * var(--rem));
+      font-size: calc(32 * var(--rem));
+    }
+
+    #sad-{{ section.id }} .sad__title {
+      margin-bottom: calc(32 * var(--rem));
+      font-size: calc(72 * var(--rem));
+    }
+
+    #sad-{{ section.id }} .sad__desc {
+      margin-bottom: calc(80 * var(--rem));
+      font-size: calc(32 * var(--rem));
+    }
+
+    #sad-{{ section.id }} .sad__label {
+      margin-bottom: calc(32 * var(--rem));
+      font-size: calc(30 * var(--rem));
+    }
+
+    #sad-{{ section.id }} .sad__badges {
+      justify-content: center;
+      gap: calc(32 * var(--rem));
+    }
+
+    #sad-{{ section.id }} .sad__badge {
+      height: calc(80 * var(--rem));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #sad-{{ section.id }} .sad__badge {
+      transition: none;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Support App Download",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "video", "id": "video_desktop", "label": "桌面背景视频" },
+    { "type": "video", "id": "video_mobile", "label": "手机背景视频" },
+    { "type": "image_picker", "id": "image_desktop", "label": "桌面背景图（无视频时）" },
+    { "type": "image_picker", "id": "image_mobile", "label": "手机背景图（无视频时）" },
+    { "type": "color", "id": "background_color", "label": "底色", "default": "#000000" },
+    { "type": "range", "id": "overlay_opacity", "min": 0, "max": 100, "step": 5, "unit": "%", "label": "遮罩", "default": 5 },
+    { "type": "text", "id": "subheading", "label": "眉题", "default": "Your ride connected" },
+    { "type": "textarea", "id": "heading", "label": "标题", "default": "AOTOS APP" },
+    { "type": "textarea", "id": "description", "label": "说明" },
+    { "type": "text", "id": "links_label", "label": "下载提示", "default": "Download Here:" },
+    { "type": "url", "id": "google_play_link", "label": "Google Play 链接" },
+    { "type": "image_picker", "id": "google_play_badge", "label": "Google Play 徽章" },
+    { "type": "url", "id": "app_store_link", "label": "App Store 链接" },
+    { "type": "image_picker", "id": "app_store_badge", "label": "App Store 徽章" }
+  ],
+  "presets": [{ "name": "Support App Download" }]
+}
+{% endschema %}

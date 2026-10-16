@@ -1,0 +1,305 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "about_banner": {
+      "type": "blog-list-hero",
+      "settings": {
+        "image": "shopify://shop_images/about-pc-01.webp",
+        "image_fit": "adapt",
+        "image_mobile": "shopify://shop_images/about-M-01.webp",
+        "image_position": "center",
+        "image_alt": "Ride The Future",
+        "content_align": "center",
+        "content_valign": "center",
+        "title": "RIDE THE FUTURE",
+        "title_size": 52,
+        "title_size_mobile": 68,
+        "title_weight": "400",
+        "title_color": "#ffffff",
+        "subtitle": "<p>AOTOS is a smart mobility brand built for modern riders. We create connected, performance-ready rides across eBikes, dirt bikes, and water boards—designed to make every journey easier, smarter, and more fun.</p>",
+        "subtitle_color": "#ffffff",
+        "overlay": 50
+      }
+    },
+    "about_mission": {
+      "type": "ifa-exhibition-series",
+      "blocks": {
+        "mission": {
+          "type": "item",
+          "settings": {
+            "layout": "text_right",
+            "card_theme": "light",
+            "image": "shopify://shop_images/about-pc-02.webp",
+            "placeholder_label": "",
+            "eyebrow": "",
+            "title": "OUR MISSION",
+            "description": "<p>Our Company established in 2016, is a high-tech company specializing in the design, production, and sales of smart mobility solutions. Our mission is to transform the way you travel with innovative, high-performance mobility solutions. We elevate every journey with cutting-edge technology and sustainable design.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "solid"
+          }
+        }
+      },
+      "block_order": ["mission"],
+      "settings": {
+        "heading": "",
+        "accent_color": "#ff6501",
+        "background_color": "#ffffff",
+        "disclaimer": "",
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "about_vision": {
+      "type": "blog-list-hero",
+      "settings": {
+        "image": "shopify://shop_images/about-pc-03.webp",
+        "image_fit": "adapt",
+        "image_mobile": "shopify://shop_images/about-M-03.webp",
+        "image_position": "center",
+        "image_alt": "From a Small Team to a Global Brand",
+        "content_align": "right",
+        "content_valign": "center",
+        "title": "FROM A SMALL TEAM TO A GLOBAL BRAND",
+        "title_size": 32,
+        "title_size_mobile": 56,
+        "title_weight": "600",
+        "title_color": "#ffffff",
+        "subtitle": "<p>AOTOS began as a tight-knit group of engineers and designers driven by one goal: rethink what modern mobility can be. With each product generation, we’ve grown from early prototypes into a recognized global brand—earning trust through consistent quality, reliable performance, and a customer-first mindset. As the way people move keeps evolving, we keep building to match it.</p>",
+        "subtitle_color": "#ffffff",
+        "overlay": 30
+      }
+    },
+    "about_innovation": {
+      "type": "ifa-exhibition-series",
+      "blocks": {
+        "innovation": {
+          "type": "item",
+          "settings": {
+            "layout": "text_left",
+            "card_theme": "light",
+            "image": "shopify://shop_images/about-pc-04.webp",
+            "placeholder_label": "",
+            "eyebrow": "",
+            "title": "INNOVATION DRIVEN BY SMART TECHNOLOGY",
+            "description": "<p>Our Company established in 2016, is a high-tech company specializing in the design, production, and sales of smart mobility solutions. Our mission is to transform the way you travel with innovative, high-performance mobility solutions. We elevate every journey with cutting-edge technology and sustainable design.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "solid"
+          }
+        }
+      },
+      "block_order": ["innovation"],
+      "settings": {
+        "heading": "",
+        "accent_color": "#ff6501",
+        "background_color": "#ffffff",
+        "disclaimer": "",
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "about_sustain": {
+      "type": "blog-list-hero",
+      "settings": {
+        "image": "shopify://shop_images/about-pc-05.webp",
+        "image_fit": "adapt",
+        "image_mobile": "shopify://shop_images/about-M-05.webp",
+        "image_position": "center",
+        "image_alt": "Our Commitment to Sustainability",
+        "content_align": "left",
+        "content_valign": "center",
+        "title": "OUR COMMITMENT TO SUSTAINABILITY",
+        "title_size": 32,
+        "title_size_mobile": 56,
+        "title_weight": "600",
+        "title_color": "#ffffff",
+        "subtitle": "<p>We believe the freedom to move shouldn’t cost the Earth. That’s why we use eco-friendly materials, energy-saving technologies, and sustainable manufacturing practices at every stage of development. Our goal is simple: mobility solutions that empower your journey while protecting the environment for future generations.</p>",
+        "subtitle_color": "#ffffff",
+        "overlay": 25
+      }
+    },
+    "about_mvv": {
+      "type": "find-dealer-why-visit",
+      "blocks": {
+        "mission": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/aae92075c12d1bb16883a17e9ef3a3d9.svg",
+            "fallback_icon_asset": "",
+            "title": "Our Mission",
+            "text": "To simplify the movement of people and objects, and make life more convenient and fun."
+          }
+        },
+        "vision": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/6cc984b17ba2883d82a40bd26e56e556.svg",
+            "fallback_icon_asset": "",
+            "title": "Our Vision",
+            "text": "To serve over 1 billion households worldwide, become the coolest and most respected Top 500 technology company and pay back to the staff with higher-than-expectation rewards."
+          }
+        },
+        "values": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/fi-ts-sparkles.svg",
+            "fallback_icon_asset": "",
+            "title": "Our Values",
+            "text": "We take customers as our priority. We value diligence and dedication. We are driven by effective innovation. We are outcome-oriented."
+          }
+        }
+      },
+      "block_order": ["mission", "vision", "values"],
+      "settings": {
+        "heading": "",
+        "intro": "",
+        "layout": "cards",
+        "eyebrow": "",
+        "text_color": "#000000",
+        "padding_top": 80,
+        "padding_bottom": 40,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "about_presence": {
+      "type": "home-explore-cards",
+      "blocks": {
+        "retailers": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/db76ff90-32ef-4db8-abfd-8c1f561f4bf8_b7f20e24-8cf1-47d5-8b1a-11caaae2a45b.webp",
+            "image_alt": "Available at Costco, Best Buy, and Amazon",
+            "title": "Available at Costco, Best Buy, and Amazon",
+            "text": "Trusted by leading global retailers, AOTOS products are available across major platforms—bringing smart mobility to more riders worldwide.",
+            "button_label": ""
+          }
+        },
+        "reddot": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/IDEA_561a1619-ccb2-4132-9e7b-9f2ef93c4961.png",
+            "image_alt": "Red Dot Design Award Winner",
+            "title": "Red Dot Design Award Winner",
+            "text": "Recognized for outstanding design and innovation, AOTOS products reflect a perfect balance of performance, aesthetics, and user experience.",
+            "button_label": ""
+          }
+        }
+      },
+      "block_order": ["retailers", "reddot"],
+      "settings": {
+        "heading": "Global Presence and Design Recognition",
+        "subtitle": "",
+        "padding_top": 40,
+        "padding_bottom": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 88
+      }
+    },
+    "about_team": {
+      "type": "blog-list-hero",
+      "settings": {
+        "image": "shopify://shop_images/about-pc-06.webp",
+        "image_fit": "adapt",
+        "image_mobile": "shopify://shop_images/about-M-06.webp",
+        "image_position": "center",
+        "image_alt": "AOTOS team",
+        "content_align": "center",
+        "content_valign": "top",
+        "title": "",
+        "title_size": 32,
+        "title_size_mobile": 48,
+        "title_weight": "600",
+        "title_color": "#ffffff",
+        "subtitle": "<p>Owning an AOTOS product means more than making a purchase — it means gaining a partner you can rely on. We provide responsive support, expert guidance, and dependable service from day one and throughout the life of your product. Whenever you need assistance, our team is ready to help you get the most out of your AOTOS experience.</p>",
+        "subtitle_color": "#ffffff",
+        "overlay": 0
+      }
+    },
+    "about_contact": {
+      "type": "find-dealer-why-visit",
+      "settings": {
+        "heading": "Contact Us",
+        "intro": "<p>We’re here to help with product questions, order support, and general inquiries.</p><p><strong>Email:</strong> support@aotos.com</p><p><strong>Hours:</strong> Mon–Fri, 9:00 AM–6:00 PM ET</p><p><strong>Address:</strong> ROOM 21 BLK B 17/F GALAXY FACTORY BUILDING 25-27 LUK HOP ST SAN PO KONG KL</p>",
+        "layout": "row",
+        "eyebrow": "",
+        "padding_top": 80,
+        "padding_bottom": 24,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 24
+      }
+    },
+    "about_warehouses": {
+      "type": "find-dealer-why-visit",
+      "blocks": {
+        "west": {
+          "type": "feature",
+          "settings": {
+            "title": "West Coast Warehouse",
+            "text": "505 South 7th Ave, City Of Industry,\nCA91746 (Dock#1-15)"
+          }
+        },
+        "central": {
+          "type": "feature",
+          "settings": {
+            "title": "Central Warehouse",
+            "text": "2425 Broad Street Houston,\nTX 77087 (Dock#5-10)"
+          }
+        },
+        "east": {
+          "type": "feature",
+          "settings": {
+            "title": "East Coast Warehouse",
+            "text": "5000 Richmond Street, Building 2,\nPA19137 (Dock#10-14)"
+          }
+        }
+      },
+      "block_order": ["west", "central", "east"],
+      "settings": {
+        "heading": "US LOCAL WAREHOUSES",
+        "intro": "<p>To better support faster fulfillment and after-sales service, AOTOS currently operates multiple US local warehouses.</p>",
+        "layout": "cards",
+        "eyebrow": "",
+        "text_color": "#999999",
+        "padding_top": 24,
+        "padding_bottom": 80,
+        "padding_top_mobile": 24,
+        "padding_bottom_mobile": 88
+      }
+    }
+  },
+  "order": [
+    "main",
+    "about_banner",
+    "about_mission",
+    "about_vision",
+    "about_innovation",
+    "about_sustain",
+    "about_mvv",
+    "about_presence",
+    "about_team",
+    "about_contact",
+    "about_warehouses"
+  ]
+}

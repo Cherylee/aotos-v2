@@ -1,10 +1,17 @@
-{% render 'aotos-flux-below-assets', with_js: true %}
+{% render 'aotos-flux-below-assets', once: true, with_js: true %}
 
-<section class="fxb fxb-faq" style="--fxb-bg: #fff; --fxb-pt: {{ section.settings.padding_top | default: 80, allow_false: true }}; --fxb-pb: {{ section.settings.padding_bottom | default: 80, allow_false: true }}; --fxb-pt-m: {{ section.settings.padding_top_mobile | default: 88, allow_false: true }}; --fxb-pb-m: {{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }};">
+<section class="fxb fxb-faq support-faq-container" style="--fxb-bg: #fff; --fxb-pt: {{ section.settings.padding_top | default: 80, allow_false: true }}; --fxb-pb: {{ section.settings.padding_bottom | default: 80, allow_false: true }}; --fxb-pt-m: {{ section.settings.padding_top_mobile | default: 88, allow_false: true }}; --fxb-pb-m: {{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }};">
   <div class="fxb-shell">
     <h2 class="fxb-title aotos-section-title">{{ section.settings.faq_title | escape }}</h2>
     {%- for block in section.blocks -%}
-      <details class="fxb-faq__item" {{ block.shopify_attributes }}>
+      {%- liquid
+        assign faq_product = block.settings.related_product
+        assign faq_image = ''
+        if faq_product.featured_image != blank
+          assign faq_image = faq_product.featured_image | image_url: width: 80
+        endif
+      -%}
+      <details class="fxb-faq__item support-faq-item" data-product="{{ faq_product.id }}" data-product-title="{{ faq_product.title | escape }}" data-product-image="{{ faq_image }}" {{ block.shopify_attributes }}>
         <summary>{{ block.settings.question }}<span class="support-faq-arrow">▼</span></summary>
         <div class="fxb-faq__answer"><div class="fxb-faq__answer-inner">{{ block.settings.answer }}</div></div>
       </details>

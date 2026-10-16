@@ -1,0 +1,205 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "support_hero": {
+      "type": "blog-list-hero",
+      "settings": {
+        "image": "shopify://shop_images/06d1be0c-78c1-425f-9d03-366508268d4a.webp",
+        "image_fit": "adapt",
+        "image_mobile": "shopify://shop_images/2db3c888-5338-422c-b514-0e5ddb166523.webp",
+        "image_position": "center",
+        "image_alt": "AOTOS Support Center",
+        "content_align": "left",
+        "content_valign": "center",
+        "mobile_center": true,
+        "title": "AOTOS Support Center",
+        "title_size": 42,
+        "title_size_mobile": 56,
+        "title_weight": "700",
+        "title_color": "#ffffff",
+        "subtitle": "<p>Find expert advice, troubleshooting steps, and inspiration to get the most out of your AOTOS products.</p>",
+        "subtitle_color": "#ffffff",
+        "overlay": 20
+      }
+    },
+    "support_app": {
+      "type": "support-app-download",
+      "settings": {
+        "video_desktop": "shopify://files/videos/fh2q90pg.mp4",
+        "video_mobile": "shopify://files/videos/fh2q90pg.mp4",
+        "background_color": "#000000",
+        "overlay_opacity": 5,
+        "subheading": "Your ride connected",
+        "heading": "AOTOS APP",
+        "description": "Track your rides, adjust your settings, and stay connected—all in one place. The AOTOS app puts control in your hands.",
+        "links_label": "Download Here:",
+        "google_play_link": "https://play.google.com/store/apps/details?id=com.dt.smart.aotos&hl=ln",
+        "google_play_badge": "shopify://shop_images/store-googleplay.avif",
+        "app_store_link": "https://apps.apple.com/us/app/aotos/id6743829984",
+        "app_store_badge": "shopify://shop_images/store-apple.avif"
+      }
+    },
+    "support_filter": {
+      "type": "support-product-filter",
+      "settings": {
+        "show_all": true,
+        "default_filter": "all"
+      }
+    },
+    "support_manuals": {
+      "type": "support-manual",
+      "blocks": {
+        "manual_1": {
+          "type": "manual_item",
+          "settings": {
+            "title": "Flux X26 / Flux X26 Pro User Manual",
+            "description": "PDF (9.49 MB)",
+            "related_product": "flux-x26-pro",
+            "file_url": "https://cdn.shopify.com/s/files/1/0719/2736/5851/files/B010030973__compressed.pdf?v=1774277236"
+          }
+        },
+        "manual_2": {
+          "type": "manual_item",
+          "settings": {
+            "title": "AOTOS L2 User Manual",
+            "description": "PDF (1.39 MB)",
+            "related_product": "l2-smart-rideable-suitcase",
+            "file_url": "https://cdn.shopify.com/s/files/1/0719/2736/5851/files/AOTOS_L2_User_Manual.pdf?v=1743152039"
+          }
+        }
+      },
+      "block_order": ["manual_1", "manual_2"],
+      "settings": {
+        "title": "User Manuals & Guides",
+        "padding_top": 44,
+        "padding_bottom": 44,
+        "padding_top_mobile": 60,
+        "padding_bottom_mobile": 60
+      }
+    },
+    "support_faq": {
+      "type": "aotos-flux-faq",
+      "blocks": {
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "When will my order ship?",
+            "answer": "<p>Orders are typically processed within 1–2 business days. Once shipped, delivery usually takes 3–7 business days depending on your location.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you ship within the United States?",
+            "answer": "<p>Yes, we currently ship within the U.S. from our local warehouses to ensure faster delivery and better service.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How can I track my order?",
+            "answer": "<p>Once your order ships, you will receive a confirmation email with a tracking number. You can use it to monitor your delivery status.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>We offer a 14-day return policy for unused products in original condition. Please contact our support team before initiating a return.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What warranty do your products come with?",
+            "answer": "<p>All AOTOS products come with a limited warranty covering manufacturing defects. Warranty terms may vary by product.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do your eBikes require assembly?",
+            "answer": "<p>Some minor assembly may be required (such as installing handlebars or pedals). Detailed instructions are included, and most setups take 15–30 minutes.</p>"
+          }
+        },
+        "faq_7": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are your products street legal?",
+            "answer": "<p>Our eBikes are designed to meet common U.S. regulations (Class 2/3), but laws may vary by state. Please check your local regulations before riding.</p>"
+          }
+        },
+        "faq_8": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I unlock or connect my device?",
+            "answer": "<p>You can connect your AOTOS product via our mobile app for features like unlocking, tracking, and system updates. Instructions are included in the user manual.</p>"
+          }
+        },
+        "faq_9": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I update the system (OTA updates)?",
+            "answer": "<p>Yes, supported models receive over-the-air (OTA) updates through the AOTOS app, allowing continuous improvements and new features.</p>"
+          }
+        },
+        "faq_10": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How can I contact customer support?",
+            "answer": "<p>You can reach our support team via email at support@aotos.com or call us at +1 (626) 989-0826 during business hours (Monday–Friday, 9AM–6PM).</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "faq_7",
+        "faq_8",
+        "faq_9",
+        "faq_10"
+      ],
+      "settings": {
+        "faq_title": "Frequently Asked Questions",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "support_contact": {
+      "type": "support-contact-features",
+      "settings": {
+        "title": "Customer Support",
+        "description": "We’re here to help with any questions about your order, products, or after-sales service.",
+        "email": "support@aotos.com",
+        "phone": "",
+        "hours": "Monday–Friday, 9:00 AM–6:00 PM (PST)",
+        "padding_top": 44,
+        "padding_bottom": 44,
+        "padding_top_mobile": 120,
+        "padding_bottom_mobile": 120
+      }
+    }
+  },
+  "order": [
+    "support_hero",
+    "support_app",
+    "support_filter",
+    "support_manuals",
+    "support_faq",
+    "support_contact"
+  ]
+}
