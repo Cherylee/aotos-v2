@@ -130,7 +130,7 @@
       ],
       "name": "Safety Certified Hero",
       "settings": {
-        "height": "700",
+        "height": "adapt",
         "height_mobile": "1000",
         "content_mobile": "top",
         "overlay_opacity": 45,
