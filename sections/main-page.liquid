@@ -55,12 +55,23 @@
     display: block;
     margin-top: calc(8 * var(--rem));
   }
+
+  {%- if section.settings.form_title_section -%}
+    #shopify-section-{{ section.id }} .globo-heading {
+      font-size: var(--aotos-section-title-size) !important;
+      font-weight: 700 !important;
+      line-height: 1.2;
+      color: #000000;
+    }
+  {%- endif -%}
 {%- endstyle -%}
 
 <div class="page-width page-width--narrow section-{{ section.id }}-padding">
-  <h1 class="main-page-title page-title h0{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-    {{ page.title | escape }}
-  </h1>
+  {%- if section.settings.show_title -%}
+    <h1 class="main-page-title page-title h0{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+      {{ page.title | escape }}
+    </h1>
+  {%- endif -%}
   <div class="rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
     {{ page.content }}
   </div>
@@ -72,6 +83,18 @@
   "tag": "section",
   "class": "section",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_title",
+      "label": "显示页面标题",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "form_title_section",
+      "label": "表单标题使用区块标题字号",
+      "default": false
+    },
     {
       "type": "header",
       "content": "t:sections.all.padding.section_padding_heading"

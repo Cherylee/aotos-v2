@@ -1,0 +1,93 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hiring_banner": {
+      "type": "blog-list-hero",
+      "settings": {
+        "image": "shopify://shop_images/WechatIMG167.jpg",
+        "image_fit": "fixed",
+        "image_position": "center",
+        "image_alt": "About AOTOS",
+        "content_align": "center",
+        "content_valign": "center",
+        "mobile_center": true,
+        "title": "About AOTOS",
+        "title_size": 52,
+        "title_size_mobile": 56,
+        "title_weight": "700",
+        "title_color": "#ffffff",
+        "subtitle": "<p>Aotos is a fast-growing smart mobility brand creating rideable luggage and eBikes for modern travelers and city riders. We’re a small, passionate team of builders, designers, and problem solvers who love turning bold ideas into real products. If you’re excited about shaping the future of electric mobility, explore our open roles and join us on the ride.</p>",
+        "subtitle_color": "#ffffff",
+        "overlay": 0
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_title": false,
+        "form_title_section": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "hiring_jobs": {
+      "type": "aotos-flux-faq",
+      "blocks": {
+        "job_sales": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Regional Sales Manager (North America / Europe)",
+            "answer": "<p>Key Responsibilities<br>1. Develop and execute regional sales strategies and annual business plans; take full ownership of sales, profit, and market share targets.<br>2. Systematically build and manage multi-channel networks, including major retail chains, B2B shared-mobility operators, and regional distributors, to achieve efficient market coverage.<br>3. Lead business development and contract negotiations with key retail chains and strategic accounts, establishing long-term partnership relationships.<br>4. Work closely with product and marketing teams to drive product localization, go-to-market activities, and brand building, enhancing competitiveness and brand awareness in the region.</p><p>Requirements<br>1. Bachelor’s degree or above; 3+ years of regional sales experience in North America or Europe. Experience in e-bikes, micromobility, or consumer electronics, with existing key account or channel resources, is a strong plus.<br>2. Familiar with cooperation models of major retail platforms (e.g., Target, Costco, Walmart, etc.); proven network with large retailers or distributors is preferred.<br>3. Strong skills in business negotiation, data analysis, and market planning, with a track record of independently developing new markets and achieving sales targets.<br>4. Results-oriented, highly self-driven, and an effective cross-functional collaborator. English can be used as a working language.</p>"
+          }
+        },
+        "job_logistics": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Logistics Planning Manager/Supervisor",
+            "answer": "<p>Job Responsibilities:<br>1. Demand and Planning Management: Lead the global S&OP (Sales and Operations) process, develop accurate demand forecasts, and formulate master production schedules;<br>2. Inventory Management: Develop global regional inventory strategies, set safety stock levels, monitor inventory health, accelerate turnover, and reduce obsolescence risk;<br>3. Logistics Network Optimization: Design and manage the global logistics network (factory-overseas warehouse-customer), responsible for first-leg, international trunk, and last-mile logistics;<br>4. Cost Control: Develop and control logistics budgets, continuously reducing unit logistics costs through negotiation and process optimization;<br>5. Supplier Management: Evaluate, select, and manage third-party logistics, freight forwarding, and other partners to ensure service quality and cost competitiveness;<br>6. Process and System Improvement: Establish and optimize planned logistics processes, introduce tools such as ERP/WMS, and improve data-driven decision-making;<br>7. Cross-Departmental Collaboration: As the core interface of the supply chain, collaborate closely with sales, product, finance, and other departments to ensure smooth information flow.</p><p>【Job Requirements】<br>1. Bachelor's degree or above, with 5+ years of planning/logistics experience, including at least 3 years of experience in global planning and logistics management for smart hardware/consumer electronics;<br>2. Excellent data analysis skills, proficient in using ERP, BI, and other tools;<br>3. Strong sense of responsibility, ability to work under pressure, and ability to solve complex problems;<br>4. Excellent cost control, negotiation, and project management skills; English proficiency is required as a working language.<br>5. Bonus points: Successful experience in building or optimizing a global planning and logistics system from scratch; familiarity with import/export regulations and product certifications (e.g., North America, Europe).</p>"
+          }
+        },
+        "job_structural": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Senior Structural Engineer",
+            "answer": "<p>Job Responsibilities:<br>1. Lead the overall vehicle structural design (frame/battery compartment/motor integration, etc.), completing 3D modeling and 2D engineering drawing output;<br>2. Utilize FEA analysis tools to verify structural strength, optimize material selection, and molding processes;<br>3. Develop DFMEA solutions, lead prototype assembly, and resolve structural issues during trial production;<br>4. Deeply participate in supplier technical collaboration to achieve the industrialization of design solutions;<br>5. Continuously research new composite materials and manufacturing technologies to drive product iteration and innovation.</p><p>Job Requirements:<br>1. Bachelor's degree or above in Mechanical Engineering/Vehicle Engineering or related fields;<br>2. Over 5 years of structural design experience, having led at least 2 mass production projects, with priority given to candidates with structural design experience in the same industry;<br>3. Proficient in the process characteristics of aluminum/magnesium alloy die casting, carbon fiber composite materials, etc.;<br>4. Proficient in using CAE tools such as SolidWorks/CATIA+ANSYS/ABAQUS;</p>"
+          }
+        },
+        "job_control": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Senior Systems/Electric Control Engineer",
+            "answer": "<p>Job Responsibilities:<br>1. Analyze the requirements of electric-assisted bicycles, establish the control system architecture, and define the functional allocation between different control modules.<br>2. Establish control module concepts and refine control module requirements specifications to the implementation level;<br>3. Manage the quality, cost, and timeline of control module development with internal/external partners;<br>4. Other tasks assigned by superiors.</p><p>Job Requirements:<br>1. Bachelor's degree or above, with 5+ years of relevant work experience;<br>2. Familiar with common communication architectures such as UART/CAN;<br>3. Familiar with electric vehicle system architecture, with the ability to locate and solve problems;</p>"
+          }
+        }
+      },
+      "block_order": [
+        "job_sales",
+        "job_logistics",
+        "job_structural",
+        "job_control"
+      ],
+      "settings": {
+        "faq_title": "Job Opening",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
+    }
+  },
+  "order": [
+    "hiring_banner",
+    "hiring_jobs",
+    "main"
+  ]
+}

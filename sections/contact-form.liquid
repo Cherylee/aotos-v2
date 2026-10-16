@@ -1,218 +1,556 @@
-{{ 'section-contact-form.css' | asset_url | stylesheet_tag }}
-
 {%- style -%}
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  #cf-{{ section.id }} {
+    background: #f4f4f4;
+    padding-top: calc({{ section.settings.padding_top | default: 80, allow_false: true }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80, allow_false: true }} * var(--rem));
   }
 
-  @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
+  #cf-{{ section.id }} * { box-sizing: border-box; }
+
+  #cf-{{ section.id }} .cf-heading {
+    width: calc(900 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+    padding: calc(54 * var(--rem)) calc(30 * var(--rem)) calc(36 * var(--rem));
+    text-align: center;
+  }
+
+  #cf-{{ section.id }} .cf-title {
+    margin: 0 0 calc(12 * var(--rem));
+    color: #111111;
+    font-size: calc(36 * var(--rem));
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: calc(-0.75 * var(--rem));
+  }
+
+  #cf-{{ section.id }} .cf-sub {
+    max-width: calc(420 * var(--rem));
+    margin: 0 auto;
+    color: #777777;
+    font-size: calc(12 * var(--rem));
+    line-height: 1.6;
+  }
+
+  #cf-{{ section.id }} .cf-inner {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    width: calc(900 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 calc(30 * var(--rem)) calc(60 * var(--rem));
+  }
+
+  #cf-{{ section.id }} .cf-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: calc(42 * var(--rem)) calc(36 * var(--rem));
+    border-radius: calc(12 * var(--rem)) 0 0 calc(12 * var(--rem));
+    background: #111111;
+    color: #ffffff;
+  }
+
+  #cf-{{ section.id }} .cf-eyebrow {
+    margin: 0 0 calc(10 * var(--rem));
+    color: #ff6501;
+    font-size: calc(8 * var(--rem));
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  #cf-{{ section.id }} .cf-panel-title {
+    margin: 0 0 calc(12 * var(--rem));
+    color: #ffffff;
+    font-size: calc(21 * var(--rem));
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: calc(-0.4 * var(--rem));
+  }
+
+  #cf-{{ section.id }} .cf-panel-desc {
+    margin: 0 0 calc(33 * var(--rem));
+    color: #aaaaaa;
+    font-size: calc(10 * var(--rem));
+    line-height: 1.75;
+  }
+
+  #cf-{{ section.id }} .cf-info {
+    display: flex;
+    flex-direction: column;
+    gap: calc(15 * var(--rem));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  #cf-{{ section.id }} .cf-info li {
+    display: flex;
+    align-items: flex-start;
+    gap: calc(10 * var(--rem));
+    color: #cccccc;
+    font-size: calc(10 * var(--rem));
+    line-height: 1.5;
+  }
+
+  #cf-{{ section.id }} .cf-info-icon {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    width: calc(28 * var(--rem));
+    height: calc(28 * var(--rem));
+    border-radius: calc(6 * var(--rem));
+    background: rgba(255, 101, 1, 0.15);
+  }
+
+  #cf-{{ section.id }} .cf-info-icon svg,
+  #cf-{{ section.id }} .cf-badge svg {
+    fill: none;
+    stroke: #ff6501;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  #cf-{{ section.id }} .cf-info-icon svg {
+    width: calc(13 * var(--rem));
+    height: calc(13 * var(--rem));
+  }
+
+  #cf-{{ section.id }} .cf-info a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  #cf-{{ section.id }} .cf-info strong {
+    display: block;
+    margin-bottom: calc(2 * var(--rem));
+    color: #ffffff;
+    font-size: calc(10 * var(--rem));
+    font-weight: 600;
+  }
+
+  #cf-{{ section.id }} .cf-badge {
+    display: flex;
+    align-items: flex-start;
+    gap: calc(9 * var(--rem));
+    margin-top: calc(36 * var(--rem));
+    padding: calc(12 * var(--rem));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: calc(8 * var(--rem));
+    background: rgba(255, 255, 255, 0.05);
+    color: #888888;
+    font-size: calc(9 * var(--rem));
+    line-height: 1.5;
+  }
+
+  #cf-{{ section.id }} .cf-badge svg {
+    flex: 0 0 auto;
+    width: calc(15 * var(--rem));
+    height: calc(15 * var(--rem));
+    margin-top: calc(1 * var(--rem));
+  }
+
+  #cf-{{ section.id }} .cf-form {
+    padding: calc(39 * var(--rem)) calc(36 * var(--rem));
+    border-radius: 0 calc(12 * var(--rem)) calc(12 * var(--rem)) 0;
+    background: #ffffff;
+  }
+
+  #cf-{{ section.id }} .cf-form-title {
+    margin: 0 0 calc(21 * var(--rem));
+    color: #111111;
+    font-size: calc(16 * var(--rem));
+    font-weight: 700;
+    letter-spacing: calc(-0.2 * var(--rem));
+  }
+
+  #cf-{{ section.id }} .cf-status {
+    display: flex;
+    align-items: center;
+    gap: calc(8 * var(--rem));
+    margin: 0 0 calc(18 * var(--rem));
+    padding: calc(10 * var(--rem)) calc(14 * var(--rem));
+    border-radius: calc(6 * var(--rem));
+    font-size: calc(10 * var(--rem));
+    font-weight: 500;
+  }
+
+  #cf-{{ section.id }} .cf-status--ok {
+    border: 1px solid #bbf7d0;
+    background: #f0fdf4;
+    color: #15803d;
+  }
+
+  #cf-{{ section.id }} .cf-status--err {
+    margin-bottom: calc(6 * var(--rem));
+    border: 1px solid #fecdd3;
+    background: #fff1f2;
+    color: #be123c;
+  }
+
+  #cf-{{ section.id }} .cf-errors {
+    margin: 0 0 calc(15 * var(--rem));
+    padding-left: calc(12 * var(--rem));
+    color: #be123c;
+    font-size: calc(10 * var(--rem));
+  }
+
+  #cf-{{ section.id }} .cf-errors a { color: inherit; }
+
+  #cf-{{ section.id }} .cf-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: calc(12 * var(--rem));
+  }
+
+  #cf-{{ section.id }} .cf-field { margin-bottom: calc(14 * var(--rem)); }
+
+  #cf-{{ section.id }} .cf-label {
+    display: block;
+    margin-bottom: calc(5 * var(--rem));
+    color: #444444;
+    font-size: calc(9 * var(--rem));
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  #cf-{{ section.id }} .cf-input {
+    width: 100%;
+    padding: calc(10 * var(--rem)) calc(14 * var(--rem));
+    border: 0;
+    border-radius: calc(8 * var(--rem));
+    background: #f9f9f9;
+    color: #111111;
+    font-family: inherit;
+    font-size: calc(11 * var(--rem));
+    appearance: none;
+    outline: none;
+  }
+
+  #cf-{{ section.id }} .cf-input::placeholder {
+    color: #bbbbbb;
+    opacity: 1;
+  }
+
+  #cf-{{ section.id }} textarea.cf-input {
+    min-height: calc(180 * var(--rem));
+    resize: vertical;
+  }
+
+  #cf-{{ section.id }} .cf-error {
+    display: block;
+    margin-top: calc(4 * var(--rem));
+    color: #be123c;
+    font-size: calc(9 * var(--rem));
+  }
+
+  #cf-{{ section.id }} .cf-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(8 * var(--rem));
+    width: 100%;
+    margin-top: calc(8 * var(--rem));
+    padding: calc(13 * var(--rem)) calc(18 * var(--rem));
+    border: 0;
+    border-radius: calc(8 * var(--rem));
+    background: #111111;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: calc(11 * var(--rem));
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  #cf-{{ section.id }} .cf-submit::after {
+    content: "→";
+    font-size: calc(13 * var(--rem));
+  }
+
+  @media (hover: hover) {
+    #cf-{{ section.id }} .cf-input,
+    #cf-{{ section.id }} .cf-submit,
+    #cf-{{ section.id }} .cf-submit::after {
+      transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+    }
+
+    #cf-{{ section.id }} .cf-input:focus {
+      background: #ffffff;
+      box-shadow: 0 0 0 calc(2 * var(--rem)) rgba(255, 101, 1, 0.1);
+    }
+
+    #cf-{{ section.id }} .cf-submit:hover {
+      background: #ff6501;
+      transform: translateY(calc(-1 * var(--rem)));
+    }
+
+    #cf-{{ section.id }} .cf-submit:hover::after {
+      transform: translateX(calc(4 * var(--rem)));
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #cf-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }} * var(--rem));
+    }
+
+    #cf-{{ section.id }} .cf-heading {
+      width: 100%;
+      padding: calc(75 * var(--rem)) calc(40 * var(--rem));
+    }
+
+    #cf-{{ section.id }} .cf-title {
+      margin-bottom: calc(45 * var(--rem));
+      font-size: calc(60 * var(--rem));
+      line-height: 1.2;
+    }
+
+    #cf-{{ section.id }} .cf-sub {
+      max-width: none;
+      font-size: calc(30 * var(--rem));
+      line-height: 1.2;
+    }
+
+    #cf-{{ section.id }} .cf-inner {
+      grid-template-columns: 1fr;
+      width: 100%;
+      padding: 0 calc(40 * var(--rem)) calc(96 * var(--rem));
+    }
+
+    #cf-{{ section.id }} .cf-panel {
+      padding: calc(72 * var(--rem)) calc(40 * var(--rem));
+      border-radius: calc(32 * var(--rem)) calc(32 * var(--rem)) 0 0;
+    }
+
+    #cf-{{ section.id }} .cf-eyebrow {
+      margin-bottom: calc(28 * var(--rem));
+      font-size: calc(22 * var(--rem));
+    }
+
+    #cf-{{ section.id }} .cf-panel-title { font-size: calc(44 * var(--rem)); }
+
+    #cf-{{ section.id }} .cf-panel-desc {
+      margin-bottom: calc(64 * var(--rem));
+      font-size: calc(28 * var(--rem));
+    }
+
+    #cf-{{ section.id }} .cf-info { gap: calc(40 * var(--rem)); }
+
+    #cf-{{ section.id }} .cf-info li {
+      gap: calc(28 * var(--rem));
+      font-size: calc(28 * var(--rem));
+    }
+
+    #cf-{{ section.id }} .cf-info-icon {
+      width: calc(76 * var(--rem));
+      height: calc(76 * var(--rem));
+      border-radius: calc(16 * var(--rem));
+    }
+
+    #cf-{{ section.id }} .cf-info-icon svg {
+      width: calc(34 * var(--rem));
+      height: calc(34 * var(--rem));
+    }
+
+    #cf-{{ section.id }} .cf-info strong {
+      margin-bottom: calc(4 * var(--rem));
+      font-size: calc(26 * var(--rem));
+    }
+
+    #cf-{{ section.id }} .cf-badge { display: none; }
+
+    #cf-{{ section.id }} .cf-form {
+      padding: calc(72 * var(--rem)) calc(40 * var(--rem)) calc(80 * var(--rem));
+      border-radius: 0 0 calc(32 * var(--rem)) calc(32 * var(--rem));
+    }
+
+    #cf-{{ section.id }} .cf-form-title {
+      margin-bottom: calc(44 * var(--rem));
+      font-size: calc(36 * var(--rem));
+    }
+
+    #cf-{{ section.id }} .cf-row {
+      grid-template-columns: 1fr;
+      gap: calc(36 * var(--rem));
+    }
+
+    #cf-{{ section.id }} .cf-field { margin-bottom: calc(36 * var(--rem)); }
+
+    #cf-{{ section.id }} .cf-label {
+      margin-bottom: calc(14 * var(--rem));
+      font-size: calc(24 * var(--rem));
+    }
+
+    #cf-{{ section.id }} .cf-input {
+      padding: calc(26 * var(--rem)) calc(32 * var(--rem));
+      border-radius: calc(20 * var(--rem));
+      font-size: max(16px, calc(32 * var(--rem)));
+    }
+
+    #cf-{{ section.id }} textarea.cf-input { min-height: calc(300 * var(--rem)); }
+
+    #cf-{{ section.id }} .cf-submit {
+      padding: calc(32 * var(--rem));
+      border-radius: calc(20 * var(--rem));
+      font-size: calc(30 * var(--rem));
+    }
+
+    #cf-{{ section.id }} .cf-submit::after { font-size: calc(36 * var(--rem)); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #cf-{{ section.id }} .cf-input,
+    #cf-{{ section.id }} .cf-submit,
+    #cf-{{ section.id }} .cf-submit::after {
+      transition: none;
     }
   }
 {%- endstyle -%}
 
-<div class="color-{{ section.settings.color_scheme }} gradient">
-  <div class="contact page-width page-width--narrow section-{{ section.id }}-padding">
+<div id="cf-{{ section.id }}">
+  <div class="cf-heading">
     {%- if section.settings.heading != blank -%}
-      <h2 class="title title-wrapper--no-top-margin inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-        {{ section.settings.heading }}
-      </h2>
+      <h1 class="cf-title">{{ section.settings.heading }}</h1>
     {%- else -%}
-      <h2 class="visually-hidden">{{ 'templates.contact.form.title' | t }}</h2>
+      <h1 class="cf-title">{{ 'templates.contact.form.title' | t }}</h1>
     {%- endif -%}
-    {%- liquid
-      assign contact_form_class = 'isolate'
-      if settings.animations_reveal_on_scroll
-        assign contact_form_class = 'isolate scroll-trigger animate--slide-in'
-      endif
-    -%}
-    {%- form 'contact', id: 'ContactForm', class: contact_form_class -%}
-      {%- if form.posted_successfully? -%}
-        <h2 class="form-status form-status-list form__message" tabindex="-1" autofocus>
-          {{- 'icon-success.svg' | inline_asset_content -}}
-          {{ 'templates.contact.form.post_success' | t }}
-        </h2>
-      {%- elsif form.errors -%}
-        <div class="form__message">
-          <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>
-            {{- 'icon-error.svg' | inline_asset_content -}}
-            {{ 'templates.contact.form.error_heading' | t }}
-          </h2>
-        </div>
-        <ul class="form-status-list caption-large" role="list">
+    {%- if section.settings.top_subtext != blank -%}
+      <p class="cf-sub">{{ section.settings.top_subtext | escape | newline_to_br }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="cf-inner">
+    <div class="cf-panel">
+      <div>
+        {%- if section.settings.side_eyebrow != blank -%}
+          <p class="cf-eyebrow">{{ section.settings.side_eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.side_title != blank -%}
+          <h2 class="cf-panel-title">{{ section.settings.side_title | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.side_desc != blank -%}
+          <p class="cf-panel-desc">{{ section.settings.side_desc | escape | newline_to_br }}</p>
+        {%- endif -%}
+        <ul class="cf-info">
           <li>
-            <a href="#ContactForm-email" class="link">
-              {{ form.errors.translated_fields.email | capitalize }}
-              {{ form.errors.messages.email }}
-            </a>
+            <span class="cf-info-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </span>
+            <span>
+              {%- if section.settings.info_email_label != blank -%}<strong>{{ section.settings.info_email_label | escape }}</strong>{%- endif -%}
+              <a href="mailto:{{ section.settings.info_email_text | escape }}">{{ section.settings.info_email_text | escape }}</a>
+            </span>
+          </li>
+          <li>
+            <span class="cf-info-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.58 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6.29 6.29l1.07-1.07a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </span>
+            <span>
+              {%- if section.settings.info_phone_label != blank -%}<strong>{{ section.settings.info_phone_label | escape }}</strong>{%- endif -%}
+              {{ section.settings.info_phone_text | escape }}
+            </span>
+          </li>
+          <li>
+            <span class="cf-info-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </span>
+            <span>
+              {%- if section.settings.info_response_label != blank -%}<strong>{{ section.settings.info_response_label | escape }}</strong>{%- endif -%}
+              {{ section.settings.info_response_text | escape }}
+            </span>
           </li>
         </ul>
+      </div>
+      {%- if section.settings.badge_text != blank -%}
+        <div class="cf-badge">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>{{ section.settings.badge_text | escape | newline_to_br }}</span>
+        </div>
       {%- endif -%}
-      <div class="contact__fields">
-        <div class="field">
-          <input
-            class="field__input"
-            autocomplete="name"
-            type="text"
-            id="ContactForm-name"
-            name="contact[{{ 'templates.contact.form.name' | t }}]"
-            value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
-            placeholder="{{ 'templates.contact.form.name' | t }}"
-          >
-          <label class="field__label" for="ContactForm-name">{{ 'templates.contact.form.name' | t }}</label>
+    </div>
+
+    <div class="cf-form">
+      {%- if section.settings.form_title != blank -%}
+        <p class="cf-form-title">{{ section.settings.form_title | escape }}</p>
+      {%- endif -%}
+      {%- form 'contact', id: 'ContactForm' -%}
+        {%- if form.posted_successfully? -%}
+          <h2 class="cf-status cf-status--ok" tabindex="-1" autofocus>{{ 'templates.contact.form.post_success' | t }}</h2>
+        {%- elsif form.errors -%}
+          <h2 class="cf-status cf-status--err" role="alert" tabindex="-1" autofocus>{{ 'templates.contact.form.error_heading' | t }}</h2>
+          <ul class="cf-errors" role="list">
+            <li>
+              <a href="#ContactForm-email">
+                {{ form.errors.translated_fields.email | capitalize }}
+                {{ form.errors.messages.email }}
+              </a>
+            </li>
+          </ul>
+        {%- endif -%}
+
+        <div class="cf-row">
+          <div class="cf-field">
+            <label class="cf-label" for="ContactForm-name">{{ 'templates.contact.form.name' | t }}</label>
+            <input class="cf-input" autocomplete="name" type="text" id="ContactForm-name" name="contact[{{ 'templates.contact.form.name' | t }}]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" placeholder="{{ 'templates.contact.form.name' | t }}">
+          </div>
+          <div class="cf-field">
+            <label class="cf-label" for="ContactForm-email">{{ 'templates.contact.form.email' | t }} <span aria-hidden="true">*</span></label>
+            <input class="cf-input" autocomplete="email" type="email" id="ContactForm-email" name="contact[email]" spellcheck="false" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" aria-required="true" {% if form.errors contains 'email' %}aria-invalid="true" aria-describedby="ContactForm-email-error"{% endif %} placeholder="{{ 'templates.contact.form.email' | t }}" required>
+            {%- if form.errors contains 'email' -%}
+              <small class="cf-error" id="ContactForm-email-error">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</small>
+            {%- endif -%}
+          </div>
         </div>
-        <div class="field field--with-error">
-          <input
-            autocomplete="email"
-            type="email"
-            id="ContactForm-email"
-            class="field__input"
-            name="contact[email]"
-            spellcheck="false"
-            autocapitalize="off"
-            value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
-            aria-required="true"
-            {% if form.errors contains 'email' %}
-              aria-invalid="true"
-              aria-describedby="ContactForm-email-error"
-            {% endif %}
-            placeholder="{{ 'templates.contact.form.email' | t }}"
-          >
-          <label class="field__label" for="ContactForm-email">
-            {{- 'templates.contact.form.email' | t }}
-            <span aria-hidden="true">*</span></label
-          >
-          {%- if form.errors contains 'email' -%}
-            <small class="contact__field-error" id="ContactForm-email-error">
-              <span class="visually-hidden">{{ 'accessibility.error' | t }}</span>
-              <span class="form__message">
-                <span class="svg-wrapper">
-                  {{- 'icon-error.svg' | inline_asset_content -}}
-                </span>
-                {{- form.errors.translated_fields.email | capitalize }}
-                {{ form.errors.messages.email -}}
-              </span>
-            </small>
-          {%- endif -%}
+
+        <div class="cf-field">
+          <label class="cf-label" for="ContactForm-phone">{{ 'templates.contact.form.phone' | t }}</label>
+          <input class="cf-input" type="tel" id="ContactForm-phone" autocomplete="tel" name="contact[{{ 'templates.contact.form.phone' | t }}]" pattern="[0-9\-]*" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}" placeholder="{{ 'templates.contact.form.phone' | t }}">
         </div>
-      </div>
-      <div class="field">
-        <input
-          type="tel"
-          id="ContactForm-phone"
-          class="field__input"
-          autocomplete="tel"
-          name="contact[{{ 'templates.contact.form.phone' | t }}]"
-          pattern="[0-9\-]*"
-          value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
-          placeholder="{{ 'templates.contact.form.phone' | t }}"
-        >
-        <label class="field__label" for="ContactForm-phone">{{ 'templates.contact.form.phone' | t }}</label>
-      </div>
-      <div class="field">
-        <textarea
-          rows="10"
-          id="ContactForm-body"
-          class="text-area field__input"
-          name="contact[{{ 'templates.contact.form.comment' | t }}]"
-          placeholder="{{ 'templates.contact.form.comment' | t }}"
-        >
-          {{- form.body -}}
-        </textarea>
-        <label class="form__label field__label" for="ContactForm-body">
-          {{- 'templates.contact.form.comment' | t -}}
-        </label>
-      </div>
-      <div class="contact__button">
-        <button type="submit" class="button">
-          {{ 'templates.contact.form.send' | t }}
-        </button>
-      </div>
-    {%- endform -%}
+
+        <div class="cf-field">
+          <label class="cf-label" for="ContactForm-body">{{ 'templates.contact.form.comment' | t }}</label>
+          <textarea class="cf-input" rows="5" id="ContactForm-body" name="contact[{{ 'templates.contact.form.comment' | t }}]" placeholder="{{ 'templates.contact.form.comment' | t }}">{{- form.body -}}</textarea>
+        </div>
+
+        <button class="cf-submit" type="submit">{{ 'templates.contact.form.send' | t }}</button>
+      {%- endform -%}
+    </div>
   </div>
 </div>
 
 {% schema %}
 {
-  "name": "t:sections.contact-form.name",
+  "name": "Contact form",
   "tag": "section",
   "class": "section",
-  "disabled_on": {
-    "groups": ["header", "footer"]
-  },
+  "disabled_on": { "groups": ["header", "footer"] },
   "settings": [
-    {
-      "type": "inline_richtext",
-      "id": "heading",
-      "default": "t:sections.contact-form.settings.title.default",
-      "label": "t:sections.contact-form.settings.title.label"
-    },
-    {
-      "type": "select",
-      "id": "heading_size",
-      "options": [
-        {
-          "value": "h2",
-          "label": "t:sections.all.heading_size.options__1.label"
-        },
-        {
-          "value": "h1",
-          "label": "t:sections.all.heading_size.options__2.label"
-        },
-        {
-          "value": "h0",
-          "label": "t:sections.all.heading_size.options__3.label"
-        },
-        {
-          "value": "hxl",
-          "label": "t:sections.all.heading_size.options__4.label"
-        },
-        {
-          "value": "hxxl",
-          "label": "t:sections.all.heading_size.options__5.label"
-        }
-      ],
-      "default": "h1",
-      "label": "t:sections.all.heading_size.label"
-    },
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:sections.all.colors.label",
-      "default": "scheme-1"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.all.padding.section_padding_heading"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_top",
-      "default": 36
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
-    }
+    { "type": "inline_richtext", "id": "heading", "label": "标题", "info": "留空则使用「联系我们」文案" },
+    { "type": "textarea", "id": "top_subtext", "label": "副标题", "default": "Questions about your bike, order, or warranty? Our team is here to help—expect a response within 24 hours." },
+    { "type": "text", "id": "side_eyebrow", "label": "左侧眉题", "default": "Get in Touch" },
+    { "type": "text", "id": "side_title", "label": "左侧标题", "default": "We'd love to hear from you" },
+    { "type": "textarea", "id": "side_desc", "label": "左侧说明", "default": "Whether you're asking about your ride, looking for support, or just want to say hello — our team is ready." },
+    { "type": "text", "id": "info_email_label", "label": "邮箱标签", "default": "Email" },
+    { "type": "text", "id": "info_email_text", "label": "邮箱", "default": "support@aotos.com" },
+    { "type": "text", "id": "info_phone_label", "label": "电话标签", "default": "Phone" },
+    { "type": "text", "id": "info_phone_text", "label": "电话说明", "default": "Mon–Fri, 9am–6pm PST" },
+    { "type": "text", "id": "info_response_label", "label": "回复标签", "default": "Response Time" },
+    { "type": "text", "id": "info_response_text", "label": "回复说明", "default": "Within 24 business hours" },
+    { "type": "textarea", "id": "badge_text", "label": "底部说明", "default": "Your information is encrypted and never shared with third parties." },
+    { "type": "text", "id": "form_title", "label": "表单标题", "default": "Send us a message" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "上边距（PC）", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "下边距（PC）", "default": 80 },
+    { "type": "range", "id": "padding_top_mobile", "min": 0, "max": 200, "step": 4, "unit": "px", "label": "上边距（手机）", "default": 88 },
+    { "type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 200, "step": 4, "unit": "px", "label": "下边距（手机）", "default": 88 }
   ],
-  "presets": [
-    {
-      "name": "t:sections.contact-form.presets.name"
-    }
-  ]
+  "presets": [{ "name": "Contact form" }]
 }
 {% endschema %}
