@@ -193,11 +193,23 @@
       "settings": {
         "include_margins": true
       }
+    },
+    "aotos_flux_faq_b9d3GQ": {
+      "type": "aotos-flux-faq",
+      "name": "Flux FAQ",
+      "settings": {
+        "faq_title": "Customer Reviews",
+        "padding_top": 80,
+        "padding_bottom": 0,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 0
+      }
     }
   },
   "order": [
     "main",
     "product_description",
-    "179214567622c22e34"
+    "179214567622c22e34",
+    "aotos_flux_faq_b9d3GQ"
   ]
 }
