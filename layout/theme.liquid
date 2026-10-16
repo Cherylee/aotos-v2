@@ -4,6 +4,24 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    {%- if request.page_type == 'product' -%}
+      {%- liquid
+        assign lcp_image = product.selected_or_first_available_variant.metafields.custom.product_showcase_image.value | first
+        if lcp_image == blank
+          assign lcp_image = product.featured_media.preview_image
+        endif
+      -%}
+      {%- if lcp_image != blank -%}
+        <link
+          rel="preload"
+          as="image"
+          href="{{ lcp_image | image_url: width: 720 }}"
+          imagesrcset="{{ lcp_image | image_url: width: 400 }} 400w, {{ lcp_image | image_url: width: 540 }} 540w, {{ lcp_image | image_url: width: 720 }} 720w"
+          imagesizes="(max-width: 768px) 92vw, 520px"
+          fetchpriority="high"
+        >
+      {%- endif -%}
+    {%- endif -%}
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
 
@@ -292,11 +310,11 @@
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
     {%- if settings.cart_type == 'drawer' -%}
-      {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
-      {{ 'component-cart.css' | asset_url | stylesheet_tag }}
-      {{ 'component-totals.css' | asset_url | stylesheet_tag }}
+      <link rel="stylesheet" href="{{ 'component-cart-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
+      <link rel="stylesheet" href="{{ 'component-cart.css' | asset_url }}" media="print" onload="this.media='all'">
+      <link rel="stylesheet" href="{{ 'component-totals.css' | asset_url }}" media="print" onload="this.media='all'">
       {{ 'component-price.css' | asset_url | stylesheet_tag }}
-      {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
+      <link rel="stylesheet" href="{{ 'component-discounts.css' | asset_url }}" media="print" onload="this.media='all'">
     {%- endif -%}
 
     {%- unless settings.type_body_font.system? -%}
