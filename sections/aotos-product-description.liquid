@@ -1,0 +1,206 @@
+{%- liquid
+  assign desc_anchor = section.settings.anchor_id | replace: '#', '' | strip
+  if desc_anchor == blank
+    assign desc_anchor = 'product-description'
+  endif
+-%}
+
+{%- if product.description != blank -%}
+{% style %}
+  #{{ desc_anchor }} {
+    scroll-margin-top: calc(var(--header-height, 80px) + calc(16 * var(--rem)));
+  }
+
+  #desc-{{ section.id }} {
+    display: block;
+    background: #ffffff;
+    color: #000000;
+    padding-top: calc({{ section.settings.padding_top | default: 80, allow_false: true }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80, allow_false: true }} * var(--rem));
+  }
+
+  #desc-{{ section.id }} * { box-sizing: border-box; }
+
+  #desc-{{ section.id }} .desc-shell {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  #desc-{{ section.id }} .desc-title {
+    margin: 0 0 calc(24 * var(--rem));
+    color: #000000;
+    font-weight: 700;
+    line-height: 1.15;
+    text-align: {{ section.settings.heading_align | default: 'center' }};
+  }
+
+  #desc-{{ section.id }} .desc-body {
+    color: #000000;
+    font-size: calc(14 * var(--rem));
+    line-height: calc(22 * var(--rem));
+  }
+
+  #desc-{{ section.id }} .desc-body > *:first-child { margin-top: 0; }
+  #desc-{{ section.id }} .desc-body > *:last-child { margin-bottom: 0; }
+
+  #desc-{{ section.id }} .desc-body p,
+  #desc-{{ section.id }} .desc-body h1,
+  #desc-{{ section.id }} .desc-body h2,
+  #desc-{{ section.id }} .desc-body h3,
+  #desc-{{ section.id }} .desc-body h4,
+  #desc-{{ section.id }} .desc-body h5,
+  #desc-{{ section.id }} .desc-body h6,
+  #desc-{{ section.id }} .desc-body ul,
+  #desc-{{ section.id }} .desc-body ol,
+  #desc-{{ section.id }} .desc-body blockquote,
+  #desc-{{ section.id }} .desc-body figure {
+    margin: 0 0 calc(16 * var(--rem));
+  }
+
+  #desc-{{ section.id }} .desc-body h1,
+  #desc-{{ section.id }} .desc-body h2,
+  #desc-{{ section.id }} .desc-body h3,
+  #desc-{{ section.id }} .desc-body h4 {
+    color: #000000;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  #desc-{{ section.id }} .desc-body h2 { font-size: calc(20 * var(--rem)); }
+  #desc-{{ section.id }} .desc-body h3 { font-size: calc(16 * var(--rem)); }
+
+  #desc-{{ section.id }} .desc-body ul,
+  #desc-{{ section.id }} .desc-body ol {
+    padding-left: calc(22 * var(--rem));
+  }
+
+  #desc-{{ section.id }} .desc-body ul { list-style: disc; }
+  #desc-{{ section.id }} .desc-body ol { list-style: decimal; }
+
+  #desc-{{ section.id }} .desc-body li {
+    margin: 0 0 calc(8 * var(--rem));
+    padding: 0;
+  }
+
+  #desc-{{ section.id }} .desc-body li:last-child { margin-bottom: 0; }
+
+  #desc-{{ section.id }} .desc-body a {
+    color: #000000;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  #desc-{{ section.id }} .desc-body img,
+  #desc-{{ section.id }} .desc-body video,
+  #desc-{{ section.id }} .desc-body iframe {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: calc(16 * var(--rem)) 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  #desc-{{ section.id }} .desc-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 calc(16 * var(--rem));
+  }
+
+  #desc-{{ section.id }} .desc-body th,
+  #desc-{{ section.id }} .desc-body td {
+    padding: calc(8 * var(--rem)) calc(12 * var(--rem));
+    border: 1px solid #e6e6e6;
+    text-align: left;
+  }
+
+  @media (hover: hover) {
+    #desc-{{ section.id }} .desc-body a:hover { color: #ff6501; }
+  }
+
+  @media screen and (max-width: 768px) {
+    #{{ desc_anchor }} {
+      scroll-margin-top: 30vh;
+    }
+
+    #desc-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }} * var(--rem));
+    }
+
+    #desc-{{ section.id }} .desc-shell {
+      width: 100%;
+      padding: 0 calc(40 * var(--rem));
+    }
+
+    #desc-{{ section.id }} .desc-title { margin-bottom: calc(24 * var(--rem)); }
+
+    #desc-{{ section.id }} .desc-body {
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #desc-{{ section.id }} .desc-body h2 { font-size: calc(28 * var(--rem)); }
+    #desc-{{ section.id }} .desc-body h3 { font-size: calc(24 * var(--rem)); }
+
+    #desc-{{ section.id }} .desc-body ul,
+    #desc-{{ section.id }} .desc-body ol {
+      padding-left: calc(32 * var(--rem));
+    }
+  }
+{% endstyle %}
+
+<section id="{{ desc_anchor | escape }}" class="aotos-product-description">
+  <div id="desc-{{ section.id }}">
+    <div class="desc-shell">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="desc-title aotos-section-title">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+      <div class="desc-body">{{ product.description }}</div>
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "产品描述",
+  "tag": "section",
+  "class": "aotos-product-description-section",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "标题",
+      "default": "Product Details"
+    },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "标题对齐",
+      "options": [
+        { "value": "left", "label": "左对齐" },
+        { "value": "center", "label": "居中" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "锚点 ID",
+      "default": "product-description",
+      "info": "上方 Learn more 的跳转锚点填同一个值，不要带 #"
+    },
+    { "type": "range", "id": "padding_top", "label": "PC 上边距", "min": 0, "max": 160, "step": 4, "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "PC 下边距", "min": 0, "max": 160, "step": 4, "default": 80 },
+    { "type": "range", "id": "padding_top_mobile", "label": "手机上边距", "min": 0, "max": 160, "step": 4, "default": 88 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "手机下边距", "min": 0, "max": 160, "step": 4, "default": 88 }
+  ],
+  "presets": [
+    { "name": "产品描述" }
+  ]
+}
+{% endschema %}

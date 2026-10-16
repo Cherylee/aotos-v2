@@ -3,6 +3,7 @@
   id="IfaSeries-{{ section.id }}"
   style="
     --ifa-series-accent: {{ section.settings.accent_color | default: '#ff6501' }};
+    background: {{ section.settings.background_color | default: '#f5f5f5' }};
     padding-top: calc({{ section.settings.padding_top | default: 80 }} * var(--rem));
     padding-bottom: calc({{ section.settings.padding_bottom | default: 80 }} * var(--rem));
   "
@@ -303,7 +304,7 @@
       overflow: hidden;
       background: #ffffff;
     }
-    .ifa-series__row--text_right{
+    .ifa-series__row--text_right:has(.ifa-series__card--dark) {
       background: #1a1a1a;
     }
     .ifa-series__row--text_right .ifa-series__card,
@@ -404,6 +405,12 @@
       "id": "accent_color",
       "label": "Accent color",
       "default": "#ff6501"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#f5f5f5"
     },
     {
       "type": "text",

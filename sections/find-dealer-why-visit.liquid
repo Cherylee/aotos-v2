@@ -29,12 +29,66 @@
     color: var(--fd-orange);
   }
 
+  .fd-why-{{ section.id }} .fd-why__heading {
+    margin: 0 0 calc(16 * var(--rem));
+    color: #000000;
+    font-weight: 700;
+  }
+
+  .fd-why-{{ section.id }} .fd-why__intro {
+    margin: 0 0 calc(32 * var(--rem));
+    color: #000000;
+    font-size: calc(14 * var(--rem));
+    font-weight: 600;
+    line-height: calc(18 * var(--rem));
+  }
+
+  .fd-why-{{ section.id }} .fd-why__intro a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  .fd-why-{{ section.id }} .fd-why__intro p {
+    margin: 0;
+  }
+
+  .fd-why-{{ section.id }} .fd-why__intro p + p {
+    margin-top: calc(12 * var(--rem));
+  }
+
   .fd-why-{{ section.id }} .fd-why__grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat({{ section.blocks.size | at_least: 1 | at_most: 4 }}, minmax(0, 1fr));
     gap: calc(32 * var(--rem));
     border-top: 1px solid var(--fd-border);
     padding-top: calc(32 * var(--rem));
+  }
+
+  .fd-why-{{ section.id }}.fd-why--cards .fd-why__grid {
+    border-top: 0;
+    padding-top: 0;
+    gap: calc(22 * var(--rem));
+  }
+
+  .fd-why-{{ section.id }}.fd-why--cards .fd-why__item {
+    min-height: 100%;
+    padding: calc(36 * var(--rem)) calc(28 * var(--rem));
+    background: #f6f6f6;
+    border-radius: calc(18 * var(--rem));
+    box-sizing: border-box;
+  }
+
+  .fd-why-{{ section.id }}.fd-why--cards .fd-why__title {
+    font-size: calc(18 * var(--rem));
+    font-weight: 700;
+    color: #000000;
+  }
+
+  .fd-why-{{ section.id }}.fd-why--cards .fd-why__text {
+    color: var(--text-color);
+    font-size: calc(14 * var(--rem));
+    font-weight: 600;
+    line-height: calc(18 * var(--rem));
   }
 
   .fd-why-{{ section.id }} .fd-why__item {
@@ -111,25 +165,60 @@
     .fd-why-{{ section.id }} .fd-why__text {
       font-size: calc(20 * var(--rem));
     }
+
+    .fd-why-{{ section.id }} .fd-why__intro {
+      font-size: calc(20 * var(--rem));
+      font-weight: 400;
+      line-height: calc(32 * var(--rem));
+    }
+
+    .fd-why-{{ section.id }}.fd-why--cards .fd-why__grid {
+      grid-template-columns: 1fr;
+      gap: calc(24 * var(--rem));
+    }
+
+    .fd-why-{{ section.id }}.fd-why--cards .fd-why__item {
+      padding: calc(40 * var(--rem)) calc(32 * var(--rem));
+      border-radius: calc(24 * var(--rem));
+    }
+
+    .fd-why-{{ section.id }}.fd-why--cards .fd-why__title {
+      font-size: calc(28 * var(--rem));
+      line-height: 1.2;
+    }
+
+    .fd-why-{{ section.id }}.fd-why--cards .fd-why__text {
+      font-size: calc(20 * var(--rem));
+      font-weight: 400;
+      line-height: calc(32 * var(--rem));
+    }
   }
 {% endstyle %}
 {% render 'aotos-fd-enter' %}
 
-<section class="fd-why-{{ section.id }}">
+<section class="fd-why-{{ section.id }}{% if section.settings.layout == 'cards' %} fd-why--cards{% endif %}">
   <div class="fd-why__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="fd-why__heading aotos-section-title">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+    {%- if section.settings.intro != blank -%}
+      <div class="fd-why__intro">{{ section.settings.intro }}</div>
+    {%- endif -%}
     {%- if section.settings.eyebrow != blank -%}
       <p class="fd-why__eyebrow fd-anim fd-fade-up">{{ section.settings.eyebrow }}</p>
     {%- endif -%}
 
+    {%- if section.blocks.size > 0 -%}
     <div class="fd-why__grid fd-anim fd-stagger">
       {%- for block in section.blocks -%}
         <div class="fd-why__item fd-stagger__item" {{ block.shopify_attributes }}>
+          {%- assign why_icon_src = block.settings.fallback_icon_asset | strip -%}
+          {%- if why_icon_src != blank and why_icon_src contains '://' -%}
+          {%- elsif why_icon_src != blank -%}
+            {%- assign why_icon_src = 'https://aotos.com/cdn/shop/t/61/assets/' | append: why_icon_src -%}
+          {%- endif -%}
+          {%- if block.settings.icon != blank or why_icon_src != blank -%}
           <div class="fd-why__icon">
-            {%- assign why_icon_src = block.settings.fallback_icon_asset | strip -%}
-            {%- if why_icon_src != blank and why_icon_src contains '://' -%}
-            {%- elsif why_icon_src != blank -%}
-              {%- assign why_icon_src = 'https://aotos.com/cdn/shop/t/61/assets/' | append: why_icon_src -%}
-            {%- endif -%}
             {%- if block.settings.icon != blank -%}
               <img
                 src="{{ block.settings.icon | image_url: width: 144 }}"
@@ -142,21 +231,19 @@
               >
             {%- elsif why_icon_src != blank -%}
               <img src="{{ why_icon_src }}" alt="" loading="lazy" width="72" height="72">
-            {%- else -%}
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <circle cx="12" cy="12" r="9" stroke="#111" stroke-width="1.5"/>
-              </svg>
             {%- endif -%}
           </div>
+          {%- endif -%}
           {%- if block.settings.title != blank -%}
             <h3 class="fd-why__title">{{ block.settings.title }}</h3>
           {%- endif -%}
           {%- if block.settings.text != blank -%}
-            <p class="fd-why__text">{{ block.settings.text }}</p>
+            <p class="fd-why__text">{{ block.settings.text | newline_to_br }}</p>
           {%- endif -%}
         </div>
       {%- endfor -%}
     </div>
+    {%- endif -%}
   </div>
 </section>
 
@@ -164,6 +251,18 @@
 {
   "name": "经销商优势",
   "settings": [
+    { "type": "text", "id": "heading", "label": "标题" },
+    { "type": "richtext", "id": "intro", "label": "说明" },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "布局",
+      "default": "row",
+      "options": [
+        { "value": "row", "label": "横排" },
+        { "value": "cards", "label": "卡片" }
+      ]
+    },
     { "type": "text", "id": "eyebrow", "label": "眉题", "default": "WHY CHOOSE AN AOTOS DEALER" },
     { "type": "header", "content": "字体" },
     { "type": "number", "id": "eyebrow_font_size_pc", "label": "眉题字号（PC）", "default": 12 },

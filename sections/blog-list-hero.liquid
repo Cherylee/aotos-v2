@@ -7,7 +7,16 @@
   assign title_size_mobile = section.settings.title_size_mobile | default: 56
   assign title_weight = section.settings.title_weight | default: '700'
   assign content_align = section.settings.content_align | default: 'center'
+  assign content_valign = section.settings.content_valign | default: 'center'
   assign image_position = section.settings.image_position | default: 'center'
+  assign title_tag = 'h2'
+  if section.index == 1
+    assign title_tag = 'h1'
+  endif
+  assign hero_loading = 'lazy'
+  if section.index == 1
+    assign hero_loading = 'eager'
+  endif
 -%}
 
 {%- style -%}
@@ -96,6 +105,34 @@
     max-width: calc(420 * var(--rem));
   }
 
+  #BlogHero-{{ section.id }}.blog-hero--right .blog-hero__content {
+    align-items: flex-end;
+    justify-content: center;
+    left: 50%;
+    right: auto;
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    padding: 0;
+    text-align: left;
+    transform: translateX(-50%);
+  }
+
+  #BlogHero-{{ section.id }}.blog-hero--right .blog-hero__title,
+  #BlogHero-{{ section.id }}.blog-hero--right .blog-hero__subtitle {
+    width: calc(420 * var(--rem));
+    max-width: 100%;
+  }
+
+  #BlogHero-{{ section.id }}.blog-hero--valign-top .blog-hero__content {
+    justify-content: flex-start;
+    padding-top: calc(72 * var(--rem));
+  }
+
+  #BlogHero-{{ section.id }}.blog-hero--valign-bottom .blog-hero__content {
+    justify-content: flex-end;
+    padding-bottom: calc(72 * var(--rem));
+  }
+
   #BlogHero-{{ section.id }}.blog-hero--fixed {
     height: calc(420 * var(--rem));
     overflow: hidden;
@@ -145,7 +182,8 @@
       padding-top: calc(40 * var(--rem));
     }
 
-    #BlogHero-{{ section.id }}.blog-hero--left .blog-hero__content {
+    #BlogHero-{{ section.id }}.blog-hero--left .blog-hero__content,
+    #BlogHero-{{ section.id }}.blog-hero--right .blog-hero__content {
       left: 0;
       right: 0;
       width: 100%;
@@ -154,6 +192,48 @@
       align-items: flex-start;
       justify-content: flex-start;
       top: 10%;
+      text-align: left;
+    }
+
+    #BlogHero-{{ section.id }}.blog-hero--right .blog-hero__title,
+    #BlogHero-{{ section.id }}.blog-hero--right .blog-hero__subtitle {
+      width: auto;
+      max-width: 100%;
+    }
+
+    #BlogHero-{{ section.id }}.blog-hero--mobile-center .blog-hero__content,
+    #BlogHero-{{ section.id }}.blog-hero--mobile-center.blog-hero--left .blog-hero__content,
+    #BlogHero-{{ section.id }}.blog-hero--mobile-center.blog-hero--right .blog-hero__content,
+    #BlogHero-{{ section.id }}.blog-hero--mobile-center.blog-hero--valign-top .blog-hero__content,
+    #BlogHero-{{ section.id }}.blog-hero--mobile-center.blog-hero--valign-bottom .blog-hero__content {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 0 calc(40 * var(--rem));
+      text-align: center;
+      transform: none;
+    }
+
+    #BlogHero-{{ section.id }}.blog-hero--mobile-center .blog-hero__subtitle,
+    #BlogHero-{{ section.id }}.blog-hero--mobile-center.blog-hero--left .blog-hero__subtitle,
+    #BlogHero-{{ section.id }}.blog-hero--mobile-center.blog-hero--right .blog-hero__title,
+    #BlogHero-{{ section.id }}.blog-hero--mobile-center.blog-hero--right .blog-hero__subtitle {
+      width: auto;
+      max-width: 100%;
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    #BlogHero-{{ section.id }}.blog-hero--valign-bottom .blog-hero__content {
+      justify-content: flex-end;
+      top: auto;
+      bottom: 0;
+      padding-top: 0;
+      padding-bottom: calc(80 * var(--rem));
     }
 
     #BlogHero-{{ section.id }} .blog-hero__subtitle {
@@ -197,7 +277,7 @@
   }
 {%- endstyle -%}
 
-<div id="BlogHero-{{ section.id }}" class="blog-hero blog-hero--{{ section.settings.image_fit | default: 'fixed' }} blog-hero--{{ content_align }} blog-hero--pos-{{ image_position }}{% if shade == 0 %} blog-hero--plain{% endif %}{% if hero == blank %} blog-hero--empty{% endif %}">
+<div id="BlogHero-{{ section.id }}" class="blog-hero blog-hero--{{ section.settings.image_fit | default: 'fixed' }} blog-hero--{{ content_align }} blog-hero--valign-{{ content_valign }} blog-hero--pos-{{ image_position }}{% if section.settings.mobile_center %} blog-hero--mobile-center{% endif %}{% if shade == 0 %} blog-hero--plain{% endif %}{% if hero == blank %} blog-hero--empty{% endif %}">
   {%- if hero != blank -%}
     {%- if hero_mobile != blank -%}
       <img
@@ -208,8 +288,8 @@
         alt="{{ section.settings.image_alt | default: section.settings.title | escape }}"
         width="1200"
         height="{{ 1200 | divided_by: hero_mobile.aspect_ratio | round }}"
-        loading="eager"
-        fetchpriority="high"
+        loading="{{ hero_loading }}"
+        {% if section.index == 1 %}fetchpriority="high"{% endif %}
       >
     {%- endif -%}
     <img
@@ -220,13 +300,13 @@
       alt="{{ section.settings.image_alt | default: section.settings.title | escape }}"
       width="{{ hero_width }}"
       height="{{ hero_width | divided_by: hero.aspect_ratio | round }}"
-      loading="eager"
-      fetchpriority="high"
+      loading="{{ hero_loading }}"
+      {% if section.index == 1 %}fetchpriority="high"{% endif %}
     >
   {%- endif -%}
   <div class="blog-hero__content">
     {%- if section.settings.title != blank -%}
-      <h1 class="blog-hero__title">{{ section.settings.title | escape }}</h1>
+      <{{ title_tag }} class="blog-hero__title">{{ section.settings.title | escape }}</{{ title_tag }}>
     {%- endif -%}
     {%- if section.settings.subtitle != blank -%}
       <div class="blog-hero__subtitle">{{ section.settings.subtitle }}</div>
@@ -290,8 +370,26 @@
       "default": "center",
       "options": [
         { "value": "center", "label": "水平居中" },
-        { "value": "left", "label": "靠左，上下居中" }
+        { "value": "left", "label": "靠左，上下居中" },
+        { "value": "right", "label": "靠右，文字左对齐" }
       ]
+    },
+    {
+      "type": "select",
+      "id": "content_valign",
+      "label": "文案垂直位置",
+      "default": "center",
+      "options": [
+        { "value": "center", "label": "居中" },
+        { "value": "top", "label": "靠上" },
+        { "value": "bottom", "label": "靠下" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_center",
+      "label": "手机端文案水平、垂直居中",
+      "default": false
     },
     {
       "type": "text",

@@ -27,7 +27,7 @@
 
   #HomeExplore-{{ section.id }} .home-explore__track {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat({{ section.blocks.size | at_least: 1 | at_most: 3 }}, minmax(0, 1fr));
     gap: calc(20 * var(--rem));
   }
 
@@ -201,18 +201,28 @@
     {%- endif -%}
 
     {%- if section.blocks.size > 0 -%}
+      {%- liquid
+        assign explore_cols = section.blocks.size | at_least: 1 | at_most: 3
+        if explore_cols == 1
+          assign explore_sizes = '(max-width: 768px) 84vw, 76vw'
+        elsif explore_cols == 2
+          assign explore_sizes = '(max-width: 768px) 84vw, 37vw'
+        else
+          assign explore_sizes = '(max-width: 768px) 84vw, 25vw'
+        endif
+      -%}
       <div class="home-explore__track">
         {%- for block in section.blocks -%}
           <article class="home-explore__card" {{ block.shopify_attributes }}>
             <div class="home-explore__media">
               {%- if block.settings.image != blank -%}
                 <img
-                  src="{{ block.settings.image | image_url: width: 540 }}"
-                  srcset="{{ block.settings.image | image_url: width: 400 }} 400w, {{ block.settings.image | image_url: width: 540 }} 540w, {{ block.settings.image | image_url: width: 720 }} 720w"
-                  sizes="(max-width: 768px) 78vw, 340px"
+                  src="{{ block.settings.image | image_url: width: 1100 }}"
+                  srcset="{{ block.settings.image | image_url: width: 540 }} 540w, {{ block.settings.image | image_url: width: 800 }} 800w, {{ block.settings.image | image_url: width: 1100 }} 1100w, {{ block.settings.image | image_url: width: 1400 }} 1400w, {{ block.settings.image | image_url: width: 1800 }} 1800w"
+                  sizes="{{ explore_sizes }}"
                   alt="{{ block.settings.image_alt | escape }}"
-                  width="540"
-                  height="338"
+                  width="1100"
+                  height="{{ 1100 | divided_by: block.settings.image.aspect_ratio | round }}"
                   loading="lazy"
                 >
               {%- else -%}
