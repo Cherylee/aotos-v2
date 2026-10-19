@@ -1,0 +1,121 @@
+{%- liquid
+  assign switch_title = block.settings.title | default: 'Choose your model:'
+  assign size_block = section.blocks | where: 'type', 'variant_picker' | first
+  assign size_icon = block.settings.size_guide_icon
+  if size_icon == blank and size_block != blank
+    assign size_icon = size_block.settings.size_guide_icon
+  endif
+  assign size_label = block.settings.size_guide_text | default: 'Size & Fit'
+-%}
+
+<div class="product-switch" {{ block.shopify_attributes }}>
+  <div class="variant-picker__title-row">
+    <div class="variant-picker__title">{{ switch_title | escape }}</div>
+    {%- if block.settings.show_size_guide and size_label != blank -%}
+      <button type="button" class="velotric-size-guide" data-product-switch-size>
+        {%- if size_icon != blank -%}
+          {%- assign size_guide_icon_url = size_icon | image_url: width: 64 -%}
+          <span
+            class="velotric-size-guide__icon velotric-size-guide__icon--custom"
+            style="--size-guide-icon: url('{{ size_guide_icon_url }}');"
+            aria-hidden="true"
+          ></span>
+        {%- else -%}
+          <svg class="velotric-size-guide__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M3.5 15.5 15.5 3.5l5 5-12 12h-5v-5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"></path>
+            <path d="m13 6 2 2M10.5 8.5l2 2M8 11l2 2M5.5 13.5l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path>
+          </svg>
+        {%- endif -%}
+        <span>{{ size_label | escape }}</span>
+      </button>
+    {%- endif -%}
+  </div>
+
+  <div class="product-switch__list">
+    {%- for index in (1..4) -%}
+      {%- liquid
+        assign product_key = 'product_' | append: index
+        assign name_key = 'name_' | append: index
+        assign description_key = 'description_' | append: index
+        assign badge_key = 'badge_' | append: index
+        assign switch_product = block.settings[product_key]
+        assign switch_name = block.settings[name_key]
+        assign switch_description = block.settings[description_key]
+        assign switch_badge = block.settings[badge_key]
+      -%}
+      {%- if switch_product != blank -%}
+        {%- liquid
+          assign is_current = false
+          if switch_product.id == product.id
+            assign is_current = true
+          endif
+          assign card_image = switch_product.featured_image
+          assign card_price = switch_product.price
+          if is_current
+            assign card_price = product.selected_or_first_available_variant.price
+          endif
+          assign card_title = switch_name | default: switch_product.title
+          assign main_title = card_title
+          assign accent_title = ''
+          if card_title contains ' Pro'
+            assign main_title = card_title | split: ' Pro' | first
+            assign accent_title = 'Pro'
+          endif
+        -%}
+        {%- if is_current -%}
+          <div class="product-switch__card variant-card is-current" aria-current="page">
+        {%- else -%}
+          <a class="product-switch__card variant-card" href="{{ switch_product.url }}">
+        {%- endif -%}
+            <div class="variant-card__media">
+              {%- if card_image != blank -%}
+                {{
+                  card_image
+                  | image_url: width: 240
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '80, 120, 160, 240',
+                    sizes: '(max-width: 768px) 110px, 80px',
+                    alt: switch_product.title
+                }}
+              {%- endif -%}
+            </div>
+            <div class="variant-card__info">
+              <div class="variant-card__header">
+                <span>{{ main_title }}</span>
+                {%- if accent_title != blank -%}
+                  <span class="brand-accent">{{ accent_title }}</span>
+                {%- endif -%}
+              </div>
+              <div class="variant-card__price">
+                {{ cart.currency.iso_code }}
+                {{ card_price | money }}
+              </div>
+              {%- if switch_description != blank -%}
+                <div class="variant-card__desc">{{ switch_description | escape }}</div>
+              {%- endif -%}
+            </div>
+            {%- if switch_badge != blank -%}
+              <div class="variant-card__badge">{{ switch_badge | escape }}</div>
+            {%- endif -%}
+        {%- if is_current -%}
+          </div>
+        {%- else -%}
+          </a>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+<script>
+  if (!window.aotosProductSwitchSize) {
+    window.aotosProductSwitchSize = true;
+    document.addEventListener('click', (event) => {
+      const trigger = event.target.closest('[data-product-switch-size]');
+      if (!trigger) return;
+      const opener = document.querySelector('size-fit-drawer [data-size-fit-open]');
+      if (opener) opener.click();
+    });
+  }
+</script>

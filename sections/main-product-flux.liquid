@@ -213,10 +213,50 @@
     </div>
 
     <div class="velotric-product__info">
+      {%- liquid
+        assign xcotton_anchor = 'variant_picker'
+        for block in section.blocks
+          if block.type == 'product_switch'
+            assign xcotton_anchor = 'product_switch'
+            break
+          endif
+        endfor
+      -%}
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when '@app' -%}
             {% render block %}
+          {%- when 'title_badges' -%}
+            {%- liquid
+              assign has_title_badge = false
+              for badge_index in (1..6)
+                assign badge_key = 'image_' | append: badge_index
+                if block.settings[badge_key] != blank
+                  assign has_title_badge = true
+                  break
+                endif
+              endfor
+            -%}
+            <div class="product-title-badges{% unless has_title_badge %} product-title-badges--empty{% endunless %}" {{ block.shopify_attributes }}>
+              {%- for badge_index in (1..6) -%}
+                {%- liquid
+                  assign badge_key = 'image_' | append: badge_index
+                  assign badge_image = block.settings[badge_key]
+                -%}
+                {%- if badge_image != blank -%}
+                  {{
+                    badge_image
+                    | image_url: width: 480
+                    | image_tag:
+                      class: 'product-title-badges__image',
+                      loading: 'lazy',
+                      widths: '160, 240, 320, 480',
+                      sizes: '160px',
+                      alt: badge_image.alt
+                  }}
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
           {%- when 'title' -%}
             <div class="velotric-product__title" {{ block.shopify_attributes }}>
               <h1>{{ product.title | escape }}</h1>
@@ -299,8 +339,14 @@
             </div>
           {%- when 'variant_picker' -%}
             {%- render 'aotos-product-flux-variants', product: product, block: block, section: section, product_form_id: product_form_id -%}
-            <div id="ProductBlockXcotton"></div>
-            <div data-product-specs-mobile></div>
+          {%- when 'product_switch' -%}
+            {%- render 'aotos-product-switch', product: product, block: block, section: section -%}
+        {%- endcase -%}
+        {%- if block.type == xcotton_anchor -%}
+          <div id="ProductBlockXcotton"></div>
+          <div data-product-specs-mobile></div>
+        {%- endif -%}
+        {%- case block.type -%}
           {%- when 'buy_buttons' -%}
             <div class="velotric-product__buy-buttons" {{ block.shopify_attributes }}>
               {% render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: false %}
@@ -390,6 +436,19 @@
     { "type": "@app" },
     { "type": "title", "name": "Title", "limit": 1, "settings": [] },
     {
+      "type": "title_badges",
+      "name": "Title badges",
+      "limit": 1,
+      "settings": [
+        { "type": "image_picker", "id": "image_1", "label": "Image 1" },
+        { "type": "image_picker", "id": "image_2", "label": "Image 2" },
+        { "type": "image_picker", "id": "image_3", "label": "Image 3" },
+        { "type": "image_picker", "id": "image_4", "label": "Image 4" },
+        { "type": "image_picker", "id": "image_5", "label": "Image 5" },
+        { "type": "image_picker", "id": "image_6", "label": "Image 6" }
+      ]
+    },
+    {
       "type": "rating",
       "name": "Rating",
       "limit": 1,
@@ -419,6 +478,37 @@
         { "type": "checkbox", "id": "show_size_guide", "label": "Show Size & Fit", "default": true },
         { "type": "text", "id": "size_guide_text", "label": "Size & Fit label", "default": "Size & Fit" },
         { "type": "image_picker", "id": "size_guide_icon", "label": "Size & Fit icon" }
+      ]
+    },
+    {
+      "type": "product_switch",
+      "name": "Product switch",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Choose your model:" },
+        { "type": "checkbox", "id": "show_size_guide", "label": "Show Size & Fit", "default": true },
+        { "type": "text", "id": "size_guide_text", "label": "Size & Fit label", "default": "Size & Fit" },
+        { "type": "image_picker", "id": "size_guide_icon", "label": "Size & Fit icon" },
+        { "type": "header", "content": "Product 1" },
+        { "type": "product", "id": "product_1", "label": "Product" },
+        { "type": "text", "id": "name_1", "label": "Name", "info": "留空则用产品标题。名称里的 Pro 会显示为橙色。" },
+        { "type": "text", "id": "description_1", "label": "Description" },
+        { "type": "text", "id": "badge_1", "label": "Badge", "info": "例如 Recommended。留空不显示。" },
+        { "type": "header", "content": "Product 2" },
+        { "type": "product", "id": "product_2", "label": "Product" },
+        { "type": "text", "id": "name_2", "label": "Name" },
+        { "type": "text", "id": "description_2", "label": "Description" },
+        { "type": "text", "id": "badge_2", "label": "Badge" },
+        { "type": "header", "content": "Product 3" },
+        { "type": "product", "id": "product_3", "label": "Product" },
+        { "type": "text", "id": "name_3", "label": "Name" },
+        { "type": "text", "id": "description_3", "label": "Description" },
+        { "type": "text", "id": "badge_3", "label": "Badge" },
+        { "type": "header", "content": "Product 4" },
+        { "type": "product", "id": "product_4", "label": "Product" },
+        { "type": "text", "id": "name_4", "label": "Name" },
+        { "type": "text", "id": "description_4", "label": "Description" },
+        { "type": "text", "id": "badge_4", "label": "Badge" }
       ]
     },
     {
