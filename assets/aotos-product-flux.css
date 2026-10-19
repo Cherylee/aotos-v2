@@ -403,7 +403,7 @@ body.velotric-lightbox-open {
   flex-wrap: wrap;
   align-items: center;
   gap: calc(8 * var(--rem));
-  margin: 0 0 calc(10 * var(--rem));
+  margin: 0 0 calc(8 * var(--rem));
 }
 
 .product-title-badges--empty {
@@ -412,7 +412,7 @@ body.velotric-lightbox-open {
 
 .product-title-badges__image {
   display: block;
-  height: calc(28 * var(--rem));
+  height: calc(16 * var(--rem));
   width: auto;
   max-width: 100%;
 }
@@ -1959,7 +1959,7 @@ body.size-fit-drawer-open {
   }
 
   .product-title-badges__image {
-    height: calc(44 * var(--rem));
+    height: calc(30 * var(--rem));
   }
 
   .velotric-product__title h1 {
@@ -2588,6 +2588,7 @@ body.size-fit-drawer-open {
 
 .product-switch {
   margin-bottom: calc(18 * var(--rem));
+  margin-top: calc(14 * var(--rem));
 }
 
 .product-switch__list {

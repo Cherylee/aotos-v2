@@ -1,33 +1,136 @@
 {%- liquid
   assign switch_title = block.settings.title | default: 'Choose your model:'
-  assign size_block = section.blocks | where: 'type', 'variant_picker' | first
   assign size_icon = block.settings.size_guide_icon
-  if size_icon == blank and size_block != blank
-    assign size_icon = size_block.settings.size_guide_icon
-  endif
   assign size_label = block.settings.size_guide_text | default: 'Size & Fit'
+  assign size_fit_drawer_id = 'SizeFitDrawer-' | append: section.id | append: '-' | append: block.id
+  assign initial_size_fit_variant = product.selected_or_first_available_variant
+  assign merge_flux_size_fit_tabs = false
+  if product.handle == 'flux-x26-pro' and product.variants.size == 2
+    assign merge_flux_size_fit_tabs = true
+    assign merged_size_fit_variant = product.variants.first
+    assign merged_size_fit_label = product.variants.first.title | append: ' & ' | append: product.variants.last.title
+  endif
 -%}
 
 <div class="product-switch" {{ block.shopify_attributes }}>
   <div class="variant-picker__title-row">
     <div class="variant-picker__title">{{ switch_title | escape }}</div>
     {%- if block.settings.show_size_guide and size_label != blank -%}
-      <button type="button" class="velotric-size-guide" data-product-switch-size>
-        {%- if size_icon != blank -%}
-          {%- assign size_guide_icon_url = size_icon | image_url: width: 64 -%}
-          <span
-            class="velotric-size-guide__icon velotric-size-guide__icon--custom"
-            style="--size-guide-icon: url('{{ size_guide_icon_url }}');"
-            aria-hidden="true"
-          ></span>
-        {%- else -%}
-          <svg class="velotric-size-guide__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M3.5 15.5 15.5 3.5l5 5-12 12h-5v-5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"></path>
-            <path d="m13 6 2 2M10.5 8.5l2 2M8 11l2 2M5.5 13.5l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path>
-          </svg>
-        {%- endif -%}
-        <span>{{ size_label | escape }}</span>
-      </button>
+      <size-fit-drawer data-initial-variant="{{ initial_size_fit_variant.id }}">
+        <button
+          type="button"
+          class="velotric-size-guide"
+          aria-controls="{{ size_fit_drawer_id }}"
+          aria-expanded="false"
+          data-size-fit-open
+        >
+          {%- if size_icon != blank -%}
+            {%- assign size_guide_icon_url = size_icon | image_url: width: 64 -%}
+            <span
+              class="velotric-size-guide__icon velotric-size-guide__icon--custom"
+              style="--size-guide-icon: url('{{ size_guide_icon_url }}');"
+              aria-hidden="true"
+            ></span>
+          {%- else -%}
+            <svg class="velotric-size-guide__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M3.5 15.5 15.5 3.5l5 5-12 12h-5v-5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"></path>
+              <path d="m13 6 2 2M10.5 8.5l2 2M8 11l2 2M5.5 13.5l2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path>
+            </svg>
+          {%- endif -%}
+          <span>{{ size_label | escape }}</span>
+        </button>
+
+        <button type="button" class="size-fit-drawer__overlay" aria-label="Close Size & Fit" data-size-fit-close></button>
+        <aside
+          id="{{ size_fit_drawer_id }}"
+          class="size-fit-drawer__panel"
+          role="dialog"
+          aria-modal="true"
+          aria-hidden="true"
+          aria-labelledby="{{ size_fit_drawer_id }}-title"
+          tabindex="-1"
+          data-size-fit-panel
+        >
+          <div class="size-fit-drawer__header">
+            <h2 id="{{ size_fit_drawer_id }}-title" class="size-fit-drawer__title">
+              {{ size_label | escape }}
+            </h2>
+            <button type="button" class="size-fit-drawer__close" aria-label="Close Size & Fit" data-size-fit-close>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+              </svg>
+            </button>
+          </div>
+
+          <div class="size-fit-drawer__images">
+            {%- for variant in product.variants -%}
+              {%- if merge_flux_size_fit_tabs and forloop.first == false -%}
+                {%- continue -%}
+              {%- endif -%}
+              {%- assign size_fit_image = variant.metafields.custom.size_fit_image.value -%}
+              <div
+                id="{{ size_fit_drawer_id }}-panel-{{ variant.id }}"
+                class="size-fit-drawer__image-panel"
+                role="tabpanel"
+                aria-labelledby="{{ size_fit_drawer_id }}-tab-{{ variant.id }}"
+                aria-hidden="{% if merge_flux_size_fit_tabs or variant.id == initial_size_fit_variant.id %}false{% else %}true{% endif %}"
+                data-size-fit-image="{{ variant.id }}"
+              >
+                {%- if size_fit_image != blank -%}
+                  {{
+                    size_fit_image
+                    | image_url: width: 1200
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '360, 540, 720, 960, 1200',
+                      sizes: '(max-width: 768px) 82vw, 396px',
+                      class: 'size-fit-drawer__image',
+                      alt: variant.title
+                  }}
+                {%- else -%}
+                  <div class="size-fit-drawer__placeholder" aria-label="Size & Fit image not configured"></div>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+
+          <div
+            class="size-fit-drawer__tabs{% if merge_flux_size_fit_tabs %} size-fit-drawer__tabs--merged{% endif %}"
+            role="tablist"
+            aria-label="Product variants"
+          >
+            {%- if merge_flux_size_fit_tabs -%}
+              <button
+                type="button"
+                id="{{ size_fit_drawer_id }}-tab-{{ merged_size_fit_variant.id }}"
+                class="size-fit-drawer__tab"
+                role="tab"
+                aria-controls="{{ size_fit_drawer_id }}-panel-{{ merged_size_fit_variant.id }}"
+                aria-selected="true"
+                tabindex="0"
+                data-size-fit-tab="{{ merged_size_fit_variant.id }}"
+              >
+                {{ merged_size_fit_label | escape }}
+              </button>
+            {%- else -%}
+              {%- for variant in product.variants -%}
+                <button
+                  type="button"
+                  id="{{ size_fit_drawer_id }}-tab-{{ variant.id }}"
+                  class="size-fit-drawer__tab"
+                  role="tab"
+                  aria-controls="{{ size_fit_drawer_id }}-panel-{{ variant.id }}"
+                  aria-selected="{% if variant.id == initial_size_fit_variant.id %}true{% else %}false{% endif %}"
+                  tabindex="{% if variant.id == initial_size_fit_variant.id %}0{% else %}-1{% endif %}"
+                  data-size-fit-tab="{{ variant.id }}"
+                >
+                  {{ variant.title | escape }}
+                </button>
+              {%- endfor -%}
+            {%- endif -%}
+          </div>
+        </aside>
+      </size-fit-drawer>
     {%- endif -%}
   </div>
 
@@ -107,15 +210,3 @@
     {%- endfor -%}
   </div>
 </div>
-
-<script>
-  if (!window.aotosProductSwitchSize) {
-    window.aotosProductSwitchSize = true;
-    document.addEventListener('click', (event) => {
-      const trigger = event.target.closest('[data-product-switch-size]');
-      if (!trigger) return;
-      const opener = document.querySelector('size-fit-drawer [data-size-fit-open]');
-      if (opener) opener.click();
-    });
-  }
-</script>
