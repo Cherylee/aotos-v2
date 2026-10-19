@@ -159,14 +159,13 @@
   }
 
   #shopify-section-{{ section.id }} {
-    position: sticky;
-    top: 0;
-    z-index: 4;
+    margin-top: calc({{ section.settings.padding_top | default: 80, allow_false: true }} * var(--rem));
+    margin-bottom: calc({{ section.settings.padding_bottom | default: 0, allow_false: true }} * var(--rem));
+    background: #fdfdfd;
   }
 
   #spf-{{ section.id }} {
     background: #fdfdfd;
-    border-top: 1px solid #e5e5e7;
     padding: calc(14 * var(--rem)) 0;
   }
 
@@ -183,12 +182,12 @@
     justify-content: space-between;
     gap: calc(12 * var(--rem));
     width: 100%;
-    padding: calc(6 * var(--rem)) calc(22 * var(--rem));
+    padding: calc(12 * var(--rem)) calc(22 * var(--rem));
     border: 1px solid #e5e5e7;
     border-radius: calc(40 * var(--rem));
     background: #ffffff;
     color: #000000;
-    font-size: calc(12 * var(--rem));
+    font-size: calc(14 * var(--rem));
     font-weight: 500;
     line-height: 1.2;
     text-align: left;
@@ -282,6 +281,11 @@
   }
 
   @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem));
+      margin-bottom: calc({{ section.settings.padding_bottom_mobile | default: 0, allow_false: true }} * var(--rem));
+    }
+
     #spf-{{ section.id }} {
       padding: calc(30 * var(--rem)) 0;
     }
@@ -339,6 +343,10 @@
   "class": "section",
   "settings": [
     { "type": "checkbox", "id": "show_all", "label": "显示 All Products", "default": true },
+    { "type": "range", "id": "padding_top", "label": "上边距", "min": 0, "max": 160, "step": 4, "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "下边距", "min": 0, "max": 160, "step": 4, "default": 0 },
+    { "type": "range", "id": "padding_top_mobile", "label": "上边距（手机）", "min": 0, "max": 200, "step": 4, "default": 88 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "下边距（手机）", "min": 0, "max": 200, "step": 4, "default": 0 },
     {
       "type": "select",
       "id": "default_filter",

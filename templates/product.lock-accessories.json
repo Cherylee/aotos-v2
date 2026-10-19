@@ -174,19 +174,15 @@
         "padding_bottom_mobile": 88
       }
     },
-    "aotos_flux_faq_b9d3GQ": {
-      "type": "aotos-flux-faq",
-      "name": "Flux FAQ",
+    "product_reviews": {
+      "type": "aotos-product-reviews",
       "settings": {
-        "faq_title": "Customer Reviews",
+        "heading": "Customer Reviews",
         "padding_top": 80,
         "padding_bottom": 0,
         "padding_top_mobile": 88,
         "padding_bottom_mobile": 0
-      }
-    },
-    "179214567622c22e34": {
-      "type": "apps",
+      },
       "blocks": {
         "judge_me_reviews_review_widget_tJtiMH": {
           "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
@@ -200,16 +196,12 @@
       },
       "block_order": [
         "judge_me_reviews_review_widget_tJtiMH"
-      ],
-      "settings": {
-        "include_margins": true
-      }
+      ]
     }
   },
   "order": [
     "main",
     "product_description",
-    "aotos_flux_faq_b9d3GQ",
-    "179214567622c22e34"
+    "product_reviews"
   ]
 }

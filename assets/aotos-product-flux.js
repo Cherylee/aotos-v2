@@ -710,18 +710,32 @@ document.querySelectorAll('[data-flux-buybar]').forEach((bar) => {
   };
   if ('IntersectionObserver' in window) {
     const footer = document.querySelector('.shopify-section-group-footer-group') || document.querySelector('footer.aotos-footer');
-    let atcInView = true;
     let footerInView = false;
-    const sync = () => setVisible(!atcInView && !footerInView);
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.target === watch) atcInView = entry.isIntersecting;
-        if (footer && entry.target === footer) footerInView = entry.isIntersecting;
+    let ticking = false;
+    const sync = () => {
+      const rect = watch.getBoundingClientRect();
+      setVisible(rect.bottom <= 0 && !footerInView);
+    };
+    const requestSync = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        sync();
       });
-      sync();
-    }, { threshold: 0 });
-    io.observe(watch);
-    if (footer) io.observe(footer);
+    };
+    if (footer) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.target === footer) footerInView = entry.isIntersecting;
+        });
+        requestSync();
+      }, { threshold: 0 });
+      io.observe(footer);
+    }
+    window.addEventListener('scroll', requestSync, { passive: true });
+    window.addEventListener('resize', requestSync, { passive: true });
+    sync();
   }
   atc.addEventListener('click', () => {
     if (!atc.disabled) watch.click();

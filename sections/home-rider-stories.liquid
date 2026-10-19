@@ -90,6 +90,8 @@
     height: 100%;
     object-fit: cover;
     opacity: 0;
+    transform: scale(1.06);
+    transition: opacity 0.45s ease, transform 0.6s ease;
   }
 
   #HomeRiders-{{ section.id }} .home-riders__face {
@@ -104,6 +106,7 @@
     background: #ffffff;
     border-radius: inherit;
     box-sizing: border-box;
+    transition: opacity 0.4s ease;
   }
 
   #HomeRiders-{{ section.id }} .home-riders__avatar {
@@ -161,6 +164,7 @@
     opacity: 0;
     pointer-events: none;
     cursor: pointer;
+    transition: opacity 0.3s ease;
   }
 
   #HomeRiders-{{ section.id }} .home-riders__play svg {
@@ -219,6 +223,7 @@
   @media (hover: hover) {
     #HomeRiders-{{ section.id }} .home-riders__card--video:hover .home-riders__poster {
       opacity: 1;
+      transform: scale(1);
     }
 
     #HomeRiders-{{ section.id }} .home-riders__card--video:hover .home-riders__face {
@@ -228,6 +233,7 @@
     #HomeRiders-{{ section.id }} .home-riders__card--video:hover .home-riders__play {
       opacity: 1;
       pointer-events: auto;
+      transition-delay: 0.12s;
     }
   }
 
@@ -393,6 +399,16 @@
   @media (prefers-reduced-motion: reduce) {
     #HomeRiders-{{ section.id }} .home-riders__viewport {
       scroll-behavior: auto;
+    }
+
+    #HomeRiders-{{ section.id }} .home-riders__poster,
+    #HomeRiders-{{ section.id }} .home-riders__face,
+    #HomeRiders-{{ section.id }} .home-riders__play {
+      transition: none;
+    }
+
+    #HomeRiders-{{ section.id }} .home-riders__poster {
+      transform: none;
     }
   }
 {%- endstyle -%}

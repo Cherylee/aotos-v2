@@ -223,10 +223,11 @@
             </div>
           {%- when 'rating' -%}
             {%- liquid
-              assign static_rating = product.metafields.reviews.rating.value.rating | default: block.settings.rating | plus: 0
-              assign static_review_count = product.metafields.reviews.rating_count.value | default: block.settings.review_count
+              assign static_review_count = product.metafields.reviews.rating_count.value | default: product.metafields.reviews.rating_count | plus: 0
+              assign static_rating = product.metafields.reviews.rating.value.rating | default: 0 | plus: 0
               assign rendered_star_count = static_rating | ceil
             -%}
+            {%- if static_review_count > 0 -%}
             <div class="product-rating" id="product-rating-{{ block.id }}" {{ block.shopify_attributes }}>
               <a class="product-rating__link" href="#judgeme_product_reviews">
                 <div class="product-rating__stars product-rating__placeholder" aria-label="{{ static_rating }} out of 5 stars">
@@ -244,6 +245,7 @@
               </a>
               <div class="product-rating__count">{{ static_review_count }} {{ block.settings.review_text | default: 'reviews' }}</div>
             </div>
+            {%- endif -%}
           {%- when 'text' -%}
             {%- if block.settings.learn_more_anchor != blank -%}
               {%- liquid

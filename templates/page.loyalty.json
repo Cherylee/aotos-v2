@@ -1,0 +1,56 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "loyalty_app": {
+      "type": "apps",
+      "blocks": {
+        "jericommerce_loyalty_page_hub_79VjnQ": {
+          "type": "shopify://apps/jericommerce/blocks/loyalty-page-hub/019b470e-80b7-7e9c-a79b-746184ef2e75",
+          "settings": {
+            "enabled": true,
+            "theme_preset": "warm",
+            "hero_title": "AOTOS Rider Club",
+            "hero_subtitle": "",
+            "hero_image_url": "https://cdn.shopify.com/s/files/1/0719/2736/5851/files/aotos_wns.webp?v=1789887049",
+            "guest_cta_url": "",
+            "show_earning_rules": true,
+            "show_tiers": true,
+            "show_rewards": true,
+            "show_tier_status": true,
+            "show_download_card": true,
+            "primary_color": "#0f0f0f",
+            "primary_contrast_color": "#fcfcfc",
+            "secondary_color": "",
+            "page_background": "",
+            "surface_color": "",
+            "surface_subtle_color": "",
+            "text_color": "",
+            "muted_text_color": "",
+            "border_color": "",
+            "use_custom_fonts": true,
+            "heading_font": "montserrat_n4",
+            "body_font": "montserrat_n4",
+            "custom_css": ""
+          }
+        }
+      },
+      "block_order": [
+        "jericommerce_loyalty_page_hub_79VjnQ"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "loyalty_app"
+  ]
+}
