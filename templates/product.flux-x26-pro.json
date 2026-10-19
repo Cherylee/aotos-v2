@@ -15,7 +15,8 @@
         "title_badges": {
           "type": "title_badges",
           "settings": {
-            "image_1": "shopify://shop_images/Halloween_Edition.webp"
+            "image_1": "shopify://shop_images/Halloween_Edition.webp",
+            "image_2": "shopify://shop_images/Halloween_Edition.webp"
           }
         },
         "title": {
