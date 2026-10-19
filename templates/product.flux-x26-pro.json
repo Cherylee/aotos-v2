@@ -14,7 +14,9 @@
       "blocks": {
         "title_badges": {
           "type": "title_badges",
-          "settings": {}
+          "settings": {
+            "image_1": "shopify://shop_images/Halloween_Edition.webp"
+          }
         },
         "title": {
           "type": "title",
@@ -36,7 +38,9 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Ride Further. Ride Smarter.</p>"
+            "text": "<p>Ride Further. Ride Smarter.</p>",
+            "learn_more_label": "Learn more",
+            "learn_more_anchor": ""
           }
         },
         "price": {
@@ -62,15 +66,6 @@
             "letter_spacing": 0
           }
         },
-        "variant_picker": {
-          "type": "variant_picker",
-          "settings": {
-            "picker_title": "Choose your model:",
-            "show_size_guide": true,
-            "size_guide_text": "Size & Fit",
-            "size_guide_icon": "shopify://shop_images/288aa83db3c7f157c94fe470a81f4032.webp"
-          }
-        },
         "product_switch": {
           "type": "product_switch",
           "settings": {
@@ -81,7 +76,19 @@
             "product_1": "flux-x26-pro",
             "name_1": "FLUX X26 Pro",
             "description_1": "More power. More control. Instant acceleration.",
-            "badge_1": "Recommended"
+            "badge_1": "Recommended",
+            "product_2": "aotos-flux-x26-series-ebike-test",
+            "name_2": "FLUX X26",
+            "description_2": "Smooth power for everyday riding.",
+            "badge_2": "",
+            "product_3": "",
+            "name_3": "",
+            "description_3": "",
+            "badge_3": "",
+            "product_4": "",
+            "name_4": "",
+            "description_4": "",
+            "badge_4": ""
           }
         },
         "buy_buttons": {
@@ -181,7 +188,6 @@
         "price",
         "affirm_pay_over_time_messaging_product_block_Mp6Lry",
         "paypal_messaging",
-        "variant_picker",
         "product_switch",
         "buy_buttons",
         "perks",
@@ -194,6 +200,7 @@
         "spec_brakes"
       ],
       "settings": {
+        "show_specs": true,
         "award_caption": "reddot winner 2026",
         "payment_icons": "visa,master,american_express,discover,jcb,klarna,paypal,maestro,venmo,afterpay",
         "payment_collapsed_count": 7,
@@ -265,6 +272,13 @@
       "name": "t:sections.image-banner.presets.name",
       "settings": {
         "video": "shopify://files/videos/pro-main.mp4",
+        "heading": "",
+        "heading_color": "#000000",
+        "bg_color": "#ffffff",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
         "image_height": "large"
       }
     },
@@ -1077,14 +1091,29 @@
       "name": "Service Repair Banner",
       "settings": {
         "layout": "card",
+        "copy_padding_x": 0,
         "copy_align": "center",
+        "show_breadcrumb": false,
+        "crumb_home": "Home",
+        "crumb_parent_label": "",
+        "crumb_parent_url": "",
+        "crumb_current": "",
+        "crumb_color": "#999999",
+        "crumb_current_color": "#000000",
+        "crumb_margin_top": 40,
+        "crumb_margin_bottom": 40,
         "eyebrow": "SMART CONNECT",
+        "eyebrow_color": "#000000",
+        "eyebrow_font_size_pc": 14,
+        "eyebrow_font_size_mob": 20,
         "heading": "Smarter rides. Connected world.",
         "heading_color": "#000000",
         "heading_font_size_pc": 32,
         "heading_font_size_mob": 38,
         "text": "Track performance, customize settings, and stay connected.",
         "text_color": "#999999",
+        "text_font_size_pc": 14,
+        "text_font_size_mob": 20,
         "primary_label": "",
         "primary_link": "",
         "secondary_label": "",
