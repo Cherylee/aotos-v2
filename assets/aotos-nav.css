@@ -371,6 +371,7 @@
   .aotos-nav__mega-link:hover {
     background: #f2f2f2;
     color: var(--aotos-theme-color, #ff6501);
+    border-radius: calc(6 * var(--rem)) 0 0 calc(6 * var(--rem));
   }
 }
 
