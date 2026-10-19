@@ -1,0 +1,15 @@
+{%- comment -%}
+  Shopify video without the extra poster image.
+  Accepts: video, class, autoplay, loop, muted, preload
+{%- endcomment -%}
+{%- capture aotos_video_html -%}
+  {{ video | video_tag: class: class, autoplay: autoplay, loop: loop, muted: muted, controls: false, playsinline: true, preload: preload | default: 'none' }}
+{%- endcapture -%}
+{%- if aotos_video_html contains ' poster="' -%}
+  {%- assign aotos_video_after = aotos_video_html | split: ' poster="' | last | split: '"' | slice: 1, 30 | join: '"' -%}
+  {%- assign aotos_video_html = aotos_video_html | split: ' poster="' | first | append: aotos_video_after -%}
+{%- endif -%}
+{%- if aotos_video_html contains '<img' -%}
+  {%- assign aotos_video_html = aotos_video_html | split: '<img' | first | append: '</video>' -%}
+{%- endif -%}
+{{ aotos_video_html }}
