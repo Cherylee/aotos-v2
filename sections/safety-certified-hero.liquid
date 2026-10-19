@@ -9,6 +9,49 @@
   endif
 -%}
 
+{%- if section.index == 1 and section.blocks.size > 0 -%}
+  {%- liquid
+    assign lcp_block = section.blocks.first
+    assign lcp_poster = lcp_block.settings.poster | default: lcp_block.settings.image
+    if lcp_poster == blank and lcp_block.settings.video != blank
+      assign lcp_poster = lcp_block.settings.video.preview_image
+    endif
+    assign lcp_poster_mob = lcp_block.settings.poster_mobile | default: lcp_block.settings.image_mobile
+    if lcp_poster_mob == blank
+      assign lcp_poster_mob = lcp_poster
+    endif
+  -%}
+  {%- if lcp_poster != blank and lcp_poster_mob != blank and lcp_poster != lcp_poster_mob -%}
+    <link
+      rel="preload"
+      as="image"
+      media="(max-width: 768px)"
+      href="{{ lcp_poster_mob | image_url: width: 1100 }}"
+      imagesrcset="{{ lcp_poster_mob | image_url: width: 750 }} 750w, {{ lcp_poster_mob | image_url: width: 1100 }} 1100w, {{ lcp_poster_mob | image_url: width: 1500 }} 1500w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    >
+    <link
+      rel="preload"
+      as="image"
+      media="(min-width: 769px)"
+      href="{{ lcp_poster | image_url: width: 1600 }}"
+      imagesrcset="{{ lcp_poster | image_url: width: 1100 }} 1100w, {{ lcp_poster | image_url: width: 1600 }} 1600w, {{ lcp_poster | image_url: width: 1920 }} 1920w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    >
+  {%- elsif lcp_poster != blank -%}
+    <link
+      rel="preload"
+      as="image"
+      href="{{ lcp_poster | image_url: width: 1600 }}"
+      imagesrcset="{{ lcp_poster | image_url: width: 1100 }} 1100w, {{ lcp_poster | image_url: width: 1600 }} 1600w, {{ lcp_poster | image_url: width: 1920 }} 1920w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    >
+  {%- endif -%}
+{%- endif -%}
+
 {% style %}
   body:has(.sc-hero) #MainContent {
     background-color: #ffffff;
@@ -73,10 +116,15 @@
 
   #sc-hero-{{ section.id }} .sc-hero__media video {
     z-index: 1;
+    opacity: 0;
   }
 
-  #sc-hero-{{ section.id }} .sc-hero__video--mobile,
-  #sc-hero-{{ section.id }} .sc-hero__poster--mobile {
+  #sc-hero-{{ section.id }} .sc-hero__media video.is-ready {
+    opacity: 1;
+  }
+
+  #sc-hero-{{ section.id }} .sc-hero__media video.sc-hero__video--mobile,
+  #sc-hero-{{ section.id }} .sc-hero__media .sc-hero__poster--mobile {
     display: none;
   }
 
@@ -103,25 +151,6 @@
     margin: 0 auto;
     padding: calc({{ section.settings.padding_top | default: 80, allow_false: true }} * var(--rem)) 0 calc({{ section.settings.padding_bottom | default: 80, allow_false: true }} * var(--rem));
     pointer-events: none;
-    opacity: 0;
-    transform: translateY(calc(-20 * var(--rem)));
-    transition: opacity 0.45s ease, transform 0.45s ease;
-  }
-
-  #sc-hero-{{ section.id }} .sc-hero__slide.is-active .sc-hero__inner {
-    animation: sc-hero-copy-in-{{ section.id }} 0.7s ease both;
-  }
-
-  @keyframes sc-hero-copy-in-{{ section.id }} {
-    from {
-      opacity: 0;
-      transform: translateY(calc(28 * var(--rem)));
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 
   #sc-hero-{{ section.id }} .sc-hero__accent {
@@ -389,13 +418,13 @@
       padding: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem)) calc(40 * var(--rem)) calc({{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }} * var(--rem));
     }
 
-    #sc-hero-{{ section.id }} .sc-hero__video--pc,
-    #sc-hero-{{ section.id }} .sc-hero__poster--pc {
+    #sc-hero-{{ section.id }} .sc-hero__media video.sc-hero__video--pc,
+    #sc-hero-{{ section.id }} .sc-hero__media .sc-hero__poster--pc {
       display: none;
     }
 
-    #sc-hero-{{ section.id }} .sc-hero__video--mobile,
-    #sc-hero-{{ section.id }} .sc-hero__poster--mobile {
+    #sc-hero-{{ section.id }} .sc-hero__media video.sc-hero__video--mobile,
+    #sc-hero-{{ section.id }} .sc-hero__media .sc-hero__poster--mobile {
       display: block;
     }
 
@@ -522,7 +551,7 @@
         endif
         assign slide_alt = block.settings.image_alt | default: block.settings.heading | default: sc_hero_title
         assign slide_eager = false
-        if forloop.first
+        if forloop.first and section.index == 1
           assign slide_eager = true
         endif
         assign video_loop = false
@@ -536,9 +565,32 @@
       >
         <div class="sc-hero__media" aria-hidden="true">
           {%- if slide_video != blank or slide_video_mob != blank -%}
-            {%- if slide_poster != blank -%}
+            {%- if slide_poster != blank and slide_poster_mob != blank and slide_poster_mob != slide_poster -%}
+              <picture>
+                <source
+                  media="(max-width: 768px)"
+                  srcset="{{ slide_poster_mob | image_url: width: 750 }} 750w, {{ slide_poster_mob | image_url: width: 1100 }} 1100w, {{ slide_poster_mob | image_url: width: 1500 }} 1500w"
+                  sizes="100vw"
+                >
+                <img
+                  class="sc-hero__poster"
+                  src="{{ slide_poster | image_url: width: 1600 }}"
+                  srcset="{{ slide_poster | image_url: width: 1100 }} 1100w, {{ slide_poster | image_url: width: 1600 }} 1600w, {{ slide_poster | image_url: width: 1920 }} 1920w"
+                  sizes="100vw"
+                  width="1600"
+                  height="{{ 1600 | divided_by: slide_poster.aspect_ratio | round }}"
+                  alt=""
+                  {% if slide_eager %}
+                    loading="eager"
+                    fetchpriority="high"
+                  {% else %}
+                    loading="lazy"
+                  {% endif %}
+                >
+              </picture>
+            {%- elsif slide_poster != blank -%}
               <img
-                class="sc-hero__poster{% if slide_poster_mob != blank and slide_poster_mob != slide_poster %} sc-hero__poster--pc{% endif %}"
+                class="sc-hero__poster"
                 src="{{ slide_poster | image_url: width: 1600 }}"
                 srcset="{{ slide_poster | image_url: width: 1100 }} 1100w, {{ slide_poster | image_url: width: 1600 }} 1600w, {{ slide_poster | image_url: width: 1920 }} 1920w"
                 sizes="100vw"
@@ -553,33 +605,28 @@
                 {% endif %}
               >
             {%- endif -%}
-            {%- if slide_poster_mob != blank and slide_poster_mob != slide_poster -%}
-              <img
-                class="sc-hero__poster sc-hero__poster--mobile"
-                src="{{ slide_poster_mob | image_url: width: 1100 }}"
-                srcset="{{ slide_poster_mob | image_url: width: 750 }} 750w, {{ slide_poster_mob | image_url: width: 1100 }} 1100w, {{ slide_poster_mob | image_url: width: 1500 }} 1500w"
-                sizes="100vw"
-                width="1100"
-                height="{{ 1100 | divided_by: slide_poster_mob.aspect_ratio | round }}"
-                alt=""
-                {% if slide_eager %}
-                  loading="eager"
-                  fetchpriority="high"
-                {% else %}
-                  loading="lazy"
-                {% endif %}
-              >
-            {%- endif -%}
             {%- if slide_video != blank -%}
               {%- capture slide_video_class -%}sc-hero__video{% if block.settings.video_mobile != blank %} sc-hero__video--pc{% endif %}{%- endcapture -%}
-              {%- if slide_eager -%}
-                {{ slide_video | video_tag: class: slide_video_class, autoplay: true, loop: video_loop, muted: true, controls: false, playsinline: true, preload: 'metadata' }}
-              {%- else -%}
-                {{ slide_video | video_tag: class: slide_video_class, autoplay: false, loop: video_loop, muted: true, controls: false, playsinline: true, preload: 'none' }}
+              {%- capture sc_video_html -%}{{ slide_video | video_tag: class: slide_video_class, autoplay: false, loop: video_loop, muted: true, controls: false, playsinline: true, preload: 'none' }}{%- endcapture -%}
+              {%- if sc_video_html contains ' poster="' -%}
+                {%- assign sc_video_after = sc_video_html | split: ' poster="' | last | split: '"' | slice: 1, 30 | join: '"' -%}
+                {%- assign sc_video_html = sc_video_html | split: ' poster="' | first | append: sc_video_after -%}
               {%- endif -%}
+              {%- if sc_video_html contains '<img' -%}
+                {%- assign sc_video_html = sc_video_html | split: '<img' | first | append: '</video>' -%}
+              {%- endif -%}
+              {{ sc_video_html }}
             {%- endif -%}
             {%- if block.settings.video_mobile != blank -%}
-              {{ block.settings.video_mobile | video_tag: class: 'sc-hero__video sc-hero__video--mobile', autoplay: video_loop, loop: video_loop, muted: true, controls: false, playsinline: true, preload: 'none' }}
+              {%- capture sc_video_html -%}{{ block.settings.video_mobile | video_tag: class: 'sc-hero__video sc-hero__video--mobile', autoplay: false, loop: video_loop, muted: true, controls: false, playsinline: true, preload: 'none' }}{%- endcapture -%}
+              {%- if sc_video_html contains ' poster="' -%}
+                {%- assign sc_video_after = sc_video_html | split: ' poster="' | last | split: '"' | slice: 1, 30 | join: '"' -%}
+                {%- assign sc_video_html = sc_video_html | split: ' poster="' | first | append: sc_video_after -%}
+              {%- endif -%}
+              {%- if sc_video_html contains '<img' -%}
+                {%- assign sc_video_html = sc_video_html | split: '<img' | first | append: '</video>' -%}
+              {%- endif -%}
+              {{ sc_video_html }}
             {%- endif -%}
           {%- elsif slide_image != blank or slide_image_mob != blank -%}
             <picture>
@@ -767,8 +814,12 @@
                 width="1600"
                 height="{{ 1600 | divided_by: slide_image.aspect_ratio | round }}"
                 alt="{{ slide_alt | escape }}"
-                loading="eager"
-                fetchpriority="high"
+                {% if section.index == 1 %}
+                  loading="eager"
+                  fetchpriority="high"
+                {% else %}
+                  loading="lazy"
+                {% endif %}
               >
             {%- else -%}
               <img
@@ -778,8 +829,12 @@
                 width="1100"
                 height="{{ 1100 | divided_by: slide_image_mob.aspect_ratio | round }}"
                 alt="{{ slide_alt | escape }}"
-                loading="eager"
-                fetchpriority="high"
+                {% if section.index == 1 %}
+                  loading="eager"
+                  fetchpriority="high"
+                {% else %}
+                  loading="lazy"
+                {% endif %}
               >
             {%- endif -%}
           </picture>
@@ -823,7 +878,20 @@
   {%- endif -%}
 </section>
 
-{%- if section.blocks.size > 1 -%}
+{%- liquid
+  assign sc_hero_boot = false
+  if section.blocks.size > 1
+    assign sc_hero_boot = true
+  else
+    for block in section.blocks
+      if block.settings.video != blank or block.settings.video_mobile != blank
+        assign sc_hero_boot = true
+        break
+      endif
+    endfor
+  endif
+-%}
+{%- if sc_hero_boot -%}
   <script>
     (function () {
       var root = document.getElementById('sc-hero-{{ section.id }}');
@@ -867,6 +935,12 @@
         if (!video) {
           scheduleImage();
           return;
+        }
+        if (!video.dataset.readyBound) {
+          video.dataset.readyBound = '1';
+          video.addEventListener('playing', function () {
+            video.classList.add('is-ready');
+          });
         }
         try {
           video.currentTime = 0;
@@ -957,7 +1031,24 @@
         }
         scheduleImage();
       });
-      playSlide(slides[0]);
+      var boot = function () {
+        var slide = slides[0];
+        var poster = slide.querySelector('img');
+        var run = function () {
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              playSlide(slide);
+            });
+          });
+        };
+        if (poster && !poster.complete) {
+          poster.addEventListener('load', run, { once: true });
+          poster.addEventListener('error', run, { once: true });
+        } else {
+          run();
+        }
+      };
+      boot();
     })();
   </script>
 {%- endif -%}

@@ -347,6 +347,8 @@
           width="240"
           height="{{ 240 | divided_by: bar_image.aspect_ratio | round }}"
           alt=""
+          loading="lazy"
+          fetchpriority="low"
         >
       {%- endif -%}
       <span class="aotos-flux-buybar__prices">

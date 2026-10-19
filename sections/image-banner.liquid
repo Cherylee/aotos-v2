@@ -1,4 +1,8 @@
-{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
+{%- if section.index == 1 -%}
+  {{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
+{%- else -%}
+  <link rel="stylesheet" href="{{ 'section-image-banner.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- endif -%}
 
 {%- liquid
   assign banner_img_pc = section.settings.image | default: section.settings.image_mobile
@@ -214,16 +218,16 @@
       {%- if banner_video != blank -%}
         {%- capture banner_video_class -%}banner__video{% if banner_video_mob != blank %} banner__video--pc{% endif %}{%- endcapture -%}
         {%- if banner_defer_video -%}
-          {{ banner_video | video_tag: class: banner_video_class, autoplay: false, loop: true, muted: true, controls: false, playsinline: true, preload: 'none' }}
+          {% render 'aotos-video', video: banner_video, class: banner_video_class, autoplay: false, loop: true, muted: true, preload: 'none' %}
         {%- else -%}
-          {{ banner_video | video_tag: class: banner_video_class, autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata' }}
+          {% render 'aotos-video', video: banner_video, class: banner_video_class, autoplay: true, loop: true, muted: true, preload: 'metadata' %}
         {%- endif -%}
       {%- endif -%}
       {%- if banner_video_mob != blank -%}
         {%- if banner_defer_video -%}
-          {{ banner_video_mob | video_tag: class: 'banner__video banner__video--mobile', autoplay: false, loop: true, muted: true, controls: false, playsinline: true, preload: 'none' }}
+          {% render 'aotos-video', video: banner_video_mob, class: 'banner__video banner__video--mobile', autoplay: false, loop: true, muted: true, preload: 'none' %}
         {%- else -%}
-          {{ banner_video_mob | video_tag: class: 'banner__video banner__video--mobile', autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata' }}
+          {% render 'aotos-video', video: banner_video_mob, class: 'banner__video banner__video--mobile', autoplay: true, loop: true, muted: true, preload: 'metadata' %}
         {%- endif -%}
       {%- endif -%}
     {%- elsif banner_img_pc != blank -%}

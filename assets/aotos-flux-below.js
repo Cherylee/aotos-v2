@@ -1,4 +1,6 @@
 (() => {
+  if (window.aotosFluxBelow) return;
+  window.aotosFluxBelow = true;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (!customElements.get('flux-anchor')) {
