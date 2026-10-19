@@ -511,6 +511,15 @@ body.velotric-lightbox-open {
   line-height: 1 !important;
 }
 
+.velotric-product__info .jdgm-prev-badge[data-average-rating='0.00'],
+.velotric-product__info .jdgm-prev-badge[data-number-of-reviews='0'],
+.velotric-product__info .jdgm-preview-badge:has(.jdgm-prev-badge[data-average-rating='0.00']),
+.velotric-product__info .jdgm-preview-badge:has(.jdgm-prev-badge[data-number-of-reviews='0']),
+.velotric-product__info .shopify-app-block:has(.jdgm-prev-badge[data-average-rating='0.00']),
+.velotric-product__info .shopify-app-block:has(.jdgm-prev-badge[data-number-of-reviews='0']) {
+  display: none !important;
+}
+
 .velotric-product__info .jdgm-prev-badge__text {
   color: #000 !important;
   font-size: calc(14 * var(--rem)) !important;

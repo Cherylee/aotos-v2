@@ -975,9 +975,7 @@ html.l2-detail-open .l2-product .product__media-wrapper.grid__item {
   font-weight: var(--aotos-button-font-weight, 600);
   text-decoration: none;
 }
-.l2-product .shopify-payment-button__more-options {
-  font-size: calc(20 * var(--rem));
-}
+
 
 .l2-product .product-form{
   margin: calc(4 * var(--rem)) 0;
@@ -1179,6 +1177,9 @@ html.l2-detail-open .l2-product .product__media-wrapper.grid__item {
 }
 
 @media screen and (max-width: 768px) {
+  .l2-product .shopify-payment-button__more-options {
+    font-size: calc(20 * var(--rem));
+  }
   .l2-detail-btn {
     padding: calc(14 * var(--rem)) calc(32 * var(--rem));
     border: 1px solid #bbb;

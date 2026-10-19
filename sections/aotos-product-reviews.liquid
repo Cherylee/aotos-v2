@@ -1,0 +1,78 @@
+{%- liquid
+  assign review_count = product.metafields.reviews.rating_count.value | default: product.metafields.reviews.rating_count | plus: 0
+  if review_count == 0
+    capture review_badge
+      echo product.metafields.judgeme.badge
+    endcapture
+    if review_badge contains "data-number-of-reviews='"
+      assign review_count = review_badge | split: "data-number-of-reviews='" | last | split: "'" | first | plus: 0
+    elsif review_badge contains 'data-number-of-reviews="'
+      assign review_count = review_badge | split: 'data-number-of-reviews="' | last | split: '"' | first | plus: 0
+    endif
+  endif
+-%}
+
+{%- if review_count > 0 -%}
+  <div class="apr">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="apr__title aotos-section-title">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+    {%- for block in section.blocks -%}
+      <div {{ block.shopify_attributes }}>
+        {% render block %}
+      </div>
+    {%- endfor -%}
+  </div>
+{%- else -%}
+  <style>#shopify-section-{{ section.id }}{display:none}</style>
+{%- endif -%}
+
+{% style %}
+  #shopify-section-{{ section.id }} .apr {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+    padding-top: calc({{ section.settings.padding_top | default: 80, allow_false: true }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 0, allow_false: true }} * var(--rem));
+  }
+
+  #shopify-section-{{ section.id }} .apr__title {
+    margin: 0 0 calc(48 * var(--rem));
+    color: #000000;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .apr {
+      width: 100%;
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 0, allow_false: true }} * var(--rem));
+      padding-left: calc(40 * var(--rem));
+      padding-right: calc(40 * var(--rem));
+      box-sizing: border-box;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Product reviews",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "标题", "default": "Customer Reviews" },
+    { "type": "range", "id": "padding_top", "label": "上边距", "min": 0, "max": 160, "step": 4, "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "下边距", "min": 0, "max": 160, "step": 4, "default": 0 },
+    { "type": "range", "id": "padding_top_mobile", "label": "上边距（手机）", "min": 0, "max": 200, "step": 4, "default": 88 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "下边距（手机）", "min": 0, "max": 200, "step": 4, "default": 0 }
+  ],
+  "blocks": [
+    { "type": "@app" }
+  ],
+  "presets": [
+    { "name": "Product reviews" }
+  ]
+}
+{% endschema %}

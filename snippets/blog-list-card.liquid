@@ -2,12 +2,12 @@
   <span class="blog-list__media">
     {%- if article.image -%}
       <img
-        src="{{ article.image | image_url: width: 600 }}"
-        srcset="{{ article.image | image_url: width: 400 }} 400w, {{ article.image | image_url: width: 600 }} 600w, {{ article.image | image_url: width: 800 }} 800w"
-        sizes="(max-width: 768px) 92vw, 360px"
+        src="{{ article.image | image_url: width: 1100 }}"
+        srcset="{{ article.image | image_url: width: 540 }} 540w, {{ article.image | image_url: width: 800 }} 800w, {{ article.image | image_url: width: 1100 }} 1100w, {{ article.image | image_url: width: 1400 }} 1400w, {{ article.image | image_url: width: 1800 }} 1800w"
+        sizes="(max-width: 768px) 90vw, 25vw"
         alt="{{ article.image.alt | default: article.title | escape }}"
-        width="600"
-        height="450"
+        width="1100"
+        height="{{ 1100 | divided_by: article.image.aspect_ratio | round }}"
         {% if loading == 'high' %}
           loading="eager"
           fetchpriority="high"
