@@ -992,7 +992,7 @@
         "bg_color": "#f8f8f8",
         "inner_color": "#ffffff",
         "title_color": "#000000",
-        "padding_top": 0,
+        "padding_top": 80,
         "padding_bottom": 80,
         "padding_top_mobile": 88,
         "padding_bottom_mobile": 88
