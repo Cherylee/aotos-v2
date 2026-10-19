@@ -224,7 +224,7 @@
       "settings": {
         "title": "FLUX X26 PRO",
         "button_label": "Learn More",
-        "button_link": "",
+        "button_link": "shopify://products/flux-x26-pro",
         "padding_top": 60,
         "padding_bottom": 80,
         "padding_top_mobile": 60,
