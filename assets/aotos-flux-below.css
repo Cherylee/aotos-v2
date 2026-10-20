@@ -37,7 +37,7 @@
 
 .fxb-anchor-section {
   position: relative;
-  z-index: 30;
+  z-index: 1;
   background: var(--fxb-bg, #eee);
 }
 
@@ -933,6 +933,10 @@ html.js .fxb-faq__answer {
 }
 
 @media screen and (max-width: 768px) {
+  html.aotos-nav-open .fxb-anchor-section {
+    z-index: 1;
+  }
+
   .fxb {
     padding-top: calc(var(--fxb-pt-m, 88) * var(--rem));
     padding-bottom: calc(var(--fxb-pb-m, 88) * var(--rem));

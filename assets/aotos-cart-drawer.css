@@ -419,6 +419,12 @@ cart-drawer.is-empty .drawer__close {
   .cart-drawer .quantity__input {
     font-size: max(16px, calc(24 * var(--rem)));
   }
+
+  cart-drawer .affirm-as-low-as,
+  cart-drawer .affirm-as-low-as .affirm-ala-price {
+    font-size: calc(24 * var(--rem)) !important;
+    line-height: calc(32 * var(--rem));
+  }
 }
 
 @media screen and (width: 768px) {
