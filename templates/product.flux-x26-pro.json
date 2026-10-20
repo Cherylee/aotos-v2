@@ -283,6 +283,89 @@
         "image_height": "large"
       }
     },
+    "flux_features": {
+      "type": "aotos-flux-features",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "video": "shopify://files/videos/pro1.mp4",
+            "video_url": "",
+            "pre_heading": "Boost Mode",
+            "heading": "Instant Torque. Controlled Launch.",
+            "description": "<p>Tap Boost to send maximum torque to the rear wheel, giving you stronger acceleration when you need an extra burst of power.</p>"
+          }
+        },
+        "card_4": {
+          "type": "card",
+          "settings": {
+            "video": "shopify://files/videos/pro2.mp4",
+            "video_url": "",
+            "pre_heading": "Long-Range Battery",
+            "heading": "Up to 70 Miles",
+            "description": "<p>The high-capacity 1008 Wh battery gives you the range for daily commutes, weekend rides, and longer routes without constant recharging.</p>"
+          }
+        },
+        "card_6": {
+          "type": "card",
+          "settings": {
+            "video": "shopify://files/videos/pro3.mp4",
+            "video_url": "",
+            "pre_heading": "Smart Security System",
+            "heading": "Track It. Protect It.",
+            "description": "<p>On the Pro model, built-in GPS tracking and an anti-theft vibration alarm help protect your bike, send instant alerts, and make it easier to locate when needed.</p>"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "video": "shopify://files/videos/pro4.mp4",
+            "video_url": "",
+            "pre_heading": "6061-T6 Aerospace-Grade Frame",
+            "heading": "Strength Meets Precision",
+            "description": "<p>Built with aerospace-grade 6061-T6 aluminum, the Flux X26 Series delivers the rigidity, durability, and sharp futuristic profile built for everyday rides and bigger adventures.</p>"
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "video": "shopify://files/videos/pro5.mp4",
+            "video_url": "",
+            "pre_heading": "Dual Hydraulic Suspension",
+            "heading": "Smooth Over Rough Roads",
+            "description": "<p>Front and rear hydraulic suspension helps absorb bumps, gravel, and uneven terrain, giving you a smoother ride and better control across changing road conditions.</p>"
+          }
+        },
+        "card_5": {
+          "type": "card",
+          "settings": {
+            "video": "shopify://files/videos/pro6.mp4",
+            "video_url": "",
+            "pre_heading": "5.5-Inch TFT Smart Display",
+            "heading": "Navigation at a Glance",
+            "description": "<p>The full-color 5.5-inch TFT display shows speed, battery level, ride mode, range, and alerts, with turn-by-turn navigation synced directly from your phone.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_4",
+        "card_6",
+        "card_2",
+        "card_3",
+        "card_5"
+      ],
+      "settings": {
+        "heading": "",
+        "subtitle": "",
+        "show_progress": false,
+        "bg_color": "#ffffff",
+        "padding_top": 80,
+        "padding_bottom": 0,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 0
+      }
+    },
     "flux_compare": {
       "type": "aotos-flux-compare",
       "blocks": {
@@ -462,89 +545,6 @@
         "padding_top": 80,
         "padding_bottom": 80,
         "padding_top_mobile": 88,
-        "padding_bottom_mobile": 88
-      }
-    },
-    "flux_features": {
-      "type": "aotos-flux-features",
-      "blocks": {
-        "card_1": {
-          "type": "card",
-          "settings": {
-            "video": "shopify://files/videos/pro1.mp4",
-            "video_url": "",
-            "pre_heading": "Boost Mode",
-            "heading": "Instant Torque. Controlled Launch.",
-            "description": "<p>Tap Boost to send maximum torque to the rear wheel, giving you stronger acceleration when you need an extra burst of power.</p>"
-          }
-        },
-        "card_4": {
-          "type": "card",
-          "settings": {
-            "video": "shopify://files/videos/pro2.mp4",
-            "video_url": "",
-            "pre_heading": "Long-Range Battery",
-            "heading": "Up to 70 Miles",
-            "description": "<p>The high-capacity 1008 Wh battery gives you the range for daily commutes, weekend rides, and longer routes without constant recharging.</p>"
-          }
-        },
-        "card_6": {
-          "type": "card",
-          "settings": {
-            "video": "shopify://files/videos/pro3.mp4",
-            "video_url": "",
-            "pre_heading": "Smart Security System",
-            "heading": "Track It. Protect It.",
-            "description": "<p>On the Pro model, built-in GPS tracking and an anti-theft vibration alarm help protect your bike, send instant alerts, and make it easier to locate when needed.</p>"
-          }
-        },
-        "card_2": {
-          "type": "card",
-          "settings": {
-            "video": "shopify://files/videos/pro4.mp4",
-            "video_url": "",
-            "pre_heading": "6061-T6 Aerospace-Grade Frame",
-            "heading": "Strength Meets Precision",
-            "description": "<p>Built with aerospace-grade 6061-T6 aluminum, the Flux X26 Series delivers the rigidity, durability, and sharp futuristic profile built for everyday rides and bigger adventures.</p>"
-          }
-        },
-        "card_3": {
-          "type": "card",
-          "settings": {
-            "video": "shopify://files/videos/pro5.mp4",
-            "video_url": "",
-            "pre_heading": "Dual Hydraulic Suspension",
-            "heading": "Smooth Over Rough Roads",
-            "description": "<p>Front and rear hydraulic suspension helps absorb bumps, gravel, and uneven terrain, giving you a smoother ride and better control across changing road conditions.</p>"
-          }
-        },
-        "card_5": {
-          "type": "card",
-          "settings": {
-            "video": "shopify://files/videos/pro6.mp4",
-            "video_url": "",
-            "pre_heading": "5.5-Inch TFT Smart Display",
-            "heading": "Navigation at a Glance",
-            "description": "<p>The full-color 5.5-inch TFT display shows speed, battery level, ride mode, range, and alerts, with turn-by-turn navigation synced directly from your phone.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "card_1",
-        "card_4",
-        "card_6",
-        "card_2",
-        "card_3",
-        "card_5"
-      ],
-      "settings": {
-        "heading": "",
-        "subtitle": "",
-        "show_progress": false,
-        "bg_color": "#ffffff",
-        "padding_top": 0,
-        "padding_bottom": 80,
-        "padding_top_mobile": 0,
         "padding_bottom_mobile": 88
       }
     },
@@ -1272,8 +1272,8 @@
     "main",
     "flux_anchor",
     "image_banner_Prm77L",
-    "flux_compare",
     "flux_features",
+    "flux_compare",
     "flux_specs",
     "flux_story",
     "flux_experts",
