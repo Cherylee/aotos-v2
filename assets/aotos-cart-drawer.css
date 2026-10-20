@@ -10,6 +10,10 @@
   initial-value: 0px;
 }
 
+cart-drawer.drawer.active {
+  z-index: 100000;
+}
+
 .cart-drawer .drawer__inner {
   width: calc(420 * var(--rem));
   max-width: 100%;
@@ -20,7 +24,7 @@
 }
 
 .cart-drawer .drawer__header {
-  padding: calc(6 * var(--rem)) 0 calc(6 * var(--rem));
+  padding: calc(12 * var(--rem)) 0 calc(12 * var(--rem));
   border-bottom: 1px solid #eee;
 }
 
@@ -91,17 +95,24 @@ cart-drawer.is-empty .drawer__close {
 
 .cart-drawer .cart-item__name {
   font-size: calc(12 * var(--rem));
-  font-weight: 500;
-  line-height: 1.35;
+  line-height: 1.15;
   color: #000;
   text-decoration: none;
 }
 
 .cart-drawer .cart-item__details > .product-option {
   margin-top: calc(6 * var(--rem));
-  font-size: calc(14 * var(--rem));
-  font-weight: 700;
+  font-size: calc(12 * var(--rem));
+  font-weight: 600;
   color: #000;
+}
+
+.cart-drawer .product-option {
+  font-weight: 600;
+  font-size: calc(14 * var(--rem));
+}
+.cart-drawer .cart-item__old-price {
+  font-size: calc(12 * var(--rem));
 }
 
 .cart-drawer .cart-item__model {
@@ -153,7 +164,7 @@ cart-drawer.is-empty .drawer__close {
   height: calc(20 * var(--rem));
   margin: 0;
   padding: 0;
-  color: #111;
+  color: #c8c8c8;
 }
 
 .cart-drawer cart-remove-button .svg-wrapper,
@@ -167,14 +178,19 @@ cart-drawer.is-empty .drawer__close {
   width: calc(68 * var(--rem));
   min-height: calc(24 * var(--rem));
   height: calc(24 * var(--rem));
-  border: 1px solid #e6e6e6;
+  border: 0;
   border-radius: calc(6 * var(--rem));
   background: #fff;
 }
 
+.cart-drawer .quantity:after {
+  border-color: transparent;
+  box-shadow: 0 0 0 1px #e5e5e5;
+}
+
 .cart-drawer .quantity__button {
   width: calc(20 * var(--rem));
-  color: #111;
+  color: #999;
 }
 
 .cart-drawer .quantity__button .svg-wrapper {
@@ -183,8 +199,8 @@ cart-drawer.is-empty .drawer__close {
 }
 
 .cart-drawer .quantity__input {
-  font-size: max(16px, calc(12 * var(--rem)));
-  font-weight: 600;
+  font-size: calc(12 * var(--rem));
+  font-weight: 400;
   padding: 0;
 }
 
@@ -218,9 +234,9 @@ cart-drawer.is-empty .drawer__close {
 .cart-drawer__trust {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: calc(6 * var(--rem)) calc(10 * var(--rem));
+  /* gap: calc(6 * var(--rem)) calc(10 * var(--rem)); */
   margin: 0 0 calc(8 * var(--rem));
-  padding: calc(10 * var(--rem));
+  padding: calc(5 * var(--rem)) calc(10 * var(--rem));
   border: 1px solid #eee;
   border-radius: calc(8 * var(--rem));
   list-style: none;
@@ -237,8 +253,8 @@ cart-drawer.is-empty .drawer__close {
 
 .cart-drawer__trust img {
   flex: 0 0 auto;
-  width: calc(18 * var(--rem));
-  height: calc(18 * var(--rem));
+  width: calc(28 * var(--rem));
+  height: calc(28 * var(--rem));
   object-fit: contain;
 }
 
@@ -266,7 +282,7 @@ cart-drawer.is-empty .drawer__close {
 .cart-drawer .cart__ctas {
   display: flex;
   flex-direction: column;
-  gap: calc(10 * var(--rem));
+  gap: calc(4 * var(--rem));
   --aotos-cta-height: clamp(25px, calc(var(--aotos-button-height, 40) * var(--rem)), 55px);
   --aotos-cta-radius: var(--buttons-radius, calc(40 * var(--rem)));
 }
@@ -289,23 +305,48 @@ cart-drawer.is-empty .drawer__close {
 
 .cart-drawer__dynamic,
 .cart-drawer__dynamic .dynamic-checkout__content,
-.cart-drawer__dynamic shopify-accelerated-checkout-cart,
-.cart-drawer__dynamic shopify-paypal-button {
+.cart-drawer__dynamic shopify-accelerated-checkout-cart {
   display: block;
-  height: var(--aotos-cta-height);
+  height: auto;
+  min-height: var(--aotos-cta-height);
+  margin: 0;
+  line-height: 0;
+  overflow: visible;
   --shopify-accelerated-checkout-button-block-size: var(--aotos-cta-height);
   --shopify-accelerated-checkout-button-border-radius: var(--aotos-cta-radius);
   --shopify-accelerated-checkout-button-inline-size: 100%;
 }
 
+.cart-drawer__dynamic shopify-paypal-button {
+  display: block;
+  height: var(--aotos-cta-height);
+  margin: 0;
+  line-height: 0;
+  overflow: visible;
+}
+
 .cart-drawer__paypal-note {
-  margin: calc(-10 * var(--rem)) 0 0;
+  margin: calc(6 * var(--rem)) 0 0;
   font-size: calc(10 * var(--rem));
+  line-height: calc(14 * var(--rem));
   color: #666;
   text-align: center;
 }
 
+cart-drawer .affirm-as-low-as,
+cart-drawer .affirm-as-low-as .affirm-ala-price,
+cart-drawer .affirm-as-low-as .affirm-modal-trigger {
+  font-size: calc(12 * var(--rem)) !important;
+  line-height: calc(16 * var(--rem));
+}
+
 @media screen and (max-width: 768px) {
+  cart-drawer .affirm-as-low-as,
+  cart-drawer .affirm-as-low-as .affirm-ala-price,
+  cart-drawer .affirm-as-low-as .affirm-modal-trigger {
+    font-size: calc(22 * var(--rem)) !important;
+    line-height: calc(36 * var(--rem));
+  }
   .cart-drawer .drawer__header {
     padding: calc(20 * var(--rem)) 0 calc(20 * var(--rem));
     border-bottom: 1px solid #eee;
