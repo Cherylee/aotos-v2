@@ -114,7 +114,7 @@ html.fxb-anchor-stuck .fxb-anchor-section {
 .fxb-compare thead .fxb-compare__cell {
   position: sticky;
   top: 0;
-  z-index: 4;
+  z-index: 1;
   background: var(--fxb-bg, #fff);
   box-shadow: 0 1px 0 var(--fxb-line, #e5e5e5);
   transition: top 0.15s ease-out;
@@ -134,7 +134,7 @@ html.fxb-anchor-stuck:has(.section-header.shopify-section-header-sticky:not(.sho
 
 .fxb-compare thead .fxb-compare__hl {
   background: var(--fxb-hl, #f5f5f5);
-  z-index: 5;
+  z-index: 1;
 }
 
 .fxb-compare__label {
@@ -975,18 +975,16 @@ html.js .fxb-faq__answer {
 
   .fxb-compare__label,
   .fxb-compare thead .fxb-compare__label,
-  html.fxb-anchor-stuck .fxb-compare thead .fxb-compare__label {
+  html.fxb-anchor-stuck .fxb-compare thead .fxb-compare__label,
+  html:has(.section-header.shopify-section-header-sticky:not(.shopify-section-header-hidden)) .fxb-compare thead .fxb-compare__label,
+  html.fxb-anchor-stuck:has(.section-header.shopify-section-header-sticky:not(.shopify-section-header-hidden)) .fxb-compare thead .fxb-compare__label {
     position: sticky;
     left: 0;
     top: auto;
-    z-index: 2;
+    z-index: 1;
     width: 29%;
     background: var(--fxb-bg, #fff);
     font-size: calc(20 * var(--rem));
-  }
-
-  .fxb-compare thead .fxb-compare__label {
-    z-index: 3;
   }
 
   .fxb-compare__cell {
@@ -1122,15 +1120,16 @@ html.js .fxb-faq__answer {
 
   .fxb-faq__item summary {
     min-height: calc(88 * var(--rem));
-    font-size: calc(22 * var(--rem));
+    font-size: calc(24 * var(--rem));
+    line-height: calc(34 * var(--rem));
   }
 
   .support-faq-arrow {
-    font-size: calc(20 * var(--rem));
+    font-size: calc(22 * var(--rem));
   }
 
   .fxb-faq__answer {
-    font-size: calc(20 * var(--rem));
+    font-size: calc(22 * var(--rem));
     line-height: calc(32 * var(--rem));
   }
 
