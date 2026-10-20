@@ -21,7 +21,8 @@
 
 .aotos-footer__menus {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(4, max-content);
+  justify-content: space-between;
   gap: calc(24 * var(--rem));
 }
 
@@ -81,6 +82,7 @@
   font-size: calc(12 * var(--rem));
   line-height: 1.4;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .aotos-footer__aside {
