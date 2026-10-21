@@ -1,0 +1,442 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "layout": "theme",
+  "sections": {
+    "user_manuals_hero_idGRcD": {
+      "type": "user-manuals-hero",
+      "name": "User Manuals Hero",
+      "settings": {
+        "layout": "overlay",
+        "image_alt": "",
+        "overlay_color": "#000000",
+        "overlay_opacity": 20,
+        "overlay_size": "small",
+        "show_breadcrumb": false,
+        "crumb_home": "Home",
+        "crumb_parent_label": "Support",
+        "crumb_parent_url": "",
+        "crumb_current": "User Manuals",
+        "crumb_color": "#999999",
+        "crumb_current_color": "#000000",
+        "eyebrow": "FIND YOUR NEXT RIDE",
+        "eyebrow_color": "#ff6501",
+        "heading": "<p>Two rides.Your choice.</p>",
+        "heading_color": "#000000",
+        "description": "<p>Compare AOTOS eBikes side by side.</p><p>Find the power, range and features that fit your ride.</p>",
+        "text_color": "#999999",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
+    },
+    "compare": {
+      "type": "aotos-product-compare",
+      "blocks": {
+        "product_x26": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "show_in_dropdown": true,
+            "title": "FLUX X26",
+            "image": "shopify://shop_images/EB03_0919_3.webp",
+            "eyebrow": "Everyday riding",
+            "description": "Smooth power for everyday riding.",
+            "price_text": "$1,699",
+            "button_label": "Choose X26",
+            "button_link": "/products/flux-x26-pro?variant=48314022199515",
+            "explore_label": "",
+            "stat_1_value": "80 km",
+            "stat_1_label": "Up to range*",
+            "stat_2_value": "1,200 W",
+            "stat_2_label": "Peak in Boost*",
+            "stat_3_value": "80 Nm",
+            "stat_3_label": "Torque",
+            "card_eyebrow": "Everyday rides",
+            "card_title": "Start with FLUX X26.",
+            "card_text": "Choose the lower-priced option for everyday riding, with dual suspension and hydraulic brakes.",
+            "specs": "rated-motor | 750 W\npeak-output | 1,200 W | In Boost mode · up to 10 seconds\ntorque | 80 Nm\ntop-speed | 45 km/h | In Boost mode\nmax-range | Up to 80 km\nbattery-spec | 48 V / 18 Ah\nbattery-energy | 864 Wh | Calculated from voltage × capacity\nsuspension | Dual hydraulic suspension\nbrakes | Hydraulic disc brakes\ntires | 20 × 4.0 in fat tires\ntire-pressure | Not included\ngps | Not included\napp | AOTOS app\nconnectivity | Not included\nrider-height | See product page\nwarranty | 1-year limited\nreturns | 30 days"
+          }
+        },
+        "product_H9fH7z": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "show_in_dropdown": true,
+            "title": "FLUX X26",
+            "image": "shopify://shop_images/EB03_0919_3.webp",
+            "eyebrow": "Everyday riding",
+            "description": "Smooth power for everyday riding.",
+            "price_text": "$1,699",
+            "button_label": "Choose X26",
+            "button_link": "/products/flux-x26-pro?variant=48314022199515",
+            "explore_label": "",
+            "stat_1_value": "80 km",
+            "stat_1_label": "Up to range*",
+            "stat_2_value": "1,200 W",
+            "stat_2_label": "Peak in Boost*",
+            "stat_3_value": "80 Nm",
+            "stat_3_label": "Torque",
+            "card_eyebrow": "Everyday rides",
+            "card_title": "Start with FLUX X26.",
+            "card_text": "Choose the lower-priced option for everyday riding, with dual suspension and hydraulic brakes.",
+            "specs": "rated-motor | 750 W\npeak-output | 1,200 W | In Boost mode · up to 10 seconds\ntorque | 80 Nm\ntop-speed | 45 km/h | In Boost mode\nmax-range | Up to 80 km\nbattery-spec | 48 V / 18 Ah\nbattery-energy | 864 Wh | Calculated from voltage × capacity\nsuspension | Dual hydraulic suspension\nbrakes | Hydraulic disc brakes\ntires | 20 × 4.0 in fat tires\ntire-pressure | Not included\ngps | Not included\napp | AOTOS app\nconnectivity | Not included\nrider-height | See product page\nwarranty | 1-year limited\nreturns | 30 days"
+          }
+        },
+        "product_pro": {
+          "type": "product",
+          "settings": {
+            "product": "aotos-e3-electric-scooter",
+            "show_in_dropdown": true,
+            "title": "E3",
+            "image": "shopify://shop_images/flux-x26-pro-side.webp",
+            "eyebrow": "More power. More connection.",
+            "description": "More power. More control. Instant acceleration.",
+            "price_text": "$2,299",
+            "button_label": "Choose X26 Pro",
+            "button_link": "/products/flux-x26-pro?variant=48314022166747",
+            "explore_label": "",
+            "stat_1_value": "113 km",
+            "stat_1_label": "Up to range*",
+            "stat_2_value": "2,000 W",
+            "stat_2_label": "Peak in Boost*",
+            "stat_3_value": "100 Nm",
+            "stat_3_label": "Torque",
+            "card_eyebrow": "More range & connectivity",
+            "card_title": "Step up to FLUX X26 Pro.",
+            "card_text": "A larger battery, stronger Boost output and added GPS and tire-pressure monitoring. Compare what the $600 upgrade brings.",
+            "specs": "rated-motor | 750 W\npeak-output | 2,000 W | In Boost mode · up to 10 seconds\ntorque | 100 Nm\ntop-speed | 45 km/h | In Boost mode\nmax-range | Up to 113 km\nbattery-spec | 48 V / 21 Ah\nbattery-energy | 1,008 Wh | Calculated from voltage × capacity\nsuspension | Dual hydraulic suspension\nbrakes | Hydraulic disc brakes\ntires | 20 × 4.0 in fat tires\ntire-pressure | Included | | accent\ngps | Included | | accent\napp | AOTOS app\nconnectivity | GPS and 4G | | accent\nrider-height | See product page\nwarranty | 1-year limited\nreturns | 30 days"
+          }
+        },
+        "cat_power": {
+          "type": "category",
+          "settings": {
+            "title": "Power & performance",
+            "handle": "power",
+            "description": ""
+          }
+        },
+        "spec_rated": {
+          "type": "spec",
+          "settings": {
+            "category": "power",
+            "key": "rated-motor",
+            "label": "Rated motor power",
+            "highlight": false
+          }
+        },
+        "spec_peak": {
+          "type": "spec",
+          "settings": {
+            "category": "power",
+            "key": "peak-output",
+            "label": "Peak output†",
+            "highlight": true
+          }
+        },
+        "spec_torque": {
+          "type": "spec",
+          "settings": {
+            "category": "power",
+            "key": "torque",
+            "label": "Torque",
+            "highlight": true
+          }
+        },
+        "spec_speed": {
+          "type": "spec",
+          "settings": {
+            "category": "power",
+            "key": "top-speed",
+            "label": "Listed top speed†",
+            "highlight": false
+          }
+        },
+        "cat_battery": {
+          "type": "category",
+          "settings": {
+            "title": "Battery & range",
+            "handle": "battery",
+            "description": "Capacity for your ride. Context for the numbers."
+          }
+        },
+        "spec_range": {
+          "type": "spec",
+          "settings": {
+            "category": "battery",
+            "key": "max-range",
+            "label": "Maximum range†",
+            "highlight": true
+          }
+        },
+        "spec_batt": {
+          "type": "spec",
+          "settings": {
+            "category": "battery",
+            "key": "battery-spec",
+            "label": "Battery specification",
+            "highlight": true
+          }
+        },
+        "spec_energy": {
+          "type": "spec",
+          "settings": {
+            "category": "battery",
+            "key": "battery-energy",
+            "label": "Battery energy",
+            "highlight": true
+          }
+        },
+        "cat_comfort": {
+          "type": "category",
+          "settings": {
+            "title": "Ride comfort",
+            "handle": "comfort",
+            "description": "Compare the components that shape the ride."
+          }
+        },
+        "spec_suspension": {
+          "type": "spec",
+          "settings": {
+            "category": "comfort",
+            "key": "suspension",
+            "label": "Suspension",
+            "highlight": false
+          }
+        },
+        "spec_brakes": {
+          "type": "spec",
+          "settings": {
+            "category": "comfort",
+            "key": "brakes",
+            "label": "Brakes",
+            "highlight": false
+          }
+        },
+        "spec_tires": {
+          "type": "spec",
+          "settings": {
+            "category": "comfort",
+            "key": "tires",
+            "label": "Tires",
+            "highlight": false
+          }
+        },
+        "spec_tpm": {
+          "type": "spec",
+          "settings": {
+            "category": "comfort",
+            "key": "tire-pressure",
+            "label": "Tire-pressure monitoring",
+            "highlight": true
+          }
+        },
+        "cat_smart": {
+          "type": "category",
+          "settings": {
+            "title": "Smart & security",
+            "handle": "smart",
+            "description": ""
+          }
+        },
+        "spec_gps": {
+          "type": "spec",
+          "settings": {
+            "category": "smart",
+            "key": "gps",
+            "label": "GPS",
+            "highlight": false
+          }
+        },
+        "spec_app": {
+          "type": "spec",
+          "settings": {
+            "category": "smart",
+            "key": "app",
+            "label": "App",
+            "highlight": false
+          }
+        },
+        "spec_connect": {
+          "type": "spec",
+          "settings": {
+            "category": "smart",
+            "key": "connectivity",
+            "label": "Connected features",
+            "highlight": true
+          }
+        },
+        "cat_size": {
+          "type": "category",
+          "settings": {
+            "title": "Size & fit",
+            "handle": "size",
+            "description": ""
+          }
+        },
+        "spec_height": {
+          "type": "spec",
+          "settings": {
+            "category": "size",
+            "key": "rider-height",
+            "label": "Rider fit",
+            "highlight": false
+          }
+        },
+        "cat_own": {
+          "type": "category",
+          "settings": {
+            "title": "Ownership",
+            "handle": "ownership",
+            "description": ""
+          }
+        },
+        "spec_warranty": {
+          "type": "spec",
+          "settings": {
+            "category": "ownership",
+            "key": "warranty",
+            "label": "Warranty",
+            "highlight": false
+          }
+        },
+        "spec_returns": {
+          "type": "spec",
+          "settings": {
+            "category": "ownership",
+            "key": "returns",
+            "label": "Returns",
+            "highlight": false
+          }
+        }
+      },
+      "block_order": [
+        "product_x26",
+        "product_H9fH7z",
+        "product_pro",
+        "cat_power",
+        "spec_rated",
+        "spec_peak",
+        "spec_torque",
+        "spec_speed",
+        "cat_battery",
+        "spec_range",
+        "spec_batt",
+        "spec_energy",
+        "cat_comfort",
+        "spec_suspension",
+        "spec_brakes",
+        "spec_tires",
+        "spec_tpm",
+        "cat_smart",
+        "spec_gps",
+        "spec_app",
+        "spec_connect",
+        "cat_size",
+        "spec_height",
+        "cat_own",
+        "spec_warranty",
+        "spec_returns"
+      ],
+      "settings": {
+        "heading": "Compare your ride",
+        "model_prefix": "MODEL",
+        "currency_code": "USD",
+        "explore_label": "Explore this model ↗",
+        "sticky_label": "Compare your ride",
+        "choose_label": "Choose model ↗",
+        "footnote": "*Range, peak output and listed top speed depend on mode, rider, terrain and conditions.",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
+    },
+    "notes": {
+      "type": "aotos-notes",
+      "blocks": {
+        "note_1": {
+          "type": "item",
+          "settings": {
+            "text": "1. Peak power and listed top speed apply in Boost mode. The product page describes Boost as up to 10 seconds per activation. Rated motor power is listed separately."
+          }
+        },
+        "note_2": {
+          "type": "item",
+          "settings": {
+            "text": "2. Range figures are manufacturer-listed maxima, not a daily range guarantee. Actual range varies with rider/load, terrain, temperature, tire pressure, speed and assist/throttle use. The comparison source does not specify a complete range-test protocol."
+          }
+        },
+        "note_3": {
+          "type": "item",
+          "settings": {
+            "text": "3. Pro 4G/GPS service: one year included; then plans listed from $2.90/month or $29/year. Check current service terms before purchase."
+          }
+        },
+        "note_4": {
+          "type": "item",
+          "settings": {
+            "text": "4. The source lists both \"97 lb / 45 kg\"; these are not exact equivalents. This page uses 97 lb and its calculated metric equivalent (44.0 kg). Confirm actual weight, rider-height range, seat height, charging time and certification documentation with AOTOS before purchase."
+          }
+        },
+        "note_5": {
+          "type": "item",
+          "settings": {
+            "text": "5. Prices are a USD snapshot from October 12, 2026, and may change. Returns require new, unused condition and original packaging. Change-of-mind return shipping is customer-paid. Warranty coverage varies by component; see the product page."
+          }
+        },
+        "note_6": {
+          "type": "item",
+          "settings": {
+            "text": "6. Speed and permitted riding locations depend on local rules and the bike's configuration. Confirm the applicable mode and classification for your route. IP ratings do not mean the bike can be submerged."
+          }
+        }
+      },
+      "block_order": [
+        "note_1",
+        "note_2",
+        "note_3",
+        "note_4",
+        "note_5",
+        "note_6"
+      ],
+      "settings": {
+        "heading": "A few details before you ride.",
+        "link_label": "View original product specifications and current terms ↗",
+        "link_url": "/products/flux-x26-pro",
+        "padding_top": 0,
+        "padding_bottom": 80,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 88
+      }
+    },
+    "cta": {
+      "type": "aotos-cta",
+      "settings": {
+        "eyebrow": "Your next chapter starts here",
+        "heading": "Ready to find your Flux?",
+        "text": "Explore the details and choose your model.",
+        "button_label": "Explore the Flux series",
+        "button_link": "/products/flux-x26-pro",
+        "padding_top": 0,
+        "padding_bottom": 80,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 88
+      }
+    }
+  },
+  "order": [
+    "user_manuals_hero_idGRcD",
+    "compare",
+    "notes",
+    "cta"
+  ]
+}

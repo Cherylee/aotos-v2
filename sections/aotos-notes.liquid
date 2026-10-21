@@ -1,0 +1,134 @@
+{% style %}
+  #notes-{{ section.id }} {
+    display: block;
+    background: #ffffff;
+    color: #000000;
+    padding-top: calc({{ section.settings.padding_top | default: 80, allow_false: true }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80, allow_false: true }} * var(--rem));
+  }
+
+  #notes-{{ section.id }} * { box-sizing: border-box; }
+
+  #notes-{{ section.id }} .notes-shell {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  #notes-{{ section.id }} .notes-card {
+    padding: calc(36 * var(--rem)) calc(40 * var(--rem));
+    border-radius: calc(16 * var(--rem));
+    background: #f6f6f6;
+  }
+
+  #notes-{{ section.id }} .notes-title {
+    margin: 0 0 calc(20 * var(--rem));
+    font-family: var(--font-heading-family);
+    font-size: calc(16 * var(--rem));
+    line-height: calc(22 * var(--rem));
+    font-weight: 700;
+    color: #000000;
+  }
+
+  #notes-{{ section.id }} .notes-list {
+    margin: 0;
+    padding: 0 0 0 calc(18 * var(--rem));
+  }
+
+  #notes-{{ section.id }} .notes-list li {
+    margin: 0 0 calc(12 * var(--rem));
+    font-size: calc(12 * var(--rem));
+    line-height: calc(22 * var(--rem));
+    color: #000000;
+  }
+
+  #notes-{{ section.id }} .notes-list li:last-child { margin-bottom: 0; }
+
+  #notes-{{ section.id }} .notes-link {
+    display: inline-block;
+    margin-top: calc(20 * var(--rem));
+    font-size: calc(12 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    text-decoration: underline;
+    color: #000000;
+  }
+
+  @media screen and (max-width: 768px) {
+    #notes-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }} * var(--rem));
+    }
+
+    #notes-{{ section.id }} .notes-shell {
+      width: 100%;
+      padding: 0 calc(40 * var(--rem));
+    }
+
+    #notes-{{ section.id }} .notes-card {
+      padding: calc(32 * var(--rem)) calc(28 * var(--rem));
+    }
+
+    #notes-{{ section.id }} .notes-title {
+      font-size: calc(22 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #notes-{{ section.id }} .notes-list li,
+    #notes-{{ section.id }} .notes-link {
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+  }
+{% endstyle %}
+
+<section id="notes-{{ section.id }}" class="aotos-notes">
+  <div class="notes-shell">
+    <div class="notes-card">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="notes-title">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+      {%- if section.blocks.size > 0 -%}
+        <ol class="notes-list">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.text != blank -%}
+              <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ol>
+      {%- endif -%}
+      {%- if section.settings.link_label != blank -%}
+        <a class="notes-link" href="{{ section.settings.link_url | default: '#' }}">{{ section.settings.link_label | escape }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "说明列表",
+  "tag": "section",
+  "class": "aotos-notes-section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "heading", "label": "标题", "default": "A few details before you ride." },
+    { "type": "text", "id": "link_label", "label": "底部链接文案" },
+    { "type": "url", "id": "link_url", "label": "底部链接" },
+    { "type": "range", "id": "padding_top", "label": "PC 上边距", "min": 0, "max": 160, "step": 4, "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "PC 下边距", "min": 0, "max": 160, "step": 4, "default": 80 },
+    { "type": "range", "id": "padding_top_mobile", "label": "手机上边距", "min": 0, "max": 160, "step": 4, "default": 88 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "手机下边距", "min": 0, "max": 160, "step": 4, "default": 88 }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "说明",
+      "settings": [
+        { "type": "textarea", "id": "text", "label": "内容" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "说明列表" }
+  ]
+}
+{% endschema %}
