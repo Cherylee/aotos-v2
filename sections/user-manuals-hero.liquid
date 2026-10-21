@@ -1,0 +1,642 @@
+{%- liquid
+  assign um_bg = '#f5f5f5'
+  assign um_heading = section.settings.heading | default: page.title | replace: '<p>', '' | replace: '</p>', ''
+  assign um_current = section.settings.crumb_current | default: 'User Manuals'
+  assign um_img_desktop = section.settings.image_desktop
+  assign um_img_mobile = section.settings.image_mobile | default: um_img_desktop
+  assign um_img_alt = section.settings.image_alt | default: um_heading | strip_html
+  assign um_lcp = um_img_desktop | default: um_img_mobile
+  assign um_layout = section.settings.layout | default: 'split'
+  assign um_overlay_opacity = section.settings.overlay_opacity | default: 20 | divided_by: 100.0
+  assign um_overlay_size = section.settings.overlay_size | default: 'medium'
+  case um_overlay_size
+    when 'small'
+      assign um_overlay_h = 240
+      assign um_overlay_h_m = 600
+    when 'large'
+      assign um_overlay_h = 680
+      assign um_overlay_h_m = 0
+    else
+      assign um_overlay_h = 320
+      assign um_overlay_h_m = 520
+  endcase
+-%}
+
+{% style %}
+  body:has(.user-manuals-hero) #MainContent {
+    background-color: #ffffff;
+  }
+
+  body:has(.user-manuals-hero) #MainContent > .shopify-section.section + .shopify-section.section {
+    margin-top: 0;
+  }
+
+  #shopify-section-{{ section.id }} {
+    background-color: {{ um_bg }} !important;
+  }
+
+  #user-manuals-hero-{{ section.id }} {
+    position: relative;
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    background-color: {{ um_bg }};
+    color: {{ section.settings.heading_color | default: '#000000' }};
+    font-family: var(--font-body-family);
+  }
+
+  #user-manuals-hero-{{ section.id }} * {
+    box-sizing: border-box;
+  }
+
+  #user-manuals-hero-{{ section.id }} .um-hero__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) calc(260 * var(--rem));
+    gap: calc(48 * var(--rem));
+    align-items: center;
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    height: calc(260 * var(--rem));
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  #user-manuals-hero-{{ section.id }} .um-hero__col--copy {
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #user-manuals-hero-{{ section.id }} .um-hero__crumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: calc(6 * var(--rem));
+    margin: 0 0 calc(32 * var(--rem));
+    color: {{ section.settings.crumb_color | default: '#999999' }};
+    font-size: calc(10 * var(--rem));
+    line-height: calc(18 * var(--rem));
+  }
+
+  #user-manuals-hero-{{ section.id }} .um-hero__crumb a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  #user-manuals-hero-{{ section.id }} .um-hero__crumb-current {
+    color: {{ section.settings.crumb_current_color | default: '#000000' }};
+    font-weight: 600;
+  }
+
+  #user-manuals-hero-{{ section.id }} .um-hero__col--media,
+  #user-manuals-hero-{{ section.id }} .um-hero__media {
+    width: calc(260 * var(--rem));
+    height: calc(260 * var(--rem));
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+  }
+
+  #user-manuals-hero-{{ section.id }} .um-hero__media picture,
+  #user-manuals-hero-{{ section.id }} .um-hero__media img,
+  #user-manuals-hero-{{ section.id }} .um-hero__media svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  #user-manuals-hero-{{ section.id }} .um-hero__eyebrow {
+    margin: 0 0 calc(12 * var(--rem));
+    color: {{ section.settings.eyebrow_color | default: '#ff6501' }};
+    font-size: calc(12 * var(--rem));
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: calc(18 * var(--rem));
+  }
+
+  #user-manuals-hero-{{ section.id }} .um-hero__title {
+    margin: 0 0 calc(20 * var(--rem));
+    color: {{ section.settings.heading_color | default: '#000000' }};
+    font-size: var(--aotos-section-title-size);
+    font-weight: 700;
+    line-height: 1.15;
+    width: calc(400 * var(--rem));
+  }
+
+  #user-manuals-hero-{{ section.id }} .um-hero__desc {
+    margin: 0;
+    color: {{ section.settings.text_color | default: '#999999' }};
+    font-size: calc(12 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    width: calc(550 * var(--rem));
+  }
+
+  #user-manuals-hero-{{ section.id }} .um-hero__title p,
+  #user-manuals-hero-{{ section.id }} .um-hero__desc p {
+    margin: 0;
+  }
+
+  #user-manuals-hero-{{ section.id }} .um-hero__desc p + p {
+    margin-top: calc(8 * var(--rem));
+  }
+
+  #user-manuals-hero-{{ section.id }} .um-hero__title a,
+  #user-manuals-hero-{{ section.id }} .um-hero__desc a {
+    color: inherit;
+  }
+
+  #user-manuals-hero-{{ section.id }} .um-hero__desc ul,
+  #user-manuals-hero-{{ section.id }} .um-hero__desc ol {
+    margin: calc(8 * var(--rem)) 0 0;
+    padding-left: calc(18 * var(--rem));
+  }
+
+  #user-manuals-hero-{{ section.id }}.um-hero--overlay {
+    display: flex;
+    align-items: center;
+    height: calc({{ um_overlay_h }} * var(--rem));
+    min-height: 0;
+  }
+
+  #user-manuals-hero-{{ section.id }}.um-hero--overlay .um-hero__bg,
+  #user-manuals-hero-{{ section.id }}.um-hero--overlay .um-hero__shade {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  #user-manuals-hero-{{ section.id }}.um-hero--overlay .um-hero__bg {
+    z-index: 0;
+  }
+
+  #user-manuals-hero-{{ section.id }}.um-hero--overlay .um-hero__bg picture,
+  #user-manuals-hero-{{ section.id }}.um-hero--overlay .um-hero__bg img,
+  #user-manuals-hero-{{ section.id }}.um-hero--overlay .um-hero__bg svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  #user-manuals-hero-{{ section.id }}.um-hero--overlay .um-hero__shade {
+    z-index: 1;
+    background: {{ section.settings.overlay_color | default: '#000000' }};
+    opacity: {{ um_overlay_opacity }};
+    pointer-events: none;
+  }
+
+  #user-manuals-hero-{{ section.id }}.um-hero--overlay .um-hero__inner {
+    z-index: 2;
+    grid-template-columns: minmax(0, 1fr);
+    height: 100%;
+    min-height: 0;
+    padding: 0;
+  }
+
+  @media (hover: hover) {
+    #user-manuals-hero-{{ section.id }} .um-hero__crumb a:hover {
+      color: {{ section.settings.crumb_current_color | default: '#000000' }};
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #user-manuals-hero-{{ section.id }} {
+      padding-top: calc(40 * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }} * var(--rem));
+    }
+
+    #user-manuals-hero-{{ section.id }} .um-hero__inner {
+      width: 100%;
+      height: auto;
+      overflow: visible;
+      grid-template-columns: 1fr;
+      gap: calc(48 * var(--rem));
+      padding: 0 calc(40 * var(--rem));
+    }
+
+    #user-manuals-hero-{{ section.id }} .um-hero__col--media,
+    #user-manuals-hero-{{ section.id }} .um-hero__media {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
+    }
+
+    #user-manuals-hero-{{ section.id }} .um-hero__crumb {
+      margin-bottom: calc(48 * var(--rem));
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #user-manuals-hero-{{ section.id }} .um-hero__eyebrow {
+      font-size: calc(22 * var(--rem));
+      line-height: calc(32 * var(--rem));
+      margin-bottom: calc(16 * var(--rem));
+    }
+
+    #user-manuals-hero-{{ section.id }} .um-hero__title {
+      width: 100%;
+    }
+
+    #user-manuals-hero-{{ section.id }} .um-hero__desc {
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+      width: 100%;
+    }
+
+    #user-manuals-hero-{{ section.id }}.um-hero--overlay {
+      height: {% if um_overlay_size == 'large' %}100dvh{% else %}calc({{ um_overlay_h_m }} * var(--rem)){% endif %};
+      min-height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    #user-manuals-hero-{{ section.id }}.um-hero--overlay .um-hero__inner {
+      height: 100%;
+      min-height: 0;
+      padding: 0 calc(40 * var(--rem));
+    }
+  }
+
+  @media screen and (min-width: 750px) and (max-width: 768px) {
+    #user-manuals-hero-{{ section.id }} {
+      padding-top: calc(40 * var(--rem));
+      padding-bottom: calc(168 * var(--rem));
+    }
+
+    #user-manuals-hero-{{ section.id }} .um-hero__inner {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      height: auto;
+      overflow: visible;
+      grid-template-columns: 1fr;
+      gap: calc(90 * var(--rem));
+      padding: 0 calc(34 * var(--rem));
+    }
+
+    #user-manuals-hero-{{ section.id }} .um-hero__col--media,
+    #user-manuals-hero-{{ section.id }} .um-hero__media {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
+    }
+
+    #user-manuals-hero-{{ section.id }} .um-hero__crumb {
+      margin-bottom: calc(90 * var(--rem));
+      font-size: calc(38 * var(--rem));
+      line-height: calc(61 * var(--rem));
+    }
+
+    #user-manuals-hero-{{ section.id }} .um-hero__eyebrow {
+      font-size: calc(42 * var(--rem));
+      line-height: calc(61 * var(--rem));
+      margin-bottom: calc(30 * var(--rem));
+    }
+
+    #user-manuals-hero-{{ section.id }} .um-hero__title {
+      width: 100%;
+    }
+
+    #user-manuals-hero-{{ section.id }} .um-hero__desc {
+      font-size: calc(38 * var(--rem));
+      line-height: calc(61 * var(--rem));
+      width: 100%;
+    }
+
+    #user-manuals-hero-{{ section.id }}.um-hero--overlay {
+      height: {% if um_overlay_size == 'large' %}100dvh{% else %}calc({{ um_overlay_h_m }} * var(--rem)){% endif %};
+      min-height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    #user-manuals-hero-{{ section.id }}.um-hero--overlay .um-hero__inner {
+      height: 100%;
+      min-height: 0;
+      padding: 0 calc(34 * var(--rem));
+    }
+  }
+{% endstyle %}
+
+<section
+  class="user-manuals-hero{% if um_layout == 'overlay' %} um-hero--overlay{% endif %}"
+  id="user-manuals-hero-{{ section.id }}"
+>
+  {%- if um_layout == 'overlay' and um_lcp != blank -%}
+    <div class="um-hero__bg">
+      <picture>
+          {%- if um_img_mobile != blank -%}
+            <source
+              media="(max-width: 749px)"
+              srcset="
+                {{ um_img_mobile | image_url: width: 600 }} 600w,
+                {{ um_img_mobile | image_url: width: 900 }} 900w,
+                {{ um_img_mobile | image_url: width: 1200 }} 1200w
+              "
+              sizes="100vw"
+            >
+          {%- endif -%}
+          <img
+            src="{{ um_lcp | image_url: width: 1600 }}"
+            srcset="
+              {{ um_lcp | image_url: width: 800 }} 800w,
+              {{ um_lcp | image_url: width: 1200 }} 1200w,
+              {{ um_lcp | image_url: width: 1600 }} 1600w,
+              {{ um_lcp | image_url: width: 1920 }} 1920w
+            "
+            sizes="100vw"
+            alt="{{ um_img_alt | escape }}"
+            loading="eager"
+            fetchpriority="high"
+            width="1600"
+            height="{{ 1600 | divided_by: um_lcp.aspect_ratio | round }}"
+          >
+        </picture>
+    </div>
+    <div class="um-hero__shade" aria-hidden="true"></div>
+  {%- endif -%}
+  <div class="um-hero__inner">
+    <div class="um-hero__col um-hero__col--copy">
+      {%- if section.settings.show_breadcrumb -%}
+        <nav class="um-hero__crumb" aria-label="Breadcrumb">
+          <a href="{{ routes.root_url }}">{{ section.settings.crumb_home | default: 'Home' | escape }}</a>
+          {%- if section.settings.crumb_parent_label != blank -%}
+            <span aria-hidden="true">/</span>
+            {%- if section.settings.crumb_parent_url != blank -%}
+              <a href="{{ section.settings.crumb_parent_url }}">{{ section.settings.crumb_parent_label | escape }}</a>
+            {%- else -%}
+              <span>{{ section.settings.crumb_parent_label | escape }}</span>
+            {%- endif -%}
+          {%- endif -%}
+          <span aria-hidden="true">/</span>
+          <span class="um-hero__crumb-current" aria-current="page">{{ um_current | escape }}</span>
+        </nav>
+      {%- endif -%}
+
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="um-hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if um_heading != blank -%}
+        <h1 class="um-hero__title aotos-section-title">{{ um_heading }}</h1>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <div class="um-hero__desc">{{ section.settings.description }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- if um_layout != 'overlay' -%}
+    <div class="um-hero__col um-hero__col--media">
+      <div class="um-hero__media">
+        {%- if um_lcp != blank -%}
+          <picture>
+            {%- if um_img_mobile != blank -%}
+              <source
+                media="(max-width: 749px)"
+                srcset="
+                  {{ um_img_mobile | image_url: width: 400 }} 400w,
+                  {{ um_img_mobile | image_url: width: 580 }} 580w,
+                  {{ um_img_mobile | image_url: width: 800 }} 800w
+                "
+                sizes="92vw"
+              >
+            {%- endif -%}
+            <img
+              src="{{ um_lcp | image_url: width: 260 }}"
+              srcset="
+                {{ um_lcp | image_url: width: 260 }} 260w,
+                {{ um_lcp | image_url: width: 520 }} 520w
+              "
+              sizes="(max-width: 768px) 92vw, 260px"
+              alt="{{ um_img_alt | escape }}"
+              loading="eager"
+              fetchpriority="high"
+              width="260"
+              height="260"
+            >
+          </picture>
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag: 'um-hero__placeholder' }}
+        {%- endif -%}
+      </div>
+    </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "User Manuals Hero",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "布局",
+      "options": [
+        { "value": "split", "label": "左文右图" },
+        { "value": "overlay", "label": "背景图撑满，文案叠在上面" }
+      ],
+      "default": "split"
+    },
+    {
+      "type": "header",
+      "content": "图片"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "图片 (PC)",
+      "info": "左文右图建议 1:1。背景撑满时建议横图，会铺满整个区域"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "图片 (手机)",
+      "info": "不填则沿用 PC 图；都不填时显示占位图"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "图片 Alt"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "背景遮罩颜色",
+      "default": "#000000",
+      "visible_if": "{{ section.settings.layout == 'overlay' }}"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "label": "背景遮罩透明度",
+      "default": 20,
+      "visible_if": "{{ section.settings.layout == 'overlay' }}"
+    },
+    {
+      "type": "select",
+      "id": "overlay_size",
+      "label": "背景高度",
+      "options": [
+        { "value": "small", "label": "小（PC 240 / 手机 600）" },
+        { "value": "medium", "label": "中（PC 320 / 手机 520）" },
+        { "value": "large", "label": "大（PC 680 / 手机一屏）" }
+      ],
+      "default": "medium",
+      "visible_if": "{{ section.settings.layout == 'overlay' }}"
+    },
+    {
+      "type": "header",
+      "content": "面包屑"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumb",
+      "label": "显示面包屑",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "crumb_home",
+      "label": "首页文案",
+      "default": "Home"
+    },
+    {
+      "type": "text",
+      "id": "crumb_parent_label",
+      "label": "上级文案",
+      "default": "Support"
+    },
+    {
+      "type": "url",
+      "id": "crumb_parent_url",
+      "label": "上级链接"
+    },
+    {
+      "type": "text",
+      "id": "crumb_current",
+      "label": "当前页文案",
+      "default": "User Manuals"
+    },
+    {
+      "type": "color",
+      "id": "crumb_color",
+      "label": "面包屑颜色",
+      "default": "#999999"
+    },
+    {
+      "type": "color",
+      "id": "crumb_current_color",
+      "label": "当前页颜色",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "文案"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "小标题",
+      "default": "AOTOS SUPPORT"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "小标题颜色",
+      "default": "#ff6501"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "主标题",
+      "default": "<p>Find the right guide for your ride.</p>"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "主标题颜色",
+      "default": "#000000"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "描述",
+      "default": "<p>Select your model and purchase channel to view the correct manual, setup videos and app download.</p>"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "描述颜色",
+      "default": "#999999"
+    },
+    {
+      "type": "header",
+      "content": "间距"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "上间距 (PC)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "下间距 (PC)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "上间距 (手机)",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "下间距 (手机)",
+      "default": 88
+    }
+  ],
+  "presets": [
+    {
+      "name": "User Manuals Hero",
+      "settings": {
+        "eyebrow": "AOTOS SUPPORT",
+        "heading": "<p>Find the right guide for your ride.</p>",
+        "description": "<p>Select your model and purchase channel to view the correct manual, setup videos and app download.</p>"
+      }
+    }
+  ]
+}
+{% endschema %}

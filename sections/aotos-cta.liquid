@@ -1,0 +1,122 @@
+{% style %}
+  #cta-{{ section.id }} {
+    display: block;
+    background: #ffffff;
+    color: #000000;
+    text-align: center;
+    padding-top: calc({{ section.settings.padding_top | default: 80, allow_false: true }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80, allow_false: true }} * var(--rem));
+  }
+
+  #cta-{{ section.id }} * { box-sizing: border-box; }
+
+  #cta-{{ section.id }} .cta-shell {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  #cta-{{ section.id }} .cta-eyebrow {
+    margin: 0 0 calc(40 * var(--rem));
+    font-size: calc(12 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #999999;
+  }
+
+  #cta-{{ section.id }} .cta-title {
+    margin: 0;
+    font-weight: 700;
+    color: #000000;
+  }
+
+  #cta-{{ section.id }} .cta-text {
+    margin: calc(40 * var(--rem)) 0 0;
+    font-size: calc(14 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    color: #999999;
+  }
+
+  #cta-{{ section.id }} .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(44 * var(--rem));
+    margin-top: calc(28 * var(--rem));
+    padding: calc(12 * var(--rem)) calc(28 * var(--rem));
+    border-radius: 999px;
+    background: #ff6501;
+    color: #ffffff;
+    font-size: calc(14 * var(--rem));
+    line-height: 1.2;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  @media (hover: hover) {
+    #cta-{{ section.id }} .cta-btn:hover { background: #e95800; }
+  }
+
+  @media screen and (max-width: 768px) {
+    #cta-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }} * var(--rem));
+    }
+
+    #cta-{{ section.id }} .cta-shell {
+      width: 100%;
+      padding: 0 calc(40 * var(--rem));
+    }
+
+    #cta-{{ section.id }} .cta-eyebrow,
+    #cta-{{ section.id }} .cta-text,
+    #cta-{{ section.id }} .cta-btn {
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #cta-{{ section.id }} .cta-btn { min-height: calc(64 * var(--rem)); }
+  }
+{% endstyle %}
+
+<section id="cta-{{ section.id }}" class="aotos-cta">
+  <div class="cta-shell">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="cta-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="cta-title aotos-section-title">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <p class="cta-text">{{ section.settings.text | escape }}</p>
+    {%- endif -%}
+    {%- if section.settings.button_label != blank -%}
+      <a class="cta-btn" href="{{ section.settings.button_link | default: '#' }}">{{ section.settings.button_label | escape }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "引导按钮",
+  "tag": "section",
+  "class": "aotos-cta-section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "眉题", "default": "Your next chapter starts here" },
+    { "type": "text", "id": "heading", "label": "标题", "default": "Ready to find your Flux?" },
+    { "type": "text", "id": "text", "label": "说明", "default": "Explore the details and choose your model." },
+    { "type": "text", "id": "button_label", "label": "按钮文案", "default": "Explore the Flux series" },
+    { "type": "url", "id": "button_link", "label": "按钮链接" },
+    { "type": "range", "id": "padding_top", "label": "PC 上边距", "min": 0, "max": 160, "step": 4, "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "PC 下边距", "min": 0, "max": 160, "step": 4, "default": 80 },
+    { "type": "range", "id": "padding_top_mobile", "label": "手机上边距", "min": 0, "max": 160, "step": 4, "default": 88 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "手机下边距", "min": 0, "max": 160, "step": 4, "default": 88 }
+  ],
+  "presets": [
+    { "name": "引导按钮" }
+  ]
+}
+{% endschema %}

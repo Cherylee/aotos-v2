@@ -1,0 +1,1084 @@
+{%- liquid
+  assign cmp_p0 = blank
+  assign cmp_p1 = blank
+  assign cmp_count = 0
+  for block in section.blocks
+    if block.type == 'product'
+      if cmp_count == 0
+        assign cmp_p0 = block
+      elsif cmp_count == 1
+        assign cmp_p1 = block
+      endif
+      assign cmp_count = cmp_count | plus: 1
+    endif
+  endfor
+-%}
+
+{% style %}
+  #cmp-{{ section.id }} {
+    --cmp-sticky-top: calc(var(--header-height, 0px) + var(--aotos-anchor-nav-height, 0px));
+    display: block;
+    background: #ffffff;
+    color: #000000;
+    padding-top: calc({{ section.settings.padding_top | default: 80, allow_false: true }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80, allow_false: true }} * var(--rem));
+  }
+
+  #cmp-{{ section.id }} * { box-sizing: border-box; }
+
+  #cmp-{{ section.id }} .cmp-shell {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  #cmp-{{ section.id }} .cmp-hero,
+  #cmp-{{ section.id }} .cmp-insights {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: calc(40 * var(--rem));
+  }
+
+  #cmp-{{ section.id }} .cmp-col { min-width: 0; text-align: center; }
+
+  #cmp-{{ section.id }} .cmp-picker {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: calc(14 * var(--rem));
+    margin: 0 0 calc(8 * var(--rem));
+    padding: calc(12 * var(--rem)) calc(16 * var(--rem));
+    border: 1px solid #e6e6e6;
+    border-radius: calc(8 * var(--rem));
+    background: #ffffff;
+    text-align: left;
+  }
+
+  #cmp-{{ section.id }} .cmp-picker__kicker {
+    flex-shrink: 0;
+    font-size: calc(10 * var(--rem));
+    line-height: 1;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #999999;
+  }
+
+  #cmp-{{ section.id }} .cmp-picker__btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(12 * var(--rem));
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  #cmp-{{ section.id }} .cmp-picker__btn:focus,
+  #cmp-{{ section.id }} .cmp-picker__btn:focus-visible {
+    outline: none;
+  }
+
+  #cmp-{{ section.id }} .cmp-picker__value {
+    min-width: 0;
+    font-family: var(--font-heading-family);
+    font-size: calc(14 * var(--rem));
+    line-height: 1.2;
+    font-weight: 500;
+    color: #000000;
+  }
+
+  #cmp-{{ section.id }} .cmp-picker__btn::after {
+    content: '';
+    flex-shrink: 0;
+    width: calc(12 * var(--rem));
+    height: calc(8 * var(--rem));
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%23000' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+
+  #cmp-{{ section.id }} .cmp-picker.is-open .cmp-picker__btn::after {
+    transform: rotate(180deg);
+  }
+
+  #cmp-{{ section.id }} .cmp-picker__menu {
+    position: absolute;
+    z-index: 8;
+    left: 0;
+    right: 0;
+    top: calc(100% + calc(6 * var(--rem)));
+    margin: 0;
+    padding: calc(6 * var(--rem));
+    list-style: none;
+    background: #ffffff;
+    border: 1px solid #eeeeee;
+    border-radius: calc(10 * var(--rem));
+    box-shadow: 0 calc(10 * var(--rem)) calc(28 * var(--rem)) rgba(0, 0, 0, 0.08);
+  }
+
+  #cmp-{{ section.id }} .cmp-picker__menu[hidden] { display: none; }
+
+  #cmp-{{ section.id }} .cmp-picker__option {
+    padding: calc(10 * var(--rem)) calc(12 * var(--rem));
+    border-radius: calc(6 * var(--rem));
+    font-family: var(--font-heading-family);
+    font-size: calc(14 * var(--rem));
+    line-height: 1.3;
+    font-weight: 500;
+    color: #999999;
+    cursor: pointer;
+  }
+
+  #cmp-{{ section.id }} .cmp-picker__option.is-selected {
+    background: #f6f6f6;
+    font-weight: 700;
+    color: #000000;
+  }
+
+  @media (hover: hover) {
+    #cmp-{{ section.id }} .cmp-picker__option:hover { background: #f6f6f6; }
+  }
+
+  #cmp-{{ section.id }} .cmp-media {
+    width: 70%;
+    max-width: calc(280 * var(--rem));
+    aspect-ratio: 16 / 10;
+    margin: 0 auto calc(16 * var(--rem));
+  }
+
+  #cmp-{{ section.id }} .cmp-media:has(img[hidden]),
+  #cmp-{{ section.id }} .cmp-eyebrow:empty,
+  #cmp-{{ section.id }} .cmp-desc:empty,
+  #cmp-{{ section.id }} .cmp-card__title:empty,
+  #cmp-{{ section.id }} .cmp-card__text:empty {
+    display: none;
+  }
+
+  #cmp-{{ section.id }} .cmp-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  #cmp-{{ section.id }} .cmp-eyebrow {
+    margin: 0 0 calc(10 * var(--rem));
+    font-size: calc(10 * var(--rem));
+    line-height: 1.2;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #999999;
+  }
+
+  #cmp-{{ section.id }} .cmp-name {
+    margin: 0;
+    font-family: var(--font-heading-family);
+    font-size: calc(28 * var(--rem));
+    line-height: 1.15;
+    font-weight: 700;
+    color: #000000;
+  }
+
+  #cmp-{{ section.id }} .cmp-desc {
+    margin: calc(10 * var(--rem)) auto 0;
+    max-width: calc(360 * var(--rem));
+    font-size: calc(14 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    color: #999999;
+  }
+
+  #cmp-{{ section.id }} .cmp-price {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: calc(6 * var(--rem));
+    margin: calc(22 * var(--rem)) 0 0;
+    font-family: var(--font-heading-family);
+    font-size: calc(18 * var(--rem));
+    line-height: calc(22 * var(--rem));
+    font-weight: 700;
+    color: #000000;
+  }
+
+  #cmp-{{ section.id }} .cmp-price__code {
+    font-family: var(--font-body-family);
+    font-size: calc(14 * var(--rem));
+    font-weight: 400;
+    color: #999999;
+  }
+
+  #cmp-{{ section.id }} .cmp-btn {
+    display: block;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(44 * var(--rem));
+    margin: calc(16 * var(--rem)) auto;
+    border-radius: 999px;
+    background: #ff6501;
+    color: #ffffff;
+    font-size: calc(14 * var(--rem));
+    line-height: calc(44 * var(--rem));
+    font-weight: 700;
+    text-decoration: none;
+    width: calc(260 * var(--rem));
+    height: calc(44 * var(--rem));
+  }
+
+  @media (hover: hover) {
+    #cmp-{{ section.id }} .cmp-btn:hover { background: #e95800; }
+  }
+
+  #cmp-{{ section.id }} .cmp-explore {
+    display: inline-block;
+    font-size: calc(14 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    color: #999999;
+  }
+
+  #cmp-{{ section.id }} .cmp-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: calc(12 * var(--rem));
+    margin: calc(28 * var(--rem)) 0 0;
+  }
+
+  #cmp-{{ section.id }} .cmp-stat__value {
+    display: block;
+    font-family: var(--font-heading-family);
+    font-size: calc(14 * var(--rem));
+    line-height: calc(22 * var(--rem));
+    font-weight: 700;
+    color: #000000;
+  }
+
+  #cmp-{{ section.id }} .cmp-stat__label {
+    display: block;
+    margin-top: calc(4 * var(--rem));
+    font-size: calc(10 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    color: #999999;
+  }
+
+  #cmp-{{ section.id }} .cmp-insights {
+    margin-top: calc(28 * var(--rem));
+    padding: calc(28 * var(--rem));
+    border-radius: calc(16 * var(--rem));
+    background: #f6f6f6;
+    text-align: left;
+  }
+
+  #cmp-{{ section.id }} .cmp-card__title {
+    margin: calc(8 * var(--rem)) 0 0;
+    font-family: var(--font-heading-family);
+    font-size: calc(14 * var(--rem));
+    line-height: calc(22 * var(--rem));
+    font-weight: 700;
+    color: #000000;
+  }
+
+  #cmp-{{ section.id }} .cmp-card__text {
+    margin: calc(8 * var(--rem)) 0 0;
+    font-size: calc(12 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    color: #999999;
+  }
+
+  #cmp-{{ section.id }} .cmp-sticky {
+    position: sticky;
+    top: var(--cmp-sticky-top);
+    z-index: 6;
+    margin-top: calc(36 * var(--rem));
+    background: #ffffff;
+    border-top: 1px solid #eeeeee;
+    border-bottom: 1px solid #eeeeee;
+  }
+
+  #cmp-{{ section.id }} .cmp-sticky__grid,
+  #cmp-{{ section.id }} .cmp-row {
+    display: grid;
+    grid-template-columns: minmax(calc(180 * var(--rem)), 0.9fr) repeat(2, minmax(0, 1fr));
+    gap: calc(16 * var(--rem));
+    align-items: center;
+  }
+
+  #cmp-{{ section.id }} .cmp-sticky__grid {
+    padding: calc(16 * var(--rem)) 0 calc(12 * var(--rem));
+  }
+
+  #cmp-{{ section.id }} .cmp-sticky__label {
+    font-size: calc(12 * var(--rem));
+    line-height: 1.3;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #999999;
+  }
+
+  #cmp-{{ section.id }} .cmp-sticky__prod { text-align: center; }
+
+  #cmp-{{ section.id }} .cmp-sticky__name {
+    display: block;
+    font-family: var(--font-heading-family);
+    font-size: calc(16 * var(--rem));
+    line-height: 1.2;
+    font-weight: 700;
+    color: #000000;
+  }
+
+  #cmp-{{ section.id }} .cmp-sticky__link {
+    display: inline-block;
+    margin-top: calc(4 * var(--rem));
+    font-size: calc(12 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    color: #999999;
+  }
+
+  #cmp-{{ section.id }} .cmp-tabs {
+    display: flex;
+    gap: calc(22 * var(--rem));
+    overflow-x: auto;
+    padding: calc(12 * var(--rem)) 0;
+    scrollbar-width: none;
+  }
+
+  #cmp-{{ section.id }} .cmp-tabs::-webkit-scrollbar { display: none; }
+
+  #cmp-{{ section.id }} .cmp-tabs a {
+    flex-shrink: 0;
+    font-size: calc(12 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    color: #999999;
+    text-decoration: none;
+  }
+
+  #cmp-{{ section.id }} .cmp-tabs a.is-active {
+    color: #ff6501;
+    font-weight: 700;
+  }
+
+  #cmp-{{ section.id }} .cmp-cat {
+    padding-top: calc(48 * var(--rem));
+    scroll-margin-top: calc(var(--cmp-sticky-top) + var(--cmp-sticky-h, 120px));
+  }
+
+  #cmp-{{ section.id }} .cmp-cat__head { margin: 0 0 calc(18 * var(--rem)); }
+
+  #cmp-{{ section.id }} .cmp-cat__title {
+    font-size: calc(14 * var(--rem));
+    margin: 0;
+    font-weight: 700;
+    color: #000000;
+  }
+
+  #cmp-{{ section.id }} .cmp-cat__desc {
+    margin: calc(12 * var(--rem)) 0 0;
+    font-size: calc(12 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    color: #999999;
+  }
+
+  #cmp-{{ section.id }} .cmp-row {
+    padding: calc(18 * var(--rem)) calc(16 * var(--rem));
+    border-bottom: 1px solid #eeeeee;
+  }
+
+  #cmp-{{ section.id }} .cmp-row.is-highlight { background: #f6f6f6; border-bottom-color: #ececec; }
+
+
+  #cmp-{{ section.id }} .cmp-row__label {
+    font-size: calc(12 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    color: #999999;
+  }
+
+  #cmp-{{ section.id }} .cmp-row__val { text-align: center; }
+
+  #cmp-{{ section.id }} .cmp-spec-value {
+    display: block;
+    font-size: calc(12 * var(--rem));
+    line-height: calc(18 * var(--rem));
+    font-weight: 500;
+    color: #000000;
+  }
+
+  #cmp-{{ section.id }} .cmp-row__val.is-accent .cmp-spec-value { color: #ff6501; }
+
+  #cmp-{{ section.id }} .cmp-spec-note {
+    display: block;
+    margin-top: calc(4 * var(--rem));
+    font-size: calc(12 * var(--rem));
+    line-height: calc(16 * var(--rem));
+    font-weight: 400;
+    color: #999999;
+  }
+
+  #cmp-{{ section.id }} .cmp-footnote {
+    margin: calc(20 * var(--rem)) 0 0;
+    font-size: calc(12 * var(--rem));
+    line-height: calc(16 * var(--rem));
+    color: #999999;
+  }
+
+  html:has(.shopify-section-header-hidden) #cmp-{{ section.id }} {
+    --cmp-sticky-top: var(--aotos-anchor-nav-height, 0px);
+  }
+
+  @media screen and (max-width: 768px) {
+    #cmp-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }} * var(--rem));
+    }
+
+    #cmp-{{ section.id }} .cmp-shell { width: 100%; padding: 0 calc(40 * var(--rem)); }
+
+    #cmp-{{ section.id }} .cmp-hero,
+    #cmp-{{ section.id }} .cmp-insights {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: calc(20 * var(--rem));
+    }
+
+    #cmp-{{ section.id }} .cmp-stats {
+      grid-template-columns: 1fr;
+      gap: calc(16 * var(--rem));
+    }
+
+    #cmp-{{ section.id }} .cmp-picker__kicker { font-size: calc(16 * var(--rem)); }
+    #cmp-{{ section.id }} .cmp-picker__value { font-size: calc(20 * var(--rem)); }
+    #cmp-{{ section.id }} .cmp-eyebrow { font-size: calc(14 * var(--rem)); }
+    #cmp-{{ section.id }} .cmp-picker__option {
+      font-size: calc(22 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+    #cmp-{{ section.id }} .cmp-name { font-size: calc(32 * var(--rem)); }
+    #cmp-{{ section.id }} .cmp-sticky__grid {padding: calc(40 * var(--rem)) 0 calc(10 * var(--rem)) 0;}
+    #cmp-{{ section.id }} .cmp-tabs { padding: calc(20 * var(--rem)) 0; }
+    #cmp-{{ section.id }} .cmp-footnote { font-size: calc(20 * var(--rem)); line-height: calc(32 * var(--rem));margin:calc(40 * var(--rem)) 0 0 }
+    #cmp-{{ section.id }} .cmp-desc,
+    #cmp-{{ section.id }} .cmp-explore,
+    #cmp-{{ section.id }} .cmp-stat__label,
+    #cmp-{{ section.id }} .cmp-card__text,
+    #cmp-{{ section.id }} .cmp-tabs a,
+    #cmp-{{ section.id }} .cmp-row__label,
+    #cmp-{{ section.id }} .cmp-spec-value,
+    #cmp-{{ section.id }} .cmp-sticky__link {
+      font-size: calc(22 * var(--rem));
+      line-height: calc(36 * var(--rem));
+    }
+
+    #cmp-{{ section.id }} .cmp-desc { max-width: none; }
+    #cmp-{{ section.id }} .cmp-price,
+    #cmp-{{ section.id }} .cmp-stat__value,
+    #cmp-{{ section.id }} .cmp-card__title,
+    #cmp-{{ section.id }} .cmp-sticky__name {
+      font-size: calc(22 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+    #cmp-{{ section.id }} .cmp-sticky__name {
+      font-size: calc(32 * var(--rem));
+      line-height: calc(42 * var(--rem));
+    }
+
+    #cmp-{{ section.id }} .cmp-btn { font-size: calc(20 * var(--rem)); height: calc(64 * var(--rem)); line-height: calc(64 * var(--rem));}
+    #cmp-{{ section.id }} .cmp-cat__desc { font-size: calc(20 * var(--rem)); line-height: calc(32 * var(--rem)); }
+
+    #cmp-{{ section.id }} .cmp-sticky__grid,
+    #cmp-{{ section.id }} .cmp-row {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    #cmp-{{ section.id }} .cmp-sticky__label,
+    #cmp-{{ section.id }} .cmp-row__label { grid-column: 1 / -1;font-size: calc(20 * var(--rem)); }
+    #cmp-{{ section.id }} .cmp-cat__title { font-size: calc(24 * var(--rem)); }
+
+    #cmp-{{ section.id }} .cmp-spec-note {
+      font-size: calc(20 * var(--rem));
+      line-height: calc(28 * var(--rem));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #cmp-{{ section.id }} .cmp-cat { scroll-margin-top: var(--cmp-sticky-top); }
+  }
+{% endstyle %}
+
+<section id="cmp-{{ section.id }}" class="cmp">
+  <h1 class="visually-hidden">{{ section.settings.heading | escape }}</h1>
+  <div class="cmp-shell">
+    <div class="cmp-hero">
+      {%- for col in (0..1) -%}
+        {%- liquid
+          if col == 0
+            assign col_block = cmp_p0
+          else
+            assign col_block = cmp_p1
+          endif
+        -%}
+        {%- if col_block != blank -%}
+          {%- liquid
+            assign col_product = col_block.settings.product
+            assign col_title = col_block.settings.title | default: col_product.title
+            assign col_image = col_block.settings.image | default: col_product.featured_image
+            assign col_url = col_block.settings.button_link | default: col_product.url
+            assign col_price = col_block.settings.price_text
+            if col_price == blank and col_product != blank
+              assign col_price = col_product.price | money_without_trailing_zeros
+            endif
+            assign col_btn = col_block.settings.button_label
+            if col_btn == blank
+              assign col_btn = 'Choose ' | append: col_title
+            endif
+            assign col_explore = col_block.settings.explore_label | default: section.settings.explore_label
+          -%}
+          <article class="cmp-col" data-cmp-col="{{ col }}" {{ col_block.shopify_attributes }}>
+            <div class="cmp-picker" data-cmp-select="{{ col }}" data-current="{{ col_block.id }}">
+              <span class="cmp-picker__kicker">{{ section.settings.model_prefix }} {{ col | plus: 1 }}</span>
+              <button type="button" class="cmp-picker__btn" aria-haspopup="listbox" aria-expanded="false" aria-label="{{ section.settings.model_prefix }} {{ col | plus: 1 }}">
+                <span class="cmp-picker__value">{{ col_title | escape }}</span>
+              </button>
+              <ul class="cmp-picker__menu" role="listbox" hidden>
+                {%- for block in section.blocks -%}
+                  {%- if block.type == 'product' and block.settings.show_in_dropdown != false -%}
+                    {%- assign opt_title = block.settings.title | default: block.settings.product.title -%}
+                    <li class="cmp-picker__option{% if block.id == col_block.id %} is-selected{% endif %}" role="option" data-value="{{ block.id }}" aria-selected="{% if block.id == col_block.id %}true{% else %}false{% endif %}">{{ opt_title | escape }}</li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            </div>
+            <div class="cmp-media">
+              {%- if col_image != blank -%}
+                <img
+                  data-field="image"
+                  src="{{ col_image | image_url: width: 480 }}"
+                  srcset="{{ col_image | image_url: width: 240 }} 240w, {{ col_image | image_url: width: 360 }} 360w, {{ col_image | image_url: width: 480 }} 480w"
+                  sizes="(max-width: 768px) 30vw, 280px"
+                  alt="{{ col_image.alt | default: col_title | escape }}"
+                  width="480"
+                  height="{{ 480 | divided_by: col_image.aspect_ratio | round }}"
+                  {% if col == 0 %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}
+                  decoding="async"
+                >
+              {%- else -%}
+                <img data-field="image" alt="" width="800" height="500" hidden>
+              {%- endif -%}
+            </div>
+            <p class="cmp-eyebrow" data-field="eyebrow">{{ col_block.settings.eyebrow }}</p>
+            <h2 class="cmp-name" data-field="title">{{ col_title }}</h2>
+            <p class="cmp-desc" data-field="description">{{ col_block.settings.description }}</p>
+            <p class="cmp-price">
+              <span data-field="price">{{ col_price }}</span>
+              {%- if section.settings.currency_code != blank -%}
+                <span class="cmp-price__code" data-field="currency">{{ section.settings.currency_code }}</span>
+              {%- endif -%}
+            </p>
+            <a class="cmp-btn" data-field="button" href="{{ col_url }}">{{ col_btn }}</a>
+            <a class="cmp-explore" data-field="explore" href="{{ col_url }}">{{ col_explore }}</a>
+            <div class="cmp-stats">
+              {%- for i in (1..3) -%}
+                {%- liquid
+                  case i
+                    when 1
+                      assign stat_value = col_block.settings.stat_1_value
+                      assign stat_label = col_block.settings.stat_1_label
+                    when 2
+                      assign stat_value = col_block.settings.stat_2_value
+                      assign stat_label = col_block.settings.stat_2_label
+                    else
+                      assign stat_value = col_block.settings.stat_3_value
+                      assign stat_label = col_block.settings.stat_3_label
+                  endcase
+                -%}
+                <div class="cmp-stat" data-stat="{{ i | minus: 1 }}" {% if stat_value == blank %}hidden{% endif %}>
+                  <span class="cmp-stat__value" data-field="stat-value">{{ stat_value }}</span>
+                  <span class="cmp-stat__label" data-field="stat-label">{{ stat_label }}</span>
+                </div>
+              {%- endfor -%}
+            </div>
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="cmp-insights">
+      {%- for col in (0..1) -%}
+        {%- liquid
+          if col == 0
+            assign col_block = cmp_p0
+          else
+            assign col_block = cmp_p1
+          endif
+        -%}
+        <div data-cmp-card="{{ col }}">
+          {%- if col_block != blank -%}
+            <p class="cmp-eyebrow" data-field="card-eyebrow">{{ col_block.settings.card_eyebrow }}</p>
+            <h3 class="cmp-card__title" data-field="card-title">{{ col_block.settings.card_title }}</h3>
+            <p class="cmp-card__text" data-field="card-text">{{ col_block.settings.card_text }}</p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <div class="cmp-sticky" data-cmp-sticky>
+    <div class="cmp-shell">
+      <div class="cmp-sticky__grid">
+        <div class="cmp-sticky__label">{{ section.settings.sticky_label }}</div>
+        {%- for col in (0..1) -%}
+          {%- liquid
+            assign col_title = ''
+            assign col_url = ''
+            if col == 0
+              assign col_block = cmp_p0
+            else
+              assign col_block = cmp_p1
+            endif
+            if col_block != blank
+              assign col_product = col_block.settings.product
+              assign col_title = col_block.settings.title | default: col_product.title
+              assign col_url = col_block.settings.button_link | default: col_product.url
+            endif
+          -%}
+          <div class="cmp-sticky__prod" data-cmp-sticky="{{ col }}">
+            <span class="cmp-sticky__name" data-field="sticky-title">{{ col_title }}</span>
+            <a class="cmp-sticky__link" data-field="sticky-link" href="{{ col_url }}">{{ section.settings.choose_label }}</a>
+          </div>
+        {%- endfor -%}
+      </div>
+      <nav class="cmp-tabs" aria-label="{{ section.settings.sticky_label | escape }}">
+        {%- assign cmp_tab_first = true -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'category' and block.settings.handle != blank -%}
+            <a href="#cmp-{{ section.id }}-{{ block.settings.handle | handleize }}" data-cmp-tab {% if cmp_tab_first %}class="is-active"{% endif %}>{{ block.settings.title }}</a>
+            {%- assign cmp_tab_first = false -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </nav>
+    </div>
+  </div>
+
+  <div class="cmp-shell">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'category' and block.settings.handle != blank -%}
+        <section class="cmp-cat" id="cmp-{{ section.id }}-{{ block.settings.handle | handleize }}" data-cmp-cat {{ block.shopify_attributes }}>
+          <div class="cmp-cat__head">
+            <h2 class="cmp-cat__title">{{ block.settings.title }}</h2>
+            {%- if block.settings.description != blank -%}
+              <p class="cmp-cat__desc">{{ block.settings.description }}</p>
+            {%- endif -%}
+          </div>
+          <div class="cmp-rows">
+            {%- assign cat_handle = block.settings.handle | strip | handleize -%}
+            {%- for spec in section.blocks -%}
+              {%- assign spec_cat = spec.settings.category | strip | handleize -%}
+              {%- if spec.type == 'spec' and spec_cat == cat_handle -%}
+                <div class="cmp-row{% if spec.settings.highlight %} is-highlight{% endif %}" {{ spec.shopify_attributes }}>
+                  <div class="cmp-row__label">{{ spec.settings.label }}</div>
+                  {%- for col in (0..1) -%}
+                    {%- liquid
+                      assign spec_source = ''
+                      if col == 0 and cmp_p0 != blank
+                        assign spec_source = cmp_p0.settings.specs
+                      elsif col == 1 and cmp_p1 != blank
+                        assign spec_source = cmp_p1.settings.specs
+                      endif
+                      assign cell_value = '—'
+                      assign cell_note = ''
+                      assign cell_accent = false
+                      assign spec_lines = spec_source | newline_to_br | split: '<br />'
+                      assign spec_key = spec.settings.key | strip
+                      for line in spec_lines
+                        assign clean = line | strip | replace: '<br />', '' | replace: '<br>', ''
+                        assign parts = clean | split: '|'
+                        assign line_key = parts[0] | strip
+                        if line_key == spec_key
+                          assign cell_value = parts[1] | default: '—' | strip
+                          assign cell_note = parts[2] | default: '' | strip
+                          assign cell_tone = parts[3] | default: '' | strip | downcase
+                          if cell_note == 'accent'
+                            assign cell_accent = true
+                            assign cell_note = ''
+                          elsif cell_tone == 'accent'
+                            assign cell_accent = true
+                          endif
+                          break
+                        endif
+                      endfor
+                    -%}
+                    <div class="cmp-row__val{% if cell_accent %} is-accent{% endif %}" data-cmp-spec="{{ spec_key | escape }}" data-cmp-col="{{ col }}">
+                      <span class="cmp-spec-value" data-spec-value>{{ cell_value }}</span>
+                      <span class="cmp-spec-note" data-spec-note {% if cell_note == blank %}hidden{% endif %}>{{ cell_note }}</span>
+                    </div>
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </section>
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if section.settings.footnote != blank -%}
+      <div class="cmp-footnote">{{ section.settings.footnote }}</div>
+    {%- endif -%}
+  </div>
+
+  <script type="application/json" data-cmp-data>
+    [
+      {%- assign json_sep = '' -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'product' -%}
+          {%- liquid
+            assign j_product = block.settings.product
+            assign j_title = block.settings.title | default: j_product.title
+            assign j_image = block.settings.image | default: j_product.featured_image
+            assign j_url = block.settings.button_link | default: j_product.url
+            assign j_price = block.settings.price_text
+            if j_price == blank and j_product != blank
+              assign j_price = j_product.price | money_without_trailing_zeros
+            endif
+            assign j_btn = block.settings.button_label
+            if j_btn == blank
+              assign j_btn = 'Choose ' | append: j_title
+            endif
+            assign j_explore = block.settings.explore_label | default: section.settings.explore_label
+          -%}
+          {{ json_sep }}
+          {
+            "id": {{ block.id | json }},
+            "title": {{ j_title | json }},
+            "url": {{ j_url | json }},
+            "eyebrow": {{ block.settings.eyebrow | json }},
+            "description": {{ block.settings.description | json }},
+            "price": {{ j_price | json }},
+            "button": {{ j_btn | json }},
+            "explore": {{ j_explore | json }},
+            "image": {% if j_image != blank %}{
+              "src": {{ j_image | image_url: width: 480 | json }},
+              "srcset": "{{ j_image | image_url: width: 240 }} 240w, {{ j_image | image_url: width: 360 }} 360w, {{ j_image | image_url: width: 480 }} 480w",
+              "width": 480,
+              "height": {{ 480 | divided_by: j_image.aspect_ratio | round }},
+              "alt": {{ j_image.alt | default: j_title | json }}
+            }{% else %}null{% endif %},
+            "stats": [
+              { "value": {{ block.settings.stat_1_value | json }}, "label": {{ block.settings.stat_1_label | json }} },
+              { "value": {{ block.settings.stat_2_value | json }}, "label": {{ block.settings.stat_2_label | json }} },
+              { "value": {{ block.settings.stat_3_value | json }}, "label": {{ block.settings.stat_3_label | json }} }
+            ],
+            "card": {
+              "eyebrow": {{ block.settings.card_eyebrow | json }},
+              "title": {{ block.settings.card_title | json }},
+              "text": {{ block.settings.card_text | json }}
+            },
+            "specs": {
+              {%- assign spec_sep = '' -%}
+              {%- assign spec_lines = block.settings.specs | newline_to_br | split: '<br />' -%}
+              {%- for line in spec_lines -%}
+                {%- liquid
+                  assign clean = line | strip | replace: '<br />', '' | replace: '<br>', ''
+                  assign parts = clean | split: '|'
+                  assign skey = parts[0] | strip
+                  assign sval = parts[1] | default: '' | strip
+                  assign snote = parts[2] | default: '' | strip
+                  assign stone = parts[3] | default: '' | strip | downcase
+                  assign saccent = false
+                  if snote == 'accent'
+                    assign saccent = true
+                    assign snote = ''
+                  elsif stone == 'accent'
+                    assign saccent = true
+                  endif
+                -%}
+                {%- if skey != blank -%}
+                  {{ spec_sep }}{{ skey | json }}: { "value": {{ sval | json }}, "note": {{ snote | json }}, "accent": {% if saccent %}true{% else %}false{% endif %} }
+                  {%- assign spec_sep = ',' -%}
+                {%- endif -%}
+              {%- endfor -%}
+            }
+          }
+          {%- assign json_sep = ',' -%}
+        {%- endif -%}
+      {%- endfor -%}
+    ]
+  </script>
+  <script>
+    (function () {
+      var root = document.getElementById('cmp-{{ section.id }}');
+      if (!root) return;
+      var dataEl = root.querySelector('[data-cmp-data]');
+      var products = [];
+      try { products = JSON.parse(dataEl.textContent); } catch (error) { return; }
+      var byId = {};
+      products.forEach(function (item) { byId[item.id] = item; });
+
+      function text(scope, field, value) {
+        var el = scope.querySelector('[data-field="' + field + '"]');
+        if (el) el.textContent = value || '';
+      }
+
+      function fill(col, product) {
+        if (!product) return;
+        var hero = root.querySelector('[data-cmp-col="' + col + '"]');
+        if (hero) {
+          text(hero, 'eyebrow', product.eyebrow);
+          text(hero, 'title', product.title);
+          text(hero, 'description', product.description);
+          text(hero, 'price', product.price);
+          var button = hero.querySelector('[data-field="button"]');
+          var explore = hero.querySelector('[data-field="explore"]');
+          if (button) {
+            button.textContent = product.button || '';
+            if (product.url) button.href = product.url;
+          }
+          if (explore) {
+            explore.textContent = product.explore || '';
+            if (product.url) explore.href = product.url;
+          }
+          var img = hero.querySelector('[data-field="image"]');
+          if (img) {
+            if (product.image && product.image.src) {
+              img.src = product.image.src;
+              img.srcset = product.image.srcset || '';
+              img.alt = product.image.alt || product.title || '';
+              img.width = product.image.width || 800;
+              img.height = product.image.height || 500;
+              img.hidden = false;
+            } else {
+              img.removeAttribute('src');
+              img.removeAttribute('srcset');
+              img.hidden = true;
+            }
+          }
+          (product.stats || []).forEach(function (stat, index) {
+            var item = hero.querySelector('[data-stat="' + index + '"]');
+            if (!item) return;
+            item.hidden = !stat.value;
+            var valueEl = item.querySelector('[data-field="stat-value"]');
+            var labelEl = item.querySelector('[data-field="stat-label"]');
+            if (valueEl) valueEl.textContent = stat.value || '';
+            if (labelEl) labelEl.textContent = stat.label || '';
+          });
+        }
+        var card = root.querySelector('[data-cmp-card="' + col + '"]');
+        if (card && product.card) {
+          text(card, 'card-eyebrow', product.card.eyebrow);
+          text(card, 'card-title', product.card.title);
+          text(card, 'card-text', product.card.text);
+        }
+        var sticky = root.querySelector('[data-cmp-sticky="' + col + '"]');
+        if (sticky) {
+          text(sticky, 'sticky-title', product.title);
+          var link = sticky.querySelector('[data-field="sticky-link"]');
+          if (link && product.url) link.href = product.url;
+        }
+        root.querySelectorAll('[data-cmp-spec][data-cmp-col="' + col + '"]').forEach(function (cell) {
+          var spec = (product.specs && product.specs[cell.getAttribute('data-cmp-spec')]) || { value: '—', note: '', accent: false };
+          var valueEl = cell.querySelector('[data-spec-value]');
+          var noteEl = cell.querySelector('[data-spec-note]');
+          if (valueEl) valueEl.textContent = spec.value || '—';
+          if (noteEl) {
+            noteEl.textContent = spec.note || '';
+            noteEl.hidden = !spec.note;
+          }
+          cell.classList.toggle('is-accent', !!spec.accent);
+        });
+      }
+
+      function setPickerValue(picker, id) {
+        picker.setAttribute('data-current', id);
+        var valueEl = picker.querySelector('.cmp-picker__value');
+        if (valueEl && byId[id]) valueEl.textContent = byId[id].title;
+        picker.querySelectorAll('.cmp-picker__option').forEach(function (opt) {
+          var on = opt.getAttribute('data-value') === id;
+          opt.classList.toggle('is-selected', on);
+          opt.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+      }
+
+      function closePicker(picker) {
+        picker.classList.remove('is-open');
+        var btn = picker.querySelector('.cmp-picker__btn');
+        var menu = picker.querySelector('.cmp-picker__menu');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+        if (menu) menu.hidden = true;
+      }
+
+      root.querySelectorAll('[data-cmp-select]').forEach(function (picker) {
+        var btn = picker.querySelector('.cmp-picker__btn');
+        if (btn) {
+          btn.addEventListener('click', function () {
+            if (picker.classList.contains('is-open')) {
+              closePicker(picker);
+              return;
+            }
+            root.querySelectorAll('.cmp-picker.is-open').forEach(closePicker);
+            picker.classList.add('is-open');
+            btn.setAttribute('aria-expanded', 'true');
+            var menu = picker.querySelector('.cmp-picker__menu');
+            if (menu) menu.hidden = false;
+          });
+        }
+        picker.querySelectorAll('.cmp-picker__option').forEach(function (opt) {
+          opt.addEventListener('click', function () {
+            var col = picker.getAttribute('data-cmp-select');
+            var prev = picker.getAttribute('data-current');
+            var next = opt.getAttribute('data-value');
+            var other = root.querySelector('[data-cmp-select]:not([data-cmp-select="' + col + '"])');
+            if (other && other.getAttribute('data-current') === next && prev) {
+              setPickerValue(other, prev);
+              fill(other.getAttribute('data-cmp-select'), byId[prev]);
+            }
+            setPickerValue(picker, next);
+            fill(col, byId[next]);
+            closePicker(picker);
+          });
+        });
+      });
+
+      document.addEventListener('click', function (event) {
+        if (event.target.closest('#' + root.id + ' .cmp-picker')) return;
+        root.querySelectorAll('.cmp-picker.is-open').forEach(closePicker);
+      });
+      document.addEventListener('keydown', function (event) {
+        if (event.key !== 'Escape') return;
+        root.querySelectorAll('.cmp-picker.is-open').forEach(closePicker);
+      });
+
+      var stickyBar = root.querySelector('[data-cmp-sticky]');
+      function syncSticky() {
+        if (!stickyBar) return;
+        root.style.setProperty('--cmp-sticky-h', stickyBar.offsetHeight + 'px');
+      }
+      syncSticky();
+      window.addEventListener('resize', syncSticky, { passive: true });
+
+      var tabs = root.querySelectorAll('[data-cmp-tab]');
+      var cats = Array.prototype.slice.call(root.querySelectorAll('[data-cmp-cat]'));
+      var tabFrame = 0;
+      var activeCatId = '';
+      function revealTab(tab) {
+        var nav = tab.closest('.cmp-tabs');
+        if (!nav) return;
+        var navRect = nav.getBoundingClientRect();
+        var tabRect = tab.getBoundingClientRect();
+        var delta = tabRect.left - navRect.left - (nav.clientWidth - tabRect.width) / 2;
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        nav.scrollTo({ left: Math.max(0, nav.scrollLeft + delta), behavior: reduce ? 'auto' : 'smooth' });
+      }
+      function setActiveTab() {
+        if (!cats.length) return;
+        var anchor = stickyBar ? stickyBar.getBoundingClientRect().bottom + 48 : 80;
+        var current = cats[0];
+        cats.forEach(function (cat) {
+          if (cat.getBoundingClientRect().top <= anchor) current = cat;
+        });
+        var activeTab = null;
+        tabs.forEach(function (tab) {
+          var on = tab.getAttribute('href') === '#' + current.id;
+          tab.classList.toggle('is-active', on);
+          if (on) activeTab = tab;
+        });
+        if (current.id !== activeCatId && activeTab) {
+          activeCatId = current.id;
+          revealTab(activeTab);
+        }
+      }
+      function onTabScroll() {
+        if (tabFrame) return;
+        tabFrame = requestAnimationFrame(function () {
+          tabFrame = 0;
+          setActiveTab();
+        });
+      }
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          tabs.forEach(function (item) {
+            item.classList.toggle('is-active', item === tab);
+          });
+          activeCatId = (tab.getAttribute('href') || '').replace('#', '');
+          revealTab(tab);
+        });
+      });
+      window.addEventListener('scroll', onTabScroll, { passive: true });
+      window.addEventListener('resize', onTabScroll, { passive: true });
+      setActiveTab();
+    })();
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "产品对比",
+  "tag": "section",
+  "class": "aotos-product-compare-section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "heading", "label": "页面标题（读屏）", "default": "Compare your ride" },
+    { "type": "text", "id": "model_prefix", "label": "下拉前缀", "default": "MODEL" },
+    { "type": "text", "id": "currency_code", "label": "货币代码", "default": "USD" },
+    { "type": "text", "id": "explore_label", "label": "探索链接文案", "default": "Explore this model ↗" },
+    { "type": "text", "id": "sticky_label", "label": "吸顶左侧文案", "default": "Compare your ride" },
+    { "type": "text", "id": "choose_label", "label": "吸顶链接文案", "default": "Choose model ↗" },
+    { "type": "text", "id": "footnote", "label": "表底注释", "default": "*Range, peak output and listed top speed depend on mode, rider, terrain and conditions." },
+    { "type": "range", "id": "padding_top", "label": "PC 上边距", "min": 0, "max": 160, "step": 4, "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "PC 下边距", "min": 0, "max": 160, "step": 4, "default": 80 },
+    { "type": "range", "id": "padding_top_mobile", "label": "手机上边距", "min": 0, "max": 160, "step": 4, "default": 88 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "手机下边距", "min": 0, "max": 160, "step": 4, "default": 88 }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "可选产品",
+      "settings": [
+        { "type": "product", "id": "product", "label": "产品" },
+        { "type": "checkbox", "id": "show_in_dropdown", "label": "出现在下拉选项", "info": "关闭后不进入下拉数据源，仍可作为左右默认对比产品", "default": true },
+        { "type": "text", "id": "title", "label": "显示名称", "info": "留空则用产品标题" },
+        { "type": "image_picker", "id": "image", "label": "产品图", "info": "留空则用产品主图" },
+        { "type": "text", "id": "eyebrow", "label": "眉题" },
+        { "type": "textarea", "id": "description", "label": "简介" },
+        { "type": "text", "id": "price_text", "label": "价格", "info": "留空则用产品现价" },
+        { "type": "text", "id": "button_label", "label": "按钮文案" },
+        { "type": "url", "id": "button_link", "label": "按钮 / 探索链接", "info": "留空则用产品链接" },
+        { "type": "text", "id": "explore_label", "label": "探索链接文案", "info": "留空用区块统一文案" },
+        { "type": "text", "id": "stat_1_value", "label": "数据 1" },
+        { "type": "text", "id": "stat_1_label", "label": "数据 1 说明" },
+        { "type": "text", "id": "stat_2_value", "label": "数据 2" },
+        { "type": "text", "id": "stat_2_label", "label": "数据 2 说明" },
+        { "type": "text", "id": "stat_3_value", "label": "数据 3" },
+        { "type": "text", "id": "stat_3_label", "label": "数据 3 说明" },
+        { "type": "text", "id": "card_eyebrow", "label": "底部卡片眉题" },
+        { "type": "text", "id": "card_title", "label": "底部卡片标题" },
+        { "type": "textarea", "id": "card_text", "label": "底部卡片正文" },
+        {
+          "type": "textarea",
+          "id": "specs",
+          "label": "参数",
+          "info": "每行一条，key 要和参数行一致：key | 数值 | 补充说明 | accent。accent 可选，数值会用主题色。例：peak-output | 1,200 W | In Boost mode"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "name": "参数分类",
+      "settings": [
+        { "type": "text", "id": "title", "label": "分类名称", "default": "Power & performance" },
+        { "type": "text", "id": "handle", "label": "分类 ID", "info": "英文短横线，参数行的「所属分类」填同一个，如 power", "default": "power" },
+        { "type": "textarea", "id": "description", "label": "分类说明" }
+      ]
+    },
+    {
+      "type": "spec",
+      "name": "参数行",
+      "settings": [
+        { "type": "text", "id": "category", "label": "所属分类 ID", "default": "power" },
+        { "type": "text", "id": "key", "label": "参数 key", "info": "和产品参数里的 key 对应", "default": "rated-motor" },
+        { "type": "text", "id": "label", "label": "参数名", "default": "Rated motor power" },
+        { "type": "checkbox", "id": "highlight", "label": "高亮这一行", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "产品对比" }
+  ]
+}
+{% endschema %}
