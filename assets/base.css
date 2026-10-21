@@ -1283,6 +1283,18 @@ button.shopify-payment-button__button--unbranded {
   z-index: auto;
 }
 
+shopify-buy-it-now-button {
+  --shopify-accelerated-checkout-button-background-color: var(--aotos-theme-color, #ff6501);
+  --shopify-accelerated-checkout-button-color: #fff;
+}
+
+.shopify-payment-button__button--unbranded,
+.shopify-payment-button__button--unbranded:hover,
+.shopify-payment-button__button--unbranded:hover:not([disabled]) {
+  background-color: var(--aotos-theme-color, #ff6501) !important;
+  color: #fff !important;
+}
+
 .cart__dynamic-checkout-buttons iframe {
   box-shadow: var(--shadow-horizontal-offset) var(--shadow-vertical-offset) var(--shadow-blur-radius)
     rgba(var(--color-shadow), var(--shadow-opacity));
