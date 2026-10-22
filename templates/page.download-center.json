@@ -47,9 +47,9 @@
         "eyebrow": "Overview",
         "title": "One App For Everything",
         "image": "shopify://shop_images/Engineered_Strength._Precision_Form._983854fe-7386-4499-bce9-64bcb883edee.webp",
-        "padding_top": 80,
+        "padding_top": 0,
         "padding_bottom": 80,
-        "padding_top_mobile": 88,
+        "padding_top_mobile": 0,
         "padding_bottom_mobile": 88
       }
     },
@@ -92,9 +92,9 @@
         "muted_text_color": "#333333",
         "active_bg_color": "#f3f3f3",
         "title": "Full Control, Full Freedom",
-        "padding_top": 80,
+        "padding_top": 0,
         "padding_bottom": 80,
-        "padding_top_mobile": 88,
+        "padding_top_mobile": 0,
         "padding_bottom_mobile": 88
       }
     }
