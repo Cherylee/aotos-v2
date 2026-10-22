@@ -959,6 +959,16 @@
     "flux_experts": {
       "type": "aotos-flux-experts",
       "blocks": {
+        "youtube_item_aLnqGH": {
+          "type": "youtube_item",
+          "settings": {
+            "video_url": "https://www.youtube.com/watch?v=41aybM92_LE",
+            "date": "",
+            "title": "I Tried Learning to Wheelie a BMX Bike",
+            "author_name": "Sunhatkid",
+            "author_image": "shopify://shop_images/channels4_profile_4219a2f1-a50e-41ad-8620-1a46a4b990a0.jpg"
+          }
+        },
         "youtube_item_8QNGfd": {
           "type": "youtube_item",
           "settings": {
@@ -1036,6 +1046,16 @@
             "author_image": "shopify://shop_images/flux26_slide4.jpg"
           }
         },
+        "youtube_item_JrNmfK": {
+          "type": "youtube_item",
+          "settings": {
+            "video_url": "https://www.youtube.com/watch?v=1r9MPr2AFZY&t=8s",
+            "date": "",
+            "title": "35MPH I Reached AOTOS FLUX X26 Electric Bike",
+            "author_name": "Create Beyond Boundaries",
+            "author_image": "shopify://shop_images/channels4_profile_1_c3c03169-5e0c-4a5a-a472-33abe60aaf77.jpg"
+          }
+        },
         "instagram_item_rx7PPw": {
           "type": "instagram_item",
           "settings": {
@@ -1066,6 +1086,7 @@
         }
       },
       "block_order": [
+        "youtube_item_aLnqGH",
         "youtube_item_8QNGfd",
         "youtube_item_wydQgL",
         "youtube_item_9rGD4w",
@@ -1073,6 +1094,7 @@
         "yt_1",
         "yt_2",
         "yt_3",
+        "youtube_item_JrNmfK",
         "instagram_item_rx7PPw",
         "instagram_item_WrwzkT",
         "ig_5",

@@ -534,6 +534,8 @@ html.fxb-anchor-stuck:has(.section-header.shopify-section-header-sticky:not(.sho
 .fxb-experts__track::-webkit-scrollbar { display: none; }
 
 .fxb-experts__card {
+  display: flex;
+  flex-direction: column;
   flex: 0 0 calc((100% - 32 * var(--rem)) / 3);
   scroll-snap-align: start;
   border-radius: calc(16 * var(--rem));
@@ -606,11 +608,14 @@ html.fxb-anchor-stuck:has(.section-header.shopify-section-header-sticky:not(.sho
 }
 
 .fxb-experts__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   padding: calc(14 * var(--rem));
 }
 
 .fxb-experts__name {
-  margin: 0 0 calc(12 * var(--rem));
+  margin: 0;
   font-size: calc(14 * var(--rem));
   line-height: calc(22* var(--rem));
   font-weight: 600;
@@ -621,6 +626,8 @@ html.fxb-anchor-stuck:has(.section-header.shopify-section-header-sticky:not(.sho
   display: flex;
   align-items: center;
   gap: calc(8 * var(--rem));
+  margin-top: auto;
+  padding-top: calc(12 * var(--rem));
   color: #bbb;
   font-size: calc(12 * var(--rem));
 }
