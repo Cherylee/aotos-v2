@@ -564,6 +564,60 @@
         "padding_bottom_mobile": 88
       }
     },
+    "home_explore_cards": {
+      "type": "home-explore-cards",
+      "blocks": {
+        "explore_media": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1_compressed_266be994-afd9-45fa-8973-4f475144f5a8_1.webp",
+            "image_alt": "AOTOS featured media",
+            "icon": "shopify://shop_images/Video_2.webp",
+            "title": "Featured in the Media",
+            "text": "Press highlights & Expert Reviews on AOTOS",
+            "button_label": "Learn More",
+            "button_link": "shopify://pages/what-the-press-is-saying-about-flux-x26-pro"
+          }
+        },
+        "explore_collaborate": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/8_61ffdd95-83f2-458b-b632-842b23a3f347_1.webp",
+            "image_alt": "Collaborate with AOTOS",
+            "icon": "shopify://shop_images/User.webp",
+            "title": "Collaborate with AOTOS",
+            "text": "Join our affiliate network and be part of the future of electric riding",
+            "button_label": "Learn More",
+            "button_link": "shopify://pages/partner-with-aotos"
+          }
+        },
+        "explore_support": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/4_ea368923-2032-418e-b1b3-14e642eecd3c.webp",
+            "image_alt": "AOTOS service and support",
+            "icon": "shopify://shop_images/Headphones_1.webp",
+            "title": "Service and Support",
+            "text": "Get help for all your AOTOS products",
+            "button_label": "Learn More",
+            "button_link": "shopify://pages/support-center"
+          }
+        }
+      },
+      "block_order": [
+        "explore_media",
+        "explore_collaborate",
+        "explore_support"
+      ],
+      "settings": {
+        "heading": "Explore More",
+        "subtitle": "Discover how AOTOS is shaping the future of electric riding.",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0
+      }
+    },
     "home_press_logos": {
       "type": "home-press-logos",
       "blocks": {
@@ -619,63 +673,9 @@
         "highsnobiety"
       ],
       "settings": {
-        "padding_top": 40,
-        "padding_bottom": 40,
-        "padding_top_mobile": 48,
-        "padding_bottom_mobile": 48
-      }
-    },
-    "home_explore_cards": {
-      "type": "home-explore-cards",
-      "blocks": {
-        "explore_media": {
-          "type": "card",
-          "settings": {
-            "image": "shopify://shop_images/Frame_1_compressed_266be994-afd9-45fa-8973-4f475144f5a8_1.webp",
-            "image_alt": "AOTOS featured media",
-            "icon": "shopify://shop_images/Video_2.webp",
-            "title": "Featured in the Media",
-            "text": "Press highlights & Expert Reviews on AOTOS",
-            "button_label": "Learn More",
-            "button_link": "shopify://pages/what-the-press-is-saying-about-flux-x26-pro"
-          }
-        },
-        "explore_collaborate": {
-          "type": "card",
-          "settings": {
-            "image": "shopify://shop_images/8_61ffdd95-83f2-458b-b632-842b23a3f347_1.webp",
-            "image_alt": "Collaborate with AOTOS",
-            "icon": "shopify://shop_images/User.webp",
-            "title": "Collaborate with AOTOS",
-            "text": "Join our affiliate network and be part of the future of electric riding",
-            "button_label": "Learn More",
-            "button_link": "shopify://pages/partner-with-aotos"
-          }
-        },
-        "explore_support": {
-          "type": "card",
-          "settings": {
-            "image": "shopify://shop_images/4_ea368923-2032-418e-b1b3-14e642eecd3c.webp",
-            "image_alt": "AOTOS service and support",
-            "icon": "shopify://shop_images/Headphones_1.webp",
-            "title": "Service and Support",
-            "text": "Get help for all your AOTOS products",
-            "button_label": "Learn More",
-            "button_link": "shopify://pages/support-center"
-          }
-        }
-      },
-      "block_order": [
-        "explore_media",
-        "explore_collaborate",
-        "explore_support"
-      ],
-      "settings": {
-        "heading": "Explore More",
-        "subtitle": "Discover how AOTOS is shaping the future of electric riding.",
-        "padding_top": 0,
+        "padding_top": 80,
         "padding_bottom": 80,
-        "padding_top_mobile": 0,
+        "padding_top_mobile": 88,
         "padding_bottom_mobile": 88
       }
     },
@@ -800,8 +800,8 @@
     "safety_certified_hero_4AnbLr",
     "home_split_cards",
     "home_rider_stories",
-    "home_press_logos",
     "home_explore_cards",
+    "home_press_logos",
     "home_dealer_card",
     "home_spotlight",
     "home_app_card"
