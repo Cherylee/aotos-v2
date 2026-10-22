@@ -31,6 +31,8 @@
                 {%- if cover != blank -%}
                   {%- assign cover_h = 640 | divided_by: cover.aspect_ratio | round -%}
                   <img src="{{ cover | image_url: width: 640 }}" srcset="{{ cover | image_url: width: 360 }} 360w, {{ cover | image_url: width: 640 }} 640w" sizes="(max-width: 768px) 82vw, 340px" width="640" height="{{ cover_h }}" alt="" loading="lazy">
+                {%- elsif yt_id != blank -%}
+                  <img src="https://img.youtube.com/vi/{{ yt_id }}/hqdefault.jpg" srcset="https://img.youtube.com/vi/{{ yt_id }}/mqdefault.jpg 320w, https://img.youtube.com/vi/{{ yt_id }}/hqdefault.jpg 480w" sizes="(max-width: 768px) 82vw, 340px" width="480" height="360" alt="" loading="lazy">
                 {%- endif -%}
                 {%- if yt_id != blank -%}
                   <button type="button" class="fxb-experts__play" data-fxb-yt="{{ yt_id }}" aria-label="{{ block.settings.title | escape }}">
