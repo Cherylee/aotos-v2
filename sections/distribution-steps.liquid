@@ -1,0 +1,230 @@
+{% render 'gsap-title-reveal' %}
+{% render 'aotos-fd-enter' %}
+
+{%- style -%}
+  #dist-steps-{{ section.id }} {
+    background: {{ section.settings.background_color | default: '#f7f8f9' }};
+    color: #111111;
+    padding-top: calc({{ section.settings.padding_top | default: 80, allow_false: true }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80, allow_false: true }} * var(--rem));
+  }
+
+  #dist-steps-{{ section.id }} * { box-sizing: border-box; }
+
+  #dist-steps-{{ section.id }} .dist-steps__shell {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  #dist-steps-{{ section.id }} .dist-steps__eyebrow {
+    margin: 0 0 calc(16 * var(--rem));
+    color: #ff6501;
+    font-size: calc(14 * var(--rem));
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  #dist-steps-{{ section.id }} .dist-steps__title {
+    margin: 0 0 calc(40 * var(--rem));
+    color: #111111;
+    font-size: calc(40 * var(--rem));
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  #dist-steps-{{ section.id }} .dist-steps__track {
+    display: flex;
+    align-items: stretch;
+  }
+
+  #dist-steps-{{ section.id }} .dist-steps__card {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+    margin-right: calc(32 * var(--rem));
+    padding: calc(28 * var(--rem)) calc(16 * var(--rem));
+    border: 1px solid #e4e4e4;
+    border-radius: calc(10 * var(--rem));
+    background: #ffffff;
+    text-align: center;
+  }
+
+  #dist-steps-{{ section.id }} .dist-steps__card:last-child { margin-right: 0; }
+
+  #dist-steps-{{ section.id }} .dist-steps__card:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: calc(-22 * var(--rem));
+    width: calc(8 * var(--rem));
+    height: calc(8 * var(--rem));
+    border-top: 2px solid #111111;
+    border-right: 2px solid #111111;
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+  #dist-steps-{{ section.id }} .dist-steps__num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(28 * var(--rem));
+    height: calc(28 * var(--rem));
+    margin-bottom: calc(16 * var(--rem));
+    border-radius: 50%;
+    background: #ff6501;
+    color: #ffffff;
+    font-size: calc(13 * var(--rem));
+    font-weight: 700;
+  }
+
+  #dist-steps-{{ section.id }} .dist-steps__icon {
+    width: calc(36 * var(--rem));
+    height: calc(36 * var(--rem));
+    margin-bottom: calc(12 * var(--rem));
+    color: #111111;
+  }
+
+  #dist-steps-{{ section.id }} .dist-steps__icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  #dist-steps-{{ section.id }} .dist-steps__name {
+    margin: 0 0 calc(8 * var(--rem));
+    color: #111111;
+    font-size: calc(12 * var(--rem));
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  #dist-steps-{{ section.id }} .dist-steps__text {
+    margin: 0;
+    color: #8a8a8a;
+    font-size: calc(10 * var(--rem));
+    line-height: 1.45;
+  }
+
+  @media screen and (max-width: 768px) {
+    #dist-steps-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }} * var(--rem));
+    }
+
+    #dist-steps-{{ section.id }} .dist-steps__shell {
+      width: 100%;
+      padding: 0 calc(40 * var(--rem));
+    }
+
+    #dist-steps-{{ section.id }} .dist-steps__eyebrow { font-size: calc(24 * var(--rem)); }
+    #dist-steps-{{ section.id }} .dist-steps__title {
+      margin-bottom: calc(28 * var(--rem));
+      font-size: calc(44 * var(--rem));
+    }
+
+    #dist-steps-{{ section.id }} .dist-steps__track {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: calc(16 * var(--rem));
+    }
+
+    #dist-steps-{{ section.id }} .dist-steps__card {
+      margin-right: 0;
+      padding: calc(24 * var(--rem)) calc(16 * var(--rem));
+      border-radius: calc(14 * var(--rem));
+    }
+
+    #dist-steps-{{ section.id }} .dist-steps__card::after { display: none; }
+    #dist-steps-{{ section.id }} .dist-steps__num {
+      width: calc(36 * var(--rem));
+      height: calc(36 * var(--rem));
+      font-size: calc(18 * var(--rem));
+    }
+    #dist-steps-{{ section.id }} .dist-steps__icon {
+      width: calc(44 * var(--rem));
+      height: calc(44 * var(--rem));
+    }
+    #dist-steps-{{ section.id }} .dist-steps__name { font-size: calc(22 * var(--rem)); }
+    #dist-steps-{{ section.id }} .dist-steps__text { font-size: calc(18 * var(--rem)); line-height: 1.4; }
+  }
+{%- endstyle -%}
+
+<section id="dist-steps-{{ section.id }}">
+  <div class="dist-steps__shell">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="dist-steps__eyebrow fd-anim fd-fade-up">{{ section.settings.eyebrow | escape }}</p>
+    {%- endif -%}
+    {%- if section.settings.title != blank -%}
+      <h2 class="dist-steps__title gsap-title-reveal">{{ section.settings.title | escape }}</h2>
+    {%- endif -%}
+    <div class="dist-steps__track fd-anim fd-stagger">
+      {%- for block in section.blocks -%}
+        <div class="dist-steps__card fd-stagger__item" {{ block.shopify_attributes }}>
+          <span class="dist-steps__num">{{ forloop.index }}</span>
+          <div class="dist-steps__icon">
+            {%- case block.settings.icon_type -%}
+              {%- when 'profile' -%}
+                <svg viewBox="0 0 36 36" fill="none" aria-hidden="true"><rect x="8" y="6" width="20" height="24" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M12 14H24M12 18H24M12 22H18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              {%- when 'search' -%}
+                <svg viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M22 22L28 28" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              {%- when 'check' -%}
+                <svg viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M13 18L16 21L23 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              {%- when 'link' -%}
+                <svg viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M14 20L10 24L14 28" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M10 24H22C25 24 28 21 28 18V14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              {%- else -%}
+                <svg viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="14" cy="12" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M6 28C6 23 9 20 14 20H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M26 24V28M24 26H28" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            {%- endcase -%}
+          </div>
+          <p class="dist-steps__name">{{ block.settings.step_title | escape }}</p>
+          <p class="dist-steps__text">{{ block.settings.text | escape }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "分销步骤",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "color", "id": "background_color", "label": "背景", "default": "#f7f8f9" },
+    { "type": "text", "id": "eyebrow", "label": "眉题", "default": "Get Started" },
+    { "type": "text", "id": "title", "label": "标题", "default": "Start Earning With AOTOS" },
+    { "type": "range", "id": "padding_top", "label": "PC 上边距", "min": 0, "max": 160, "step": 4, "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "PC 下边距", "min": 0, "max": 160, "step": 4, "default": 80 },
+    { "type": "range", "id": "padding_top_mobile", "label": "手机上边距", "min": 0, "max": 160, "step": 4, "default": 88 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "手机下边距", "min": 0, "max": 160, "step": 4, "default": 88 }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "步骤",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "图标",
+          "default": "signup",
+          "options": [
+            { "value": "signup", "label": "注册" },
+            { "value": "profile", "label": "资料" },
+            { "value": "search", "label": "搜索" },
+            { "value": "check", "label": "通过" },
+            { "value": "link", "label": "链接" }
+          ]
+        },
+        { "type": "text", "id": "step_title", "label": "标题" },
+        { "type": "textarea", "id": "text", "label": "说明" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "分销步骤" }]
+}
+{% endschema %}

@@ -1,0 +1,195 @@
+{% render 'gsap-title-reveal' %}
+{% render 'aotos-fd-enter' %}
+
+{%- style -%}
+  #dist-cta-{{ section.id }} {
+    background: {{ section.settings.background_color | default: '#f7f8f9' }};
+    padding-top: calc({{ section.settings.padding_top | default: 80, allow_false: true }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80, allow_false: true }} * var(--rem));
+  }
+
+  #dist-cta-{{ section.id }} * { box-sizing: border-box; }
+
+  #dist-cta-{{ section.id }} .dist-cta__shell {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  #dist-cta-{{ section.id }} .dist-cta__card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: calc(180 * var(--rem));
+    overflow: hidden;
+    border: 1px solid #e4e4e4;
+    border-radius: calc(12 * var(--rem));
+    background: #ffffff;
+  }
+
+  #dist-cta-{{ section.id }} .dist-cta__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 85% center;
+  }
+
+  #dist-cta-{{ section.id }} .dist-cta__shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #fff 0%, #fff 36%, rgb(255 255 255 / 96%) 44%, rgb(255 255 255 / 72%) 56%, rgb(255 255 255 / 28%) 72%, rgb(255 255 255 / 0%) 100%);
+  }
+
+  #dist-cta-{{ section.id }} .dist-cta__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: calc(40 * var(--rem));
+    width: 100%;
+    padding: calc(36 * var(--rem)) calc(48 * var(--rem));
+  }
+
+  #dist-cta-{{ section.id }} .dist-cta__copy {
+    flex: 1;
+    min-width: 0;
+    max-width: calc(490 * var(--rem));
+  }
+
+  #dist-cta-{{ section.id }} .dist-cta__title {
+    margin: 0 0 calc(10 * var(--rem));
+    color: #111111;
+    font-size: calc(32 * var(--rem));
+    font-weight: 700;
+    line-height: 1.15;
+  }
+
+  #dist-cta-{{ section.id }} .dist-cta__text {
+    margin: 0;
+    color: #8a8a8a;
+    font-size: calc(15 * var(--rem));
+    line-height: 1.5;
+  }
+
+  #dist-cta-{{ section.id }} .dist-cta__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    min-height: calc(var(--aotos-button-height, 40) * var(--rem));
+    padding: 0 calc(24 * var(--rem));
+    border-radius: var(--buttons-radius, calc(40 * var(--rem)));
+    background: #ff6501;
+    color: #ffffff;
+    font-size: calc(var(--aotos-button-font-size, 14) * var(--rem));
+    font-weight: var(--aotos-button-font-weight, 600);
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  @media (hover: hover) {
+    #dist-cta-{{ section.id }} .dist-cta__btn:hover { opacity: 0.88; }
+  }
+
+  @media screen and (max-width: 768px) {
+    #dist-cta-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }} * var(--rem));
+    }
+
+    #dist-cta-{{ section.id }} .dist-cta__shell {
+      width: 100%;
+      padding: 0 calc(40 * var(--rem));
+    }
+
+    #dist-cta-{{ section.id }} .dist-cta__card {
+      min-height: calc(480 * var(--rem));
+      align-items: flex-end;
+    }
+
+    #dist-cta-{{ section.id }} .dist-cta__bg { object-position: 70% center; }
+
+    #dist-cta-{{ section.id }} .dist-cta__shade {
+      background: linear-gradient(180deg, rgb(255 255 255 / 5%) 0%, rgb(255 255 255 / 55%) 42%, rgb(255 255 255 / 92%) 62%, #fff 100%);
+    }
+
+    #dist-cta-{{ section.id }} .dist-cta__inner {
+      flex-direction: column;
+      align-items: stretch;
+      gap: calc(28 * var(--rem));
+      padding: calc(32 * var(--rem));
+    }
+
+    #dist-cta-{{ section.id }} .dist-cta__copy { max-width: none; }
+    #dist-cta-{{ section.id }} .dist-cta__title { font-size: calc(40 * var(--rem)); }
+    #dist-cta-{{ section.id }} .dist-cta__text { font-size: calc(26 * var(--rem)); }
+    #dist-cta-{{ section.id }} .dist-cta__btn {
+      min-height: calc(var(--aotos-button-height-mobile, 80) * var(--rem));
+      font-size: calc(var(--aotos-button-font-size-mobile, 22) * var(--rem));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #dist-cta-{{ section.id }} .dist-cta__btn { transition: none; }
+  }
+{%- endstyle -%}
+
+<section id="dist-cta-{{ section.id }}">
+  <div class="dist-cta__shell">
+    <div class="dist-cta__card fd-anim fd-fade-up">
+      {%- if section.settings.image != blank -%}
+        {%- assign cta_image = section.settings.image -%}
+        {%- assign cta_height = 1600 | divided_by: cta_image.aspect_ratio | round -%}
+        <img
+          class="dist-cta__bg"
+          src="{{ cta_image | image_url: width: 1600 }}"
+          srcset="{{ cta_image | image_url: width: 750 }} 750w, {{ cta_image | image_url: width: 1100 }} 1100w, {{ cta_image | image_url: width: 1600 }} 1600w"
+          sizes="(max-width: 768px) 92vw, 1100px"
+          width="1600"
+          height="{{ cta_height }}"
+          alt=""
+          loading="lazy"
+        >
+      {%- endif -%}
+      <div class="dist-cta__shade" aria-hidden="true"></div>
+      <div class="dist-cta__inner">
+        <div class="dist-cta__copy">
+          {%- if section.settings.title != blank -%}
+            <h2 class="dist-cta__title gsap-title-reveal">{{ section.settings.title | escape }}</h2>
+          {%- endif -%}
+          {%- if section.settings.text != blank -%}
+            <p class="dist-cta__text fd-anim fd-fade-up">{{ section.settings.text | escape }}</p>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.button_label != blank -%}
+          <a class="dist-cta__btn fd-anim fd-fade-up" href="{{ section.settings.button_link | default: '#' }}">{{ section.settings.button_label | escape }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "分销引导",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "color", "id": "background_color", "label": "背景", "default": "#f7f8f9" },
+    { "type": "text", "id": "title", "label": "标题", "default": "Ready to Ride With AOTOS?" },
+    { "type": "textarea", "id": "text", "label": "说明" },
+    { "type": "text", "id": "button_label", "label": "按钮" },
+    { "type": "url", "id": "button_link", "label": "按钮链接" },
+    { "type": "image_picker", "id": "image", "label": "背景图" },
+    { "type": "range", "id": "padding_top", "label": "PC 上边距", "min": 0, "max": 160, "step": 4, "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "PC 下边距", "min": 0, "max": 160, "step": 4, "default": 48 },
+    { "type": "range", "id": "padding_top_mobile", "label": "手机上边距", "min": 0, "max": 160, "step": 4, "default": 72 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "手机下边距", "min": 0, "max": 160, "step": 4, "default": 72 }
+  ],
+  "presets": [{ "name": "分销引导" }]
+}
+{% endschema %}

@@ -1,0 +1,244 @@
+{%- style -%}
+  #dl-features-{{ section.id }} {
+    background: {{ section.settings.background_color | default: '#ffffff' }};
+    color: {{ section.settings.text_color | default: '#000000' }};
+    padding-top: calc({{ section.settings.padding_top | default: 80, allow_false: true }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80, allow_false: true }} * var(--rem));
+  }
+
+  #dl-features-{{ section.id }} * { box-sizing: border-box; }
+
+  #dl-features-{{ section.id }} .dl-features__shell {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  #dl-features-{{ section.id }} .dl-features__title {
+    margin: 0 0 calc(48 * var(--rem));
+    color: {{ section.settings.text_color | default: '#000000' }};
+    font-weight:700;
+  }
+
+  #dl-features-{{ section.id }} .dl-features__layout {
+    display: flex;
+    align-items: center;
+    gap: calc(80 * var(--rem));
+  }
+
+  #dl-features-{{ section.id }} .dl-features__media {
+    flex: 0 0 calc(280 * var(--rem));
+    width: calc(280 * var(--rem));
+  }
+
+  #dl-features-{{ section.id }} .dl-features__shot {
+    display: none;
+  }
+
+  #dl-features-{{ section.id }} .dl-features__shot.is-active {
+    display: block;
+  }
+
+  #dl-features-{{ section.id }} .dl-features__shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  #dl-features-{{ section.id }} .dl-features__list {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: calc(16 * var(--rem));
+  }
+
+  #dl-features-{{ section.id }} .dl-features__item {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: calc(20 * var(--rem));
+    border: 0;
+    border-radius: calc(16 * var(--rem));
+    background: transparent;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  #dl-features-{{ section.id }} .dl-features__item.is-active {
+    background: {{ section.settings.active_bg_color | default: '#f3f3f3' }};
+  }
+
+  #dl-features-{{ section.id }} .dl-features__item h3 {
+    margin: 0 0 calc(10 * var(--rem));
+    font-size: calc(18 * var(--rem));
+    line-height: calc(22 * var(--rem));
+    font-weight: 700;
+  }
+
+  #dl-features-{{ section.id }} .dl-features__item p {
+    margin: 0;
+    font-size: calc(16 * var(--rem));
+    line-height: calc(28 * var(--rem));
+    font-weight: 400;
+    color: {{ section.settings.muted_text_color | default: '#333333' }};
+  }
+
+  #dl-features-{{ section.id }} .dl-features__item.is-active p {
+    color: {{ section.settings.text_color | default: '#000000' }};
+  }
+
+  @media (hover: hover) {
+    #dl-features-{{ section.id }} .dl-features__item:hover {
+      background: {{ section.settings.active_bg_color | default: '#f3f3f3' }};
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #dl-features-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }} * var(--rem));
+    }
+
+    #dl-features-{{ section.id }} .dl-features__shell {
+      width: 100%;
+      padding: 0 calc(40 * var(--rem));
+    }
+
+    #dl-features-{{ section.id }} .dl-features__title {
+      text-align: center;
+    }
+
+    #dl-features-{{ section.id }} .dl-features__layout {
+      flex-direction: column;
+      align-items: stretch;
+      gap: calc(40 * var(--rem));
+    }
+
+    #dl-features-{{ section.id }} .dl-features__media {
+      order: 1;
+      flex-basis: auto;
+      width: calc(420 * var(--rem));
+      max-width: 70%;
+      margin: 0 auto;
+    }
+
+    #dl-features-{{ section.id }} .dl-features__list {
+      order: 2;
+    }
+
+    #dl-features-{{ section.id }} .dl-features__item h3 {
+      font-size: calc(28 * var(--rem));
+      line-height: calc(38 * var(--rem));
+    }
+
+    #dl-features-{{ section.id }} .dl-features__item p {
+      font-size: calc(24 * var(--rem));
+      line-height: calc(38 * var(--rem));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #dl-features-{{ section.id }} .dl-features__item {
+      transition: none;
+    }
+  }
+{%- endstyle -%}
+
+<section id="dl-features-{{ section.id }}" class="dl-features">
+  <div class="dl-features__shell">
+    {%- if section.settings.title != blank -%}
+      <h2 class="dl-features__title aotos-section-title">{{ section.settings.title | escape }}</h2>
+    {%- endif -%}
+    <div class="dl-features__layout">
+      <div class="dl-features__media">
+        {%- for block in section.blocks -%}
+          <div class="dl-features__shot{% if forloop.first %} is-active{% endif %}" data-dl-shot="{{ forloop.index0 }}">
+            {%- if block.settings.image != blank -%}
+              {%- assign feature_image = block.settings.image -%}
+              {%- assign feature_height = 560 | divided_by: feature_image.aspect_ratio | round -%}
+              <img
+                src="{{ feature_image | image_url: width: 560 }}"
+                srcset="{{ feature_image | image_url: width: 280 }} 280w, {{ feature_image | image_url: width: 420 }} 420w, {{ feature_image | image_url: width: 560 }} 560w, {{ feature_image | image_url: width: 750 }} 750w"
+                sizes="(max-width: 768px) 62vw, 280px"
+                width="560"
+                height="{{ feature_height }}"
+                alt="{{ feature_image.alt | default: block.settings.title | escape }}"
+                loading="lazy"
+              >
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+      <div class="dl-features__list">
+        {%- for block in section.blocks -%}
+          <button
+            type="button"
+            class="dl-features__item{% if forloop.first %} is-active{% endif %}"
+            data-dl-feature="{{ forloop.index0 }}"
+            aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"
+            {{ block.shopify_attributes }}
+          >
+            <h3>{{ block.settings.title | escape }}</h3>
+            <p>{{ block.settings.description | escape }}</p>
+          </button>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('dl-features-{{ section.id }}');
+    if (!root || root.dataset.dlBound) return;
+    root.dataset.dlBound = '1';
+    var items = root.querySelectorAll('[data-dl-feature]');
+    var shots = root.querySelectorAll('[data-dl-shot]');
+    items.forEach(function (item) {
+      item.addEventListener('click', function () {
+        var index = item.getAttribute('data-dl-feature');
+        items.forEach(function (button) {
+          var on = button === item;
+          button.classList.toggle('is-active', on);
+          button.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+        shots.forEach(function (shot) {
+          shot.classList.toggle('is-active', shot.getAttribute('data-dl-shot') === index);
+        });
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "下载中心功能切换",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "color", "id": "background_color", "label": "背景", "default": "#ffffff" },
+    { "type": "color", "id": "text_color", "label": "文字", "default": "#000000" },
+    { "type": "color", "id": "muted_text_color", "label": "说明文字", "default": "#333333" },
+    { "type": "color", "id": "active_bg_color", "label": "选中背景", "default": "#f3f3f3" },
+    { "type": "text", "id": "title", "label": "标题", "default": "Full Control, Full Freedom" },
+    { "type": "range", "id": "padding_top", "label": "PC 上边距", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "PC 下边距", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_top_mobile", "label": "手机上边距", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 88 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "手机下边距", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 88 }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "功能",
+      "settings": [
+        { "type": "text", "id": "title", "label": "标题" },
+        { "type": "textarea", "id": "description", "label": "说明" },
+        { "type": "image_picker", "id": "image", "label": "配图" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "下载中心功能切换" }]
+}
+{% endschema %}

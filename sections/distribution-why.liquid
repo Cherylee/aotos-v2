@@ -1,0 +1,314 @@
+{% render 'gsap-title-reveal' %}
+{% render 'aotos-fd-enter' %}
+
+{%- style -%}
+  #dist-why-{{ section.id }} {
+    background: {{ section.settings.background_color | default: '#ffffff' }};
+    color: #111111;
+    padding-top: calc({{ section.settings.padding_top | default: 80, allow_false: true }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80, allow_false: true }} * var(--rem));
+  }
+
+  #dist-why-{{ section.id }} * { box-sizing: border-box; }
+
+  #dist-why-{{ section.id }} .dist-why__shell {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: calc(48 * var(--rem));
+    align-items: start;
+  }
+
+  #dist-why-{{ section.id }} .dist-why__eyebrow {
+    margin: 0 0 calc(16 * var(--rem));
+    color: #ff6501;
+    font-size: calc(14 * var(--rem));
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  #dist-why-{{ section.id }} .dist-why__title {
+    margin: 0 0 calc(20 * var(--rem));
+    color: #111111;
+    font-size: calc(40 * var(--rem));
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  #dist-why-{{ section.id }} .dist-why__text {
+    margin: 0 0 calc(28 * var(--rem));
+    color: #8a8a8a;
+    font-size: calc(14 * var(--rem));
+    line-height: 1.6;
+  }
+
+  #dist-why-{{ section.id }} .dist-why__list {
+    display: flex;
+    flex-direction: column;
+    gap: calc(14 * var(--rem));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  #dist-why-{{ section.id }} .dist-why__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: calc(12 * var(--rem));
+    color: #333333;
+    font-size: calc(15 * var(--rem));
+    line-height: 1.45;
+  }
+
+  #dist-why-{{ section.id }} .dist-why__check {
+    flex: 0 0 calc(22 * var(--rem));
+    width: calc(22 * var(--rem));
+    height: calc(22 * var(--rem));
+    margin-top: calc(2 * var(--rem));
+    border-radius: 50%;
+    background: #ff6501;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #dist-why-{{ section.id }} .dist-why__check svg {
+    width: calc(12 * var(--rem));
+    height: calc(12 * var(--rem));
+  }
+
+  #dist-why-{{ section.id }} .dist-why__stats {
+    border: 1px solid #ebebeb;
+    border-radius: calc(14 * var(--rem));
+    background: #ffffff;
+    box-shadow: 0 calc(2 * var(--rem)) calc(16 * var(--rem)) rgb(0 0 0 / 5%);
+    overflow: hidden;
+  }
+
+  #dist-why-{{ section.id }} .dist-why__grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  #dist-why-{{ section.id }} .dist-why__grid::before,
+  #dist-why-{{ section.id }} .dist-why__grid::after {
+    content: "";
+    position: absolute;
+    background: #e8e8e8;
+    pointer-events: none;
+  }
+
+  #dist-why-{{ section.id }} .dist-why__grid::before {
+    left: 50%;
+    top: calc(32 * var(--rem));
+    bottom: calc(32 * var(--rem));
+    width: 1px;
+  }
+
+  #dist-why-{{ section.id }} .dist-why__grid::after {
+    top: 50%;
+    left: calc(32 * var(--rem));
+    right: calc(32 * var(--rem));
+    height: 1px;
+  }
+
+  #dist-why-{{ section.id }} .dist-why__stat {
+    display: flex;
+    align-items: center;
+    gap: calc(18 * var(--rem));
+    min-width: 0;
+    padding: calc(36 * var(--rem)) calc(40 * var(--rem));
+  }
+
+  #dist-why-{{ section.id }} .dist-why__stat-icon {
+    flex: 0 0 calc(36 * var(--rem));
+    width: calc(36 * var(--rem));
+    height: calc(36 * var(--rem));
+    color: #111111;
+  }
+
+  #dist-why-{{ section.id }} .dist-why__stat-icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  #dist-why-{{ section.id }} .dist-why__stat-label {
+    margin: 0 0 calc(4 * var(--rem));
+    color: #333333;
+    font-size: calc(12 * var(--rem));
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  #dist-why-{{ section.id }} .dist-why__stat-value {
+    margin: 0;
+    color: #ff6501;
+    font-size: calc(24 * var(--rem));
+    font-weight: 700;
+    line-height: 1.15;
+  }
+
+  #dist-why-{{ section.id }} .dist-why__note {
+    margin: 0;
+    padding: calc(14 * var(--rem)) calc(24 * var(--rem));
+    border-top: 1px solid #e8e8e8;
+    color: #999999;
+    font-size: calc(12 * var(--rem));
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  @media screen and (max-width: 768px) {
+    #dist-why-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }} * var(--rem));
+    }
+
+    #dist-why-{{ section.id }} .dist-why__shell {
+      width: 100%;
+      grid-template-columns: 1fr;
+      gap: calc(40 * var(--rem));
+      padding: 0 calc(40 * var(--rem));
+    }
+
+    #dist-why-{{ section.id }} .dist-why__eyebrow { font-size: calc(24 * var(--rem)); }
+    #dist-why-{{ section.id }} .dist-why__title { font-size: calc(44 * var(--rem)); line-height: 1.15; }
+    #dist-why-{{ section.id }} .dist-why__text { font-size: calc(20 * var(--rem)); line-height: 1.5; margin-bottom: calc(40 * var(--rem));}
+    #dist-why-{{ section.id }} .dist-why__list {  gap: calc(24 * var(--rem));}
+    #dist-why-{{ section.id }} .dist-why__list li { font-size: calc(24 * var(--rem)); line-height: 1.4; gap: calc(16 * var(--rem));}
+    #dist-why-{{ section.id }} .dist-why__check {
+      flex-basis: calc(32 * var(--rem));
+      width: calc(32 * var(--rem));
+      height: calc(32 * var(--rem));
+    }
+    #dist-why-{{ section.id }} .dist-why__stat {
+      gap: calc(18 * var(--rem));
+      padding: calc(18 * var(--rem)) calc(14 * var(--rem));
+    }
+    #dist-why-{{ section.id }} .dist-why__stat-icon {
+      flex-basis: calc(58 * var(--rem));
+      width: calc(58 * var(--rem));
+      height: calc(58 * var(--rem));
+    }
+    #dist-why-{{ section.id }} .dist-why__stat-label { font-size: calc(18 * var(--rem)); margin-bottom: calc(8 * var(--rem)); }
+    #dist-why-{{ section.id }} .dist-why__stat-value { font-size: calc(26 * var(--rem)); }
+    #dist-why-{{ section.id }} .dist-why__note { font-size: calc(20 * var(--rem)); }
+    #dist-why-{{ section.id }} .dist-why__grid::before {
+      top: calc(16 * var(--rem));
+      bottom: calc(16 * var(--rem));
+    }
+    #dist-why-{{ section.id }} .dist-why__grid::after {
+      left: calc(16 * var(--rem));
+      right: calc(16 * var(--rem));
+    }
+  }
+{%- endstyle -%}
+
+<section id="dist-why-{{ section.id }}">
+  <div class="dist-why__shell">
+    <div class="dist-why__copy">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="dist-why__eyebrow fd-anim fd-fade-up">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="dist-why__title gsap-title-reveal">{{ section.settings.title | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <p class="dist-why__text fd-anim fd-fade-up">{{ section.settings.text | escape }}</p>
+      {%- endif -%}
+      <ul class="dist-why__list fd-anim fd-fade-up">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'feature' -%}
+            <li {{ block.shopify_attributes }}>
+              <span class="dist-why__check" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6L5 9L10 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span>{{ block.settings.text | escape }}</span>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+    <div class="dist-why__stats fd-anim fd-fade-up">
+      <div class="dist-why__grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'stat' -%}
+            <div class="dist-why__stat" {{ block.shopify_attributes }}>
+              <div class="dist-why__stat-icon">
+                {%- case block.settings.icon_type -%}
+                  {%- when 'wallet' -%}
+                    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M7 14H25C26.105 14 27 14.895 27 16V23C27 24.105 26.105 25 25 25H7C5.895 25 5 24.105 5 23V16C5 14.895 5.895 14 7 14Z" stroke="currentColor" stroke-width="1.5"/><path d="M5 18H27" stroke="currentColor" stroke-width="1.5"/><rect x="9" y="9" width="14" height="7" rx="1.5" stroke="currentColor" stroke-width="1.5"/><circle cx="22.5" cy="20.5" r="3" stroke="currentColor" stroke-width="1.25"/></svg>
+                  {%- when 'clock' -%}
+                    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="11" stroke="currentColor" stroke-width="1.5"/><path d="M16 10V16L21 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  {%- when 'dollar' -%}
+                    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="11" stroke="currentColor" stroke-width="1.5"/><path d="M16 10.5V21.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M19.5 13.5H15.2C13.5 13.5 12.5 14.5 12.5 15.8C12.5 17.1 13.5 18.1 15.2 18.1H17.2C18.9 18.1 19.9 19.1 19.9 20.4C19.9 21.7 18.9 22.7 17.2 22.7H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  {%- else -%}
+                    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M6 24V18M12 24V13M18 24V16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M6 20L12 15L18 18L26 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M23 10H26V13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                {%- endcase -%}
+              </div>
+              <div>
+                <p class="dist-why__stat-label">{{ block.settings.label | escape }}</p>
+                <p class="dist-why__stat-value">{{ block.settings.value | escape }}</p>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      {%- if section.settings.footnote != blank -%}
+        <p class="dist-why__note">{{ section.settings.footnote | escape }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "分销优势",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "color", "id": "background_color", "label": "背景", "default": "#ffffff" },
+    { "type": "text", "id": "eyebrow", "label": "眉题", "default": "Why Partner With AOTOS" },
+    { "type": "text", "id": "title", "label": "标题", "default": "Promote Products People Want to Ride" },
+    { "type": "textarea", "id": "text", "label": "说明" },
+    { "type": "text", "id": "footnote", "label": "脚注" },
+    { "type": "range", "id": "padding_top", "label": "PC 上边距", "min": 0, "max": 160, "step": 4, "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "PC 下边距", "min": 0, "max": 160, "step": 4, "default": 80 },
+    { "type": "range", "id": "padding_top_mobile", "label": "手机上边距", "min": 0, "max": 160, "step": 4, "default": 88 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "手机下边距", "min": 0, "max": 160, "step": 4, "default": 88 }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "卖点",
+      "settings": [{ "type": "text", "id": "text", "label": "文案" }]
+    },
+    {
+      "type": "stat",
+      "name": "数据",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "图标",
+          "default": "chart",
+          "options": [
+            { "value": "chart", "label": "趋势" },
+            { "value": "wallet", "label": "钱包" },
+            { "value": "clock", "label": "时钟" },
+            { "value": "dollar", "label": "金额" }
+          ]
+        },
+        { "type": "text", "id": "label", "label": "名称" },
+        { "type": "text", "id": "value", "label": "数值" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "分销优势" }]
+}
+{% endschema %}

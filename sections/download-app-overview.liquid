@@ -1,0 +1,189 @@
+{%- style -%}
+  #dl-overview-{{ section.id }} {
+    background: {{ section.settings.background_color | default: '#ffffff' }};
+    color: {{ section.settings.text_color | default: '#000000' }};
+    padding-top: calc({{ section.settings.padding_top | default: 80, allow_false: true }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80, allow_false: true }} * var(--rem));
+  }
+
+  #dl-overview-{{ section.id }} * { box-sizing: border-box; }
+
+  #dl-overview-{{ section.id }} .dl-overview__shell {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(80 * var(--rem));
+  }
+
+  #dl-overview-{{ section.id }} .dl-overview__copy {
+    flex: 1;
+    min-width: 0;
+    max-width: calc(640 * var(--rem));
+  }
+
+  #dl-overview-{{ section.id }} .dl-overview__eyebrow {
+    display: inline-block;
+    margin: 0 0 calc(16 * var(--rem));
+    padding-bottom: calc(4 * var(--rem));
+    border-bottom: 2px solid #ff6501;
+    font-size: calc(12 * var(--rem));
+    line-height: calc(16 * var(--rem));
+    font-weight: 700;
+  }
+
+  #dl-overview-{{ section.id }} .dl-overview__title {
+    margin: 0 0 calc(48 * var(--rem));
+    color: {{ section.settings.text_color | default: '#000000' }};
+    font-weight:700;
+  }
+
+  #dl-overview-{{ section.id }} .dl-overview__list {
+    display: flex;
+    flex-direction: column;
+    gap: calc(32 * var(--rem));
+    margin: 0;
+    padding: 0;
+  }
+
+  #dl-overview-{{ section.id }} .dl-overview__item h3 {
+    margin: 0 0 calc(12 * var(--rem));
+    font-size: calc(18 * var(--rem));
+    line-height: calc(22 * var(--rem));
+    font-weight: 700;
+    color: {{ section.settings.text_color | default: '#000000' }};
+  }
+
+  #dl-overview-{{ section.id }} .dl-overview__item p {
+    margin: 0;
+    font-size: calc(16 * var(--rem));
+    line-height: calc(28 * var(--rem));
+    font-weight: 400;
+    color: {{ section.settings.muted_text_color | default: '#000000' }};
+  }
+
+  #dl-overview-{{ section.id }} .dl-overview__media {
+    flex: 0 0 calc(280 * var(--rem));
+    width: calc(280 * var(--rem));
+  }
+
+  #dl-overview-{{ section.id }} .dl-overview__media img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  @media screen and (max-width: 768px) {
+    #dl-overview-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }} * var(--rem));
+    }
+
+    #dl-overview-{{ section.id }} .dl-overview__shell {
+      width: 100%;
+      flex-direction: column;
+      align-items: stretch;
+      gap: calc(48 * var(--rem));
+      padding: 0 calc(40 * var(--rem));
+    }
+
+    #dl-overview-{{ section.id }} .dl-overview__copy {
+      max-width: none;
+    }
+
+    #dl-overview-{{ section.id }} .dl-overview__eyebrow {
+      font-size: calc(20 * var(--rem));
+      line-height: calc(32 * var(--rem));
+    }
+
+    #dl-overview-{{ section.id }} .dl-overview__item h3 {
+      font-size: calc(28 * var(--rem));
+      line-height: calc(38 * var(--rem));
+    }
+
+    #dl-overview-{{ section.id }} .dl-overview__item p {
+      font-size: calc(24 * var(--rem));
+      line-height: calc(38 * var(--rem));
+    }
+
+    #dl-overview-{{ section.id }} .dl-overview__media {
+      flex-basis: auto;
+      width: calc(420 * var(--rem));
+      max-width: 70%;
+      margin: 0 auto;
+    }
+  }
+{%- endstyle -%}
+
+<section id="dl-overview-{{ section.id }}" class="dl-overview">
+  <div class="dl-overview__shell">
+    <div class="dl-overview__copy">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="dl-overview__eyebrow">{{ section.settings.eyebrow | escape }}</span>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="dl-overview__title aotos-section-title">{{ section.settings.title | escape }}</h2>
+      {%- endif -%}
+      <div class="dl-overview__list">
+        {%- for block in section.blocks -%}
+          <div class="dl-overview__item" {{ block.shopify_attributes }}>
+            {%- if block.settings.title != blank -%}
+              <h3>{{ block.settings.title | escape }}</h3>
+            {%- endif -%}
+            {%- if block.settings.content != blank -%}
+              <p>{{ block.settings.content | escape }}</p>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+    <div class="dl-overview__media">
+      {%- if section.settings.image != blank -%}
+        {%- assign overview_image = section.settings.image -%}
+        {%- assign overview_height = 560 | divided_by: overview_image.aspect_ratio | round -%}
+        <img
+          src="{{ overview_image | image_url: width: 560 }}"
+          srcset="{{ overview_image | image_url: width: 280 }} 280w, {{ overview_image | image_url: width: 420 }} 420w, {{ overview_image | image_url: width: 560 }} 560w, {{ overview_image | image_url: width: 750 }} 750w"
+          sizes="(max-width: 768px) 62vw, 280px"
+          width="560"
+          height="{{ overview_height }}"
+          alt="{{ overview_image.alt | escape }}"
+          loading="lazy"
+        >
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "下载中心概览",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "color", "id": "background_color", "label": "背景", "default": "#ffffff" },
+    { "type": "color", "id": "text_color", "label": "文字", "default": "#000000" },
+    { "type": "color", "id": "muted_text_color", "label": "说明文字", "default": "#000000" },
+    { "type": "text", "id": "eyebrow", "label": "眉题", "default": "Overview" },
+    { "type": "text", "id": "title", "label": "标题", "default": "One App For Everything" },
+    { "type": "image_picker", "id": "image", "label": "配图" },
+    { "type": "range", "id": "padding_top", "label": "PC 上边距", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "PC 下边距", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_top_mobile", "label": "手机上边距", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 88 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "手机下边距", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 88 }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "说明",
+      "settings": [
+        { "type": "text", "id": "title", "label": "标题" },
+        { "type": "textarea", "id": "content", "label": "内容" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "下载中心概览" }]
+}
+{% endschema %}

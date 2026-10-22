@@ -1,3 +1,7 @@
+{%- if section.settings.enter_animation -%}
+  {% render 'aotos-fd-enter' %}
+{%- endif -%}
+
 {%- style -%}
   #HomeTrust-{{ section.id }} {
     padding-top: calc({{ section.settings.padding_top | default: 24 }} * var(--rem));
@@ -48,11 +52,27 @@
     overflow: hidden;
   }
 
-  #HomeTrust-{{ section.id }} .home-trust__icon img {
+  #HomeTrust-{{ section.id }} .home-trust__icon {
+    color: #111111;
+  }
+
+  #HomeTrust-{{ section.id }} .home-trust__icon img,
+  #HomeTrust-{{ section.id }} .home-trust__icon svg {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: contain;
+  }
+
+  #HomeTrust-{{ section.id }}.home-trust--plain .home-trust__title {
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  @media (hover: hover) {
+    #HomeTrust-{{ section.id }} .home-trust__item:hover .home-trust__icon {
+      color: #ff6501;
+    }
   }
 
   #HomeTrust-{{ section.id }} .home-trust__copy {
@@ -138,13 +158,12 @@
   }
 {%- endstyle -%}
 
-<div id="HomeTrust-{{ section.id }}" class="home-trust">
+<div id="HomeTrust-{{ section.id }}" class="home-trust{% if section.settings.title_style == 'plain' %} home-trust--plain{% endif %}">
   <div class="home-trust__shell">
-    <div class="home-trust__card">
+    <div class="home-trust__card{% if section.settings.enter_animation %} fd-anim fd-stagger{% endif %}">
       {%- for block in section.blocks -%}
-        <div class="home-trust__item" {{ block.shopify_attributes }}>
+        <div class="home-trust__item{% if section.settings.enter_animation %} fd-stagger__item{% endif %}" {{ block.shopify_attributes }}>
           <div class="home-trust__icon">
-            <span class="home-trust__ph" aria-hidden="true"></span>
             {%- if block.settings.icon != blank -%}
               <img
                 src="{{ block.settings.icon | image_url: width: 128 }}"
@@ -155,6 +174,14 @@
                 alt=""
                 loading="lazy"
               >
+            {%- elsif block.settings.icon_type == 'percent' -%}
+              <svg viewBox="0 0 44 44" fill="none" aria-hidden="true"><circle cx="22" cy="22" r="20.5" stroke="currentColor" stroke-width="1.5"/><path d="M15 17.5C16.3807 17.5 17.5 16.3807 17.5 15C17.5 13.6193 16.3807 12.5 15 12.5C13.6193 12.5 12.5 13.6193 12.5 15C12.5 16.3807 13.6193 17.5 15 17.5Z" fill="currentColor"/><path d="M29 31.5C30.3807 31.5 31.5 30.3807 31.5 29C31.5 27.6193 30.3807 26.5 29 26.5C27.6193 26.5 26.5 27.6193 26.5 29C26.5 30.3807 27.6193 31.5 29 31.5Z" fill="currentColor"/><path d="M29 15L15 29" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+            {%- elsif block.settings.icon_type == 'bag' -%}
+              <svg viewBox="0 0 44 44" fill="none" aria-hidden="true"><circle cx="22" cy="22" r="20.5" stroke="currentColor" stroke-width="1.5"/><path d="M15 19H29L27.5 33H16.5L15 19Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M18 19V16.5C18 14.567 19.567 13 21.5 13H22.5C24.433 13 26 14.567 26 16.5V19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            {%- elsif block.settings.icon_type == 'shield' -%}
+              <svg viewBox="0 0 44 44" fill="none" aria-hidden="true"><path d="M22 6L34 10V20.5C34 28.232 28.732 33.5 22 37C15.268 33.5 10 28.232 10 20.5V10L22 6Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M22 16.5C19.7909 16.5 18 18.2909 18 20.5C18 22.7091 19.7909 24.5 22 24.5C24.2091 24.5 26 22.7091 26 20.5C26 18.2909 24.2091 16.5 22 16.5Z" stroke="currentColor" stroke-width="1.5"/><path d="M22 24.5V29.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            {%- else -%}
+              <span class="home-trust__ph" aria-hidden="true"></span>
             {%- endif -%}
           </div>
           <div class="home-trust__copy">
@@ -219,6 +246,22 @@
       "unit": "px",
       "label": "下边距（手机）",
       "default": 40
+    },
+    {
+      "type": "select",
+      "id": "title_style",
+      "label": "标题样式",
+      "default": "upper",
+      "options": [
+        { "value": "upper", "label": "全大写" },
+        { "value": "plain", "label": "原样" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "enter_animation",
+      "label": "进场动画",
+      "default": false
     }
   ],
   "blocks": [
@@ -231,7 +274,19 @@
           "type": "image_picker",
           "id": "icon",
           "label": "图标",
-          "info": "不上传时显示灰色占位。"
+          "info": "不上传、也不选内置图标时显示灰色占位。"
+        },
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "内置图标",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "无" },
+            { "value": "percent", "label": "百分比" },
+            { "value": "shield", "label": "盾牌" },
+            { "value": "bag", "label": "购物袋" }
+          ]
         },
         {
           "type": "text",
