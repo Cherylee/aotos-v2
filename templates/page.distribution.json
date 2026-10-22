@@ -13,6 +13,7 @@
       "type": "ifa-exhibition-banner",
       "settings": {
         "image": "shopify://shop_images/dc500da9-90bc-407c-b610-2e2bbdd52ad9.png",
+        "placeholder_label": "Banner background image",
         "overlay_opacity": 0,
         "tone": "light",
         "light_wash": false,
@@ -63,7 +64,12 @@
           }
         }
       },
-      "block_order": ["benefit_1", "benefit_2", "benefit_3", "benefit_4"],
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4"
+      ],
       "settings": {
         "padding_top": 80,
         "padding_bottom": 80,
@@ -76,79 +82,245 @@
     "dist_why": {
       "type": "distribution-why",
       "blocks": {
-        "f1": { "type": "feature", "settings": { "text": "Distinctive designs that stand out in content" } },
-        "f2": { "type": "feature", "settings": { "text": "Powerful performance riders actually want" } },
-        "f3": { "type": "feature", "settings": { "text": "Ready-made assets for reviews, social, and recommendations" } },
-        "s1": { "type": "stat", "settings": { "icon_type": "chart", "label": "Commission", "value": "UP TO 8%" } },
-        "s2": { "type": "stat", "settings": { "icon_type": "wallet", "label": "Average Order Value", "value": "$1,200+" } },
-        "s3": { "type": "stat", "settings": { "icon_type": "clock", "label": "Cookie Window", "value": "30 DAYS" } },
-        "s4": { "type": "stat", "settings": { "icon_type": "dollar", "label": "Earnings Per Click", "value": "$37.80" } }
+        "f1": {
+          "type": "feature",
+          "settings": {
+            "text": "Distinctive designs that stand out in content"
+          }
+        },
+        "f2": {
+          "type": "feature",
+          "settings": {
+            "text": "Powerful performance riders actually want"
+          }
+        },
+        "f3": {
+          "type": "feature",
+          "settings": {
+            "text": "Ready-made assets for reviews, social, and recommendations"
+          }
+        },
+        "s1": {
+          "type": "stat",
+          "settings": {
+            "icon_type": "chart",
+            "label": "Commission",
+            "value": "UP TO 8%"
+          }
+        },
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "icon_type": "wallet",
+            "label": "Average Order Value",
+            "value": "$1,200+"
+          }
+        },
+        "s3": {
+          "type": "stat",
+          "settings": {
+            "icon_type": "clock",
+            "label": "Cookie Window",
+            "value": "30 DAYS"
+          }
+        },
+        "s4": {
+          "type": "stat",
+          "settings": {
+            "icon_type": "dollar",
+            "label": "Earnings Per Click",
+            "value": "$37.80"
+          }
+        }
       },
-      "block_order": ["f1", "f2", "f3", "s1", "s2", "s3", "s4"],
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ],
       "settings": {
         "background_color": "#ffffff",
         "eyebrow": "Why Partner With AOTOS",
         "title": "Promote Products People Want to Ride",
         "text": "AOTOS builds high-performance electric bikes and mobility products built for adventure, commuting, and everyday freedom.",
         "footnote": "* Data based on all channels (Apr 2024 – Mar 2026)",
-        "padding_top": 80,
+        "padding_top": 0,
         "padding_bottom": 80,
-        "padding_top_mobile": 88,
+        "padding_top_mobile": 0,
         "padding_bottom_mobile": 88
       }
     },
     "dist_steps": {
       "type": "distribution-steps",
       "blocks": {
-        "step_1": { "type": "step", "settings": { "icon_type": "signup", "step_title": "Join Awin", "text": "Create or log in to your Awin Publisher account." } },
-        "step_2": { "type": "step", "settings": { "icon_type": "profile", "step_title": "Find AOTOS", "text": "Search for AOTOS in the Awin advertiser directory." } },
-        "step_3": { "type": "step", "settings": { "icon_type": "search", "step_title": "Apply", "text": "Submit your application with the required publisher details." } },
-        "step_4": { "type": "step", "settings": { "icon_type": "check", "step_title": "Get Approved", "text": "Once approved, access affiliate tools and resources." } },
-        "step_5": { "type": "step", "settings": { "icon_type": "link", "step_title": "Share & Earn", "text": "Promote with your unique links and earn commissions." } }
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "icon_type": "signup",
+            "step_title": "Join Awin",
+            "text": "Create or log in to your Awin Publisher account."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "icon_type": "profile",
+            "step_title": "Find AOTOS",
+            "text": "Search for AOTOS in the Awin advertiser directory."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "icon_type": "search",
+            "step_title": "Apply",
+            "text": "Submit your application with the required publisher details."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "icon_type": "check",
+            "step_title": "Get Approved",
+            "text": "Once approved, access affiliate tools and resources."
+          }
+        },
+        "step_5": {
+          "type": "step",
+          "settings": {
+            "icon_type": "link",
+            "step_title": "Share & Earn",
+            "text": "Promote with your unique links and earn commissions."
+          }
+        }
       },
-      "block_order": ["step_1", "step_2", "step_3", "step_4", "step_5"],
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "step_5"
+      ],
       "settings": {
         "background_color": "#f7f8f9",
         "eyebrow": "Get Started",
         "title": "Start Earning With AOTOS",
-        "padding_top": 80,
+        "padding_top": 0,
         "padding_bottom": 80,
-        "padding_top_mobile": 88,
+        "padding_top_mobile": 0,
         "padding_bottom_mobile": 88
       }
     },
     "dist_audience": {
       "type": "distribution-audience",
       "blocks": {
-        "a1": { "type": "audience", "settings": { "icon_type": "creator", "title": "Content Creators", "text": "YouTubers, TikTok & Instagram creators covering e-bikes, outdoor, and lifestyle." } },
-        "a2": { "type": "audience", "settings": { "icon_type": "star", "title": "Review & Tech Publishers", "text": "Review sites, blogs, and comparison platforms helping buyers decide." } },
-        "a3": { "type": "audience", "settings": { "icon_type": "media", "title": "Media & Editorial", "text": "Publishers covering tech, outdoor, mobility, and lifestyle." } },
-        "a4": { "type": "audience", "settings": { "icon_type": "deal", "title": "Deal & Affiliate Partners", "text": "Deal sites, coupon communities, cashback platforms, and performance partners." } }
+        "a1": {
+          "type": "audience",
+          "settings": {
+            "icon_type": "creator",
+            "title": "Content Creators",
+            "text": "YouTubers, TikTok & Instagram creators covering e-bikes, outdoor, and lifestyle."
+          }
+        },
+        "a2": {
+          "type": "audience",
+          "settings": {
+            "icon_type": "star",
+            "title": "Review & Tech Publishers",
+            "text": "Review sites, blogs, and comparison platforms helping buyers decide."
+          }
+        },
+        "a3": {
+          "type": "audience",
+          "settings": {
+            "icon_type": "media",
+            "title": "Media & Editorial",
+            "text": "Publishers covering tech, outdoor, mobility, and lifestyle."
+          }
+        },
+        "a4": {
+          "type": "audience",
+          "settings": {
+            "icon_type": "deal",
+            "title": "Deal & Affiliate Partners",
+            "text": "Deal sites, coupon communities, cashback platforms, and performance partners."
+          }
+        }
       },
-      "block_order": ["a1", "a2", "a3", "a4"],
+      "block_order": [
+        "a1",
+        "a2",
+        "a3",
+        "a4"
+      ],
       "settings": {
         "eyebrow": "Built for Partners Who Know Their Audience",
-        "padding_top": 80,
+        "padding_top": 0,
         "padding_bottom": 80,
-        "padding_top_mobile": 88,
+        "padding_top_mobile": 0,
         "padding_bottom_mobile": 88
       }
     },
     "dist_faq": {
       "type": "aotos-flux-faq",
       "blocks": {
-        "q1": { "type": "faq_item", "settings": { "question": "What types of partners can join?", "answer": "<p>Content creators, influencers, review sites, bloggers, media, deal sites, and qualified affiliates.</p>" } },
-        "q2": { "type": "faq_item", "settings": { "question": "What marketing materials are available?", "answer": "<p>Banners, product images, deep links, and seasonal campaign assets via Awin.</p>" } },
-        "q3": { "type": "faq_item", "settings": { "question": "When are commissions paid?", "answer": "<p>Commissions follow Awin’s tracking and validation process, after order confirmation.</p>" } },
-        "q4": { "type": "faq_item", "settings": { "question": "Can I promote AOTOS on social media?", "answer": "<p>Yes, as long as you follow AOTOS and Awin program terms.</p>" } },
-        "q5": { "type": "faq_item", "settings": { "question": "Are there any prohibited promotional methods?", "answer": "<p>Yes. All promotions must comply with AOTOS program terms and Awin policies.</p>" } }
+        "q1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What types of partners can join?",
+            "related_product": "",
+            "answer": "<p>Content creators, influencers, review sites, bloggers, media, deal sites, and qualified affiliates.</p>"
+          }
+        },
+        "q2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What marketing materials are available?",
+            "related_product": "",
+            "answer": "<p>Banners, product images, deep links, and seasonal campaign assets via Awin.</p>"
+          }
+        },
+        "q3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "When are commissions paid?",
+            "related_product": "",
+            "answer": "<p>Commissions follow Awin’s tracking and validation process, after order confirmation.</p>"
+          }
+        },
+        "q4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I promote AOTOS on social media?",
+            "related_product": "",
+            "answer": "<p>Yes, as long as you follow AOTOS and Awin program terms.</p>"
+          }
+        },
+        "q5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are there any prohibited promotional methods?",
+            "related_product": "",
+            "answer": "<p>Yes. All promotions must comply with AOTOS program terms and Awin policies.</p>"
+          }
+        }
       },
-      "block_order": ["q1", "q2", "q3", "q4", "q5"],
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5"
+      ],
       "settings": {
         "faq_title": "FAQ",
-        "padding_top": 80,
+        "padding_top": 0,
         "padding_bottom": 80,
-        "padding_top_mobile": 88,
+        "padding_top_mobile": 0,
         "padding_bottom_mobile": 88
       }
     },
