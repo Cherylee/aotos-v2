@@ -1,0 +1,180 @@
+{% render 'aotos-fd-enter' %}
+
+{%- style -%}
+  #dist-audience-{{ section.id }} {
+    background: #ffffff;
+    padding-top: calc({{ section.settings.padding_top | default: 80, allow_false: true }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80, allow_false: true }} * var(--rem));
+  }
+
+  #dist-audience-{{ section.id }} * { box-sizing: border-box; }
+
+  #dist-audience-{{ section.id }} .dist-audience__shell {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  #dist-audience-{{ section.id }} .dist-audience__eyebrow {
+    margin: 0 0 calc(28 * var(--rem));
+    color: #ff6501;
+    font-size: calc(14 * var(--rem));
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  #dist-audience-{{ section.id }} .dist-audience__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: calc(20 * var(--rem));
+  }
+
+  #dist-audience-{{ section.id }} .dist-audience__card {
+    display: flex;
+    align-items: center;
+    gap: calc(4 * var(--rem));
+    min-width: 0;
+    padding: calc(14 * var(--rem));
+    border: 1px solid #e4e4e4;
+    border-radius: calc(10 * var(--rem));
+    background: #ffffff;
+  }
+
+  #dist-audience-{{ section.id }} .dist-audience__icon {
+    flex: 0 0 calc(40 * var(--rem));
+    width: calc(40 * var(--rem));
+    height: calc(40 * var(--rem));
+    color: #111111;
+  }
+
+  #dist-audience-{{ section.id }} .dist-audience__icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  #dist-audience-{{ section.id }} .dist-audience__title {
+    margin: 0 0 calc(8 * var(--rem));
+    color: #111111;
+    font-size: calc(12 * var(--rem));
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  #dist-audience-{{ section.id }} .dist-audience__text {
+    margin: 0;
+    color: #8a8a8a;
+    font-size: calc(10 * var(--rem));
+    line-height: 1.45;
+  }
+
+  @media (hover: hover) {
+    #dist-audience-{{ section.id }} .dist-audience__card:hover .dist-audience__icon { color: #ff6501; }
+  }
+
+  @media screen and (max-width: 768px) {
+    #dist-audience-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }} * var(--rem));
+    }
+
+    #dist-audience-{{ section.id }} .dist-audience__shell {
+      width: 100%;
+      padding: 0 calc(40 * var(--rem));
+    }
+
+    #dist-audience-{{ section.id }} .dist-audience__eyebrow {
+      margin-bottom: calc(24 * var(--rem));
+      font-size: calc(24 * var(--rem));
+    }
+
+    #dist-audience-{{ section.id }} .dist-audience__grid {
+      grid-template-columns: 1fr;
+      gap: calc(16 * var(--rem));
+    }
+
+    #dist-audience-{{ section.id }} .dist-audience__card {
+      padding: calc(24 * var(--rem)) calc(20 * var(--rem));
+      border-radius: calc(14 * var(--rem));
+      gap: calc(20 * var(--rem));
+    }
+
+    #dist-audience-{{ section.id }} .dist-audience__icon {
+      flex-basis: calc(48 * var(--rem));
+      width: calc(48 * var(--rem));
+      height: calc(48 * var(--rem));
+    }
+
+    #dist-audience-{{ section.id }} .dist-audience__title { font-size: calc(24 * var(--rem)); }
+    #dist-audience-{{ section.id }} .dist-audience__text { font-size: calc(20 * var(--rem)); line-height: 1.4; }
+  }
+{%- endstyle -%}
+
+<section id="dist-audience-{{ section.id }}">
+  <div class="dist-audience__shell">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="dist-audience__eyebrow fd-anim fd-fade-up">{{ section.settings.eyebrow | escape }}</p>
+    {%- endif -%}
+    <div class="dist-audience__grid fd-anim fd-stagger">
+      {%- for block in section.blocks -%}
+        <div class="dist-audience__card fd-stagger__item" {{ block.shopify_attributes }}>
+          <div class="dist-audience__icon">
+            {%- case block.settings.icon_type -%}
+              {%- when 'star' -%}
+                <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M20 7L23.4 15.8H33L25.3 21.2L28.7 30L20 24.6L11.3 30L14.7 21.2L6.6 15.8H16L20 7Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M20 13.2L21.6 17.8H26.4L22.6 20.4L24.1 25.1L20 22.5L15.9 25.1L17.4 20.4L13.6 17.8H18.4L20 13.2Z" fill="#ff6501"/></svg>
+              {%- when 'media' -%}
+                <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M12 16H17L29 10V30L17 24H12V16Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 18V22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="13" cy="13" r="3" fill="#ff6501"/></svg>
+              {%- when 'deal' -%}
+                <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M10 28V17L21 8L33 16V28H10Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="21.5" cy="12" r="2.25" stroke="currentColor" stroke-width="1.5"/></svg>
+              {%- else -%}
+                <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="15" cy="13" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M7 31C7 25 10.5 21.5 15 21.5C19.5 21.5 23 25 23 31" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="28" cy="27" r="6.5" fill="#ff6501"/><path d="M26.2 24.8V29.2L30.8 27Z" fill="#fff"/></svg>
+            {%- endcase -%}
+          </div>
+          <div>
+            <h3 class="dist-audience__title">{{ block.settings.title | escape }}</h3>
+            <p class="dist-audience__text">{{ block.settings.text | escape }}</p>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "分销受众",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "眉题", "default": "Built for Partners Who Know Their Audience" },
+    { "type": "range", "id": "padding_top", "label": "PC 上边距", "min": 0, "max": 160, "step": 4, "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "PC 下边距", "min": 0, "max": 160, "step": 4, "default": 80 },
+    { "type": "range", "id": "padding_top_mobile", "label": "手机上边距", "min": 0, "max": 160, "step": 4, "default": 88 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "手机下边距", "min": 0, "max": 160, "step": 4, "default": 88 }
+  ],
+  "blocks": [
+    {
+      "type": "audience",
+      "name": "受众",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "图标",
+          "default": "creator",
+          "options": [
+            { "value": "creator", "label": "创作者" },
+            { "value": "star", "label": "评测" },
+            { "value": "media", "label": "媒体" },
+            { "value": "deal", "label": "优惠" }
+          ]
+        },
+        { "type": "text", "id": "title", "label": "标题" },
+        { "type": "textarea", "id": "text", "label": "说明" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "分销受众" }]
+}
+{% endschema %}

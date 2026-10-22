@@ -8,10 +8,24 @@
     assign mobile_image = desktop_image
   endif
   assign overlay_opacity = section.settings.overlay_opacity | default: 35 | times: 0.01
+  assign ifa_light = false
+  if section.settings.tone == 'light'
+    assign ifa_light = true
+  endif
+  assign ifa_anim = section.settings.enter_animation
+  assign ifa_wash = true
+  if section.settings.light_wash == false
+    assign ifa_wash = false
+  endif
 -%}
 
+{%- if ifa_anim -%}
+  {% render 'gsap-title-reveal' %}
+  {% render 'aotos-fd-enter' %}
+{%- endif -%}
+
 <section
-  class="ifa-banner section-{{ section.id }}"
+  class="ifa-banner section-{{ section.id }}{% if ifa_light %} ifa-banner--light{% endif %}{% if ifa_light and ifa_wash == false %} ifa-banner--no-wash{% endif %}"
   id="IfaBanner-{{ section.id }}"
   style="--ifa-accent: {{ section.settings.accent_color | default: '#ff6501' }}; --ifa-overlay: {{ overlay_opacity }};"
 >
@@ -53,15 +67,15 @@
     <div class="ifa-banner__content">
       <div class="ifa-banner__copy">
         {%- if section.settings.eyebrow != blank -%}
-          <p class="ifa-banner__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+          <p class="ifa-banner__eyebrow{% if ifa_anim %} fd-anim fd-fade-up{% endif %}">{{ section.settings.eyebrow | escape }}</p>
         {%- endif -%}
         {%- if section.settings.heading != blank -%}
-          <h1 class="ifa-banner__heading">{{ section.settings.heading | escape }}</h1>
+          <h1 class="ifa-banner__heading{% if ifa_anim %} gsap-title-reveal{% endif %}">{{ section.settings.heading | escape }}</h1>
         {%- endif -%}
         {%- if section.settings.description != blank -%}
-          <div class="ifa-banner__description rte">{{ section.settings.description }}</div>
+          <div class="ifa-banner__description rte{% if ifa_anim %} fd-anim fd-fade-up{% endif %}">{{ section.settings.description }}</div>
         {%- endif -%}
-        <div class="ifa-banner__actions">
+        <div class="ifa-banner__actions{% if ifa_anim %} fd-anim fd-fade-up{% endif %}">
           {%- if section.settings.primary_button_label != blank -%}
             <a
               {% if section.settings.primary_button_link != blank %}
@@ -307,6 +321,81 @@
     }
   }
 
+  .ifa-banner--light .ifa-banner__frame--has-image {
+    min-height: calc(480 * var(--rem));
+    background: #eef1f3;
+  }
+
+  .ifa-banner--light .ifa-banner__media {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+  }
+
+  .ifa-banner--light .ifa-banner__media-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center right;
+  }
+
+  .ifa-banner--light .ifa-banner__frame--has-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(90deg, rgb(238 241 243 / 95%) 0%, rgb(238 241 243 / 84%) 38%, rgb(238 241 243 / 43%) 62%, rgb(238 241 243 / 0%) 100%);
+  }
+
+  .ifa-banner--light .ifa-banner__heading {
+    color: #111111;
+    text-transform: none;
+  }
+
+  .ifa-banner--light .ifa-banner__description {
+    color: #666666;
+  }
+
+  .ifa-banner--light .ifa-banner__button--secondary {
+    background: #ffffff;
+    color: #111111;
+    border-color: #111111;
+  }
+
+  .ifa-banner--light.ifa-banner--no-wash .ifa-banner__frame--has-image::after {
+    display: none;
+  }
+
+  .ifa-banner--light .ifa-banner__button--primary::after {
+    content: "";
+    width: calc(8 * var(--rem));
+    height: calc(8 * var(--rem));
+    margin-left: calc(8 * var(--rem));
+    border-top: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    transform: rotate(45deg);
+  }
+
+  @media screen and (max-width: 768px) {
+    .ifa-banner--light .ifa-banner__frame--has-image {
+      min-height: calc(1100 * var(--rem));
+    }
+
+    .ifa-banner--light .ifa-banner__media-image {
+      object-position: 72% center;
+    }
+
+    .ifa-banner--light .ifa-banner__frame--has-image::after {
+      background: linear-gradient(180deg, rgb(238 241 243 / 95%) 0%, rgb(238 241 243 / 87%) 52%, rgb(238 241 243 / 52%) 78%, rgb(238 241 243 / 15%) 100%);
+    }
+
+    .ifa-banner--light .ifa-banner__content {
+      align-items: flex-start;
+      padding-top: calc(220 * var(--rem));
+    }
+  }
+
   @media screen and (min-width: 750px) and (max-width: 768px) {
     .ifa-banner__content {
       padding: calc(90 * var(--rem)) calc(34 * var(--rem));
@@ -371,6 +460,29 @@
       "unit": "%",
       "default": 35,
       "info": "Improves text readability over bright images."
+    },
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "文字色",
+      "default": "dark",
+      "options": [
+        { "value": "dark", "label": "浅字（深色遮罩）" },
+        { "value": "light", "label": "深字（浅色渐变）" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "light_wash",
+      "label": "浅色渐变蒙层",
+      "info": "仅浅色文字模式。关掉后图片不再盖白。",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enter_animation",
+      "label": "进场动画",
+      "default": false
     },
     {
       "type": "color",

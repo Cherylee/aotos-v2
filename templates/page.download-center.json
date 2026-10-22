@@ -1,0 +1,107 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "app_download_banner": {
+      "type": "support-app-download",
+      "settings": {
+        "video_desktop": "shopify://files/videos/fh2q90pg.mp4",
+        "video_mobile": "shopify://files/videos/fh2q90pg.mp4",
+        "background_color": "#ffffff",
+        "overlay_opacity": 0,
+        "subheading": "Your ride connected",
+        "heading": "AOTOS APP",
+        "description": "Track your rides, adjust your settings, and stay connected—all in one place. The AOTOS app puts control in your hands.",
+        "links_label": "Download Here:",
+        "google_play_link": "https://play.google.com/store/apps/details?id=com.dt.smart.aotos&hl=ln",
+        "google_play_badge": "shopify://shop_images/store-googleplay.avif",
+        "app_store_link": "https://apps.apple.com/us/app/aotos/id6743829984",
+        "app_store_badge": "shopify://shop_images/store-apple.avif"
+      }
+    },
+    "app_overview": {
+      "type": "download-app-overview",
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "title": "Your Bike",
+            "content": "The AOTOS app gives you full customizable control to your ebike. From setting your speed limit to enabling the ACU-enabled Smart Security Features, the AOTOS app is the key to unlocking your bike's potential."
+          }
+        }
+      },
+      "block_order": [
+        "feature_1"
+      ],
+      "settings": {
+        "background_color": "#ffffff",
+        "text_color": "#000000",
+        "muted_text_color": "#000000",
+        "eyebrow": "Overview",
+        "title": "One App For Everything",
+        "image": "shopify://shop_images/Engineered_Strength._Precision_Form._983854fe-7386-4499-bce9-64bcb883edee.webp",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
+    },
+    "app_features_switch": {
+      "type": "download-app-features",
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "title": "Security Features",
+            "description": "Customize our Smart Security Features for peace of mind",
+            "image": "shopify://shop_images/Engineered_Strength._Precision_Form._dd7a540c-c15d-4d6b-a727-2db3abd4816c.webp"
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "title": "Speed Limit",
+            "description": "Unlock to Class 3 or dial it back with Speed Limit customization",
+            "image": "shopify://shop_images/Engineered_Strength._Precision_Form._7612a769-3d35-44b4-a490-53a3d219ff09.webp"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "title": "Tracking/IoT",
+            "description": "Know your bike's location, anytime",
+            "image": "shopify://shop_images/Engineered_Strength._Precision_Form._983854fe-7386-4499-bce9-64bcb883edee.webp"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3"
+      ],
+      "settings": {
+        "background_color": "#ffffff",
+        "text_color": "#000000",
+        "muted_text_color": "#333333",
+        "active_bg_color": "#f3f3f3",
+        "title": "Full Control, Full Freedom",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
+    }
+  },
+  "order": [
+    "app_download_banner",
+    "app_overview",
+    "app_features_switch"
+  ]
+}
