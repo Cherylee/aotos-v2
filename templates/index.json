@@ -564,6 +564,67 @@
         "padding_bottom_mobile": 88
       }
     },
+    "home_press_logos": {
+      "type": "home-press-logos",
+      "blocks": {
+        "designboom": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/cropped-new-electrek-logo_2a99233d-bdc4-4ecf-90aa-dc4d4c8f1cd8.webp",
+            "alt": "designboom"
+          }
+        },
+        "gq_2": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/6_3f275b4c-f50c-463e-834f-f83e6039f432.webp",
+            "alt": "GQ"
+          }
+        },
+        "gq_1": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/4_096a7543-ac19-4a78-9739-9d33b6c92afb.avif",
+            "alt": "GQ"
+          }
+        },
+        "forbes": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/Bike-Exif-Logo.avif",
+            "alt": "Forbes"
+          }
+        },
+        "hypebeast": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/5_22b47d5d-a360-4f12-b799-c225ede03a4a.avif",
+            "alt": "HYPEBEAST"
+          }
+        },
+        "highsnobiety": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/8_5b8841f2-5f05-46b3-8f06-e3df9c951133_1.avif",
+            "alt": "HIGHSNOBIETY"
+          }
+        }
+      },
+      "block_order": [
+        "designboom",
+        "gq_2",
+        "gq_1",
+        "forbes",
+        "hypebeast",
+        "highsnobiety"
+      ],
+      "settings": {
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    },
     "home_explore_cards": {
       "type": "home-explore-cards",
       "blocks": {
@@ -739,6 +800,7 @@
     "safety_certified_hero_4AnbLr",
     "home_split_cards",
     "home_rider_stories",
+    "home_press_logos",
     "home_explore_cards",
     "home_dealer_card",
     "home_spotlight",

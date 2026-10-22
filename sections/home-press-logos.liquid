@@ -1,0 +1,111 @@
+{%- style -%}
+  #HomePress-{{ section.id }} {
+    background: #ffffff;
+    padding-top: calc({{ section.settings.padding_top | default: 40, allow_false: true }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 40, allow_false: true }} * var(--rem));
+  }
+
+  #HomePress-{{ section.id }} .home-press__shell {
+    width: calc(1100 * var(--rem));
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(24 * var(--rem));
+  }
+
+  #HomePress-{{ section.id }} .home-press__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    flex: 1 1 0;
+  }
+
+  #HomePress-{{ section.id }} .home-press__item img {
+    display: block;
+    width: auto;
+    max-width: calc(150 * var(--rem));
+    height: calc(34 * var(--rem));
+    object-fit: contain;
+  }
+
+  @media screen and (max-width: 768px) {
+    #HomePress-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 48, allow_false: true }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 48, allow_false: true }} * var(--rem));
+    }
+
+    #HomePress-{{ section.id }} .home-press__shell {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0 calc(40 * var(--rem));
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: calc(32 * var(--rem)) calc(24 * var(--rem));
+    }
+
+    #HomePress-{{ section.id }} .home-press__item {
+      flex: 0 1 calc(33.33% - 16 * var(--rem));
+    }
+
+    #HomePress-{{ section.id }} .home-press__item img {
+      max-width: calc(180 * var(--rem));
+      height: calc(48 * var(--rem));
+    }
+  }
+{%- endstyle -%}
+
+<section id="HomePress-{{ section.id }}" class="home-press">
+  <div class="home-press__shell">
+    {%- for block in section.blocks -%}
+      {%- if block.settings.logo != blank -%}
+        {%- liquid
+          assign press_logo = block.settings.logo
+          assign press_logo_height = 320 | divided_by: press_logo.aspect_ratio | round
+        -%}
+        <div class="home-press__item" {{ block.shopify_attributes }}>
+          {{
+            press_logo
+            | image_url: width: 320
+            | image_tag:
+              widths: '160, 240, 320',
+              sizes: '(max-width: 768px) 30vw, 160px',
+              width: 320,
+              height: press_logo_height,
+              loading: 'lazy',
+              alt: block.settings.alt
+          }}
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "首页媒体 Logo",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "range", "id": "padding_top", "label": "PC 上边距", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding_bottom", "label": "PC 下边距", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding_top_mobile", "label": "手机上边距", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "手机下边距", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 48 }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        { "type": "image_picker", "id": "logo", "label": "Logo" },
+        { "type": "text", "id": "alt", "label": "替代文字" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "首页媒体 Logo" }
+  ]
+}
+{% endschema %}
