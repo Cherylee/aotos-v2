@@ -1,5 +1,16 @@
 {{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{{ 'component-announcement-bar.css' | asset_url | stylesheet_tag }}
+
+{%- unless section.settings.show_on_mobile -%}
+  <style>
+    @media screen and (max-width: 749px) {
+      #shopify-section-{{ section.id }} {
+        display: none !important;
+      }
+    }
+  </style>
+{%- endunless -%}
 
 {%- liquid
   assign social_icons = true
@@ -19,7 +30,7 @@
 {% endif %}
 
 <div
-  class="utility-bar color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %}"
+  class="utility-bar color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %}{% unless section.settings.show_on_mobile %} small-hide{% endunless %}"
   {{ block.shopify_attributes }}
 >
   <div class="page-width utility-bar__grid{% if announcement_bar and language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--3-col{% elsif language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--2-col{% endif %}">
@@ -33,23 +44,7 @@
         aria-label="{{ 'sections.header.announcement' | t }}"
         {{ block.shopify_attributes }}
       >
-        {%- if section.blocks.first.settings.text != blank -%}
-          {%- if section.blocks.first.settings.link != blank -%}
-            <a
-              href="{{ section.blocks.first.settings.link }}"
-              class="announcement-bar__link link link--text focus-inset animate-arrow"
-            >
-          {%- endif -%}
-          <p class="announcement-bar__message h5">
-            <span>{{ section.blocks.first.settings.text | escape }}</span>
-            {%- if section.blocks.first.settings.link != blank -%}
-              {{- 'icon-arrow.svg' | inline_asset_content -}}
-            {%- endif -%}
-          </p>
-          {%- if section.blocks.first.settings.link != blank -%}
-            </a>
-          {%- endif -%}
-        {%- endif -%}
+        {%- render 'announcement-bar-content', block: section.blocks.first -%}
       </div>
     {%- elsif section.blocks.size > 1 -%}
       <slideshow-component
@@ -65,6 +60,7 @@
             name="previous"
             aria-label="{{ 'sections.announcements.previous_announcement' | t }}"
             aria-controls="Slider-{{ section.id }}"
+            {% unless section.settings.show_nav_buttons %}hidden{% endunless %}
           >
             <span class="svg-wrapper">
               {{- 'icon-caret.svg' | inline_asset_content -}}
@@ -94,23 +90,7 @@
                   aria-label="{{ 'sections.header.announcement' | t }}"
                   {{ block.shopify_attributes }}
                 >
-                  {%- if block.settings.text != blank -%}
-                    {%- if block.settings.link != blank -%}
-                      <a
-                        href="{{ block.settings.link }}"
-                        class="announcement-bar__link link link--text focus-inset animate-arrow"
-                      >
-                    {%- endif -%}
-                    <p class="announcement-bar__message h5">
-                      <span>{{ block.settings.text | escape }}</span>
-                      {%- if block.settings.link != blank -%}
-                        {{- 'icon-arrow.svg' | inline_asset_content -}}
-                      {%- endif -%}
-                    </p>
-                    {%- if block.settings.link != blank -%}
-                      </a>
-                    {%- endif -%}
-                  {%- endif -%}
+                  {%- render 'announcement-bar-content', block: block -%}
                 </div>
               </div>
             {%- endfor -%}
@@ -121,6 +101,7 @@
             name="next"
             aria-label="{{ 'sections.announcements.next_announcement' | t }}"
             aria-controls="Slider-{{ section.id }}"
+            {% unless section.settings.show_nav_buttons %}hidden{% endunless %}
           >
             <span class="svg-wrapper">
               {{- 'icon-caret.svg' | inline_asset_content -}}
@@ -164,6 +145,51 @@
   </div>
 </div>
 
+<script>
+  if (!customElements.get('countdown-timer')) {
+    customElements.define(
+      'countdown-timer',
+      class extends HTMLElement {
+        connectedCallback() {
+          const raw = (this.dataset.endDate || '').trim();
+          // Normalize "YYYY-MM-DD HH:MM" to a Safari-safe ISO format
+          const end = new Date(raw.replace(' ', 'T'));
+          if (!raw || isNaN(end)) {
+            this.hidden = true;
+            return;
+          }
+          this.endDate = end;
+          this.update();
+          this.interval = setInterval(() => this.update(), 1000);
+        }
+
+        disconnectedCallback() {
+          clearInterval(this.interval);
+        }
+
+        update() {
+          const diff = this.endDate.getTime() - Date.now();
+          const total = Math.max(0, Math.floor(diff / 1000));
+          const values = {
+            days: Math.floor(total / 86400),
+            hours: Math.floor((total % 86400) / 3600),
+            minutes: Math.floor((total % 3600) / 60),
+            seconds: total % 60
+          };
+          for (const [unit, value] of Object.entries(values)) {
+            const el = this.querySelector(`[data-countdown-${unit}]`);
+            if (el) el.textContent = String(value).padStart(2, '0');
+          }
+          if (diff <= 0) {
+            clearInterval(this.interval);
+            this.classList.add('countdown--expired');
+          }
+        }
+      }
+    );
+  }
+</script>
+
 {% schema %}
 {
   "name": "t:sections.announcement-bar.name",
@@ -186,6 +212,12 @@
       "label": "t:sections.header.settings.show_line_separator.label"
     },
     {
+      "type": "checkbox",
+      "id": "show_on_mobile",
+      "default": true,
+      "label": "t:sections.announcement-bar.settings.show_on_mobile.label"
+    },
+    {
       "type": "header",
       "content": "t:sections.announcement-bar.settings.header__1.content",
       "info": "t:sections.announcement-bar.settings.header__1.info"
@@ -204,7 +236,7 @@
       "type": "checkbox",
       "id": "auto_rotate",
       "label": "t:sections.announcement-bar.settings.auto_rotate.label",
-      "default": false
+      "default": true
     },
     {
       "type": "range",
@@ -215,6 +247,12 @@
       "unit": "s",
       "label": "t:sections.announcement-bar.settings.change_slides_speed.label",
       "default": 5
+    },
+    {
+      "type": "checkbox",
+      "id": "show_nav_buttons",
+      "label": "Show slide navigation buttons",
+      "default": false
     },
     {
       "type": "header",
@@ -245,15 +283,228 @@
       "name": "t:sections.announcement-bar.blocks.announcement.name",
       "settings": [
         {
-          "type": "text",
+          "type": "select",
+          "id": "layout_style",
+          "label": "Style",
+          "default": "simple",
+          "options": [
+            { "value": "simple", "label": "Simple text + link" },
+            { "value": "promotion", "label": "Promotion: countdown + button + image" },
+            { "value": "benefits", "label": "Benefits: four icon items" }
+          ]
+        },
+        {
+          "type": "inline_richtext",
           "id": "text",
           "default": "t:sections.announcement-bar.blocks.announcement.settings.text.default",
           "label": "t:sections.announcement-bar.blocks.announcement.settings.text.label"
         },
         {
+          "type": "color",
+          "id": "text_highlight_color",
+          "label": "Highlighted text color",
+          "default": "#ff6501",
+          "info": "Bold text in the editor uses this color."
+        },
+        {
           "type": "url",
           "id": "link",
           "label": "t:sections.announcement-bar.blocks.announcement.settings.link.label"
+        },
+        {
+          "type": "header",
+          "content": "Product image"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_image",
+          "label": "Show product image",
+          "default": false
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image (desktop)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Image (mobile)",
+          "info": "Optional. Shown below 750px; falls back to the desktop image when empty."
+        },
+        {
+          "type": "header",
+          "content": "Button"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_button",
+          "label": "Show button",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "color",
+          "id": "button_background",
+          "label": "Button background color",
+          "default": "#ff6501"
+        },
+        {
+          "type": "color",
+          "id": "button_text_color",
+          "label": "Button text color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "range",
+          "id": "button_padding_vertical",
+          "label": "Vertical padding",
+          "info": "Responsive px based on the 1440px desktop design (8 = 8px at 1440px).",
+          "min": 0,
+          "max": 30,
+          "step": 1,
+          "default": 8
+        },
+        {
+          "type": "range",
+          "id": "button_padding_horizontal",
+          "label": "Horizontal padding",
+          "info": "Responsive px based on the 1440px desktop design (18 = 18px at 1440px).",
+          "min": 0,
+          "max": 60,
+          "step": 1,
+          "default": 18
+        },
+        {
+          "type": "range",
+          "id": "button_radius",
+          "label": "Corner radius",
+          "info": "Responsive px based on the 1440px desktop design (16 = 16px at 1440px).",
+          "min": 0,
+          "max": 50,
+          "step": 1,
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "button_font_size",
+          "label": "Font size",
+          "info": "Responsive px based on the 1440px desktop design (12 = 12px at 1440px).",
+          "min": 8,
+          "max": 30,
+          "step": 1,
+          "default": 12
+        },
+        {
+          "type": "select",
+          "id": "button_font_weight",
+          "label": "Font weight",
+          "default": "600",
+          "options": [
+            { "value": "400", "label": "Normal (400)" },
+            { "value": "500", "label": "Medium (500)" },
+            { "value": "600", "label": "Semi bold (600)" },
+            { "value": "700", "label": "Bold (700)" },
+            { "value": "800", "label": "Extra bold (800)" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Countdown timer"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_countdown",
+          "label": "Show countdown timer",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "countdown_end_date",
+          "label": "End date",
+          "info": "Format: YYYY-MM-DD HH:MM (e.g. 2026-12-31 23:59). Uses the visitor's local timezone."
+        },
+        {
+          "type": "header",
+          "content": "Benefits style"
+        },
+        {
+          "type": "paragraph",
+          "content": "Used only when Style is “Benefits: four icon items”."
+        },
+        {
+          "type": "image_picker",
+          "id": "benefit_icon_1",
+          "label": "Item 1 icon"
+        },
+        {
+          "type": "text",
+          "id": "benefit_text_1",
+          "label": "Item 1 text",
+          "default": "1-Year Warranty"
+        },
+        {
+          "type": "url",
+          "id": "benefit_link_1",
+          "label": "Item 1 link"
+        },
+        {
+          "type": "image_picker",
+          "id": "benefit_icon_2",
+          "label": "Item 2 icon"
+        },
+        {
+          "type": "text",
+          "id": "benefit_text_2",
+          "label": "Item 2 text",
+          "default": "Lifetime Customer Support"
+        },
+        {
+          "type": "url",
+          "id": "benefit_link_2",
+          "label": "Item 2 link"
+        },
+        {
+          "type": "image_picker",
+          "id": "benefit_icon_3",
+          "label": "Item 3 icon"
+        },
+        {
+          "type": "text",
+          "id": "benefit_text_3",
+          "label": "Item 3 text",
+          "default": "Fast Local Shipping in 2–5 Days"
+        },
+        {
+          "type": "url",
+          "id": "benefit_link_3",
+          "label": "Item 3 link"
+        },
+        {
+          "type": "image_picker",
+          "id": "benefit_icon_4",
+          "label": "Item 4 icon"
+        },
+        {
+          "type": "text",
+          "id": "benefit_text_4",
+          "label": "Item 4 text",
+          "default": "30-Day Hassle-Free Returns"
+        },
+        {
+          "type": "url",
+          "id": "benefit_link_4",
+          "label": "Item 4 link"
         }
       ]
     }

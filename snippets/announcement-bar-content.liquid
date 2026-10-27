@@ -1,0 +1,169 @@
+{% comment %}
+  Renders announcement content: optional product image, message text (keeps the
+  original text-link behavior), optional CTA button and optional countdown timer.
+
+  Accepts:
+  - block: {Object} announcement block
+{% endcomment %}
+
+{%- liquid
+  assign layout_style = block.settings.layout_style | default: 'simple'
+  assign desktop_image = block.settings.image
+  assign mobile_image = block.settings.image_mobile
+  assign show_banner_image = false
+
+  if desktop_image == blank
+    assign desktop_image = mobile_image
+  endif
+  if mobile_image == blank
+    assign mobile_image = desktop_image
+  endif
+  if layout_style == 'promotion' and block.settings.show_image and desktop_image != blank
+    assign show_banner_image = true
+  endif
+-%}
+
+<div class="announcement-bar__frame{% if show_banner_image %} announcement-bar__frame--has-image{% endif %}">
+{%- if show_banner_image -%}
+  <picture class="announcement-bar__media" aria-hidden="true">
+    <source
+      media="(max-width: 749px)"
+      srcset="
+        {{ mobile_image | image_url: width: 375 }} 375w,
+        {{ mobile_image | image_url: width: 750 }} 750w,
+        {{ mobile_image | image_url: width: 1000 }} 1000w,
+        {{ mobile_image | image_url: width: 1500 }} 1500w
+      "
+      sizes="100vw"
+    >
+    {{
+      desktop_image
+      | image_url: width: 3840
+      | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '100vw', widths: '750, 1100, 1440, 1920, 2560, 3200, 3840', class: 'announcement-bar__media-image', alt: ''
+    }}
+  </picture>
+{%- endif -%}
+{%- if layout_style == 'benefits' -%}
+  <div class="announcement-bar__benefits">
+    {%- assign rendered_benefits = 0 -%}
+    {%- for index in (1..4) -%}
+      {%- liquid
+        assign icon_key = 'benefit_icon_' | append: index
+        assign text_key = 'benefit_text_' | append: index
+        assign link_key = 'benefit_link_' | append: index
+        assign benefit_icon = block.settings[icon_key]
+        assign benefit_text = block.settings[text_key]
+        assign benefit_link = block.settings[link_key]
+      -%}
+      {%- if benefit_text != blank -%}
+        {%- if rendered_benefits > 0 -%}
+          <span class="announcement-bar__benefit-separator" aria-hidden="true"></span>
+        {%- endif -%}
+        {%- assign rendered_benefits = rendered_benefits | plus: 1 -%}
+        {%- if benefit_link != blank -%}
+          <a href="{{ benefit_link }}" class="announcement-bar__benefit announcement-bar__benefit--{{ rendered_benefits }} link link--text focus-inset">
+        {%- else -%}
+          <div class="announcement-bar__benefit announcement-bar__benefit--{{ rendered_benefits }}">
+        {%- endif -%}
+          {%- if benefit_icon != blank -%}
+            {{
+              benefit_icon
+              | image_url: width: 64
+              | image_tag: loading: 'eager', widths: '32, 48, 64', class: 'announcement-bar__benefit-icon'
+            }}
+          {%- else -%}
+            <span class="announcement-bar__benefit-icon announcement-bar__benefit-icon--placeholder" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"></circle>
+                <path d="m8.2 12.1 2.4 2.4 5.3-5.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </span>
+          {%- endif -%}
+          <span>{{ benefit_text | escape }}</span>
+        {%- if benefit_link != blank -%}
+          </a>
+        {%- else -%}
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+{%- else -%}
+<div class="announcement-bar__content announcement-bar__content--{{ layout_style }}">
+  {%- if block.settings.text != blank -%}
+    {%- if block.settings.link != blank -%}
+      <a
+        href="{{ block.settings.link }}"
+        class="announcement-bar__link link link--text focus-inset animate-arrow"
+      >
+    {%- endif -%}
+    <p
+      class="announcement-bar__message"
+      style="--announcement-highlight-color: {{ block.settings.text_highlight_color | default: '#ff6501' }};"
+    >
+      <span class="announcement-bar__message-text">{{ block.settings.text }}</span>
+      {%- if block.settings.link != blank -%}
+        {{- 'icon-arrow.svg' | inline_asset_content -}}
+      {%- endif -%}
+    </p>
+    {%- if block.settings.link != blank -%}
+      </a>
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- if layout_style == 'promotion' and block.settings.show_countdown and block.settings.countdown_end_date != blank -%}
+    <div class="announcement-bar__countdown-wrap">
+      <span class="countdown__title">{{ 'sections.announcements.countdown.ends_in' | t }}</span>
+      <countdown-timer
+        class="announcement-bar__countdown"
+        data-end-date="{{ block.settings.countdown_end_date | strip | escape }}"
+        role="timer"
+      >
+      <span class="countdown__unit">
+        <span class="countdown__number" data-countdown-days>00</span>
+        <span class="countdown__label">{{ 'sections.announcements.countdown.days' | t }}</span>
+      </span>
+      <span class="countdown__separator" aria-hidden="true">:</span>
+      <span class="countdown__unit">
+        <span class="countdown__number" data-countdown-hours>00</span>
+        <span class="countdown__label">{{ 'sections.announcements.countdown.hours' | t }}</span>
+      </span>
+      <span class="countdown__separator" aria-hidden="true">:</span>
+      <span class="countdown__unit">
+        <span class="countdown__number" data-countdown-minutes>00</span>
+        <span class="countdown__label">{{ 'sections.announcements.countdown.minutes' | t }}</span>
+      </span>
+      <span class="countdown__separator" aria-hidden="true">:</span>
+      <span class="countdown__unit">
+        <span class="countdown__number" data-countdown-seconds>00</span>
+        <span class="countdown__label">{{ 'sections.announcements.countdown.seconds' | t }}</span>
+      </span>
+      </countdown-timer>
+    </div>
+  {%- endif -%}
+
+  {%- if layout_style == 'promotion' and block.settings.show_button and block.settings.button_label != blank -%}
+    <a
+      {% if block.settings.button_link != blank %}
+        href="{{ block.settings.button_link }}"
+      {% else %}
+        role="link" aria-disabled="true"
+      {% endif %}
+      class="announcement-bar__button"
+      style="
+        --ab-btn-padding-v: calc({{ block.settings.button_padding_vertical | default: 8 }} * var(--rem));
+        --ab-btn-padding-h: calc({{ block.settings.button_padding_horizontal | default: 18 }} * var(--rem));
+        --ab-btn-radius: calc({{ block.settings.button_radius | default: 16 }} * var(--rem));
+        --ab-btn-font-size: calc({{ block.settings.button_font_size | default: 12 }} * var(--rem));
+        --ab-btn-font-weight: {{ block.settings.button_font_weight | default: 600 }};
+        --ab-btn-background: {{ block.settings.button_background | default: '#ff6501' }};
+        --ab-btn-text-color: {{ block.settings.button_text_color | default: '#ffffff' }};
+      "
+    >
+      <span>{{ block.settings.button_label | escape }}</span>
+    </a>
+  {%- endif -%}
+
+</div>
+{%- endif -%}
+</div>

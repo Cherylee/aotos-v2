@@ -284,7 +284,14 @@
       "next_announcement": "Next announcement",
       "carousel": "Carousel",
       "announcement": "Announcement",
-      "announcement_bar": "Announcement bar"
+      "announcement_bar": "Announcement bar",
+      "countdown": {
+        "ends_in": "Ends In",
+        "days": "Days",
+        "hours": "HRS",
+        "minutes": "MINS",
+        "seconds": "SECS"
+      }
     },
 
     "header": {
