@@ -684,8 +684,13 @@ body.velotric-lightbox-open {
   padding-bottom: 0;
 }
 
-.velotric-product__buy-buttons [data-essential-upsell-element="container"] {
+.velotric-product__buy-buttons [data-essential-upsell-element="container"]:has(> [data-essential-upsell-element="header"]) {
   padding-top: 0 !important;
+}
+
+.velotric-product__buy-buttons [data-essential-upsell-element="container"]:has(> [data-essential-upsell-element="decrement"]) {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 .velotric-product__buy-buttons [data-essential-upsell-element="header"] {
