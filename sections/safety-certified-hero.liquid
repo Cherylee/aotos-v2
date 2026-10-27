@@ -2,6 +2,22 @@
   assign sc_overlay = section.settings.overlay_opacity | default: 45
   assign sc_height = section.settings.height | default: '400'
   assign sc_height_mob = section.settings.height_mobile | default: '480'
+  assign sc_adapt_ratio = blank
+  assign sc_adapt_ratio_mob = blank
+  if sc_height == 'adapt' or sc_height_mob == 'adapt'
+    for block in section.blocks
+      if sc_adapt_ratio == blank and block.settings.image != blank
+        assign sc_adapt_ratio = block.settings.image.aspect_ratio
+      endif
+      if sc_adapt_ratio_mob == blank
+        if block.settings.image_mobile != blank
+          assign sc_adapt_ratio_mob = block.settings.image_mobile.aspect_ratio
+        elsif block.settings.image != blank
+          assign sc_adapt_ratio_mob = block.settings.image.aspect_ratio
+        endif
+      endif
+    endfor
+  endif
   if section.blocks.size > 0
     assign sc_hero_title = section.blocks.first.settings.heading | default: 'Safety Certified'
   else
@@ -321,6 +337,22 @@
       height: auto;
     }
 
+    {%- if sc_adapt_ratio != blank -%}
+      #sc-hero-{{ section.id }} .sc-hero__media:has(video) {
+        aspect-ratio: {{ sc_adapt_ratio }};
+      }
+
+      #sc-hero-{{ section.id }} .sc-hero__media:has(video) picture,
+      #sc-hero-{{ section.id }} .sc-hero__media:has(video) img,
+      #sc-hero-{{ section.id }} .sc-hero__media:has(video) video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    {%- endif -%}
+
     #sc-hero-{{ section.id }} .sc-hero__inner {
       position: absolute;
       top: 0;
@@ -372,6 +404,22 @@
         width: 100%;
         height: auto;
       }
+
+      {%- if sc_adapt_ratio_mob != blank -%}
+        #sc-hero-{{ section.id }} .sc-hero__media:has(video) {
+          aspect-ratio: {{ sc_adapt_ratio_mob }};
+        }
+
+        #sc-hero-{{ section.id }} .sc-hero__media:has(video) picture,
+        #sc-hero-{{ section.id }} .sc-hero__media:has(video) img,
+        #sc-hero-{{ section.id }} .sc-hero__media:has(video) video {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      {%- endif -%}
 
       #sc-hero-{{ section.id }} .sc-hero__inner {
         position: absolute;

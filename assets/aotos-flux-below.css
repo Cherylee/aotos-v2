@@ -1015,22 +1015,49 @@ html.js .fxb-faq__answer {
     line-height: calc(24 * var(--rem));
   }
 
-  .fxb-features__stage { overflow: visible; }
+  .fxb-features__stage {
+    overflow: visible;
+    width: calc(100% + 80 * var(--rem));
+    margin-left: calc(-40 * var(--rem));
+    margin-right: calc(-40 * var(--rem));
+  }
+
+  .fxb-features__stage:has(.fxb-features__slide:only-child) {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
 
   .fxb-features__slide,
   .fxb-features__slide.is-active {
     display: flex;
     flex-direction: column;
-    flex: 0 0 100%;
-    width: 100%;
-    max-width: 100%;
+    flex: 0 0 calc(100% - 220 * var(--rem));
+    width: calc(100% - 220 * var(--rem));
+    max-width: none;
     gap: calc(24 * var(--rem));
+  }
+
+  .fxb-features__slide:first-child {
+    margin-left: calc(40 * var(--rem));
+  }
+
+  .fxb-features__slide:last-child {
+    margin-right: calc(40 * var(--rem));
+  }
+
+  .fxb-features__slide:only-child,
+  .fxb-features__slide:only-child.is-active {
+    flex-basis: 100%;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .fxb-features__track {
     display: flex;
     align-items: flex-start;
-    gap: calc(40 * var(--rem));
+    gap: calc(24 * var(--rem));
     overflow: visible;
     touch-action: pan-y;
   }

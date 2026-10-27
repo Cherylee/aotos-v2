@@ -17,12 +17,12 @@
                 {%- assign poster = block.settings.image | default: block.settings.video.preview_image -%}
                 {%- if poster != blank -%}
                   {%- assign poster_h = 800 | divided_by: poster.aspect_ratio | round -%}
-                  <img src="{{ poster | image_url: width: 800 }}" srcset="{{ poster | image_url: width: 480 }} 480w, {{ poster | image_url: width: 800 }} 800w, {{ poster | image_url: width: 1200 }} 1200w" sizes="(max-width: 768px) 92vw, 560px" width="800" height="{{ poster_h }}" alt="{{ block.settings.heading | escape }}" loading="lazy">
+                  <img src="{{ poster | image_url: width: 800 }}" srcset="{{ poster | image_url: width: 480 }} 480w, {{ poster | image_url: width: 800 }} 800w, {{ poster | image_url: width: 1200 }} 1200w" sizes="(max-width: 768px) 72vw, 560px" width="800" height="{{ poster_h }}" alt="{{ block.settings.heading | escape }}" loading="lazy">
                 {%- endif -%}
                 {% render 'aotos-video', video: block.settings.video, autoplay: false, loop: true, muted: true, preload: 'none' %}
               {%- elsif block.settings.image != blank -%}
                 {%- assign img_h = 800 | divided_by: block.settings.image.aspect_ratio | round -%}
-                <img src="{{ block.settings.image | image_url: width: 800 }}" srcset="{{ block.settings.image | image_url: width: 480 }} 480w, {{ block.settings.image | image_url: width: 800 }} 800w" sizes="(max-width: 768px) 92vw, 560px" width="800" height="{{ img_h }}" alt="{{ block.settings.heading | escape }}" loading="lazy">
+                <img src="{{ block.settings.image | image_url: width: 800 }}" srcset="{{ block.settings.image | image_url: width: 480 }} 480w, {{ block.settings.image | image_url: width: 800 }} 800w" sizes="(max-width: 768px) 72vw, 560px" width="800" height="{{ img_h }}" alt="{{ block.settings.heading | escape }}" loading="lazy">
               {%- endif -%}
             </div>
             <div>

@@ -141,7 +141,17 @@
           return;
         }
         const slide = this.slides[this.index];
-        const shift = slide ? slide.offsetLeft : 0;
+        const stageW = this.stage?.clientWidth || 0;
+        const last = this.slides.length - 1;
+        let shift = 0;
+        if (slide && last > 0) {
+          if (this.index === last) {
+            const endGap = parseFloat(getComputedStyle(slide).marginRight) || 0;
+            shift = slide.offsetLeft + slide.offsetWidth + endGap - stageW;
+          } else if (this.index > 0) {
+            shift = slide.offsetLeft - (stageW - slide.offsetWidth) / 2;
+          }
+        }
         const x = -shift + (offsetPx || 0);
         this.track.style.transition = animate && !reduced ? 'transform 0.4s ease' : 'none';
         this.track.style.transform = `translate3d(${x}px, 0, 0)`;
