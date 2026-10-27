@@ -1,3 +1,6 @@
+{%- liquid
+  assign card_title = nav_title | default: nav_product.title
+-%}
 <a class="aotos-nav__card{% if request.path == nav_product.url %} is-current{% endif %}" href="{{ nav_product.url }}">
   <span class="aotos-nav__card-media">
     {%- if nav_product.featured_image != blank -%}
@@ -8,13 +11,13 @@
         | image_url: width: card_width
         | image_tag:
           widths: '160, 240, 320',
-          sizes: '(max-width: 768px) 28vw, 11vw',
+          sizes: '(max-width: 768px) 40vw, 180px',
           width: card_width,
           height: card_height,
           loading: 'lazy',
-          alt: nav_product.title
+          alt: card_title
       }}
     {%- endif -%}
   </span>
-  <span class="aotos-nav__card-title">{{ nav_product.title | escape }}</span>
+  <span class="aotos-nav__card-title">{{ card_title | escape }}</span>
 </a>

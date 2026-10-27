@@ -127,44 +127,47 @@
                     {%- liquid
                       assign title_key = 'item_' | append: i | append: '_title'
                       assign url_key = 'item_' | append: i | append: '_url'
-                      assign product_1_key = 'item_' | append: i | append: '_product_1'
+                      assign more_show_key = 'item_' | append: i | append: '_more_show'
+                      assign more_label_key = 'item_' | append: i | append: '_more_label'
+                      assign more_url_key = 'item_' | append: i | append: '_more_url'
                       assign item_title = block.settings[title_key]
                       assign item_url = block.settings[url_key]
-                      assign product_1 = block.settings[product_1_key]
-                      assign nav_handle = item_url | split: '/collections/' | last | split: '/' | first | split: '?' | first | split: '#' | first
-                      assign nav_collection = blank
-                      if item_url contains '/collections/' and nav_handle == 'accessories'
-                        assign nav_collection = collections[nav_handle]
-                      endif
+                      assign more_show = block.settings[more_show_key]
+                      assign more_label = block.settings[more_label_key]
+                      assign more_url = block.settings[more_url_key]
+                      assign product_1 = blank
+                      assign has_products = false
+                      for n in (1..8)
+                        assign product_key = 'item_' | append: i | append: '_product_' | append: n
+                        if block.settings[product_key] != blank
+                          assign has_products = true
+                          if product_1 == blank
+                            assign product_1 = block.settings[product_key]
+                          endif
+                        endif
+                      endfor
                     -%}
-                    {%- if item_title != blank or product_1 != blank -%}
+                    {%- if item_title != blank or has_products -%}
                       <li class="aotos-nav__mega-item{% if forloop.first %} is-active{% endif %}">
                         <a class="aotos-nav__mega-link" href="{{ item_url | default: product_1.url | default: '#' }}">
                           {{ item_title | default: product_1.title | escape }}
                         </a>
                         <div class="aotos-nav__mega-products">
-                          {%- liquid
-                            assign shown_handles = '|'
-                          -%}
-                          {%- for n in (1..6) -%}
-                            {%- liquid
-                              assign product_key = 'item_' | append: i | append: '_product_' | append: n
-                              assign nav_product = block.settings[product_key]
-                            -%}
-                            {%- if nav_product != blank -%}
-                              {%- render 'aotos-nav-card', nav_product: nav_product -%}
-                              {%- capture shown_handles -%}{{ shown_handles }}{{ nav_product.handle }}|{%- endcapture -%}
-                            {%- endif -%}
-                          {%- endfor -%}
-                          {%- if nav_collection != blank -%}
-                            {%- for nav_product in nav_collection.products -%}
+                          <div class="aotos-nav__mega-grid">
+                            {%- for n in (1..8) -%}
                               {%- liquid
-                                assign handle_token = '|' | append: nav_product.handle | append: '|'
+                                assign product_key = 'item_' | append: i | append: '_product_' | append: n
+                                assign product_title_key = 'item_' | append: i | append: '_product_' | append: n | append: '_title'
+                                assign nav_product = block.settings[product_key]
+                                assign nav_title = block.settings[product_title_key]
                               -%}
-                              {%- unless shown_handles contains handle_token -%}
-                                {%- render 'aotos-nav-card', nav_product: nav_product -%}
-                              {%- endunless -%}
+                              {%- if nav_product != blank -%}
+                                {%- render 'aotos-nav-card', nav_product: nav_product, nav_title: nav_title -%}
+                              {%- endif -%}
                             {%- endfor -%}
+                          </div>
+                          {%- if more_show and more_label != blank -%}
+                            <a class="aotos-nav__mega-cta" href="{{ more_url | default: '#' }}">{{ more_label | escape }}</a>
                           {%- endif -%}
                         </div>
                       </li>
