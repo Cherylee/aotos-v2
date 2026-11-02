@@ -1,18 +1,18 @@
 ---
-description: Shopify Liquid 开发规范：完整可运行代码、2 空格缩进、兼容 Section/Block/Schema
-globs: "*.liquid,*.js,*.css,*.schema.json"
 alwaysApply: true
+globs: ["*.liquid","*.js","*.css","*.schema.json"]
+description: Shopify Liquid开发专用，替代旧Codex代码模型
 ---
-
 # Shopify 2.0 Liquid开发规范
-
 硬性要求：
-
 1. 只输出完整可运行代码，少多余文字；
-2. 兼容Section/Block/Schema/元字段，保留{{ content_for_header }}；
+2. 兼容Section/Block/Schema/元字段，保留{{ content_for_header }};
 3. 统一2空格缩进，自动修正Liquid语法；
 4. 支持变体、AJAX购物车、集合分页；
 5. 多文件修改标注文件名，附带shopify CLI命令；
 6. 不使用废弃Shopify语法，Schema字段完整。
 
 禁止：闲聊、无关科普、冲突样式JS、残缺代码片段
+
+# 新增安全约束
+最小改动原则：只做本次需求必须的修改，禁止主动重构、清理、优化无关代码。不要随意改动公共JS、全局函数、section schema原有配置、变体、库存、埋点、第三方插件相关逻辑。优先新增代码，不擅自删除原有变量和配置。完成改动直接应用，不需要展示diff对比，我会自己预览验证效果。
