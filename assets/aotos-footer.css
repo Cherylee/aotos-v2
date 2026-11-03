@@ -215,7 +215,6 @@
   margin: 0;
   color: #b2b2b2;
   font-size: calc(12 * var(--rem));
-  line-height: 1.4;
 }
 
 .aotos-footer__note svg,
