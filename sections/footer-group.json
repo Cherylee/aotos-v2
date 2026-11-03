@@ -57,6 +57,14 @@
             "text": "support@aotos.com",
             "link": "mailto:support@aotos.com"
           }
+        },
+        "contact_item_TyeGPj": {
+          "type": "contact_item",
+          "settings": {
+            "icon_preset": "email",
+            "text": "Tel:888-330-3799",
+            "link": "Tel:888-330-3799"
+          }
         }
       },
       "block_order": [
@@ -65,7 +73,8 @@
         "menu-about",
         "menu-policy",
         "contact-hours",
-        "contact-email"
+        "contact-email",
+        "contact_item_TyeGPj"
       ],
       "settings": {
         "show_social": true,

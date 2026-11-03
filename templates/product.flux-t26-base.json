@@ -14,10 +14,10 @@
       "blocks": {
         "title_badges": {
           "type": "title_badges",
+          "disabled": true,
           "settings": {
             "image_1": "shopify://shop_images/Halloween_Edition.webp"
-          },
-          "disabled": true
+          }
         },
         "title": {
           "type": "title",
@@ -281,6 +281,7 @@
       "name": "t:sections.image-banner.presets.name",
       "settings": {
         "video": "shopify://files/videos/FLUX T26 H.mp4",
+        "video_mobile": "shopify://files/videos/FLUX T26 S.mp4",
         "heading": "",
         "heading_color": "#000000",
         "bg_color": "#ffffff",
@@ -288,8 +289,7 @@
         "padding_bottom": 0,
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 0,
-        "image_height": "large",
-        "video_mobile": "shopify://files/videos/FLUX T26 S.mp4"
+        "image_height": "large"
       }
     },
     "flux_features": {
@@ -298,67 +298,61 @@
         "card_1": {
           "type": "card",
           "settings": {
-            "video": "",
             "video_url": "",
+            "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales01.webp",
             "pre_heading": "SMARTER FROM THE START",
             "heading": "Unlock Your Ride, Your Way.",
-            "description": "<p>On FLUX T26, get moving with proximity, NFC, or passcode—no key fob hunt. The 1.9\" TFT keeps speed, mode, and battery clear, with navigation mirroring for everyday city trips.<br/></p>",
-            "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales01.webp"
+            "description": "<p>On FLUX T26, get moving with proximity, NFC, or passcode—no key fob hunt. The 1.9\" TFT keeps speed, mode, and battery clear, with navigation mirroring for everyday city trips.<br/></p>"
           }
         },
         "card_4": {
           "type": "card",
           "settings": {
-            "video": "",
             "video_url": "",
+            "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales02.webp",
             "pre_heading": "CITY-READY CONFIDENCE",
             "heading": "Built for Commutes and Neighborhood Miles.",
-            "description": "<p>20\" × 4.0\" fat tires, hydraulic disc brakes, integrated lighting, and Walk Assist are tuned for paved streets, stop-and-go traffic, and the ride home—not off-road adventures.</p>",
-            "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales02.webp"
+            "description": "<p>20\" × 4.0\" fat tires, hydraulic disc brakes, integrated lighting, and Walk Assist are tuned for paved streets, stop-and-go traffic, and the ride home—not off-road adventures.</p>"
           }
         },
         "card_6": {
           "type": "card",
           "settings": {
-            "video": "",
             "video_url": "",
+            "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales03.webp",
             "pre_heading": "RANGE THAT FITS YOUR ROUTE",
             "heading": "Forty Miles When You Need Them.",
-            "description": "<p>FLUX T26 delivers up to 40 miles** with 48V 14.5Ah actual discharge capacity. Enough for daily routes without carrying more battery than you need.</p>",
-            "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales03.webp"
+            "description": "<p>FLUX T26 delivers up to 40 miles** with 48V 14.5Ah actual discharge capacity. Enough for daily routes without carrying more battery than you need.</p>"
           }
         },
         "card_2": {
           "type": "card",
           "settings": {
-            "video": "",
             "video_url": "",
+            "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales04.webp",
             "pre_heading": "POWER FOR EVERYDAY RIDES",
             "heading": "Responsive Power for City Days.",
-            "description": "<p>A 500W rated motor, 750W Peak in BOOST*, and 60 Nm of torque give FLUX T26 clean, predictable power for starts, hills, and stop-and-go riding. Standard power control—gyro-assisted posture sensing is PRO only.</p>",
-            "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales04.webp"
+            "description": "<p>A 500W rated motor, 750W Peak in BOOST*, and 60 Nm of torque give FLUX T26 clean, predictable power for starts, hills, and stop-and-go riding. Standard power control—gyro-assisted posture sensing is PRO only.</p>"
           }
         },
         "card_3": {
           "type": "card",
           "settings": {
-            "video": "",
             "video_url": "",
+            "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales05.webp",
             "pre_heading": "CREATE AS YOU RIDE",
             "heading": "Capture the City You Ride.",
-            "description": "<p>Add an optional bike-mounted Hover holder and use Hover app tracking tools to film rider and group-ride moments. The Hover Creator Kit is an accessory and content tool—not a drone built into the bike.</p>",
-            "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales05.webp"
+            "description": "<p>Add an optional bike-mounted Hover holder and use Hover app tracking tools to film rider and group-ride moments. The Hover Creator Kit is an accessory and content tool—not a drone built into the bike.</p>"
           }
         },
         "card_5": {
           "type": "card",
           "settings": {
-            "video": "",
             "video_url": "",
+            "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales06.webp",
             "pre_heading": "BOOST THE MOMENT",
             "heading": "10 Seconds. One Controlled Burst.",
-            "description": "<p>Tap BOOST for up to 750W Peak* on FLUX T26—a short, controlled burst for starts and inclines. Ambient lighting adds a visible energy cue. Peak power is not a speed unlock.</p>",
-            "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales06.webp"
+            "description": "<p>Tap BOOST for up to 750W Peak* on FLUX T26—a short, controlled burst for starts and inclines. Ambient lighting adds a visible energy cue. Peak power is not a speed unlock.</p>"
           }
         }
       },
@@ -605,6 +599,11 @@
         "product_2_image": "shopify://shop_images/eb03020-cropped.webp",
         "product_2_tagline": "Smooth, predictable power for everyday rides.",
         "product_2_url": "shopify://products/flux-x26",
+        "product_3_name": "FLUX X26 Pro",
+        "product_3_highlight": "Pro",
+        "product_3_image": "shopify://shop_images/eb03_010-cropped.webp",
+        "product_3_tagline": "Sharper response for riders who want instant acceleration.",
+        "product_3_url": "shopify://products/flux-x26-pro",
         "bg_color": "#ffffff",
         "title_color": "#000000",
         "label_color": "#999999",
@@ -616,12 +615,7 @@
         "padding_top": 80,
         "padding_bottom": 80,
         "padding_top_mobile": 88,
-        "padding_bottom_mobile": 88,
-        "product_3_name": "FLUX X26 Pro",
-        "product_3_highlight": "Pro",
-        "product_3_image": "shopify://shop_images/eb03_010-cropped.webp",
-        "product_3_tagline": "Sharper response for riders who want instant acceleration.",
-        "product_3_url": "shopify://products/flux-x26-pro"
+        "padding_bottom_mobile": 88
       }
     },
     "flux_specs": {
@@ -677,21 +671,21 @@
         },
         "geo_7": {
           "type": "geometry_item",
+          "disabled": true,
           "settings": {
             "label_id": "G",
             "label": "Handlebar Width",
             "value": "28.5\""
-          },
-          "disabled": true
+          }
         },
         "geo_8": {
           "type": "geometry_item",
+          "disabled": true,
           "settings": {
             "label_id": "H",
             "label": "Recommended Rider Height",
             "value": "5'2\"–6'7\""
-          },
-          "disabled": true
+          }
         },
         "spec_1": {
           "type": "spec_item",
@@ -702,11 +696,11 @@
         },
         "spec_2": {
           "type": "spec_item",
+          "disabled": true,
           "settings": {
             "label": "Display",
             "value": "<p>5.5-inch TFT smart display</p>"
-          },
-          "disabled": true
+          }
         },
         "spec_3": {
           "type": "spec_item",
@@ -928,59 +922,59 @@
         },
         "box_list_6": {
           "type": "box_item",
+          "disabled": true,
           "settings": {
             "label_id": "6",
             "label": "Front reflector ×1"
-          },
-          "disabled": true
+          }
         },
         "box_list_7": {
           "type": "box_item",
+          "disabled": true,
           "settings": {
             "label_id": "7",
             "label": "Power cord ×1"
-          },
-          "disabled": true
+          }
         },
         "box_list_8": {
           "type": "box_item",
+          "disabled": true,
           "settings": {
             "label_id": "8",
             "label": "Pedals ×2"
-          },
-          "disabled": true
+          }
         },
         "box_list_9": {
           "type": "box_item",
+          "disabled": true,
           "settings": {
             "label_id": "9",
             "label": "Wrench ×1"
-          },
-          "disabled": true
+          }
         },
         "box_list_10": {
           "type": "box_item",
+          "disabled": true,
           "settings": {
             "label_id": "10",
             "label": "Ratchet wrench ×1"
-          },
-          "disabled": true
+          }
         },
         "box_item_UM6eCr": {
           "type": "box_item",
+          "disabled": true,
           "settings": {
             "label_id": "11",
             "label": "User Manual x1"
-          },
-          "disabled": true
+          }
         },
         "box_item_HLxRiK": {
           "type": "box_item",
+          "disabled": true,
           "settings": {
             "label_id": "12",
             "label": "Tool Kit x1"
-          },
-          "disabled": true
+          }
         }
       },
       "block_order": [
@@ -1307,12 +1301,12 @@
         },
         "faq_item_f6n3ff": {
           "type": "faq_item",
+          "disabled": true,
           "settings": {
             "question": "What is Shipping Protection?",
             "related_product": "",
             "answer": "<p>Shipping Protection is an optional coverage powered by Xcotton that gives you peace of mind when your order is on the way. It protects your package against common shipping risks.</p><p><strong>Shipping Protection cover:</strong></p><ul><li>Loss and damage in transit</li><li>Theft / Porch piracy</li><li>Mis-delivery by the courier</li><li>Quick and easy claims resolution</li></ul>"
-          },
-          "disabled": true
+          }
         }
       },
       "block_order": [
@@ -1334,6 +1328,7 @@
     },
     "flux_safety": {
       "type": "aotos-flux-safety",
+      "disabled": true,
       "name": "Product Safety Certified",
       "settings": {
         "background_image": "shopify://shop_images/AOTOS_center_right_1440x200_11zon.webp",
@@ -1359,8 +1354,7 @@
         "padding_bottom": 48,
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 0
-      },
-      "disabled": true
+      }
     },
     "aotos_flux_faq_qQqXtc": {
       "type": "aotos-flux-faq",
@@ -1410,4 +1404,3 @@
     "reviews"
   ]
 }
-
