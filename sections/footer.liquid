@@ -157,26 +157,77 @@
           {%- endform -%}
         {%- endif -%}
 
-        {%- if section.settings.hours != blank or section.settings.email != blank or settings.payment_icons != blank -%}
+        {%- liquid
+          assign note_blocks = section.blocks | where: 'type', 'contact_item'
+          assign has_notes = false
+          if note_blocks.size > 0 or section.settings.hours != blank or section.settings.email != blank
+            assign has_notes = true
+          endif
+        -%}
+        {%- if has_notes or settings.payment_icons != blank -%}
           <div class="aotos-footer__meta">
-            {%- if section.settings.hours != blank -%}
-              <p class="aotos-footer__note">
-                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6">
-                  <circle cx="12" cy="12" r="8"></circle>
-                  <path d="M12 8v4.5l3 2"></path>
-                </svg>
-                <span>{{ section.settings.hours | escape }}</span>
-              </p>
-            {%- endif -%}
+            {%- if note_blocks.size > 0 -%}
+              {%- for block in note_blocks -%}
+                {%- if block.settings.text != blank -%}
+                  {%- liquid
+                    assign note_text = block.settings.text
+                    assign note_href = block.settings.link
+                    if note_href == blank and block.settings.icon_preset == 'email' and note_text contains '@'
+                      assign note_href = 'mailto:' | append: note_text
+                    endif
+                  -%}
+                  <p class="aotos-footer__note" {{ block.shopify_attributes }}>
+                    {%- if block.settings.icon != blank -%}
+                      {{
+                        block.settings.icon
+                        | image_url: width: 80
+                        | image_tag:
+                          widths: '32, 48, 80',
+                          sizes: '(max-width: 768px) 38px, 18px',
+                          width: 48,
+                          height: 48,
+                          loading: 'lazy',
+                          alt: ''
+                      }}
+                    {%- elsif block.settings.icon_preset == 'email' -%}
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6">
+                        <rect x="4" y="6" width="16" height="12" rx="2"></rect>
+                        <path d="M5 7l7 6 7-6"></path>
+                      </svg>
+                    {%- elsif block.settings.icon_preset == 'clock' -%}
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6">
+                        <circle cx="12" cy="12" r="8"></circle>
+                        <path d="M12 8v4.5l3 2"></path>
+                      </svg>
+                    {%- endif -%}
+                    {%- if note_href != blank -%}
+                      <a href="{{ note_href | escape }}">{{ note_text | escape }}</a>
+                    {%- else -%}
+                      <span>{{ note_text | escape }}</span>
+                    {%- endif -%}
+                  </p>
+                {%- endif -%}
+              {%- endfor -%}
+            {%- else -%}
+              {%- if section.settings.hours != blank -%}
+                <p class="aotos-footer__note">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6">
+                    <circle cx="12" cy="12" r="8"></circle>
+                    <path d="M12 8v4.5l3 2"></path>
+                  </svg>
+                  <span>{{ section.settings.hours | escape }}</span>
+                </p>
+              {%- endif -%}
 
-            {%- if section.settings.email != blank -%}
-              <p class="aotos-footer__note">
-                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6">
-                  <rect x="4" y="6" width="16" height="12" rx="2"></rect>
-                  <path d="M5 7l7 6 7-6"></path>
-                </svg>
-                <a href="mailto:{{ section.settings.email | escape }}">{{ section.settings.email | escape }}</a>
-              </p>
+              {%- if section.settings.email != blank -%}
+                <p class="aotos-footer__note">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6">
+                    <rect x="4" y="6" width="16" height="12" rx="2"></rect>
+                    <path d="M5 7l7 6 7-6"></path>
+                  </svg>
+                  <a href="mailto:{{ section.settings.email | escape }}">{{ section.settings.email | escape }}</a>
+                </p>
+              {%- endif -%}
             {%- endif -%}
 
             {%- if settings.payment_icons != blank -%}
@@ -257,11 +308,11 @@
 {% schema %}
 {
   "name": "页脚",
-  "max_blocks": 4,
   "blocks": [
     {
       "type": "link_list",
       "name": "菜单",
+      "limit": 4,
       "settings": [
         {
           "type": "text",
@@ -273,6 +324,41 @@
           "type": "link_list",
           "id": "menu",
           "label": "菜单"
+        }
+      ]
+    },
+    {
+      "type": "contact_item",
+      "name": "联系信息",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "图标图片",
+          "info": "上传图片将覆盖下方的默认图标"
+        },
+        {
+          "type": "select",
+          "id": "icon_preset",
+          "label": "默认图标（未上传图片时）",
+          "default": "clock",
+          "options": [
+            { "value": "clock", "label": "时钟" },
+            { "value": "email", "label": "邮箱" },
+            { "value": "none", "label": "无" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "文案",
+          "default": "Mon–Fri, 9:00 AM–6:00 PM ET"
+        },
+        {
+          "type": "text",
+          "id": "link",
+          "label": "链接（可选）",
+          "info": "可填网址或 mailto: / tel:，留空为纯文字"
         }
       ]
     }

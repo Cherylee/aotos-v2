@@ -219,10 +219,12 @@
 }
 
 .aotos-footer__note svg,
+.aotos-footer__note img,
 .aotos-footer__message svg {
   flex: 0 0 auto;
-  width: calc(16 * var(--rem));
-  height: calc(16 * var(--rem));
+  width: calc(18 * var(--rem));
+  height: calc(18 * var(--rem));
+  object-fit: contain;
 }
 
 .aotos-footer__note a {
@@ -358,7 +360,9 @@
   .aotos-footer__menu[open] > .aotos-footer__links {
     padding-bottom: calc(28 * var(--rem));
   }
-  .aotos-footer__note svg, .aotos-footer__message svg{
+  .aotos-footer__note svg,
+  .aotos-footer__note img,
+  .aotos-footer__message svg {
     width: calc(38 * var(--rem));
     height: calc(38 * var(--rem));
   }

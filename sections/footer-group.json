@@ -41,13 +41,31 @@
             "heading": "Policy",
             "menu": "help"
           }
+        },
+        "contact-hours": {
+          "type": "contact_item",
+          "settings": {
+            "icon_preset": "clock",
+            "text": "Mon–Fri, 9:00 AM–6:00 PM ET",
+            "link": ""
+          }
+        },
+        "contact-email": {
+          "type": "contact_item",
+          "settings": {
+            "icon_preset": "email",
+            "text": "support@aotos.com",
+            "link": "mailto:support@aotos.com"
+          }
         }
       },
       "block_order": [
         "menu-product",
         "menu-support",
         "menu-about",
-        "menu-policy"
+        "menu-policy",
+        "contact-hours",
+        "contact-email"
       ],
       "settings": {
         "show_social": true,
