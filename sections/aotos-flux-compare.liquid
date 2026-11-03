@@ -3,7 +3,12 @@
 {%- liquid
   assign p1 = section.settings.product_1_image
   assign p2 = section.settings.product_2_image
+  assign p3 = section.settings.product_3_image
   assign hl = section.settings.highlighted_column
+  assign compare_col_count = 2
+  if section.settings.product_3_name != blank
+    assign compare_col_count = 3
+  endif
 -%}
 
 <section
@@ -13,7 +18,7 @@
   <div class="fxb-shell">
     <h2 class="fxb-title aotos-section-title">{{ section.settings.title | escape }}</h2>
     <div class="fxb-compare__scroll">
-      <table class="fxb-compare__table">
+      <table class="fxb-compare__table{% if compare_col_count == 3 %} fxb-compare__table--cols3{% endif %}">
         <thead>
           <tr>
             <th class="fxb-compare__cell fxb-compare__label fxb-compare__head" scope="col">{{ section.settings.model_label | escape }}</th>
@@ -50,6 +55,28 @@
                 </div>
               </div>
             </th>
+            {%- if compare_col_count == 3 -%}
+              <th class="fxb-compare__cell fxb-compare__head{% if hl == '3' %} fxb-compare__hl{% endif %}" scope="col">
+                <div class="fxb-compare__product">
+                  {%- if p3 != blank -%}
+                    <img class="fxb-compare__photo" src="{{ p3 | image_url: width: 160 }}" srcset="{{ p3 | image_url: width: 120 }} 120w, {{ p3 | image_url: width: 160 }} 160w, {{ p3 | image_url: width: 240 }} 240w" sizes="72px" width="160" height="{{ 160 | divided_by: p3.aspect_ratio | round }}" alt="{{ section.settings.product_3_name | escape }}" loading="lazy">
+                  {%- endif -%}
+                  <div>
+                    <span class="fxb-compare__name">
+                      {%- if section.settings.product_3_highlight != blank -%}
+                        {{ section.settings.product_3_name | remove: section.settings.product_3_highlight }}
+                        <span class="fxb-compare__accent">{{ section.settings.product_3_highlight }}</span>
+                      {%- else -%}
+                        {{ section.settings.product_3_name }}
+                      {%- endif -%}
+                    </span>
+                    {%- if section.settings.product_3_tagline != blank -%}
+                      <p class="fxb-compare__tag">{{ section.settings.product_3_tagline }}</p>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </th>
+            {%- endif -%}
           </tr>
         </thead>
         <tbody>
@@ -59,6 +86,9 @@
                 <th class="fxb-compare__cell fxb-compare__label" scope="row">{{ block.settings.label }}</th>
                 <td class="fxb-compare__cell{% if hl == '1' %} fxb-compare__hl{% endif %}">{{ block.settings.value_1 }}</td>
                 <td class="fxb-compare__cell{% if hl == '2' %} fxb-compare__hl{% endif %}">{{ block.settings.value_2 }}</td>
+                {%- if compare_col_count == 3 -%}
+                  <td class="fxb-compare__cell{% if hl == '3' %} fxb-compare__hl{% endif %}">{{ block.settings.value_3 }}</td>
+                {%- endif -%}
               </tr>
             {%- endunless -%}
           {%- endfor -%}
@@ -82,6 +112,7 @@
     { "type": "select", "id": "highlighted_column", "label": "Highlight", "default": "1", "options": [
       { "value": "1", "label": "Column 1" },
       { "value": "2", "label": "Column 2" },
+      { "value": "3", "label": "Column 3" },
       { "value": "0", "label": "None" }
     ]},
     { "type": "text", "id": "product_1_name", "label": "Product 1", "default": "FLUX X26 Pro" },
@@ -94,6 +125,12 @@
     { "type": "image_picker", "id": "product_2_image", "label": "Product 2 image" },
     { "type": "text", "id": "product_2_tagline", "label": "Product 2 tagline" },
     { "type": "url", "id": "product_2_url", "label": "Product 2 link" },
+    { "type": "header", "content": "Product 3 (optional)" },
+    { "type": "text", "id": "product_3_name", "label": "Product 3", "info": "留空则只显示两列对比。" },
+    { "type": "text", "id": "product_3_highlight", "label": "Product 3 accent" },
+    { "type": "image_picker", "id": "product_3_image", "label": "Product 3 image" },
+    { "type": "text", "id": "product_3_tagline", "label": "Product 3 tagline" },
+    { "type": "url", "id": "product_3_url", "label": "Product 3 link" },
     { "type": "color", "id": "bg_color", "label": "Background", "default": "#ffffff" },
     { "type": "color", "id": "title_color", "label": "Title", "default": "#000000" },
     { "type": "color", "id": "label_color", "label": "Label", "default": "#999999" },
@@ -114,7 +151,8 @@
       "settings": [
         { "type": "text", "id": "label", "label": "Label" },
         { "type": "text", "id": "value_1", "label": "Value 1" },
-        { "type": "text", "id": "value_2", "label": "Value 2" }
+        { "type": "text", "id": "value_2", "label": "Value 2" },
+        { "type": "text", "id": "value_3", "label": "Value 3" }
       ]
     }
   ],

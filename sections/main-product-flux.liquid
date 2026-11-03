@@ -337,6 +337,25 @@
                 <span class="aotos-flux-price__save">{% if on_sale %}SAVE {{ save_amount | money }}{% endif %}</span>
               </div>
             </div>
+          {%- when 'preorder_notice' -%}
+            {%- if block.settings.text != blank -%}
+              <div class="product-preorder-notice" style="background: {{ block.settings.bg_color | default: '#f7f1e8' }};" {{ block.shopify_attributes }}>
+                <span class="product-preorder-notice__icon" aria-hidden="true">
+                  {%- if block.settings.icon != blank -%}
+                    {{ block.settings.icon | image_url: width: 72 | image_tag: loading: 'lazy', widths: '44, 72', alt: '' }}
+                  {%- else -%}
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="3.25" y="4.75" width="17.5" height="16" rx="2.25" stroke="currentColor" stroke-width="1.6"/>
+                      <path d="M3.25 9.25h17.5" stroke="currentColor" stroke-width="1.6"/>
+                      <path d="M8 3v3.5M16 3v3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                    </svg>
+                  {%- endif -%}
+                </span>
+                <div class="product-preorder-notice__text">
+                  {{ block.settings.text }}
+                </div>
+              </div>
+            {%- endif -%}
           {%- when 'variant_picker' -%}
             {%- render 'aotos-product-flux-variants', product: product, block: block, section: section, product_form_id: product_form_id -%}
           {%- when 'product_switch' -%}
@@ -470,6 +489,16 @@
     },
     { "type": "price", "name": "Price", "limit": 1, "settings": [] },
     {
+      "type": "preorder_notice",
+      "name": "Pre-order notice",
+      "limit": 1,
+      "settings": [
+        { "type": "richtext", "id": "text", "label": "文案", "info": "第一段为标题，第二段为说明。加粗文字显示为深色。", "default": "<p><strong>Available for Pre-Order</strong></p><p>Estimated ship date: <strong>Nov 10, 2026</strong></p>" },
+        { "type": "image_picker", "id": "icon", "label": "图标", "info": "不上传则使用默认日历图标。" },
+        { "type": "color", "id": "bg_color", "label": "背景色", "default": "#f7f1e8" }
+      ]
+    },
+    {
       "type": "variant_picker",
       "name": "Model picker",
       "limit": 1,
@@ -563,3 +592,4 @@
   "presets": [{ "name": "FLUX product buy" }]
 }
 {% endschema %}
+

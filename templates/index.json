@@ -177,9 +177,65 @@
             "button_2_margin": 24,
             "button_2_margin_mobile": 32
           }
+        },
+        "slide_t26launch": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/flux_t26_banner01.webp",
+            "image_mobile": "shopify://shop_images/flux_t26_banner02.webp",
+            "image_alt": "",
+            "show_accent": false,
+            "accent_color": "theme",
+            "eyebrow": "INTRODUCING FLUX T26",
+            "eyebrow_weight": "500",
+            "eyebrow_color": "black",
+            "heading": "TURN THE CITY ON.",
+            "title_weight": "700",
+            "title_color": "theme",
+            "subtitle": "Your everyday ride. A free helmet with every pre-order.",
+            "subtitle_weight": "500",
+            "subtitle_color": "black",
+            "eyebrow_size": 24,
+            "eyebrow_gap": 10,
+            "title_size": 40,
+            "title_gap": 16,
+            "subtitle_size": 24,
+            "subtitle_gap": 0,
+            "eyebrow_size_mobile": 26,
+            "eyebrow_gap_mobile": 20,
+            "title_size_mobile": 43,
+            "title_gap_mobile": 20,
+            "subtitle_size_mobile": 30,
+            "subtitle_gap_mobile": 0,
+            "stat_1_value": "",
+            "stat_1_label": "",
+            "stat_2_value": "",
+            "stat_2_label": "",
+            "stat_3_value": "",
+            "stat_3_label": "",
+            "stat_size": 28,
+            "stat_label_size": 14,
+            "stat_gap": 56,
+            "stat_margin": 28,
+            "stat_size_mobile": 36,
+            "stat_label_size_mobile": 20,
+            "stat_gap_mobile": 40,
+            "stat_margin_mobile": 32,
+            "show_button_1": true,
+            "button_1_label": "PRE-ORDER NOW",
+            "button_1_link": "shopify://products/flux-t26",
+            "button_1_margin": 24,
+            "button_1_margin_mobile": 32,
+            "show_button_2": false,
+            "button_2_label": "",
+            "button_2_link": "",
+            "button_2_margin": 24,
+            "button_2_margin_mobile": 32
+          }
         }
       },
       "block_order": [
+        "slide_t26launch",
         "slide_TmTGkn",
         "slide_ceJe8k",
         "slide_8qyhAe"
@@ -863,3 +919,7 @@
     "home_app_card"
   ]
 }
+
+
+
+

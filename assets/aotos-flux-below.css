@@ -984,6 +984,30 @@ html.js .fxb-faq__answer {
 
   .fxb-compare__table { width: 141%; }
 
+  .fxb-compare__table--cols3 { width: 165%; }
+
+  .fxb-compare__table--cols3 .fxb-compare__label {
+    width: 24%;
+  }
+
+  .fxb-compare__table--cols3 .fxb-compare__product {
+    gap: calc(8 * var(--rem));
+  }
+
+  .fxb-compare__table--cols3 .fxb-compare__photo {
+    width: calc(56 * var(--rem));
+    height: calc(56 * var(--rem));
+  }
+
+  .fxb-compare__table--cols3 .fxb-compare__name {
+    font-size: calc(18 * var(--rem));
+  }
+
+  .fxb-compare__table--cols3 .fxb-compare__tag {
+    font-size: calc(14 * var(--rem));
+    line-height: calc(20 * var(--rem));
+  }
+
   .fxb-compare__label,
   .fxb-compare thead .fxb-compare__label,
   html.fxb-anchor-stuck .fxb-compare thead .fxb-compare__label,

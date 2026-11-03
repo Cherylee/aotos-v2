@@ -59,6 +59,15 @@
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     scrollbar-width: none;
+    padding: calc(4 * var(--rem));
+    margin: calc(-4 * var(--rem));
+    scroll-padding-inline: calc(4 * var(--rem));
+  }
+
+  #HomeRiders-{{ section.id }} .home-riders__end {
+    flex: 0 0 auto;
+    width: calc(4 * var(--rem));
+    margin-left: calc(-16 * var(--rem));
   }
 
   #HomeRiders-{{ section.id }} .home-riders__viewport::-webkit-scrollbar {
@@ -73,7 +82,7 @@
 
   #HomeRiders-{{ section.id }} .home-riders__card {
     position: relative;
-    flex: 0 0 calc((100% - calc(16 * var(--rem)) * 2) / 3.15);
+    flex: 0 0 calc((100% - calc(16 * var(--rem)) * 2) / 3);
     aspect-ratio: 760 / 424;
     overflow: hidden;
     background: #ffffff;
@@ -238,9 +247,13 @@
   }
 
   #HomeRiders-{{ section.id }}.home-riders--articles .home-riders__viewport {
-    padding: calc(24 * var(--rem)) calc(24 * var(--rem)) calc(40 * var(--rem));
-    margin: calc(-24 * var(--rem)) calc(-24 * var(--rem)) calc(-40 * var(--rem));
-    scroll-padding-inline: calc(24 * var(--rem));
+    padding: calc(24 * var(--rem)) calc(6 * var(--rem)) calc(40 * var(--rem));
+    margin: calc(-24 * var(--rem)) calc(-6 * var(--rem)) calc(-40 * var(--rem));
+    scroll-padding-inline: calc(6 * var(--rem));
+  }
+
+  #HomeRiders-{{ section.id }}.home-riders--articles .home-riders__end {
+    width: calc(6 * var(--rem));
   }
 
   #HomeRiders-{{ section.id }}.home-riders--articles .home-riders__card {
@@ -252,7 +265,7 @@
     background: #ffffff;
     border: 0;
     border-radius: calc(16 * var(--rem));
-    box-shadow: 0 calc(6 * var(--rem)) calc(20 * var(--rem)) rgb(0 0 0 / 8%);
+    box-shadow: 0 calc(2 * var(--rem)) calc(6 * var(--rem)) rgb(0 0 0 / 10%);
     color: inherit;
     text-decoration: none;
   }
@@ -375,13 +388,17 @@
     }
 
     #HomeRiders-{{ section.id }}.home-riders--articles .home-riders__viewport {
-      padding: calc(24 * var(--rem)) calc(24 * var(--rem)) calc(48 * var(--rem));
-      margin: calc(-24 * var(--rem)) calc(-24 * var(--rem)) calc(-48 * var(--rem));
-      scroll-padding-inline: calc(24 * var(--rem));
+      padding: calc(24 * var(--rem)) calc(72 * var(--rem)) calc(48 * var(--rem));
+      margin: calc(-24 * var(--rem)) calc(-72 * var(--rem)) calc(-48 * var(--rem));
+      scroll-padding-inline: calc(72 * var(--rem));
+    }
+
+    #HomeRiders-{{ section.id }}.home-riders--articles .home-riders__end {
+      width: calc(72 * var(--rem));
     }
 
     #HomeRiders-{{ section.id }}.home-riders--articles .home-riders__card {
-      flex-basis: 84%;
+      flex-basis: 100%;
     }
 
     #HomeRiders-{{ section.id }}.home-riders--articles .home-riders__headline {
@@ -480,6 +497,7 @@
                 </div>
               </a>
             {%- endfor -%}
+            <span class="home-riders__end" aria-hidden="true"></span>
           </div>
         </div>
         {%- if riders_count > 1 -%}
@@ -580,6 +598,7 @@
               {%- endif -%}
             </article>
           {%- endfor -%}
+          <span class="home-riders__end" aria-hidden="true"></span>
         </div>
       </div>
       {%- if section.blocks.size > 1 -%}
@@ -617,10 +636,43 @@
       return Math.round(viewport.scrollLeft / amount);
     }
 
+    function maxScroll() {
+      return viewport.scrollWidth - viewport.clientWidth;
+    }
+
+    function pageCount() {
+      var amount = step();
+      var max = maxScroll();
+      if (max <= 2 || !amount) return 1;
+      return Math.max(1, Math.round(max / amount) + 1);
+    }
+
+    function buildDots() {
+      if (!dots) return;
+      var count = pageCount();
+      if (count <= 1) {
+        dots.hidden = true;
+        dots.innerHTML = '';
+        return;
+      }
+      dots.hidden = false;
+      while (dots.children.length > count) dots.removeChild(dots.lastChild);
+      while (dots.children.length < count) {
+        (function (i) {
+          var dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = 'home-riders__dot';
+          dot.setAttribute('aria-label', 'Show story ' + (i + 1));
+          dot.addEventListener('click', function () { go(i); });
+          dots.appendChild(dot);
+        })(dots.children.length);
+      }
+    }
+
     function go(index) {
-      var max = Math.max(cards.length - 1, 0);
-      var nextIndex = Math.min(Math.max(index, 0), max);
-      var left = step() * nextIndex;
+      var pages = pageCount();
+      var nextIndex = Math.min(Math.max(index, 0), pages - 1);
+      var left = Math.min(step() * nextIndex, maxScroll());
       stopAll(null);
       requestAnimationFrame(function () {
         viewport.scrollTo({ left: left, behavior: 'smooth' });
@@ -628,26 +680,25 @@
     }
 
     function paint() {
-      var index = nearestIndex();
-      var max = viewport.scrollWidth - viewport.clientWidth - 2;
+      var max = maxScroll() - 2;
       if (prev) prev.disabled = viewport.scrollLeft <= 2;
       if (next) next.disabled = viewport.scrollLeft >= max;
       if (!dots) return;
+      var pages = pageCount();
+      var index = nearestIndex();
+      if (max > 0 && viewport.scrollLeft >= max - step() / 2) index = pages - 1;
+      if (index > pages - 1) index = pages - 1;
       dots.querySelectorAll('.home-riders__dot').forEach(function (dot, i) {
         dot.classList.toggle('is-active', i === index);
       });
     }
 
-    if (dots) {
-      cards.forEach(function (_, i) {
-        var dot = document.createElement('button');
-        dot.type = 'button';
-        dot.className = 'home-riders__dot';
-        dot.setAttribute('aria-label', 'Show story ' + (i + 1));
-        dot.addEventListener('click', function () { go(i); });
-        dots.appendChild(dot);
-      });
-    }
+    buildDots();
+
+    window.addEventListener('resize', function () {
+      buildDots();
+      paint();
+    });
 
     if (prev) prev.addEventListener('click', function () { go(nearestIndex() - 1); });
     if (next) next.addEventListener('click', function () { go(nearestIndex() + 1); });
@@ -661,7 +712,11 @@
         if (cards[nearestIndex()] === playing) return;
         var left = viewport.scrollLeft;
         stopAll(null);
-        if (viewport.scrollLeft !== left) viewport.scrollLeft = left;
+        if (viewport.scrollLeft !== left) {
+          viewport.style.scrollBehavior = 'auto';
+          viewport.scrollLeft = left;
+          viewport.style.scrollBehavior = '';
+        }
       }, 140);
     }, { passive: true });
 
@@ -872,3 +927,4 @@
   ]
 }
 {% endschema %}
+
