@@ -19,7 +19,8 @@
 
   #HomeSplit-{{ section.id }} .home-split__card {
     position: relative;
-    display: block;
+    display: flex;
+    flex-direction: column;
     min-width: 0;
     padding: calc(32 * var(--rem)) calc(20 * var(--rem)) calc(28 * var(--rem)) calc(28 * var(--rem));
     background: #f5f5f5;
@@ -29,8 +30,16 @@
   }
 
   #HomeSplit-{{ section.id }} .home-split__copy {
-    align-self: start;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-self: stretch;
+    min-height: 100%;
     padding-right: calc(392 * var(--rem));
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__intro {
+    flex: 0 0 auto;
   }
 
   #HomeSplit-{{ section.id }} .home-split__title {
@@ -53,9 +62,16 @@
     display: flex;
     flex-direction: column;
     gap: calc(14 * var(--rem));
-    margin: calc(22 * var(--rem)) 0 0;
-    padding: 0;
+    margin: auto 0 0;
+    padding: calc(22 * var(--rem)) 0 0;
     list-style: none;
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__features--empty {
+    display: block;
+    margin-top: auto;
+    padding-top: calc(22 * var(--rem));
+    min-height: 0;
   }
 
   #HomeSplit-{{ section.id }} .home-split__feature {
@@ -109,6 +125,7 @@
   }
 
   #HomeSplit-{{ section.id }} .home-split__actions {
+    flex: 0 0 auto;
     margin-top: calc(22 * var(--rem));
   }
 
@@ -170,7 +187,8 @@
 
     #HomeSplit-{{ section.id }} .home-split__card {
       position: relative;
-      display: block;
+      display: flex;
+      flex-direction: column;
       padding: calc(40 * var(--rem)) calc(28 * var(--rem));
       border-radius: calc(20 * var(--rem));
       overflow: hidden;
@@ -222,7 +240,12 @@
 
     #HomeSplit-{{ section.id }} .home-split__features {
       gap: calc(22 * var(--rem));
-      margin-top: calc(28 * var(--rem));
+      margin-top: auto;
+      padding-top: calc(28 * var(--rem));
+    }
+
+    #HomeSplit-{{ section.id }} .home-split__features--empty {
+      padding-top: calc(28 * var(--rem));
     }
 
     #HomeSplit-{{ section.id }} .home-split__feature {
@@ -257,11 +280,18 @@
       {%- for block in section.blocks -%}
         <article class="home-split__card" {{ block.shopify_attributes }}>
           <div class="home-split__copy">
-            {%- if block.settings.title != blank -%}
-              <h2 class="home-split__title">{{ block.settings.title | escape }}</h2>
-            {%- endif -%}
-            {%- if block.settings.text != blank -%}
-              <p class="home-split__text">{{ block.settings.text | escape }}</p>
+            <div class="home-split__intro">
+              {%- if block.settings.title != blank -%}
+                <h2 class="home-split__title">{{ block.settings.title | escape }}</h2>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <p class="home-split__text">{{ block.settings.text | escape }}</p>
+              {%- endif -%}
+            </div>
+
+            {%- assign show_features = block.settings.show_features -%}
+            {%- if show_features == nil -%}
+              {%- assign show_features = true -%}
             {%- endif -%}
 
             {%- assign feature_nums = '1,2,3,4' | split: ',' -%}
@@ -304,8 +334,12 @@
               {%- endfor -%}
             {%- endcapture -%}
             {%- assign feature_items = feature_items | strip -%}
-            {%- if feature_items != blank -%}
-              <ul class="home-split__features">{{ feature_items }}</ul>
+            {%- if show_features -%}
+              {%- if feature_items != blank -%}
+                <ul class="home-split__features">{{ feature_items }}</ul>
+              {%- else -%}
+                <span class="home-split__features home-split__features--empty" aria-hidden="true"></span>
+              {%- endif -%}
             {%- endif -%}
 
             {%- if block.settings.button_label != blank -%}
@@ -419,6 +453,12 @@
           "label": "说明"
         },
         {
+          "type": "checkbox",
+          "id": "show_features",
+          "label": "显示功能卖点",
+          "default": true
+        },
+        {
           "type": "text",
           "id": "button_label",
           "label": "按钮文案",
@@ -515,9 +555,18 @@
         {
           "type": "card",
           "settings": {
-            "title": "Accessories",
-            "text": "Suitable for FLUX X26 Series",
-            "button_label": "Shop Accessories"
+            "title": "AOTOS FLUX T26",
+            "text": "TURN THE CITY ON. Smart power for every street.",
+            "button_label": "PRE-ORDER",
+            "show_features": true,
+            "feature_1_title": "750W Peak BOOST*",
+            "feature_1_text": "500W rated · 60 Nm torque",
+            "feature_2_title": "Up to 40 Miles**",
+            "feature_2_text": "48V 14.5Ah battery",
+            "feature_3_title": "Keyless Unlock",
+            "feature_3_text": "NFC, proximity, or passcode",
+            "feature_4_title": "1.9\" TFT Display",
+            "feature_4_text": "Mirror your phone's navigation"
           }
         },
         {
@@ -526,6 +575,7 @@
             "title": "AOTOS Mobility App",
             "text": "Control Every Ride from One App",
             "button_label": "Learn More",
+            "show_features": true,
             "feature_1_title": "Ride Stats",
             "feature_1_text": "Track your performance",
             "feature_2_title": "Smart Security",
