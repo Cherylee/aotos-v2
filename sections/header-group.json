@@ -202,13 +202,19 @@
           "type": "nav_link",
           "settings": {
             "title": "Home",
-            "link": "/"
+            "link": "/",
+            "badge_text": "",
+            "badge_bg_color": "#ff6501",
+            "badge_text_color": "#ffffff"
           }
         },
         "nav-products": {
           "type": "nav_mega",
           "settings": {
             "title": "Products",
+            "badge_text": "",
+            "badge_bg_color": "#ff6501",
+            "badge_text_color": "#ffffff",
             "item_1_title": "Electric Bicycle",
             "item_1_url": "/collections/smart-electric-bicycle",
             "item_1_product_1": "flux-x26-pro",
@@ -309,7 +315,10 @@
           "type": "nav_link",
           "settings": {
             "title": "Dealer Locator",
-            "link": "shopify://pages/find-a-dealer"
+            "link": "shopify://pages/find-a-dealer",
+            "badge_text": "",
+            "badge_bg_color": "#ff6501",
+            "badge_text_color": "#ffffff"
           }
         },
         "nav-about": {
@@ -317,6 +326,9 @@
           "settings": {
             "title": "About",
             "link": "",
+            "badge_text": "",
+            "badge_bg_color": "#ff6501",
+            "badge_text_color": "#ffffff",
             "menu": "",
             "item_1_title": "Blog Post",
             "item_1_url": "shopify://blogs/knowledge",
