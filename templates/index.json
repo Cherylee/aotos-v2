@@ -425,12 +425,12 @@
         "card_accessories": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/2_1.webp",
-            "image_alt": "AOTOS accessories",
-            "title": "Accessories",
-            "text": "Suitable for FLUX X26 Series",
-            "button_label": "Shop Accessories",
-            "button_link": "shopify://collections/accessories",
+            "image": "shopify://shop_images/9b87b8b24db7c11629e2076f684acdc8.png",
+            "image_alt": "AOTOS FLUX T26",
+            "title": "AOTOS FLUX T26",
+            "text": "TURN THE CITY ON. Smart power for every street.",
+            "button_label": "PRE-ORDER",
+            "button_link": "shopify://products/flux-t26",
             "feature_1_title": "",
             "feature_1_text": "",
             "feature_2_title": "",

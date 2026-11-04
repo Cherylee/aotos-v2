@@ -98,6 +98,33 @@
   color: var(--aotos-theme-color, #ff6501);
 }
 
+.aotos-nav__label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.aotos-nav__badge {
+  position: absolute;
+  left: 100%;
+  top: calc(-5 * var(--rem));
+  display: inline-flex;
+  align-items: center;
+  margin-left: calc(3 * var(--rem));
+  padding: calc(3 * var(--rem)) calc(7 * var(--rem));
+  border-radius: calc(5 * var(--rem));
+  background-color: var(--aotos-nav-badge-bg, #ff6501);
+  color: var(--aotos-nav-badge-color, #ffffff);
+  font-size: calc(10 * var(--rem));
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.aotos-nav__item:has(.aotos-nav__badge) + .aotos-nav__item {
+  margin-left: calc(32 * var(--rem));
+}
+
 .aotos-nav__subtoggle,
 .aotos-nav__back {
   display: none;
@@ -572,6 +599,20 @@
     height: auto;
     padding: calc(28 * var(--rem)) 0;
     color: #111;
+  }
+
+  .aotos-nav__badge {
+    position: static;
+    top: auto;
+    left: auto;
+    margin-left: calc(12 * var(--rem));
+    padding: calc(4 * var(--rem)) calc(12 * var(--rem));
+    border-radius: calc(8 * var(--rem));
+    font-size: calc(18 * var(--rem));
+  }
+
+  .aotos-nav__item:has(.aotos-nav__badge) + .aotos-nav__item {
+    margin-left: 0;
   }
 
   .aotos-nav__row .aotos-nav__link {

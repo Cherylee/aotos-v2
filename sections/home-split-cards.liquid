@@ -323,11 +323,11 @@
             {%- if block.settings.image != blank -%}
               {%- assign card_alt = block.settings.image_alt | default: block.settings.title -%}
               <img
-                src="{{ block.settings.image | image_url: width: 700 }}"
-                srcset="{{ block.settings.image | image_url: width: 400 }} 400w, {{ block.settings.image | image_url: width: 700 }} 700w, {{ block.settings.image | image_url: width: 1000 }} 1000w"
-                sizes="(max-width: 768px) 84vw, 360px"
-                width="700"
-                height="{{ 700 | divided_by: block.settings.image.aspect_ratio | round }}"
+                src="{{ block.settings.image | image_url: width: 1000 }}"
+                srcset="{{ block.settings.image | image_url: width: 600 }} 600w, {{ block.settings.image | image_url: width: 1000 }} 1000w, {{ block.settings.image | image_url: width: 1400 }} 1400w"
+                sizes="(max-width: 768px) 38vw, 27vw"
+                width="1000"
+                height="{{ 1000 | divided_by: block.settings.image.aspect_ratio | round }}"
                 alt="{{ card_alt | escape }}"
                 loading="lazy"
               >

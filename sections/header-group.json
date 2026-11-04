@@ -298,8 +298,11 @@
         "nav-flux": {
           "type": "nav_link",
           "settings": {
-            "title": "FLUX X26 & Pro",
-            "link": "shopify://pages/flux-x26"
+            "title": "FLUX T26",
+            "link": "shopify://products/flux-t26",
+            "badge_text": "NEW",
+            "badge_bg_color": "#ff6501",
+            "badge_text_color": "#ffffff"
           }
         },
         "nav-dealer": {

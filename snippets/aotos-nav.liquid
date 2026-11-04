@@ -26,6 +26,16 @@
       </button>
     </li>
     {%- for block in section.blocks -%}
+      {%- capture badge_markup -%}
+        {%- if block.settings.badge_text != blank -%}
+          <span
+            class="aotos-nav__badge"
+            style="--aotos-nav-badge-bg: {{ block.settings.badge_bg_color | default: '#ff6501' }}; --aotos-nav-badge-color: {{ block.settings.badge_text_color | default: '#ffffff' }};"
+          >
+            {{- block.settings.badge_text | escape -}}
+          </span>
+        {%- endif -%}
+      {%- endcapture -%}
       {%- if block.type == 'nav_link' -%}
         <li class="aotos-nav__item" {{ block.shopify_attributes }}>
           <a
@@ -35,7 +45,7 @@
               aria-current="page"
             {% endif %}
           >
-            {{ block.settings.title | escape }}
+            <span class="aotos-nav__label">{{ block.settings.title | escape }}{{ badge_markup }}</span>
           </a>
         </li>
       {%- elsif block.type == 'nav_dropdown' or block.type == 'nav_mega' -%}
@@ -67,11 +77,11 @@
                 {% endif %}
                 aria-controls="{{ panel_id }}"
               >
-                {{ block.settings.title | escape }}
+                <span class="aotos-nav__label">{{ block.settings.title | escape }}{{ badge_markup }}</span>
               </a>
             {%- else -%}
               <button type="button" class="aotos-nav__link" data-aotos-sub-toggle aria-expanded="false" aria-controls="{{ panel_id }}">
-                {{ block.settings.title | escape }}
+                <span class="aotos-nav__label">{{ block.settings.title | escape }}{{ badge_markup }}</span>
               </button>
             {%- endif -%}
             <button
