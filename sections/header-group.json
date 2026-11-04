@@ -306,8 +306,8 @@
           "settings": {
             "title": "FLUX T26",
             "link": "shopify://products/flux-t26",
-            "badge_text": "NEW",
-            "badge_bg_color": "#ff6501",
+            "badge_text": "New",
+            "badge_bg_color": "#FF0101",
             "badge_text_color": "#ffffff"
           }
         },
