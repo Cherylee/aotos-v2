@@ -117,6 +117,7 @@
         },
         "accordion_box": {
           "type": "accordion",
+          "disabled": true,
           "settings": {
             "icon": "shopify://shop_images/1_9b74d37f-ee92-4622-9912-020d30cc685d.webp",
             "title": "What's in the Box",
@@ -322,7 +323,7 @@
             "video_url": "",
             "pre_heading": "6061-T6 Aerospace-Grade Frame",
             "heading": "Strength Meets Precision",
-            "description": "<p>Built with aerospace-grade 6061-T6 aluminum, the Flux X26 Series delivers the rigidity, durability, and sharp futuristic profile built for everyday rides and bigger adventures.</p>"
+            "description": "<p>Built with aerospace-grade 6061-T6 aluminum, the FLUX X26 Pro delivers the rigidity, durability, and sharp futuristic profile built for everyday rides and bigger adventures.</p>"
           }
         },
         "card_3": {
@@ -518,10 +519,10 @@
       ],
       "name": "Comparison Table",
       "settings": {
-        "title": "FLUX X26 Pro VS Flux X26",
+        "title": "FLUX X26 Pro VS FLUX X26",
         "model_label": "Model",
         "show_footnote": true,
-        "footnote": "<p>*Boost Mode allows your bike to output it's max torque and power for up to 10 seconds at a time.&nbsp;<br/>*Enjoy One year of free 4G/GPS service. Afterward, plans start at $2.90/month or $29 for 12 months (Best Value). Cancel anytime through the AOTOS app.</p>",
+        "footnote": "<p>*Boost Mode allows your bike to deliver its maximum torque and power for up to 10 seconds at a time.&nbsp;<br/>*Enjoy One year of free 4G/GPS service. Afterward, plans start at $2.90/month or $29 for 12 months (Best Value). Cancel anytime through the AOTOS app.</p>",
         "highlighted_column": "1",
         "product_1_name": "FLUX X26 Pro",
         "product_1_highlight": "Pro",
@@ -880,6 +881,41 @@
             "label_id": "10",
             "label": "Ratchet wrench ×1"
           }
+        },
+        "box_list_11": {
+          "type": "box_item",
+          "settings": {
+            "label_id": "11",
+            "label": "User Manual × 1"
+          }
+        },
+        "box_list_12": {
+          "type": "box_item",
+          "settings": {
+            "label_id": "12",
+            "label": "Tool Kit × 1"
+          }
+        },
+        "box_list_13": {
+          "type": "box_item",
+          "settings": {
+            "label_id": "13",
+            "label": "Tire Pressure Sensor × 1"
+          }
+        },
+        "box_list_14": {
+          "type": "box_item",
+          "settings": {
+            "label_id": "14",
+            "label": "Storage Bag × 1"
+          }
+        },
+        "box_list_15": {
+          "type": "box_item",
+          "settings": {
+            "label_id": "15",
+            "label": "Folding Lock × 1"
+          }
         }
       },
       "block_order": [
@@ -925,7 +961,12 @@
         "box_list_7",
         "box_list_8",
         "box_list_9",
-        "box_list_10"
+        "box_list_10",
+        "box_list_11",
+        "box_list_12",
+        "box_list_13",
+        "box_list_14",
+        "box_list_15"
       ],
       "settings": {
         "title": "Specs & Geometry",
@@ -946,7 +987,7 @@
       "type": "aotos-flux-story",
       "settings": {
         "title": "Playful by choice. Predictable by design.",
-        "description": "The FLUX X26 brings excitement without the guesswork. Smooth acceleration, stable handling, and responsive power work together to keep every ride fun, confident, and in control.",
+        "description": "The FLUX X26 Pro brings excitement without the guesswork. Smooth acceleration, stable handling, and responsive power work together to keep every ride fun, confident, and in control.",
         "image": "shopify://shop_images/flux26_slide4.jpg",
         "bg_color": "#1a1a1a",
         "padding_top": 80,

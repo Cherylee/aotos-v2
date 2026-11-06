@@ -118,6 +118,7 @@
         },
         "accordion_box": {
           "type": "accordion",
+          "disabled": true,
           "settings": {
             "icon": "shopify://shop_images/1_9b74d37f-ee92-4622-9912-020d30cc685d.webp",
             "title": "What's in the Box",
