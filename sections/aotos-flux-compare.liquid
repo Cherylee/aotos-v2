@@ -25,7 +25,13 @@
             <th class="fxb-compare__cell fxb-compare__head{% if hl == '1' %} fxb-compare__hl{% endif %}" scope="col">
               <div class="fxb-compare__product">
                 {%- if p1 != blank -%}
-                  <img class="fxb-compare__photo" src="{{ p1 | image_url: width: 160 }}" srcset="{{ p1 | image_url: width: 120 }} 120w, {{ p1 | image_url: width: 160 }} 160w, {{ p1 | image_url: width: 240 }} 240w" sizes="72px" width="160" height="{{ 160 | divided_by: p1.aspect_ratio | round }}" alt="{{ section.settings.product_1_name | escape }}" loading="lazy">
+                  {%- if section.settings.product_1_url != blank -%}
+                    <a class="fxb-compare__photo-link" href="{{ section.settings.product_1_url }}">
+                      <img class="fxb-compare__photo" src="{{ p1 | image_url: width: 160 }}" srcset="{{ p1 | image_url: width: 120 }} 120w, {{ p1 | image_url: width: 160 }} 160w, {{ p1 | image_url: width: 240 }} 240w" sizes="72px" width="160" height="{{ 160 | divided_by: p1.aspect_ratio | round }}" alt="{{ section.settings.product_1_name | escape }}" loading="lazy">
+                    </a>
+                  {%- else -%}
+                    <img class="fxb-compare__photo" src="{{ p1 | image_url: width: 160 }}" srcset="{{ p1 | image_url: width: 120 }} 120w, {{ p1 | image_url: width: 160 }} 160w, {{ p1 | image_url: width: 240 }} 240w" sizes="72px" width="160" height="{{ 160 | divided_by: p1.aspect_ratio | round }}" alt="{{ section.settings.product_1_name | escape }}" loading="lazy">
+                  {%- endif -%}
                 {%- endif -%}
                 <div>
                   <span class="fxb-compare__name">
@@ -45,7 +51,13 @@
             <th class="fxb-compare__cell fxb-compare__head{% if hl == '2' %} fxb-compare__hl{% endif %}" scope="col">
               <div class="fxb-compare__product">
                 {%- if p2 != blank -%}
-                  <img class="fxb-compare__photo" src="{{ p2 | image_url: width: 160 }}" srcset="{{ p2 | image_url: width: 120 }} 120w, {{ p2 | image_url: width: 160 }} 160w, {{ p2 | image_url: width: 240 }} 240w" sizes="72px" width="160" height="{{ 160 | divided_by: p2.aspect_ratio | round }}" alt="{{ section.settings.product_2_name | escape }}" loading="lazy">
+                  {%- if section.settings.product_2_url != blank -%}
+                    <a class="fxb-compare__photo-link" href="{{ section.settings.product_2_url }}">
+                      <img class="fxb-compare__photo" src="{{ p2 | image_url: width: 160 }}" srcset="{{ p2 | image_url: width: 120 }} 120w, {{ p2 | image_url: width: 160 }} 160w, {{ p2 | image_url: width: 240 }} 240w" sizes="72px" width="160" height="{{ 160 | divided_by: p2.aspect_ratio | round }}" alt="{{ section.settings.product_2_name | escape }}" loading="lazy">
+                    </a>
+                  {%- else -%}
+                    <img class="fxb-compare__photo" src="{{ p2 | image_url: width: 160 }}" srcset="{{ p2 | image_url: width: 120 }} 120w, {{ p2 | image_url: width: 160 }} 160w, {{ p2 | image_url: width: 240 }} 240w" sizes="72px" width="160" height="{{ 160 | divided_by: p2.aspect_ratio | round }}" alt="{{ section.settings.product_2_name | escape }}" loading="lazy">
+                  {%- endif -%}
                 {%- endif -%}
                 <div>
                   <span class="fxb-compare__name">{{ section.settings.product_2_name }}</span>
@@ -59,7 +71,13 @@
               <th class="fxb-compare__cell fxb-compare__head{% if hl == '3' %} fxb-compare__hl{% endif %}" scope="col">
                 <div class="fxb-compare__product">
                   {%- if p3 != blank -%}
-                    <img class="fxb-compare__photo" src="{{ p3 | image_url: width: 160 }}" srcset="{{ p3 | image_url: width: 120 }} 120w, {{ p3 | image_url: width: 160 }} 160w, {{ p3 | image_url: width: 240 }} 240w" sizes="72px" width="160" height="{{ 160 | divided_by: p3.aspect_ratio | round }}" alt="{{ section.settings.product_3_name | escape }}" loading="lazy">
+                    {%- if section.settings.product_3_url != blank -%}
+                      <a class="fxb-compare__photo-link" href="{{ section.settings.product_3_url }}">
+                        <img class="fxb-compare__photo" src="{{ p3 | image_url: width: 160 }}" srcset="{{ p3 | image_url: width: 120 }} 120w, {{ p3 | image_url: width: 160 }} 160w, {{ p3 | image_url: width: 240 }} 240w" sizes="72px" width="160" height="{{ 160 | divided_by: p3.aspect_ratio | round }}" alt="{{ section.settings.product_3_name | escape }}" loading="lazy">
+                      </a>
+                    {%- else -%}
+                      <img class="fxb-compare__photo" src="{{ p3 | image_url: width: 160 }}" srcset="{{ p3 | image_url: width: 120 }} 120w, {{ p3 | image_url: width: 160 }} 160w, {{ p3 | image_url: width: 240 }} 240w" sizes="72px" width="160" height="{{ 160 | divided_by: p3.aspect_ratio | round }}" alt="{{ section.settings.product_3_name | escape }}" loading="lazy">
+                    {%- endif -%}
                   {%- endif -%}
                   <div>
                     <span class="fxb-compare__name">
