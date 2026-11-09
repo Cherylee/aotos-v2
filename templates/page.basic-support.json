@@ -51,6 +51,10 @@
       "type": "support-product-filter",
       "settings": {
         "show_all": true,
+        "padding_top": 80,
+        "padding_bottom": 0,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 0,
         "default_filter": "all"
       }
     },
@@ -76,7 +80,10 @@
           }
         }
       },
-      "block_order": ["manual_1", "manual_2"],
+      "block_order": [
+        "manual_1",
+        "manual_2"
+      ],
       "settings": {
         "title": "User Manuals & Guides",
         "padding_top": 44,
@@ -92,6 +99,7 @@
           "type": "faq_item",
           "settings": {
             "question": "When will my order ship?",
+            "related_product": "",
             "answer": "<p>Orders are typically processed within 1–2 business days. Once shipped, delivery usually takes 3–7 business days depending on your location.</p>"
           }
         },
@@ -99,6 +107,7 @@
           "type": "faq_item",
           "settings": {
             "question": "Do you ship within the United States?",
+            "related_product": "",
             "answer": "<p>Yes, we currently ship within the U.S. from our local warehouses to ensure faster delivery and better service.</p>"
           }
         },
@@ -106,6 +115,7 @@
           "type": "faq_item",
           "settings": {
             "question": "How can I track my order?",
+            "related_product": "",
             "answer": "<p>Once your order ships, you will receive a confirmation email with a tracking number. You can use it to monitor your delivery status.</p>"
           }
         },
@@ -113,6 +123,7 @@
           "type": "faq_item",
           "settings": {
             "question": "What is your return policy?",
+            "related_product": "",
             "answer": "<p>We offer a 14-day return policy for unused products in original condition. Please contact our support team before initiating a return.</p>"
           }
         },
@@ -120,6 +131,7 @@
           "type": "faq_item",
           "settings": {
             "question": "What warranty do your products come with?",
+            "related_product": "",
             "answer": "<p>All AOTOS products come with a limited warranty covering manufacturing defects. Warranty terms may vary by product.</p>"
           }
         },
@@ -127,6 +139,7 @@
           "type": "faq_item",
           "settings": {
             "question": "Do your eBikes require assembly?",
+            "related_product": "",
             "answer": "<p>Some minor assembly may be required (such as installing handlebars or pedals). Detailed instructions are included, and most setups take 15–30 minutes.</p>"
           }
         },
@@ -134,6 +147,7 @@
           "type": "faq_item",
           "settings": {
             "question": "Are your products street legal?",
+            "related_product": "",
             "answer": "<p>Our eBikes are designed to meet common U.S. regulations (Class 2/3), but laws may vary by state. Please check your local regulations before riding.</p>"
           }
         },
@@ -141,6 +155,7 @@
           "type": "faq_item",
           "settings": {
             "question": "How do I unlock or connect my device?",
+            "related_product": "",
             "answer": "<p>You can connect your AOTOS product via our mobile app for features like unlocking, tracking, and system updates. Instructions are included in the user manual.</p>"
           }
         },
@@ -148,6 +163,7 @@
           "type": "faq_item",
           "settings": {
             "question": "Can I update the system (OTA updates)?",
+            "related_product": "",
             "answer": "<p>Yes, supported models receive over-the-air (OTA) updates through the AOTOS app, allowing continuous improvements and new features.</p>"
           }
         },
@@ -155,6 +171,7 @@
           "type": "faq_item",
           "settings": {
             "question": "How can I contact customer support?",
+            "related_product": "",
             "answer": "<p>You can reach our support team via email at support@aotos.com or call us at +1 (626) 989-0826 during business hours (Monday–Friday, 9AM–6PM).</p>"
           }
         }
@@ -185,8 +202,8 @@
         "title": "Customer Support",
         "description": "We’re here to help with any questions about your order, products, or after-sales service.",
         "email": "support@aotos.com",
-        "phone": "",
-        "hours": "Monday–Friday, 9:00 AM–6:00 PM (PST)",
+        "phone": "888-330-3799",
+        "hours": "Mon–Fri, 9:00 AM–6:00 PM ET",
         "padding_top": 44,
         "padding_bottom": 44,
         "padding_top_mobile": 120,
