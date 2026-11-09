@@ -335,14 +335,6 @@
   display: block;
 }
 
-/* cart viewBox is 40, search/account are 18 — scale the glyph to the same visual size */
-.section-header .aotos-nav__tools .header__icon--cart .icon {
-  width: calc(13 * var(--rem));
-  height: calc(13 * var(--rem));
-  transform: scale(2.1);
-  transform-origin: center;
-}
-
 .section-header .aotos-nav__tools .header__icon--cart {
   position: relative;
   margin-right: 0;
