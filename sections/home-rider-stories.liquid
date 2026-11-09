@@ -1,5 +1,7 @@
 {%- style -%}
   #HomeRiders-{{ section.id }} {
+    position: relative;
+    z-index: 0;
     padding-top: calc({{ section.settings.padding_top | default: 80, allow_false: true }} * var(--rem));
     padding-bottom: calc({{ section.settings.padding_bottom | default: 80, allow_false: true }} * var(--rem));
     background: #ffffff;
