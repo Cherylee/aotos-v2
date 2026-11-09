@@ -63,8 +63,8 @@
         "bike_eb03": {
           "type": "bike",
           "settings": {
-            "badge": "EB03",
-            "series": "EB03 SERIES",
+            "badge": "X26",
+            "series": "FLUX X26 SERIES",
             "model": "FLUX X26",
             "image": "shopify://shop_images/EB03_0919_2.webp",
             "aotos_version_label": "AOTOS VERSION",
@@ -82,8 +82,8 @@
         "bike_eb02": {
           "type": "bike",
           "settings": {
-            "badge": "EB02",
-            "series": "EB02 SERIES",
+            "badge": "T26",
+            "series": "FLUX T26 SERIES",
             "model": "FLUX T26",
             "image": "shopify://shop_images/eb02-bike-alt.webp",
             "aotos_version_label": "AOTOS VERSION",

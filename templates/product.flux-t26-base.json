@@ -110,7 +110,7 @@
             "detail_2": "<p>We offer a <strong>30-day free return policy</strong>.</p><ul><li>You may return the bike within 30 days of delivery if it is in new, unused condition with original packaging.</li><li>To start a return, please email us at <a href=\"mailto:support@aotos.com\" target=\"_blank\"><strong>support@aotos.com</strong></a> with your order number and photos/videos if needed.</li><li>We will review your request within 3 business days.</li></ul><p><strong>Return shipping:</strong></p><ul><li>If the return is due to our error (wrong item, quality issue, etc.), we cover the return shipping cost.</li><li>If the return is due to change of mind, the customer is responsible for return shipping.</li><li>No restocking fee will be charged.</li></ul><p>   <a href=\"/pages/return-refund-policy\" title=\"Return & Refund Policy\">  More</a></p>",
             "icon_3": "shopify://shop_images/2_923b391a-8035-4372-a1e6-b88e92751e4f.png",
             "text_3": "1-Year Warranty",
-            "detail_3": "<p>Your Flux X26 Series is covered by our limited warranty:</p><ul><li><strong>Main Components</strong> (Frame, Fork, Handlebar, Motor, Battery, Controller, Display, etc.): <strong>1 Year</strong></li><li><strong>Main Accessories</strong> (Throttle, Lights, Brake Levers, Charger, Shock Absorber, etc.): <strong>6 Months</strong></li><li><strong>Wear & Tear Parts</strong> (Tires, Fenders, Seat, Foot Pegs, Plastic Parts, etc.): <strong>3 Months</strong></li></ul><p><strong>Battery Note:</strong><br/>Covered for 1 year or 500 charge cycles (whichever comes first), with capacity remaining at least 80% of rated capacity under normal conditions.</p><p>Warranty does not cover damage caused by improper use, accidents, or unauthorized modifications.<a href=\"/pages/warranty-policy\" title=\"Warranty Policy\">More</a></p>",
+            "detail_3": "<p>Your FLUX T26 is covered by our limited warranty:</p><ul><li><strong>Main Components</strong> (Frame, Fork, Handlebar, Motor, Battery, Controller, Display, etc.): <strong>1 Year</strong></li><li><strong>Main Accessories</strong> (Throttle, Lights, Brake Levers, Charger, Shock Absorber, etc.): <strong>6 Months</strong></li><li><strong>Wear & Tear Parts</strong> (Tires, Fenders, Seat, Foot Pegs, Plastic Parts, etc.): <strong>3 Months</strong></li></ul><p><strong>Battery Note:</strong><br/>Covered for 1 year or 500 charge cycles (whichever comes first), with capacity remaining at least 80% of rated capacity under normal conditions.</p><p>Warranty does not cover damage caused by improper use, accidents, or unauthorized modifications.<a href=\"/pages/warranty-policy\" title=\"Warranty Policy\">More</a></p>",
             "icon_4": "shopify://shop_images/2_2_2393cb17-6719-43ff-821d-2a7ba1d45a5b.png",
             "text_4": "Customer Support",
             "detail_4": "<p>We’re here to help!</p><ul><li><strong>Email:</strong> <a href=\"mailto:support@aotos.com\" target=\"_blank\">support@aotos.com</a></li><li><strong>Hours:</strong> 10:00 AM–8:30 PM (HKT)</li></ul><p>For the fastest response, please include your order number when contacting us.<br/>Our team typically replies within 1 business day.</p>"
@@ -177,7 +177,7 @@
             "icon": "shopify://shop_images/Group_25_1_6e34c942-be4d-4b4a-9856-2f6ac9e81653.webp",
             "title": "Brakes",
             "value": "Hydraulic disc brakes",
-            "variant_values": "Flux T26: Hydraulic disc brakes\nFlux X26: Hydraulic disc brakes\nFlux X26 Pro: Hydraulic disc brakes"
+            "variant_values": "Flux T26: Hydraulic disc brakes"
           }
         },
         "preorder_notice": {
@@ -798,7 +798,7 @@
           "type": "featured",
           "settings": {
             "box_tab": "tab1",
-            "title": "FLUX X26 Pro",
+            "title": "FLUX T26",
             "image": "shopify://shop_images/aotos.webp",
             "link": ""
           }
@@ -844,7 +844,7 @@
           "type": "featured",
           "settings": {
             "box_tab": "tab2",
-            "title": "FLUX X26",
+            "title": "FLUX T26 Pro",
             "image": "shopify://shop_images/aotos.webp",
             "link": ""
           }
@@ -1030,8 +1030,8 @@
         "bg_color": "#000000",
         "geometry_image": "shopify://shop_images/b.jpg",
         "box_layout": "list",
-        "box_tab_1": "FLUX X26 Pro",
-        "box_tab_2": "FLUX X26",
+        "box_tab_1": "FLUX T26",
+        "box_tab_2": "FLUX T26 Pro",
         "card_background": "#1a1a1a",
         "padding_top": 80,
         "padding_bottom": 80,
@@ -1055,6 +1055,7 @@
     },
     "flux_experts": {
       "type": "aotos-flux-experts",
+      "disabled": true,
       "blocks": {
         "youtube_item_aLnqGH": {
           "type": "youtube_item",
