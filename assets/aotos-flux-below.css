@@ -188,7 +188,16 @@ html.fxb-anchor-stuck:has(.section-header.shopify-section-header-sticky:not(.sho
   text-align: left;
 }
 
+.fxb-compare__photo-link {
+  display: block;
+  flex-shrink: 0;
+  line-height: 0;
+  text-decoration: none;
+  color: inherit;
+}
+
 .fxb-compare__photo {
+  display: block;
   width: calc(72 * var(--rem));
   height: calc(72 * var(--rem));
   object-fit: contain;
