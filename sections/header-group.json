@@ -183,6 +183,7 @@
         "announcement_FtFjdV",
         "announcement-bar-0"
       ],
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-1",
         "show_line_separator": false,
@@ -307,7 +308,7 @@
             "title": "FLUX T26",
             "link": "shopify://products/flux-t26",
             "badge_text": "New",
-            "badge_bg_color": "#FF0101",
+            "badge_bg_color": "#ff0101",
             "badge_text_color": "#ffffff"
           }
         },

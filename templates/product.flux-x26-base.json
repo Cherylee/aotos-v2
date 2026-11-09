@@ -14,6 +14,7 @@
       "blocks": {
         "title_badges": {
           "type": "title_badges",
+          "disabled": true,
           "settings": {
             "image_1": "shopify://shop_images/Halloween-Special-Tight_1.png"
           }
@@ -374,7 +375,8 @@
           "settings": {
             "label": "Motor",
             "value_1": "750W rated / 2000W Peak in Boost*",
-            "value_2": "750W rated / 1200W Peak in Boost*"
+            "value_2": "750W rated / 1200W Peak in Boost*",
+            "value_3": ""
           }
         },
         "spec_row_zVatzz": {
@@ -383,7 +385,8 @@
           "settings": {
             "label": "Motor",
             "value_1": "Rated 750W / Peak 2000W",
-            "value_2": "Rated 750W / Peak 1200W"
+            "value_2": "Rated 750W / Peak 1200W",
+            "value_3": ""
           }
         },
         "spec_row_PQRtQT": {
@@ -391,7 +394,8 @@
           "settings": {
             "label": "Torque",
             "value_1": "100 Nm",
-            "value_2": "80 Nm"
+            "value_2": "80 Nm",
+            "value_3": ""
           }
         },
         "spec_row_MJtbPQ": {
@@ -399,7 +403,8 @@
           "settings": {
             "label": "Top Speed",
             "value_1": "28 mph (in Boost*)",
-            "value_2": "28 mph (in Boost*)"
+            "value_2": "28 mph (in Boost*)",
+            "value_3": ""
           }
         },
         "spec_row_CycLHB": {
@@ -407,7 +412,8 @@
           "settings": {
             "label": "Battery",
             "value_1": "48V 21Ah battery",
-            "value_2": "48V 18Ah battery"
+            "value_2": "48V 18Ah battery",
+            "value_3": ""
           }
         },
         "spec_row_8WJmh3": {
@@ -415,7 +421,8 @@
           "settings": {
             "label": "Range",
             "value_1": "Up to 70 Miles",
-            "value_2": "Up to 50 Miles"
+            "value_2": "Up to 50 Miles",
+            "value_3": ""
           }
         },
         "spec_row_6kKbWk": {
@@ -423,7 +430,8 @@
           "settings": {
             "label": "Brakes",
             "value_1": "Hydraulic disc brakes",
-            "value_2": "Hydraulic disc brakes"
+            "value_2": "Hydraulic disc brakes",
+            "value_3": ""
           }
         },
         "spec_row_VBK8Y4": {
@@ -431,7 +439,8 @@
           "settings": {
             "label": "Suspension",
             "value_1": "Dual hydraulic suspension",
-            "value_2": "Dual hydraulic suspension"
+            "value_2": "Dual hydraulic suspension",
+            "value_3": ""
           }
         },
         "spec_row_QhwUiG": {
@@ -439,7 +448,8 @@
           "settings": {
             "label": "Tires",
             "value_1": "20 × 4.0 in fat tires",
-            "value_2": "20 × 4.0 in fat tires"
+            "value_2": "20 × 4.0 in fat tires",
+            "value_3": ""
           }
         },
         "spec_row_7bMHJN": {
@@ -447,7 +457,8 @@
           "settings": {
             "label": "Tire Pressure Monitoring",
             "value_1": "Yes",
-            "value_2": "No"
+            "value_2": "No",
+            "value_3": ""
           }
         },
         "spec_row_GywwnT": {
@@ -455,7 +466,8 @@
           "settings": {
             "label": "Under-Frame Storage Bag",
             "value_1": "Yes",
-            "value_2": "No"
+            "value_2": "No",
+            "value_3": ""
           }
         },
         "spec_row_NM64J9": {
@@ -463,7 +475,8 @@
           "settings": {
             "label": "Security",
             "value_1": "App + 4G GPS tracking* + physical lock",
-            "value_2": "App"
+            "value_2": "App",
+            "value_3": ""
           }
         },
         "spec_row_EiE8tJ": {
@@ -471,7 +484,8 @@
           "settings": {
             "label": "Connectivity",
             "value_1": "App support",
-            "value_2": "App support"
+            "value_2": "App support",
+            "value_3": ""
           }
         },
         "spec_row_Agcwpq": {
@@ -479,7 +493,8 @@
           "settings": {
             "label": "IP Rating",
             "value_1": "IPX5 vehicle / IPX6 battery",
-            "value_2": "IPX5"
+            "value_2": "IPX5",
+            "value_3": ""
           }
         },
         "spec_row_gT3bEF": {
@@ -487,7 +502,8 @@
           "settings": {
             "label": "Net Weight",
             "value_1": "97 lb / 45 kg",
-            "value_2": "97 lb / 45 kg"
+            "value_2": "97 lb / 45 kg",
+            "value_3": ""
           }
         },
         "spec_row_jbjHbF": {
@@ -495,7 +511,8 @@
           "settings": {
             "label": "Maximum Load",
             "value_1": "330 lb",
-            "value_2": "330 lb"
+            "value_2": "330 lb",
+            "value_3": ""
           }
         }
       },
@@ -534,6 +551,10 @@
         "product_2_image": "shopify://shop_images/eb03020-cropped.webp",
         "product_2_tagline": "Smooth, predictable power for everyday rides.",
         "product_2_url": "shopify://products/flux-x26",
+        "product_3_name": "",
+        "product_3_highlight": "",
+        "product_3_tagline": "",
+        "product_3_url": "",
         "bg_color": "#ffffff",
         "title_color": "#000000",
         "label_color": "#999999",
@@ -1221,12 +1242,12 @@
         },
         "faq_item_f6n3ff": {
           "type": "faq_item",
+          "disabled": true,
           "settings": {
             "question": "What is Shipping Protection?",
             "related_product": "",
             "answer": "<p>Shipping Protection is an optional coverage powered by Xcotton that gives you peace of mind when your order is on the way. It protects your package against common shipping risks.</p><p><strong>Shipping Protection cover:</strong></p><ul><li>Loss and damage in transit</li><li>Theft / Porch piracy</li><li>Mis-delivery by the courier</li><li>Quick and easy claims resolution</li></ul>"
-          },
-          "disabled": true
+          }
         }
       },
       "block_order": [
