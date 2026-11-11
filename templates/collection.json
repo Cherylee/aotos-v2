@@ -11,7 +11,6 @@
   "sections": {
     "image_banner_HTF3zQ": {
       "type": "image-banner",
-      "disabled": true,
       "name": "t:sections.image-banner.presets.name",
       "settings": {
         "image": "shopify://shop_images/1a0ec33e-5639-46d3-9e12-896739a326ea.webp",
@@ -29,7 +28,7 @@
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
-        "products_per_page": 16,
+        "products_per_page": "9",
         "columns_desktop": 3,
         "color_scheme": "scheme-1",
         "image_ratio": "square",

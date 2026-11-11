@@ -671,7 +671,8 @@
     {%- else -%}
       <h1 class="visually-hidden">{{ collection.title | escape }}</h1>
     {%- endif -%}
-  {%- paginate collection.products by section.settings.products_per_page -%}
+  {%- assign products_per_page = section.settings.products_per_page | plus: 0 -%}
+  {%- paginate collection.products by products_per_page -%}
     {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
     {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
       <facet-filters-form class="facets facets-vertical-sort page-width small-hide">
@@ -904,13 +905,17 @@
   "class": "section",
   "settings": [
     {
-      "type": "range",
+      "type": "select",
       "id": "products_per_page",
-      "min": 8,
-      "max": 36,
-      "step": 4,
-      "default": 16,
-      "label": "t:sections.main-collection-product-grid.settings.products_per_page.label"
+      "label": "t:sections.main-collection-product-grid.settings.products_per_page.label",
+      "options": [
+        { "value": "9", "label": "9" },
+        { "value": "12", "label": "12" },
+        { "value": "18", "label": "18" },
+        { "value": "24", "label": "24" },
+        { "value": "36", "label": "36" }
+      ],
+      "default": "9"
     },
     {
       "type": "range",

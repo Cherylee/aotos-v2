@@ -433,5 +433,63 @@
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+
+    {%- comment -%} Shopify dynamic checkout label: Buy it now → Buy Now {%- endcomment -%}
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var renameBuyNow = function (button) {
+          if (!button) return;
+          var walker = document.createTreeWalker(button, NodeFilter.SHOW_TEXT);
+          var textNode;
+          while ((textNode = walker.nextNode())) {
+            if (/buy it now/i.test(textNode.nodeValue)) {
+              textNode.nodeValue = textNode.nodeValue.replace(/buy it now/gi, 'Buy Now');
+            }
+          }
+          var label = button.getAttribute('aria-label');
+          if (label && /buy it now/i.test(label)) {
+            button.setAttribute('aria-label', label.replace(/buy it now/gi, 'Buy Now'));
+          }
+        };
+
+        var watchBuyNow = function (button) {
+          if (!button) return;
+          renameBuyNow(button);
+          if (button.dataset.buyNowWatched === '1') return;
+          button.dataset.buyNowWatched = '1';
+          new MutationObserver(function () {
+            renameBuyNow(button);
+          }).observe(button, { childList: true, subtree: true, characterData: true });
+        };
+
+        var renameAll = function () {
+          document
+            .querySelectorAll('shopify-buy-it-now-button button, button.shopify-payment-button__button--unbranded')
+            .forEach(watchBuyNow);
+        };
+
+        renameAll();
+        new MutationObserver(function (mutations) {
+          for (var i = 0; i < mutations.length; i++) {
+            var nodes = mutations[i].addedNodes;
+            for (var j = 0; j < nodes.length; j++) {
+              var node = nodes[j];
+              if (!node || node.nodeType !== 1) continue;
+              if (
+                (node.matches &&
+                  node.matches(
+                    'shopify-buy-it-now-button, shopify-accelerated-checkout, .shopify-payment-button, button.shopify-payment-button__button--unbranded'
+                  )) ||
+                (node.querySelector &&
+                  node.querySelector('shopify-buy-it-now-button, button.shopify-payment-button__button--unbranded'))
+              ) {
+                renameAll();
+                return;
+              }
+            }
+          }
+        }).observe(document.body, { childList: true, subtree: true });
+      });
+    </script>
   </body>
 </html>
