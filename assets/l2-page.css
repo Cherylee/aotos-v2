@@ -241,6 +241,7 @@
 
 .l2-product .swatch {
   --swatch-input--size: calc(28 * var(--rem));
+  position: relative;
 }
 
 .l2-product .swatch-input__label .swatch {
