@@ -320,6 +320,7 @@
 
   @media screen and (max-width: 768px) {
     #HomeRiders-{{ section.id }} {
+      overflow-x: clip;
       padding-top: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem));
       padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }} * var(--rem));
     }
@@ -390,13 +391,13 @@
     }
 
     #HomeRiders-{{ section.id }}.home-riders--articles .home-riders__viewport {
-      padding: calc(24 * var(--rem)) calc(72 * var(--rem)) calc(48 * var(--rem));
-      margin: calc(-24 * var(--rem)) calc(-72 * var(--rem)) calc(-48 * var(--rem));
-      scroll-padding-inline: calc(72 * var(--rem));
+      padding: calc(24 * var(--rem)) calc(40 * var(--rem)) calc(48 * var(--rem));
+      margin: calc(-24 * var(--rem)) calc(-40 * var(--rem)) calc(-48 * var(--rem));
+      scroll-padding-inline: calc(40 * var(--rem));
     }
 
     #HomeRiders-{{ section.id }}.home-riders--articles .home-riders__end {
-      width: calc(72 * var(--rem));
+      width: calc(40 * var(--rem));
     }
 
     #HomeRiders-{{ section.id }}.home-riders--articles .home-riders__card {

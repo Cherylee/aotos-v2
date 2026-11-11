@@ -826,6 +826,8 @@
 
   .section-header .aotos-nav__tools .header__icon,
   .section-header .aotos-nav__tools .header__icon span,
+  .section-header .aotos-nav__tools .header__icon .svg-wrapper,
+  .section-header .aotos-nav__tools .header__icon svg,
   .section-header .aotos-nav__tools .svg-wrapper,
   .section-header .aotos-nav__tools .icon {
     flex: 0 0 calc(32 * var(--rem));
@@ -847,22 +849,8 @@
     overflow: hidden;
   }
 
-  .section-header .aotos-nav__tools .header__icon--cart .svg-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: visible;
-  }
-
-  .section-header .aotos-nav__tools .header__icon--cart .icon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    flex: none;
-    width: calc(74 * var(--rem));
-    height: calc(74 * var(--rem));
-    transform: translate(-50%, -50%);
+  .section-header .header__search details:not([open]) > .search-modal {
+    display: none;
   }
 
   .section-header .aotos-nav__tools .cart-count-bubble {

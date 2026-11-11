@@ -1023,7 +1023,7 @@ body.size-fit-drawer-open {
 
 .velotric-product__trust-icons {
   width: 100%;
-  margin: 0 0 calc(16 * var(--rem));
+  margin:  calc(16 * var(--rem)) 0;
 }
 
 .velotric-product__trust-icons-grid {
