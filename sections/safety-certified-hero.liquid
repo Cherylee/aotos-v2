@@ -503,6 +503,11 @@
       align-items: flex-start;
     }
 
+    #sc-hero-{{ section.id }}.sc-hero--mob-center .sc-hero__inner {
+      justify-content: center;
+      align-items: flex-start;
+    }
+
     #sc-hero-{{ section.id }}.sc-hero--mob-split .sc-hero__inner {
       justify-content: flex-start;
       align-items: center;
@@ -578,7 +583,7 @@
 {% endstyle %}
 
 <section
-  class="sc-hero{% if section.settings.content_mobile == 'split' %} sc-hero--mob-split{% else %} sc-hero--mob-top{% endif %}"
+  class="sc-hero{% if section.settings.content_mobile == 'split' %} sc-hero--mob-split{% elsif section.settings.content_mobile == 'center' %} sc-hero--mob-center{% else %} sc-hero--mob-top{% endif %}"
   id="sc-hero-{{ section.id }}"
   style="--sc-hero-overlay: {{ sc_overlay }};"
 >
@@ -1135,6 +1140,7 @@
       "label": "手机文案位置",
       "options": [
         { "value": "top", "label": "整块在顶部" },
+        { "value": "center", "label": "整块上下居中" },
         { "value": "split", "label": "文案居中在顶部，按钮在底部" }
       ],
       "default": "top"
