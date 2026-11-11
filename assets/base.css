@@ -1295,7 +1295,7 @@ shopify-buy-it-now-button {
   color: #fff !important;
 }
 
-/* Unified button hover: black background with theme-color text */
+/* Unified button hover: opacity only */
 @media (hover: hover) {
   body .button:not([disabled]):not([aria-disabled='true']):hover,
   body .shopify-challenge__button:not([disabled]):hover,
@@ -1322,24 +1322,14 @@ shopify-buy-it-now-button {
   body .ifa-banner__button:hover,
   body .ifa-series__button:hover,
   body .ifa-subscribe__button:hover {
-    background: #000000 !important;
-    color: var(--aotos-theme-color, #ff6501) !important;
-    opacity: 1 !important;
-    filter: none !important;
-    box-shadow: none !important;
-    text-decoration: none;
+    opacity: 0.85;
   }
 
   /* Non-CTA buttons that reuse .button keep their own hover */
   body cart-remove-button .button:not([disabled]):hover,
-  body quick-order-list-remove-button .button:not([disabled]):hover {
-    background: transparent !important;
-    color: rgb(var(--color-foreground)) !important;
-  }
-
+  body quick-order-list-remove-button .button:not([disabled]):hover,
   body .button.product__xr-button:not([disabled]):hover {
-    background: rgba(var(--color-button), var(--alpha-button-background)) !important;
-    color: rgb(var(--color-button-text)) !important;
+    opacity: 1;
   }
 }
 
@@ -1362,7 +1352,7 @@ shopify-buy-it-now-button {
   font-weight: var(--aotos-button-font-weight, 600);
   text-decoration: none;
   color: rgb(var(--color-button-text));
-  transition: box-shadow var(--duration-short) ease, background-color var(--duration-short) ease, color var(--duration-short) ease;
+  transition: box-shadow var(--duration-short) ease, background-color var(--duration-short) ease, color var(--duration-short) ease, opacity var(--duration-short) ease;
   -webkit-appearance: none;
   appearance: none;
   background-color: rgba(var(--color-button), var(--alpha-button-background));
