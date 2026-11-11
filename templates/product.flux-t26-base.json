@@ -67,6 +67,14 @@
             "letter_spacing": 0
           }
         },
+        "preorder_notice": {
+          "type": "preorder_notice",
+          "disabled": true,
+          "settings": {
+            "text": "<p><strong>Available for Pre-Order</strong></p><p>Estimated ship date: <strong>Nov 10, 2026</strong></p>",
+            "bg_color": "#fff8e8"
+          }
+        },
         "product_switch": {
           "type": "product_switch",
           "settings": {
@@ -179,14 +187,6 @@
             "value": "Hydraulic disc brakes",
             "variant_values": "Flux T26: Hydraulic disc brakes"
           }
-        },
-        "preorder_notice": {
-          "type": "preorder_notice",
-          "disabled": true,
-          "settings": {
-            "text": "<p><strong>Available for Pre-Order</strong></p><p>Estimated ship date: <strong>Nov 10, 2026</strong></p>",
-            "bg_color": "#fff8e8"
-          }
         }
       },
       "block_order": [
@@ -297,6 +297,26 @@
     "flux_features": {
       "type": "aotos-flux-features",
       "blocks": {
+        "card_6": {
+          "type": "card",
+          "settings": {
+            "video_url": "",
+            "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales03.webp",
+            "pre_heading": "RANGE THAT FITS YOUR ROUTE",
+            "heading": "Forty Miles When You Need Them.",
+            "description": "<p>FLUX T26 delivers up to 40 miles** with 48V 14.5Ah actual discharge capacity. Enough for daily routes without carrying more battery than you need.</p>"
+          }
+        },
+        "card_5": {
+          "type": "card",
+          "settings": {
+            "video_url": "",
+            "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales06.webp",
+            "pre_heading": "BOOST THE MOMENT",
+            "heading": "10 Seconds. One Controlled Burst.",
+            "description": "<p>Tap BOOST for up to 750W Peak* on FLUX T26—a short, controlled burst for starts and inclines. Ambient lighting adds a visible energy cue. Peak power is not a speed unlock.</p>"
+          }
+        },
         "card_1": {
           "type": "card",
           "settings": {
@@ -317,16 +337,6 @@
             "description": "<p>20\" × 4.0\" fat tires, hydraulic disc brakes, integrated lighting, and Walk Assist are tuned for paved streets, stop-and-go traffic, and the ride home—not off-road adventures.</p>"
           }
         },
-        "card_6": {
-          "type": "card",
-          "settings": {
-            "video_url": "",
-            "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales03.webp",
-            "pre_heading": "RANGE THAT FITS YOUR ROUTE",
-            "heading": "Forty Miles When You Need Them.",
-            "description": "<p>FLUX T26 delivers up to 40 miles** with 48V 14.5Ah actual discharge capacity. Enough for daily routes without carrying more battery than you need.</p>"
-          }
-        },
         "card_2": {
           "type": "card",
           "settings": {
@@ -345,16 +355,6 @@
             "pre_heading": "CREATE AS YOU RIDE",
             "heading": "Capture the City You Ride.",
             "description": "<p>Add an optional bike-mounted Hover holder and use Hover app tracking tools to film rider and group-ride moments. The Hover Creator Kit is an accessory and content tool—not a drone built into the bike.</p>"
-          }
-        },
-        "card_5": {
-          "type": "card",
-          "settings": {
-            "video_url": "",
-            "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales06.webp",
-            "pre_heading": "BOOST THE MOMENT",
-            "heading": "10 Seconds. One Controlled Burst.",
-            "description": "<p>Tap BOOST for up to 750W Peak* on FLUX T26—a short, controlled burst for starts and inclines. Ambient lighting adds a visible energy cue. Peak power is not a speed unlock.</p>"
           }
         }
       },
@@ -430,9 +430,18 @@
           "type": "spec_row",
           "settings": {
             "label": "Range",
-            "value_1": "Up to 40 miles**",
+            "value_1": "Up to 40 miles*",
             "value_2": "Up to 50 miles",
             "value_3": "Up to 70 miles"
+          }
+        },
+        "spec_row_display": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Display",
+            "value_1": "1.9-inch TFT",
+            "value_2": "5.5-inch TFT",
+            "value_3": "5.5-inch TFT"
           }
         },
         "spec_row_6kKbWk": {
@@ -480,6 +489,24 @@
             "value_3": "Yes"
           }
         },
+        "spec_row_gyro": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Gyro Posture Sensing",
+            "value_1": "No",
+            "value_2": "Yes",
+            "value_3": "Yes"
+          }
+        },
+        "spec_row_unlock": {
+          "type": "spec_row",
+          "settings": {
+            "label": "Unlock",
+            "value_1": "NFC / proximity / passcode",
+            "value_2": "NFC / proximity / passcode",
+            "value_3": "NFC / proximity / passcode"
+          }
+        },
         "spec_row_NM64J9": {
           "type": "spec_row",
           "settings": {
@@ -496,6 +523,15 @@
             "value_1": "App support",
             "value_2": "App support",
             "value_3": "App support"
+          }
+        },
+        "spec_row_usb": {
+          "type": "spec_row",
+          "settings": {
+            "label": "USB Output",
+            "value_1": "Not available",
+            "value_2": "USB-A + USB-C",
+            "value_3": "USB-A + USB-C"
           }
         },
         "spec_row_Agcwpq": {
@@ -523,42 +559,6 @@
             "value_1": "265 lb",
             "value_2": "330 lb",
             "value_3": "330 lb"
-          }
-        },
-        "spec_row_display": {
-          "type": "spec_row",
-          "settings": {
-            "label": "Display",
-            "value_1": "1.9-inch TFT",
-            "value_2": "5.5-inch TFT",
-            "value_3": "5.5-inch TFT"
-          }
-        },
-        "spec_row_gyro": {
-          "type": "spec_row",
-          "settings": {
-            "label": "Gyro Posture Sensing",
-            "value_1": "No",
-            "value_2": "Yes",
-            "value_3": "Yes"
-          }
-        },
-        "spec_row_unlock": {
-          "type": "spec_row",
-          "settings": {
-            "label": "Unlock",
-            "value_1": "NFC / proximity / passcode",
-            "value_2": "NFC / proximity / passcode",
-            "value_3": "NFC / proximity / passcode"
-          }
-        },
-        "spec_row_usb": {
-          "type": "spec_row",
-          "settings": {
-            "label": "USB Output",
-            "value_1": "Not available",
-            "value_2": "USB-A + USB-C",
-            "value_3": "USB-A + USB-C"
           }
         }
       },
@@ -589,7 +589,7 @@
         "title": "Compare FLUX Models",
         "model_label": "Model",
         "show_footnote": true,
-        "footnote": "<p>*Boost Mode allows your bike to output its maximum torque and power for up to 10 seconds at a time.&nbsp;<br/>*Enjoy One year of free 4G/GPS service. Afterward, plans start at $2.90/month or $29 for 12 months (Best Value). Cancel anytime through the AOTOS app.<br/>**Range varies with rider weight, terrain, and assist level.</p>",
+        "footnote": "<p>*Boost Mode allows your bike to output its maximum torque and power for up to 10 seconds at a time.&nbsp;<br/>*Enjoy One year of free 4G/GPS service. Afterward, plans start at $2.90/month or $29 for 12 months (Best Value). Cancel anytime through the AOTOS app.<br/>*Range varies with rider weight, terrain, and assist level.</p>",
         "highlighted_column": "1",
         "product_1_name": "FLUX T26",
         "product_1_highlight": "",
@@ -1056,7 +1056,6 @@
     },
     "flux_experts": {
       "type": "aotos-flux-experts",
-      "disabled": true,
       "blocks": {
         "youtube_item_aLnqGH": {
           "type": "youtube_item",
@@ -1199,6 +1198,7 @@
         "ig_5",
         "ig_6"
       ],
+      "disabled": true,
       "settings": {
         "title": "Hear from the Experts",
         "bg_color": "#000000",
