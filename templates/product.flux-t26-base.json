@@ -103,8 +103,8 @@
           "type": "perks",
           "settings": {
             "icon_1": "shopify://shop_images/2_1.png",
-            "text_1": "Fast Free Shipping in 2–5 Days",
-            "detail_1": "<p>We offer <strong>free shipping</strong> on all orders to the contiguous 48 states in the United States.</p><ul><li>Processing time: 1–3 business days</li><li>Shipping time: usually 2–5 business days (depending on your location)</li><li>Carriers: UPS / FedEx</li></ul><p><strong>Note:</strong><br/>We currently do not ship to Alaska, Hawaii, Puerto Rico, PO Boxes, or APO/FPO addresses.<br/>You will receive a tracking number once your order ships.<a href=\"/pages/shipping-policy\" title=\"Shipping Policy\"> More</a></p>",
+            "text_1": "Fast Free Shipping",
+            "detail_1": "<p>We offer <strong>free shipping</strong> on all orders to the contiguous 48 states in the United States.</p><ul><li>Processing time: 1–3 business days</li><li>Shipping time: usually 2–5 business days (depending on your location)</li><li>Carriers: UPS / FedEx/ Truck Delivery</li></ul><p><strong>Note:</strong><br/>We currently do not ship to Alaska, Hawaii, Puerto Rico, PO Boxes, or APO/FPO addresses.<br/>You will receive a tracking number once your order ships.<a href=\"/pages/shipping-policy\" title=\"Shipping Policy\"> More</a></p>",
             "icon_2": "shopify://shop_images/2_3.png",
             "text_2": "30-Day Free Returns",
             "detail_2": "<p>We offer a <strong>30-day free return policy</strong>.</p><ul><li>You may return the bike within 30 days of delivery if it is in new, unused condition with original packaging.</li><li>To start a return, please email us at <a href=\"mailto:support@aotos.com\" target=\"_blank\"><strong>support@aotos.com</strong></a> with your order number and photos/videos if needed.</li><li>We will review your request within 3 business days.</li></ul><p><strong>Return shipping:</strong></p><ul><li>If the return is due to our error (wrong item, quality issue, etc.), we cover the return shipping cost.</li><li>If the return is due to change of mind, the customer is responsible for return shipping.</li><li>No restocking fee will be charged.</li></ul><p>   <a href=\"/pages/return-refund-policy\" title=\"Return & Refund Policy\">  More</a></p>",
@@ -182,6 +182,7 @@
         },
         "preorder_notice": {
           "type": "preorder_notice",
+          "disabled": true,
           "settings": {
             "text": "<p><strong>Available for Pre-Order</strong></p><p>Estimated ship date: <strong>Nov 10, 2026</strong></p>",
             "bg_color": "#fff8e8"
