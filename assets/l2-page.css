@@ -252,6 +252,10 @@
   border-color: #1e1b1b;
 }
 
+.l2-product #l2-variant-notices {
+  display: none;
+}
+
 .l2-product .swatch-input__input:not(.visually-disabled):not(:disabled) + .swatch-input__label .swatch::after {
   content: "";
   position: absolute;
