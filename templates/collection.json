@@ -11,6 +11,7 @@
   "sections": {
     "image_banner_HTF3zQ": {
       "type": "image-banner",
+      "disabled": true,
       "name": "t:sections.image-banner.presets.name",
       "settings": {
         "image": "shopify://shop_images/1a0ec33e-5639-46d3-9e12-896739a326ea.webp",
