@@ -29,11 +29,15 @@
           "type": "price",
           "settings": {}
         },
-        "paypal_messaging": {
-          "type": "shopify://apps/paypal-payments-studio/blocks/paypal-messaging/019df789-f519-7bce-9967-1ff928443aa9",
+        "affirm_pay_over_time_messaging_product_block_Mp6Lry": {
+          "type": "shopify://apps/affirm-pay-over-time-messaging/blocks/product-block/6dce54be-130d-4d13-9636-1e8f611b3071",
           "settings": {
-            "font_size": 15,
-            "letter_spacing": 0
+            "logo_align": "left",
+            "font_size": 16,
+            "logo_color": "blue",
+            "logo_type": "logo",
+            "public_api_key": "P8QU49AGSFMKUTOH",
+            "price_selector": ""
           }
         },
         "variant_picker": {
@@ -43,6 +47,19 @@
             "show_size_guide": false,
             "size_guide_text": "Size & Fit",
             "size_guide_icon": "shopify://shop_images/288aa83db3c7f157c94fe470a81f4032.webp"
+          }
+        },
+        "trust_icons": {
+          "type": "trust_icons",
+          "settings": {
+            "icon_1": "shopify://shop_images/2_1.png",
+            "title_1": "Free Shipping",
+            "icon_2": "shopify://shop_images/2_923b391a-8035-4372-a1e6-b88e92751e4f.png",
+            "title_2": "1-Year Warranty",
+            "icon_3": "shopify://shop_images/2_3.png",
+            "title_3": "30-Day FreeReturns",
+            "icon_4": "shopify://shop_images/2_2_2393cb17-6719-43ff-821d-2a7ba1d45a5b.png",
+            "title_4": "Customer Support"
           }
         },
         "buy_buttons": {
@@ -128,8 +145,9 @@
         "title",
         "rating",
         "price",
-        "paypal_messaging",
+        "affirm_pay_over_time_messaging_product_block_Mp6Lry",
         "variant_picker",
+        "trust_icons",
         "buy_buttons",
         "perks",
         "spec_motor",

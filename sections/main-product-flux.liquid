@@ -287,31 +287,33 @@
             </div>
             {%- endif -%}
           {%- when 'text' -%}
-            {%- if block.settings.learn_more_anchor != blank -%}
-              {%- liquid
-                assign text_more = block.settings.learn_more_label | default: 'Learn more'
-                assign text_anchor = block.settings.learn_more_anchor | replace: '#', '' | strip
-                assign text_plain = product.description | strip_html | strip
-              -%}
-              {%- if text_plain != blank -%}
-                <div class="velotric-product__text velotric-product__text--summary" id="product-text-{{ block.id }}" {{ block.shopify_attributes }}>
-                  <div class="velotric-product__text-body">{{ product.description }}</div>
+            {%- liquid
+              assign text_more = block.settings.learn_more_label | default: 'Learn more'
+              assign text_anchor = block.settings.learn_more_anchor | replace: '#', '' | strip
+              assign text_plain = product.description | strip_html | strip
+            -%}
+            {%- if text_plain != blank -%}
+              <div class="velotric-product__text velotric-product__text--summary" id="product-text-{{ block.id }}" {{ block.shopify_attributes }}>
+                <div class="velotric-product__text-body">{{ product.description }}</div>
+                {%- if text_anchor != blank -%}
                   <a class="velotric-product__text-more" href="#{{ text_anchor | escape }}"><span>{{ text_more | escape }}</span></a>
-                </div>
-                <script>
-                  (function () {
-                    var root = document.getElementById('product-text-{{ block.id }}');
-                    if (!root) return;
-                    var body = root.querySelector('.velotric-product__text-body');
-                    var fit = function () {
-                      root.classList.toggle('is-clamped', body.scrollHeight > body.clientHeight + 1);
-                    };
-                    fit();
-                    window.addEventListener('resize', fit);
-                    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
-                  })();
-                </script>
-              {%- endif -%}
+                {%- else -%}
+                  <span class="velotric-product__text-more"><span>{{ text_more | escape }}</span></span>
+                {%- endif -%}
+              </div>
+              <script>
+                (function () {
+                  var root = document.getElementById('product-text-{{ block.id }}');
+                  if (!root) return;
+                  var body = root.querySelector('.velotric-product__text-body');
+                  var fit = function () {
+                    root.classList.toggle('is-clamped', body.scrollHeight > body.clientHeight + 1);
+                  };
+                  fit();
+                  window.addEventListener('resize', fit);
+                  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+                })();
+              </script>
             {%- elsif block.settings.text != blank -%}
               <div class="velotric-product__text" {{ block.shopify_attributes }}>
                 {{ block.settings.text }}
@@ -366,6 +368,40 @@
           <div data-product-specs-mobile></div>
         {%- endif -%}
         {%- case block.type -%}
+          {%- when 'trust_icons' -%}
+            <div class="velotric-product__trust-icons" {{ block.shopify_attributes }}>
+              <div class="velotric-product__trust-icons-grid">
+                {%- for trust_index in (1..4) -%}
+                  {%- liquid
+                    assign trust_icon_key = 'icon_' | append: trust_index
+                    assign trust_title_key = 'title_' | append: trust_index
+                    assign trust_icon = block.settings[trust_icon_key]
+                    assign trust_title = block.settings[trust_title_key]
+                  -%}
+                  {%- if trust_icon != blank or trust_title != blank -%}
+                    <div class="velotric-product__trust-icon">
+                      {%- if trust_icon != blank -%}
+                        {%- assign trust_icon_height = 96 | divided_by: trust_icon.aspect_ratio | round -%}
+                        {{
+                          trust_icon
+                          | image_url: width: 96
+                          | image_tag:
+                            loading: 'lazy',
+                            widths: '48, 72, 96',
+                            sizes: '(max-width: 768px) 64px, 48px',
+                            width: 96,
+                            height: trust_icon_height,
+                            alt: trust_title
+                        }}
+                      {%- endif -%}
+                      {%- if trust_title != blank -%}
+                        <span class="velotric-product__trust-icon-title">{{ trust_title | escape }}</span>
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </div>
           {%- when 'buy_buttons' -%}
             <div class="velotric-product__buy-buttons" {{ block.shopify_attributes }}>
               {% render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: false %}
@@ -538,6 +574,21 @@
         { "type": "text", "id": "name_4", "label": "Name" },
         { "type": "text", "id": "description_4", "label": "Description" },
         { "type": "text", "id": "badge_4", "label": "Badge" }
+      ]
+    },
+    {
+      "type": "trust_icons",
+      "name": "Trust icons",
+      "limit": 1,
+      "settings": [
+        { "type": "image_picker", "id": "icon_1", "label": "Icon 1" },
+        { "type": "text", "id": "title_1", "label": "Title 1", "default": "Free Shipping" },
+        { "type": "image_picker", "id": "icon_2", "label": "Icon 2" },
+        { "type": "text", "id": "title_2", "label": "Title 2", "default": "1-Year Warranty" },
+        { "type": "image_picker", "id": "icon_3", "label": "Icon 3" },
+        { "type": "text", "id": "title_3", "label": "Title 3", "default": "30-Day FreeReturns" },
+        { "type": "image_picker", "id": "icon_4", "label": "Icon 4" },
+        { "type": "text", "id": "title_4", "label": "Title 4", "default": "Customer Support" }
       ]
     },
     {

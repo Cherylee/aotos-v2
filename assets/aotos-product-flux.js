@@ -496,7 +496,7 @@ document.addEventListener('change', (event) => {
     const span = btn.querySelector('span');
     if (variant.available) {
       btn.removeAttribute('disabled');
-      if (span) span.textContent = window.variantStrings ? window.variantStrings.addToCart : 'Add to cart';
+      if (span) span.textContent = window.variantStrings ? window.variantStrings.addToCart : 'Add to Cart';
     } else {
       btn.setAttribute('disabled', 'disabled');
       if (span) span.textContent = window.variantStrings ? window.variantStrings.soldOut : 'Sold out';
@@ -518,7 +518,7 @@ document.addEventListener('change', (event) => {
     const atc = bar.querySelector('[data-flux-buybar-atc]');
     const buy = bar.querySelector('[data-flux-buybar-buy]');
     const label = variant.available
-      ? (window.variantStrings ? window.variantStrings.addToCart : 'Add to cart')
+      ? (window.variantStrings ? window.variantStrings.addToCart : 'Add to Cart')
       : (window.variantStrings ? window.variantStrings.soldOut : 'Sold out');
     if (atc) {
       atc.disabled = !variant.available;

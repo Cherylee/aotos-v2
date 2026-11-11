@@ -1021,6 +1021,40 @@ body.size-fit-drawer-open {
   outline-offset: calc(2 * var(--rem));
 }
 
+.velotric-product__trust-icons {
+  width: 100%;
+  margin: 0 0 calc(16 * var(--rem));
+}
+
+.velotric-product__trust-icons-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: calc(16 * var(--rem));
+  align-items: start;
+}
+
+.velotric-product__trust-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(8 * var(--rem));
+  text-align: center;
+}
+
+.velotric-product__trust-icon img {
+  width: calc(48 * var(--rem));
+  height: auto;
+  display: block;
+}
+
+.velotric-product__trust-icon-title {
+  display: block;
+  font-size: calc(13 * var(--rem));
+  line-height: 1.2;
+  font-weight: 600;
+  color: #111111;
+}
+
 .velotric-product__buy-buttons {
   /* PayPal 加速结账只接受 25–55px，超出后按钮不再变高 */
   --flux-btn-h: clamp(25px, calc(48 * var(--rem)), 55px);
@@ -2018,6 +2052,18 @@ body.size-fit-drawer-open {
     padding: calc(16 * var(--rem));
     border-radius: calc(8 * var(--rem));
     font-size: calc(22 * var(--rem));
+  }
+
+  .velotric-product__trust-icons-grid {
+    gap: calc(12 * var(--rem));
+  }
+
+  .velotric-product__trust-icon img {
+    width: calc(100 * var(--rem));
+  }
+
+  .velotric-product__trust-icon-title {
+    font-size: calc(20 * var(--rem));
   }
 
   .velotric-product__buy-buttons {
