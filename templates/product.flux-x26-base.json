@@ -82,9 +82,9 @@
             "name_2": "FLUX X26 Pro",
             "description_2": "More power. More control. Instant acceleration.",
             "badge_2": "Recommended",
-            "product_3": "flux-t26",
-            "name_3": "FLUX T26",
-            "description_3": "Smart city entry. Everyday power and range.",
+            "product_3": "",
+            "name_3": "",
+            "description_3": "",
             "badge_3": "",
             "product_4": "",
             "name_4": "",
@@ -113,7 +113,7 @@
             "detail_3": "<p>Your Flux X26 Series is covered by our limited warranty:</p><ul><li><strong>Main Components</strong> (Frame, Fork, Handlebar, Motor, Battery, Controller, Display, etc.): <strong>1 Year</strong></li><li><strong>Main Accessories</strong> (Throttle, Lights, Brake Levers, Charger, Shock Absorber, etc.): <strong>6 Months</strong></li><li><strong>Wear & Tear Parts</strong> (Tires, Fenders, Seat, Foot Pegs, Plastic Parts, etc.): <strong>3 Months</strong></li></ul><p><strong>Battery Note:</strong><br/>Covered for 1 year or 500 charge cycles (whichever comes first), with capacity remaining at least 80% of rated capacity under normal conditions.</p><p>Warranty does not cover damage caused by improper use, accidents, or unauthorized modifications.<a href=\"/pages/warranty-policy\" title=\"Warranty Policy\">More</a></p>",
             "icon_4": "shopify://shop_images/2_2_2393cb17-6719-43ff-821d-2a7ba1d45a5b.png",
             "text_4": "Customer Support",
-            "detail_4": "<p>We’re here to help!</p><ul><li><strong>Email:</strong> <a href=\"mailto:support@aotos.com\" target=\"_blank\">support@aotos.com</a></li><li><strong>Tel:</strong> 888-330-3799</li><li><strong>Support Hours:</strong> Mon–Fri, 9:00 AM–6:00 PM ET</li></ul><p>For the fastest response, please include your order number when contacting us.<br/>Our team typically replies within 1 business day.</p>"
+            "detail_4": "<p>We’re here to help!</p><ul><li><strong>Email:</strong> <a href=\"mailto:support@aotos.com\" target=\"_blank\">support@aotos.com</a></li><li><strong>Tel:</strong> 888-330-3799</li><li><strong>Hours:</strong> Mon–Fri, 9:00 AM–6:00 PM ET</li></ul><p>For the fastest response, please include your order number when contacting us.<br/>Our team typically replies within 1 business day.</p>"
           }
         },
         "accordion_box": {
@@ -375,7 +375,8 @@
           "settings": {
             "label": "Motor",
             "value_1": "750W rated / 2000W Peak in Boost*",
-            "value_2": "750W rated / 1200W Peak in Boost*"
+            "value_2": "750W rated / 1200W Peak in Boost*",
+            "value_3": ""
           }
         },
         "spec_row_zVatzz": {
@@ -384,7 +385,8 @@
           "settings": {
             "label": "Motor",
             "value_1": "Rated 750W / Peak 2000W",
-            "value_2": "Rated 750W / Peak 1200W"
+            "value_2": "Rated 750W / Peak 1200W",
+            "value_3": ""
           }
         },
         "spec_row_PQRtQT": {
@@ -392,7 +394,8 @@
           "settings": {
             "label": "Torque",
             "value_1": "100 Nm",
-            "value_2": "80 Nm"
+            "value_2": "80 Nm",
+            "value_3": ""
           }
         },
         "spec_row_MJtbPQ": {
@@ -400,7 +403,8 @@
           "settings": {
             "label": "Top Speed",
             "value_1": "28 mph (in Boost*)",
-            "value_2": "28 mph (in Boost*)"
+            "value_2": "28 mph (in Boost*)",
+            "value_3": ""
           }
         },
         "spec_row_CycLHB": {
@@ -408,7 +412,8 @@
           "settings": {
             "label": "Battery",
             "value_1": "48V 21Ah battery",
-            "value_2": "48V 18Ah battery"
+            "value_2": "48V 18Ah battery",
+            "value_3": ""
           }
         },
         "spec_row_8WJmh3": {
@@ -416,7 +421,8 @@
           "settings": {
             "label": "Range",
             "value_1": "Up to 70 Miles",
-            "value_2": "Up to 50 Miles"
+            "value_2": "Up to 50 Miles",
+            "value_3": ""
           }
         },
         "spec_row_6kKbWk": {
@@ -424,7 +430,8 @@
           "settings": {
             "label": "Brakes",
             "value_1": "Hydraulic disc brakes",
-            "value_2": "Hydraulic disc brakes"
+            "value_2": "Hydraulic disc brakes",
+            "value_3": ""
           }
         },
         "spec_row_VBK8Y4": {
@@ -432,7 +439,8 @@
           "settings": {
             "label": "Suspension",
             "value_1": "Dual hydraulic suspension",
-            "value_2": "Dual hydraulic suspension"
+            "value_2": "Dual hydraulic suspension",
+            "value_3": ""
           }
         },
         "spec_row_QhwUiG": {
@@ -440,7 +448,8 @@
           "settings": {
             "label": "Tires",
             "value_1": "20 × 4.0 in fat tires",
-            "value_2": "20 × 4.0 in fat tires"
+            "value_2": "20 × 4.0 in fat tires",
+            "value_3": ""
           }
         },
         "spec_row_7bMHJN": {
@@ -448,7 +457,8 @@
           "settings": {
             "label": "Tire Pressure Monitoring",
             "value_1": "Yes",
-            "value_2": "No"
+            "value_2": "No",
+            "value_3": ""
           }
         },
         "spec_row_GywwnT": {
@@ -456,7 +466,8 @@
           "settings": {
             "label": "Under-Frame Storage Bag",
             "value_1": "Yes",
-            "value_2": "No"
+            "value_2": "No",
+            "value_3": ""
           }
         },
         "spec_row_NM64J9": {
@@ -464,7 +475,8 @@
           "settings": {
             "label": "Security",
             "value_1": "App + 4G GPS tracking* + physical lock",
-            "value_2": "App"
+            "value_2": "App",
+            "value_3": ""
           }
         },
         "spec_row_EiE8tJ": {
@@ -472,7 +484,8 @@
           "settings": {
             "label": "Connectivity",
             "value_1": "App support",
-            "value_2": "App support"
+            "value_2": "App support",
+            "value_3": ""
           }
         },
         "spec_row_Agcwpq": {
@@ -480,7 +493,8 @@
           "settings": {
             "label": "IP Rating",
             "value_1": "IPX5 vehicle / IPX6 battery",
-            "value_2": "IPX5"
+            "value_2": "IPX5",
+            "value_3": ""
           }
         },
         "spec_row_gT3bEF": {
@@ -488,7 +502,8 @@
           "settings": {
             "label": "Net Weight",
             "value_1": "97 lb / 45 kg",
-            "value_2": "97 lb / 45 kg"
+            "value_2": "97 lb / 45 kg",
+            "value_3": ""
           }
         },
         "spec_row_jbjHbF": {
@@ -496,7 +511,8 @@
           "settings": {
             "label": "Maximum Load",
             "value_1": "330 lb",
-            "value_2": "330 lb"
+            "value_2": "330 lb",
+            "value_3": ""
           }
         }
       },
@@ -535,6 +551,10 @@
         "product_2_image": "shopify://shop_images/eb03020-cropped.webp",
         "product_2_tagline": "Smooth, predictable power for everyday rides.",
         "product_2_url": "shopify://products/flux-x26",
+        "product_3_name": "",
+        "product_3_highlight": "",
+        "product_3_tagline": "",
+        "product_3_url": "",
         "bg_color": "#ffffff",
         "title_color": "#000000",
         "label_color": "#999999",
@@ -1222,12 +1242,12 @@
         },
         "faq_item_f6n3ff": {
           "type": "faq_item",
+          "disabled": true,
           "settings": {
             "question": "What is Shipping Protection?",
             "related_product": "",
             "answer": "<p>Shipping Protection is an optional coverage powered by Xcotton that gives you peace of mind when your order is on the way. It protects your package against common shipping risks.</p><p><strong>Shipping Protection cover:</strong></p><ul><li>Loss and damage in transit</li><li>Theft / Porch piracy</li><li>Mis-delivery by the courier</li><li>Quick and easy claims resolution</li></ul>"
-          },
-          "disabled": true
+          }
         }
       },
       "block_order": [
