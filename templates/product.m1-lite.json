@@ -54,13 +54,14 @@
         },
         "perks": {
           "type": "perks",
+          "disabled": true,
           "settings": {
             "icon_1": "shopify://shop_images/2_1.png",
             "text_1": "Fast Free Shipping in 2–5 Days",
             "detail_1": "<p>We offer <strong>free shipping</strong> on all orders to the contiguous 48 states in the United States.</p><ul><li>Processing time: 1–3 business days</li><li>Shipping time: usually 2–5 business days (depending on your location)</li><li>Carriers: UPS / FedEx</li></ul><p><strong>Note:</strong><br/>We currently do not ship to Alaska, Hawaii, Puerto Rico, PO Boxes, or APO/FPO addresses.<br/>You will receive a tracking number once your order ships.<a href=\"/pages/shipping-policy\" title=\"Shipping Policy\"> More</a></p>",
             "icon_2": "shopify://shop_images/2_3.png",
             "text_2": "30-Day Free Returns",
-            "detail_2": "<p>We offer a <strong>30-day free return policy</strong>.</p><ul><li>You may return the bike within 30 days of delivery if it is in new, unused condition with original packaging.</li><li>To start a return, please email us at <a href=\"mailto:support@aotos.com\" target=\"_blank\"><strong>support@aotos.com</strong></a> with your order number and photos/videos if needed.</li><li>We will review your request within 3 business days.</li></ul><p><strong>Return shipping:</strong></p><ul><li>If the return is due to our error (wrong item, quality issue, etc.), we cover the return shipping cost.</li><li>If the return is due to change of mind, the customer is responsible for return shipping.</li><li>No restocking fee will be charged.</li></ul><p>   <a href=\"/pages/return-refund-policy\" title=\"Return & Refund Policy\">  More</a></p>",
+            "detail_2": "<p>We offer a <strong>30-day free return policy</strong>.</p><ul><li>You may return the bike within 30 days of delivery if it is in new, unused condition with original packaging.</li><li>To start a return, please email us at <a href=\"mailto:support@aotos.com\" target=\"_blank\"><strong>support@aotos.com</strong></a> with your order number and photos/videos if needed.</li><li>We will review your request within 3 business days.</li></ul><p><strong>Return shipping:</strong></p><ul><li>If the return is due to our error (wrong item, quality issue, etc.), we cover the return shipping cost.</li><li>If the return is due to change of mind, the customer is responsible for return shipping.</li><li>No restocking fee will be charged.</li></ul><p>&nbsp; &nbsp;<a href=\"/pages/return-refund-policy\" title=\"Return & Refund Policy\"> &nbsp;More</a></p>",
             "icon_3": "shopify://shop_images/2_923b391a-8035-4372-a1e6-b88e92751e4f.png",
             "text_3": "1-Year Warranty",
             "detail_3": "<p>Your Flux X26 Series is covered by our limited warranty:</p><ul><li><strong>Main Components</strong> (Frame, Fork, Handlebar, Motor, Battery, Controller, Display, etc.): <strong>1 Year</strong></li><li><strong>Main Accessories</strong> (Throttle, Lights, Brake Levers, Charger, Shock Absorber, etc.): <strong>6 Months</strong></li><li><strong>Wear & Tear Parts</strong> (Tires, Fenders, Seat, Foot Pegs, Plastic Parts, etc.): <strong>3 Months</strong></li></ul><p><strong>Battery Note:</strong><br/>Covered for 1 year or 500 charge cycles (whichever comes first), with capacity remaining at least 80% of rated capacity under normal conditions.</p><p>Warranty does not cover damage caused by improper use, accidents, or unauthorized modifications.<a href=\"/pages/warranty-policy\" title=\"Warranty Policy\">More</a></p>",
@@ -152,6 +153,13 @@
       "type": "image-banner",
       "settings": {
         "image": "shopify://shop_images/7193285d-618d-43b5-9aff-45d9effb53ef.__CR0_0_1464_600_PT0_SX1464_V1.jpg",
+        "heading": "",
+        "heading_color": "#000000",
+        "bg_color": "#ffffff",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
         "image_height": "adapt"
       }
     },
@@ -159,6 +167,13 @@
       "type": "image-banner",
       "settings": {
         "image": "shopify://shop_images/db1e6e6e-cfd8-4596-90b2-83efc696e56a.__CR0_0_1464_600_PT0_SX1464_V1.jpg",
+        "heading": "",
+        "heading_color": "#000000",
+        "bg_color": "#ffffff",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
         "image_height": "adapt"
       }
     },
@@ -166,6 +181,13 @@
       "type": "image-banner",
       "settings": {
         "image": "shopify://shop_images/986ed8db-a789-4081-b53c-23e2d112714f.__CR0_0_1464_600_PT0_SX1464_V1.jpg",
+        "heading": "",
+        "heading_color": "#000000",
+        "bg_color": "#ffffff",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
         "image_height": "adapt"
       }
     },
@@ -173,6 +195,13 @@
       "type": "image-banner",
       "settings": {
         "image": "shopify://shop_images/9e7bee2c-535d-4c50-ad09-35aaed5389b6.__CR0_0_1464_600_PT0_SX1464_V1.jpg",
+        "heading": "",
+        "heading_color": "#000000",
+        "bg_color": "#ffffff",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
         "image_height": "adapt"
       }
     },
@@ -180,6 +209,13 @@
       "type": "image-banner",
       "settings": {
         "image": "shopify://shop_images/e0fd828e-b125-4c21-ab56-9688f100b98e.__CR0_0_1464_600_PT0_SX1464_V1.jpg",
+        "heading": "",
+        "heading_color": "#000000",
+        "bg_color": "#ffffff",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
         "image_height": "adapt"
       }
     },
@@ -187,6 +223,13 @@
       "type": "image-banner",
       "settings": {
         "image": "shopify://shop_images/14512854-fe79-47d0-afc0-67a122447be9.__CR0_0_1464_600_PT0_SX1464_V1.jpg",
+        "heading": "",
+        "heading_color": "#000000",
+        "bg_color": "#ffffff",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
         "image_height": "adapt"
       }
     },
@@ -194,6 +237,13 @@
       "type": "image-banner",
       "settings": {
         "image": "shopify://shop_images/26f560f7-b221-4c7c-a927-76081b6f4f2b.__CR0_0_1464_600_PT0_SX1464_V1.jpg",
+        "heading": "",
+        "heading_color": "#000000",
+        "bg_color": "#ffffff",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
         "image_height": "adapt"
       }
     },
@@ -202,6 +252,13 @@
       "disabled": true,
       "settings": {
         "image": "shopify://shop_images/M1-20.jpg",
+        "heading": "",
+        "heading_color": "#000000",
+        "bg_color": "#ffffff",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
         "image_height": "adapt"
       }
     }
