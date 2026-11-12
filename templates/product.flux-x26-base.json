@@ -107,9 +107,9 @@
             "detail_1": "<p>We offer <strong>free shipping</strong> on all orders to the contiguous 48 states in the United States.</p><ul><li>Processing time: 1–3 business days</li><li>Shipping time: usually 2–5 business days (depending on your location)</li><li>Carriers: UPS / FedEx/ Truck Delivery</li></ul><p><strong>Note:</strong><br/>We currently do not ship to Alaska, Hawaii, Puerto Rico, PO Boxes, or APO/FPO addresses.<br/>You will receive a tracking number once your order ships.<a href=\"/pages/shipping-policy\" title=\"Shipping Policy\"> More</a></p>",
             "icon_2": "shopify://shop_images/2_3.png",
             "text_2": "30-Day Free Returns",
-            "detail_2": "<p>We offer a <strong>30-day free return policy</strong>.</p><ul><li>You may return the bike within 30 days of delivery if it is in new, unused condition with original packaging.</li><li>To start a return, please email us at <a href=\"mailto:support@aotos.com\" target=\"_blank\"><strong>support@aotos.com</strong></a> with your order number and photos/videos if needed.</li><li>We will review your request within 3 business days.</li></ul><p><strong>Return shipping:</strong></p><ul><li>If the return is due to our error (wrong item, quality issue, etc.), we cover the return shipping cost.</li><li>If the return is due to change of mind, the customer is responsible for return shipping.</li><li>No restocking fee will be charged.</li></ul><p>   <a href=\"/pages/return-refund-policy\" title=\"Return & Refund Policy\">  More</a></p>",
+            "detail_2": "<p>We offer a <strong>30-day free return policy</strong>.</p><ul><li>You may return the bike within 30 days of delivery if it is in new, unused condition with original packaging.</li><li>To start a return, please email us at <a href=\"mailto:support@aotos.com\" target=\"_blank\"><strong>support@aotos.com</strong></a> with your order number and photos/videos if needed.</li><li>We will review your request within 3 business days.</li></ul><p><strong>Return shipping:</strong></p><ul><li>If the return is due to our error (wrong item, quality issue, etc.), we cover the return shipping cost.</li><li>If the return is due to change of mind, the customer is responsible for return shipping.</li><li>No restocking fee will be charged.</li></ul><p>&nbsp; &nbsp;<a href=\"/pages/return-refund-policy\" title=\"Return & Refund Policy\"> &nbsp;More</a></p>",
             "icon_3": "shopify://shop_images/2_923b391a-8035-4372-a1e6-b88e92751e4f.png",
-            "text_3": "1-Year Warranty",
+            "text_3": "2-Year Warranty",
             "detail_3": "<p>Your Flux X26 Series is covered by our limited warranty:</p><ul><li><strong>Main Components</strong> (Frame, Fork, Handlebar, Motor, Battery, Controller, Display, etc.): <strong>1 Year</strong></li><li><strong>Main Accessories</strong> (Throttle, Lights, Brake Levers, Charger, Shock Absorber, etc.): <strong>6 Months</strong></li><li><strong>Wear & Tear Parts</strong> (Tires, Fenders, Seat, Foot Pegs, Plastic Parts, etc.): <strong>3 Months</strong></li></ul><p><strong>Battery Note:</strong><br/>Covered for 1 year or 500 charge cycles (whichever comes first), with capacity remaining at least 80% of rated capacity under normal conditions.</p><p>Warranty does not cover damage caused by improper use, accidents, or unauthorized modifications.<a href=\"/pages/warranty-policy\" title=\"Warranty Policy\">More</a></p>",
             "icon_4": "shopify://shop_images/2_2_2393cb17-6719-43ff-821d-2a7ba1d45a5b.png",
             "text_4": "Customer Support",
@@ -287,16 +287,6 @@
     "flux_features": {
       "type": "aotos-flux-features",
       "blocks": {
-        "card_1": {
-          "type": "card",
-          "settings": {
-            "video": "shopify://files/videos/pro1.mp4",
-            "video_url": "",
-            "pre_heading": "Boost Mode",
-            "heading": "1200W Peak Power. Smooth, Responsive Control.",
-            "description": "<p>Powered by a 750W rated motor with up to 1200W peak output in Boost Mode, the FLUX X26 delivers smooth acceleration and responsive performance for everyday rides.</p>"
-          }
-        },
         "card_4": {
           "type": "card",
           "settings": {
@@ -317,14 +307,14 @@
             "description": "<p>Connect your FLUX X26 to the AOTOS app for convenient access to supported ride information and bike settings, bringing smart functionality to your everyday riding experience.</p>"
           }
         },
-        "card_2": {
+        "card_1": {
           "type": "card",
           "settings": {
-            "video": "shopify://files/videos/pro4.mp4",
+            "video": "shopify://files/videos/pro1.mp4",
             "video_url": "",
-            "pre_heading": "6061-T6 Aerospace-Grade Frame",
-            "heading": "Strength Meets Precision",
-            "description": "<p>Built with a 6061-T6 aluminum frame, the FLUX X26 combines durability, stability, and futuristic styling for a confident everyday riding experience.</p>"
+            "pre_heading": "Boost Mode",
+            "heading": "1200W Peak Power. Smooth, Responsive Control.",
+            "description": "<p>Powered by a 750W rated motor with up to 1200W peak output in Boost Mode, the FLUX X26 delivers smooth acceleration and responsive performance for everyday rides.</p>"
           }
         },
         "card_3": {
@@ -345,6 +335,16 @@
             "pre_heading": "5.5-Inch TFT Smart Display",
             "heading": "Navigation at a Glance",
             "description": "<p>The full-color 5.5-inch TFT display shows speed, battery level, ride mode, range, and alerts, with turn-by-turn navigation synced directly from your phone.</p>"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "video": "shopify://files/videos/pro4.mp4",
+            "video_url": "",
+            "pre_heading": "6061-T6 Aerospace-Grade Frame",
+            "heading": "Strength Meets Precision",
+            "description": "<p>Built with a 6061-T6 aluminum frame, the FLUX X26 combines durability, stability, and futuristic styling for a confident everyday riding experience.</p>"
           }
         }
       },
