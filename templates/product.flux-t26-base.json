@@ -539,8 +539,8 @@
           "settings": {
             "label": "IP Rating",
             "value_1": "IPX5",
-            "value_2": "IPX5",
-            "value_3": "IPX5 vehicle / IPX6 battery"
+            "value_2": "IPX6",
+            "value_3": "IPX6"
           }
         },
         "spec_row_gT3bEF": {
