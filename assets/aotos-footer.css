@@ -94,6 +94,7 @@
 
 .aotos-footer__social {
   display: flex;
+  order: 2;
   gap: calc(10 * var(--rem));
   margin: 0;
   padding: 0;
@@ -109,6 +110,7 @@
   border-radius: 50%;
   color: #000;
   background: #fff;
+  transition: background-color 0.2s ease;
 }
 
 .aotos-footer__social .icon {
@@ -118,6 +120,7 @@
 
 .aotos-footer__form {
   width: 100%;
+  order: 1;
 }
 
 .aotos-footer__field {
@@ -234,6 +237,7 @@
 .aotos-footer__meta {
   display: flex;
   flex-direction: column;
+  order: 3;
   gap: calc(8 * var(--rem));
 }
 
@@ -321,6 +325,10 @@
   .aotos-footer__note a:hover {
     color: #fff;
     text-decoration: underline;
+  }
+
+  .aotos-footer__social a:hover {
+    background: #e6e6e6;
   }
 }
 
