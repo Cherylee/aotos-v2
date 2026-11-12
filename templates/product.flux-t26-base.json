@@ -502,9 +502,9 @@
           "type": "spec_row",
           "settings": {
             "label": "Unlock",
-            "value_1": "NFC / proximity / passcode",
-            "value_2": "NFC / proximity / passcode",
-            "value_3": "NFC / proximity / passcode"
+            "value_1": "NFC / Proximity / Passcode",
+            "value_2": "Proximity / Passcode",
+            "value_3": "Proximity / Passcode"
           }
         },
         "spec_row_NM64J9": {
