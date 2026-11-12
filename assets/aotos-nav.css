@@ -540,7 +540,7 @@
     top: var(--aotos-drawer-top, 0px);
     left: 0;
     z-index: 31;
-    display: flex;
+    display: block;
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
@@ -706,13 +706,15 @@
   .aotos-nav__mega {
     display: block;
     width: 100%;
-    min-height: 0;
+    height: auto;
+    min-height: auto;
     padding: 0;
   }
 
   .aotos-nav__mega-list {
-    display: flex;
-    flex-direction: column;
+    display: block;
+    height: auto;
+    min-height: auto;
     gap: 0;
     min-width: 0;
     padding: 0;
@@ -752,22 +754,27 @@
   }
 
   .aotos-nav.is-drill-products .aotos-nav__mega-item.is-drill .aotos-nav__mega-products {
-    display: flex;
+    display: block;
     position: static;
     width: 100%;
+    height: auto;
+    min-height: auto;
     margin: 0;
+    overflow: visible;
   }
 
-  .aotos-nav__list > .aotos-nav__item,
-  .aotos-nav__mega-list > .aotos-nav__mega-item,
-  .aotos-nav__mega-products,
-  .aotos-nav__mega-products > .aotos-nav__mega-grid,
-  .aotos-nav__mega-products > .aotos-nav__mega-cta {
-    flex-shrink: 0;
+  .aotos-nav__mega-products > .aotos-nav__mega-grid {
+    height: auto;
+    min-height: auto;
+    overflow: visible;
   }
 
   .aotos-nav__mega-products > .aotos-nav__mega-cta {
-    margin-bottom: calc(40 * var(--rem));
+    display: flex;
+    position: relative;
+    width: max-content;
+    max-width: 100%;
+    margin: calc(32 * var(--rem)) auto calc(48 * var(--rem));
   }
 
   .aotos-nav__mega-grid {
