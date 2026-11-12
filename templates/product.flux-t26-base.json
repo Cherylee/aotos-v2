@@ -556,9 +556,9 @@
           "type": "spec_row",
           "settings": {
             "label": "Maximum Load",
-            "value_1": "265 lb",
-            "value_2": "330 lb",
-            "value_3": "330 lb"
+            "value_1": "265 lbs",
+            "value_2": "330 lbs",
+            "value_3": "330 lbs"
           }
         }
       },
