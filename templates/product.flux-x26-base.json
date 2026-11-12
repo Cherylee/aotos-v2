@@ -675,7 +675,7 @@
           "type": "spec_item",
           "settings": {
             "label": "Bike Weight",
-            "value": "<p>97 lb / 45 kg</p>"
+            "value": "<p>104 lbs / 47 kg</p>"
           }
         },
         "spec_7": {
@@ -731,7 +731,7 @@
           "type": "spec_item",
           "settings": {
             "label": "Maximum Load",
-            "value": "<p>330 lb</p>"
+            "value": "<p>330 lbs</p>"
           }
         },
         "spec_item_4WUrE9": {
