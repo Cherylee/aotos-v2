@@ -13,10 +13,30 @@
       "type": "service-repair-banner",
       "name": "Service Repair Banner",
       "settings": {
+        "layout": "banner",
+        "copy_padding_x": 0,
+        "copy_align": "center",
+        "show_breadcrumb": false,
+        "crumb_home": "Home",
+        "crumb_parent_label": "",
+        "crumb_parent_url": "",
+        "crumb_current": "",
+        "crumb_color": "#999999",
+        "crumb_current_color": "#000000",
+        "crumb_margin_top": 40,
+        "crumb_margin_bottom": 40,
+        "eyebrow": "",
+        "eyebrow_color": "#000000",
+        "eyebrow_font_size_pc": 14,
+        "eyebrow_font_size_mob": 20,
         "heading": "SERVICE & REPAIR",
         "heading_color": "#000000",
+        "heading_font_size_pc": 40,
+        "heading_font_size_mob": 48,
         "text": "Get online help, book a repair, or find an AOTOS service location near you.",
         "text_color": "#999999",
+        "text_font_size_pc": 14,
+        "text_font_size_mob": 20,
         "primary_label": "GET ONLINE HELP",
         "primary_link": "",
         "secondary_label": "BOOK A REPAIR",
@@ -24,12 +44,17 @@
         "image_ratio": "5/2",
         "image": "shopify://shop_images/eb02-bike-alt.webp",
         "image_alt": "AOTOS e-bike in a service workshop",
+        "store_link_1": "",
+        "store_alt_1": "Download on the App Store",
+        "store_link_2": "",
+        "store_alt_2": "Get it on Google Play",
         "image_position": "right center",
         "fallback_asset": "service-repair-banner.png",
         "accent_color": "#ff6501",
         "background_color": "#f5f5f5",
         "padding_top": 80,
         "padding_bottom": 80,
+        "padding_top_mobile": 88,
         "padding_bottom_mobile": 88
       }
     },
@@ -127,6 +152,10 @@
       "settings": {
         "globo_form_id": "MTYzNDk3",
         "form_liquid": "",
+        "show_form_note": false,
+        "form_note": "By submitting this form, you agree to be contacted regarding your repair request.",
+        "form_note_align": "left",
+        "form_note_color": "#666666",
         "background_color": "#f5f5f5",
         "padding_top": 40,
         "padding_bottom": 40,
@@ -183,7 +212,7 @@
           "settings": {
             "icon_key": "shield",
             "icon": "shopify://shop_images/3.svg",
-            "title": "1-Year Warranty",
+            "title": "2-Year Warranty",
             "link": ""
           }
         },
@@ -280,6 +309,8 @@
       "type": "main-page",
       "disabled": true,
       "settings": {
+        "show_title": true,
+        "form_title_section": false,
         "padding_top": 28,
         "padding_bottom": 28
       }
