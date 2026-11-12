@@ -758,6 +758,18 @@
     margin: 0;
   }
 
+  .aotos-nav__list > .aotos-nav__item,
+  .aotos-nav__mega-list > .aotos-nav__mega-item,
+  .aotos-nav__mega-products,
+  .aotos-nav__mega-products > .aotos-nav__mega-grid,
+  .aotos-nav__mega-products > .aotos-nav__mega-cta {
+    flex-shrink: 0;
+  }
+
+  .aotos-nav__mega-products > .aotos-nav__mega-cta {
+    margin-bottom: calc(40 * var(--rem));
+  }
+
   .aotos-nav__mega-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: calc(24 * var(--rem));

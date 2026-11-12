@@ -307,11 +307,22 @@
                   if (!root) return;
                   var body = root.querySelector('.velotric-product__text-body');
                   var fit = function () {
-                    root.classList.toggle('is-clamped', body.scrollHeight > body.clientHeight + 1);
+                    var cs = window.getComputedStyle(body);
+                    var max = parseFloat(cs.maxHeight);
+                    var line = parseFloat(cs.lineHeight);
+                    if (!(max > 0) || !(body.clientHeight > 0)) {
+                      root.classList.remove('is-clamped');
+                      return;
+                    }
+                    var slack = Math.max(2, (line > 0 ? line : 0) * 0.5);
+                    root.classList.toggle('is-clamped', body.scrollHeight > max + slack);
                   };
                   fit();
                   window.addEventListener('resize', fit);
+                  window.addEventListener('load', fit);
+                  if (window.ResizeObserver) new ResizeObserver(fit).observe(body);
                   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+                  requestAnimationFrame(fit);
                 })();
               </script>
             {%- elsif block.settings.text != blank -%}

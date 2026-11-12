@@ -309,6 +309,13 @@
 
     #Blog-{{ section.id }} .blog-list__nav {
       gap: calc(28 * var(--rem));
+      overflow-y: hidden;
+      overscroll-behavior-x: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    #Blog-{{ section.id }} .blog-list__tab {
+      margin-bottom: 0;
     }
 
     #Blog-{{ section.id }} .blog-list__main {
