@@ -326,21 +326,17 @@
   }
 
   {%- if sc_height == 'adapt' -%}
-    #sc-hero-{{ section.id }} .sc-hero__slide.is-active {
-      position: relative;
-      inset: auto;
-    }
-
-    #sc-hero-{{ section.id }} .sc-hero__media {
-      position: relative;
-      inset: auto;
-      height: auto;
-      {%- if sc_lock_media and sc_adapt_ratio != blank -%}
-        aspect-ratio: {{ sc_adapt_ratio }};
-      {%- endif -%}
-    }
-
     {%- if sc_lock_media -%}
+      #sc-hero-{{ section.id }} {
+        aspect-ratio: {{ sc_adapt_ratio }};
+      }
+
+      #sc-hero-{{ section.id }} .sc-hero__slide.is-active {
+        position: absolute;
+        inset: 0;
+      }
+
+      #sc-hero-{{ section.id }} .sc-hero__media,
       #sc-hero-{{ section.id }} .sc-hero__media picture,
       #sc-hero-{{ section.id }} .sc-hero__media img,
       #sc-hero-{{ section.id }} .sc-hero__media video {
@@ -351,6 +347,17 @@
         object-fit: cover;
       }
     {%- else -%}
+    #sc-hero-{{ section.id }} .sc-hero__slide.is-active {
+      position: relative;
+      inset: auto;
+    }
+
+    #sc-hero-{{ section.id }} .sc-hero__media {
+      position: relative;
+      inset: auto;
+      height: auto;
+    }
+
       #sc-hero-{{ section.id }} .sc-hero__media picture,
       #sc-hero-{{ section.id }} .sc-hero__media img {
         position: relative;
@@ -409,21 +416,17 @@
         min-height: 0;
       }
 
-      #sc-hero-{{ section.id }} .sc-hero__slide.is-active {
-        position: relative;
-        inset: auto;
-      }
-
-      #sc-hero-{{ section.id }} .sc-hero__media {
-        position: relative;
-        inset: auto;
-        height: auto;
-        {%- if sc_lock_media and sc_adapt_ratio_mob != blank -%}
-          aspect-ratio: {{ sc_adapt_ratio_mob }};
-        {%- endif -%}
-      }
-
       {%- if sc_lock_media -%}
+        #sc-hero-{{ section.id }} {
+          aspect-ratio: {{ sc_adapt_ratio_mob }};
+        }
+
+        #sc-hero-{{ section.id }} .sc-hero__slide.is-active {
+          position: absolute;
+          inset: 0;
+        }
+
+        #sc-hero-{{ section.id }} .sc-hero__media,
         #sc-hero-{{ section.id }} .sc-hero__media picture,
         #sc-hero-{{ section.id }} .sc-hero__media img,
         #sc-hero-{{ section.id }} .sc-hero__media video {
@@ -434,6 +437,16 @@
           object-fit: cover;
         }
       {%- else -%}
+      #sc-hero-{{ section.id }} .sc-hero__slide.is-active {
+        position: relative;
+        inset: auto;
+      }
+
+      #sc-hero-{{ section.id }} .sc-hero__media {
+        position: relative;
+        inset: auto;
+        height: auto;
+      }
         #sc-hero-{{ section.id }} .sc-hero__media picture,
         #sc-hero-{{ section.id }} .sc-hero__media img {
           position: relative;

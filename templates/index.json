@@ -182,9 +182,9 @@
         "slide_t26launch": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/flux_t26_banner01.webp",
+            "image": "",
             "video": "shopify://files/videos/FLUX T26 VEDIO H.mp4",
-            "image_mobile": "shopify://shop_images/flux_t26_banner02.webp",
+            "image_mobile": "",
             "video_mobile": "shopify://files/videos/flux t26 s.mp4",
             "image_alt": "",
             "show_accent": false,
