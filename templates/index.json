@@ -15,9 +15,7 @@
         "slide_t26launch": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/FLUXT26_11zon_1_71081d83-ab15-48ed-a844-0cfe8ae6abd4.webp",
             "video": "shopify://files/videos/FLUX T26 VEDIO H.mp4",
-            "image_mobile": "shopify://shop_images/a_11zon_1.webp",
             "video_mobile": "shopify://files/videos/flux t26 s.mp4",
             "image_alt": "",
             "show_accent": false,
