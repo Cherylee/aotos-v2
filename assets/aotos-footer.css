@@ -250,7 +250,7 @@
   margin-top: 0;
   padding-top: calc(28 * var(--rem));
   padding-bottom: calc(28 * var(--rem));
-  border-top: 1px solid #4f4f4f;
+  border-top: 1px solid #272727;
 }
 
 .aotos-footer__apps-group {
@@ -304,8 +304,6 @@
 
 .aotos-footer__copy {
   margin: 0;
-  padding-top: calc(20 * var(--rem));
-  border-top: 1px solid #4f4f4f;
   color: #b2b2b2;
   font-size: calc(12 * var(--rem));
   line-height: 1.4;
