@@ -4,7 +4,16 @@
   assign sc_height_mob = section.settings.height_mobile | default: '480'
   assign sc_adapt_ratio = blank
   assign sc_adapt_ratio_mob = blank
-  if sc_height == 'adapt' or sc_height_mob == 'adapt'
+  assign sc_lock_media = false
+  if section.id contains 'safety_certified_hero_QW8qWE'
+    assign sc_lock_media = true
+    if sc_height == 'adapt'
+      assign sc_adapt_ratio = '2.4'
+    endif
+    if sc_height_mob == 'adapt'
+      assign sc_adapt_ratio_mob = '0.75'
+    endif
+  elsif sc_height == 'adapt' or sc_height_mob == 'adapt'
     for block in section.blocks
       if sc_adapt_ratio == blank and block.settings.image != blank
         assign sc_adapt_ratio = block.settings.image.aspect_ratio
@@ -104,6 +113,17 @@
     opacity: 1;
     z-index: 1;
     pointer-events: auto;
+  }
+
+  #sc-hero-{{ section.id }} .sc-hero__slide.is-leaving {
+    opacity: 1;
+    z-index: 2;
+    pointer-events: none;
+    transition: opacity 0.65s ease;
+  }
+
+  #sc-hero-{{ section.id }} .sc-hero__slide.is-leaving.is-fade {
+    opacity: 0;
   }
 
   #sc-hero-{{ section.id }} .sc-hero__media,
@@ -315,42 +335,57 @@
       position: relative;
       inset: auto;
       height: auto;
-    }
-
-    #sc-hero-{{ section.id }} .sc-hero__media picture,
-    #sc-hero-{{ section.id }} .sc-hero__media img {
-      position: relative;
-      inset: auto;
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-    }
-
-    #sc-hero-{{ section.id }} .sc-hero__media video {
-      object-fit: contain;
-    }
-
-    #sc-hero-{{ section.id }} .sc-hero__media:not(:has(img)) video {
-      position: relative;
-      inset: auto;
-      width: 100%;
-      height: auto;
-    }
-
-    {%- if sc_adapt_ratio != blank -%}
-      #sc-hero-{{ section.id }} .sc-hero__media:has(video) {
+      {%- if sc_lock_media and sc_adapt_ratio != blank -%}
         aspect-ratio: {{ sc_adapt_ratio }};
-      }
+      {%- endif -%}
+    }
 
-      #sc-hero-{{ section.id }} .sc-hero__media:has(video) picture,
-      #sc-hero-{{ section.id }} .sc-hero__media:has(video) img,
-      #sc-hero-{{ section.id }} .sc-hero__media:has(video) video {
+    {%- if sc_lock_media -%}
+      #sc-hero-{{ section.id }} .sc-hero__media picture,
+      #sc-hero-{{ section.id }} .sc-hero__media img,
+      #sc-hero-{{ section.id }} .sc-hero__media video {
         position: absolute;
         inset: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
       }
+    {%- else -%}
+      #sc-hero-{{ section.id }} .sc-hero__media picture,
+      #sc-hero-{{ section.id }} .sc-hero__media img {
+        position: relative;
+        inset: auto;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+      }
+
+      #sc-hero-{{ section.id }} .sc-hero__media video {
+        object-fit: contain;
+      }
+
+      #sc-hero-{{ section.id }} .sc-hero__media:not(:has(img)) video {
+        position: relative;
+        inset: auto;
+        width: 100%;
+        height: auto;
+      }
+
+      {%- if sc_adapt_ratio != blank -%}
+        #sc-hero-{{ section.id }} .sc-hero__media:has(video) {
+          aspect-ratio: {{ sc_adapt_ratio }};
+        }
+
+        #sc-hero-{{ section.id }} .sc-hero__media:has(video) picture,
+        #sc-hero-{{ section.id }} .sc-hero__media:has(video) img,
+        #sc-hero-{{ section.id }} .sc-hero__media:has(video) video {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      {%- endif -%}
     {%- endif -%}
 
     #sc-hero-{{ section.id }} .sc-hero__inner {
@@ -383,42 +418,57 @@
         position: relative;
         inset: auto;
         height: auto;
-      }
-
-      #sc-hero-{{ section.id }} .sc-hero__media picture,
-      #sc-hero-{{ section.id }} .sc-hero__media img {
-        position: relative;
-        inset: auto;
-        width: 100%;
-        height: auto;
-        object-fit: contain;
-      }
-
-      #sc-hero-{{ section.id }} .sc-hero__media video {
-        object-fit: contain;
-      }
-
-      #sc-hero-{{ section.id }} .sc-hero__media:not(:has(img)) video {
-        position: relative;
-        inset: auto;
-        width: 100%;
-        height: auto;
-      }
-
-      {%- if sc_adapt_ratio_mob != blank -%}
-        #sc-hero-{{ section.id }} .sc-hero__media:has(video) {
+        {%- if sc_lock_media and sc_adapt_ratio_mob != blank -%}
           aspect-ratio: {{ sc_adapt_ratio_mob }};
-        }
+        {%- endif -%}
+      }
 
-        #sc-hero-{{ section.id }} .sc-hero__media:has(video) picture,
-        #sc-hero-{{ section.id }} .sc-hero__media:has(video) img,
-        #sc-hero-{{ section.id }} .sc-hero__media:has(video) video {
+      {%- if sc_lock_media -%}
+        #sc-hero-{{ section.id }} .sc-hero__media picture,
+        #sc-hero-{{ section.id }} .sc-hero__media img,
+        #sc-hero-{{ section.id }} .sc-hero__media video {
           position: absolute;
           inset: 0;
           width: 100%;
           height: 100%;
           object-fit: cover;
         }
+      {%- else -%}
+        #sc-hero-{{ section.id }} .sc-hero__media picture,
+        #sc-hero-{{ section.id }} .sc-hero__media img {
+          position: relative;
+          inset: auto;
+          width: 100%;
+          height: auto;
+          object-fit: contain;
+        }
+
+        #sc-hero-{{ section.id }} .sc-hero__media video {
+          object-fit: contain;
+        }
+
+        #sc-hero-{{ section.id }} .sc-hero__media:not(:has(img)) video {
+          position: relative;
+          inset: auto;
+          width: 100%;
+          height: auto;
+        }
+
+        {%- if sc_adapt_ratio_mob != blank -%}
+          #sc-hero-{{ section.id }} .sc-hero__media:has(video) {
+            aspect-ratio: {{ sc_adapt_ratio_mob }};
+          }
+
+          #sc-hero-{{ section.id }} .sc-hero__media:has(video) picture,
+          #sc-hero-{{ section.id }} .sc-hero__media:has(video) img,
+          #sc-hero-{{ section.id }} .sc-hero__media:has(video) video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        {%- endif -%}
       {%- endif -%}
 
       #sc-hero-{{ section.id }} .sc-hero__inner {
@@ -569,7 +619,8 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    #sc-hero-{{ section.id }} .sc-hero__slide {
+    #sc-hero-{{ section.id }} .sc-hero__slide,
+    #sc-hero-{{ section.id }} .sc-hero__slide.is-leaving {
       transition: none;
     }
 
@@ -1007,8 +1058,29 @@
       };
 
       var go = function (next) {
-        index = (next + slides.length) % slides.length;
+        var target = (next + slides.length) % slides.length;
+        var current = slides[index];
+        if (current && target !== index && !reduce) {
+          slides.forEach(function (slide) {
+            if (slide !== current) slide.classList.remove('is-leaving', 'is-fade');
+          });
+          current.classList.remove('is-active');
+          current.classList.add('is-leaving');
+          void current.offsetWidth;
+          current.classList.add('is-fade');
+          var finish = function (event) {
+            if (event && (event.target !== current || event.propertyName !== 'opacity')) return;
+            current.classList.remove('is-leaving', 'is-fade');
+            current.removeEventListener('transitionend', finish);
+          };
+          current.addEventListener('transitionend', finish);
+          window.setTimeout(function () {
+            current.classList.remove('is-leaving', 'is-fade');
+          }, 800);
+        }
+        index = target;
         slides.forEach(function (slide, i) {
+          if (slide.classList.contains('is-leaving')) return;
           slide.classList.toggle('is-active', i === index);
         });
         dots.forEach(function (dot, i) {
