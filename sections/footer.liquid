@@ -140,13 +140,13 @@
             <label class="aotos-footer__consent">
               <input type="checkbox" name="contact[accepts_marketing]" value="true" required>
               <span>
-                {{ section.settings.consent_before | escape }}
+                {{ section.settings.consent_before | escape }}{{ ' ' }}
                 {%- if section.settings.privacy_link != blank -%}
                   <a href="{{ section.settings.privacy_link }}">{{ section.settings.privacy_label | escape }}</a>
                 {%- else -%}
                   {{ section.settings.privacy_label | escape }}
                 {%- endif -%}
-                {{ section.settings.consent_middle | escape }}
+                {{ ' ' }}{{ section.settings.consent_middle | escape }}{{ ' ' }}
                 {%- if section.settings.terms_link != blank -%}
                   <a href="{{ section.settings.terms_link }}">{{ section.settings.terms_label | escape }}</a>{{ section.settings.consent_after | escape }}
                 {%- else -%}
