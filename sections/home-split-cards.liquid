@@ -14,13 +14,15 @@
   #HomeSplit-{{ section.id }} .home-split__row {
     display: grid;
     grid-template-columns: repeat({{ section.blocks.size | at_least: 1 | at_most: 2 }}, minmax(0, 1fr));
+    grid-template-rows: auto auto auto;
     gap: calc(16 * var(--rem));
   }
 
   #HomeSplit-{{ section.id }} .home-split__card {
     position: relative;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 3;
     min-width: 0;
     padding: calc(32 * var(--rem)) calc(20 * var(--rem)) calc(28 * var(--rem)) calc(28 * var(--rem));
     background: #f5f5f5;
@@ -30,11 +32,11 @@
   }
 
   #HomeSplit-{{ section.id }} .home-split__copy {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 3;
     align-self: stretch;
-    min-height: 100%;
+    min-width: 0;
     padding-right: calc(392 * var(--rem));
   }
 
@@ -62,8 +64,8 @@
     display: flex;
     flex-direction: column;
     gap: calc(14 * var(--rem));
-    margin: auto 0 0;
-    padding: calc(22 * var(--rem)) 0 0;
+    margin: 0;
+    padding: calc(8 * var(--rem)) 0 0 0;
     list-style: none;
   }
 
@@ -126,7 +128,69 @@
 
   #HomeSplit-{{ section.id }} .home-split__actions {
     flex: 0 0 auto;
-    margin-top: calc(22 * var(--rem));
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__stores {
+    display: flex;
+    align-items: center;
+    gap: calc(10 * var(--rem));
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__store {
+    display: block;
+    height: calc(40 * var(--rem));
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__store img {
+    display: block;
+    width: auto;
+    height: 100%;
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__more {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(6 * var(--rem));
+    margin-top: calc(12 * var(--rem));
+    color: #000000;
+    font-size: calc(14 * var(--rem));
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none;
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__more-text {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s ease;
+  }
+
+  #HomeSplit-{{ section.id }} .home-split__more-arrow {
+    color: var(--aotos-theme-color, #ff6501);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @media (hover: hover) {
+    #HomeSplit-{{ section.id }} .home-split__more:hover .home-split__more-text {
+      color: var(--aotos-theme-color, #ff6501);
+      transform: translateX(-0.4em);
+    }
+
+    #HomeSplit-{{ section.id }} .home-split__more:hover .home-split__more-arrow {
+      transform: translateX(0.45em);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #HomeSplit-{{ section.id }} .home-split__more-text,
+    #HomeSplit-{{ section.id }} .home-split__more-arrow {
+      transition: none;
+    }
+
+    #HomeSplit-{{ section.id }} .home-split__more:hover .home-split__more-text,
+    #HomeSplit-{{ section.id }} .home-split__more:hover .home-split__more-arrow {
+      transform: none;
+    }
   }
 
   #HomeSplit-{{ section.id }} .home-split__media {
@@ -182,6 +246,7 @@
 
     #HomeSplit-{{ section.id }} .home-split__row {
       grid-template-columns: 1fr;
+      grid-template-rows: none;
       gap: calc(24 * var(--rem));
     }
 
@@ -189,12 +254,19 @@
       position: relative;
       display: flex;
       flex-direction: column;
+      grid-row: auto;
+      grid-template-rows: none;
       padding: calc(40 * var(--rem)) calc(28 * var(--rem));
       border-radius: calc(20 * var(--rem));
       overflow: hidden;
     }
 
     #HomeSplit-{{ section.id }} .home-split__copy {
+      display: flex;
+      flex-direction: column;
+      grid-row: auto;
+      grid-template-rows: none;
+      min-height: 100%;
       padding-right: calc(0 * var(--rem));
       padding-bottom: 0;
     }
@@ -268,8 +340,27 @@
       line-height: calc(28 * var(--rem));
     }
 
+    #HomeSplit-{{ section.id }} .home-split__stores {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: calc(12 * var(--rem));
+    }
+
+    #HomeSplit-{{ section.id }} .home-split__card:nth-child(2) .home-split__features,
+    #HomeSplit-{{ section.id }} .home-split__card:nth-child(2) .home-split__actions {
+      padding-right: calc((280 + 24) * var(--rem));
+    }
+
+    #HomeSplit-{{ section.id }} .home-split__store {
+      height: calc(64 * var(--rem));
+    }
+
+    #HomeSplit-{{ section.id }} .home-split__more {
+      margin-top: calc(16 * var(--rem));
+      font-size: calc(22 * var(--rem));
+    }
     #HomeSplit-{{ section.id }} .home-split__actions {
-      margin-top: calc(32 * var(--rem));
+      margin-top: calc(26 * var(--rem));
     }
   }
 {%- endstyle -%}
@@ -342,9 +433,52 @@
               {%- endif -%}
             {%- endif -%}
 
-            {%- if block.settings.button_label != blank -%}
+            {%- liquid
+              assign has_stores = false
+              if block.settings.app_store_image != blank or block.settings.google_play_image != blank
+                assign has_stores = true
+              endif
+            -%}
+            {%- if has_stores or block.settings.button_label != blank -%}
               <div class="home-split__actions">
-                {%- if block.settings.button_link != blank -%}
+                {%- if has_stores -%}
+                  <div class="home-split__stores">
+                    {%- if block.settings.app_store_image != blank -%}
+                      {%- assign app_store_height = 640 | divided_by: block.settings.app_store_image.aspect_ratio | round -%}
+                      <a class="home-split__store" href="{{ block.settings.app_store_link | default: '#' }}">
+                        <img
+                          src="{{ block.settings.app_store_image | image_url: width: 640 }}"
+                          srcset="{{ block.settings.app_store_image | image_url: width: 320 }} 320w, {{ block.settings.app_store_image | image_url: width: 480 }} 480w, {{ block.settings.app_store_image | image_url: width: 640 }} 640w"
+                          sizes="(max-width: 768px) 280px, 320px"
+                          width="640"
+                          height="{{ app_store_height }}"
+                          loading="lazy"
+                          alt="Download on the App Store"
+                        >
+                      </a>
+                    {%- endif -%}
+                    {%- if block.settings.google_play_image != blank -%}
+                      {%- assign google_play_height = 640 | divided_by: block.settings.google_play_image.aspect_ratio | round -%}
+                      <a class="home-split__store" href="{{ block.settings.google_play_link | default: '#' }}">
+                        <img
+                          src="{{ block.settings.google_play_image | image_url: width: 640 }}"
+                          srcset="{{ block.settings.google_play_image | image_url: width: 320 }} 320w, {{ block.settings.google_play_image | image_url: width: 480 }} 480w, {{ block.settings.google_play_image | image_url: width: 640 }} 640w"
+                          sizes="(max-width: 768px) 280px, 320px"
+                          width="640"
+                          height="{{ google_play_height }}"
+                          loading="lazy"
+                          alt="Get it on Google Play"
+                        >
+                      </a>
+                    {%- endif -%}
+                  </div>
+                  {%- if block.settings.button_label != blank -%}
+                    <a class="home-split__more" href="{{ block.settings.button_link | default: '#' }}">
+                      <span class="home-split__more-text">{{ block.settings.button_label | escape }}</span>
+                      <span class="home-split__more-arrow" aria-hidden="true">→</span>
+                    </a>
+                  {%- endif -%}
+                {%- elsif block.settings.button_link != blank -%}
                   <a class="button" href="{{ block.settings.button_link }}">{{ block.settings.button_label | escape }}</a>
                 {%- else -%}
                   <span class="button">{{ block.settings.button_label | escape }}</span>
@@ -468,6 +602,30 @@
           "type": "url",
           "id": "button_link",
           "label": "按钮链接"
+        },
+        {
+          "type": "header",
+          "content": "下载图标（填写后替换按钮）"
+        },
+        {
+          "type": "image_picker",
+          "id": "app_store_image",
+          "label": "App Store 图标"
+        },
+        {
+          "type": "url",
+          "id": "app_store_link",
+          "label": "App Store 链接"
+        },
+        {
+          "type": "image_picker",
+          "id": "google_play_image",
+          "label": "Google Play 图标"
+        },
+        {
+          "type": "url",
+          "id": "google_play_link",
+          "label": "Google Play 链接"
         },
         {
           "type": "header",

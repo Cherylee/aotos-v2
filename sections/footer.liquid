@@ -164,7 +164,7 @@
             assign has_notes = true
           endif
         -%}
-        {%- if has_notes or settings.payment_icons != blank -%}
+        {%- if has_notes -%}
           <div class="aotos-footer__meta">
             {%- if note_blocks.size > 0 -%}
               {%- for block in note_blocks -%}
@@ -229,74 +229,86 @@
                 </p>
               {%- endif -%}
             {%- endif -%}
-
-            {%- if settings.payment_icons != blank -%}
-              <ul class="aotos-footer__pay" role="list">
-                {%- assign payment_list = settings.payment_icons | replace: '，', ',' | split: ',' -%}
-                {%- for raw_name in payment_list -%}
-                  {%- assign pay_name = raw_name | strip | downcase -%}
-                  {%- case pay_name -%}
-                    {%- when 'mastercard', 'master-card', 'master_card' -%}
-                      {%- assign pay_name = 'master' -%}
-                    {%- when 'amex', 'americanexpress', 'american-express', 'american express' -%}
-                      {%- assign pay_name = 'american_express' -%}
-                    {%- when 'diners', 'dinersclub', 'diners-club' -%}
-                      {%- assign pay_name = 'diners_club' -%}
-                    {%- when 'applepay', 'apple-pay', 'apple pay' -%}
-                      {%- assign pay_name = 'apple_pay' -%}
-                    {%- when 'googlepay', 'google-pay', 'google pay', 'gpay' -%}
-                      {%- assign pay_name = 'google_pay' -%}
-                    {%- when 'shoppay', 'shop-pay', 'shop pay', 'shop_pay' -%}
-                      {%- assign pay_name = 'shopify_pay' -%}
-                    {%- when 'union pay', 'union-pay', 'union_pay' -%}
-                      {%- assign pay_name = 'unionpay' -%}
-                  {%- endcase -%}
-                  {%- if pay_name != blank -%}
-                    <li>{{ pay_name | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>
-                  {%- endif -%}
-                {%- endfor -%}
-              </ul>
-            {%- endif -%}
-          </div>
-        {%- endif -%}
-
-        {%- if section.settings.app_heading != blank or section.settings.app_store_image != blank or section.settings.google_play_image != blank -%}
-          {%- if section.settings.app_heading != blank -%}
-            <p class="aotos-footer__apps-label">{{ section.settings.app_heading | escape }}</p>
-          {%- endif -%}
-          <div class="aotos-footer__apps">
-            {%- assign app_badge_sizes = '(max-width: 768px) 29vw, 10vw' -%}
-            {%- if section.settings.app_store_image != blank -%}
-              {%- assign app_store_height = 480 | divided_by: section.settings.app_store_image.aspect_ratio | round -%}
-              <a class="aotos-footer__app" href="{{ section.settings.app_store_link | default: '#' }}">
-                <img
-                  src="{{ section.settings.app_store_image | image_url: width: 480 }}"
-                  srcset="{{ section.settings.app_store_image | image_url: width: 240 }} 240w, {{ section.settings.app_store_image | image_url: width: 360 }} 360w, {{ section.settings.app_store_image | image_url: width: 480 }} 480w, {{ section.settings.app_store_image | image_url: width: 640 }} 640w"
-                  sizes="{{ app_badge_sizes }}"
-                  width="480"
-                  height="{{ app_store_height }}"
-                  loading="lazy"
-                  alt="Download on the App Store"
-                >
-              </a>
-            {%- endif -%}
-            {%- if section.settings.google_play_image != blank -%}
-              {%- assign google_play_height = 480 | divided_by: section.settings.google_play_image.aspect_ratio | round -%}
-              <a class="aotos-footer__app" href="{{ section.settings.google_play_link | default: '#' }}">
-                <img
-                  src="{{ section.settings.google_play_image | image_url: width: 480 }}"
-                  srcset="{{ section.settings.google_play_image | image_url: width: 240 }} 240w, {{ section.settings.google_play_image | image_url: width: 360 }} 360w, {{ section.settings.google_play_image | image_url: width: 480 }} 480w, {{ section.settings.google_play_image | image_url: width: 640 }} 640w"
-                  sizes="{{ app_badge_sizes }}"
-                  width="480"
-                  height="{{ google_play_height }}"
-                  loading="lazy"
-                  alt="Get it on Google Play"
-                >
-              </a>
-            {%- endif -%}
           </div>
         {%- endif -%}
       </div>
+
+    {%- liquid
+      assign show_apps = false
+      if section.settings.app_heading != blank or section.settings.app_store_image != blank or section.settings.google_play_image != blank
+        assign show_apps = true
+      endif
+    -%}
+    {%- if show_apps or settings.payment_icons != blank -%}
+      <div class="aotos-footer__bar">
+        {%- if show_apps -%}
+          <div class="aotos-footer__apps-group">
+            {%- if section.settings.app_heading != blank -%}
+              <p class="aotos-footer__apps-label">{{ section.settings.app_heading | escape }}</p>
+            {%- endif -%}
+            <div class="aotos-footer__apps">
+              {%- assign app_badge_sizes = '(max-width: 768px) 29vw, 120px' -%}
+              {%- if section.settings.app_store_image != blank -%}
+                {%- assign app_store_height = 480 | divided_by: section.settings.app_store_image.aspect_ratio | round -%}
+                <a class="aotos-footer__app" href="{{ section.settings.app_store_link | default: '#' }}">
+                  <img
+                    src="{{ section.settings.app_store_image | image_url: width: 480 }}"
+                    srcset="{{ section.settings.app_store_image | image_url: width: 240 }} 240w, {{ section.settings.app_store_image | image_url: width: 360 }} 360w, {{ section.settings.app_store_image | image_url: width: 480 }} 480w, {{ section.settings.app_store_image | image_url: width: 640 }} 640w"
+                    sizes="{{ app_badge_sizes }}"
+                    width="480"
+                    height="{{ app_store_height }}"
+                    loading="lazy"
+                    alt="Download on the App Store"
+                  >
+                </a>
+              {%- endif -%}
+              {%- if section.settings.google_play_image != blank -%}
+                {%- assign google_play_height = 480 | divided_by: section.settings.google_play_image.aspect_ratio | round -%}
+                <a class="aotos-footer__app" href="{{ section.settings.google_play_link | default: '#' }}">
+                  <img
+                    src="{{ section.settings.google_play_image | image_url: width: 480 }}"
+                    srcset="{{ section.settings.google_play_image | image_url: width: 240 }} 240w, {{ section.settings.google_play_image | image_url: width: 360 }} 360w, {{ section.settings.google_play_image | image_url: width: 480 }} 480w, {{ section.settings.google_play_image | image_url: width: 640 }} 640w"
+                    sizes="{{ app_badge_sizes }}"
+                    width="480"
+                    height="{{ google_play_height }}"
+                    loading="lazy"
+                    alt="Get it on Google Play"
+                  >
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if settings.payment_icons != blank -%}
+          <ul class="aotos-footer__pay" role="list">
+            {%- assign payment_list = settings.payment_icons | replace: '，', ',' | split: ',' -%}
+            {%- for raw_name in payment_list -%}
+              {%- assign pay_name = raw_name | strip | downcase -%}
+              {%- case pay_name -%}
+                {%- when 'mastercard', 'master-card', 'master_card' -%}
+                  {%- assign pay_name = 'master' -%}
+                {%- when 'amex', 'americanexpress', 'american-express', 'american express' -%}
+                  {%- assign pay_name = 'american_express' -%}
+                {%- when 'diners', 'dinersclub', 'diners-club' -%}
+                  {%- assign pay_name = 'diners_club' -%}
+                {%- when 'applepay', 'apple-pay', 'apple pay' -%}
+                  {%- assign pay_name = 'apple_pay' -%}
+                {%- when 'googlepay', 'google-pay', 'google pay', 'gpay' -%}
+                  {%- assign pay_name = 'google_pay' -%}
+                {%- when 'shoppay', 'shop-pay', 'shop pay', 'shop_pay' -%}
+                  {%- assign pay_name = 'shopify_pay' -%}
+                {%- when 'union pay', 'union-pay', 'union_pay' -%}
+                  {%- assign pay_name = 'unionpay' -%}
+              {%- endcase -%}
+              {%- if pay_name != blank -%}
+                <li>{{ pay_name | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
     </div>
 
     {%- if section.settings.copyright != blank -%}

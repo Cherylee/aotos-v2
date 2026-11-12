@@ -241,31 +241,53 @@
   color: #ffb4a2;
 }
 
+.aotos-footer__bar {
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(24 * var(--rem));
+  margin-top: 0;
+  padding-top: calc(28 * var(--rem));
+  padding-bottom: calc(28 * var(--rem));
+  border-top: 1px solid #4f4f4f;
+}
+
+.aotos-footer__apps-group {
+  display: flex;
+  align-items: center;
+  gap: calc(16 * var(--rem));
+  min-width: 0;
+}
+
 .aotos-footer__pay {
   display: flex;
   flex-wrap: wrap;
-  gap: calc(3 * var(--rem));
+  justify-content: flex-end;
+  gap: calc(6 * var(--rem));
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .aotos-footer__pay svg {
-  width: calc(30 * var(--rem));
+  display: block;
+  width: calc(38 * var(--rem));
   height: auto;
 }
 
 .aotos-footer__apps-label {
-  margin: calc(8 * var(--rem)) 0 0;
+  margin: 0;
   color: #fff;
-  font-size: calc(13 * var(--rem));
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font-size: calc(14 * var(--rem));
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .aotos-footer__apps {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   gap: calc(10 * var(--rem));
 }
 
@@ -281,7 +303,7 @@
 }
 
 .aotos-footer__copy {
-  margin: calc(32 * var(--rem)) 0 0;
+  margin: 0;
   padding-top: calc(20 * var(--rem));
   border-top: 1px solid #4f4f4f;
   color: #b2b2b2;
@@ -411,18 +433,42 @@
     width: calc(20 * var(--rem));
     height: calc(20 * var(--rem));
   }
+  .aotos-footer__menus {
+    order: 1;
+  }
+
+  .aotos-footer__aside {
+    order: 2;
+  }
+
+  .aotos-footer__bar {
+    order: 3;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(24 * var(--rem));
+    margin-top: 0;
+  }
+
+  .aotos-footer__apps-group {
+    display: contents;
+  }
+
+  .aotos-footer__apps-label {
+    flex: 1 1 100%;
+  }
+
   .aotos-footer__pay {
     gap: calc(10 * var(--rem));
   }
   .aotos-footer__pay svg {
-    width: calc(80 * var(--rem));
+    width: calc(64 * var(--rem));
   }
   .aotos-footer__app {
-    height: calc(84 * var(--rem));
+    height: calc(64 * var(--rem));
   }
 
   .aotos-footer__copy {
-    margin-top: calc(84 * var(--rem));
+    margin-top: 0;
   }
   .aotos-footer__apps-label {
     font-size: calc(28 * var(--rem));
