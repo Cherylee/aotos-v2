@@ -26,7 +26,8 @@
           "type": "link_list",
           "settings": {
             "heading": "Support",
-            "menu": "legal"
+            "menu": "legal",
+            "new_items": ""
           }
         },
         "menu-about": {
