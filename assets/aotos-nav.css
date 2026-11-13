@@ -283,6 +283,14 @@
   max-width: 100%;
 }
 
+.aotos-nav__card-name .aotos-nav__badge {
+  position: static;
+  top: auto;
+  left: auto;
+  margin-left: calc(6 * var(--rem));
+  flex-shrink: 0;
+}
+
 @media (hover: hover) {
   .aotos-nav__mega-cta:hover {
     filter: brightness(0.92);
