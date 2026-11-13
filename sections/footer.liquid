@@ -15,9 +15,30 @@
               {%- if block.settings.menu != blank -%}
                 <ul class="aotos-footer__links" role="list">
                   {%- for link in block.settings.menu.links -%}
+                    {%- liquid
+                      assign link_plain = link.title | replace: ' — NEW', '' | replace: ' — New', '' | replace: ' — new', '' | replace: ' - NEW', '' | replace: ' - New', '' | replace: ' – NEW', '' | replace: ' – New', '' | strip
+                      assign link_key = link_plain | downcase
+                      assign raw_key = link.title | downcase | strip
+                      assign show_new = false
+                      assign new_source = block.settings.new_items | replace: '，', ',' | downcase
+                      assign new_list = new_source | split: ','
+                      for new_item in new_list
+                        assign new_name = new_item | strip
+                        if new_name != blank and new_name == link_key or new_name == raw_key
+                          assign show_new = true
+                        endif
+                      endfor
+                      assign link_label = link.title
+                      if show_new
+                        assign link_label = link_plain
+                      endif
+                    -%}
                     <li>
                       <a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>
-                        {{ link.title | escape }}
+                        <span class="aotos-footer__link-text">{{ link_label | escape }}</span>
+                        {%- if show_new -%}
+                          <span class="aotos-footer__new">New</span>
+                        {%- endif -%}
                       </a>
                     </li>
                   {%- endfor -%}
@@ -336,6 +357,12 @@
           "type": "link_list",
           "id": "menu",
           "label": "菜单"
+        },
+        {
+          "type": "text",
+          "id": "new_items",
+          "label": "New 标签",
+          "info": "填写要显示 New 的菜单名称，多个用英文逗号分隔。样式同顶部导航。"
         }
       ]
     },

@@ -168,11 +168,13 @@
                               {%- liquid
                                 assign product_key = 'item_' | append: i | append: '_product_' | append: n
                                 assign product_title_key = 'item_' | append: i | append: '_product_' | append: n | append: '_title'
+                                assign product_new_key = 'item_' | append: i | append: '_product_' | append: n | append: '_new'
                                 assign nav_product = block.settings[product_key]
                                 assign nav_title = block.settings[product_title_key]
+                                assign nav_new = block.settings[product_new_key]
                               -%}
                               {%- if nav_product != blank -%}
-                                {%- render 'aotos-nav-card', nav_product: nav_product, nav_title: nav_title -%}
+                                {%- render 'aotos-nav-card', nav_product: nav_product, nav_title: nav_title, nav_new: nav_new -%}
                               {%- endif -%}
                             {%- endfor -%}
                           </div>
