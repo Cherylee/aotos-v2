@@ -12,61 +12,6 @@
     "safety_certified_hero_QW8qWE": {
       "type": "safety-certified-hero",
       "blocks": {
-        "slide_GXcV8w": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/bb_2.webp",
-            "image_mobile": "shopify://shop_images/bb_1.webp",
-            "image_alt": "",
-            "show_accent": false,
-            "accent_color": "theme",
-            "eyebrow": "BLACK FRIDAY",
-            "eyebrow_weight": "700",
-            "eyebrow_color": "white",
-            "heading": "LOWEST PRICES EVER",
-            "title_weight": "700",
-            "title_color": "theme",
-            "subtitle": "FLUX X26 $1,499 · X26 Pro $2,099",
-            "subtitle_weight": "500",
-            "subtitle_color": "white",
-            "eyebrow_size": 24,
-            "eyebrow_gap": 4,
-            "title_size": 35,
-            "title_gap": 8,
-            "subtitle_size": 24,
-            "subtitle_gap": 0,
-            "eyebrow_size_mobile": 26,
-            "eyebrow_gap_mobile": 4,
-            "title_size_mobile": 38,
-            "title_gap_mobile": 8,
-            "subtitle_size_mobile": 30,
-            "subtitle_gap_mobile": 0,
-            "stat_1_value": "",
-            "stat_1_label": "",
-            "stat_2_value": "",
-            "stat_2_label": "",
-            "stat_3_value": "",
-            "stat_3_label": "",
-            "stat_size": 28,
-            "stat_label_size": 14,
-            "stat_gap": 56,
-            "stat_margin": 28,
-            "stat_size_mobile": 36,
-            "stat_label_size_mobile": 20,
-            "stat_gap_mobile": 40,
-            "stat_margin_mobile": 32,
-            "show_button_1": true,
-            "button_1_label": "Shop X26 Series",
-            "button_1_link": "https://aotos.com/products/flux-x26-pro",
-            "button_1_margin": 24,
-            "button_1_margin_mobile": 16,
-            "show_button_2": false,
-            "button_2_label": "",
-            "button_2_link": "",
-            "button_2_margin": 24,
-            "button_2_margin_mobile": 32
-          }
-        },
         "slide_t26launch": {
           "type": "slide",
           "settings": {
@@ -291,7 +236,6 @@
         }
       },
       "block_order": [
-        "slide_GXcV8w",
         "slide_t26launch",
         "slide_8qyhAe",
         "slide_TmTGkn",
@@ -375,21 +319,21 @@
         "view_front": {
           "type": "view",
           "settings": {
-            "image": "shopify://shop_images/4_fffc70c0-048e-416c-bb50-2391be7bacd6.webp",
+            "image": "shopify://shop_images/flux_t26_q.webp",
             "image_alt": "FLUX X26 Pro front"
           }
         },
         "view_side": {
           "type": "view",
           "settings": {
-            "image": "shopify://shop_images/EB03_0919_3.webp",
+            "image": "shopify://shop_images/flux_t26_z_af94aa36-0618-44e1-9bb1-1e0d9d4882f3.webp",
             "image_alt": "FLUX X26 Pro side"
           }
         },
         "view_rear": {
           "type": "view",
           "settings": {
-            "image": "shopify://shop_images/3_84181337-25e1-47bc-81b8-d339aa45e320.webp",
+            "image": "shopify://shop_images/flux_t26_h.webp",
             "image_alt": "FLUX X26 Pro rear"
           }
         }
@@ -400,9 +344,9 @@
         "view_rear"
       ],
       "settings": {
-        "title": "FLUX X26 PRO",
+        "title": "FLUX T26",
         "button_label": "Learn More",
-        "button_link": "shopify://products/flux-x26-pro",
+        "button_link": "shopify://products/flux-t26",
         "padding_top": 60,
         "padding_bottom": 80,
         "padding_top_mobile": 60,
