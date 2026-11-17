@@ -140,6 +140,17 @@
             "bikes": " FLUX X26"
           }
         },
+        "video_nN9Wpr": {
+          "type": "video",
+          "settings": {
+            "index": "01",
+            "duration": "",
+            "label": "START HERE",
+            "title": "Unboxing & Assembly",
+            "video_url": "https://youtu.be/K4EEMgJkmm0",
+            "bikes": " FLUX T26"
+          }
+        },
         "vid_02": {
           "type": "video",
           "settings": {
@@ -149,6 +160,17 @@
             "title": "Connect the AOTOS App",
             "video_url": "https://youtu.be/iI-_UrpfrK4",
             "bikes": " FLUX X26"
+          }
+        },
+        "video_drkQjb": {
+          "type": "video",
+          "settings": {
+            "index": "02",
+            "duration": "",
+            "label": "APP SETUP",
+            "title": "Connect the AOTOS App",
+            "video_url": "https://youtu.be/PkPdt5jIJqs",
+            "bikes": " FLUX T26"
           }
         },
         "vid_03": {
@@ -162,47 +184,25 @@
             "bikes": " FLUX X26"
           }
         },
-        "video_GFyxfp": {
+        "video_xhpeji": {
           "type": "video",
           "settings": {
             "index": "03",
             "duration": "",
             "label": "DAILY USE",
             "title": "Display & Ride Modes",
-            "video_url": "https://youtu.be/tzX3NE0IG18",
-            "bikes": " FLUX T26"
-          }
-        },
-        "video_UdDwic": {
-          "type": "video",
-          "settings": {
-            "index": "03",
-            "duration": "",
-            "label": "DAILY USE",
-            "title": "Display & Ride Modes",
-            "video_url": "https://youtu.be/tzX3NE0IG18",
-            "bikes": " FLUX T26"
-          }
-        },
-        "video_cHdLkM": {
-          "type": "video",
-          "settings": {
-            "index": "03",
-            "duration": "",
-            "label": "DAILY USE",
-            "title": "Display & Ride Modes",
-            "video_url": "https://youtu.be/tzX3NE0IG18",
+            "video_url": "https://youtu.be/-H3-4jGkxEo",
             "bikes": " FLUX T26"
           }
         }
       },
       "block_order": [
         "video_7mkPFr",
+        "video_nN9Wpr",
         "vid_02",
+        "video_drkQjb",
         "vid_03",
-        "video_GFyxfp",
-        "video_UdDwic",
-        "video_cHdLkM"
+        "video_xhpeji"
       ],
       "settings": {
         "step_num": "3",
