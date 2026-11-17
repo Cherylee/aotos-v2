@@ -108,7 +108,7 @@
       "settings": {
         "step1_title": "Select your e-bike",
         "step1_hint": "Check the model name on the frame or your order confirmation.",
-        "step2_title": "Select purchase channel",
+        "step2_title": "Download User Manual",
         "channel_aotos": "AOTOS.com",
         "channel_aotos_version": "AOTOS VERSION",
         "show_costco": false,

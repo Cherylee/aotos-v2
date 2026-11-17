@@ -483,7 +483,7 @@
     #user-manuals-picker-{{ ump_id }} .ump-res__top {
       flex-direction: column;
       align-items: flex-start;
-      margin-bottom: calc(48 * var(--rem));
+      margin-bottom: calc(18 * var(--rem));
     }
 
     #user-manuals-picker-{{ ump_id }} .ump-res__lead {
@@ -701,30 +701,18 @@
       </div>
     </div>
 
-    <hr class="ump-rule">
-
-    <div class="ump-step ump-step--ch">
-      <div class="ump-step__head">
-        <h2 class="ump-step__title">
-          <span class="ump-step__num">2</span>
-          {{ section.settings.step2_title | default: 'Select purchase channel' | escape }}
-        </h2>
-        <div class="ump-ch" role="group" aria-label="{{ section.settings.step2_title | default: 'Select purchase channel' | escape }}">
-          <button class="ump-ch__btn" type="button" data-channel="aotos" aria-pressed="true">
-            {{ section.settings.channel_aotos | default: 'AOTOS.com' | escape }}
-          </button>
-          {%- if section.settings.show_costco -%}
-            <button class="ump-ch__btn" type="button" data-channel="costco" aria-pressed="false">
-              {{ section.settings.channel_costco | default: 'Costco' | escape }}
-            </button>
-          {%- endif -%}
-        </div>
-      </div>
-    </div>
   </div>
 
   <div class="ump-res-wrap">
     <div class="ump-shell">
+      <div class="ump-step ump-step--ch">
+        <div class="ump-step__head">
+          <h2 class="ump-step__title">
+            <span class="ump-step__num">2</span>
+            {{ section.settings.step2_title | default: 'Download User Manual' | escape }}
+          </h2>
+        </div>
+      </div>
       {%- if section.settings.show_costco -%}
         {%- assign ump_ch_list = 'aotos,costco' | split: ',' -%}
       {%- else -%}
@@ -761,14 +749,6 @@
               data-channel="{{ ch }}"
               {% unless ump_show %}hidden{% endunless %}
             >
-              <p class="ump-res__meta">
-                <span class="ump-res__meta-series">{{ block.settings.series | default: block.settings.badge | escape }}</span>
-                ·
-                <span class="ump-res__meta-channel">{{ ump_ch_label | default: ch | upcase | escape }}</span>
-              </p>
-              {%- if section.settings.resources_eyebrow != blank -%}
-                <p class="ump-res__eyebrow">{{ section.settings.resources_eyebrow | escape }}</p>
-              {%- endif -%}
               <div class="ump-res__top">
                 <h2 class="ump-res__title aotos-section-title">{{ block.settings.model | escape }}</h2>
                 {%- if section.settings.resources_lead != blank -%}
@@ -779,9 +759,6 @@
               <div class="ump-cards">
                 <article class="ump-manual">
                   <div class="ump-manual__copy">
-                    {%- if section.settings.manual_tag != blank -%}
-                      <p class="ump-manual__tag">{{ section.settings.manual_tag | escape }}</p>
-                    {%- endif -%}
                     <h3 class="ump-manual__name">{{ section.settings.manual_title | default: "Owner's Manual" | escape }}</h3>
                     {%- if section.settings.manual_desc != blank -%}
                       <p class="ump-manual__desc">{{ section.settings.manual_desc | escape }}</p>
@@ -902,7 +879,7 @@
       "type": "text",
       "id": "step2_title",
       "label": "标题",
-      "default": "Select purchase channel"
+      "default": "Download User Manual"
     },
     {
       "type": "text",
