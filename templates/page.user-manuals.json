@@ -136,7 +136,8 @@
             "duration": "",
             "label": "START HERE",
             "title": "Unboxing & Assembly",
-            "video_url": "https://youtu.be/MQ-tw_znUzc"
+            "video_url": "https://youtu.be/MQ-tw_znUzc",
+            "bikes": " FLUX X26"
           }
         },
         "vid_02": {
@@ -146,7 +147,8 @@
             "duration": "",
             "label": "APP SETUP",
             "title": "Connect the AOTOS App",
-            "video_url": "https://youtu.be/iI-_UrpfrK4"
+            "video_url": "https://youtu.be/iI-_UrpfrK4",
+            "bikes": " FLUX X26"
           }
         },
         "vid_03": {
@@ -156,7 +158,41 @@
             "duration": "",
             "label": "DAILY USE",
             "title": "Display & Ride Modes",
-            "video_url": "https://youtu.be/tzX3NE0IG18"
+            "video_url": "https://youtu.be/tzX3NE0IG18",
+            "bikes": " FLUX X26"
+          }
+        },
+        "video_GFyxfp": {
+          "type": "video",
+          "settings": {
+            "index": "03",
+            "duration": "",
+            "label": "DAILY USE",
+            "title": "Display & Ride Modes",
+            "video_url": "https://youtu.be/tzX3NE0IG18",
+            "bikes": " FLUX T26"
+          }
+        },
+        "video_UdDwic": {
+          "type": "video",
+          "settings": {
+            "index": "03",
+            "duration": "",
+            "label": "DAILY USE",
+            "title": "Display & Ride Modes",
+            "video_url": "https://youtu.be/tzX3NE0IG18",
+            "bikes": " FLUX T26"
+          }
+        },
+        "video_cHdLkM": {
+          "type": "video",
+          "settings": {
+            "index": "03",
+            "duration": "",
+            "label": "DAILY USE",
+            "title": "Display & Ride Modes",
+            "video_url": "https://youtu.be/tzX3NE0IG18",
+            "bikes": " FLUX T26"
           }
         }
       },
@@ -164,9 +200,9 @@
         "video_7mkPFr",
         "vid_02",
         "vid_03",
-        "vid_04",
-        "vid_05",
-        "vid_06"
+        "video_GFyxfp",
+        "video_UdDwic",
+        "video_cHdLkM"
       ],
       "settings": {
         "step_num": "3",
