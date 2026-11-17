@@ -403,6 +403,22 @@
                     sizes: '(max-width: 749px) 92vw, 356px',
                     alt: block.settings.title
                 }}
+              {%- elsif block.settings.video_url.type == 'youtube' -%}
+                <img
+                  src="https://i.ytimg.com/vi/{{ block.settings.video_url.id }}/hqdefault.jpg"
+                  alt="{{ block.settings.title | escape }}"
+                  width="480"
+                  height="360"
+                  loading="lazy"
+                >
+              {%- elsif block.settings.video_url.type == 'vimeo' -%}
+                <img
+                  data-vimeo-id="{{ block.settings.video_url.id }}"
+                  alt="{{ block.settings.title | escape }}"
+                  width="640"
+                  height="360"
+                  loading="lazy"
+                >
               {%- else -%}
                 {{ 'lifestyle-1' | placeholder_svg_tag: 'umv-ph' }}
               {%- endif -%}
@@ -441,6 +457,17 @@
   (function () {
     var root = document.getElementById('user-manuals-videos-{{ umv_id }}');
     if (!root) return;
+    root.querySelectorAll('[data-vimeo-id]').forEach(function (img) {
+      var id = img.getAttribute('data-vimeo-id');
+      if (!id) return;
+      fetch('https://vimeo.com/api/oembed.json?url=' + encodeURIComponent('https://vimeo.com/' + id))
+        .then(function (response) { return response.json(); })
+        .then(function (data) {
+          if (!data || !data.thumbnail_url) return;
+          img.src = data.thumbnail_url.replace(/_\d+x\d+/, '_640');
+        })
+        .catch(function () {});
+    });
     var modal = root.querySelector('.umv-modal');
     var iframe = modal && modal.querySelector('iframe');
     if (!modal || !iframe) return;
