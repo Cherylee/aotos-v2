@@ -375,18 +375,21 @@
         "view_front": {
           "type": "view",
           "settings": {
+            "image": "shopify://shop_images/iwEcAqNqcGcDAQTRAlgF0QHCBrB3i3oDVmQRKwrGpAm7Gr0CB9MAAAABmxZ0rAgACaJpbQoAC9IAALy0.jpg",
             "image_alt": "FLUX X26 Pro front"
           }
         },
         "view_side": {
           "type": "view",
           "settings": {
+            "image": "shopify://shop_images/iwEcAqNqcGcDAQTRBEwF0QM5BrBeag1-x6JjWArGpZgmJokAB9MAAAABmxZ0rAgACaJpbQoAC9IABWGy.jpg",
             "image_alt": "FLUX X26 Pro side"
           }
         },
         "view_rear": {
           "type": "view",
           "settings": {
+            "image": "shopify://shop_images/iwEcAqNqcGcDAQTRAlgF0QHCBrCMofZECWYllArGpLA_Y4YAB9MAAAABmxZ0rAgACaJpbQoAC9IAAMIe.jpg",
             "image_alt": "FLUX X26 Pro rear"
           }
         }
