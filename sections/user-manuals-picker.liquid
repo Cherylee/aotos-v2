@@ -712,9 +712,11 @@
           <button class="ump-ch__btn" type="button" data-channel="aotos" aria-pressed="true">
             {{ section.settings.channel_aotos | default: 'AOTOS.com' | escape }}
           </button>
-          <button class="ump-ch__btn" type="button" data-channel="costco" aria-pressed="false">
-            {{ section.settings.channel_costco | default: 'Costco' | escape }}
-          </button>
+          {%- if section.settings.show_costco -%}
+            <button class="ump-ch__btn" type="button" data-channel="costco" aria-pressed="false">
+              {{ section.settings.channel_costco | default: 'Costco' | escape }}
+            </button>
+          {%- endif -%}
         </div>
       </div>
     </div>
@@ -722,7 +724,11 @@
 
   <div class="ump-res-wrap">
     <div class="ump-shell">
-      {%- assign ump_ch_list = 'aotos,costco' | split: ',' -%}
+      {%- if section.settings.show_costco -%}
+        {%- assign ump_ch_list = 'aotos,costco' | split: ',' -%}
+      {%- else -%}
+        {%- assign ump_ch_list = 'aotos' | split: ',' -%}
+      {%- endif -%}
       {%- for block in section.blocks -%}
         {%- if block.type == 'bike' -%}
           {%- assign ump_first_bike = forloop.first -%}
@@ -903,6 +909,12 @@
       "id": "channel_aotos_version",
       "label": "渠道 A 版本文案",
       "default": "AOTOS VERSION"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_costco",
+      "label": "显示 Costco",
+      "default": false
     },
     {
       "type": "text",
