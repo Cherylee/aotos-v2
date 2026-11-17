@@ -88,16 +88,16 @@
             "model": "FLUX T26",
             "image": "shopify://shop_images/eb02-bike-alt.webp",
             "aotos_version_label": "AOTOS VERSION",
-            "aotos_pdf": "",
-            "aotos_version": "Version 1.4",
-            "aotos_updated": "Updated Aug 2026",
-            "aotos_size": "18.6 MB",
+            "aotos_pdf": "https://cdn.shopify.com/s/files/1/0719/2736/5851/files/FLUX_T26_Series_User_Manual.pdf?v=1794884688",
+            "aotos_version": "",
+            "aotos_updated": "",
+            "aotos_size": "",
             "aotos_cover": "shopify://shop_images/124c169f4be26c11f4c523cd1ff9c86b.svg",
             "costco_version_label": "COSTCO VERSION",
             "costco_pdf": "https://cdn.shopify.com/s/files/1/0719/2736/5851/files/FLUX_T26_Series_User_Manual.pdf?v=1794884688",
-            "costco_version": "Version 1.4",
-            "costco_updated": "Updated Aug 2026",
-            "costco_size": "18.6 MB"
+            "costco_version": "",
+            "costco_updated": "",
+            "costco_size": ""
           }
         }
       },
