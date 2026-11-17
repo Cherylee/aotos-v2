@@ -422,6 +422,10 @@
       margin-bottom: calc(20 * var(--rem));
     }
 
+    #sc-hero-{{ section.id }} .sc-hero__inner:has(.sc-hero__badge) {
+      translate: 0 calc(-72 * var(--rem));
+    }
+
     {%- if sc_height_mob == 'adapt' -%}
       #sc-hero-{{ section.id }},
       #sc-hero-{{ section.id }} .sc-hero__inner {
