@@ -69,8 +69,8 @@
         "slide_t26launch": {
           "type": "slide",
           "settings": {
-            "video": "shopify://files/videos/FLUX T26 H.mp4",
-            "video_mobile": "shopify://files/videos/flux t26 s.mp4",
+            "video": "shopify://files/videos/AOTOS_Homepage_Desktop.mp4",
+            "video_mobile": "shopify://files/videos/AOTOS_Homepage_Mobile.mp4",
             "image_alt": "",
             "show_accent": false,
             "accent_color": "theme",
