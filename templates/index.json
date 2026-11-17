@@ -16,7 +16,6 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/bb_2.webp",
-            "image_mobile": "shopify://shop_images/bb_1.webp",
             "image_alt": "",
             "show_accent": false,
             "accent_color": "theme",
@@ -70,7 +69,7 @@
         "slide_t26launch": {
           "type": "slide",
           "settings": {
-            "video": "shopify://files/videos/FLUX T26 VEDIO H.mp4",
+            "video": "shopify://files/videos/FLUX T26 H.mp4",
             "video_mobile": "shopify://files/videos/flux t26 s.mp4",
             "image_alt": "",
             "show_accent": false,
@@ -376,21 +375,18 @@
         "view_front": {
           "type": "view",
           "settings": {
-            "image": "shopify://shop_images/flux_t26_q.webp",
             "image_alt": "FLUX X26 Pro front"
           }
         },
         "view_side": {
           "type": "view",
           "settings": {
-            "image": "shopify://shop_images/flux_t26_z_af94aa36-0618-44e1-9bb1-1e0d9d4882f3.webp",
             "image_alt": "FLUX X26 Pro side"
           }
         },
         "view_rear": {
           "type": "view",
           "settings": {
-            "image": "shopify://shop_images/flux_t26_h.webp",
             "image_alt": "FLUX X26 Pro rear"
           }
         }
@@ -501,16 +497,12 @@
             "button_link": "shopify://products/flux-t26",
             "app_store_link": "",
             "google_play_link": "",
-            "feature_1_icon": "shopify://shop_images/e474f8a1158cd08f52bca8be5aea7a24.svg",
             "feature_1_title": "750W Peak BOOST*",
             "feature_1_text": "500W rated · 60 Nm torque",
-            "feature_2_icon": "shopify://shop_images/e0c12aae8759bcd0ba1300e22ffbe6c6.svg",
             "feature_2_title": "Up to 40 Miles**",
             "feature_2_text": "48V 14.5Ah battery",
-            "feature_3_icon": "shopify://shop_images/15f1d287124c725bc6c35fdab27df6de.svg",
             "feature_3_title": "Keyless Unlock",
             "feature_3_text": "NFC, proximity, or passcode",
-            "feature_4_icon": "shopify://shop_images/68dec2efed446304bb39dcaebe9cd3bc.svg",
             "feature_4_title": "1.9\" TFT Display",
             "feature_4_text": "Mirror your phone's navigation"
           }
