@@ -105,6 +105,10 @@
     object-fit: cover;
   }
 
+  #user-manuals-videos-{{ umv_id }} .umv-thumb img.umv-yt.is-letterbox {
+    transform: scale(1.22);
+  }
+
   #user-manuals-videos-{{ umv_id }} .umv-idx {
     position: absolute;
     top: calc(12 * var(--rem));
@@ -405,11 +409,13 @@
                 }}
               {%- elsif block.settings.video_url.type == 'youtube' -%}
                 <img
-                  src="https://i.ytimg.com/vi/{{ block.settings.video_url.id }}/hqdefault.jpg"
+                  class="umv-yt"
+                  src="https://i.ytimg.com/vi/{{ block.settings.video_url.id }}/maxresdefault.jpg"
                   alt="{{ block.settings.title | escape }}"
-                  width="480"
-                  height="360"
+                  width="1280"
+                  height="720"
                   loading="lazy"
+                  onerror="this.onerror=null;this.classList.add('is-letterbox');this.src='https://i.ytimg.com/vi/{{ block.settings.video_url.id }}/hqdefault.jpg';"
                 >
               {%- elsif block.settings.video_url.type == 'vimeo' -%}
                 <img
@@ -464,7 +470,7 @@
         .then(function (response) { return response.json(); })
         .then(function (data) {
           if (!data || !data.thumbnail_url) return;
-          img.src = data.thumbnail_url.replace(/_\d+x\d+/, '_640');
+          img.src = data.thumbnail_url.replace(/_\d+x\d+/, '_1280x720').split('?')[0];
         })
         .catch(function () {});
     });
