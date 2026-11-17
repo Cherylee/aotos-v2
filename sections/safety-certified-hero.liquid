@@ -189,6 +189,13 @@
     pointer-events: none;
   }
 
+  #sc-hero-{{ section.id }} .sc-hero__badge {
+    display: block;
+    width: calc(180 * var(--rem));
+    height: auto;
+    margin: 0 0 calc(16 * var(--rem));
+  }
+
   #sc-hero-{{ section.id }} .sc-hero__accent {
     display: block;
     width: calc(40 * var(--rem));
@@ -408,6 +415,11 @@
   @media screen and (max-width: 768px) {
     #sc-hero-{{ section.id }} {
       touch-action: pan-y;
+    }
+
+    #sc-hero-{{ section.id }} .sc-hero__badge {
+      width: calc(240 * var(--rem));
+      margin-bottom: calc(20 * var(--rem));
     }
 
     {%- if sc_height_mob == 'adapt' -%}
@@ -795,6 +807,19 @@
           class="sc-hero__inner"
           style="--sc-eyebrow-size: {{ block.settings.eyebrow_size | default: 12 }}; --sc-eyebrow-gap: {{ block.settings.eyebrow_gap | default: 16 }}; --sc-title-size: {{ block.settings.title_size | default: 32 }}; --sc-title-gap: {{ block.settings.title_gap | default: 16 }}; --sc-subtitle-size: {{ block.settings.subtitle_size | default: 12 }}; --sc-subtitle-gap: {{ block.settings.subtitle_gap | default: 0 }}; --sc-eyebrow-size-mob: {{ block.settings.eyebrow_size_mobile | default: 20 }}; --sc-eyebrow-gap-mob: {{ block.settings.eyebrow_gap_mobile | default: 20 }}; --sc-title-size-mob: {{ block.settings.title_size_mobile | default: 48 }}; --sc-title-gap-mob: {{ block.settings.title_gap_mobile | default: 20 }}; --sc-subtitle-size-mob: {{ block.settings.subtitle_size_mobile | default: 20 }}; --sc-subtitle-gap-mob: {{ block.settings.subtitle_gap_mobile | default: 0 }};"
         >
+          {%- if section.id contains 'safety_certified_hero_QW8qWE' and block.settings.badge != blank -%}
+            {%- assign sc_badge = block.settings.badge -%}
+            <img
+              class="sc-hero__badge"
+              src="{{ sc_badge | image_url: width: 720 }}"
+              srcset="{{ sc_badge | image_url: width: 360 }} 360w, {{ sc_badge | image_url: width: 540 }} 540w, {{ sc_badge | image_url: width: 720 }} 720w, {{ sc_badge | image_url: width: 960 }} 960w"
+              sizes="(max-width: 768px) 32vw, 18vw"
+              width="720"
+              height="{{ 720 | divided_by: sc_badge.aspect_ratio | round }}"
+              alt="{{ sc_badge.alt | escape }}"
+              {% if section.index == 1 and forloop.first %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}
+            >
+          {%- endif -%}
           {%- if block.settings.show_accent != false -%}
             <span class="sc-hero__accent is-color-{{ block.settings.accent_color | default: 'theme' }}" aria-hidden="true"></span>
           {%- endif -%}
@@ -1374,6 +1399,12 @@
         {
           "type": "header",
           "content": "文案"
+        },
+        {
+          "type": "image_picker",
+          "id": "badge",
+          "label": "文案上方图片",
+          "info": "显示在文案最上面。不上传则不显示。"
         },
         {
           "type": "checkbox",
