@@ -76,13 +76,15 @@
 
   #user-manuals-picker-{{ ump_id }} .ump-bike {
     position: relative;
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: calc(16 * var(--rem));
     width: 100%;
     margin: 0;
-    padding: 0;
+    padding: calc(12 * var(--rem)) calc(16 * var(--rem));
     border: calc(1 * var(--rem)) solid #e8e8e8;
     border-radius: calc(8 * var(--rem));
-    background: #f5f5f5;
+    background: #ffffff;
     cursor: pointer;
     text-align: left;
     color: inherit;
@@ -96,8 +98,10 @@
 
   #user-manuals-picker-{{ ump_id }} .ump-bike__media {
     position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 10;
+    flex-shrink: 0;
+    width: calc(64 * var(--rem));
+    height: calc(64 * var(--rem));
+    border-radius: calc(6 * var(--rem));
     overflow: hidden;
     background: #ededed;
   }
@@ -111,43 +115,26 @@
     object-position: center;
   }
 
-  #user-manuals-picker-{{ ump_id }} .ump-bike__badge {
-    position: absolute;
-    top: calc(16 * var(--rem));
-    left: calc(16 * var(--rem));
-    z-index: 1;
-    padding: calc(4 * var(--rem)) calc(8 * var(--rem));
-    background: #ffffff;
-    font-size: calc(12 * var(--rem));
-    line-height: 1.2;
+  #user-manuals-picker-{{ ump_id }} .ump-bike__info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  #user-manuals-picker-{{ ump_id }} .ump-bike__model {
+    margin: 0;
+    font-size: calc(16 * var(--rem));
+    line-height: calc(22 * var(--rem));
     font-weight: 700;
     color: #000000;
   }
 
-  #user-manuals-picker-{{ ump_id }} .ump-bike__foot {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: calc(12 * var(--rem));
-    padding: calc(16 * var(--rem));
-    background: #ffffff;
-  }
-
   #user-manuals-picker-{{ ump_id }} .ump-bike__series {
-    margin: 0 0 calc(4 * var(--rem));
+    margin: calc(2 * var(--rem)) 0 0;
     font-size: calc(12 * var(--rem));
     line-height: calc(16 * var(--rem));
     color: #999999;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-  }
-
-  #user-manuals-picker-{{ ump_id }} .ump-bike__model {
-    margin: 0;
-    font-size: calc(18 * var(--rem));
-    line-height: calc(22 * var(--rem));
-    font-weight: 700;
-    color: #000000;
   }
 
   #user-manuals-picker-{{ ump_id }} .ump-bike__mark {
@@ -160,6 +147,7 @@
     background: #e8e8e8;
     color: #999999;
     flex-shrink: 0;
+    margin-left: auto;
   }
 
   #user-manuals-picker-{{ ump_id }} .ump-bike[aria-pressed='true'] .ump-bike__mark {
@@ -276,7 +264,7 @@
     align-items: flex-end;
     justify-content: space-between;
     gap: calc(24 * var(--rem));
-    margin: 0 0 calc(48 * var(--rem));
+    margin: 0 0 calc(18 * var(--rem));
   }
 
   #user-manuals-picker-{{ ump_id }} .ump-res__title {
@@ -437,7 +425,17 @@
 
     #user-manuals-picker-{{ ump_id }} .ump-bikes {
       grid-template-columns: 1fr;
-      gap: calc(24 * var(--rem));
+      gap: calc(16 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-bike {
+      padding: calc(16 * var(--rem)) calc(20 * var(--rem));
+      gap: calc(20 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-bike__media {
+      width: calc(88 * var(--rem));
+      height: calc(88 * var(--rem));
     }
 
     #user-manuals-picker-{{ ump_id }} .ump-bike__model {
@@ -504,17 +502,14 @@
     #user-manuals-picker-{{ ump_id }} .ump-manual__cover svg {
       width: calc(220 * var(--rem));
     }
-    #user-manuals-picker-{{ ump_id }} .ump-bike__badge {
-      font-size: calc(20 * var(--rem));
-    }
     #user-manuals-picker-{{ ump_id }} .ump-bike__mark {
-      width: calc(48 * var(--rem));
-      height: calc(48 * var(--rem));
+      width: calc(40 * var(--rem));
+      height: calc(40 * var(--rem));
     }
 
     #user-manuals-picker-{{ ump_id }} .ump-bike__mark svg {
-      width: calc(20 * var(--rem));
-      height: calc(20 * var(--rem));
+      width: calc(18 * var(--rem));
+      height: calc(18 * var(--rem));
     }
     #user-manuals-picker-{{ ump_id }} .ump-manual__tag {
       font-size: calc(20 * var(--rem));
@@ -565,16 +560,44 @@
 
     #user-manuals-picker-{{ ump_id }} .ump-bikes {
       grid-template-columns: 1fr;
-      gap: calc(46 * var(--rem));
+      gap: calc(24 * var(--rem));
     }
 
-    #user-manuals-picker-{{ ump_id }} .ump-bike__model,
+    #user-manuals-picker-{{ ump_id }} .ump-bike {
+      padding: calc(20 * var(--rem)) calc(24 * var(--rem));
+      gap: calc(24 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-bike__media {
+      width: calc(100 * var(--rem));
+      height: calc(100 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-bike__model {
+      font-size: calc(28 * var(--rem));
+      line-height: calc(36 * var(--rem));
+    }
+
     #user-manuals-picker-{{ ump_id }} .ump-manual__name {
       font-size: calc(42 * var(--rem));
       line-height: calc(42 * var(--rem));
     }
 
-    #user-manuals-picker-{{ ump_id }} .ump-bike__series,
+    #user-manuals-picker-{{ ump_id }} .ump-bike__series {
+      font-size: calc(22 * var(--rem));
+      line-height: calc(28 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-bike__mark {
+      width: calc(46 * var(--rem));
+      height: calc(46 * var(--rem));
+    }
+
+    #user-manuals-picker-{{ ump_id }} .ump-bike__mark svg {
+      width: calc(20 * var(--rem));
+      height: calc(20 * var(--rem));
+    }
+
     #user-manuals-picker-{{ ump_id }} .ump-ch__btn,
     #user-manuals-picker-{{ ump_id }} .ump-res__meta,
     #user-manuals-picker-{{ ump_id }} .ump-res__eyebrow,
@@ -660,41 +683,38 @@
               {{ block.shopify_attributes }}
             >
               <div class="ump-bike__media">
-                {%- if block.settings.badge != blank -%}
-                  <span class="ump-bike__badge">{{ block.settings.badge | escape }}</span>
-                {%- endif -%}
                 {%- if block.settings.image != blank -%}
                   {{
                     block.settings.image
-                    | image_url: width: 540
+                    | image_url: width: 480
                     | image_tag:
                       loading: 'lazy',
-                      widths: '400, 540, 800',
-                      sizes: '(max-width: 749px) 92vw, 542px',
+                      widths: '160, 240, 360, 480',
+                      sizes: '(max-width: 768px) 12vw, 5vw',
+                      width: 240,
+                      height: 240,
                       alt: ump_bike_alt
                   }}
                 {%- else -%}
                   {{ 'product-1' | placeholder_svg_tag: 'ump-bike__ph' }}
                 {%- endif -%}
               </div>
-              <div class="ump-bike__foot">
-                <div>
-                  {%- if block.settings.series != blank -%}
-                    <p class="ump-bike__series">{{ block.settings.series | escape }}</p>
-                  {%- endif -%}
-                  {%- if block.settings.model != blank -%}
-                    <p class="ump-bike__model">{{ block.settings.model | escape }}</p>
-                  {%- endif -%}
-                </div>
-                <span class="ump-bike__mark" aria-hidden="true">
-                  <svg class="ump-bike__ico ump-bike__ico--check" viewBox="0 0 12 12" fill="none">
-                    <path d="M2 6.2L4.7 9L10 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                  <svg class="ump-bike__ico ump-bike__ico--arrow" viewBox="0 0 12 12" fill="none">
-                    <path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </span>
+              <div class="ump-bike__info">
+                {%- if block.settings.model != blank -%}
+                  <p class="ump-bike__model">{{ block.settings.model | escape }}</p>
+                {%- endif -%}
+                {%- if block.settings.series != blank -%}
+                  <p class="ump-bike__series">{{ block.settings.series | escape }}</p>
+                {%- endif -%}
               </div>
+              <span class="ump-bike__mark" aria-hidden="true">
+                <svg class="ump-bike__ico ump-bike__ico--check" viewBox="0 0 12 12" fill="none">
+                  <path d="M2 6.2L4.7 9L10 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <svg class="ump-bike__ico ump-bike__ico--arrow" viewBox="0 0 12 12" fill="none">
+                  <path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
             </button>
           {%- endif -%}
         {%- endfor -%}
