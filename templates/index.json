@@ -20,7 +20,7 @@
             "image_alt": "",
             "show_accent": false,
             "accent_color": "theme",
-            "eyebrow": "BLACK FRIDAY + CYBER MONDAY",
+            "eyebrow": "BLACK FRIDAY",
             "eyebrow_weight": "700",
             "eyebrow_color": "white",
             "heading": "$200 OFF THE FLUX X26 SERIES",
@@ -124,6 +124,7 @@
         },
         "slide_8qyhAe": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "video": "shopify://files/videos/0409.mp4",
             "video_mobile": "shopify://files/videos/006.mp4",
