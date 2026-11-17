@@ -501,12 +501,16 @@
             "button_link": "shopify://products/flux-t26",
             "app_store_link": "",
             "google_play_link": "",
+            "feature_1_icon": "shopify://shop_images/Activity.webp",
             "feature_1_title": "750W Peak BOOST*",
             "feature_1_text": "500W rated · 60 Nm torque",
+            "feature_2_icon": "shopify://shop_images/Settings.webp",
             "feature_2_title": "Up to 40 Miles**",
             "feature_2_text": "48V 14.5Ah battery",
+            "feature_3_icon": "shopify://shop_images/Lock.webp",
             "feature_3_title": "Keyless Unlock",
             "feature_3_text": "NFC, proximity, or passcode",
+            "feature_4_icon": "shopify://shop_images/Map_pin.webp",
             "feature_4_title": "1.9\" TFT Display",
             "feature_4_text": "Mirror your phone's navigation"
           }
