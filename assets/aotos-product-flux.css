@@ -781,31 +781,6 @@ body.velotric-lightbox-open {
   padding-left: 0 !important;
 }
 
-.velotric-product__buy-buttons product-form,
-.velotric-product__buy-buttons product-form > .form,
-.velotric-product__buy-buttons .product-form {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.velotric-product__buy-buttons .essential-upsell-addon-container,
-.velotric-product__buy-buttons [class*="essential-upsell"],
-.velotric-product__buy-buttons [data-essential-upsell-element="container"] {
-  order: 2;
-  width: 100%;
-  grid-column: 1 / -1;
-  margin-top: calc(16 * var(--rem));
-}
-
-.velotric-product__buy-buttons .product-form__buttons:has([class*="essential-upsell"]) {
-  padding-bottom: 0;
-}
-
-.velotric-product__buy-buttons .product-form__buttons > [class*="essential-upsell"] {
-  margin-top: calc(28 * var(--rem));
-}
-
 .velotric-product__variants fieldset.product-form__input {
   border: none;
   padding: 0;
