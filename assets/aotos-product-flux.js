@@ -462,6 +462,137 @@
       );
     }
 
+function fluxDiscountRoot() {
+  return document.querySelector('[data-discount-code]');
+}
+
+function fluxDiscountCode() {
+  const root = fluxDiscountRoot();
+  return root ? (root.dataset.code || '').trim() : '';
+}
+
+function fluxDiscountWanted() {
+  const root = fluxDiscountRoot();
+  if (!root || root.hidden) return false;
+  if (typeof root._discountRequested === 'undefined') {
+    root._discountRequested = root.dataset.defaultChecked === 'true';
+  }
+  return !!root._discountRequested;
+}
+
+function fluxCurrentVariant() {
+  const container = document.querySelector('variant-selects');
+  const mapScript = container && container.querySelector('[data-variants-map]');
+  if (!mapScript) return null;
+  let variantsMap;
+  try { variantsMap = JSON.parse(mapScript.textContent); } catch (e) { return null; }
+  const selected = new URL(window.location.href).searchParams.get('variant');
+  if (selected && variantsMap[selected]) return variantsMap[selected];
+  const selectedOptions = Array.from(container.querySelectorAll('fieldset input:checked')).map((input) => input.value);
+  return Object.values(variantsMap).find((item) =>
+    item.options.length === selectedOptions.length && item.options.every((opt) => selectedOptions.includes(opt))
+  ) || Object.values(variantsMap)[0] || null;
+}
+
+function paintFluxPrices(variant) {
+  const applied = fluxDiscountWanted();
+  const row = document.querySelector('[id^="price-"] .aotos-flux-price__row');
+  let priceText = '';
+  let compareText = '';
+  let saveText = '';
+  let onSale = false;
+  if (variant && variant.price_formatted) {
+    const useDiscount = applied && variant.discount_cents > 0;
+    priceText = useDiscount && variant.discount_price_formatted ? variant.discount_price_formatted : variant.price_formatted;
+    onSale = useDiscount ? Boolean(variant.discount_save_formatted) : variant.compare_at_price > variant.price;
+    compareText = useDiscount
+      ? (onSale ? variant.discount_compare_formatted : '')
+      : (onSale ? variant.compare_at_price_formatted : '');
+    saveText = useDiscount
+      ? (variant.discount_save_formatted ? `SAVE ${variant.discount_save_formatted}` : '')
+      : (onSale && variant.save_formatted ? `SAVE ${variant.save_formatted}` : '');
+  } else if (row) {
+    priceText = applied && row.dataset.offPrice ? row.dataset.offPrice : row.dataset.rawPrice;
+    compareText = applied ? (row.dataset.offCompare || '') : (row.dataset.rawCompare || '');
+    const saveAmount = applied ? row.dataset.offSave : row.dataset.rawSave;
+    onSale = Boolean(saveAmount);
+    saveText = saveAmount ? `SAVE ${saveAmount}` : '';
+  } else {
+    return;
+  }
+  document.querySelectorAll('[id^="price-"]').forEach((priceBox) => {
+    const regularPrice = priceBox.querySelector('.aotos-flux-price__regular');
+    if (regularPrice) regularPrice.textContent = priceText;
+    const comparePrice = priceBox.querySelector('.aotos-flux-price__compare-value');
+    if (comparePrice) comparePrice.textContent = compareText || '';
+    const saveBadge = priceBox.querySelector('.aotos-flux-price__save');
+    if (saveBadge) saveBadge.textContent = saveText;
+    const wrapper = priceBox.querySelector('.aotos-flux-price__row');
+    if (wrapper) wrapper.classList.toggle('is-sale', onSale);
+  });
+  document.querySelectorAll('[data-flux-buybar]').forEach((bar) => {
+    const price = bar.querySelector('[data-flux-buybar-price]');
+    if (price) price.textContent = priceText;
+    const compare = bar.querySelector('[data-flux-buybar-compare]');
+    if (compare) compare.textContent = compareText || '';
+    const barProduct = bar.querySelector('.aotos-flux-buybar__product');
+    if (barProduct) barProduct.classList.toggle('is-sale', onSale);
+  });
+}
+
+let fluxDiscountChain = Promise.resolve();
+
+function fluxCartUpdateUrl() {
+  const url = (window.routes && window.routes.cart_update_url) || '/cart/update';
+  return url.indexOf('.js') === -1 ? `${url}.js` : url;
+}
+
+function pushFluxDiscount(force) {
+  const code = fluxDiscountCode();
+  if (!code) return Promise.resolve(null);
+  const want = fluxDiscountWanted();
+  const run = fluxDiscountChain.catch(() => null).then(async () => {
+    const cart = await fetch('/cart.js', { headers: { Accept: 'application/json' } }).then((response) => response.json());
+    const existing = (cart.discount_codes || []).map((item) => item.code).filter(Boolean);
+    const next = existing.filter((item) => item.toUpperCase() !== code.toUpperCase());
+    if (want) next.push(code);
+    if (!force && next.join(',').toUpperCase() === existing.join(',').toUpperCase()) return cart;
+    return fetch(fluxCartUpdateUrl(), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({ discount: next.join(',') }),
+      keepalive: true
+    }).then((response) => response.json());
+  });
+  fluxDiscountChain = run;
+  return run;
+}
+
+function refreshFluxCart(open) {
+  const drawer = document.querySelector('cart-drawer');
+  if (!drawer || typeof drawer.getSectionsToRender !== 'function') return Promise.resolve();
+  const ids = drawer.getSectionsToRender().map((section) => section.id).join(',');
+  const cartUrl = (window.routes && window.routes.cart_url) || '/cart';
+  return fetch(`${cartUrl}?sections=${encodeURIComponent(ids)}`)
+    .then((response) => response.json())
+    .then((sections) => {
+      if (open && typeof drawer.renderContents === 'function') {
+        drawer.renderContents({ sections });
+        return;
+      }
+      drawer.getSectionsToRender().forEach((section) => {
+        const sectionElement = section.selector
+          ? document.querySelector(section.selector)
+          : document.getElementById(section.id);
+        if (!sectionElement || !sections[section.id]) return;
+        sectionElement.innerHTML = drawer.getSectionInnerHTML(sections[section.id], section.selector);
+      });
+      const overlay = drawer.querySelector('#CartDrawer-Overlay');
+      if (overlay && typeof drawer.close === 'function') overlay.addEventListener('click', drawer.close.bind(drawer));
+    })
+    .catch(() => {});
+}
+
 document.addEventListener('change', (event) => {
   const target = event.target;
   if (!target || target.type !== 'radio') return;
@@ -479,18 +610,22 @@ document.addEventListener('change', (event) => {
   const url = new URL(window.location.href);
   url.searchParams.set('variant', variant.id);
   window.history.replaceState({}, '', url.href);
-  document.querySelectorAll('[id^="price-"]').forEach((priceBox) => {
-    const regularPrice = priceBox.querySelector('.aotos-flux-price__regular');
-    if (regularPrice) regularPrice.textContent = variant.price_formatted;
-    const comparePrice = priceBox.querySelector('.aotos-flux-price__compare-value');
-    if (comparePrice) {
-      comparePrice.textContent = variant.compare_at_price > variant.price ? variant.compare_at_price_formatted : '';
+  document.querySelectorAll('[data-discount-code]').forEach((root) => {
+    const checkbox = root.querySelector('[data-discount-checkbox]');
+    const save = root.querySelector('.velotric-discount-code__save');
+    const hasDiscount = variant.discount_cents > 0;
+    if (typeof root._discountRequested === 'undefined') {
+      root._discountRequested = root.dataset.defaultChecked === 'true';
     }
-    const onSale = variant.compare_at_price > variant.price;
-    const saveBadge = priceBox.querySelector('.aotos-flux-price__save');
-    if (saveBadge) saveBadge.textContent = onSale && variant.save_formatted ? `SAVE  ${variant.save_formatted}` : '';
-    const wrapper = priceBox.querySelector('.aotos-flux-price__row');
-    if (wrapper) wrapper.classList.toggle('is-sale', onSale);
+    root.hidden = !hasDiscount;
+    if (save) save.textContent = hasDiscount ? `Save ${variant.discount_formatted}` : '';
+    const applied = hasDiscount && root._discountRequested;
+    if (checkbox) checkbox.checked = applied;
+    document.body.classList.toggle('discount-applied', applied);
+  });
+  paintFluxPrices(variant);
+  pushFluxDiscount().then((cart) => {
+    if (cart && cart.item_count > 0) refreshFluxCart(false);
   });
   document.querySelectorAll('[id^="ProductSubmitButton-"]').forEach((btn) => {
     const span = btn.querySelector('span');
@@ -503,13 +638,6 @@ document.addEventListener('change', (event) => {
     }
   });
   document.querySelectorAll('[data-flux-buybar]').forEach((bar) => {
-    const price = bar.querySelector('[data-flux-buybar-price]');
-    if (price) price.textContent = variant.price_formatted;
-    const compare = bar.querySelector('[data-flux-buybar-compare]');
-    const barOnSale = variant.compare_at_price > variant.price;
-    if (compare) compare.textContent = barOnSale ? variant.compare_at_price_formatted : '';
-    const barProduct = bar.querySelector('.aotos-flux-buybar__product');
-    if (barProduct) barProduct.classList.toggle('is-sale', barOnSale);
     const img = bar.querySelector('[data-flux-buybar-img]');
     if (img && variant.featured_image && variant.featured_image.src) {
       img.src = variant.featured_image.src;
@@ -545,6 +673,20 @@ document.addEventListener('change', (event) => {
       data: { variant, sectionId: container.dataset.section, html: document.documentElement }
     });
   }
+});
+
+document.addEventListener('click', (event) => {
+  const area = event.target.closest('[data-discount-code]');
+  if (!area || area.hidden) return;
+  const checkbox = area.querySelector('[data-discount-checkbox]');
+  if (!checkbox) return;
+  area._discountRequested = !checkbox.checked;
+  checkbox.checked = area._discountRequested;
+  document.body.classList.toggle('discount-applied', area._discountRequested);
+  paintFluxPrices(fluxCurrentVariant());
+  pushFluxDiscount().then((cart) => {
+    if (cart && cart.item_count > 0) refreshFluxCart(false);
+  });
 });
 
 document.addEventListener('click', (event) => {
@@ -750,17 +892,103 @@ document.querySelectorAll('[data-flux-buybar]').forEach((bar) => {
       body: new FormData(form)
     };
     const addUrl = (window.routes && window.routes.cart_add_url) || '/cart/add';
-    fetch(addUrl, config)
+    pushFluxDiscount()
+      .then(() => fetch(addUrl, config))
       .then((response) => response.json())
       .then((data) => {
         if (data && data.status) {
           buy.disabled = false;
           return;
         }
-        window.location.href = bar.getAttribute('data-checkout') || '/checkout';
+        return pushFluxDiscount(true).then(() => {
+          window.location.href = bar.getAttribute('data-checkout') || '/checkout';
+        });
       })
       .catch(() => {
         buy.disabled = false;
       });
   });
 });
+
+document.addEventListener('submit', (event) => {
+  const form = event.target;
+  if (!form || form.tagName !== 'FORM' || form.getAttribute('data-type') !== 'add-to-cart-form') return;
+  if (!form.closest('.aotos-flux')) return;
+  if (!fluxDiscountCode()) return;
+  event.preventDefault();
+  event.stopPropagation();
+  const productForm = form.closest('product-form');
+  const button = form.querySelector('[type="submit"]');
+  if (button && button.getAttribute('aria-disabled') === 'true') return;
+  if (button) {
+    button.setAttribute('aria-disabled', 'true');
+    button.classList.add('loading');
+  }
+  const spinner = productForm && productForm.querySelector('.loading__spinner');
+  if (spinner) spinner.classList.remove('hidden');
+  const cart = document.querySelector('cart-drawer') || document.querySelector('cart-notification');
+  const finish = () => {
+    if (button) {
+      button.classList.remove('loading');
+      if (!button.hasAttribute('disabled')) button.removeAttribute('aria-disabled');
+    }
+    if (spinner) spinner.classList.add('hidden');
+    if (cart && cart.classList.contains('is-empty')) cart.classList.remove('is-empty');
+  };
+  pushFluxDiscount()
+    .then(() => {
+      const config = {
+        method: 'POST',
+        headers: { 'X-Requested-With': 'XMLHttpRequest', Accept: 'application/javascript' }
+      };
+      const formData = new FormData(form);
+      if (cart && typeof cart.getSectionsToRender === 'function') {
+        formData.append('sections', cart.getSectionsToRender().map((section) => section.id));
+        formData.append('sections_url', window.location.pathname);
+        if (typeof cart.setActiveElement === 'function') cart.setActiveElement(document.activeElement);
+      }
+      config.body = formData;
+      const addUrl = (window.routes && window.routes.cart_add_url) || '/cart/add';
+      return fetch(addUrl, config).then((response) => response.json());
+    })
+    .then((data) => {
+      if (!data || data.status) {
+        const message = (data && (data.description || data.message)) || '';
+        const wrapper = productForm && productForm.querySelector('.product-form__error-message-wrapper');
+        const messageEl = wrapper && wrapper.querySelector('.product-form__error-message');
+        if (wrapper && messageEl && message) {
+          wrapper.hidden = false;
+          messageEl.textContent = message;
+        }
+        return null;
+      }
+      return pushFluxDiscount(true).then(() => refreshFluxCart(true));
+    })
+    .catch(() => {})
+    .finally(finish);
+}, true);
+
+document.addEventListener('submit', (event) => {
+  const form = event.target;
+  if (!form || form.id !== 'CartDrawer-Form') return;
+  if (!fluxDiscountCode()) return;
+  const submitter = event.submitter;
+  if (!submitter || submitter.name !== 'checkout') return;
+  if (form.dataset.fluxCheckoutReady === '1') {
+    delete form.dataset.fluxCheckoutReady;
+    return;
+  }
+  event.preventDefault();
+  event.stopPropagation();
+  pushFluxDiscount(true).finally(() => {
+    form.dataset.fluxCheckoutReady = '1';
+    if (submitter && typeof form.requestSubmit === 'function') form.requestSubmit(submitter);
+    else form.submit();
+  });
+}, true);
+
+if (fluxDiscountCode()) {
+  pushFluxDiscount(!fluxDiscountWanted()).then((cart) => {
+    if (cart && cart.item_count > 0) refreshFluxCart(false);
+  });
+}
