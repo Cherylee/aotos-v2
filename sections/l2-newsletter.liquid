@@ -15,7 +15,7 @@
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
       {%- if form.posted_successfully? -%}
-        <p class="l2-newsletter__msg">Thanks for subscribing.</p>
+        <p class="l2-newsletter__msg">Thanks for subscribing!</p>
       {%- endif -%}
       {%- if form.errors -%}
         <p class="l2-newsletter__msg">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>

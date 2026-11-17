@@ -237,6 +237,9 @@
   color: #b2b2b2;
   font-size: calc(12 * var(--rem));
 }
+.aotos-footer__message{
+  color: #21b141;
+}
 
 .aotos-footer__note svg,
 .aotos-footer__note img,
