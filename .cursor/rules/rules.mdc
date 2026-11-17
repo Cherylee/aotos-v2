@@ -1,0 +1,11 @@
+---
+alwaysApply: true
+description: Shopify 平台边界。样式、输出格式和购物车事件分别听其他规则。
+---
+硬性边界，只守这几条：
+
+1. 禁止编造不存在的 Liquid 对象、属性、metafield 命名空间和字段。不确定就先问，不要硬写。
+2. 前端可以调用 Storefront API。Admin API 密钥不能出现在前端，前端不能直接调用 Admin API。结账页不写自定义 JS、自定义样式。
+3. `{% schema %}` 必须合法，能过 theme check。
+4. 交互不能打断结账。结账页不弹窗、不浮层。
+5. Shopify 现有前端做不到的，直接说明限制和可选替代，不要硬写一套会出问题的实现。

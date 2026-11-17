@@ -10,6 +10,12 @@
 {%- liquid
   assign current_variant = product.selected_or_first_available_variant
   assign product_form_id = 'product-form-' | append: section.id
+  assign flux_discount_block = section.blocks | where: 'type', 'product_discount_code' | first
+  assign flux_dc = current_variant.metafields.custom.discount_money_count.value | default: 0 | plus: 0
+  assign flux_dc_on = false
+  if flux_discount_block != blank and flux_discount_block.settings.default_checked and flux_dc > 0
+    assign flux_dc_on = true
+  endif
   assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src'
   assign showcase_images = current_variant.metafields.custom.product_showcase_image.value
 -%}
@@ -333,16 +339,56 @@
           {%- when 'price' -%}
             {%- liquid
               assign price = current_variant.price
-              assign compare_at_price = current_variant.compare_at_price
+              assign compare_at_price = current_variant.compare_at_price | default: 0
               assign on_sale = false
               assign save_amount = 0
+              if flux_dc_on
+                assign price = price | minus: flux_dc
+                if price < 0
+                  assign price = 0
+                endif
+                unless compare_at_price > current_variant.price
+                  assign compare_at_price = current_variant.price
+                endunless
+              endif
               if compare_at_price > price
                 assign on_sale = true
                 assign save_amount = compare_at_price | minus: price
               endif
             -%}
             <div class="velotric-product__price" id="price-{{ section.id }}" {{ block.shopify_attributes }}>
-              <div class="velotric-product__price-wrapper aotos-flux-price__row{% if on_sale %} velotric-price--on-sale is-sale{% endif %}">
+              {%- liquid
+                assign raw_price = current_variant.price
+                assign raw_compare = current_variant.compare_at_price | default: 0
+                assign raw_save = 0
+                if raw_compare > raw_price
+                  assign raw_save = raw_compare | minus: raw_price
+                endif
+                assign off_price = raw_price
+                assign off_compare = raw_compare
+                assign off_save = 0
+                if flux_dc > 0
+                  assign off_price = raw_price | minus: flux_dc
+                  if off_price < 0
+                    assign off_price = 0
+                  endif
+                  unless off_compare > raw_price
+                    assign off_compare = raw_price
+                  endunless
+                  if off_compare > off_price
+                    assign off_save = off_compare | minus: off_price
+                  endif
+                endif
+              -%}
+              <div
+                class="velotric-product__price-wrapper aotos-flux-price__row{% if on_sale %} velotric-price--on-sale is-sale{% endif %}"
+                data-raw-price="{{ raw_price | money | escape }}"
+                data-raw-compare="{% if raw_save > 0 %}{{ raw_compare | money | escape }}{% endif %}"
+                data-raw-save="{% if raw_save > 0 %}{{ raw_save | money | escape }}{% endif %}"
+                data-off-price="{% if flux_dc > 0 %}{{ off_price | money | escape }}{% endif %}"
+                data-off-compare="{% if off_save > 0 %}{{ off_compare | money | escape }}{% endif %}"
+                data-off-save="{% if off_save > 0 %}{{ off_save | money | escape }}{% endif %}"
+              >
                 <span class="velotric-price-item velotric-price-item--regular aotos-flux-price__regular">{{ price | money }}</span>
                 <span class="velotric-price__compare aotos-flux-price__compare">
                   <s class="velotric-price-item aotos-flux-price__compare-value">{% if on_sale %}{{ compare_at_price | money }}{% endif %}</s>
@@ -350,6 +396,50 @@
                 <span class="aotos-flux-price__save">{% if on_sale %}SAVE {{ save_amount | money }}{% endif %}</span>
               </div>
             </div>
+          {%- when 'product_discount_code' -%}
+            {%- liquid
+              assign dc_variant = product.selected_or_first_available_variant
+              assign dc_amount = dc_variant.metafields.custom.discount_money_count.value
+              assign dc_has = false
+              if dc_amount != blank and dc_amount > 0
+                assign dc_has = true
+                assign dc_save_cents = dc_amount | times: 1
+              endif
+            -%}
+            <div
+              class="velotric-discount-code"
+              id="DiscountCode-{{ section.id }}"
+              data-discount-code
+              data-code="{{ block.settings.code | default: 'X26BF200' | escape }}"
+              data-default-checked="{{ block.settings.default_checked }}"
+              {% unless dc_has %}hidden{% endunless %}
+              style="--discount-checkbox-color: {{ block.settings.checkbox_color | default: '#ff6501' }};"
+              {{ block.shopify_attributes }}
+            >
+              <div class="velotric-discount-code__main">
+                <input
+                  type="checkbox"
+                  class="velotric-discount-code__checkbox"
+                  data-discount-checkbox
+                  tabindex="-1"
+                  aria-hidden="true"
+                  {% if dc_has and block.settings.default_checked %}
+                    checked
+                  {% endif %}
+                >
+                <span class="velotric-discount-code__box" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" fill="none">
+                    <path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span class="velotric-discount-code__text">
+                  <span class="velotric-discount-code__save">{% if dc_has %}Save {{ dc_save_cents | money }}{% endif %}</span>
+                </span>
+              </div>
+            </div>
+            {%- if dc_has and block.settings.default_checked -%}
+              <script>document.body.classList.add('discount-applied');</script>
+            {%- endif -%}
           {%- when 'preorder_notice' -%}
             {%- if block.settings.text != blank -%}
               <div class="product-preorder-notice" style="background: {{ block.settings.bg_color | default: '#f7f1e8' }};" {{ block.shopify_attributes }}>
@@ -442,8 +532,19 @@
 
   {%- liquid
     assign bar_image = current_variant.featured_image | default: product.featured_image
+    assign bar_price = current_variant.price
+    assign bar_compare = current_variant.compare_at_price | default: 0
     assign bar_sale = false
-    if current_variant.compare_at_price > current_variant.price
+    if flux_dc_on
+      assign bar_price = bar_price | minus: flux_dc
+      if bar_price < 0
+        assign bar_price = 0
+      endif
+      unless bar_compare > current_variant.price
+        assign bar_compare = current_variant.price
+      endunless
+    endif
+    if bar_compare > bar_price
       assign bar_sale = true
     endif
   -%}
@@ -464,8 +565,8 @@
         >
       {%- endif -%}
       <span class="aotos-flux-buybar__prices">
-        <span class="aotos-flux-buybar__price" data-flux-buybar-price>{{ current_variant.price | money }}</span>
-        <s class="aotos-flux-buybar__compare" data-flux-buybar-compare>{% if bar_sale %}{{ current_variant.compare_at_price | money }}{% endif %}</s>
+        <span class="aotos-flux-buybar__price" data-flux-buybar-price>{{ bar_price | money }}</span>
+        <s class="aotos-flux-buybar__compare" data-flux-buybar-compare>{% if bar_sale %}{{ bar_compare | money }}{% endif %}</s>
       </span>
     </div>
     <div class="aotos-flux-buybar__actions">
@@ -535,6 +636,36 @@
       ]
     },
     { "type": "price", "name": "Price", "limit": 1, "settings": [] },
+    {
+      "type": "product_discount_code",
+      "name": "Discount code",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "读取当前变体元字段 custom.discount_money_count。勾选后价格减去该金额，并把折扣码写入购物车，结算页折扣码区域会带上这个码。"
+        },
+        {
+          "type": "text",
+          "id": "code",
+          "label": "折扣码",
+          "default": "X26BF200"
+        },
+        {
+          "type": "checkbox",
+          "id": "default_checked",
+          "label": "默认勾选",
+          "info": "打开页面时自动应用折扣预览。",
+          "default": false
+        },
+        {
+          "type": "color",
+          "id": "checkbox_color",
+          "label": "勾选框颜色",
+          "default": "#ff6501"
+        }
+      ]
+    },
     {
       "type": "preorder_notice",
       "name": "Pre-order notice",

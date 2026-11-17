@@ -604,6 +604,90 @@ body.velotric-lightbox-open {
   display: inline-flex;
 }
 
+.velotric-discount-code {
+  display: flex;
+  align-items: center;
+
+  gap: calc(12 * var(--rem));
+  padding: calc(14 * var(--rem)) calc(18 * var(--rem));
+  margin-bottom: calc(16 * var(--rem));
+  margin-top: calc(16 * var(--rem));
+  border-radius: calc(12 * var(--rem));
+  background: #fff8e5;
+  color: #111;
+  cursor: pointer;
+  
+  user-select: none;
+}
+
+.velotric-discount-code[hidden] {
+  display: none;
+}
+
+.velotric-discount-code__main {
+  display: flex;
+  align-items: center;
+  gap: calc(12 * var(--rem));
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.velotric-discount-code__checkbox {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.velotric-discount-code__box {
+  flex: 0 0 auto;
+  width: calc(22 * var(--rem));
+  height: calc(22 * var(--rem));
+  border-radius: calc(6 * var(--rem));
+  background: #fff;
+  border: calc(2 * var(--rem)) solid var(--discount-checkbox-color, #ff6501);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.velotric-discount-code__box svg {
+  width: calc(13 * var(--rem));
+  height: calc(13 * var(--rem));
+  opacity: 0;
+  color: #fff;
+  transition: opacity 0.2s ease;
+}
+
+.velotric-discount-code__checkbox:checked + .velotric-discount-code__box {
+  background: var(--discount-checkbox-color, #ff6501);
+}
+
+.velotric-discount-code__checkbox:checked + .velotric-discount-code__box svg {
+  opacity: 1;
+}
+
+.velotric-discount-code__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+  min-width: 0;
+}
+
+.velotric-discount-code__save {
+  display: flex;
+  flex-direction: column;
+  font-size: calc(18 * var(--rem));
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .velotric-discount-code__box,
+  .velotric-discount-code__box svg {
+    transition: none;
+  }
+}
+
 .velotric-product__text {
   font-size: calc(12 * var(--rem));
   line-height: calc(16 * var(--rem));
@@ -1941,6 +2025,31 @@ body.size-fit-drawer-open {
     margin-left: calc(8 * var(--rem));
     padding: calc(8 * var(--rem)) calc(14 * var(--rem));
     font-size: calc(22 * var(--rem));
+  }
+
+  .velotric-discount-code {
+    padding: calc(24 * var(--rem)) calc(28 * var(--rem));
+    gap: calc(18 * var(--rem));
+    margin-bottom: calc(24 * var(--rem));
+    border-radius: calc(16 * var(--rem));
+  }
+
+  .velotric-discount-code__main {
+    gap: calc(18 * var(--rem));
+  }
+
+  .velotric-discount-code__box {
+    width: calc(36 * var(--rem));
+    height: calc(36 * var(--rem));
+  }
+
+  .velotric-discount-code__box svg {
+    width: calc(20 * var(--rem));
+    height: calc(20 * var(--rem));
+  }
+
+  .velotric-discount-code__save {
+    font-size: calc(28 * var(--rem));
   }
 
   .velotric-product__text {
