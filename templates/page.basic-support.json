@@ -61,10 +61,19 @@
     "support_manuals": {
       "type": "support-manual",
       "blocks": {
+        "manual_item_mDBjiE": {
+          "type": "manual_item",
+          "settings": {
+            "title": "FLUX T26 Series User Manual",
+            "description": "PDF (4.62 MB）",
+            "related_product": "",
+            "file_url": "https://cdn.shopify.com/s/files/1/0719/2736/5851/files/FLUX_T26_Series_User_Manual.pdf?v=1794884688"
+          }
+        },
         "manual_1": {
           "type": "manual_item",
           "settings": {
-            "title": "Flux X26 / Flux X26 Pro User Manual",
+            "title": "FLUX X26 Series User Manual",
             "description": "PDF (9.49 MB)",
             "related_product": "flux-x26-pro",
             "file_url": "https://cdn.shopify.com/s/files/1/0719/2736/5851/files/B010030973__compressed.pdf?v=1774277236"
@@ -81,6 +90,7 @@
         }
       },
       "block_order": [
+        "manual_item_mDBjiE",
         "manual_1",
         "manual_2"
       ],
