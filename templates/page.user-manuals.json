@@ -129,14 +129,14 @@
     "user_manuals_videos": {
       "type": "user-manuals-videos",
       "blocks": {
-        "vid_01": {
+        "video_7mkPFr": {
           "type": "video",
           "settings": {
             "index": "01",
             "duration": "",
             "label": "START HERE",
             "title": "Unboxing & Assembly",
-            "video_url": "https://www.youtube.com/watch?v=HFi_j91FbRo"
+            "video_url": "https://youtu.be/MQ-tw_znUzc"
           }
         },
         "vid_02": {
@@ -146,7 +146,7 @@
             "duration": "",
             "label": "APP SETUP",
             "title": "Connect the AOTOS App",
-            "video_url": ""
+            "video_url": "https://youtu.be/iI-_UrpfrK4"
           }
         },
         "vid_03": {
@@ -156,12 +156,12 @@
             "duration": "",
             "label": "DAILY USE",
             "title": "Display & Ride Modes",
-            "video_url": ""
+            "video_url": "https://youtu.be/tzX3NE0IG18"
           }
         }
       },
       "block_order": [
-        "vid_01",
+        "video_7mkPFr",
         "vid_02",
         "vid_03"
       ],
