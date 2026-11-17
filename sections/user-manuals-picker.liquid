@@ -655,6 +655,7 @@
               class="ump-bike"
               type="button"
               data-bike="{{ block.id }}"
+              data-model="{{ block.settings.model | escape }}"
               aria-pressed="{% if ump_pressed %}true{% else %}false{% endif %}"
               {{ block.shopify_attributes }}
             >
@@ -849,7 +850,12 @@
         var on = panel.getAttribute('data-bike') === bike && panel.getAttribute('data-channel') === channel;
         panel.hidden = !on;
       });
+      var current = root.querySelector('.ump-bike[aria-pressed="true"]');
+      window.umpBikeModel = current ? current.getAttribute('data-model') || '' : '';
+      document.dispatchEvent(new CustomEvent('ump:bike', { detail: { model: window.umpBikeModel } }));
     }
+
+    apply();
 
     root.addEventListener('click', function (e) {
       var b = e.target.closest('.ump-bike');

@@ -126,14 +126,15 @@
     "user_manuals_videos": {
       "type": "user-manuals-videos",
       "blocks": {
-        "vid_01": {
+        "video_7mkPFr": {
           "type": "video",
           "settings": {
             "index": "01",
             "duration": "",
             "label": "START HERE",
             "title": "Unboxing & Assembly",
-            "video_url": "https://www.youtube.com/watch?v=HFi_j91FbRo"
+            "video_url": "https://youtu.be/MQ-tw_znUzc",
+            "bikes": "FLUX X26"
           }
         },
         "vid_02": {
@@ -143,7 +144,8 @@
             "duration": "",
             "label": "APP SETUP",
             "title": "Connect the AOTOS App",
-            "video_url": ""
+            "video_url": "https://youtu.be/iI-_UrpfrK4",
+            "bikes": "FLUX X26"
           }
         },
         "vid_03": {
@@ -153,14 +155,51 @@
             "duration": "",
             "label": "DAILY USE",
             "title": "Display & Ride Modes",
-            "video_url": ""
+            "video_url": "https://youtu.be/tzX3NE0IG18",
+            "bikes": "FLUX X26"
+          }
+        },
+        "vid_04": {
+          "type": "video",
+          "settings": {
+            "index": "01",
+            "duration": "",
+            "label": "START HERE",
+            "title": "Unboxing & Assembly",
+            "video_url": "",
+            "bikes": "FLUX T26"
+          }
+        },
+        "vid_05": {
+          "type": "video",
+          "settings": {
+            "index": "02",
+            "duration": "",
+            "label": "APP SETUP",
+            "title": "Connect the AOTOS App",
+            "video_url": "",
+            "bikes": "FLUX T26"
+          }
+        },
+        "vid_06": {
+          "type": "video",
+          "settings": {
+            "index": "03",
+            "duration": "",
+            "label": "DAILY USE",
+            "title": "Display & Ride Modes",
+            "video_url": "",
+            "bikes": "FLUX T26"
           }
         }
       },
       "block_order": [
-        "vid_01",
+        "video_7mkPFr",
         "vid_02",
-        "vid_03"
+        "vid_03",
+        "vid_04",
+        "vid_05",
+        "vid_06"
       ],
       "settings": {
         "step_num": "3",

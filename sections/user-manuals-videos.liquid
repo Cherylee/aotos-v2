@@ -85,6 +85,10 @@
     width: 100%;
   }
 
+  #user-manuals-videos-{{ umv_id }} .umv-card[hidden] {
+    display: none;
+  }
+
   #user-manuals-videos-{{ umv_id }} .umv-card[aria-disabled='true'] {
     cursor: default;
   }
@@ -392,11 +396,12 @@
             class="umv-card"
             type="button"
             data-src="{{ umv_src | escape }}"
+            data-bikes="{{ block.settings.bikes | escape }}"
             {% if umv_src == blank %}aria-disabled="true"{% endif %}
             {{ block.shopify_attributes }}
           >
             <div class="umv-thumb">
-              <span class="umv-idx">{{ umv_idx | escape }}</span>
+              <span class="umv-idx"{% if block.settings.index == blank %} data-auto{% endif %}>{{ umv_idx | escape }}</span>
               {%- if block.settings.image != blank -%}
                 {{
                   block.settings.image
@@ -474,6 +479,30 @@
         })
         .catch(function () {});
     });
+
+    function norm(value) {
+      return String(value || '').trim().toLowerCase();
+    }
+
+    function filterByBike(model) {
+      var key = norm(model);
+      var n = 0;
+      root.querySelectorAll('.umv-card').forEach(function (card) {
+        var list = (card.getAttribute('data-bikes') || '').split(',').map(norm).filter(Boolean);
+        var on = !key || !list.length || list.indexOf(key) !== -1;
+        card.hidden = !on;
+        if (!on) return;
+        n += 1;
+        var idx = card.querySelector('.umv-idx[data-auto]');
+        if (idx) idx.textContent = n > 9 ? String(n) : '0' + n;
+      });
+    }
+
+    if (typeof window.umpBikeModel === 'string') filterByBike(window.umpBikeModel);
+    document.addEventListener('ump:bike', function (e) {
+      filterByBike(e.detail && e.detail.model);
+    });
+
     var modal = root.querySelector('.umv-modal');
     var iframe = modal && modal.querySelector('iframe');
     if (!modal || !iframe) return;
@@ -611,6 +640,12 @@
           "id": "video_url",
           "label": "视频链接",
           "accept": ["youtube", "vimeo"]
+        },
+        {
+          "type": "text",
+          "id": "bikes",
+          "label": "适用车型",
+          "info": "填上方产品选择里的「型号名」，如 FLUX X26；多个用英文逗号分隔。留空则所有车型都显示"
         }
       ]
     }
