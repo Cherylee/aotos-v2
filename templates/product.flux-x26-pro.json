@@ -51,7 +51,6 @@
         "product_discount_code_PXAcQb": {
           "type": "product_discount_code",
           "name": "Discount code",
-          "disabled": false,
           "settings": {
             "code": "X26BF200",
             "default_checked": true,
