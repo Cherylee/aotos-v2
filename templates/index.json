@@ -404,6 +404,7 @@
       "settings": {
         "title": "FLUX T26",
         "button_label": "Learn More",
+        "button_aria_label": "View Flux T26 product details",
         "button_link": "shopify://products/flux-t26",
         "padding_top": 60,
         "padding_bottom": 80,
@@ -447,7 +448,7 @@
             "stat_1_label": "Up to",
             "stat_2_value": "100 N·m",
             "stat_2_label": "Torque",
-            "stat_3_value": "35 MPH",
+            "stat_3_value": "28 MPH",
             "stat_3_label": "Top Speed",
             "stat_size": 16,
             "stat_label_size": 10,
