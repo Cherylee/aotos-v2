@@ -50,6 +50,7 @@ if (!customElements.get('aotos-option-modal')) {
           if (el !== this) el.remove();
         });
         document.body.appendChild(this);
+        this.sync();
         this.hidden = false;
         this.classList.add('is-open');
         document.body.style.overflow = 'hidden';
@@ -101,7 +102,11 @@ if (!customElements.get('aotos-option-modal')) {
           this.idInput.disabled = !variant.available;
           this.idInput.value = String(variant.id);
         }
-        if (this.priceEl && variant.price) this.priceEl.textContent = variant.price;
+        if (this.priceEl && variant.price) {
+          const cardCb = this.opener && this.opener.closest('.card') && this.opener.closest('.card').querySelector('[data-card-discount-checkbox]');
+          const useOff = cardCb && cardCb.checked && variant.off_price;
+          this.priceEl.textContent = useOff ? variant.off_price : variant.price;
+        }
         if (this.img && variant.image) this.img.src = variant.image;
         if (this.addBtn) this.addBtn.disabled = !variant.available;
       }
