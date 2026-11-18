@@ -251,7 +251,7 @@
               {%- endif -%}
               {%- if block.settings.button_label != blank -%}
                 {%- if block.settings.button_link != blank -%}
-                  <a class="button home-explore__btn" href="{{ block.settings.button_link }}">
+                  <a class="button home-explore__btn"{% if block.settings.button_aria_label != blank %} aria-label="{{ block.settings.button_aria_label | escape }}"{% endif %} href="{{ block.settings.button_link }}">
                     {{ block.settings.button_label | escape }}
                     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                       <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -366,6 +366,11 @@
           "id": "button_label",
           "label": "按钮文字",
           "default": "Learn More"
+        },
+        {
+          "type": "text",
+          "id": "button_aria_label",
+          "label": "按钮无障碍描述（aria-label）"
         },
         {
           "type": "url",

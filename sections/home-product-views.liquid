@@ -240,7 +240,7 @@
     {%- if section.settings.button_label != blank -%}
       <div class="home-views__actions">
         {%- if section.settings.button_link != blank -%}
-          <a class="button" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>
+          <a class="button"{% if section.settings.button_aria_label != blank %} aria-label="{{ section.settings.button_aria_label | escape }}"{% endif %} href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>
         {%- else -%}
           <span class="button">{{ section.settings.button_label | escape }}</span>
         {%- endif -%}
@@ -292,6 +292,12 @@
       "id": "button_label",
       "label": "按钮文案",
       "default": "Learn More"
+    },
+    {
+      "type": "text",
+      "id": "button_aria_label",
+      "label": "按钮无障碍描述（aria-label）",
+      "default": "View Flux T26 product details"
     },
     {
       "type": "url",

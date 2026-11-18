@@ -768,6 +768,7 @@
             "title": "Featured in the Media",
             "text": "Press highlights & Expert Reviews on AOTOS",
             "button_label": "Learn More",
+            "button_aria_label": "Read press coverage about Flux X26 Pro",
             "button_link": "shopify://pages/what-the-press-is-saying-about-flux-x26-pro"
           }
         },
@@ -780,6 +781,7 @@
             "title": "Collaborate with AOTOS",
             "text": "Join our affiliate network and be part of the future of electric riding",
             "button_label": "Learn More",
+            "button_aria_label": "Learn about partnering with Aotos",
             "button_link": "shopify://pages/partner-with-aotos"
           }
         },
@@ -792,6 +794,7 @@
             "title": "Service and Support",
             "text": "Get help for all your AOTOS products",
             "button_label": "Learn More",
+            "button_aria_label": "Open Aotos support center",
             "button_link": "shopify://pages/support-center"
           }
         }
