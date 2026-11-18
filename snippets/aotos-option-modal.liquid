@@ -92,10 +92,18 @@
     <script type="application/json" data-opt-variants>
       [
         {%- for variant in product.variants -%}
+          {%- liquid
+            assign opt_v_dc = variant.metafields.custom.discount_money_count.value | default: 0 | plus: 0
+            assign opt_v_off = variant.price | minus: opt_v_dc
+            if opt_v_off < 0
+              assign opt_v_off = 0
+            endif
+          -%}
           {
             "id": {{ variant.id }},
             "available": {{ variant.available }},
             "price": {{ variant.price | money | json }},
+            "off_price": {% if opt_v_dc > 0 %}{{ opt_v_off | money | json }}{% else %}null{% endif %},
             "options": {{ variant.options | json }},
             "image": {% if variant.featured_image %}{{ variant.featured_image | image_url: width: 400 | json }}{% else %}null{% endif %}
           }{% unless forloop.last %},{% endunless %}

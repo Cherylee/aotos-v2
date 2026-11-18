@@ -133,7 +133,7 @@
               >
                 {{- 'products.product.sold_out' | t -}}
               </span>
-            {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
+            {%- elsif hide_sale_badge != true and card_product.compare_at_price > card_product.price and card_product.available -%}
               <span
                 id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
                 class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
@@ -246,7 +246,92 @@
               </div>
             {%- endif -%}
 
-            {% render 'price', product: card_product, price_class: '', show_compare_at_price: true, hide_from_prefix: hide_from_prefix %}
+            {%- liquid
+              assign card_dc_cents = 0
+              assign card_dc_code = discount_code | default: 'X26BF200'
+              if show_discount_checkbox
+                assign card_dc_variant = card_product.selected_or_first_available_variant
+                assign card_dc_cents = card_dc_variant.metafields.custom.discount_money_count.value | default: 0 | plus: 0
+                if card_dc_cents <= 0
+                  for v in card_product.variants
+                    assign v_dc = v.metafields.custom.discount_money_count.value | default: 0 | plus: 0
+                    if v_dc > 0
+                      assign card_dc_cents = v_dc
+                      break
+                    endif
+                  endfor
+                endif
+              endif
+            -%}
+            {%- if card_dc_cents > 0 -%}
+              {%- liquid
+                assign raw_price_cents = card_product.price
+                assign raw_compare_cents = card_product.compare_at_price | default: 0
+                assign off_price_cents = raw_price_cents | minus: card_dc_cents
+                if off_price_cents < 0
+                  assign off_price_cents = 0
+                endif
+                assign off_compare_cents = raw_compare_cents
+                unless off_compare_cents > raw_price_cents
+                  assign off_compare_cents = raw_price_cents
+                endunless
+                if settings.currency_code_enabled
+                  assign raw_price_fmt = raw_price_cents | money_with_currency
+                  assign raw_compare_fmt = raw_compare_cents | money_with_currency
+                  assign off_price_fmt = off_price_cents | money_with_currency
+                  assign off_compare_fmt = off_compare_cents | money_with_currency
+                else
+                  assign raw_price_fmt = raw_price_cents | money
+                  assign raw_compare_fmt = raw_compare_cents | money
+                  assign off_price_fmt = off_price_cents | money
+                  assign off_compare_fmt = off_compare_cents | money
+                endif
+              -%}
+              <div
+                class="price price--on-sale{% if card_product.available == false %} price--sold-out{% endif %}"
+                data-card-price
+                data-raw-price="{{ raw_price_fmt | escape }}"
+                data-raw-compare="{% if raw_compare_cents > raw_price_cents %}{{ raw_compare_fmt | escape }}{% endif %}"
+                data-raw-sale="{% if raw_compare_cents > raw_price_cents %}true{% else %}false{% endif %}"
+                data-off-price="{{ off_price_fmt | escape }}"
+                data-off-compare="{{ off_compare_fmt | escape }}"
+              >
+                <div class="price__container">
+                  <div class="price__regular">
+                    <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
+                    <span class="price-item price-item--regular" data-card-price-regular>{{ raw_price_fmt }}</span>
+                  </div>
+                  <div class="price__sale">
+                    <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.sale_price' | t }}</span>
+                    <span class="price-item price-item--sale price-item--last" data-card-price-sale>{{ off_price_fmt }}</span>
+                    <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
+                    <span>
+                      <s class="price-item price-item--regular" data-card-price-compare>{{ off_compare_fmt }}</s>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <label
+                class="aotos-card-discount"
+                data-card-discount
+                data-code="{{ card_dc_code | escape }}"
+              >
+                <input
+                  type="checkbox"
+                  class="aotos-card-discount__checkbox"
+                  data-card-discount-checkbox
+                  checked
+                >
+                <span class="aotos-card-discount__box" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" fill="none">
+                    <path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span class="aotos-card-discount__save">Save {{ card_dc_cents | money }}</span>
+              </label>
+            {%- else -%}
+              {% render 'price', product: card_product, price_class: '', show_compare_at_price: true, hide_from_prefix: hide_from_prefix %}
+            {%- endif -%}
             {%- if card_product.quantity_price_breaks_configured? -%}
               {% if card_product.variants.size == 1 and quick_add == 'bulk' %}
                 {% liquid
@@ -394,7 +479,12 @@
               >
                 <input type="hidden" name="id" value="{{ buy_variant.id }}">
                 <input type="hidden" name="quantity" value="1">
-                <input type="hidden" name="return_to" value="/checkout">
+                <input
+                  type="hidden"
+                  name="return_to"
+                  data-card-buy-return
+                  value="{% if card_dc_cents > 0 and card_dc_code != blank %}/checkout?discount={{ card_dc_code | url_encode }}{% else %}/checkout{% endif %}"
+                >
                 <button
                   type="submit"
                   class="aotos-card-actions__buy"
@@ -676,7 +766,7 @@
             >
               {{- 'products.product.sold_out' | t -}}
             </span>
-          {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
+          {%- elsif hide_sale_badge != true and card_product.compare_at_price > card_product.price and card_product.available -%}
             <span
               id="Badge-{{ section_id }}-{{ card_product.id }}"
               class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"

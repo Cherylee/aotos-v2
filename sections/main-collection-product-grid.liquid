@@ -500,6 +500,74 @@
     line-height: calc(14 * var(--rem));
   }
 
+  .aotos-collection-{{ section.id }} .aotos-card-discount {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: calc(8 * var(--rem));
+    width: 100%;
+    margin-top: calc(6 * var(--rem));
+    padding: calc(7 * var(--rem)) calc(10 * var(--rem));
+    border-radius: calc(6 * var(--rem));
+    background: #fff8e5;
+    color: #000000;
+    cursor: pointer;
+    user-select: none;
+    box-sizing: border-box;
+  }
+
+  .aotos-collection-{{ section.id }} .aotos-card-discount__checkbox {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .aotos-collection-{{ section.id }} .aotos-card-discount__box {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(15 * var(--rem));
+    height: calc(15 * var(--rem));
+    border-radius: calc(4 * var(--rem));
+    border: calc(1.5 * var(--rem)) solid var(--aotos-theme-color, #ff6501);
+    background: #ffffff;
+    box-sizing: border-box;
+    transition: background 0.2s ease;
+  }
+
+  .aotos-collection-{{ section.id }} .aotos-card-discount__box svg {
+    width: calc(9 * var(--rem));
+    height: calc(9 * var(--rem));
+    color: #ffffff;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .aotos-collection-{{ section.id }} .aotos-card-discount__checkbox:checked + .aotos-card-discount__box {
+    background: var(--aotos-theme-color, #ff6501);
+  }
+
+  .aotos-collection-{{ section.id }} .aotos-card-discount__checkbox:checked + .aotos-card-discount__box svg {
+    opacity: 1;
+  }
+
+  .aotos-collection-{{ section.id }} .aotos-card-discount__save {
+    font-size: calc(12 * var(--rem));
+    line-height: calc(16 * var(--rem));
+    font-weight: 700;
+    color: #000000;
+    white-space: nowrap;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .aotos-collection-{{ section.id }} .aotos-card-discount__box,
+    .aotos-collection-{{ section.id }} .aotos-card-discount__box svg {
+      transition: none;
+    }
+  }
+
   @media screen and (max-width: 768px) {
     .aotos-collection-{{ section.id }} .aotos-collection__inner {
       width: 100%;
@@ -576,6 +644,30 @@
     .aotos-collection-{{ section.id }} .price--on-sale .price-item--regular {
       font-size: calc(22 * var(--rem));
       line-height: calc(28 * var(--rem));
+    }
+
+    .aotos-collection-{{ section.id }} .aotos-card-discount {
+      gap: calc(14 * var(--rem));
+      margin-top: calc(12 * var(--rem));
+      padding: calc(16 * var(--rem)) calc(20 * var(--rem));
+      border-radius: calc(12 * var(--rem));
+    }
+
+    .aotos-collection-{{ section.id }} .aotos-card-discount__box {
+      width: calc(30 * var(--rem));
+      height: calc(30 * var(--rem));
+      border-radius: calc(8 * var(--rem));
+      border-width: calc(3 * var(--rem));
+    }
+
+    .aotos-collection-{{ section.id }} .aotos-card-discount__box svg {
+      width: calc(18 * var(--rem));
+      height: calc(18 * var(--rem));
+    }
+
+    .aotos-collection-{{ section.id }} .aotos-card-discount__save {
+      font-size: calc(24 * var(--rem));
+      line-height: calc(32 * var(--rem));
     }
 
     .aotos-collection-{{ section.id }} .facets.small-hide,
@@ -878,7 +970,10 @@
                     quick_add: section.settings.quick_add,
                     section_id: section.id,
                     hide_from_prefix: true,
-                    show_cart_buttons: section.settings.show_cart_buttons
+                    hide_sale_badge: true,
+                    show_cart_buttons: section.settings.show_cart_buttons,
+                    show_discount_checkbox: section.settings.show_discount_checkbox,
+                    discount_code: section.settings.discount_code
                   %}
                 </li>
                 {%- assign skip_card_product_styles = true -%}
@@ -898,6 +993,86 @@
   {%- endif -%}
   </div>
 </div>
+
+<script>
+  (function () {
+    if (window._aotosCollectionDiscountBound) return;
+    window._aotosCollectionDiscountBound = true;
+
+    function syncCartDiscount(code, want) {
+      if (!code) return Promise.resolve();
+      var updateUrl = (window.routes && window.routes.cart_update_url) || '/cart/update';
+      if (updateUrl.indexOf('.js') === -1) updateUrl += '.js';
+      return fetch('/cart.js', { headers: { Accept: 'application/json' } })
+        .then(function (r) { return r.json(); })
+        .then(function (cart) {
+          var existing = (cart.discount_codes || []).map(function (c) { return c.code; }).filter(Boolean);
+          var next = existing.filter(function (c) { return c.toUpperCase() !== code.toUpperCase(); });
+          if (want) next.push(code);
+          if (next.join(',').toUpperCase() === existing.join(',').toUpperCase()) return cart;
+          return fetch(updateUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({ discount: next.join(',') }),
+            keepalive: true
+          }).then(function (r) { return r.json(); });
+        })
+        .catch(function () {});
+    }
+
+    document.addEventListener('click', function (event) {
+      if (event.target.closest('[data-card-discount]')) {
+        event.stopPropagation();
+      }
+    });
+
+    document.addEventListener('change', function (event) {
+      var cb = event.target;
+      if (!cb || !cb.matches('[data-card-discount-checkbox]')) return;
+      var wrap = cb.closest('[data-card-discount]');
+      var card = cb.closest('.card');
+      if (!card) return;
+      var checked = cb.checked;
+      var code = (wrap && wrap.getAttribute('data-code')) || '';
+      var priceEl = card.querySelector('[data-card-price]');
+      if (priceEl) {
+        var saleEl = priceEl.querySelector('[data-card-price-sale]');
+        var cmpEl = priceEl.querySelector('[data-card-price-compare]');
+        if (checked) {
+          priceEl.classList.add('price--on-sale');
+          if (saleEl) saleEl.textContent = priceEl.getAttribute('data-off-price') || '';
+          if (cmpEl) cmpEl.textContent = priceEl.getAttribute('data-off-compare') || '';
+        } else {
+          var rawSale = priceEl.getAttribute('data-raw-sale') === 'true';
+          priceEl.classList.toggle('price--on-sale', rawSale);
+          if (saleEl) saleEl.textContent = priceEl.getAttribute('data-raw-price') || '';
+          if (cmpEl) cmpEl.textContent = priceEl.getAttribute('data-raw-compare') || '';
+        }
+      }
+      var retInput = card.querySelector('[data-card-buy-return]');
+      if (retInput) {
+        retInput.value = checked && code ? '/checkout?discount=' + encodeURIComponent(code) : '/checkout';
+      }
+      syncCartDiscount(code, checked);
+    });
+
+    document.addEventListener('submit', function (event) {
+      var form = event.target;
+      if (!form || form.tagName !== 'FORM' || form.getAttribute('data-type') !== 'add-to-cart-form') return;
+      var card = form.closest('.card');
+      if (!card) {
+        var modal = form.closest('aotos-option-modal');
+        if (modal && modal.opener) card = modal.opener.closest('.card');
+      }
+      if (!card) return;
+      var wrap = card.querySelector('[data-card-discount]');
+      var cb = card.querySelector('[data-card-discount-checkbox]');
+      if (!wrap || !cb) return;
+      var code = wrap.getAttribute('data-code') || '';
+      if (code && cb.checked) syncCartDiscount(code, true);
+    }, true);
+  })();
+</script>
 
 {% schema %}
 {
@@ -1034,6 +1209,19 @@
       "id": "show_cart_buttons",
       "default": true,
       "label": "显示加购/结算按钮"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_discount_checkbox",
+      "default": true,
+      "label": "显示折扣勾选框",
+      "info": "读取产品变体元字段 custom.discount_money_count，默认勾选并展示折后价。"
+    },
+    {
+      "type": "text",
+      "id": "discount_code",
+      "default": "X26BF200",
+      "label": "折扣码"
     },
     {
       "type": "select",
