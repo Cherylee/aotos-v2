@@ -350,6 +350,7 @@
         },
         "card_2": {
           "type": "card",
+          "disabled": true,
           "settings": {
             "video_url": "",
             "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales04.webp",
