@@ -297,6 +297,16 @@
     "flux_features": {
       "type": "aotos-flux-features",
       "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "video": "shopify://files/videos/pro1.mp4",
+            "video_url": "",
+            "pre_heading": "Boost Mode",
+            "heading": "Instant Torque. Controlled Launch.",
+            "description": "<p>Tap Boost to send maximum torque to the rear wheel, giving you stronger acceleration when you need an extra burst of power.</p>"
+          }
+        },
         "card_4": {
           "type": "card",
           "settings": {
@@ -315,16 +325,6 @@
             "pre_heading": "Smart Security System",
             "heading": "Track It. Protect It.",
             "description": "<p>On the Pro model, built-in GPS tracking and an anti-theft vibration alarm help protect your bike, send instant alerts, and make it easier to locate when needed.</p>"
-          }
-        },
-        "card_1": {
-          "type": "card",
-          "settings": {
-            "video": "shopify://files/videos/pro1.mp4",
-            "video_url": "",
-            "pre_heading": "Boost Mode",
-            "heading": "Instant Torque. Controlled Launch.",
-            "description": "<p>Tap Boost to send maximum torque to the rear wheel, giving you stronger acceleration when you need an extra burst of power.</p>"
           }
         },
         "card_3": {
@@ -359,9 +359,9 @@
         }
       },
       "block_order": [
+        "card_1",
         "card_4",
         "card_6",
-        "card_1",
         "card_3",
         "card_5",
         "card_2"
