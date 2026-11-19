@@ -250,8 +250,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  aspect-ratio: 4 / 3;
-  padding: calc(10 * var(--rem));
+  aspect-ratio: 1 / 1;
+  padding: calc(4 * var(--rem));
+  box-sizing: border-box;
   background: #fff;
   border: calc(2 * var(--rem)) solid transparent;
   border-radius: calc(10 * var(--rem));

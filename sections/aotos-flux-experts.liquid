@@ -1,6 +1,15 @@
 {% render 'aotos-flux-below-assets', with_js: true %}
 
-<flux-tabs class="fxb fxb-experts-wrap" style="--fxb-bg: {{ section.settings.bg_color }}; --fxb-color: #fff; --fxb-pt: {{ section.settings.padding_top | default: 80, allow_false: true }}; --fxb-pb: {{ section.settings.padding_bottom | default: 80, allow_false: true }}; --fxb-pt-m: {{ section.settings.padding_top_mobile | default: 88, allow_false: true }}; --fxb-pb-m: {{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }};">
+{%- liquid
+  assign experts_bg = section.settings.bg_color | default: '#000000'
+  assign experts_brightness = experts_bg | color_brightness
+  assign experts_light = false
+  if experts_brightness > 128
+    assign experts_light = true
+  endif
+-%}
+
+<flux-tabs class="fxb fxb-experts-wrap{% if experts_light %} fxb-experts-wrap--light{% endif %}" style="--fxb-bg: {{ experts_bg }}; --fxb-color: {% if experts_light %}#000000{% else %}#fff{% endif %}; --fxb-pt: {{ section.settings.padding_top | default: 80, allow_false: true }}; --fxb-pb: {{ section.settings.padding_bottom | default: 80, allow_false: true }}; --fxb-pt-m: {{ section.settings.padding_top_mobile | default: 88, allow_false: true }}; --fxb-pb-m: {{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }};">
   <flux-experts class="fxb-shell fxb-experts">
     <h2 class="fxb-title aotos-section-title fxb-experts__title">{{ section.settings.title | escape }}</h2>
     <div class="fxb-experts__head">

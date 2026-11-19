@@ -72,10 +72,11 @@ body:has(.aotos-flux) {
 }
 
 .velotric-custom-carousel__track {
+  position: relative;
   display: flex;
+  gap: calc(16 * var(--rem));
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
@@ -87,7 +88,9 @@ body:has(.aotos-flux) {
 .velotric-custom-carousel__slide {
   flex: 0 0 100%;
   width: 100%;
-  scroll-snap-align: center;
+  overflow: hidden;
+  box-sizing: border-box;
+  scroll-snap-align: start;
   scroll-snap-stop: always;
   display: flex;
   align-items: center;

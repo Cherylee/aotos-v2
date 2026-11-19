@@ -6,11 +6,17 @@
   assign boxes = section.blocks | where: 'type', 'box_item'
   assign half_specs = specs.size | plus: 1 | divided_by: 2
   assign half_boxes = boxes.size | plus: 1 | divided_by: 2
+  assign specs_bg = section.settings.bg_color | default: '#000000'
+  assign specs_brightness = specs_bg | color_brightness
+  assign specs_light = false
+  if specs_brightness > 128
+    assign specs_light = true
+  endif
 -%}
 
 <flux-tabs
-  class="fxb fxb-specs"
-  style="--fxb-bg: {{ section.settings.bg_color }}; --fxb-color: #fff; --fxb-pt: {{ section.settings.padding_top | default: 80, allow_false: true }}; --fxb-pb: {{ section.settings.padding_bottom | default: 80, allow_false: true }}; --fxb-pt-m: {{ section.settings.padding_top_mobile | default: 88, allow_false: true }}; --fxb-pb-m: {{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }};"
+  class="fxb fxb-specs{% if specs_light %} fxb-specs--light{% endif %}"
+  style="--fxb-bg: {{ specs_bg }}; --fxb-color: {% if specs_light %}#000000{% else %}#fff{% endif %}; --fxb-pt: {{ section.settings.padding_top | default: 80, allow_false: true }}; --fxb-pb: {{ section.settings.padding_bottom | default: 80, allow_false: true }}; --fxb-pt-m: {{ section.settings.padding_top_mobile | default: 88, allow_false: true }}; --fxb-pb-m: {{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }};"
 >
   <div class="fxb-shell">
     <h2 class="fxb-title aotos-section-title">{{ section.settings.title | escape }}</h2>

@@ -1001,7 +1001,7 @@
       ],
       "settings": {
         "title": "Specs & Geometry",
-        "bg_color": "#000000",
+        "bg_color": "#f5f5f5",
         "geometry_image": "shopify://shop_images/e68160140fed42559d7070c6299792f5.png",
         "box_layout": "list",
         "box_tab_1": "FLUX X26 Pro",
@@ -1020,7 +1020,7 @@
         "title": "Playful by choice. Predictable by design.",
         "description": "The FLUX X26 Pro brings excitement without the guesswork. Smooth acceleration, stable handling, and responsive power work together to keep every ride fun, confident, and in control.",
         "image": "shopify://shop_images/flux26_slide4.jpg",
-        "bg_color": "#1a1a1a",
+        "bg_color": "#ffffff",
         "padding_top": 80,
         "padding_bottom": 80,
         "padding_top_mobile": 88,
@@ -1173,7 +1173,7 @@
       ],
       "settings": {
         "title": "Hear from the Experts",
-        "bg_color": "#000000",
+        "bg_color": "#f5f5f5",
         "padding_top": 80,
         "padding_bottom": 80,
         "padding_top_mobile": 88,
