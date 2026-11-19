@@ -134,7 +134,7 @@
           "settings": {
             "question": "What is your return policy?",
             "related_product": "",
-            "answer": "<p>We offer a 14-day return policy for unused products in original condition. Please contact our support team before initiating a return.</p>"
+            "answer": "<p>We offer a 30-day return policy. Eligibility, return shipping, and applicable fees are detailed in our Return and Refund Policy. Please contact our support team before initiating a return.</p>"
           }
         },
         "faq_5": {
@@ -142,7 +142,7 @@
           "settings": {
             "question": "What warranty do your products come with?",
             "related_product": "",
-            "answer": "<p>All AOTOS products come with a limited warranty covering manufacturing defects. Warranty terms may vary by product.</p>"
+            "answer": "<p>FLUX X26, X26 Pro, and T26 eBike main parts are covered for 2 years. Other components and wear parts have different terms. Other products have model-specific coverage; see our Warranty Policy for details.</p>"
           }
         },
         "faq_6": {
@@ -158,7 +158,7 @@
           "settings": {
             "question": "Are your products street legal?",
             "related_product": "",
-            "answer": "<p>Our eBikes are designed to meet common U.S. regulations (Class 2/3), but laws may vary by state. Please check your local regulations before riding.</p>"
+            "answer": "<p>Yes. Our eBikes ship in a Class 2 configuration with a 20 mph limit. Street and trail rules vary by location, so please check local regulations before riding or changing speed settings.</p>"
           }
         },
         "faq_8": {
@@ -182,7 +182,7 @@
           "settings": {
             "question": "How can I contact customer support?",
             "related_product": "",
-            "answer": "<p>You can reach our support team via email at support@aotos.com or call us at +1 (626) 989-0826 during business hours (Monday–Friday, 9AM–6PM).</p>"
+            "answer": "<p>You can reach our support team via email at support@aotos.com or call 888-330-3799. Please see the contact details on this page for current service hours.</p>"
           }
         }
       },
