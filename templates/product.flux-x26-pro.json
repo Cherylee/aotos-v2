@@ -1237,45 +1237,46 @@
         "faq_item_cCt6Eh": {
           "type": "faq_item",
           "settings": {
-            "question": "What’s the difference between the FLUX X26 and Flux X26 Pro?",
+            "question": "How far can the FLUX X26 Pro go on a charge?",
             "related_product": "",
-            "answer": "<p>The FLUX X26 is the standard model built for everyday rides, while the Flux X26 Pro is the high-performance version with more power, a larger battery, and advanced smart features. Both models share the same premium frame and suspension.</p>"
+            "answer": "<p>Its 48V 21Ah battery offers up to 70 miles. Actual range varies with terrain, rider weight, speed, and riding mode.</p>"
           }
         },
         "faq_item_UCRNeq": {
           "type": "faq_item",
           "settings": {
-            "question": "What are the key specs of the FLUX X26 and Flux X26 Pro?",
+            "question": "Can it handle hills and longer rides?",
             "related_product": "",
-            "answer": "<p>FLUX X26: 750W rated / 1200WPeak in Boost*, 80 Nm torque, 48V 18Ah battery, and up to 50 miles of range.</p><p>FLUX X26 Pro: 750W rated / 2000W Peak in Boost*, 100 Nm torque, 48V 21Ah battery, and up to 70 miles of range.</p><p>Both models offer a top speed of 20 mph, a 330 lbs max load, and an IPX5/IPX6 water-resistance rating. The Pro model adds advanced 4G, GPS, and TPMS smart features.</p>"
+            "answer": "<p>The Pro combines 100 Nm of torque, dual hydraulic suspension, and fat tires for hills and varied everyday routes.</p>"
           }
         },
         "faq_item_T3fWcU": {
           "type": "faq_item",
           "settings": {
-            "question": "What smart features are included?",
+            "question": "Is it a Class 2 e-bike? How fast can it go?",
             "related_product": "",
-            "answer": "<p>Both models support app connectivity and keyless unlocking. The Pro model adds 4G connectivity, real-time GPS tracking, tire pressure monitoring, and turn-by-turn navigation.</p>"
+            "answer": "<p>The Pro ships limited to 20 mph for Class 2 use. Up to 28 mph is listed in its unlocked Boost configuration for private-property use where allowed.</p>"
           }
         },
         "faq_item_jgHhTe": {
           "type": "faq_item",
           "settings": {
-            "question": "What does the warranty cover?",
+            "question": "What security and storage features are included?",
             "related_product": "",
-            "answer": "<p>Warranty coverage varies by component type:</p><p></p><ul><li><strong>Main Components</strong> (Frame, Fork, Handlebar, Kickstand, Motor, Battery, Controller, Display, etc.): <strong>2 Year</strong></li><li><strong>Main Accessories</strong> (Throttle, Headlight, Taillight, Brake Levers, Charger, Shock Absorber, Crank, etc.): <strong>6 Months</strong></li><li><strong>Wear & Tear Parts</strong> (Tires, Fenders, Foot Pegs, Reflectors, Seat, Storage Box, Plastic Parts, etc.): <strong>3 Months</strong></li></ul><p></p><p><strong>Battery Note:</strong> Covered for 1 year or 500 charge cycles (whichever comes first), with capacity remaining at least 80% of rated capacity under 25°C conditions.</p>"
+            "answer": "<p>Built-in 4G GPS tracking, tire pressure monitoring, a physical lock, and an under-frame storage bag are included.</p>"
           }
         },
         "faq_item_qWeaLj": {
           "type": "faq_item",
           "settings": {
-            "question": "What are your return and shipping policies?",
+            "question": "What is the warranty?",
             "related_product": "",
-            "answer": "<p>We offer 30-day returns on bikes in new condition. Free shipping is available within the contiguous U.S. See our Shipping & Returns Policy for full details.</p>"
+            "answer": "<p>Main parts are covered for 2 years, attachments for 6 months, and wearing parts for 3 months. See our Warranty Policy for battery terms and exclusions.</p>"
           }
         },
         "faq_item_f6n3ff": {
           "type": "faq_item",
+          "disabled": true,
           "settings": {
             "question": "What is Shipping Protection?",
             "related_product": "",
