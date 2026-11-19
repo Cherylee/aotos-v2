@@ -27,6 +27,8 @@
           }
           disconnectedCallback() {
             this.closeLightbox();
+            if (this._scrollRaf) cancelAnimationFrame(this._scrollRaf);
+            if (this._onResizeAlign) window.removeEventListener('resize', this._onResizeAlign);
             document.removeEventListener('keydown', this._onLightboxKeydown);
             this.lightbox?.removeEventListener('touchstart', this._onLightboxTouchStart);
             this.lightbox?.removeEventListener('touchmove', this._onLightboxTouchMove);
@@ -107,19 +109,90 @@
           easeOutQuart(t) {
             return 1 - --t * t * t * t;
           }
-          smoothScroll(target, duration = 400) {
+          getSlideLeft(index) {
+            const slides = this.getSlides();
+            const slide = slides[index];
+            if (!slide || !this.track) return 0;
+            if (index === 0) return 0;
+            const trackRect = this.track.getBoundingClientRect();
+            const slideRect = slide.getBoundingClientRect();
+            if (trackRect.width > 0) {
+              return slideRect.left - trackRect.left + this.track.scrollLeft;
+            }
+            return slide.offsetLeft;
+          }
+          getClosestIndex() {
+            const slides = this.getSlides();
+            if (!slides.length || !this.track) return 0;
+            const scrollLeft = this.track.scrollLeft;
+            let best = 0;
+            let minDiff = Infinity;
+            for (let i = 0; i < slides.length; i++) {
+              const diff = Math.abs(slides[i].offsetLeft - scrollLeft);
+              if (diff < minDiff) {
+                minDiff = diff;
+                best = i;
+              }
+            }
+            return best;
+          }
+          scrollToSlide(index, duration = 400) {
             if (!this.track) return;
+            const slides = this.getSlides();
+            if (!slides.length) return;
+            const clamped = Math.max(0, Math.min(index, slides.length - 1));
+            this._activeSlideIndex = clamped;
+            if (this._scrollRaf) {
+              cancelAnimationFrame(this._scrollRaf);
+              this._scrollRaf = null;
+            }
+            const target = this.getSlideLeft(clamped);
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (reducedMotion || duration <= 0 || Math.abs(target - this.track.scrollLeft) < 1) {
+              this.track.style.scrollSnapType = '';
+              this.track.scrollLeft = target;
+              return;
+            }
             const start = this.track.scrollLeft;
-            const change = target - start;
             let startTime = null;
+            this.track.style.scrollSnapType = 'none';
             const animateScroll = (currentTime) => {
               if (startTime === null) startTime = currentTime;
               const timeElapsed = currentTime - startTime;
               const progress = Math.min(timeElapsed / duration, 1);
-              this.track.scrollLeft = start + change * this.easeOutQuart(progress);
-              if (timeElapsed < duration) requestAnimationFrame(animateScroll);
+              const latestTarget = this.getSlideLeft(clamped);
+              if (progress < 1) {
+                this.track.scrollLeft = start + (latestTarget - start) * this.easeOutQuart(progress);
+                this._scrollRaf = requestAnimationFrame(animateScroll);
+              } else {
+                this._scrollRaf = null;
+                this.track.scrollLeft = latestTarget;
+                this.track.style.scrollSnapType = '';
+              }
             };
-            requestAnimationFrame(animateScroll);
+            this._scrollRaf = requestAnimationFrame(animateScroll);
+          }
+          smoothScroll(target, duration = 400) {
+            if (!this.track) return;
+            if (this._scrollRaf) cancelAnimationFrame(this._scrollRaf);
+            const start = this.track.scrollLeft;
+            const change = target - start;
+            let startTime = null;
+            this.track.style.scrollSnapType = 'none';
+            const animateScroll = (currentTime) => {
+              if (startTime === null) startTime = currentTime;
+              const timeElapsed = currentTime - startTime;
+              const progress = Math.min(timeElapsed / duration, 1);
+              if (progress < 1) {
+                this.track.scrollLeft = start + change * this.easeOutQuart(progress);
+                this._scrollRaf = requestAnimationFrame(animateScroll);
+              } else {
+                this._scrollRaf = null;
+                this.track.scrollLeft = target;
+                this.track.style.scrollSnapType = '';
+              }
+            };
+            this._scrollRaf = requestAnimationFrame(animateScroll);
           }
           normalizeImageData(image) {
             const data = typeof image === 'string' ? { src: image } : image || {};
@@ -227,6 +300,7 @@
               }, 300);
             }
 
+            this._activeSlideIndex = 0;
             this.track.scrollLeft = 0;
             this.updateDotActive(0);
             this.updateZoomButton();
@@ -235,8 +309,8 @@
             this.dots?.forEach((dot) => {
               dot.removeEventListener('click', dot._clickHandler);
               dot._clickHandler = (e) => {
-                const index = parseInt(dot.dataset.index);
-                this.smoothScroll(index * this.track.clientWidth);
+                const index = parseInt(dot.dataset.index, 10);
+                this.scrollToSlide(index);
                 this.centerThumbnail(index);
               };
               dot.addEventListener('click', dot._clickHandler);
@@ -247,29 +321,35 @@
               this.track.addEventListener(
                 'scroll',
                 () => {
-                  const slideWidth = this.track.clientWidth;
-                  if (slideWidth === 0) return;
-                  const index = Math.round(this.track.scrollLeft / slideWidth);
+                  if (!this.track.clientWidth) return;
+                  const index = this.getClosestIndex();
+                  if (!this._scrollRaf) this._activeSlideIndex = index;
                   this.updateDotActive(index);
                   this.updateZoomButton();
                 },
                 { passive: true }
               );
+              this._onResizeAlign = () => {
+                if (!this.track || this._scrollRaf) return;
+                const idx = typeof this._activeSlideIndex === 'number' ? this._activeSlideIndex : this.getClosestIndex();
+                this.track.scrollLeft = this.getSlideLeft(idx);
+              };
+              window.addEventListener('resize', this._onResizeAlign, { passive: true });
             }
             this.bindDotEvents();
             this.prevBtn?.addEventListener('click', (e) => {
               e.preventDefault();
-              const current = Math.round(this.track.scrollLeft / this.track.clientWidth);
+              const current = typeof this._activeSlideIndex === 'number' && this._scrollRaf ? this._activeSlideIndex : this.getClosestIndex();
               const target = Math.max(0, current - 1);
-              this.smoothScroll(target * this.track.clientWidth);
+              this.scrollToSlide(target);
               this.centerThumbnail(target);
             });
             this.nextBtn?.addEventListener('click', (e) => {
               e.preventDefault();
-              const lastIndex = (this.dots?.length || 1) - 1;
-              const current = Math.round(this.track.scrollLeft / this.track.clientWidth);
+              const lastIndex = Math.max(0, this.getSlides().length - 1);
+              const current = typeof this._activeSlideIndex === 'number' && this._scrollRaf ? this._activeSlideIndex : this.getClosestIndex();
               const target = Math.min(lastIndex, current + 1);
-              this.smoothScroll(target * this.track.clientWidth);
+              this.scrollToSlide(target);
               this.centerThumbnail(target);
             });
             this.bindZoom();
@@ -280,11 +360,8 @@
           getCurrentSlide() {
             const slides = this.getSlides();
             if (!slides.length) return null;
-            if (!this.track) return slides[0];
-            const slideWidth = this.track.clientWidth;
-            if (!slideWidth) return slides[0];
-            const index = Math.round(this.track.scrollLeft / slideWidth);
-            return slides[index] || slides[0];
+            if (!this.track || !this.track.clientWidth) return slides[0];
+            return slides[this.getClosestIndex()] || slides[0];
           }
           getCurrentSlideIndex() {
             const slides = this.getSlides();
@@ -313,7 +390,7 @@
           }
           syncCarouselToIndex(index) {
             if (!this.track) return;
-            this.smoothScroll(index * this.track.clientWidth);
+            this.scrollToSlide(index);
             this.centerThumbnail(index);
             this.updateDotActive(index);
             this.updateZoomButton();

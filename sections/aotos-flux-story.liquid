@@ -3,9 +3,15 @@
 {%- liquid
   assign story_image = section.settings.image
   assign story_video = section.settings.video
+  assign story_bg = section.settings.bg_color | default: '#1a1a1a'
+  assign story_brightness = story_bg | color_brightness
+  assign story_light = false
+  if story_brightness > 128
+    assign story_light = true
+  endif
 -%}
 
-<section class="fxb fxb-story" style="--fxb-bg: {{ section.settings.bg_color }}; --fxb-color: #fff; --fxb-pt: {{ section.settings.padding_top | default: 80, allow_false: true }}; --fxb-pb: {{ section.settings.padding_bottom | default: 80, allow_false: true }}; --fxb-pt-m: {{ section.settings.padding_top_mobile | default: 88, allow_false: true }}; --fxb-pb-m: {{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }};">
+<section class="fxb fxb-story{% if story_light %} fxb-story--light{% endif %}" style="--fxb-bg: {{ story_bg }}; --fxb-color: {% if story_light %}#000000{% else %}#fff{% endif %}; --fxb-pt: {{ section.settings.padding_top | default: 80, allow_false: true }}; --fxb-pb: {{ section.settings.padding_bottom | default: 80, allow_false: true }}; --fxb-pt-m: {{ section.settings.padding_top_mobile | default: 88, allow_false: true }}; --fxb-pb-m: {{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }};">
   <div class="fxb-shell">
     <div class="fxb-story__head">
       <h2 class="fxb-title aotos-section-title fxb-story__title">{{ section.settings.title | escape | replace: '. ', '.<br>' }}</h2>

@@ -25,6 +25,7 @@
   font-size: var(--aotos-section-title-size);
   font-weight: 700;
   line-height: 1.2;
+  color: #111;
 }
 
 .fxb-anchor-sentinel {
@@ -365,7 +366,7 @@ html.fxb-anchor-stuck:has(.section-header.shopify-section-header-sticky:not(.sho
   width: fit-content;
   overflow: hidden;
   border-radius: calc(40 * var(--rem));
-  background: #e8e8e8;
+  background: #ffffff;
 }
 
 .fxb-specs__tab,
@@ -403,6 +404,7 @@ html.fxb-anchor-stuck:has(.section-header.shopify-section-header-sticky:not(.sho
   width: 100%;
   height: auto;
   display: block;
+  border-radius: calc(16 * var(--rem));
 }
 
 .fxb-specs__row {
@@ -421,19 +423,22 @@ html.fxb-anchor-stuck:has(.section-header.shopify-section-header-sticky:not(.sho
   align-items: center;
   gap: calc(12 * var(--rem));
   min-width: 0;
+  color: #111;
 }
 
 .fxb-specs__badge {
   width: calc(28 * var(--rem));
   height: calc(28 * var(--rem));
   border-radius: 50%;
-  background: #3a3a3a;
+  background: #ffffff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   font-size: calc(12 * var(--rem));
   font-weight: 600;
+  border: 1px solid #e4e4e4;
+  color: #111;
 }
 
 .fxb-specs__value {
@@ -442,6 +447,18 @@ html.fxb-anchor-stuck:has(.section-header.shopify-section-header-sticky:not(.sho
 }
 
 .fxb-specs__value p { margin: 0; }
+
+.fxb-specs--light .fxb-specs__row {
+  border-bottom-color: rgba(0, 0, 0, 0.04);
+}
+
+.fxb-specs--light .fxb-specs__badge {
+  color: #111;
+}
+
+.fxb-specs--light .fxb-specs__value {
+  color: #111;
+}
 
 .fxb-specs__cols {
   display: grid;
@@ -646,6 +663,29 @@ html.fxb-anchor-stuck:has(.section-header.shopify-section-header-sticky:not(.sho
   height: calc(28 * var(--rem));
   border-radius: 50%;
   object-fit: cover;
+}
+
+.fxb-experts-wrap--light .fxb-experts__arrow {
+  border-color: #dedede;
+  background: #ffffff;
+  color: #000000;
+}
+
+.fxb-experts-wrap--light .fxb-experts__arrow:disabled {
+  border-color: #e5e5e5;
+  color: rgba(0, 0, 0, 0.28);
+}
+
+.fxb-experts-wrap--light .fxb-experts__card {
+  background: #ffffff;
+}
+
+.fxb-experts-wrap--light .fxb-experts__name {
+  color: #000000;
+}
+
+.fxb-experts-wrap--light .fxb-experts__author {
+  color: #999999;
 }
 
 .fxb-faq .fxb-title {
