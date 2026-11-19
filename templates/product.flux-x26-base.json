@@ -216,7 +216,7 @@
         "award_caption": "reddot winner 2026",
         "payment_icons": "visa,master,american_express,discover,jcb,klarna,paypal,maestro,venmo,afterpay",
         "payment_collapsed_count": 7,
-        "payment_accessibility_label": "View accepted payment methods",
+        "payment_accessibility_label": "Returns are accepted within 30 days, subject to our Return and Refund Policy. Return shipping and other applicable fees depend on the reason for return. Contact support@aotos.com to start a request.",
         "padding_bottom": 80
       }
     },
