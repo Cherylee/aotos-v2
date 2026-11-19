@@ -250,7 +250,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 8 / 7;
   padding: calc(4 * var(--rem));
   box-sizing: border-box;
   background: #fff;
@@ -400,22 +400,29 @@
 
   .aotos-nav__mega {
     display: block;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: calc(36 * var(--rem)) calc(170 * var(--rem)) calc(48 * var(--rem)) var(--aotos-mega-left, calc(170 * var(--rem)));
   }
 
   .aotos-nav__mega-list {
+    --aotos-mega-gap: calc(96 * var(--rem));
+    --aotos-mega-side: calc(216 * var(--rem));
     display: grid;
-    grid-template-columns: calc(240 * var(--rem)) minmax(0, 1fr);
-    column-gap: calc(48 * var(--rem));
+    grid-template-columns: var(--aotos-mega-side) minmax(0, 1fr);
+    column-gap: var(--aotos-mega-gap);
     row-gap: calc(8 * var(--rem));
     align-items: start;
     align-self: stretch;
+    width: 100%;
     box-sizing: border-box;
     min-width: 0;
     padding: calc(8 * var(--rem)) 0 0;
     background-image: linear-gradient(#e5e5e5, #e5e5e5);
     background-repeat: no-repeat;
     background-size: 1px 100%;
-    background-position: calc(240 * var(--rem)) 0;
+    background-position: var(--aotos-mega-side) 0;
   }
 
   .aotos-nav__mega-item {

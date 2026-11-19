@@ -142,16 +142,52 @@
     closeNav();
   });
 
+  function syncMegaAlign() {
+    if (mq.matches) return;
+    var header = nav.closest('.header');
+    var wrapper = nav.closest('.header-wrapper') || header;
+    var firstItem = nav.querySelector('.aotos-nav__list > .aotos-nav__item');
+    if (!header || !wrapper || !firstItem) return;
+    var logo = header.querySelector('.header__heading-logo') || header.querySelector('.header__heading-link');
+    if (!logo) return;
+    var wrapRect = wrapper.getBoundingClientRect();
+    var logoRect = logo.getBoundingClientRect();
+    var navRect = firstItem.getBoundingClientRect();
+    var megaLeft = logoRect.left - wrapRect.left;
+    var totalOffset = navRect.left - logoRect.left;
+    if (megaLeft >= 0 && totalOffset > 120) {
+      var rem = wrapRect.width / 1440;
+      var midX = (logoRect.right + navRect.left) / 2;
+      var side = Math.min(totalOffset - 16, Math.max(140 * rem, midX - logoRect.left));
+      nav.style.setProperty('--aotos-mega-left', megaLeft + 'px');
+      nav.querySelectorAll('.aotos-nav__mega-list').forEach(function (list) {
+        list.style.setProperty('--aotos-mega-side', side + 'px');
+        list.style.setProperty('--aotos-mega-gap', (totalOffset - side) + 'px');
+      });
+    }
+  }
+
   window.addEventListener('resize', function () {
-    if (!mq.matches) closeNav();
-    else if (nav.classList.contains('is-open')) placeDrawer();
+    if (!mq.matches) {
+      closeNav();
+      syncMegaAlign();
+    } else if (nav.classList.contains('is-open')) {
+      placeDrawer();
+    }
   });
 
   window.addEventListener('scroll', function () {
     if (mq.matches && nav.classList.contains('is-open')) placeDrawer();
   }, { passive: true });
 
+  syncMegaAlign();
+  window.addEventListener('load', syncMegaAlign, { once: true });
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(syncMegaAlign);
+  }
+
   function activateMega(item) {
+    syncMegaAlign();
     var mega = item.closest('.aotos-nav__mega');
     if (!mega) return;
     var items = mega.querySelectorAll('.aotos-nav__mega-item');
