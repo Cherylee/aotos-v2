@@ -1213,41 +1213,41 @@
         "faq_item_cCt6Eh": {
           "type": "faq_item",
           "settings": {
-            "question": "What are the key specifications of the FLUX X26?",
+            "question": "How far can the FLUX X26 go on a charge?",
             "related_product": "",
-            "answer": "<p>The FLUX X26 features a 750W rated motor with up to 1200W peak output in Boost Mode, 80 Nm of torque, a 48V 18Ah battery, and up to 50 miles of riding range. It also features hydraulic disc brakes and dual hydraulic suspension.</p>"
+            "answer": "<p>Its 48V 18Ah battery offers up to 50 miles. Actual range varies with terrain, rider weight, speed, and riding mode.</p>"
           }
         },
         "faq_item_UCRNeq": {
           "type": "faq_item",
           "settings": {
-            "question": "Does the FLUX X26 support app connectivity?",
+            "question": "Can it handle hills and bumpy roads?",
             "related_product": "",
-            "answer": "<p>Yes. The FLUX X26 supports connectivity with the AOTOS app for compatible smart features and bike settings.</p>"
+            "answer": "<p>Yes. It pairs 80 Nm of torque with fat tires and dual hydraulic suspension for everyday hills and uneven roads.</p>"
           }
         },
         "faq_item_T3fWcU": {
           "type": "faq_item",
           "settings": {
-            "question": "Does the FLUX X26 include GPS tracking and tire pressure monitoring?",
+            "question": "Is it a Class 2 e-bike? How fast can it go?",
             "related_product": "",
-            "answer": "<p>No. Built-in 4G GPS tracking and tire pressure monitoring are features associated with the FLUX X26 Pro. They are not included as standard features on the FLUX X26.</p>"
+            "answer": "<p>The X26 ships limited to 20 mph for Class 2 use. Up to 28 mph is listed in its unlocked Boost configuration for private-property use where allowed.</p>"
           }
         },
         "faq_item_jgHhTe": {
           "type": "faq_item",
           "settings": {
-            "question": "What is the maximum load capacity of the FLUX X26?",
+            "question": "Does it have GPS tracking?",
             "related_product": "",
-            "answer": "<p>The FLUX X26 supports a maximum load of 330 lbs.</p>"
+            "answer": "<p>The X26 supports the AOTOS app and keyless unlocking. Built-in 4G GPS tracking and tire pressure monitoring are X26 Pro features.</p>"
           }
         },
         "faq_item_qWeaLj": {
           "type": "faq_item",
           "settings": {
-            "question": "What is the maximum riding range of the FLUX X26?",
+            "question": "What is the warranty?",
             "related_product": "",
-            "answer": "<p>The FLUX X26 offers up to 50 miles of range under specified riding conditions. Actual range may vary depending on rider weight, terrain, speed, riding mode, and weather conditions.</p>"
+            "answer": "<p>Main parts are covered for 2 years, attachments for 6 months, and wearing parts for 3 months. See our Warranty Policy for battery terms and exclusions.</p>"
           }
         },
         "faq_item_f6n3ff": {
