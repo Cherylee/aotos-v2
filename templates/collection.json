@@ -61,7 +61,7 @@
         "card_featured": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/Long-Range_Riding.webp",
+            "image": "shopify://shop_images/3_ec152c3f-058b-4eba-a4a9-30e30d48df39.jpg",
             "badge": "Newly Released",
             "title": "FLUX T26",
             "text": "Light on Weight. Big on Style.",
@@ -72,7 +72,7 @@
         "card_helmet": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/zzz_helmet_on_thank_you_page.jpg",
+            "image": "shopify://shop_images/03_c01785cb-d994-4376-907e-d4c0c5d00407.png",
             "badge": "Accessories",
             "title": "Ride Safer with an AOTOS Helmet",
             "text": "Safety First",
@@ -83,7 +83,7 @@
         "card_subscribe": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/Engineered_Strength._Precision_Form._a2df3f6b-82c7-431f-9d3c-dd579da495ce.webp",
+            "image": "shopify://shop_images/8_61ffdd95-83f2-458b-b632-842b23a3f347_1.webp",
             "badge": "Subscribe",
             "title": "Get Your Ebike Tips",
             "text": "Join Us",
