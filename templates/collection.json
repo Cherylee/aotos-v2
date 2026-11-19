@@ -40,6 +40,8 @@
         "accessories_collection": "accessories",
         "show_accessories_rating": true,
         "show_cart_buttons": true,
+        "show_discount_checkbox": true,
+        "discount_code": "X26BF200",
         "quick_add": "none",
         "enable_filtering": true,
         "filter_type": "vertical",
@@ -61,10 +63,10 @@
           "settings": {
             "image": "shopify://shop_images/Long-Range_Riding.webp",
             "badge": "Newly Released",
-            "title": "Flux X26 Pro",
-            "text": "Power whenever you need it",
+            "title": "FLUX T26",
+            "text": "Light on Weight. Big on Style.",
             "button_label": "Learn More",
-            "button_link": "shopify://products/flux-x26-pro"
+            "button_link": "shopify://products/flux-t26"
           }
         },
         "card_helmet": {
