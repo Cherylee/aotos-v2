@@ -1294,7 +1294,7 @@
           "settings": {
             "question": "Is it a Class 2 e-bike? How fast can it go?",
             "related_product": "",
-            "answer": "<p>The standard 20 mph setting is intended for Class 2 riding. The T26 product specifications list up to 25 mph in BOOST; use higher-speed settings only where permitted.</p>"
+            "answer": "<p>The T26 ships in a 20 mph Class 2 configuration. BOOST provides a short burst of acceleration for up to 10 seconds, with a listed top speed of up to 25 mph during the burst. It does not unlock a permanent higher-speed setting. Follow local riding rules.</p>"
           }
         },
         "faq_item_jgHhTe": {
