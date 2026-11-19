@@ -1276,41 +1276,41 @@
         "faq_item_cCt6Eh": {
           "type": "faq_item",
           "settings": {
-            "question": "What are the key specs of FLUX T26?",
+            "question": "How far can the FLUX T26 go on a charge?",
             "related_product": "",
-            "answer": "<p>500W rated / 750W Peak in BOOST*, 60 Nm torque, 48V 14.5Ah actual discharge capacity, and up to 40 miles** of range. 20\" × 4.0\" fat tires, front and rear hydraulic disc brakes, net weight about 84 lbs.</p>"
+            "answer": "<p>Its 48V 14.5Ah battery offers up to 40 miles. Actual range varies with terrain, rider weight, speed, and assist level.</p>"
           }
         },
         "faq_item_UCRNeq": {
           "type": "faq_item",
           "settings": {
-            "question": "How do I unlock it, and what smart features are included?",
+            "question": "Does it have enough power for city hills?",
             "related_product": "",
-            "answer": "<p>Unlock with NFC, proximity, or passcode. The 1.9\" TFT shows key ride info and supports navigation mirroring. Nearby over Bluetooth, the app shows battery, estimated range, charging status, basic self-check, and lighting settings.</p>"
+            "answer": "<p>Its 500W rated motor delivers 60 Nm of torque. BOOST provides up to 750W peak power in a controlled 10-second burst.</p>"
           }
         },
         "faq_item_T3fWcU": {
           "type": "faq_item",
           "settings": {
-            "question": "What does the warranty cover?",
+            "question": "Is it a Class 2 e-bike? How fast can it go?",
             "related_product": "",
-            "answer": "<p>Main components (frame, fork, handlebar, motor, battery, controller, display, etc.): 2 year. Main accessories (throttle, lights, brake levers, charger, etc.): 6 months. Wear parts (tires, fenders, seat, plastic parts, etc.): 3 months. Battery: 1 year or 500 charge cycles, whichever comes first, with at least 80% of rated capacity under normal conditions.</p>"
+            "answer": "<p>The standard 20 mph setting is intended for Class 2 riding. The T26 product specifications list up to 25 mph in BOOST; use higher-speed settings only where permitted.</p>"
           }
         },
         "faq_item_jgHhTe": {
           "type": "faq_item",
           "settings": {
-            "question": "Is it suitable for off-road riding?",
+            "question": "How do I unlock the T26?",
             "related_product": "",
-            "answer": "<p>FLUX T26 is built for paved city streets: commuting, neighborhood trips, and weekend city rides. It is not designed for off-road use.<br/></p>"
+            "answer": "<p>Use NFC, proximity, or a passcode. The 1.9-inch TFT display also supports navigation mirroring.</p>"
           }
         },
         "faq_item_qWeaLj": {
           "type": "faq_item",
           "settings": {
-            "question": "What are your return and shipping policies?",
+            "question": "What is the warranty?",
             "related_product": "",
-            "answer": "<p>30-day returns on bikes in new, unused condition with original packaging. Free shipping within the contiguous U.S. See our Shipping & Returns Policy for full details.</p>"
+            "answer": "<p>Main parts are covered for 2 years, attachments for 6 months, and wearing parts for 3 months. See our Warranty Policy for battery terms and exclusions.</p>"
           }
         },
         "faq_item_f6n3ff": {
