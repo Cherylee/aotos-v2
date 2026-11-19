@@ -27,7 +27,8 @@
 
   #CollectionWhy-{{ section.id }} .collection-why__card {
     position: relative;
-    display: block;
+    display: flex;
+    flex-direction: column;
     min-width: 0;
     overflow: hidden;
     color: #ffffff;
@@ -76,9 +77,15 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    flex: 1 1 auto;
+    width: 100%;
     height: 100%;
     padding: calc(24 * var(--rem));
     box-sizing: border-box;
+  }
+
+  #CollectionWhy-{{ section.id }} .collection-why__card--large .collection-why__copy {
+    justify-content: center;
   }
 
   #CollectionWhy-{{ section.id }} .collection-why__badge {
@@ -136,9 +143,16 @@
     border-radius: 50%;
   }
 
+  #CollectionWhy-{{ section.id }} .collection-why__card--large .collection-why__plus {
+    position: absolute;
+    right: calc(24 * var(--rem));
+    bottom: calc(24 * var(--rem));
+    margin: 0;
+  }
+
   #CollectionWhy-{{ section.id }} .collection-why__plus .icon {
-    width: calc(12 * var(--rem));
-    height: calc(12 * var(--rem));
+    width: calc(14 * var(--rem));
+    height: calc(14 * var(--rem));
   }
 
   @media (hover: hover) {
@@ -185,6 +199,10 @@
       padding: calc(32 * var(--rem));
     }
 
+    #CollectionWhy-{{ section.id }} .collection-why__card--large .collection-why__copy {
+      justify-content: flex-start;
+    }
+
     #CollectionWhy-{{ section.id }} .collection-why__badge {
       font-size: calc(20 * var(--rem));
       line-height: calc(28 * var(--rem));
@@ -205,6 +223,19 @@
     #CollectionWhy-{{ section.id }} .collection-why__plus {
       width: calc(56 * var(--rem));
       height: calc(56 * var(--rem));
+    }
+
+    #CollectionWhy-{{ section.id }} .collection-why__card--large .collection-why__plus {
+      position: static;
+      right: auto;
+      bottom: auto;
+      margin-top: auto;
+      margin-left: auto;
+    }
+
+    #CollectionWhy-{{ section.id }} .collection-why__plus .icon {
+      width: calc(24 * var(--rem));
+      height: calc(24 * var(--rem));
     }
   }
 
@@ -272,18 +303,11 @@
               {%- if block.settings.text != blank -%}
                 <p class="collection-why__text">{{ block.settings.text | escape }}</p>
               {%- endif -%}
-              {%- if forloop.first -%}
-                {%- if block.settings.button_label != blank -%}
-                  <span class="button collection-why__btn">
-                    {{ block.settings.button_label | escape }}
-                    {{- 'icon-plus.svg' | inline_asset_content -}}
-                  </span>
-                {%- endif -%}
-              {%- else -%}
-                <span class="collection-why__plus" aria-hidden="true">
-                  {{- 'icon-plus.svg' | inline_asset_content -}}
-                </span>
-              {%- endif -%}
+              <span class="collection-why__plus" aria-hidden="true">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                  <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </span>
             </div>
           {%- if block.settings.button_link != blank -%}
             </a>
