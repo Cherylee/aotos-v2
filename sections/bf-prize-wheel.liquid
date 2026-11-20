@@ -1,0 +1,233 @@
+{{ 'aotos-bf.css' | asset_url | stylesheet_tag }}
+
+<style>
+  #shopify-section-{{ section.id }} .bf-wheel-section {
+    background-color: {{ section.settings.bg_color }};
+    padding-top: calc({{ section.settings.padding_top | default: 80, allow_false: true }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80, allow_false: true }} * var(--rem));
+  }
+
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .bf-wheel-section {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }} * var(--rem));
+    }
+  }
+</style>
+
+{%- liquid
+  assign bf_has_app = false
+  assign bf_prize_count = 0
+  for block in section.blocks
+    if block.type == '@app'
+      assign bf_has_app = true
+    elsif block.type == 'prize'
+      assign bf_prize_count = bf_prize_count | plus: 1
+    endif
+  endfor
+-%}
+
+<section class="bf bf-wheel-section"{% if section.settings.anchor_id != blank %} id="{{ section.settings.anchor_id | handleize }}"{% endif %}>
+  <div class="bf-shell bf-wheel">
+    <div class="bf-wheel__body">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="bf-eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="bf-heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <p class="bf-text">{{ section.settings.description }}</p>
+      {%- endif -%}
+
+      {%- if bf_prize_count > 0 -%}
+        <div class="bf-prizes">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'prize' -%}
+              <div class="bf-prize" {{ block.shopify_attributes }}>
+                {%- if block.settings.tier != blank -%}
+                  <p class="bf-prize__tier">{{ block.settings.tier }}</p>
+                {%- endif -%}
+                {%- if block.settings.value != blank -%}
+                  <p class="bf-prize__value">{{ block.settings.value }}</p>
+                {%- endif -%}
+                {%- if block.settings.desc != blank -%}
+                  <p class="bf-prize__desc">{{ block.settings.desc }}</p>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.button_label != blank -%}
+        <a class="bf-btn bf-btn--dark" href="{{ section.settings.button_link | default: '#offer-details' }}">{{ section.settings.button_label }}</a>
+      {%- endif -%}
+      {%- if section.settings.note != blank -%}
+        <p class="bf-note">{{ section.settings.note }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="bf-wheel__app">
+      {%- if bf_has_app -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == '@app' -%}
+            {% render block %}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        <div class="bf-wheel__placeholder">
+          <span class="bf-wheel__placeholder-label">{{ section.settings.placeholder_text }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "BF Part 02 转盘",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "锚点 ID",
+      "default": "part-02"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "背景色",
+      "default": "#fff1e3"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "小标题",
+      "default": "Part 02 / Prize wheel"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "标题",
+      "default": "Give the wheel a spin."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "描述",
+      "default": "Every visitor gets a spin. Land on a prize and it's yours — cash, helmets and more are waiting."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "按钮文案",
+      "default": "View the details"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "按钮链接",
+      "info": "留空则跳到活动说明区（#offer-details）"
+    },
+    {
+      "type": "textarea",
+      "id": "note",
+      "label": "按钮下方小字",
+      "default": "No purchase necessary. See official rules for eligibility and details."
+    },
+    {
+      "type": "text",
+      "id": "placeholder_text",
+      "label": "转盘占位文案",
+      "info": "添加转盘 App 区块后自动隐藏",
+      "default": "Prize wheel app"
+    },
+    {
+      "type": "header",
+      "content": "间距"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "上边距 PC",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "下边距 PC",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "上边距 手机",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "下边距 手机",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 88
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "prize",
+      "name": "奖项卡片",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "tier",
+          "label": "奖项等级",
+          "default": "First / 3 winners"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "奖品",
+          "default": "$100"
+        },
+        {
+          "type": "text",
+          "id": "desc",
+          "label": "说明",
+          "default": "Cash prize"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BF Part 02 转盘",
+      "blocks": [
+        { "type": "prize", "settings": { "tier": "First / 3 winners", "value": "$100", "desc": "Cash prize" } },
+        { "type": "prize", "settings": { "tier": "Second / 5 winners", "value": "$50", "desc": "Cash prize" } },
+        { "type": "prize", "settings": { "tier": "Third / 5 winners", "value": "2 helmets", "desc": "Per winner" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

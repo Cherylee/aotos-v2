@@ -1,0 +1,50 @@
+{
+  "sections": {
+    "bf_hero": {
+      "type": "bf-hero",
+      "settings": {}
+    },
+    "bf_nav": {
+      "type": "bf-anchor-nav",
+      "blocks": {
+        "nav_1": { "type": "link", "settings": { "number": "01", "label": "E-bike + free helmet", "target": "part-01" } },
+        "nav_2": { "type": "link", "settings": { "number": "02", "label": "Spin & win", "target": "part-02" } },
+        "nav_3": { "type": "link", "settings": { "number": "03", "label": "AOTOS helmet buy 1 get 1", "target": "part-03" } },
+        "nav_4": { "type": "link", "settings": { "number": "04", "label": "Accessories 20% off", "target": "part-04" } }
+      },
+      "block_order": ["nav_1", "nav_2", "nav_3", "nav_4"],
+      "settings": {}
+    },
+    "bf_ebike": {
+      "type": "bf-ebike-offers",
+      "blocks": {
+        "bike_t26": { "type": "bike", "settings": { "product": "flux-t26", "button_label": "Shop T26" } }
+      },
+      "block_order": ["bike_t26"],
+      "settings": {}
+    },
+    "bf_wheel": {
+      "type": "bf-prize-wheel",
+      "blocks": {
+        "prize_1": { "type": "prize", "settings": { "tier": "First / 3 winners", "value": "$100", "desc": "Cash prize" } },
+        "prize_2": { "type": "prize", "settings": { "tier": "Second / 5 winners", "value": "$50", "desc": "Cash prize" } },
+        "prize_3": { "type": "prize", "settings": { "tier": "Third / 5 winners", "value": "2 helmets", "desc": "Per winner" } }
+      },
+      "block_order": ["prize_1", "prize_2", "prize_3"],
+      "settings": {}
+    },
+    "bf_helmet": {
+      "type": "bf-helmet-bogo",
+      "settings": { "discount_code": "TESTBOGO" }
+    },
+    "bf_accessories": {
+      "type": "bf-accessories",
+      "settings": { "discount_code": "TEST20" }
+    },
+    "bf_details": {
+      "type": "bf-offer-details",
+      "settings": {}
+    }
+  },
+  "order": ["bf_hero", "bf_nav", "bf_ebike", "bf_wheel", "bf_helmet", "bf_accessories", "bf_details"]
+}

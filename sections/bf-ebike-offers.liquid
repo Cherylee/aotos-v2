@@ -1,0 +1,329 @@
+{{ 'aotos-bf.css' | asset_url | stylesheet_tag }}
+
+<style>
+  #shopify-section-{{ section.id }} .bf-ebike {
+    background-color: {{ section.settings.bg_color }};
+    padding-top: calc({{ section.settings.padding_top | default: 80, allow_false: true }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80, allow_false: true }} * var(--rem));
+  }
+
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .bf-ebike {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }} * var(--rem));
+    }
+  }
+</style>
+
+<section class="bf bf-ebike"{% if section.settings.anchor_id != blank %} id="{{ section.settings.anchor_id | handleize }}"{% endif %}>
+  <div class="bf-shell">
+    <div class="bf-part-head">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="bf-eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="bf-heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <p class="bf-text">{{ section.settings.description }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="bf-bikes">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign bs = block.settings
+          assign bf_product = bs.product
+          assign bf_variant = bf_product.selected_or_first_available_variant
+          assign bf_price = bf_variant.price
+          assign bf_compare = bf_variant.compare_at_price
+          if bs.price_amount != blank
+            assign bf_price = bs.price_amount | times: 100
+          endif
+          if bs.compare_amount != blank
+            assign bf_compare = bs.compare_amount | times: 100
+          endif
+          assign bf_save = 0
+          if bf_compare != blank and bf_price != blank and bf_compare > bf_price
+            assign bf_save = bf_compare | minus: bf_price
+          endif
+          assign bf_image = bs.image | default: bf_product.featured_image
+          assign bf_title = bs.title | default: bf_product.title
+        -%}
+        <article class="bf-bike" {{ block.shopify_attributes }}>
+          <div class="bf-bike__media">
+            {%- if bf_save > 0 -%}
+              <span class="bf-bike__badge">
+                <span class="bf-bike__badge-amount">{{ bf_save | money_without_trailing_zeros }}</span>
+                <span class="bf-bike__badge-off">OFF</span>
+              </span>
+            {%- endif -%}
+            {%- if bs.award != blank -%}
+              <img
+                class="bf-bike__award"
+                src="{{ bs.award | image_url: width: 240 }}"
+                srcset="{{ bs.award | image_url: width: 160 }} 160w, {{ bs.award | image_url: width: 240 }} 240w"
+                sizes="(max-width: 768px) 15vw, 72px"
+                width="240"
+                height="{{ 240 | divided_by: bs.award.aspect_ratio | round }}"
+                alt="{{ bs.award.alt | escape }}"
+                loading="lazy"
+              >
+            {%- endif -%}
+            {%- if bf_image != blank -%}
+              <img
+                class="bf-media-img"
+                src="{{ bf_image | image_url: width: 960 }}"
+                srcset="
+                  {{ bf_image | image_url: width: 480 }} 480w,
+                  {{ bf_image | image_url: width: 720 }} 720w,
+                  {{ bf_image | image_url: width: 960 }} 960w
+                "
+                sizes="(max-width: 768px) 90vw, 34vw"
+                width="960"
+                height="{{ 960 | divided_by: bf_image.aspect_ratio | round }}"
+                alt="{{ bf_image.alt | default: bf_title | escape }}"
+                loading="lazy"
+              >
+            {%- else -%}
+              <div class="bf-placeholder">{{ 'product-1' | placeholder_svg_tag }}</div>
+            {%- endif -%}
+          </div>
+
+          <div class="bf-bike__body">
+            {%- if bs.eyebrow != blank -%}
+              <p class="bf-eyebrow">{{ bs.eyebrow }}</p>
+            {%- endif -%}
+            {%- if bf_title != blank -%}
+              <h3 class="bf-bike__title">{{ bf_title }}</h3>
+            {%- endif -%}
+            {%- if bs.tagline != blank -%}
+              <p class="bf-bike__tagline">{{ bs.tagline }}</p>
+            {%- endif -%}
+            {%- if bs.spec_1 != blank or bs.spec_2 != blank -%}
+              <ul class="bf-bike__specs">
+                {%- if bs.spec_1 != blank -%}<li>{{ bs.spec_1 }}</li>{%- endif -%}
+                {%- if bs.spec_2 != blank -%}<li>{{ bs.spec_2 }}</li>{%- endif -%}
+              </ul>
+            {%- endif -%}
+            {%- if bf_price != blank -%}
+              <p class="bf-bike__price">
+                <span class="bf-bike__price-now">{{ bf_price | money_without_trailing_zeros }}</span>
+                {%- if bf_save > 0 -%}
+                  <s class="bf-bike__price-was">{{ bf_compare | money_without_trailing_zeros }}</s>
+                {%- endif -%}
+              </p>
+            {%- endif -%}
+            {%- if bs.gift_text != blank -%}
+              <div class="bf-gift">
+                <div class="bf-gift__thumb">
+                  {%- if bs.gift_image != blank -%}
+                    <img
+                      class="bf-media-img"
+                      src="{{ bs.gift_image | image_url: width: 160 }}"
+                      width="160"
+                      height="{{ 160 | divided_by: bs.gift_image.aspect_ratio | round }}"
+                      alt="{{ bs.gift_image.alt | escape }}"
+                      loading="lazy"
+                    >
+                  {%- else -%}
+                    <div class="bf-placeholder">{{ 'product-2' | placeholder_svg_tag }}</div>
+                  {%- endif -%}
+                </div>
+                <p class="bf-gift__text">
+                  {%- if bs.gift_tag != blank -%}<span class="bf-gift__tag">{{ bs.gift_tag }}</span>{%- endif -%}
+                  {{ bs.gift_text }}
+                </p>
+              </div>
+            {%- endif -%}
+            {%- if bf_product != blank and bs.button_label != blank -%}
+              <a class="bf-btn bf-btn--primary" href="{{ bf_product.url }}">{{ bs.button_label }}</a>
+            {%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "BF Part 01 车型优惠",
+  "tag": "div",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "锚点 ID",
+      "default": "part-01"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "背景色",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "小标题",
+      "default": "Part 01 / E-bike offers"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "标题",
+      "default": "Buy the ride. Get the helmet."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "描述",
+      "default": "One free helmet with every eligible e-bike order, November 16 through December 6."
+    },
+    {
+      "type": "header",
+      "content": "间距"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "上边距 PC",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "下边距 PC",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "上边距 手机",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "下边距 手机",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 88
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bike",
+      "name": "车型卡片",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "产品"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "产品图",
+          "info": "不上传则用产品主图"
+        },
+        {
+          "type": "number",
+          "id": "price_amount",
+          "label": "自定义现价",
+          "info": "留空则用产品现价。填整数，单位是店铺货币，如 1399。折扣标签按划线价减现价自动计算"
+        },
+        {
+          "type": "number",
+          "id": "compare_amount",
+          "label": "自定义划线价",
+          "info": "留空则用产品划线价"
+        },
+        {
+          "type": "image_picker",
+          "id": "award",
+          "label": "右上角奖项图"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "小标题",
+          "default": "New arrival / Flux series"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "车型名",
+          "info": "留空则用产品标题"
+        },
+        {
+          "type": "text",
+          "id": "tagline",
+          "label": "卖点",
+          "default": "Light on weight. Big on style."
+        },
+        {
+          "type": "text",
+          "id": "spec_1",
+          "label": "参数 1",
+          "default": "500W rated motor"
+        },
+        {
+          "type": "text",
+          "id": "spec_2",
+          "label": "参数 2",
+          "default": "Up to 40 mi range"
+        },
+        {
+          "type": "image_picker",
+          "id": "gift_image",
+          "label": "赠品图"
+        },
+        {
+          "type": "text",
+          "id": "gift_tag",
+          "label": "赠品标签",
+          "default": "GIFT"
+        },
+        {
+          "type": "text",
+          "id": "gift_text",
+          "label": "赠品文案",
+          "default": "One free helmet with your ride"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "按钮文案",
+          "info": "跳转到所选产品页",
+          "default": "Shop now"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BF Part 01 车型优惠",
+      "blocks": [
+        { "type": "bike" }
+      ]
+    }
+  ]
+}
+{% endschema %}
