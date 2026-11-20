@@ -1,0 +1,73 @@
+{{ 'aotos-bf.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'aotos-bf-nav.js' | asset_url }}" defer="defer"></script>
+
+<bf-anchor-nav class="bf bf-nav" role="navigation" aria-label="{{ section.settings.aria_label | escape }}">
+  <ul class="bf-shell bf-nav__list">
+    {%- for block in section.blocks -%}
+      {%- assign bf_target = block.settings.target | handleize -%}
+      <li class="bf-nav__item" {{ block.shopify_attributes }}>
+        <a class="bf-nav__link" href="#{{ bf_target }}" data-bf-target="{{ bf_target }}">
+          {%- if block.settings.number != blank -%}
+            <span class="bf-nav__num">{{ block.settings.number }}</span>
+          {%- endif -%}
+          <span class="bf-nav__label">{{ block.settings.label }}</span>
+        </a>
+      </li>
+    {%- endfor -%}
+  </ul>
+</bf-anchor-nav>
+
+{% schema %}
+{
+  "name": "BF 吸顶锚点导航",
+  "tag": "div",
+  "class": "bf-nav-host",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "导航无障碍名称",
+      "default": "Event sections"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "导航项",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "序号",
+          "default": "01"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "文案",
+          "default": "E-bike + free helmet"
+        },
+        {
+          "type": "text",
+          "id": "target",
+          "label": "目标锚点 ID",
+          "info": "填对应区块里的「锚点 ID」，例如 part-01",
+          "default": "part-01"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BF 吸顶锚点导航",
+      "blocks": [
+        { "type": "link", "settings": { "number": "01", "label": "E-bike + free helmet", "target": "part-01" } },
+        { "type": "link", "settings": { "number": "02", "label": "Spin & win", "target": "part-02" } },
+        { "type": "link", "settings": { "number": "03", "label": "AOTOS helmet buy 1 get 1", "target": "part-03" } },
+        { "type": "link", "settings": { "number": "04", "label": "Accessories 20% off", "target": "part-04" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

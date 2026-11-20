@@ -1,0 +1,215 @@
+{{ 'aotos-bf.css' | asset_url | stylesheet_tag }}
+
+{%- assign bf_image = section.settings.image -%}
+{%- assign bf_image_mobile = section.settings.image_mobile | default: bf_image -%}
+
+<style>
+  #shopify-section-{{ section.id }} .bf-hero {
+    background-color: {{ section.settings.bg_color }};
+    padding-top: calc({{ section.settings.padding_top | default: 80, allow_false: true }} * var(--rem));
+    padding-bottom: calc({{ section.settings.padding_bottom | default: 80, allow_false: true }} * var(--rem));
+  }
+
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .bf-hero {
+      padding-top: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem));
+      padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }} * var(--rem));
+    }
+  }
+</style>
+
+<section class="bf bf-hero"{% if section.settings.anchor_id != blank %} id="{{ section.settings.anchor_id | handleize }}"{% endif %}>
+  <div class="bf-shell bf-hero__inner">
+    <div class="bf-hero__copy">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="bf-eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h1 class="bf-hero__title">
+        {%- if section.settings.title_line_1 != blank -%}
+          <span>{{ section.settings.title_line_1 }}</span>
+        {%- endif -%}
+        {%- if section.settings.title_line_2 != blank -%}
+          <span class="bf-hero__title-accent">{{ section.settings.title_line_2 }}</span>
+        {%- endif -%}
+      </h1>
+      {%- if section.settings.description != blank -%}
+        <p class="bf-hero__desc">{{ section.settings.description }}</p>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <a class="bf-btn bf-btn--primary" href="{{ section.settings.button_link | default: '#part-01' }}">
+          {{ section.settings.button_label }}
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="bf-hero__media">
+      {%- if section.settings.tag != blank -%}
+        <span class="bf-hero__tag">{{ section.settings.tag }}</span>
+      {%- endif -%}
+      {%- if bf_image != blank -%}
+        <picture>
+          <source
+            media="(max-width: 768px)"
+            srcset="
+              {{ bf_image_mobile | image_url: width: 480 }} 480w,
+              {{ bf_image_mobile | image_url: width: 720 }} 720w,
+              {{ bf_image_mobile | image_url: width: 960 }} 960w
+            "
+            sizes="90vw"
+            width="720"
+            height="{{ 720 | divided_by: bf_image_mobile.aspect_ratio | round }}"
+          >
+          <img
+            class="bf-media-img"
+            src="{{ bf_image | image_url: width: 960 }}"
+            srcset="
+              {{ bf_image | image_url: width: 480 }} 480w,
+              {{ bf_image | image_url: width: 720 }} 720w,
+              {{ bf_image | image_url: width: 960 }} 960w,
+              {{ bf_image | image_url: width: 1200 }} 1200w
+            "
+            sizes="34vw"
+            width="960"
+            height="{{ 960 | divided_by: bf_image.aspect_ratio | round }}"
+            alt="{{ bf_image.alt | escape }}"
+            {% if section.index == 1 %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}
+          >
+        </picture>
+      {%- else -%}
+        <div class="bf-placeholder">{{ 'lifestyle-1' | placeholder_svg_tag }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "BF 活动 Banner",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "锚点 ID",
+      "info": "导航跳转用，可留空"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "背景色",
+      "default": "#fff1e3"
+    },
+    {
+      "type": "header",
+      "content": "文案"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "小标题",
+      "default": "AOTOS / Black Friday + Cyber Monday"
+    },
+    {
+      "type": "text",
+      "id": "title_line_1",
+      "label": "大标题第一行（黑色）",
+      "default": "More ride."
+    },
+    {
+      "type": "text",
+      "id": "title_line_2",
+      "label": "大标题第二行（橙色）",
+      "default": "More rewards."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "描述",
+      "default": "Three e-bike deals. A free helmet with every ride. A prize wheel in the middle of it all."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "按钮文案",
+      "default": "Explore the event"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "按钮链接",
+      "info": "留空则跳到第一部分（#part-01）"
+    },
+    {
+      "type": "header",
+      "content": "图片"
+    },
+    {
+      "type": "text",
+      "id": "tag",
+      "label": "图片角标",
+      "default": "Black Friday 2026"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "图片 PC"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "图片 手机",
+      "info": "不传则用 PC 图"
+    },
+    {
+      "type": "header",
+      "content": "间距"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "上边距 PC",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "下边距 PC",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "上边距 手机",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "下边距 手机",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 88
+    }
+  ],
+  "presets": [
+    {
+      "name": "BF 活动 Banner"
+    }
+  ]
+}
+{% endschema %}
