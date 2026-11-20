@@ -167,7 +167,6 @@
         "prize_2",
         "prize_3"
       ],
-      "disabled": true,
       "settings": {
         "anchor_id": "part-02",
         "bg_color": "#222222",
@@ -215,6 +214,21 @@
         "padding_top_mobile": 88,
         "padding_bottom_mobile": 88
       }
+    },
+    "1795172609d466d809": {
+      "type": "apps",
+      "blocks": {
+        "wheelify_spin_wheel_wheelify_app_section_aEnFDR": {
+          "type": "shopify://apps/wheelify-spin-wheel/blocks/wheelify-app-section/505ff42c-abce-4466-9558-7e1d3b2cfcd7",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "wheelify_spin_wheel_wheelify_app_section_aEnFDR"
+      ],
+      "settings": {
+        "include_margins": true
+      }
     }
   },
   "order": [
@@ -222,6 +236,7 @@
     "bf_nav",
     "bf_ebike",
     "bf_wheel",
+    "1795172609d466d809",
     "bf_accessories",
     "bf_details"
   ]
