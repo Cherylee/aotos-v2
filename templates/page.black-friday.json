@@ -47,27 +47,18 @@
             "target": "part-02"
           }
         },
-        "nav_3": {
-          "type": "link",
-          "settings": {
-            "number": "03",
-            "label": "AOTOS helmet buy 1 get 1",
-            "target": "part-03"
-          }
-        },
         "nav_4": {
           "type": "link",
           "settings": {
-            "number": "04",
+            "number": "03",
             "label": "Accessories 20% off",
-            "target": "part-04"
+            "target": "part-03"
           }
         }
       },
       "block_order": [
         "nav_1",
         "nav_2",
-        "nav_3",
         "nav_4"
       ],
       "settings": {
@@ -135,7 +126,7 @@
         "bg_color": "#f7f7f7",
         "eyebrow": "Part 01 / E-bike offers",
         "heading": "Buy the ride. Get the helmet.",
-        "description": "One free helmet with every eligible e-bike order, November 16 through December 6.",
+        "description": "One free helmet with every eligible e-bike order, November 16–December 6. X26 prices shown after the existing $200 checkout coupon.",
         "padding_top": 80,
         "padding_bottom": 80,
         "padding_top_mobile": 88,
@@ -150,7 +141,7 @@
           "settings": {
             "tier": "First / 3 winners",
             "value": "$100",
-            "desc": "Cash prize"
+            "desc": "AOTOS Gift Card · emailed to winner"
           }
         },
         "prize_2": {
@@ -158,7 +149,7 @@
           "settings": {
             "tier": "Second / 5 winners",
             "value": "$50",
-            "desc": "Cash prize"
+            "desc": "AOTOS Gift Card · emailed to winner"
           }
         },
         "prize_3": {
@@ -180,7 +171,7 @@
         "bg_color": "#222222",
         "eyebrow": "Part 02 / Prize wheel",
         "heading": "Give the wheel a spin.",
-        "description": "A bright little surprise in the middle of the sale. Thirteen proposed winning spots across three prize tiers.",
+        "description": "Spin for a chance to win an AOTOS gift card or two helmets. Thirteen prizes are available.",
         "button_label": "",
         "button_link": "",
         "note": "No purchase necessary. See official rules for eligibility and details.",
@@ -191,38 +182,17 @@
         "padding_bottom_mobile": 88
       }
     },
-    "bf_helmet": {
-      "type": "bf-helmet-bogo",
-      "settings": {
-        "anchor_id": "part-03",
-        "bg_color": "#ffffff",
-        "image": "shopify://shop_images/2_1_e08df968-28ee-4116-86a1-609ff6c3c708.webp",
-        "multiplier": "×2",
-        "eyebrow": "Part 03 / AOTOS logo helmet",
-        "heading": "<p>One for you. &nbsp;</p><p>One for a friend.</p>",
-        "description": "Buy one AOTOS logo helmet and get a second one free. Ride together, stay protected together.",
-        "highlight": "2 helmets for the price of 1",
-        "discount_code": "TESTBOGO",
-        "button_label": "Explore the helmet",
-        "button_link": "",
-        "note": "The existing AOTOS logo helmet is currently listed at $79. BOGO and 20% off are alternative discounts for this item, not combined.",
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "padding_top_mobile": 88,
-        "padding_bottom_mobile": 88
-      }
-    },
     "bf_accessories": {
       "type": "bf-accessories",
       "settings": {
-        "anchor_id": "part-04",
+        "anchor_id": "part-03",
         "bg_color": "#222222",
-        "eyebrow": "Part 04 / The finishing touches",
+        "eyebrow": "Part 03 / The finishing touches",
         "heading": "All accessories\n20% off.",
-        "description": "Complete your setup with the parts and extras you need. The AOTOS logo helmet can instead use its buy one get one offer.",
-        "discount_code": "TEST20",
+        "description": "Complete your ride with 20% off eligible accessories, including the AOTOS helmet.",
+        "discount_code": "",
         "button_label": "Shop accessories",
-        "button_link": "",
+        "button_link": "https://aotos.com/collections/accessories",
         "badge_big": "20%",
         "badge_small": "Off\naccessories",
         "padding_top": 80,
@@ -236,8 +206,8 @@
       "settings": {
         "anchor_id": "offer-details",
         "bg_color": "#f5f5f5",
-        "heading": "Offer details for review",
-        "body": "<p><strong>E-bike gift:</strong> proposed for qualifying orders from November 16 through December 6, including eligible orders already placed. The gift SKU, quantity per order, returns handling and fulfillment need to be set before launch. <strong>Helmet BOGO:</strong> shown as a separate offer for the existing AOTOS logo helmet; it does not stack with its 20% accessory discount. <strong>Accessories:</strong> proposed 20% discount across the collection; out-of-stock items cannot be ordered. <strong>Wheel:</strong> this is a visual demonstration and does not accept entries or award prizes. A live U.S. random drawing needs an equally accessible free entry route and official rules. The eight decorative wheel segments are not the odds or number of prizes.<br/><br/></p>",
+        "heading": "Offer details",
+        "body": "<p>E-bike gift: One helmet with each eligible e-bike order, Nov 16–Dec 6. Accessories: 20% off eligible items. Wheel: 3 × $100 gift cards, 5 × $50 gift cards, 5 × two helmets. Winners receive an email. No purchase necessary. See official rules.</p>",
         "padding_top": 80,
         "padding_bottom": 80,
         "padding_top_mobile": 88,
@@ -250,7 +220,6 @@
     "bf_nav",
     "bf_ebike",
     "bf_wheel",
-    "bf_helmet",
     "bf_accessories",
     "bf_details"
   ]
