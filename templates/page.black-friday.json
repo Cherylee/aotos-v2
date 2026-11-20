@@ -1,50 +1,252 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "bf_hero": {
       "type": "bf-hero",
-      "settings": {}
+      "settings": {
+        "anchor_id": "",
+        "bg_color": "#fff1e3",
+        "eyebrow": "AOTOS / Black Friday + Cyber Monday",
+        "title_line_1": "More ride.",
+        "title_line_2": "More rewards.",
+        "description": "Three e-bike deals. A free helmet with every ride. A prize wheel in the middle of it all.",
+        "button_label": "Explore the event",
+        "button_link": "",
+        "tag": "Black Friday 2026",
+        "image": "shopify://shop_images/AOTOS_Golden_Gate_900x720_Right.webp",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
     },
     "bf_nav": {
       "type": "bf-anchor-nav",
       "blocks": {
-        "nav_1": { "type": "link", "settings": { "number": "01", "label": "E-bike + free helmet", "target": "part-01" } },
-        "nav_2": { "type": "link", "settings": { "number": "02", "label": "Spin & win", "target": "part-02" } },
-        "nav_3": { "type": "link", "settings": { "number": "03", "label": "AOTOS helmet buy 1 get 1", "target": "part-03" } },
-        "nav_4": { "type": "link", "settings": { "number": "04", "label": "Accessories 20% off", "target": "part-04" } }
+        "nav_1": {
+          "type": "link",
+          "settings": {
+            "number": "01",
+            "label": "E-bike + free helmet",
+            "target": "part-01"
+          }
+        },
+        "nav_2": {
+          "type": "link",
+          "settings": {
+            "number": "02",
+            "label": "Spin & win",
+            "target": "part-02"
+          }
+        },
+        "nav_3": {
+          "type": "link",
+          "settings": {
+            "number": "03",
+            "label": "AOTOS helmet buy 1 get 1",
+            "target": "part-03"
+          }
+        },
+        "nav_4": {
+          "type": "link",
+          "settings": {
+            "number": "04",
+            "label": "Accessories 20% off",
+            "target": "part-04"
+          }
+        }
       },
-      "block_order": ["nav_1", "nav_2", "nav_3", "nav_4"],
-      "settings": {}
+      "block_order": [
+        "nav_1",
+        "nav_2",
+        "nav_3",
+        "nav_4"
+      ],
+      "settings": {
+        "aria_label": "Event sections"
+      }
     },
     "bf_ebike": {
       "type": "bf-ebike-offers",
       "blocks": {
-        "bike_t26": { "type": "bike", "settings": { "product": "flux-t26", "button_label": "Shop T26" } }
+        "bike_t26": {
+          "type": "bike",
+          "settings": {
+            "product": "flux-t26",
+            "eyebrow": "New arrival / Flux series",
+            "title": "",
+            "tagline": "Light on weight. Big on style.",
+            "spec_1": "500W rated motor",
+            "spec_2": "Up to 40 mi range",
+            "gift_tag": "GIFT",
+            "gift_text": "One free helmet with your ride",
+            "button_label": "Shop T26"
+          }
+        },
+        "bike_xyB3fk": {
+          "type": "bike",
+          "settings": {
+            "product": "flux-x26",
+            "eyebrow": "New arrival / Flux series",
+            "title": "",
+            "tagline": "Light on weight. Big on style.",
+            "spec_1": "500W rated motor",
+            "spec_2": "Up to 40 mi range",
+            "gift_tag": "GIFT",
+            "gift_text": "One free helmet with your ride",
+            "button_label": "Shop FLUX X26"
+          }
+        },
+        "bike_xmiQxw": {
+          "type": "bike",
+          "settings": {
+            "product": "flux-x26-pro",
+            "eyebrow": "New arrival / Flux series",
+            "title": "",
+            "tagline": "Light on weight. Big on style.",
+            "spec_1": "500W rated motor",
+            "spec_2": "Up to 40 mi range",
+            "gift_tag": "GIFT",
+            "gift_text": "One free helmet with your ride",
+            "button_label": "Shop FLUX X26 Pro"
+          }
+        }
       },
-      "block_order": ["bike_t26"],
-      "settings": {}
+      "block_order": [
+        "bike_t26",
+        "bike_xyB3fk",
+        "bike_xmiQxw"
+      ],
+      "settings": {
+        "anchor_id": "part-01",
+        "bg_color": "#ffffff",
+        "eyebrow": "Part 01 / E-bike offers",
+        "heading": "Buy the ride. Get the helmet.",
+        "description": "One free helmet with every eligible e-bike order, November 16 through December 6.",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
     },
     "bf_wheel": {
       "type": "bf-prize-wheel",
       "blocks": {
-        "prize_1": { "type": "prize", "settings": { "tier": "First / 3 winners", "value": "$100", "desc": "Cash prize" } },
-        "prize_2": { "type": "prize", "settings": { "tier": "Second / 5 winners", "value": "$50", "desc": "Cash prize" } },
-        "prize_3": { "type": "prize", "settings": { "tier": "Third / 5 winners", "value": "2 helmets", "desc": "Per winner" } }
+        "prize_1": {
+          "type": "prize",
+          "settings": {
+            "tier": "First / 3 winners",
+            "value": "$100",
+            "desc": "Cash prize"
+          }
+        },
+        "prize_2": {
+          "type": "prize",
+          "settings": {
+            "tier": "Second / 5 winners",
+            "value": "$50",
+            "desc": "Cash prize"
+          }
+        },
+        "prize_3": {
+          "type": "prize",
+          "settings": {
+            "tier": "Third / 5 winners",
+            "value": "2 helmets",
+            "desc": "Per winner"
+          }
+        }
       },
-      "block_order": ["prize_1", "prize_2", "prize_3"],
-      "settings": {}
+      "block_order": [
+        "prize_1",
+        "prize_2",
+        "prize_3"
+      ],
+      "settings": {
+        "anchor_id": "part-02",
+        "bg_color": "#fff1e3",
+        "eyebrow": "Part 02 / Prize wheel",
+        "heading": "Give the wheel a spin.",
+        "description": "Every visitor gets a spin. Land on a prize and it's yours — cash, helmets and more are waiting.",
+        "button_label": "",
+        "button_link": "",
+        "note": "No purchase necessary. See official rules for eligibility and details.",
+        "placeholder_text": "Prize wheel app",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
     },
     "bf_helmet": {
       "type": "bf-helmet-bogo",
-      "settings": { "discount_code": "TESTBOGO" }
+      "settings": {
+        "anchor_id": "part-03",
+        "bg_color": "#ffffff",
+        "image": "shopify://shop_images/2_1_e08df968-28ee-4116-86a1-609ff6c3c708.webp",
+        "multiplier": "×2",
+        "eyebrow": "Part 03 / AOTOS logo helmet",
+        "heading": "One for you. One for a friend.",
+        "description": "Buy one AOTOS logo helmet and get a second one free. Ride together, stay protected together.",
+        "highlight": "2 helmets for the price of 1",
+        "discount_code": "TESTBOGO",
+        "button_label": "Explore the helmet",
+        "button_link": "",
+        "note": "Add two helmets to your cart. The discount applies automatically at checkout.",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
     },
     "bf_accessories": {
       "type": "bf-accessories",
-      "settings": { "discount_code": "TEST20" }
+      "settings": {
+        "anchor_id": "part-04",
+        "bg_color": "#ff6501",
+        "eyebrow": "Part 04 / The finishing touches",
+        "heading": "All accessories\n20% off.",
+        "description": "Racks, bags, locks, lights and more. Gear up your ride for less.",
+        "discount_code": "TEST20",
+        "button_label": "Shop accessories",
+        "button_link": "",
+        "badge_big": "20%",
+        "badge_small": "Off\naccessories",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
     },
     "bf_details": {
       "type": "bf-offer-details",
-      "settings": {}
+      "settings": {
+        "anchor_id": "offer-details",
+        "bg_color": "#f5f5f5",
+        "heading": "Offer details",
+        "body": "<p>Offers valid November 16 – December 6, 2026 (PT) on aotos.com while supplies last. Free helmet applies to eligible e-bike orders only. Prices and promotions are subject to change without notice.</p>",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 88,
+        "padding_bottom_mobile": 88
+      }
     }
   },
-  "order": ["bf_hero", "bf_nav", "bf_ebike", "bf_wheel", "bf_helmet", "bf_accessories", "bf_details"]
+  "order": [
+    "bf_hero",
+    "bf_nav",
+    "bf_ebike",
+    "bf_wheel",
+    "bf_helmet",
+    "bf_accessories",
+    "bf_details"
+  ]
 }
