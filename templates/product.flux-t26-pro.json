@@ -39,7 +39,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Experience the ultimate ride with our latest e-bike model.</p>",
+            "text": "<p>Meet the FLUX T26 Pro: a 1,500W motor, up to 55 miles of range, and app-enabled wheelie assist for a new way to ride.</p>",
             "learn_more_label": "Learn more",
             "learn_more_anchor": ""
           }
@@ -94,16 +94,16 @@
             "size_guide_icon": "shopify://shop_images/288aa83db3c7f157c94fe470a81f4032.webp",
             "product_1": "flux-t26",
             "name_1": "FLUX T26",
-            "description_1": "Smart city entry. Everyday power and range.",
+            "description_1": "500W motor. Up to 40 miles for everyday rides.",
             "badge_1": "",
-            "product_2": "flux-x26",
-            "name_2": "FLUX X26",
-            "description_2": "Smooth power for everyday riding.",
+            "product_2": "",
+            "name_2": "FLUX T26 Pro",
+            "description_2": "1,500W motor. Up to 55 miles and wheelie assist.",
             "badge_2": "",
-            "product_3": "flux-x26-pro",
-            "name_3": "FLUX X26 Pro",
-            "description_3": "More power. More control. Instant acceleration.",
-            "badge_3": "Recommended",
+            "product_3": "",
+            "name_3": "",
+            "description_3": "",
+            "badge_3": "",
             "product_4": "",
             "name_4": "",
             "description_4": "",
@@ -149,8 +149,8 @@
           "settings": {
             "icon": "shopify://shop_images/Motor_987a092e-a8c8-469d-b48d-610681999762.svg",
             "title": "Motor",
-            "value": "500W rated / 750W Peak in BOOST*",
-            "variant_values": "Flux T26: 500W rated / 750W Peak in BOOST*"
+            "value": "1,500W rated motor",
+            "variant_values": ""
           }
         },
         "spec_torque": {
@@ -158,8 +158,8 @@
           "settings": {
             "icon": "shopify://shop_images/Torque_bc1a12dc-b32a-484d-9a7b-636330936ffc.svg",
             "title": "Torque",
-            "value": "60 Nm torque",
-            "variant_values": "Flux T26: 60 Nm torque"
+            "value": "100 Nm stall torque",
+            "variant_values": ""
           }
         },
         "spec_speed": {
@@ -167,8 +167,8 @@
           "settings": {
             "icon": "shopify://shop_images/Top_Speed_03910da7-e533-4487-ae1b-8e47624b98ae.svg",
             "title": "Top Speed",
-            "value": "25 mph (in BOOST*)",
-            "variant_values": "Flux T26: 25 mph (in BOOST*)"
+            "value": "Up to 28 mph in BOOST*",
+            "variant_values": ""
           }
         },
         "spec_battery": {
@@ -176,8 +176,8 @@
           "settings": {
             "icon": "shopify://shop_images/Battery_e82c59a5-1329-4520-9cd3-ec2cec88761a.svg",
             "title": "Battery",
-            "value": "48V 14.5Ah battery",
-            "variant_values": "Flux T26: 48V 14.5Ah battery"
+            "value": "48V 19Ah battery",
+            "variant_values": ""
           }
         },
         "spec_range": {
@@ -185,8 +185,8 @@
           "settings": {
             "icon": "shopify://shop_images/Range_7a0fa706-b5c5-412d-9821-44d96150f59b.svg",
             "title": "Range",
-            "value": "Up to 40 miles*",
-            "variant_values": "Flux T26: Up to 40 miles*"
+            "value": "Up to 55 miles*",
+            "variant_values": ""
           }
         },
         "spec_brakes": {
@@ -313,9 +313,9 @@
           "settings": {
             "video_url": "",
             "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales03.webp",
-            "pre_heading": "RANGE THAT FITS YOUR ROUTE",
-            "heading": "Forty Miles When You Need Them.",
-            "description": "<p>FLUX T26 delivers up to 40 miles** with 48V 14.5Ah actual discharge capacity. Enough for daily routes without carrying more battery than you need.</p>"
+            "pre_heading": "GO FURTHER",
+            "heading": "Up to 55 Miles of Possibility.",
+            "description": "<p>The 48V 19Ah battery delivers up to 55 miles under test conditions, giving you more room for longer commutes and weekend rides.</p>"
           }
         },
         "card_5": {
@@ -323,9 +323,9 @@
           "settings": {
             "video_url": "",
             "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales06.webp",
-            "pre_heading": "BOOST THE MOMENT",
-            "heading": "10 Seconds. One Controlled Burst.",
-            "description": "<p>Tap BOOST for up to 750W peak power on FLUX T26—a controlled 10-second acceleration burst for starts and inclines. Ambient lighting adds a visible energy cue. BOOST is not a permanent speed setting or unlock.</p>"
+            "pre_heading": "10-SECOND BOOST",
+            "heading": "Power When the Road Rises.",
+            "description": "<p>Tap BOOST for a 10-second burst of added output when starting or climbing. The 1,500W rated motor gives the T26 Pro the strength for demanding city routes.</p>"
           }
         },
         "card_1": {
@@ -333,9 +333,9 @@
           "settings": {
             "video_url": "",
             "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales01.webp",
-            "pre_heading": "SMARTER FROM THE START",
-            "heading": "Unlock Your Ride, Your Way.",
-            "description": "<p>On FLUX T26, get moving with proximity, NFC, or passcode—no key fob hunt. The 1.9\" TFT keeps speed, mode, and battery clear, with navigation mirroring for everyday city trips.<br/></p>"
+            "pre_heading": "SMART ACCESS",
+            "heading": "Unlock and Ride Your Way.",
+            "description": "<p>Unlock with proximity, NFC or a passcode. The 1.9-inch TFT display puts speed, ride data and mirrored navigation where you can see them.</p>"
           }
         },
         "card_4": {
@@ -343,20 +343,19 @@
           "settings": {
             "video_url": "",
             "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales02.webp",
-            "pre_heading": "CITY-READY CONFIDENCE",
-            "heading": "Built for Commutes and Neighborhood Miles.",
-            "description": "<p>20\" × 4.0\" fat tires, hydraulic disc brakes, integrated lighting, and Walk Assist are tuned for paved streets, stop-and-go traffic, and the ride home—not off-road adventures.</p>"
+            "pre_heading": "CITY-READY CONTROL",
+            "heading": "Confidence for Every City Mile.",
+            "description": "<p>20 × 4.0-inch wide tires, hydraulic disc brakes, integrated lighting and walk assist help you move through commutes, hills and daily errands with confidence.</p>"
           }
         },
         "card_2": {
           "type": "card",
-          "disabled": true,
           "settings": {
             "video_url": "",
             "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales04.webp",
-            "pre_heading": "POWER FOR EVERYDAY RIDES",
-            "heading": "Responsive Power for City Days.",
-            "description": "<p>A 500W rated motor, 750W Peak in BOOST*, and 60 Nm of torque give FLUX T26 clean, predictable power for starts, hills, and stop-and-go riding. Standard power control—gyro-assisted posture sensing is PRO only.</p>"
+            "pre_heading": "PRO POWER & POSTURE",
+            "heading": "Power That Responds to You.",
+            "description": "<p>The 1,500W rated motor and gyroscope-assisted posture sensing respond to how the bike moves. Wheelie assist is available through the app and starts off by default.</p>"
           }
         },
         "card_3": {
@@ -397,7 +396,7 @@
           "settings": {
             "label": "Motor",
             "value_1": "500W rated / 750W peak in BOOST*",
-            "value_2": "750W rated / 1,200W peak in BOOST*",
+            "value_2": "1,500W rated",
             "value_3": "750W rated / 2,000W peak in BOOST*"
           }
         },
@@ -406,8 +405,8 @@
           "disabled": true,
           "settings": {
             "label": "Motor",
-            "value_1": "500W rated / 750W peak in BOOST*",
-            "value_2": "750W rated / 1,200W peak in BOOST*",
+            "value_1": "60 Nm stall torque",
+            "value_2": "100 Nm stall torque",
             "value_3": "750W rated / 2,000W peak in BOOST*"
           }
         },
@@ -416,7 +415,7 @@
           "settings": {
             "label": "Torque",
             "value_1": "60 Nm",
-            "value_2": "80 Nm",
+            "value_2": "100 Nm stall torque",
             "value_3": "100 Nm"
           }
         },
@@ -434,7 +433,7 @@
           "settings": {
             "label": "Battery",
             "value_1": "48V 14.5Ah",
-            "value_2": "48V 18Ah",
+            "value_2": "48V 19Ah",
             "value_3": "48V 21Ah"
           }
         },
@@ -443,7 +442,7 @@
           "settings": {
             "label": "Range",
             "value_1": "Up to 40 miles*",
-            "value_2": "Up to 50 miles",
+            "value_2": "Up to 55 miles*",
             "value_3": "Up to 70 miles"
           }
         },
@@ -452,7 +451,7 @@
           "settings": {
             "label": "Display",
             "value_1": "1.9-inch TFT",
-            "value_2": "5.5-inch TFT",
+            "value_2": "1.9-inch TFT",
             "value_3": "5.5-inch TFT"
           }
         },
@@ -467,6 +466,7 @@
         },
         "spec_row_VBK8Y4": {
           "type": "spec_row",
+          "disabled": true,
           "settings": {
             "label": "Suspension",
             "value_1": "Dual hydraulic suspension",
@@ -485,10 +485,11 @@
         },
         "spec_row_7bMHJN": {
           "type": "spec_row",
+          "disabled": true,
           "settings": {
             "label": "Tire Pressure Monitoring",
             "value_1": "No",
-            "value_2": "No",
+            "value_2": "Included storage bag",
             "value_3": "Yes"
           }
         },
@@ -497,7 +498,7 @@
           "settings": {
             "label": "Under-Frame Storage Bag",
             "value_1": "No",
-            "value_2": "No",
+            "value_2": "Included",
             "value_3": "Yes"
           }
         },
@@ -506,7 +507,7 @@
           "settings": {
             "label": "Gyro Posture Sensing",
             "value_1": "No",
-            "value_2": "Yes",
+            "value_2": "Yes, with wheelie assist",
             "value_3": "Yes"
           }
         },
@@ -515,7 +516,7 @@
           "settings": {
             "label": "Unlock",
             "value_1": "NFC / Proximity / Passcode",
-            "value_2": "Proximity / Passcode",
+            "value_2": "NFC / Proximity / Passcode",
             "value_3": "Proximity / Passcode"
           }
         },
@@ -551,7 +552,7 @@
           "settings": {
             "label": "IP Rating",
             "value_1": "IPX5",
-            "value_2": "IPX6",
+            "value_2": "IPX5",
             "value_3": "IPX6"
           }
         },
@@ -560,7 +561,7 @@
           "settings": {
             "label": "Net Weight",
             "value_1": "84 lbs / 38 kg",
-            "value_2": "104 lbs / 47 kg",
+            "value_2": "93 lbs / 42 kg",
             "value_3": "112 lbs / 51 kg"
           }
         },
@@ -569,7 +570,7 @@
           "settings": {
             "label": "Maximum Load",
             "value_1": "265 lbs",
-            "value_2": "330 lbs",
+            "value_2": "265 lbs / 120 kg",
             "value_3": "330 lbs"
           }
         }
@@ -598,25 +599,24 @@
       ],
       "name": "Comparison Table",
       "settings": {
-        "title": "Compare FLUX Models",
+        "title": "Compare FLUX T26 Models",
         "model_label": "Model",
         "show_footnote": true,
-        "footnote": "<p>*Boost Mode allows your bike to output its maximum torque and power for up to 10 seconds at a time.&nbsp;<br/>*Enjoy One year of free 4G/GPS service. Afterward, plans start at $2.90/month or $29 for 12 months (Best Value). Cancel anytime through the AOTOS app.<br/>*Range varies with rider weight, terrain, and assist level.</p>",
+        "footnote": "<p>*BOOST delivers additional output for up to 10 seconds at a time.<br/>*Range figures are based on a 75 kg rider traveling at 10 mph on level ground; actual range varies.</p>",
         "highlighted_column": "1",
         "product_1_name": "FLUX T26",
         "product_1_highlight": "",
         "product_1_image": "shopify://shop_images/flux_t26.png",
-        "product_1_tagline": "Smart city entry. Everyday power and range.",
+        "product_1_tagline": "Smart city riding. 500W motor and up to 40 miles.",
         "product_1_url": "shopify://products/flux-t26",
-        "product_2_name": "FLUX X26",
+        "product_2_name": "FLUX T26 Pro",
         "product_2_highlight": "",
-        "product_2_image": "shopify://shop_images/eb03020-cropped.webp",
-        "product_2_tagline": "Smooth, predictable power for everyday rides.",
-        "product_2_url": "shopify://products/flux-x26",
-        "product_3_name": "FLUX X26 Pro",
-        "product_3_highlight": "Pro",
+        "product_2_tagline": "1,500W motor, up to 55 miles and wheelie assist.",
+        "product_2_url": "/products/flux-t26-pro",
+        "product_3_name": "",
+        "product_3_highlight": "",
         "product_3_image": "shopify://shop_images/eb03_010-cropped.webp",
-        "product_3_tagline": "Sharper response for riders who want instant acceleration.",
+        "product_3_tagline": "",
         "product_3_url": "shopify://products/flux-x26-pro",
         "bg_color": "#ffffff",
         "title_color": "#000000",
@@ -705,7 +705,7 @@
           "type": "spec_item",
           "settings": {
             "label": "Motor",
-            "value": "<p>500W rated / 750W Peak in BOOST*</p>"
+            "value": "<p>1,500W rated geared hub motor</p>"
           }
         },
         "spec_2": {
@@ -755,28 +755,28 @@
           "type": "spec_item",
           "settings": {
             "label": "Bike Weight",
-            "value": "<p>~84 lbs</p>"
+            "value": "<p>~93 lbs / 42 kg</p>"
           }
         },
         "spec_item_K4meDW": {
           "type": "spec_item",
           "settings": {
             "label": "Range",
-            "value": "<p>Up to 40 miles**</p>"
+            "value": "<p>Up to 55 miles*</p>"
           }
         },
         "spec_item_RR4BHe": {
           "type": "spec_item",
           "settings": {
             "label": "Torque",
-            "value": "<p>60 Nm</p>"
+            "value": "<p>100 Nm stall torque</p>"
           }
         },
         "spec_item_CJbpU8": {
           "type": "spec_item",
           "settings": {
             "label": "BOOST",
-            "value": "<p>10-second controlled peak burst*</p>"
+            "value": "<p>10-second boost for starts and hills</p>"
           }
         },
         "spec_item_a7bCHw": {
@@ -804,7 +804,7 @@
           "type": "spec_item",
           "settings": {
             "label": "Smart Features",
-            "value": "<p>Keyless unlock · Navigation mirroring · Nearby Bluetooth management</p>"
+            "value": "<p>Keyless unlock · Navigation mirroring · Nearby Bluetooth management · Wheelie assist</p>"
           }
         },
         "box_featured": {
@@ -1056,8 +1056,8 @@
     "flux_story": {
       "type": "aotos-flux-story",
       "settings": {
-        "title": "TURN THE CITY ON.  Smart power for every street.",
-        "description": "The FLUX T26 is the smart entry to everyday city riding. A clear TFT display, fat-tire confidence, and controlled BOOST for starts and hills keep every commute smooth, capable, and fully yours.",
+        "title": "TURN THE CITY ON. More power for your next ride.",
+        "description": "FLUX T26 Pro adds a 1,500W rated motor, up to 55 miles of range and app-enabled wheelie assist to the smart city riding experience. Ride farther and take on more demanding routes.",
         "image": "shopify://shop_images/2400X1000.jpg",
         "bg_color": "#ffffff",
         "padding_top": 80,
@@ -1277,33 +1277,33 @@
         "faq_item_cCt6Eh": {
           "type": "faq_item",
           "settings": {
-            "question": "How far can the FLUX T26 go on a charge?",
+            "question": "How far can the FLUX T26 Pro go on a charge?",
             "related_product": "",
-            "answer": "<p>Its 48V 14.5Ah battery offers up to 40 miles. Actual range varies with terrain, rider weight, speed, and assist level.</p>"
+            "answer": "<p>The 48V 19Ah battery offers up to 55 miles under test conditions: a 75 kg rider at 10 mph on level ground. Actual range varies with terrain, speed, rider weight and assist level.</p>"
           }
         },
         "faq_item_UCRNeq": {
           "type": "faq_item",
           "settings": {
-            "question": "Does it have enough power for city hills?",
+            "question": "How much power does the T26 Pro have?",
             "related_product": "",
-            "answer": "<p>Its 500W rated motor delivers 60 Nm of torque. BOOST provides up to 750W peak power in a controlled 10-second burst.</p>"
+            "answer": "<p>Its rated motor power is 1,500W. BOOST provides additional output for up to 10 seconds to help with starts and hills.</p>"
           }
         },
         "faq_item_T3fWcU": {
           "type": "faq_item",
           "settings": {
-            "question": "Is it a Class 2 e-bike? How fast can it go?",
+            "question": "How fast can the T26 Pro go?",
             "related_product": "",
-            "answer": "<p>The T26 ships in a 20 mph Class 2 configuration. BOOST provides a short burst of acceleration for up to 10 seconds, with a listed top speed of up to 25 mph during the burst. It does not unlock a permanent higher-speed setting. Follow local riding rules.</p>"
+            "answer": "<p>The bike ships with a 20 mph default maximum speed. In BOOST, its listed top speed is up to 28 mph for a short burst. Follow local riding rules.</p>"
           }
         },
         "faq_item_jgHhTe": {
           "type": "faq_item",
           "settings": {
-            "question": "How do I unlock the T26?",
+            "question": "How do I unlock the T26 Pro?",
             "related_product": "",
-            "answer": "<p>Use NFC, proximity, or a passcode. The 1.9-inch TFT display also supports navigation mirroring.</p>"
+            "answer": "<p>Use NFC, proximity or a passcode. The 1.9-inch TFT display also supports navigation mirroring.</p>"
           }
         },
         "faq_item_qWeaLj": {
