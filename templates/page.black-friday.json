@@ -96,6 +96,7 @@
           "type": "bike",
           "settings": {
             "product": "flux-x26",
+            "price_amount": 1499,
             "eyebrow": "New arrival / Flux series",
             "title": "",
             "tagline": "Light on weight. Big on style.",
@@ -111,6 +112,7 @@
           "type": "bike",
           "settings": {
             "product": "flux-x26-pro",
+            "price_amount": 2099,
             "eyebrow": "New arrival / Flux series",
             "title": "",
             "tagline": "Light on weight. Big on style.",
