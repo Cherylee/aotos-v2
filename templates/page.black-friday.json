@@ -41,6 +41,7 @@
         },
         "nav_2": {
           "type": "link",
+          "disabled": true,
           "settings": {
             "number": "02",
             "label": "Spin & win",
@@ -166,6 +167,7 @@
         "prize_2",
         "prize_3"
       ],
+      "disabled": true,
       "settings": {
         "anchor_id": "part-02",
         "bg_color": "#222222",
@@ -207,7 +209,7 @@
         "anchor_id": "offer-details",
         "bg_color": "#f5f5f5",
         "heading": "Offer details",
-        "body": "<p>E-bike gift: One helmet with each eligible e-bike order placed November 16–December 6. Accessories: Use BFACCESS20 for 20% off items in the Accessories collection through December 6. Discount codes cannot be combined. Prize wheel: 3 × $100 gift cards, 5 × $50 gift cards, and 5 prizes of two helmets. Winners will be contacted by email. No purchase necessary.</p>",
+        "body": "<p>E-bike gift: One helmet with each eligible e-bike order placed November 16–December 6. Accessories: Use BFACCESS20 for 20% off items in the Accessories collection through December 6. Discount codes cannot be combined.</p>",
         "padding_top": 80,
         "padding_bottom": 80,
         "padding_top_mobile": 88,
