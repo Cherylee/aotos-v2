@@ -10,6 +10,10 @@
     padding-bottom: calc({{ section.settings.padding_bottom | default: 80, allow_false: true }} * var(--rem));
   }
 
+  #shopify-section-{{ section.id }} .bf-hero__media {
+    background-color: {{ section.settings.bg_color }};
+  }
+
   @media screen and (max-width: 768px) {
     #shopify-section-{{ section.id }} .bf-hero {
       padding-top: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem));
@@ -153,13 +157,14 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "图片 PC"
+      "label": "图片 PC",
+      "info": "建议尺寸 900×720"
     },
     {
       "type": "image_picker",
       "id": "image_mobile",
       "label": "图片 手机",
-      "info": "不传则用 PC 图"
+      "info": "建议尺寸 900×720。不传则用 PC 图"
     },
     {
       "type": "header",

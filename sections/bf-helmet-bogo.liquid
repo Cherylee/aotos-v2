@@ -51,8 +51,10 @@
         {%- if section.settings.eyebrow != blank -%}
           <p class="bf-eyebrow">{{ section.settings.eyebrow }}</p>
         {%- endif -%}
-        {%- if section.settings.heading != blank -%}
-          <h2 class="bf-heading">{{ section.settings.heading }}</h2>
+        {%- assign bf_heading_text = section.settings.heading | strip_html | strip -%}
+        {%- if bf_heading_text != blank -%}
+          {%- assign bf_heading_html = section.settings.heading | strip_newlines | replace: '</p><p>', '<br>' | replace: '</p> <p>', '<br>' | remove: '<p>' | remove: '</p>' | strip -%}
+          <h2 class="bf-heading">{{ bf_heading_html }}</h2>
         {%- endif -%}
         {%- if section.settings.description != blank -%}
           <p class="bf-text">{{ section.settings.description }}</p>
@@ -164,10 +166,10 @@
       "default": "Part 03 / AOTOS logo helmet"
     },
     {
-      "type": "text",
+      "type": "richtext",
       "id": "heading",
       "label": "标题",
-      "default": "One for you. One for a friend."
+      "default": "<p>One for you. One for a friend.</p>"
     },
     {
       "type": "textarea",
