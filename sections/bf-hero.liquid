@@ -6,6 +6,11 @@
 <style>
   #shopify-section-{{ section.id }} .bf-hero {
     background-color: {{ section.settings.bg_color }};
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  #shopify-section-{{ section.id }} .bf-hero__copy {
     padding-top: calc({{ section.settings.padding_top | default: 80, allow_false: true }} * var(--rem));
     padding-bottom: calc({{ section.settings.padding_bottom | default: 80, allow_false: true }} * var(--rem));
   }
@@ -18,6 +23,11 @@
     #shopify-section-{{ section.id }} .bf-hero {
       padding-top: calc({{ section.settings.padding_top_mobile | default: 88, allow_false: true }} * var(--rem));
       padding-bottom: calc({{ section.settings.padding_bottom_mobile | default: 88, allow_false: true }} * var(--rem));
+    }
+
+    #shopify-section-{{ section.id }} .bf-hero__copy {
+      padding-top: 0;
+      padding-bottom: 0;
     }
   }
 </style>
@@ -102,7 +112,7 @@
       "type": "color",
       "id": "bg_color",
       "label": "背景色",
-      "default": "#fff1e3"
+      "default": "#222222"
     },
     {
       "type": "header",

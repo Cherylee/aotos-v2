@@ -134,28 +134,19 @@
 .bf-hero {
   position: relative;
   overflow: hidden;
-  background: var(--bf-cream);
+  background: #222222;
+  color: #ffffff;
 }
 
 .bf-hero::before {
-  content: "";
-  position: absolute;
-  top: calc(-180 * var(--rem));
-  right: calc(-120 * var(--rem));
-  width: calc(480 * var(--rem));
-  height: calc(480 * var(--rem));
-  border-radius: 50%;
-  background: var(--bf-peach);
-  opacity: 0.7;
-  pointer-events: none;
+  content: none;
 }
 
 .bf-hero__inner {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr calc(480 * var(--rem));
+  grid-template-columns: 1fr calc(550 * var(--rem));
   align-items: stretch;
-  gap: calc(64 * var(--rem));
 }
 
 .bf-hero__title {
@@ -165,6 +156,7 @@
   font-weight: 900;
   letter-spacing: -0.03em;
   text-transform: uppercase;
+  color: #ffffff;
 }
 
 .bf-hero__title span {
@@ -180,30 +172,40 @@
   margin: 0 0 calc(32 * var(--rem));
   font-size: calc(18 * var(--rem));
   line-height: calc(26 * var(--rem));
+  color: #ffffff;
 }
 
 .bf-hero__media {
   position: relative;
-  height: 100%;
+  align-self: stretch;
+  height: auto;
   min-height: 0;
+}
+
+.bf-hero__media picture,
+.bf-hero__media .bf-placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .bf-hero__media picture {
   display: block;
-  height: 100%;
 }
 
 .bf-hero__media picture,
 .bf-hero__media .bf-placeholder {
   --bf-hero-fade: 18%;
+  --bf-hero-fade-left: 22%;
   -webkit-mask-image:
-    linear-gradient(to right, transparent, #000 var(--bf-hero-fade), #000 calc(100% - var(--bf-hero-fade)), transparent),
+    linear-gradient(to right, transparent 0%, #000 var(--bf-hero-fade-left), #000 calc(100% - var(--bf-hero-fade)), transparent),
     linear-gradient(to bottom, transparent, #000 var(--bf-hero-fade), #000 calc(100% - var(--bf-hero-fade)), transparent);
   -webkit-mask-size: 100% 100%;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-composite: source-in;
   mask-image:
-    linear-gradient(to right, transparent, #000 var(--bf-hero-fade), #000 calc(100% - var(--bf-hero-fade)), transparent),
+    linear-gradient(to right, transparent 0%, #000 var(--bf-hero-fade-left), #000 calc(100% - var(--bf-hero-fade)), transparent),
     linear-gradient(to bottom, transparent, #000 var(--bf-hero-fade), #000 calc(100% - var(--bf-hero-fade)), transparent);
   mask-size: 100% 100%;
   mask-repeat: no-repeat;
@@ -214,7 +216,7 @@
   position: absolute;
   right: calc(28 * var(--rem));
   bottom: calc(36 * var(--rem));
-  z-index: 1;
+  z-index: 2;
   padding: calc(10 * var(--rem)) calc(18 * var(--rem));
   border-radius: calc(4 * var(--rem));
   background: #ffffff;
@@ -229,7 +231,10 @@
 }
 
 .bf-hero__media .bf-media-img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 /* ---------- Sticky nav ---------- */
@@ -334,7 +339,7 @@ html:has(.section-header.shopify-section-header-sticky:not(.shopify-section-head
   position: relative;
   aspect-ratio: 550 / 480;
   padding: calc(56 * var(--rem)) calc(32 * var(--rem)) calc(32 * var(--rem));
-  background: linear-gradient(160deg, #fff1e3 0%, var(--bf-peach) 100%);
+  
 }
 
 .bf-bike__badge {
@@ -383,6 +388,8 @@ html:has(.section-header.shopify-section-header-sticky:not(.shopify-section-head
   flex-direction: column;
   justify-content: center;
   padding: calc(48 * var(--rem));
+  background: linear-gradient(160deg, #222 0%, #222 100%);
+  color: #ffffff;
 }
 
 .bf-bike__title {
@@ -390,6 +397,7 @@ html:has(.section-header.shopify-section-header-sticky:not(.shopify-section-head
   font-size: calc(36 * var(--rem));
   line-height: 1.1;
   font-weight: 800;
+  color: #ffffff;
 }
 
 .bf-bike__tagline {
@@ -409,6 +417,7 @@ html:has(.section-header.shopify-section-header-sticky:not(.shopify-section-head
   font-size: calc(14 * var(--rem));
   line-height: calc(18 * var(--rem));
   font-weight: 600;
+  color: #999999;
 }
 
 .bf-bike__specs li::before {
@@ -448,9 +457,10 @@ html:has(.section-header.shopify-section-header-sticky:not(.shopify-section-head
   gap: calc(12 * var(--rem));
   margin: 0 0 calc(28 * var(--rem));
   padding: calc(12 * var(--rem)) calc(16 * var(--rem));
-  border: 1px dashed var(--bf-orange);
+  border: 1px dashed #999999;
   border-radius: calc(8 * var(--rem));
-  background: #fff8f2;
+  background: #fff1e3;
+  color: #000000;
 }
 
 .bf-gift__thumb {
@@ -494,6 +504,11 @@ html:has(.section-header.shopify-section-header-sticky:not(.shopify-section-head
 
 .bf-wheel .bf-heading {
   font-size: calc(44 * var(--rem));
+  color: #ffffff;
+}
+
+.bf-wheel .bf-text {
+  color: #ffffff;
 }
 
 .bf-prizes {
@@ -621,7 +636,7 @@ html:has(.section-header.shopify-section-header-sticky:not(.shopify-section-head
   flex-direction: column;
   justify-content: center;
   padding: calc(56 * var(--rem));
-  background: var(--bf-cream);
+  background: #eee;
 }
 
 .bf-helmet__body .bf-text {
@@ -698,7 +713,7 @@ html:has(.section-header.shopify-section-header-sticky:not(.shopify-section-head
 
 /* ---------- Part 04 accessories ---------- */
 .bf-acc {
-  background: var(--bf-orange);
+  background: #222222;
   color: #ffffff;
   overflow: hidden;
 }
@@ -989,7 +1004,7 @@ html:has(.section-header.shopify-section-header-sticky:not(.shopify-section-head
   }
 
   .bf-gift__text {
-    font-size: calc(22 * var(--rem));
+    font-size: calc(20 * var(--rem));
     line-height: calc(32 * var(--rem));
   }
 
@@ -1111,7 +1126,7 @@ html:has(.section-header.shopify-section-header-sticky:not(.shopify-section-head
   }
 
   .bf-acc__title {
-    font-size: calc(96 * var(--rem));
+    font-size: calc(92 * var(--rem));
   }
 
   .bf-acc .bf-text {

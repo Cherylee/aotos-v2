@@ -13,7 +13,7 @@
       "type": "bf-hero",
       "settings": {
         "anchor_id": "",
-        "bg_color": "#fff1e3",
+        "bg_color": "#222222",
         "eyebrow": "AOTOS / Black Friday + Cyber Monday",
         "title_line_1": "More ride.",
         "title_line_2": "More rewards.",
@@ -130,7 +130,7 @@
       ],
       "settings": {
         "anchor_id": "part-01",
-        "bg_color": "#ffffff",
+        "bg_color": "#f7f7f7",
         "eyebrow": "Part 01 / E-bike offers",
         "heading": "Buy the ride. Get the helmet.",
         "description": "One free helmet with every eligible e-bike order, November 16 through December 6.",
@@ -175,7 +175,7 @@
       ],
       "settings": {
         "anchor_id": "part-02",
-        "bg_color": "#fff1e3",
+        "bg_color": "#222222",
         "eyebrow": "Part 02 / Prize wheel",
         "heading": "Give the wheel a spin.",
         "description": "A bright little surprise in the middle of the sale. Thirteen proposed winning spots across three prize tiers.",
@@ -214,7 +214,7 @@
       "type": "bf-accessories",
       "settings": {
         "anchor_id": "part-04",
-        "bg_color": "#ff6501",
+        "bg_color": "#222222",
         "eyebrow": "Part 04 / The finishing touches",
         "heading": "All accessories\n20% off.",
         "description": "Complete your setup with the parts and extras you need. The AOTOS logo helmet can instead use its buy one get one offer.",
