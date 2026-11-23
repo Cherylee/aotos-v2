@@ -21,9 +21,9 @@
   </span>
   <span class="aotos-nav__card-title">
     <span class="aotos-nav__card-name">
-      {{ card_title | escape }}
+      <span class="aotos-nav__card-label">{{ card_title | escape }}</span>
       {%- if nav_new -%}
-        <span class="aotos-nav__badge" style="--aotos-nav-badge-bg: #ff0101; --aotos-nav-badge-color: #ffffff;">New</span>
+        <span class="aotos-nav__badge" style="--aotos-nav-badge-bg: #ff0101; --aotos-nav-badge-color: #ffffff;">{{ nav_badge | default: 'New' | escape }}</span>
       {%- endif -%}
     </span>
   </span>

@@ -280,16 +280,22 @@
 .aotos-nav__card-name {
   position: relative;
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   max-width: 100%;
+}
+
+.aotos-nav__card-label {
+  min-width: 0;
 }
 
 .aotos-nav__card-name .aotos-nav__badge {
   position: static;
   top: auto;
   left: auto;
+  align-self: flex-start;
+  flex: 0 0 auto;
   margin-left: calc(6 * var(--rem));
-  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 @media (hover: hover) {

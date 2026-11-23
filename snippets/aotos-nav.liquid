@@ -169,12 +169,14 @@
                                 assign product_key = 'item_' | append: i | append: '_product_' | append: n
                                 assign product_title_key = 'item_' | append: i | append: '_product_' | append: n | append: '_title'
                                 assign product_new_key = 'item_' | append: i | append: '_product_' | append: n | append: '_new'
+                                assign product_badge_key = 'item_' | append: i | append: '_product_' | append: n | append: '_badge'
                                 assign nav_product = block.settings[product_key]
                                 assign nav_title = block.settings[product_title_key]
                                 assign nav_new = block.settings[product_new_key]
+                                assign nav_badge = block.settings[product_badge_key]
                               -%}
                               {%- if nav_product != blank -%}
-                                {%- render 'aotos-nav-card', nav_product: nav_product, nav_title: nav_title, nav_new: nav_new -%}
+                                {%- render 'aotos-nav-card', nav_product: nav_product, nav_title: nav_title, nav_new: nav_new, nav_badge: nav_badge -%}
                               {%- endif -%}
                             {%- endfor -%}
                           </div>
