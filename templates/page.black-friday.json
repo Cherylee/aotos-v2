@@ -77,7 +77,7 @@
             "tagline": "Lightweight design for everyday riding.",
             "spec_1": "500W rated motor",
             "spec_2": "Up to 40 miles of range",
-            "gift_image": "shopify://shop_images/840X360b.webp",
+            "gift_image": "shopify://shop_images/c9c5111c5d8b3a1089bceb65088d4ccd32537d347ecb1f40c2c4cf35aeddf447.png",
             "gift_tag": "GIFT",
             "gift_text": "One free helmet with your ride",
             "button_label": "Shop T26"
@@ -93,7 +93,7 @@
             "tagline": "Built for city streets and weekend escapes.",
             "spec_1": "750W rated motor",
             "spec_2": "Up to 50 miles of range",
-            "gift_image": "shopify://shop_images/840X360b.webp",
+            "gift_image": "shopify://shop_images/c9c5111c5d8b3a1089bceb65088d4ccd32537d347ecb1f40c2c4cf35aeddf447.png",
             "gift_tag": "GIFT",
             "gift_text": "One free helmet with your ride",
             "button_label": "Shop FLUX X26"
@@ -109,7 +109,7 @@
             "tagline": "Advanced features for a more capable ride.",
             "spec_1": "750W rated motor",
             "spec_2": "Up to 70 miles of range",
-            "gift_image": "shopify://shop_images/840X360b.webp",
+            "gift_image": "shopify://shop_images/c9c5111c5d8b3a1089bceb65088d4ccd32537d347ecb1f40c2c4cf35aeddf447.png",
             "gift_tag": "GIFT",
             "gift_text": "One free helmet with your ride",
             "button_label": "Shop FLUX X26 Pro"
@@ -141,7 +141,7 @@
           "settings": {
             "tier": "First / 3 winners",
             "value": "$100",
-            "desc": "AOTOS Gift Card · emailed to winner"
+            "desc": "AOTOS Coupon Code"
           }
         },
         "prize_2": {
@@ -149,7 +149,7 @@
           "settings": {
             "tier": "Second / 5 winners",
             "value": "$50",
-            "desc": "AOTOS Gift Card · emailed to winner"
+            "desc": "AOTOS Coupon Code"
           }
         },
         "prize_3": {
@@ -174,7 +174,7 @@
         "description": "Enter your email for a chance to win a $100 or $50 AOTOS gift card, or two helmets. A total of 13 prizes are available.",
         "button_label": "",
         "button_link": "",
-        "note": "One entry per email. Winners will receive prize details by email. No purchase necessary.",
+        "note": "",
         "padding_top": 48,
         "padding_bottom": 48,
         "padding_top_mobile": 88,
