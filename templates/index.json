@@ -58,7 +58,7 @@
             "stat_margin_mobile": 32,
             "show_button_1": true,
             "button_1_label": "Shop X26 Series",
-            "button_1_link": "https://aotos.com/products/flux-x26-pro",
+            "button_1_link": "shopify://pages/deal",
             "button_1_margin": 24,
             "button_1_margin_mobile": 16,
             "show_button_2": false,
