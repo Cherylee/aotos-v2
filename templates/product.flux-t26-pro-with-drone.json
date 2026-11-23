@@ -39,7 +39,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Meet the FLUX T26 Pro: a 1,500W motor, up to 55 miles of range, and app-enabled wheelie assist for a new way to ride.</p>",
+            "text": "<p>The FLUX T26 Pro pairs a 1,500W rated motor with up to 55 miles of range and app-enabled wheelie assist. This bundle adds a mini drone to capture your ride.</p>",
             "learn_more_label": "Learn more",
             "learn_more_anchor": ""
           }
@@ -52,7 +52,7 @@
           "type": "product_discount_code",
           "name": "Discount code",
           "settings": {
-            "code": "T26PRO100",
+            "code": "T26PRO200",
             "default_checked": true,
             "checkbox_color": "#ff6501"
           }
@@ -93,13 +93,13 @@
             "size_guide_icon": "shopify://shop_images/288aa83db3c7f157c94fe470a81f4032.webp",
             "product_1": "flux-t26-pro",
             "name_1": "FLUX T26 Pro",
-            "description_1": "500W motor. Up to 40 miles for everyday rides.",
+            "description_1": "1,500W rated motor, up to 55 miles, and app-enabled wheelie assist.",
             "badge_1": "",
             "product_2": "aotos-flux-t26-pro-ebike-with-mini-drone",
-            "name_2": "FLUX T26 Pro",
-            "description_2": "1,500W motor. Up to 55 miles and wheelie assist.",
+            "name_2": "FLUX T26 Pro + Mini Drone",
+            "description_2": "T26 Pro performance with a mini drone to capture your ride.",
             "badge_2": "",
-            "product_3": "flux-t26",
+            "product_3": "",
             "name_3": "",
             "description_3": "",
             "badge_3": "",
@@ -364,7 +364,7 @@
             "image": "shopify://shop_images/pro06.jpg",
             "pre_heading": "CREATE AS YOU RIDE",
             "heading": "Capture the City You Ride.",
-            "description": "<p>Add an optional bike-mounted Hover holder and use Hover app tracking tools to film rider and group-ride moments. The Hover Creator Kit is an accessory and content tool—not a drone built into the bike.</p>"
+            "description": "<p>The T26 Pro + Mini Drone bundle includes a mini drone to capture new perspectives on solo and group rides. The bike-mounted Hover holder is an optional accessory; set up and operate the drone while stopped.</p>"
           }
         }
       },
