@@ -312,7 +312,7 @@
           "type": "card",
           "settings": {
             "video_url": "",
-            "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales03.webp",
+            "image": "shopify://shop_images/pro01.jpg",
             "pre_heading": "GO FURTHER",
             "heading": "Up to 55 Miles of Possibility.",
             "description": "<p>The 48V 19Ah battery delivers up to 55 miles under test conditions, giving you more room for longer commutes and weekend rides.</p>"
@@ -322,7 +322,7 @@
           "type": "card",
           "settings": {
             "video_url": "",
-            "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales06.webp",
+            "image": "shopify://shop_images/pro02.jpg",
             "pre_heading": "10-SECOND BOOST",
             "heading": "Power When the Road Rises.",
             "description": "<p>Tap BOOST for a 10-second burst of added output when starting or climbing. The 1,500W rated motor gives the T26 Pro the strength for demanding city routes.</p>"
@@ -332,7 +332,7 @@
           "type": "card",
           "settings": {
             "video_url": "",
-            "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales01.webp",
+            "image": "shopify://shop_images/pro03.jpg",
             "pre_heading": "SMART ACCESS",
             "heading": "Unlock and Ride Your Way.",
             "description": "<p>Unlock with proximity, NFC or a passcode. The 1.9-inch TFT display puts speed, ride data and mirrored navigation where you can see them.</p>"
@@ -342,7 +342,7 @@
           "type": "card",
           "settings": {
             "video_url": "",
-            "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales02.webp",
+            "image": "shopify://shop_images/pro04.jpg",
             "pre_heading": "CITY-READY CONTROL",
             "heading": "Confidence for Every City Mile.",
             "description": "<p>20 × 4.0-inch wide tires, hydraulic disc brakes, integrated lighting and walk assist help you move through commutes, hills and daily errands with confidence.</p>"
@@ -352,7 +352,7 @@
           "type": "card",
           "settings": {
             "video_url": "",
-            "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales04.webp",
+            "image": "shopify://shop_images/pro05.jpg",
             "pre_heading": "PRO POWER & POSTURE",
             "heading": "Power That Responds to You.",
             "description": "<p>The 1,500W rated motor and gyroscope-assisted posture sensing respond to how the bike moves. Wheelie assist is available through the app and starts off by default.</p>"
@@ -362,7 +362,7 @@
           "type": "card",
           "settings": {
             "video_url": "",
-            "image": "shopify://shop_images/AOTOS_FLUX_T26_Ebike_sales05.webp",
+            "image": "shopify://shop_images/pro06.jpg",
             "pre_heading": "CREATE AS YOU RIDE",
             "heading": "Capture the City You Ride.",
             "description": "<p>Add an optional bike-mounted Hover holder and use Hover app tracking tools to film rider and group-ride moments. The Hover Creator Kit is an accessory and content tool—not a drone built into the bike.</p>"
@@ -611,7 +611,7 @@
         "product_1_url": "shopify://products/flux-t26",
         "product_2_name": "FLUX T26 Pro",
         "product_2_highlight": "",
-        "product_2_image": "shopify://shop_images/iwEcAqNqcGcDAQTRBkAF0QZABrCuPNS3_x8iqQrN_1kT14sAB9MAAAABmxZ0rAgACaJpbQoAC9IABOub.jpg",
+        "product_2_image": "shopify://shop_images/1_beca545c-0bce-4227-a84f-f83370b4e230.jpg",
         "product_2_tagline": "1,500W motor, up to 55 miles and wheelie assist.",
         "product_2_url": "/products/flux-t26-pro",
         "product_3_name": "",
@@ -1059,7 +1059,7 @@
       "settings": {
         "title": "TURN THE CITY ON. More power for your next ride.",
         "description": "FLUX T26 Pro adds a 1,500W rated motor, up to 55 miles of range and app-enabled wheelie assist to the smart city riding experience. Ride farther and take on more demanding routes.",
-        "image": "shopify://shop_images/2400X1000.jpg",
+        "image": "shopify://shop_images/PC.jpg",
         "bg_color": "#ffffff",
         "padding_top": 80,
         "padding_bottom": 80,
@@ -1400,7 +1400,12 @@
         "judge_me_reviews_review_widget_jedQtp"
       ],
       "settings": {
-        "include_margins": true
+        "include_margins": true,
+        "bg_color": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0
       }
     }
   },
