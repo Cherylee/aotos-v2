@@ -93,7 +93,7 @@
             "size_guide_icon": "shopify://shop_images/288aa83db3c7f157c94fe470a81f4032.webp",
             "product_1": "flux-t26-pro",
             "name_1": "FLUX T26 Pro",
-            "description_1": "1,500W rated motor, up to 55 miles, and app-enabled wheelie assist.",
+            "description_1": "750W rated motor, up to 55 miles, and app-enabled wheelie assist.",
             "badge_1": "",
             "product_2": "aotos-flux-t26-pro-ebike-with-mini-drone",
             "name_2": "FLUX T26 Pro + Mini Drone",
@@ -148,7 +148,7 @@
           "settings": {
             "icon": "shopify://shop_images/Motor_987a092e-a8c8-469d-b48d-610681999762.svg",
             "title": "Motor",
-            "value": "1,500W rated motor",
+            "value": "750W rated / 2,000W peak in BOOST*",
             "variant_values": ""
           }
         },
@@ -396,7 +396,7 @@
           "settings": {
             "label": "Motor",
             "value_1": "500W rated / 750W peak in BOOST*",
-            "value_2": "1,500W rated",
+            "value_2": "750W rated / 2,000W peak in BOOST*",
             "value_3": "750W rated / 2,000W peak in BOOST*"
           }
         },
@@ -612,7 +612,7 @@
         "product_2_name": "FLUX T26 Pro",
         "product_2_highlight": "",
         "product_2_image": "shopify://shop_images/1_beca545c-0bce-4227-a84f-f83370b4e230.jpg",
-        "product_2_tagline": "1,500W motor, up to 55 miles and wheelie assist.",
+        "product_2_tagline": "2,000W  peak motor, up to 55 miles and wheelie assist.",
         "product_2_url": "/products/flux-t26-pro",
         "product_3_name": "",
         "product_3_highlight": "",
@@ -1066,7 +1066,7 @@
       "type": "aotos-flux-story",
       "settings": {
         "title": "TURN THE CITY ON. More power for your next ride.",
-        "description": "FLUX T26 Pro adds a 1,500W rated motor, up to 55 miles of range and app-enabled wheelie assist to the smart city riding experience. Ride farther and take on more demanding routes.",
+        "description": "FLUX T26 Pro adds a 750W rated motor, up to 55 miles of range, and app-enabled wheelie assist to the smart city riding experience. Ride farther and take on more demanding routes.",
         "image": "shopify://shop_images/PC.jpg",
         "bg_color": "#ffffff",
         "padding_top": 80,
