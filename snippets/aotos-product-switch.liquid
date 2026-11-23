@@ -179,12 +179,20 @@
             </div>
             <div class="variant-card__info">
               <div class="variant-card__header">
-                {%- if card_title == 'FLUX X26 Pro' -%}
-                  <span>FLUX X26</span>
-                  <span class="brand-accent">Pro</span>
-                {%- else -%}
-                  <span>{{ card_title }}</span>
-                {%- endif -%}
+                <span>
+                  {%- if card_title contains 'Pro' -%}
+                    {%- assign title_parts = card_title | append: '||END||' | split: 'Pro' -%}
+                    {%- for part in title_parts -%}
+                      {%- if forloop.last -%}
+                        {{- part | remove: '||END||' | escape -}}
+                      {%- else -%}
+                        {{- part | escape -}}<span class="brand-accent">Pro</span>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  {%- else -%}
+                    {{- card_title | escape -}}
+                  {%- endif -%}
+                </span>
               </div>
               <div class="variant-card__price">
                 {{ cart.currency.iso_code }}
