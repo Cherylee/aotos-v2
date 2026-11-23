@@ -70,6 +70,7 @@
         },
         "slide_4G49km": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "video": "shopify://files/videos/首屏新品Banner (2).mp4",
             "image_alt": "",
@@ -124,7 +125,6 @@
         },
         "slide_t26launch": {
           "type": "slide",
-          "disabled": true,
           "settings": {
             "video": "shopify://files/videos/AOTOS_Homepage_Desktop.mp4",
             "video_mobile": "shopify://files/videos/AOTOS_Homepage_Mobile.mp4",
