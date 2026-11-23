@@ -1133,11 +1133,8 @@ html:has(.section-header.shopify-section-header-sticky:not(.shopify-section-head
 .section + .shopify-section[id$="__1795172609d466d809"],
 .shopify-section[id$="__1795172609d466d809"] {
   display: flow-root;
-  background: #222222;
   margin-top: 0;
   margin-bottom: 0;
-  padding-top: 0;
-  padding-bottom: 0;
 }
 
 .shopify-section[id$="__1795172609d466d809"] > *,
