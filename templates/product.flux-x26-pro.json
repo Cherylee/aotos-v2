@@ -76,6 +76,14 @@
             "letter_spacing": 0
           }
         },
+        "variant_picker_KEdmji": {
+          "type": "variant_picker",
+          "disabled": true,
+          "settings": {
+            "picker_title": "Choose your model:",
+            "show_size_guide": false
+          }
+        },
         "product_switch": {
           "type": "product_switch",
           "settings": {
@@ -201,6 +209,7 @@
         "affirm_pay_over_time_messaging_product_block_Mp6Lry",
         "paypal_messaging",
         "product_switch",
+        "variant_picker_KEdmji",
         "buy_buttons",
         "perks",
         "accordion_box",
