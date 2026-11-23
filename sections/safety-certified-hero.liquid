@@ -280,7 +280,7 @@
 
   #sc-hero-{{ section.id }} .sc-hero__stat-value {
     margin: 0;
-    color: #000000;
+    color: #ffffff;
     font-size: calc(var(--sc-stat-size, 28) * var(--rem));
     font-weight: 700;
     line-height: 1.1;
@@ -288,9 +288,29 @@
 
   #sc-hero-{{ section.id }} .sc-hero__stat-label {
     margin: calc(6 * var(--rem)) 0 0;
-    color: rgb(0 0 0 / 80%);
+    color: #ffffff;
     font-size: calc(var(--sc-stat-label-size, 14) * var(--rem));
     line-height: 1.3;
+  }
+
+  #sc-hero-{{ section.id }} .sc-hero__stats.is-color-theme .sc-hero__stat-value,
+  #sc-hero-{{ section.id }} .sc-hero__stats.is-color-theme .sc-hero__stat-label {
+    color: var(--aotos-theme-color, #ff6501);
+  }
+
+  #sc-hero-{{ section.id }} .sc-hero__stats.is-color-black .sc-hero__stat-value,
+  #sc-hero-{{ section.id }} .sc-hero__stats.is-color-black .sc-hero__stat-label {
+    color: #000000;
+  }
+
+  #sc-hero-{{ section.id }} .sc-hero__stats.is-color-gray .sc-hero__stat-value,
+  #sc-hero-{{ section.id }} .sc-hero__stats.is-color-gray .sc-hero__stat-label {
+    color: #999999;
+  }
+
+  #sc-hero-{{ section.id }} .sc-hero__stats.is-color-white .sc-hero__stat-value,
+  #sc-hero-{{ section.id }} .sc-hero__stats.is-color-white .sc-hero__stat-label {
+    color: #ffffff;
   }
 
   #sc-hero-{{ section.id }} .sc-hero__actions {
@@ -577,6 +597,22 @@
       font-size: calc(var(--sc-subtitle-size-mob, 20) * var(--rem));
     }
 
+    #sc-hero-{{ section.id }} .sc-hero__subtitle.is-color-mob-theme {
+      color: var(--aotos-theme-color, #ff6501);
+    }
+
+    #sc-hero-{{ section.id }} .sc-hero__subtitle.is-color-mob-black {
+      color: #000000;
+    }
+
+    #sc-hero-{{ section.id }} .sc-hero__subtitle.is-color-mob-gray {
+      color: #999999;
+    }
+
+    #sc-hero-{{ section.id }} .sc-hero__subtitle.is-color-mob-white {
+      color: #ffffff;
+    }
+
     #sc-hero-{{ section.id }}.sc-hero--mob-top .sc-hero__inner {
       justify-content: flex-start;
       align-items: flex-start;
@@ -838,7 +874,7 @@
             {%- endif -%}
           {%- endif -%}
           {%- if block.settings.subtitle != blank -%}
-            <p class="sc-hero__subtitle is-color-{{ block.settings.subtitle_color | default: 'white' }}" style="--sc-weight: {{ block.settings.subtitle_weight | default: 400 }};">{{ block.settings.subtitle | escape }}</p>
+            <p class="sc-hero__subtitle is-color-{{ block.settings.subtitle_color | default: 'white' }} is-color-mob-{{ block.settings.subtitle_color_mobile | default: 'white' }}" style="--sc-weight: {{ block.settings.subtitle_weight | default: 400 }};">{{ block.settings.subtitle | escape }}</p>
           {%- endif -%}
           {%- liquid
             assign slide_show_stats = false
@@ -854,7 +890,7 @@
           -%}
           {%- if slide_show_stats -%}
             <ul
-              class="sc-hero__stats"
+              class="sc-hero__stats is-color-{{ block.settings.stat_color | default: 'white' }}"
               style="--sc-stat-size: {{ block.settings.stat_size | default: 28 }}; --sc-stat-size-mob: {{ block.settings.stat_size_mobile | default: 36 }}; --sc-stat-label-size: {{ block.settings.stat_label_size | default: 14 }}; --sc-stat-label-size-mob: {{ block.settings.stat_label_size_mobile | default: 20 }}; --sc-stat-gap: {{ block.settings.stat_gap | default: 56 }}; --sc-stat-gap-mob: {{ block.settings.stat_gap_mobile | default: 40 }}; --sc-stat-margin: {{ block.settings.stat_margin | default: 28 }}; --sc-stat-margin-mob: {{ block.settings.stat_margin_mobile | default: 32 }};"
             >
               {%- if block.settings.stat_1_value != blank -%}
@@ -1509,7 +1545,19 @@
         {
           "type": "select",
           "id": "subtitle_color",
-          "label": "说明颜色",
+          "label": "说明颜色（电脑）",
+          "options": [
+            { "value": "theme", "label": "主题色" },
+            { "value": "black", "label": "纯黑" },
+            { "value": "gray", "label": "#999999" },
+            { "value": "white", "label": "纯白" }
+          ],
+          "default": "white"
+        },
+        {
+          "type": "select",
+          "id": "subtitle_color_mobile",
+          "label": "说明颜色（手机）",
           "options": [
             { "value": "theme", "label": "主题色" },
             { "value": "black", "label": "纯黑" },
@@ -1637,6 +1685,18 @@
         {
           "type": "header",
           "content": "参数"
+        },
+        {
+          "type": "select",
+          "id": "stat_color",
+          "label": "参数颜色",
+          "options": [
+            { "value": "theme", "label": "主题色" },
+            { "value": "black", "label": "纯黑" },
+            { "value": "gray", "label": "#999999" },
+            { "value": "white", "label": "纯白" }
+          ],
+          "default": "white"
         },
         {
           "type": "text",
