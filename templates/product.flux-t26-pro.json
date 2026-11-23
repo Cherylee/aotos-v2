@@ -39,7 +39,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Meet the FLUX T26 Pro: a 1,500W motor, up to 55 miles of range, and app-enabled wheelie assist for a new way to ride.</p>",
+            "text": "<p>Meet the FLUX T26 Pro: a 1,500W rated motor, up to 55 miles of range, and app-enabled wheelie assist. A storage bag is included as standard.</p>",
             "learn_more_label": "Learn more",
             "learn_more_anchor": ""
           }
@@ -93,14 +93,14 @@
             "size_guide_icon": "shopify://shop_images/288aa83db3c7f157c94fe470a81f4032.webp",
             "product_1": "flux-t26-pro",
             "name_1": "FLUX T26 Pro",
-            "description_1": "500W motor. Up to 40 miles for everyday rides.",
+            "description_1": "1,500W rated motor, up to 55 miles, and app-enabled wheelie assist.",
             "badge_1": "",
             "product_2": "aotos-flux-t26-pro-ebike-with-mini-drone",
             "name_2": "FLUX T26 Pro + Mini Drone",
-            "description_2": "1,500W motor. Up to 55 miles and wheelie assist.",
+            "description_2": "T26 Pro performance with a mini drone to capture your ride.",
             "badge_2": "",
-            "product_3": "flux-t26",
-            "name_3": "FLUX T26",
+            "product_3": "",
+            "name_3": "",
             "description_3": "",
             "badge_3": "",
             "product_4": "",
@@ -989,6 +989,13 @@
             "label_id": "12",
             "label": "Tool Kit x1"
           }
+        },
+        "box_item_hNKDkH": {
+          "type": "box_item",
+          "settings": {
+            "label_id": "6",
+            "label": "Storage Bag ×1 (included)"
+          }
         }
       },
       "block_order": [
@@ -1036,7 +1043,8 @@
         "box_list_9",
         "box_list_10",
         "box_item_UM6eCr",
-        "box_item_HLxRiK"
+        "box_item_HLxRiK",
+        "box_item_hNKDkH"
       ],
       "settings": {
         "title": "Specs & Geometry",
