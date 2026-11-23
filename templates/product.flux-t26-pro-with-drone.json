@@ -989,6 +989,20 @@
             "label_id": "12",
             "label": "Tool Kit x1"
           }
+        },
+        "box_item_JwXUx7": {
+          "type": "box_item",
+          "settings": {
+            "label_id": "6",
+            "label": "Storage Bag ×1 (included)"
+          }
+        },
+        "box_item_MkHca6": {
+          "type": "box_item",
+          "settings": {
+            "label_id": "7",
+            "label": "Mini Drone ×1 (included in this bundle)"
+          }
         }
       },
       "block_order": [
@@ -1036,7 +1050,9 @@
         "box_list_9",
         "box_list_10",
         "box_item_UM6eCr",
-        "box_item_HLxRiK"
+        "box_item_HLxRiK",
+        "box_item_JwXUx7",
+        "box_item_MkHca6"
       ],
       "settings": {
         "title": "Specs & Geometry",
