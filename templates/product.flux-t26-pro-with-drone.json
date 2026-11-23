@@ -396,7 +396,7 @@
           "settings": {
             "label": "Motor",
             "value_1": "500W rated / 750W peak in BOOST*",
-            "value_2": "1,500W rated",
+            "value_2": "750W rated / 2,000W peak in BOOST*",
             "value_3": "750W rated / 2,000W peak in BOOST*"
           }
         },
@@ -706,7 +706,7 @@
           "type": "spec_item",
           "settings": {
             "label": "Motor",
-            "value": "<p>1,500W rated geared hub motor</p>"
+            "value": "<p>750W rated / 2,000W peak geared hub motor</p>"
           }
         },
         "spec_2": {
