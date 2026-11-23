@@ -70,9 +70,9 @@
         },
         "slide_4G49km": {
           "type": "slide",
-          "disabled": true,
           "settings": {
             "video": "shopify://files/videos/首屏新品Banner (2).mp4",
+            "video_mobile": "shopify://files/videos/首屏新品Banner (2)M端.mp4",
             "image_alt": "",
             "show_accent": true,
             "accent_color": "theme",
@@ -125,6 +125,7 @@
         },
         "slide_t26launch": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "video": "shopify://files/videos/AOTOS_Homepage_Desktop.mp4",
             "video_mobile": "shopify://files/videos/AOTOS_Homepage_Mobile.mp4",
@@ -561,16 +562,16 @@
             "google_play_link": "",
             "feature_1_icon": "shopify://shop_images/Activity.webp",
             "feature_1_title": "28 MPH BOOST*",
-            "feature_1_text": "2,000W peak rate",
-            "feature_2_icon": "shopify://shop_images/Settings.webp",
+            "feature_1_text": "750W rated power",
+            "feature_2_icon": "shopify://shop_images/c36e1f5dbf8c7b8d033e4fc33f00cdc1.png",
             "feature_2_title": "Up to 55 Miles",
             "feature_2_text": "48V 19Ah battery",
             "feature_3_icon": "shopify://shop_images/Lock.webp",
             "feature_3_title": "Keyless Unlock",
             "feature_3_text": "NFC, proximity, or passcode",
-            "feature_4_icon": "shopify://shop_images/Map_pin.webp",
-            "feature_4_title": "1.9\" TFT Display",
-            "feature_4_text": "Mirror your phone's navigation"
+            "feature_4_icon": "shopify://shop_images/1_a9ffd05b-0e60-4faf-8251-26561efa22e2.png",
+            "feature_4_title": "Mini Drone Option",
+            "feature_4_text": "Capture the ride from above"
           }
         },
         "card_app": {
