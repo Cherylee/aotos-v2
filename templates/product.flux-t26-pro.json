@@ -301,7 +301,8 @@
         "padding_bottom": 0,
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 0,
-        "image_height": "large"
+        "image_height": "large",
+        "height_pc": 640
       }
     },
     "flux_features": {
