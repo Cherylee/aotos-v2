@@ -640,15 +640,15 @@
           "settings": {
             "label_id": "A",
             "label": "Total Length",
-            "value": "64.5\""
+            "value": "65.7 in / 1669 mm"
           }
         },
         "geo_2": {
           "type": "geometry_item",
           "settings": {
             "label_id": "B",
-            "label": "Handlebar Height",
-            "value": "38.3\""
+            "label": "Overall Height",
+            "value": "44.6 in / 1134 mm"
           }
         },
         "geo_3": {
