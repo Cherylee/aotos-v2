@@ -41,7 +41,6 @@
         },
         "nav_2": {
           "type": "link",
-          "disabled": true,
           "settings": {
             "number": "02",
             "label": "Spin & win",
