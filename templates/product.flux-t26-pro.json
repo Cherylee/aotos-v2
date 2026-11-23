@@ -51,9 +51,8 @@
         "product_discount_code_PXAcQb": {
           "type": "product_discount_code",
           "name": "Discount code",
-          "disabled": true,
           "settings": {
-            "code": "X26BF200",
+            "code": "T26PRO100",
             "default_checked": true,
             "checkbox_color": "#ff6501"
           }
@@ -96,11 +95,11 @@
             "name_1": "FLUX T26 Pro",
             "description_1": "500W motor. Up to 40 miles for everyday rides.",
             "badge_1": "",
-            "product_2": "",
+            "product_2": "aotos-flux-t26-pro-ebike-with-mini-drone",
             "name_2": "FLUX T26 Pro",
             "description_2": "1,500W motor. Up to 55 miles and wheelie assist.",
             "badge_2": "",
-            "product_3": "",
+            "product_3": "flux-t26",
             "name_3": "",
             "description_3": "",
             "badge_3": "",
