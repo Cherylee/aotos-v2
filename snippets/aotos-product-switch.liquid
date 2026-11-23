@@ -158,12 +158,6 @@
             assign card_price = product.selected_or_first_available_variant.price
           endif
           assign card_title = switch_name | default: switch_product.title
-          assign main_title = card_title
-          assign accent_title = ''
-          if card_title contains ' Pro'
-            assign main_title = card_title | split: ' Pro' | first
-            assign accent_title = 'Pro'
-          endif
         -%}
         {%- if is_current -%}
           <div class="product-switch__card variant-card is-current" aria-current="page">
@@ -185,9 +179,11 @@
             </div>
             <div class="variant-card__info">
               <div class="variant-card__header">
-                <span>{{ main_title }}</span>
-                {%- if accent_title != blank -%}
-                  <span class="brand-accent">{{ accent_title }}</span>
+                {%- if card_title == 'FLUX X26 Pro' -%}
+                  <span>FLUX X26</span>
+                  <span class="brand-accent">Pro</span>
+                {%- else -%}
+                  <span>{{ card_title }}</span>
                 {%- endif -%}
               </div>
               <div class="variant-card__price">

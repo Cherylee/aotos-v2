@@ -876,6 +876,10 @@ body.velotric-lightbox-open {
   color: #ff6b00;
 }
 
+.product-switch .variant-card__header .brand-accent {
+  color: var(--aotos-theme-color, #ff6501);
+}
+
 .variant-card__price {
   font-size: calc(11 * var(--rem));
   letter-spacing: calc(-0.3 * var(--rem));
