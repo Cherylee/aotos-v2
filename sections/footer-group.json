@@ -19,28 +19,31 @@
           "settings": {
             "heading": "Product",
             "menu": "product",
-            "new_items": "FLUX T26"
+            "new_items": "FLUX T26 Series"
           }
         },
         "menu-support": {
           "type": "link_list",
           "settings": {
             "heading": "Support",
-            "menu": "legal"
+            "menu": "legal",
+            "new_items": ""
           }
         },
         "menu-about": {
           "type": "link_list",
           "settings": {
             "heading": "About",
-            "menu": "about"
+            "menu": "about",
+            "new_items": ""
           }
         },
         "menu-policy": {
           "type": "link_list",
           "settings": {
             "heading": "Policy",
-            "menu": "help"
+            "menu": "help",
+            "new_items": ""
           }
         },
         "contact-hours": {
