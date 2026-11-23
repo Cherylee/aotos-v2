@@ -497,9 +497,9 @@ html:has(.section-header.shopify-section-header-sticky:not(.shopify-section-head
 /* ---------- Part 02 wheel ---------- */
 .bf-wheel {
   display: grid;
-  grid-template-columns: 1fr calc(480 * var(--rem));
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.85fr);
   align-items: center;
-  gap: calc(64 * var(--rem));
+  gap: calc(32 * var(--rem));
 }
 
 .bf-wheel .bf-heading {
@@ -514,12 +514,12 @@ html:has(.section-header.shopify-section-header-sticky:not(.shopify-section-head
 .bf-prizes {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: calc(12 * var(--rem));
-  margin: calc(28 * var(--rem)) 0 calc(28 * var(--rem));
+  gap: calc(16 * var(--rem));
+  margin: 0;
 }
 
 .bf-prize {
-  padding: calc(20 * var(--rem)) calc(16 * var(--rem));
+  padding: calc(12 * var(--rem)) calc(16 * var(--rem));
   border-radius: calc(12 * var(--rem));
   background: #ffffff;
   box-shadow: 0 calc(4 * var(--rem)) calc(16 * var(--rem)) rgba(0, 0, 0, 0.05);
@@ -549,37 +549,6 @@ html:has(.section-header.shopify-section-header-sticky:not(.shopify-section-head
   font-size: calc(12 * var(--rem));
   line-height: calc(16 * var(--rem));
   color: var(--bf-muted);
-}
-
-.bf-wheel__app {
-  position: relative;
-  width: 100%;
-}
-
-.bf-wheel__placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: calc(16 * var(--rem));
-  aspect-ratio: 1 / 1;
-  border: 2px dashed rgba(255, 101, 1, 0.4);
-  border-radius: 50%;
-  background:
-    radial-gradient(circle, #ffffff 0 18%, transparent 18.5%),
-    conic-gradient(var(--bf-orange) 0 45deg, #ffd9bd 45deg 90deg, var(--bf-orange) 90deg 135deg, #ffd9bd 135deg 180deg, var(--bf-orange) 180deg 225deg, #ffd9bd 225deg 270deg, var(--bf-orange) 270deg 315deg, #ffd9bd 315deg 360deg);
-  opacity: 0.35;
-}
-
-.bf-wheel__placeholder-label {
-  padding: calc(8 * var(--rem)) calc(16 * var(--rem));
-  border-radius: calc(4 * var(--rem));
-  background: #000000;
-  color: #ffffff;
-  font-size: calc(12 * var(--rem));
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 /* ---------- Part 03 helmet ---------- */
@@ -1054,8 +1023,8 @@ html:has(.section-header.shopify-section-header-sticky:not(.shopify-section-head
 
   .bf-prizes {
     grid-template-columns: 1fr;
-    gap: calc(20 * var(--rem));
-    margin: calc(40 * var(--rem)) 0;
+    gap: calc(16 * var(--rem));
+    margin: 0;
   }
 
   .bf-prize {
@@ -1079,11 +1048,6 @@ html:has(.section-header.shopify-section-header-sticky:not(.shopify-section-head
 
   .bf-wheel__body .bf-btn {
     width: 100%;
-  }
-
-  .bf-wheel__placeholder-label {
-    font-size: calc(20 * var(--rem));
-    padding: calc(12 * var(--rem)) calc(24 * var(--rem));
   }
 
   .bf-helmet {
@@ -1126,7 +1090,7 @@ html:has(.section-header.shopify-section-header-sticky:not(.shopify-section-head
   }
 
   .bf-acc__title {
-    font-size: calc(92 * var(--rem));
+    font-size: calc(82 * var(--rem));
   }
 
   .bf-acc .bf-text {
@@ -1164,6 +1128,12 @@ html:has(.section-header.shopify-section-header-sticky:not(.shopify-section-head
   .bf-terms__body p {
     margin-bottom: calc(16 * var(--rem));
   }
+}
+
+.shopify-section[id$="__1795172609d466d809"] {
+  background: #222222;
+  margin: 0;
+  padding: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {

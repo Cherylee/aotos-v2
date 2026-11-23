@@ -16,12 +16,9 @@
 </style>
 
 {%- liquid
-  assign bf_has_app = false
   assign bf_prize_count = 0
   for block in section.blocks
-    if block.type == '@app'
-      assign bf_has_app = true
-    elsif block.type == 'prize'
+    if block.type == 'prize'
       assign bf_prize_count = bf_prize_count | plus: 1
     endif
   endfor
@@ -40,26 +37,6 @@
         <p class="bf-text">{{ section.settings.description }}</p>
       {%- endif -%}
 
-      {%- if bf_prize_count > 0 -%}
-        <div class="bf-prizes">
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'prize' -%}
-              <div class="bf-prize" {{ block.shopify_attributes }}>
-                {%- if block.settings.tier != blank -%}
-                  <p class="bf-prize__tier">{{ block.settings.tier }}</p>
-                {%- endif -%}
-                {%- if block.settings.value != blank -%}
-                  <p class="bf-prize__value">{{ block.settings.value }}</p>
-                {%- endif -%}
-                {%- if block.settings.desc != blank -%}
-                  <p class="bf-prize__desc">{{ block.settings.desc }}</p>
-                {%- endif -%}
-              </div>
-            {%- endif -%}
-          {%- endfor -%}
-        </div>
-      {%- endif -%}
-
       {%- if section.settings.button_label != blank -%}
         <a class="bf-btn bf-btn--dark" href="{{ section.settings.button_link | default: '#offer-details' }}">{{ section.settings.button_label }}</a>
       {%- endif -%}
@@ -68,19 +45,25 @@
       {%- endif -%}
     </div>
 
-    <div class="bf-wheel__app">
-      {%- if bf_has_app -%}
+    {%- if bf_prize_count > 0 -%}
+      <div class="bf-prizes">
         {%- for block in section.blocks -%}
-          {%- if block.type == '@app' -%}
-            {% render block %}
+          {%- if block.type == 'prize' -%}
+            <div class="bf-prize" {{ block.shopify_attributes }}>
+              {%- if block.settings.tier != blank -%}
+                <p class="bf-prize__tier">{{ block.settings.tier }}</p>
+              {%- endif -%}
+              {%- if block.settings.value != blank -%}
+                <p class="bf-prize__value">{{ block.settings.value }}</p>
+              {%- endif -%}
+              {%- if block.settings.desc != blank -%}
+                <p class="bf-prize__desc">{{ block.settings.desc }}</p>
+              {%- endif -%}
+            </div>
           {%- endif -%}
         {%- endfor -%}
-      {%- else -%}
-        <div class="bf-wheel__placeholder">
-          <span class="bf-wheel__placeholder-label">{{ section.settings.placeholder_text }}</span>
-        </div>
-      {%- endif -%}
-    </div>
+      </div>
+    {%- endif -%}
   </div>
 </section>
 
@@ -138,13 +121,6 @@
       "default": "No purchase necessary. See official rules for eligibility and details."
     },
     {
-      "type": "text",
-      "id": "placeholder_text",
-      "label": "转盘占位文案",
-      "info": "添加转盘 App 区块后自动隐藏",
-      "default": "Prize wheel app"
-    },
-    {
       "type": "header",
       "content": "间距"
     },
@@ -190,9 +166,6 @@
     }
   ],
   "blocks": [
-    {
-      "type": "@app"
-    },
     {
       "type": "prize",
       "name": "奖项卡片",
