@@ -169,7 +169,7 @@
       ],
       "settings": {
         "anchor_id": "part-02",
-        "bg_color": "#222222",
+        "bg_color": "#101216",
         "eyebrow": "Part 02 / Prize wheel",
         "heading": "Give the wheel a spin.",
         "description": "Enter your email for a chance to win a $100 or $50 AOTOS gift card, or two helmets. A total of 13 prizes are available.",
@@ -182,11 +182,26 @@
         "padding_bottom_mobile": 88
       }
     },
+    "1795172609d466d809": {
+      "type": "apps",
+      "blocks": {
+        "wheelify_spin_wheel_wheelify_app_section_aEnFDR": {
+          "type": "shopify://apps/wheelify-spin-wheel/blocks/wheelify-app-section/505ff42c-abce-4466-9558-7e1d3b2cfcd7",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "wheelify_spin_wheel_wheelify_app_section_aEnFDR"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
     "bf_accessories": {
       "type": "bf-accessories",
       "settings": {
         "anchor_id": "part-03",
-        "bg_color": "#222222",
+        "bg_color": "#FF6501",
         "eyebrow": "Part 03 / Accessories",
         "heading": "20% off accessories.",
         "description": "Use code BFACCESS20 at checkout for 20% off eligible accessories. Cannot be combined with other discount codes.",
@@ -212,21 +227,6 @@
         "padding_bottom": 80,
         "padding_top_mobile": 88,
         "padding_bottom_mobile": 88
-      }
-    },
-    "1795172609d466d809": {
-      "type": "apps",
-      "blocks": {
-        "wheelify_spin_wheel_wheelify_app_section_aEnFDR": {
-          "type": "shopify://apps/wheelify-spin-wheel/blocks/wheelify-app-section/505ff42c-abce-4466-9558-7e1d3b2cfcd7",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "wheelify_spin_wheel_wheelify_app_section_aEnFDR"
-      ],
-      "settings": {
-        "include_margins": true
       }
     }
   },
