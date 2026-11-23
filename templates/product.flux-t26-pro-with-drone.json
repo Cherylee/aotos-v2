@@ -93,7 +93,7 @@
             "size_guide_icon": "shopify://shop_images/288aa83db3c7f157c94fe470a81f4032.webp",
             "product_1": "flux-t26-pro",
             "name_1": "FLUX T26 Pro",
-            "description_1": "1,500W rated motor, up to 55 miles, and app-enabled wheelie assist.",
+            "description_1": "Up to 55 miles, and app-enabled wheelie assist.",
             "badge_1": "",
             "product_2": "aotos-flux-t26-pro-ebike-with-mini-drone",
             "name_2": "FLUX T26 Pro + Mini Drone",
@@ -148,7 +148,7 @@
           "settings": {
             "icon": "shopify://shop_images/Motor_987a092e-a8c8-469d-b48d-610681999762.svg",
             "title": "Motor",
-            "value": "1,500W rated motor",
+            "value": "750W rated / 2,000W peak in BOOST*",
             "variant_values": ""
           }
         },
@@ -325,7 +325,7 @@
             "image": "shopify://shop_images/pro02.jpg",
             "pre_heading": "10-SECOND BOOST",
             "heading": "Power When the Road Rises.",
-            "description": "<p>Tap BOOST for a 10-second burst of added output when starting or climbing. The 1,500W rated motor gives the T26 Pro the strength for demanding city routes.</p>"
+            "description": "<p>Tap BOOST for a 10-second burst of added output when starting or climbing. The 2，000W peak power gives the T26 Pro the strength for demanding city routes.</p>"
           }
         },
         "card_1": {
