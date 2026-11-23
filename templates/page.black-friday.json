@@ -226,7 +226,12 @@
         "wheelify_spin_wheel_wheelify_app_section_aEnFDR"
       ],
       "settings": {
-        "include_margins": true
+        "include_margins": true,
+        "bg_color": "#222222",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0
       }
     }
   },
