@@ -557,7 +557,7 @@
             "text": "TURN THE CITY ON.",
             "show_features": true,
             "button_label": "Shop Now",
-            "button_link": "shopify://products/flux-t26",
+            "button_link": "shopify://products/flux-t26-pro",
             "app_store_link": "",
             "google_play_link": "",
             "feature_1_icon": "shopify://shop_images/Activity.webp",
