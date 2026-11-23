@@ -308,6 +308,16 @@
     "flux_features": {
       "type": "aotos-flux-features",
       "blocks": {
+        "card_5": {
+          "type": "card",
+          "settings": {
+            "video": "shopify://files/videos/卖点pro02.mp4",
+            "video_url": "",
+            "pre_heading": "10-SECOND BOOST",
+            "heading": "Power When the Road Rises.",
+            "description": "<p>Tap BOOST for a 10-second burst of added output when starting or climbing. The 2，000W peak power gives the T26 Pro the strength for demanding city routes.</p>"
+          }
+        },
         "card_6": {
           "type": "card",
           "settings": {
@@ -316,16 +326,6 @@
             "pre_heading": "GO FURTHER",
             "heading": "Up to 55 Miles of Possibility.",
             "description": "<p>The 48V 19Ah battery delivers up to 55 miles under test conditions, giving you more room for longer commutes and weekend rides.</p>"
-          }
-        },
-        "card_5": {
-          "type": "card",
-          "settings": {
-            "video_url": "",
-            "image": "shopify://shop_images/pro02.jpg",
-            "pre_heading": "10-SECOND BOOST",
-            "heading": "Power When the Road Rises.",
-            "description": "<p>Tap BOOST for a 10-second burst of added output when starting or climbing. The 2，000W peak power gives the T26 Pro the strength for demanding city routes.</p>"
           }
         },
         "card_1": {
@@ -370,8 +370,8 @@
         }
       },
       "block_order": [
-        "card_6",
         "card_5",
+        "card_6",
         "card_1",
         "card_4",
         "card_2",
