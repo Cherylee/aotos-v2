@@ -58,6 +58,14 @@
     {%- endif -%}
 
     {{ content_for_header }}
+    {%- comment -%} 样式表未到之前，图片和视频按自身宽度撑开页面 {%- endcomment -%}
+    <style>
+      img,
+      video {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
     {%- comment -%} Klaviyo 弹窗覆盖：隐藏原样式，避免弹窗先闪 {%- endcomment -%}
     <style>
       [role="dialog"][aria-label="POPUP Form"] {

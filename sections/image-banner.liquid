@@ -30,6 +30,49 @@
       assign banner_defer_video = true
     endif
   endif
+  assign banner_src_pc = ''
+  assign banner_src_pc_w = 0
+  assign banner_src_pc_h = 0
+  if banner_video != blank
+    for source in banner_video.sources
+      if source.format == 'mp4' and source.height > banner_src_pc_h
+        assign banner_src_pc = source.url
+        assign banner_src_pc_w = source.width
+        assign banner_src_pc_h = source.height
+      endif
+    endfor
+  endif
+  assign banner_src_mob = ''
+  assign banner_src_mob_w = 0
+  assign banner_src_mob_h = 0
+  if banner_video_mob != blank
+    for source in banner_video_mob.sources
+      if source.format == 'mp4' and source.height > banner_src_mob_h
+        assign banner_src_mob = source.url
+        assign banner_src_mob_w = source.width
+        assign banner_src_mob_h = source.height
+      endif
+    endfor
+  endif
+  assign banner_split_video = false
+  if banner_src_pc != blank and banner_src_mob != blank
+    assign banner_split_video = true
+  endif
+  assign banner_frame_w = banner_src_mob_w
+  assign banner_frame_h = banner_src_mob_h
+  if banner_frame_w == 0 or banner_frame_h == 0
+    assign banner_frame_w = banner_src_pc_w
+    assign banner_frame_h = banner_src_pc_h
+  endif
+  assign banner_height_pc = 560
+  if section.settings.image_height == 'small'
+    assign banner_height_pc = 420
+  elsif section.settings.image_height == 'large'
+    assign banner_height_pc = 720
+  endif
+  if section.settings.height_pc > 0
+    assign banner_height_pc = section.settings.height_pc
+  endif
 -%}
 
 {%- if section.settings.image_height == 'adapt' and poster_pc != blank -%}
@@ -119,9 +162,30 @@
     object-fit: cover;
   }
 
-  #Banner-{{ section.id }} .banner__video--mobile {
+  #Banner-{{ section.id }} .banner__media video.banner__video--mobile {
     display: none;
   }
+
+  {%- unless section.settings.image_height == 'adapt' -%}
+    #Banner-{{ section.id }} {
+      min-height: calc({{ banner_height_pc }} * var(--rem));
+    }
+  {%- endunless -%}
+
+  {%- if banner_video != blank or banner_video_mob != blank -%}
+    @media screen and (max-width: 749px) {
+      #Banner-{{ section.id }} {
+        display: block;
+        height: auto;
+        {%- if banner_frame_w > 0 and banner_frame_h > 0 -%}
+          aspect-ratio: {{ banner_frame_w }} / {{ banner_frame_h }};
+          min-height: calc(100vw * {{ banner_frame_h }} / {{ banner_frame_w }});
+        {%- else -%}
+          min-height: 39rem;
+        {%- endif -%}
+      }
+    }
+  {%- endif -%}
 
   {%- if banner_defer_video -%}
     #Banner-{{ section.id }} .banner__poster {
@@ -134,11 +198,11 @@
   {%- endif -%}
 
   @media screen and (max-width: 749px) {
-    #Banner-{{ section.id }} .banner__video--pc {
+    #Banner-{{ section.id }} .banner__media video.banner__video--pc {
       display: none;
     }
 
-    #Banner-{{ section.id }} .banner__video--mobile {
+    #Banner-{{ section.id }} .banner__media video.banner__video--mobile {
       display: block;
     }
   }
@@ -215,19 +279,31 @@
           {% endif %}
         >
       {%- endif -%}
-      {%- if banner_video != blank -%}
-        {%- capture banner_video_class -%}banner__video{% if banner_video_mob != blank %} banner__video--pc{% endif %}{%- endcapture -%}
-        {%- if banner_defer_video -%}
-          {% render 'aotos-video', video: banner_video, class: banner_video_class, autoplay: false, loop: true, muted: true, preload: 'none' %}
-        {%- else -%}
-          {% render 'aotos-video', video: banner_video, class: banner_video_class, autoplay: true, loop: true, muted: true, preload: 'metadata' %}
+      {%- if banner_split_video -%}
+        <video
+          class="banner__video"
+          loop
+          muted
+          playsinline
+          preload="none"
+          data-src-pc="{{ banner_src_pc | escape }}"
+          data-src-mobile="{{ banner_src_mob | escape }}"
+        ></video>
+      {%- else -%}
+        {%- if banner_video != blank -%}
+          {%- capture banner_video_class -%}banner__video{% if banner_video_mob != blank %} banner__video--pc{% endif %}{%- endcapture -%}
+          {%- if banner_defer_video -%}
+            {% render 'aotos-video', video: banner_video, class: banner_video_class, autoplay: false, loop: true, muted: true, preload: 'none' %}
+          {%- else -%}
+            {% render 'aotos-video', video: banner_video, class: banner_video_class, autoplay: true, loop: true, muted: true, preload: 'metadata' %}
+          {%- endif -%}
         {%- endif -%}
-      {%- endif -%}
-      {%- if banner_video_mob != blank -%}
-        {%- if banner_defer_video -%}
-          {% render 'aotos-video', video: banner_video_mob, class: 'banner__video banner__video--mobile', autoplay: false, loop: true, muted: true, preload: 'none' %}
-        {%- else -%}
-          {% render 'aotos-video', video: banner_video_mob, class: 'banner__video banner__video--mobile', autoplay: true, loop: true, muted: true, preload: 'metadata' %}
+        {%- if banner_video_mob != blank -%}
+          {%- if banner_defer_video -%}
+            {% render 'aotos-video', video: banner_video_mob, class: 'banner__video banner__video--mobile', autoplay: false, loop: true, muted: true, preload: 'none' %}
+          {%- else -%}
+            {% render 'aotos-video', video: banner_video_mob, class: 'banner__video banner__video--mobile', autoplay: true, loop: true, muted: true, preload: 'metadata' %}
+          {%- endif -%}
         {%- endif -%}
       {%- endif -%}
     {%- elsif banner_img_pc != blank -%}
@@ -292,24 +368,31 @@
   {%- endstyle -%}
 {%- endif -%}
 
-{%- if banner_defer_video -%}
+{%- if banner_defer_video or banner_split_video -%}
   <script>
     (function () {
       var root = document.getElementById('Banner-{{ section.id }}');
       if (!root) return;
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var videos = root.querySelectorAll('video');
-      if (!videos.length || reduce) return;
+      if (reduce) return;
+      var mobileQuery = window.matchMedia('(max-width: 749px)');
+      var splitVideo = root.querySelector('video[data-src-pc]');
 
-      var visible = function (video) {
-        return window.getComputedStyle(video).display !== 'none';
+      var pick = function (video) {
+        if (mobileQuery.matches && video.getAttribute('data-src-mobile')) {
+          return video.getAttribute('data-src-mobile');
+        }
+        return video.getAttribute('data-src-pc') || video.getAttribute('data-src-mobile') || '';
       };
 
-      var sync = function (video, on) {
-        if (!on || !visible(video)) {
-          video.pause();
-          return;
-        }
+      var applySource = function (video) {
+        var next = pick(video);
+        if (!next || video.getAttribute('data-loaded') === next) return;
+        video.setAttribute('data-loaded', next);
+        video.src = next;
+      };
+
+      var markReady = function (video) {
         video.preload = 'auto';
         var play = video.play();
         if (play && play.then) {
@@ -319,18 +402,72 @@
         }
       };
 
-      if (!('IntersectionObserver' in window)) {
-        videos.forEach(function (video) { sync(video, true); });
+      if (splitVideo) {
+        var playSplit = function () {
+          splitVideo.muted = true;
+          splitVideo.playsInline = true;
+          applySource(splitVideo);
+          markReady(splitVideo);
+        };
+
+        if (mobileQuery.addEventListener) {
+          mobileQuery.addEventListener('change', function () {
+            if (!splitVideo.getAttribute('data-loaded')) return;
+            splitVideo.removeAttribute('data-loaded');
+            playSplit();
+          });
+        }
+
+        {%- if banner_defer_video -%}
+          if (!('IntersectionObserver' in window)) {
+            playSplit();
+            return;
+          }
+          var splitObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) {
+                splitVideo.pause();
+                return;
+              }
+              playSplit();
+            });
+          }, { threshold: 0.15 });
+          splitObserver.observe(root);
+        {%- else -%}
+          playSplit();
+        {%- endif -%}
         return;
       }
 
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          sync(entry.target, entry.isIntersecting);
-        });
-      }, { threshold: 0.15 });
+      {%- if banner_defer_video -%}
+        var videos = root.querySelectorAll('video');
+        if (!videos.length) return;
 
-      videos.forEach(function (video) { io.observe(video); });
+        var visible = function (video) {
+          return window.getComputedStyle(video).display !== 'none';
+        };
+
+        var sync = function (video, on) {
+          if (!on || !visible(video)) {
+            video.pause();
+            return;
+          }
+          markReady(video);
+        };
+
+        if (!('IntersectionObserver' in window)) {
+          videos.forEach(function (video) { sync(video, true); });
+          return;
+        }
+
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            sync(entry.target, entry.isIntersecting);
+          });
+        }, { threshold: 0.15 });
+
+        videos.forEach(function (video) { io.observe(video); });
+      {%- endif -%}
     })();
   </script>
 {%- endif -%}
@@ -455,6 +592,17 @@
       ],
       "default": "medium",
       "label": "t:sections.image-banner.settings.image_height.label"
+    },
+    {
+      "type": "range",
+      "id": "height_pc",
+      "min": 0,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "label": "电脑高度",
+      "info": "0 则用上面的高度档。按 1440 稿宽，大屏会跟着变。",
+      "default": 0
     }
   ],
   "presets": [
