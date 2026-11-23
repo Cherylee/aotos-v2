@@ -96,13 +96,13 @@
             "name_1": "FLUX T26",
             "description_1": "Smart city entry. Everyday power and range.",
             "badge_1": "",
-            "product_2": "flux-x26",
-            "name_2": "FLUX X26",
-            "description_2": "Smooth power for everyday riding.",
+            "product_2": "flux-t26-pro",
+            "name_2": "FLUX T26 Pro",
+            "description_2": "Up to 55 miles and app-enabled wheelie assist.",
             "badge_2": "",
-            "product_3": "flux-x26-pro",
-            "name_3": "FLUX X26 Pro",
-            "description_3": "More power. More control. Instant acceleration.",
+            "product_3": "aotos-flux-t26-pro-ebike-with-mini-drone",
+            "name_3": "FLUX X26 Pro + Mini Drone",
+            "description_3": "T26 Pro performance with a mini drone to capture your ride.",
             "badge_3": "Recommended",
             "product_4": "",
             "name_4": "",
@@ -1400,7 +1400,12 @@
         "judge_me_reviews_review_widget_jedQtp"
       ],
       "settings": {
-        "include_margins": true
+        "include_margins": true,
+        "bg_color": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0
       }
     }
   },
