@@ -338,8 +338,17 @@ html:has(.section-header.shopify-section-header-sticky:not(.shopify-section-head
 .bf-bike__media {
   position: relative;
   aspect-ratio: 550 / 480;
-  padding: calc(56 * var(--rem)) calc(32 * var(--rem)) calc(32 * var(--rem));
-  
+  overflow: hidden;
+}
+
+.bf-bike__media .bf-media-img,
+.bf-bike__media .bf-placeholder {
+  position: absolute;
+  top: calc(56 * var(--rem));
+  left: calc(32 * var(--rem));
+  width: calc(100% - 64 * var(--rem));
+  height: calc(100% - 88 * var(--rem));
+  object-fit: contain;
 }
 
 .bf-bike__badge {
@@ -891,8 +900,12 @@ html:has(.section-header.shopify-section-header-sticky:not(.shopify-section-head
     border-radius: calc(24 * var(--rem));
   }
 
-  .bf-bike__media {
-    padding: calc(80 * var(--rem)) calc(40 * var(--rem)) calc(40 * var(--rem));
+  .bf-bike__media .bf-media-img,
+  .bf-bike__media .bf-placeholder {
+    top: calc(80 * var(--rem));
+    left: calc(40 * var(--rem));
+    width: calc(100% - 80 * var(--rem));
+    height: calc(100% - 120 * var(--rem));
   }
 
   .bf-bike__badge {
