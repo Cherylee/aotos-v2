@@ -15,9 +15,9 @@
         "anchor_id": "",
         "bg_color": "#222222",
         "eyebrow": "AOTOS / Black Friday + Cyber Monday",
-        "title_line_1": "Black Friday deals.",
-        "title_line_2": "Ride more.",
-        "description": "Explore Black Friday offers on the FLUX T26, X26 and X26 Pro. Get a free helmet with every eligible e-bike order.",
+        "title_line_1": "New rides meet",
+        "title_line_2": "BFCM deals.",
+        "description": "Meet the new FLUX T26 Pro and T26 Pro + Mini Drone bundle, plus our X26 series deals. Get a free helmet with every eligible e-bike order.",
         "button_label": "Explore the event",
         "button_link": "",
         "tag": "Black Friday 2026",
@@ -68,19 +68,54 @@
     "bf_ebike": {
       "type": "bf-ebike-offers",
       "blocks": {
-        "bike_t26": {
+        "bike_BbRMXR": {
           "type": "bike",
           "settings": {
-            "product": "flux-t26",
-            "eyebrow": "FLUX T26 / New arrival",
+            "product": "flux-t26-pro",
+            "price_amount": 1799,
+            "compare_amount": 1899,
+            "eyebrow": "FLUX T26 Pro / New arrival",
             "title": "",
-            "tagline": "Lightweight design for everyday riding.",
-            "spec_1": "500W rated motor",
-            "spec_2": "Up to 40 miles of range",
+            "tagline": "Bold performance for a more thrilling ride.",
+            "spec_1": "750W rated / 2,000W peak motor",
+            "spec_2": "Use code T26PRO100 at checkout",
             "gift_image": "shopify://shop_images/c9c5111c5d8b3a1089bceb65088d4ccd32537d347ecb1f40c2c4cf35aeddf447.png",
             "gift_tag": "GIFT",
             "gift_text": "One free helmet with your ride",
-            "button_label": "Shop FLUX T26"
+            "button_label": "Shop FLUX T26 Pro"
+          }
+        },
+        "bike_awnxV7": {
+          "type": "bike",
+          "settings": {
+            "product": "aotos-flux-t26-pro-ebike-with-mini-drone",
+            "price_amount": 2199,
+            "compare_amount": 2399,
+            "eyebrow": "FLUX T26 Pro + Mini Drone / New bundle",
+            "title": "",
+            "tagline": "A standout ride with a Mini Drone and storage bag.",
+            "spec_1": "750W rated / 2,000W peak motor",
+            "spec_2": "Use code T26PRO200 at checkout",
+            "gift_image": "shopify://shop_images/c9c5111c5d8b3a1089bceb65088d4ccd32537d347ecb1f40c2c4cf35aeddf447.png",
+            "gift_tag": "GIFT",
+            "gift_text": "One free helmet with your ride",
+            "button_label": "Shop T26 Pro + Mini Drone"
+          }
+        },
+        "bike_xmiQxw": {
+          "type": "bike",
+          "settings": {
+            "product": "flux-x26-pro",
+            "price_amount": 2099,
+            "eyebrow": "FLUX X26 Pro / Premium performance",
+            "title": "",
+            "tagline": "Advanced features for a more capable ride.",
+            "spec_1": "750W rated motor",
+            "spec_2": "Up to 70 miles of range",
+            "gift_image": "shopify://shop_images/c9c5111c5d8b3a1089bceb65088d4ccd32537d347ecb1f40c2c4cf35aeddf447.png",
+            "gift_tag": "GIFT",
+            "gift_text": "One free helmet with your ride",
+            "button_label": "Shop FLUX X26 Pro"
           }
         },
         "bike_xyB3fk": {
@@ -99,34 +134,35 @@
             "button_label": "Shop FLUX X26"
           }
         },
-        "bike_xmiQxw": {
+        "bike_t26": {
           "type": "bike",
           "settings": {
-            "product": "flux-x26-pro",
-            "price_amount": 2099,
-            "eyebrow": "FLUX X26 Pro / Premium performance",
+            "product": "flux-t26",
+            "eyebrow": "FLUX T26 / New arrival",
             "title": "",
-            "tagline": "Advanced features for a more capable ride.",
-            "spec_1": "750W rated motor",
-            "spec_2": "Up to 70 miles of range",
+            "tagline": "Lightweight design for everyday riding.",
+            "spec_1": "500W rated motor",
+            "spec_2": "Up to 40 miles of range",
             "gift_image": "shopify://shop_images/c9c5111c5d8b3a1089bceb65088d4ccd32537d347ecb1f40c2c4cf35aeddf447.png",
             "gift_tag": "GIFT",
             "gift_text": "One free helmet with your ride",
-            "button_label": "Shop FLUX X26 Pro"
+            "button_label": "Shop FLUX T26"
           }
         }
       },
       "block_order": [
-        "bike_t26",
+        "bike_BbRMXR",
+        "bike_awnxV7",
+        "bike_xmiQxw",
         "bike_xyB3fk",
-        "bike_xmiQxw"
+        "bike_t26"
       ],
       "settings": {
         "anchor_id": "part-01",
         "bg_color": "#f7f7f7",
         "eyebrow": "Part 01 / E-bike offers",
         "heading": "Find your ride. Get a free helmet.",
-        "description": "Get one free helmet with an eligible e-bike order placed November 16–December 6. X26 and X26 Pro prices shown include $200 off with code X26BF200 at checkout.",
+        "description": "New arrivals meet Black Friday & Cyber Monday. Free helmet with every eligible e-bike order through December 6. Use the code on each new arrival card, or X26BF200 for X26/X26 Pro. One code per order.",
         "padding_top": 80,
         "padding_bottom": 80,
         "padding_top_mobile": 88,
