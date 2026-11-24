@@ -46,15 +46,6 @@
             "new_items": ""
           }
         },
-        "contact-hours": {
-          "type": "contact_item",
-          "settings": {
-            "icon": "shopify://shop_images/1_65a55559-fa81-4303-a526-e3ddaa0e7f71.svg",
-            "icon_preset": "clock",
-            "text": "Mon–Fri, 9:00 AM–6:00 PM ET",
-            "link": ""
-          }
-        },
         "contact-email": {
           "type": "contact_item",
           "settings": {
@@ -72,6 +63,15 @@
             "text": "+1 (888) 330-3799",
             "link": "Tel:888-330-3799"
           }
+        },
+        "contact-hours": {
+          "type": "contact_item",
+          "settings": {
+            "icon": "shopify://shop_images/1_65a55559-fa81-4303-a526-e3ddaa0e7f71.svg",
+            "icon_preset": "clock",
+            "text": "Mon–Fri, 9:00 AM–6:00 PM ET",
+            "link": ""
+          }
         }
       },
       "block_order": [
@@ -79,9 +79,9 @@
         "menu-support",
         "menu-about",
         "menu-policy",
-        "contact-hours",
         "contact-email",
-        "contact_item_TyeGPj"
+        "contact_item_TyeGPj",
+        "contact-hours"
       ],
       "settings": {
         "show_social": true,
