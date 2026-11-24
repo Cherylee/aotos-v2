@@ -395,9 +395,9 @@
           "type": "spec_row",
           "settings": {
             "label": "Motor",
-            "value_1": "500W rated / 750W peak in BOOST*",
-            "value_2": "750W rated / 2,000W peak in BOOST*",
-            "value_3": "750W rated / 2,000W peak in BOOST*"
+            "value_1": "500W rated / 750W peak",
+            "value_2": "750W rated / 2,000W peak",
+            "value_3": "750W rated / 2,000W peak"
           }
         },
         "spec_row_zVatzz": {
