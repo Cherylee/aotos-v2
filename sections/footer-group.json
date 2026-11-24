@@ -17,7 +17,7 @@
         "menu-product": {
           "type": "link_list",
           "settings": {
-            "heading": "Product",
+            "heading": "Products",
             "menu": "product",
             "new_items": "FLUX T26 Series"
           }
