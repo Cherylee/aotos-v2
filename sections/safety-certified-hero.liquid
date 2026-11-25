@@ -867,7 +867,11 @@
             <p class="sc-hero__eyebrow is-color-{{ block.settings.eyebrow_color | default: 'white' }}" style="--sc-weight: {{ block.settings.eyebrow_weight | default: 400 }};">{{ block.settings.eyebrow | escape }}</p>
           {%- endif -%}
           {%- if block.settings.heading != blank -%}
-            <h2 class="sc-hero__title is-color-{{ block.settings.title_color | default: 'white' }}" style="--sc-weight: {{ block.settings.title_weight | default: 600 }};">{{ block.settings.heading | escape }}</h2>
+            {%- if forloop.first and section.index == 1 -%}
+              <h1 class="sc-hero__title is-color-{{ block.settings.title_color | default: 'white' }}" style="--sc-weight: {{ block.settings.title_weight | default: 600 }};">{{ block.settings.heading | escape }}</h1>
+            {%- else -%}
+              <h2 class="sc-hero__title is-color-{{ block.settings.title_color | default: 'white' }}" style="--sc-weight: {{ block.settings.title_weight | default: 600 }};">{{ block.settings.heading | escape }}</h2>
+            {%- endif -%}
           {%- endif -%}
           {%- if block.settings.subtitle != blank -%}
             <p class="sc-hero__subtitle is-color-{{ block.settings.subtitle_color | default: 'white' }} is-color-mob-{{ block.settings.subtitle_color_mobile | default: 'white' }}" style="--sc-weight: {{ block.settings.subtitle_weight | default: 400 }};">{{ block.settings.subtitle | escape }}</p>
