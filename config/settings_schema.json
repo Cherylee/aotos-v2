@@ -1397,24 +1397,73 @@
     "name": "购物车保障图标",
     "settings": [
       {
+        "type": "select",
+        "id": "cart_trust_icon_source",
+        "label": "图标来源",
+        "options": [
+          {
+            "value": "default",
+            "label": "默认图标"
+          },
+          {
+            "value": "custom",
+            "label": "上传图标"
+          }
+        ],
+        "default": "default"
+      },
+      {
+        "type": "paragraph",
+        "content": "选「上传图标」后生效。图片支持 PNG、JPG、WEBP。SVG 请把代码贴到对应文本框，填了 SVG 时优先用 SVG。",
+        "visible_if": "{{ settings.cart_trust_icon_source == 'custom' }}"
+      },
+      {
         "type": "image_picker",
         "id": "cart_trust_icon_shipping",
-        "label": "Free Shipping 图标"
+        "label": "Free Shipping 图标",
+        "visible_if": "{{ settings.cart_trust_icon_source == 'custom' }}"
+      },
+      {
+        "type": "textarea",
+        "id": "cart_trust_svg_shipping",
+        "label": "Free Shipping SVG",
+        "visible_if": "{{ settings.cart_trust_icon_source == 'custom' }}"
       },
       {
         "type": "image_picker",
         "id": "cart_trust_icon_returns",
-        "label": "30-Day Free Returns 图标"
+        "label": "30-Day Free Returns 图标",
+        "visible_if": "{{ settings.cart_trust_icon_source == 'custom' }}"
+      },
+      {
+        "type": "textarea",
+        "id": "cart_trust_svg_returns",
+        "label": "30-Day Free Returns SVG",
+        "visible_if": "{{ settings.cart_trust_icon_source == 'custom' }}"
       },
       {
         "type": "image_picker",
         "id": "cart_trust_icon_warranty",
-        "label": "1-Year Warranty 图标"
+        "label": "1-Year Warranty 图标",
+        "visible_if": "{{ settings.cart_trust_icon_source == 'custom' }}"
+      },
+      {
+        "type": "textarea",
+        "id": "cart_trust_svg_warranty",
+        "label": "1-Year Warranty SVG",
+        "visible_if": "{{ settings.cart_trust_icon_source == 'custom' }}"
       },
       {
         "type": "image_picker",
         "id": "cart_trust_icon_support",
-        "label": "Customer Support 图标"
+        "label": "Customer Support 图标",
+        "visible_if": "{{ settings.cart_trust_icon_source == 'custom' }}"
+      },
+      {
+        "type": "textarea",
+        "id": "cart_trust_svg_support",
+        "label": "Customer Support SVG",
+        "visible_if": "{{ settings.cart_trust_icon_source == 'custom' }}"
       }
     ]
   },

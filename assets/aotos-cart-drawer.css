@@ -386,6 +386,20 @@ cart-drawer.is-empty .drawer__close {
   object-fit: contain;
 }
 
+.cart-drawer__trust .cart-drawer__trust-icon--custom {
+  flex: 0 0 auto;
+  display: block;
+  width: calc(16 * var(--rem));
+  height: calc(16 * var(--rem));
+  object-fit: contain;
+}
+
+.cart-drawer__trust .cart-drawer__trust-icon--custom svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .cart-drawer__pay {
   display: flex;
   flex-wrap: wrap;
@@ -667,6 +681,11 @@ cart-drawer .affirm-as-low-as .affirm-modal-trigger {
   .cart-drawer__trust img {
     width: calc(40 * var(--rem));
     height: calc(40 * var(--rem));
+  }
+
+  .cart-drawer__trust .cart-drawer__trust-icon--custom {
+    width: calc(20 * var(--rem));
+    height: calc(20 * var(--rem));
   }
 
   .cart-drawer__pay svg {
