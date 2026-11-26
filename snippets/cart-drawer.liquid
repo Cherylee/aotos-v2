@@ -549,7 +549,7 @@
 
         <!-- CTAs -->
 
-        <ul class="cart-drawer__trust" role="list">
+        <ul class="cart-drawer__trust{% if settings.cart_trust_icon_source == 'custom' %} cart-drawer__trust--custom{% endif %}" role="list">
           <li>
             {%- if settings.cart_trust_icon_source == 'custom' -%}
               {%- if settings.cart_trust_svg_shipping != blank -%}
@@ -559,7 +559,7 @@
                   class="cart-drawer__trust-icon--custom"
                   src="{{ settings.cart_trust_icon_shipping | image_url: width: 32 }}"
                   srcset="{{ settings.cart_trust_icon_shipping | image_url: width: 32 }} 32w, {{ settings.cart_trust_icon_shipping | image_url: width: 64 }} 64w"
-                  sizes="(max-width: 768px) 20px, 16px"
+                  sizes="(max-width: 768px) 32px, 16px"
                   width="32"
                   height="{{ 32 | divided_by: settings.cart_trust_icon_shipping.aspect_ratio | round }}"
                   alt=""
@@ -588,7 +588,7 @@
                   class="cart-drawer__trust-icon--custom"
                   src="{{ settings.cart_trust_icon_returns | image_url: width: 32 }}"
                   srcset="{{ settings.cart_trust_icon_returns | image_url: width: 32 }} 32w, {{ settings.cart_trust_icon_returns | image_url: width: 64 }} 64w"
-                  sizes="(max-width: 768px) 20px, 16px"
+                  sizes="(max-width: 768px) 32px, 16px"
                   width="32"
                   height="{{ 32 | divided_by: settings.cart_trust_icon_returns.aspect_ratio | round }}"
                   alt=""
@@ -617,7 +617,7 @@
                   class="cart-drawer__trust-icon--custom"
                   src="{{ settings.cart_trust_icon_warranty | image_url: width: 32 }}"
                   srcset="{{ settings.cart_trust_icon_warranty | image_url: width: 32 }} 32w, {{ settings.cart_trust_icon_warranty | image_url: width: 64 }} 64w"
-                  sizes="(max-width: 768px) 20px, 16px"
+                  sizes="(max-width: 768px) 32px, 16px"
                   width="32"
                   height="{{ 32 | divided_by: settings.cart_trust_icon_warranty.aspect_ratio | round }}"
                   alt=""
@@ -646,7 +646,7 @@
                   class="cart-drawer__trust-icon--custom"
                   src="{{ settings.cart_trust_icon_support | image_url: width: 32 }}"
                   srcset="{{ settings.cart_trust_icon_support | image_url: width: 32 }} 32w, {{ settings.cart_trust_icon_support | image_url: width: 64 }} 64w"
-                  sizes="(max-width: 768px) 20px, 16px"
+                  sizes="(max-width: 768px) 32px, 16px"
                   width="32"
                   height="{{ 32 | divided_by: settings.cart_trust_icon_support.aspect_ratio | round }}"
                   alt=""
