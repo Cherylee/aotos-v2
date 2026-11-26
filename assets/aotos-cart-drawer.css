@@ -400,6 +400,11 @@ cart-drawer.is-empty .drawer__close {
   height: 100%;
 }
 
+.cart-drawer__trust--custom {
+  gap: calc(8 * var(--rem)) calc(16 * var(--rem));
+  padding: calc(12 * var(--rem)) calc(4 * var(--rem)) calc(8 * var(--rem));
+}
+
 .cart-drawer__pay {
   display: flex;
   flex-wrap: wrap;
@@ -684,8 +689,13 @@ cart-drawer .affirm-as-low-as .affirm-modal-trigger {
   }
 
   .cart-drawer__trust .cart-drawer__trust-icon--custom {
-    width: calc(20 * var(--rem));
-    height: calc(20 * var(--rem));
+    width: calc(32 * var(--rem));
+    height: calc(32 * var(--rem));
+  }
+
+  .cart-drawer__trust--custom {
+    gap: calc(16 * var(--rem)) calc(24 * var(--rem));
+    padding: calc(24 * var(--rem)) 0 calc(8 * var(--rem));
   }
 
   .cart-drawer__pay svg {
