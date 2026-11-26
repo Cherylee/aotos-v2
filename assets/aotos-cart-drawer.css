@@ -71,33 +71,87 @@ cart-drawer.is-empty .drawer__close {
 .cart-drawer .cart-item {
   display: grid;
   grid-template-columns: calc(72 * var(--rem)) minmax(0, 1fr) auto;
-  gap: calc(12 * var(--rem));
+  column-gap: calc(12 * var(--rem));
+  row-gap: 0;
   align-items: start;
-  padding: calc(16 * var(--rem)) 0;
+  padding: calc(40 * var(--rem)) 0;
   margin-bottom: 0;
+  border-bottom: 1px solid #eee;
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
 .cart-drawer .cart-item__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-column: 1;
+  grid-row: 1 / span 4;
   width: calc(72 * var(--rem));
+  height: calc(72 * var(--rem));
+  background: #f5f5f5;
+  border: 1px solid #e6e6e6;
+  border-radius: calc(8 * var(--rem));
+  overflow: hidden;
 }
 
 .cart-drawer .cart-item__image {
-  width: calc(72 * var(--rem));
+  width: calc(60 * var(--rem));
+  max-width: none;
   height: auto;
   display: block;
   object-fit: contain;
 }
 
 .cart-drawer .cart-item__details {
-  width: auto;
-  grid-column: auto;
+  display: contents;
+}
+
+.cart-drawer .cart-item__details > * {
+  grid-column: 2;
 }
 
 .cart-drawer .cart-item__name {
+  grid-row: 1;
   font-size: calc(12 * var(--rem));
+  font-weight: 600;
   line-height: 1.15;
   color: #000;
   text-decoration: none;
+}
+
+.cart-drawer .cart-item__details > dl {
+  grid-row: 2;
+  margin-top: calc(4 * var(--rem));
+}
+
+.cart-drawer .cart-item__details > .cart-item__discounted-prices,
+.cart-drawer .cart-item__details > div.product-option {
+  grid-column: 2 / 4;
+  grid-row: 3;
+  margin-top: calc(4 * var(--rem));
+  padding-right: calc(30 * var(--rem));
+}
+
+.cart-drawer .cart-item__details > .discounts {
+  grid-row: 4;
+  align-self: start;
+  margin-top: calc(4 * var(--rem));
+  padding: 0;
+}
+
+.cart-drawer .cart-item__details .cart-item__discounted-prices {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  column-gap: calc(6 * var(--rem));
+  white-space: nowrap;
+}
+
+.cart-drawer .cart-item__details .cart-item__final-price {
+  order: 1;
+  color: #000000;
 }
 
 .cart-drawer .cart-item__details > .product-option {
@@ -112,7 +166,10 @@ cart-drawer.is-empty .drawer__close {
   font-size: calc(14 * var(--rem));
 }
 .cart-drawer .cart-item__old-price {
+  order: 2;
   font-size: calc(12 * var(--rem));
+  color: #000000;
+  opacity: 1;
 }
 
 .cart-drawer .cart-item__model {
@@ -121,7 +178,7 @@ cart-drawer.is-empty .drawer__close {
   margin-top: calc(0 * var(--rem));
   font-size: calc(10 * var(--rem));
   font-weight: 400;
-  color: #999;
+  color: #666;
 }
 
 .cart-drawer .cart-item__model dt,
@@ -135,7 +192,10 @@ cart-drawer.is-empty .drawer__close {
 
 .cart-drawer .cart-items .cart-item__quantity,
 .cart-drawer .cart-item__quantity {
-  grid-column: auto;
+  grid-column: 3;
+  grid-row: 4;
+  align-self: start;
+  margin-top: calc(4 * var(--rem));
   padding-top: 0;
 }
 
@@ -144,10 +204,21 @@ cart-drawer.is-empty .drawer__close {
 }
 
 .cart-drawer .cart-item__quantity-wrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: calc(10 * var(--rem));
+}
+
+.cart-drawer .quantity-popover-container {
+  padding: 0;
+}
+
+.cart-drawer .cart-item cart-remove-button {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 4 * var(--rem));
 }
 
 .cart-drawer .cart-item cart-remove-button {
@@ -186,6 +257,7 @@ cart-drawer.is-empty .drawer__close {
 .cart-drawer .quantity:after {
   border-color: transparent;
   box-shadow: 0 0 0 1px #e5e5e5;
+  border-radius: calc(6 * var(--rem));
 }
 
 .cart-drawer .quantity__button {
@@ -205,15 +277,41 @@ cart-drawer.is-empty .drawer__close {
 }
 
 .cart-drawer .drawer__footer {
+  display: flex;
+  flex-direction: column;
   border-top: 0;
   padding: calc(8 * var(--rem)) 0 0;
+}
+
+.cart-drawer .cart-drawer__footer {
+  display: contents;
+}
+
+.cart-drawer .affirm-as-low-as {
+  order: 1;
+}
+
+.cart-drawer .cart-drawer__lock {
+  order: 2;
+}
+
+.cart-drawer .cart-drawer__pay {
+  order: 3;
+}
+
+.cart-drawer .cart-drawer__trust {
+  order: 4;
+}
+
+.cart-drawer .cart__ctas {
+  order: 5;
 }
 
 .cart-drawer .totals {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin: calc(8 * var(--rem)) 0 calc(6 * var(--rem));
+  margin: calc(8 * var(--rem)) 0 calc(14 * var(--rem));
 }
 
 .cart-drawer .totals__total,
@@ -226,9 +324,38 @@ cart-drawer.is-empty .drawer__close {
 
 .cart-drawer .tax-note {
   display: block;
-  margin: 0 0 calc(8 * var(--rem));
+  margin: 0 0 calc(12 * var(--rem));
+  padding-bottom: calc(8 * var(--rem));
+  border-bottom: 1px solid #eeeeee;
   font-size: calc(10 * var(--rem));
-  color: #888;
+  color: #666;
+}
+
+.cart-drawer .discounts {
+  margin: 0;
+}
+
+.cart-drawer .discounts__discount {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: fit-content;
+  min-height: calc(24 * var(--rem));
+  gap: calc(4 * var(--rem));
+  margin-top: 0;
+  padding: 0 calc(8 * var(--rem));
+  border-radius: calc(6 * var(--rem));
+  background: rgba(255, 243, 235);
+  color: #000000;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.cart-drawer .discounts__discount svg,
+.cart-drawer .discounts__discount .icon {
+  width: calc(12 * var(--rem));
+  height: calc(12 * var(--rem));
+  margin: 0;
 }
 
 .cart-drawer__trust {
@@ -236,9 +363,9 @@ cart-drawer.is-empty .drawer__close {
   grid-template-columns: 1fr 1fr;
   /* gap: calc(6 * var(--rem)) calc(10 * var(--rem)); */
   margin: 0 0 calc(8 * var(--rem));
-  padding: calc(5 * var(--rem)) calc(10 * var(--rem));
-  border: 1px solid #eee;
-  border-radius: calc(8 * var(--rem));
+  padding: calc(8 * var(--rem)) calc(10 * var(--rem)) calc(5 * var(--rem));
+  border-top: 1px solid #eeeeee;
+  border-radius: 0;
   list-style: none;
 }
 
@@ -248,7 +375,8 @@ cart-drawer.is-empty .drawer__close {
   gap: calc(8 * var(--rem));
   font-size: calc(10 * var(--rem));
   line-height: 1.3;
-  color: #333;
+  color: #000;
+  font-weight: 500;
 }
 
 .cart-drawer__trust img {
@@ -262,7 +390,7 @@ cart-drawer.is-empty .drawer__close {
   display: flex;
   flex-wrap: wrap;
   gap: calc(6 * var(--rem));
-  margin: 0 0 calc(6 * var(--rem));
+  margin: 0 0 calc(16 * var(--rem));
   padding: 0;
   list-style: none;
 }
@@ -274,9 +402,9 @@ cart-drawer.is-empty .drawer__close {
 }
 
 .cart-drawer__lock {
-  margin: 0 0 calc(8 * var(--rem));
-  font-size: calc(10 * var(--rem));
-  color: #666;
+  font-size: calc(12 * var(--rem));
+  color: #000;
+  margin-bottom: calc(10 * var(--rem));
 }
 
 .cart-drawer .cart__ctas {
@@ -338,6 +466,7 @@ cart-drawer .affirm-as-low-as .affirm-ala-price,
 cart-drawer .affirm-as-low-as .affirm-modal-trigger {
   font-size: calc(12 * var(--rem)) !important;
   line-height: calc(16 * var(--rem));
+  margin-bottom: calc(10 * var(--rem));
 }
 
 @media screen and (max-width: 768px) {
@@ -365,13 +494,98 @@ cart-drawer .affirm-as-low-as .affirm-modal-trigger {
   }
 
   .cart-drawer .cart-item {
-    grid-template-columns: calc(120 * var(--rem)) minmax(0, 1fr) auto;
-    gap: calc(16 * var(--rem));
+    grid-template-columns: calc(200 * var(--rem)) minmax(0, 1fr) auto;
+    column-gap: calc(28 * var(--rem));
+    row-gap: 0;
+    align-items: start;
   }
 
-  .cart-drawer .cart-item__media,
+  .cart-drawer .cart-item__media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-column: 1;
+    grid-row: 1 / span 4;
+    width: calc(200 * var(--rem));
+    height: calc(200 * var(--rem));
+    background: #f5f5f5;
+    border: 1px solid #e6e6e6;
+    border-radius: calc(16 * var(--rem));
+    overflow: hidden;
+  }
+
   .cart-drawer .cart-item__image {
-    width: calc(120 * var(--rem));
+    width: calc(172 * var(--rem));
+    max-width: none;
+  }
+
+  .cart-drawer .cart-item__details {
+    display: contents;
+  }
+
+  .cart-drawer .cart-item__details > * {
+    grid-column: 2;
+  }
+
+  .cart-drawer .cart-item__name {
+    grid-row: 1;
+  }
+
+  .cart-drawer .cart-item__details > dl {
+    grid-row: 2;
+    margin-top: calc(10 * var(--rem));
+  }
+
+  .cart-drawer .cart-item__details > .cart-item__discounted-prices,
+  .cart-drawer .cart-item__details > div.product-option {
+    grid-column: 2 / 4;
+    grid-row: 3;
+    margin-top: calc(6 * var(--rem));
+    padding-right: calc(66 * var(--rem));
+  }
+
+  .cart-drawer .cart-item__details > .discounts {
+    grid-row: 4;
+    align-self: start;
+    margin-top: calc(10 * var(--rem));
+    padding: 0;
+  }
+
+  .cart-drawer .cart-items .cart-item__quantity {
+    grid-column: 3;
+    grid-row: 4;
+    align-self: start;
+    margin-top: calc(10 * var(--rem));
+  }
+
+  .cart-drawer .cart-item__quantity-wrapper {
+    position: relative;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .cart-drawer .quantity-popover-container {
+    padding: 0;
+  }
+
+  .cart-drawer .cart-item cart-remove-button {
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + 10 * var(--rem));
+  }
+
+  .cart-drawer .cart-item__details .cart-item__discounted-prices {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    column-gap: calc(8 * var(--rem));
+    white-space: nowrap;
+  }
+
+  .cart-drawer .cart-item__details .cart-item__final-price {
+    order: 1;
+    font-size: calc(32 * var(--rem));
+    color: #000000;
   }
 
   .cart-drawer .cart-item__name,
@@ -379,8 +593,59 @@ cart-drawer .affirm-as-low-as .affirm-modal-trigger {
     font-size: calc(26 * var(--rem));
   }
 
-  .cart-drawer .cart-item__model,
-  .cart-drawer .tax-note,
+  .cart-drawer .cart-item__details > .product-option {
+    font-size: calc(32 * var(--rem));
+    color: #000000;
+  }
+
+  .cart-drawer .cart-item__name {
+    font-weight: 600;
+  }
+
+  .cart-drawer .cart-item__model {
+    font-size: calc(22 * var(--rem));
+    color: #666;
+  }
+
+  .cart-drawer .cart-item__old-price {
+    order: 2;
+    font-size: calc(24 * var(--rem));
+    color: #000000;
+    opacity: 1;
+  }
+
+  .cart-drawer .discounts {
+    margin: 0;
+  }
+
+  .cart-drawer .discounts__discount {
+    display: inline-flex;
+    align-items: center;
+    box-sizing: border-box;
+    width: fit-content;
+    min-height: calc(56 * var(--rem));
+    gap: calc(8 * var(--rem));
+    margin-top: 0;
+    padding: 0 calc(16 * var(--rem));
+    border-radius: calc(12 * var(--rem));
+    background: rgba(var(--aotos-theme-color-rgb, 255, 101, 1), 0.08);
+    color: #000000;
+    font-size: calc(20 * var(--rem));
+    font-weight: 500;
+    line-height: 1.2;
+    background-color: rgba(255, 243, 235, 1);
+  }
+
+  .cart-drawer .discounts__discount svg,
+  .cart-drawer .discounts__discount .icon {
+    width: calc(24 * var(--rem));
+    height: calc(24 * var(--rem));
+    margin: 0;
+  }
+
+  .cart-drawer__lock {
+    margin-bottom: calc(8 * var(--rem));
+  }
   .cart-drawer__trust li,
   .cart-drawer__lock,
   .cart-drawer__paypal-note {
@@ -390,6 +655,15 @@ cart-drawer .affirm-as-low-as .affirm-modal-trigger {
     margin: 0 0 calc(20 * var(--rem));
   }
 
+  .cart-drawer .tax-note {
+    padding-bottom: calc(20 * var(--rem));
+    border-bottom: 1px solid #eeeeee;
+    font-size: calc(24 * var(--rem));
+  }
+  .cart-drawer__trust {
+    border-top: 1px solid #eeeeee;
+    padding-top: calc(20 * var(--rem));
+  }
   .cart-drawer__trust img {
     width: calc(40 * var(--rem));
     height: calc(40 * var(--rem));
@@ -410,9 +684,11 @@ cart-drawer .affirm-as-low-as .affirm-modal-trigger {
 
   .cart-drawer .totals__total,
   .cart-drawer .totals__total-value {
-    font-size: calc(28 * var(--rem));
+    font-size: calc(32 * var(--rem));
   }
-
+  .cart-drawer .totals__total{
+    font-weight: 500;
+  }
   .cart-drawer .cart__checkout-button {
     font-size: calc(var(--aotos-button-font-size-mobile, 22) * var(--rem));
   }
@@ -432,6 +708,11 @@ cart-drawer .affirm-as-low-as .affirm-modal-trigger {
     width: calc(150 * var(--rem));
     min-height: calc(56 * var(--rem));
     height: calc(56 * var(--rem));
+    border-radius: calc(12 * var(--rem));
+  }
+
+  .cart-drawer .quantity:after {
+    border-radius: calc(12 * var(--rem));
   }
 
   .cart-drawer .drawer__close {
@@ -465,6 +746,7 @@ cart-drawer .affirm-as-low-as .affirm-modal-trigger {
   cart-drawer .affirm-as-low-as .affirm-ala-price {
     font-size: calc(24 * var(--rem)) !important;
     line-height: calc(32 * var(--rem));
+    margin-bottom: calc(6 * var(--rem));
   }
 }
 

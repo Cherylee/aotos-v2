@@ -296,9 +296,9 @@ cart-drawer-items {
   }
 }
 
-.cart-drawer__footer > * + * {
+/* .cart-drawer__footer > * + * {
   margin-top: 1rem;
-}
+} */
 
 .cart-drawer .totals {
   justify-content: space-between;
