@@ -1394,6 +1394,31 @@
     ]
   },
   {
+    "name": "购物车保障图标",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "cart_trust_icon_shipping",
+        "label": "Free Shipping 图标"
+      },
+      {
+        "type": "image_picker",
+        "id": "cart_trust_icon_returns",
+        "label": "30-Day Free Returns 图标"
+      },
+      {
+        "type": "image_picker",
+        "id": "cart_trust_icon_warranty",
+        "label": "1-Year Warranty 图标"
+      },
+      {
+        "type": "image_picker",
+        "id": "cart_trust_icon_support",
+        "label": "Customer Support 图标"
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.search_input.name",
     "settings": [
       {
