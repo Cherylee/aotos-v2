@@ -29,6 +29,14 @@
           "type": "price",
           "settings": {}
         },
+        "product_discount_code_8RzeFJ": {
+          "type": "product_discount_code",
+          "settings": {
+            "code": "GT500OFF",
+            "default_checked": true,
+            "checkbox_color": "#ff6501"
+          }
+        },
         "affirm_pay_over_time_messaging_product_block_Mp6Lry": {
           "type": "shopify://apps/affirm-pay-over-time-messaging/blocks/product-block/6dce54be-130d-4d13-9636-1e8f611b3071",
           "settings": {
@@ -156,6 +164,7 @@
         "title",
         "rating",
         "price",
+        "product_discount_code_8RzeFJ",
         "affirm_pay_over_time_messaging_product_block_Mp6Lry",
         "variant_picker",
         "trust_icons",
@@ -189,7 +198,8 @@
         "padding_bottom": 0,
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 0,
-        "image_height": "adapt"
+        "image_height": "adapt",
+        "height_pc": 0
       }
     },
     "image_banner_yLWDMH": {
@@ -203,7 +213,8 @@
         "padding_bottom": 0,
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 0,
-        "image_height": "adapt"
+        "image_height": "adapt",
+        "height_pc": 0
       }
     },
     "image_banner_CBwmhf": {
@@ -217,7 +228,8 @@
         "padding_bottom": 0,
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 0,
-        "image_height": "adapt"
+        "image_height": "adapt",
+        "height_pc": 0
       }
     },
     "image_banner_z8UinF": {
@@ -231,7 +243,8 @@
         "padding_bottom": 0,
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 0,
-        "image_height": "adapt"
+        "image_height": "adapt",
+        "height_pc": 0
       }
     },
     "image_banner_LhLJVK": {
@@ -245,7 +258,8 @@
         "padding_bottom": 0,
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 0,
-        "image_height": "adapt"
+        "image_height": "adapt",
+        "height_pc": 0
       }
     },
     "image_banner_cRrXPA": {
@@ -259,7 +273,8 @@
         "padding_bottom": 0,
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 0,
-        "image_height": "adapt"
+        "image_height": "adapt",
+        "height_pc": 0
       }
     },
     "image_banner_KC7aWT": {
@@ -273,7 +288,8 @@
         "padding_bottom": 0,
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 0,
-        "image_height": "adapt"
+        "image_height": "adapt",
+        "height_pc": 0
       }
     },
     "image_banner_JhweFb": {
@@ -287,7 +303,8 @@
         "padding_bottom": 0,
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 0,
-        "image_height": "adapt"
+        "image_height": "adapt",
+        "height_pc": 0
       }
     }
   },
